@@ -108,7 +108,7 @@ workflow:
     validation: request_completed
     output_handling:
       - if_export_folder_exists: "Deliver to ./Export/ with [###] - filename format"
-      - if_folder_missing: "Notify user and request folder creation"
+      - if_folder_missing: "Notify user and request folder creation if relevant"
       - sequential_numbering: "Check existing files, use next number (001, 002, etc.)"
 
 # ───────────────────────────────────────────────────────────────
