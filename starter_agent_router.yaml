@@ -17,14 +17,14 @@ operating_mode:
 user_inputs:
   context: |
     [CONTEXT]
-    
+
     Provide background information about the current environment, project state,
     existing constraints, or relevant documentation. This helps the agent understand
     the broader situation before executing the request.
-  
+
   request: |
     [REQUEST]
-    
+
     Describe what you want the agent to do. Be specific about the task, goals,
     or problem to solve. The agent will process this according to AGENTS.md and
     Knowledge Base guidelines.
@@ -50,12 +50,15 @@ rules:
     - acknowledge_compliance_in_first_response
     - follow_agents_md_constraints_and_workflows
     - resolve_conflicts_in_favor_of_agents_md
-  
+    - check_export_folder_exists_before_creating_output
+    - deliver_all_output_files_to_export_folder_with_sequential_numbering
+
   NEVER:
     - skip_or_defer_agents_md_reading
     - guess_agents_md_content
     - proceed_without_agents_md_confirmation
     - override_agents_md_instructions
+    - create_output_files_outside_export_folder_when_available
 
 # ───────────────────────────────────────────────────────────────
 # WORKFLOW
@@ -65,7 +68,7 @@ workflow:
     action: Search for AGENTS.md using search_order
     validation: agents_md_found
     failure_mode: "Output: 'AGENTS.md not found—please provide path or link.' STOP."
-  
+
   step_2_read_and_route:
     action: Read AGENTS.md end-to-end (it contains intelligent routing logic)
     understand:
@@ -81,28 +84,32 @@ workflow:
       - core_principles
       - routing_instructions
     validation: agents_md_parsed_and_routing_understood
-  
+
   step_3_follow_routing:
     action: Follow AGENTS.md internal routing sequence
     note: AGENTS.md determines which additional documents to read based on [CONTEXT]/[REQUEST]
     validation: routing_sequence_completed
-  
+
   step_4_acknowledge:
     action: Confirm compliance in first response
     format: "AGENTS.md read and applied: [path]. Summary: [1-3 line summary]. Knowledge Base routing: [documents read]"
     validation: compliance_confirmed
-  
+
   step_5_parse_context:
     input: "[CONTEXT]"
     action: Extract environment, state, constraints
     clarify: Ask targeted questions if critical info missing
     validation: context_understood
-  
+
   step_6_execute:
     input: "[REQUEST]"
     action: Process request strictly per AGENTS.md + Knowledge Base guidelines
     conflict_resolution: Follow AGENTS.md and explain adjustment
     validation: request_completed
+    output_handling:
+      - if_export_folder_exists: "Deliver to ./Export/ with [###] - filename format"
+      - if_folder_missing: "Notify user and request folder creation"
+      - sequential_numbering: "Check existing files, use next number (001, 002, etc.)"
 
 # ───────────────────────────────────────────────────────────────
 # OUTPUT
@@ -114,7 +121,8 @@ output:
     - context_understanding: "Parsed [CONTEXT] with assumptions"
     - execution_approach: "How [REQUEST] will be handled per AGENTS.md + Knowledge Base"
     - next_actions: "Immediate next steps or results"
-  
-  format: Follow AGENTS.md tone and structure
-  tone: Evidence-based, scope-disciplined, clarification-ready
-  note: AGENTS.md is a routing controller - it directs to additional Knowledge Base documents that must also be followed
+
+  delivery_location:
+    primary: ./Export/
+    filename_format: "[###] - [description].[extension]"
+    note: "Use sequential numbering starting from 001. Check folder availability before creating output."
