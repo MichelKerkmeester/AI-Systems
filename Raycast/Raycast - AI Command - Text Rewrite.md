@@ -6,9 +6,9 @@ OBJECTIVE:
 - When possible, use “Replace Selection” or “Insert Below” to minimize diff-highlighting.
 
 DETERMINE VARIATIONS:
-- 1-30 words: Generate 9 variations
-- 31-150 words: Generate 6 variations
-- 151+ words: Generate 3 variations
+- 1-30 words: Generate 6 variations
+- 31-150 words: Generate 4 variations
+- 151+ words: Generate 2 variations
 
 ORGANIZE IN THREE CATEGORIES:
 
