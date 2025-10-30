@@ -52,13 +52,38 @@ user_inputs:
     
     List files or folders to analyze and improve. Can be:
     - Single file path
-    - Multiple file paths (one per line)
+    - Multiple file paths (as YAML list items)
     - Folder path (will scan for relevant files)
     
-    Examples:
+    Examples (as list):
     - /path/to/single-file.md
-    - /path/to/multiple-files/*.md
-    - /path/to/folder/
+    - /path/to/another-file.md
+    
+    Or as string for description:
+    "/path/to/folder/ or /path/to/file.md"
+
+  already_improved_reference_files: |
+    [ALREADY_IMPROVED_REFERENCE_FILES] (Optional)
+    
+    ⚠️ IMPORTANT: These are files that have ALREADY BEEN IMPROVED and should
+    serve as the gold standard/baseline for this analysis.
+    
+    Purpose:
+    - Extract proven patterns, logic structures, and formatting conventions
+    - Use as alignment baseline for consistency across target files
+    - Reference best-practice examples that target files should match
+    
+    What to include:
+    - Files from previous improvement cycles in this system
+    - Successfully improved files that achieved desired quality
+    - Reference standards or templates that represent the target state
+    
+    Examples (as list):
+    - /path/to/already-improved-depth-framework-v0.106.md
+    - /path/to/already-improved-interactive-mode-v0.642.md
+    - /path/to/reference-standard-template.md
+    
+    Leave empty or omit if no already-improved reference files are available.
   
   analysis_scope:
     folder_to_analyze: "[FOLDER_PATH or leave empty]"
@@ -120,6 +145,7 @@ field_handling:
     context_empty: "Infer from REQUEST and TARGET_FILES analysis"
     request_empty: "Error: REQUEST required - describe desired improvements"
     target_files_empty: "Infer from REQUEST or prompt user for clarification"
+    already_improved_reference_files_empty: "Optional - proceed without reference files"
     analysis_scope_empty: "Use REQUEST context to determine scope automatically"
     requirements_empty: "Use general best practices and zero-regression policy"
     complexity_empty: "standard"
@@ -149,6 +175,12 @@ field_handling:
     folder_path: "Scan folder and identify relevant files"
     empty: "Request clarification from user"
   
+  already_improved_reference_files_handling:
+    present: "Load and use as best-practice examples for alignment"
+    multiple: "Extract patterns from all references for comprehensive baseline"
+    empty: "Proceed without reference baseline, use general best practices"
+    not_accessible: "Log warning and proceed without references"
+  
   scope_detection:
     from_request:
       - extract_target_locations
@@ -172,17 +204,18 @@ workflow:
       context: "[CONTEXT] → apply defaults"
       request: "[REQUEST] → validate not empty"
       target_files: "[TARGET_FILES] → apply handling policy"
+      already_improved_reference_files: "[ALREADY_IMPROVED_REFERENCE_FILES] → apply handling policy"
       analysis_scope: "[ANALYSIS_SCOPE] → infer if empty"
       requirements: "[REQUIREMENTS] → apply defaults"
       complexity: "[COMPLEXITY] → apply policy"
       output_folder: "[OUTPUT_FOLDER] → apply defaults"
-    validation: [request_not_empty, target_files_accessible_or_inferable, output_folder_accessible_or_creatable, complexity_valid, context_parsed, requirements_parsed]
-    outputs: [normalized_inputs, analysis_configuration, output_paths, artifact_naming_pattern]
+    validation: [request_not_empty, target_files_accessible_or_inferable, already_improved_reference_files_accessible_or_skip, output_folder_accessible_or_creatable, complexity_valid, context_parsed, requirements_parsed]
+    outputs: [normalized_inputs, analysis_configuration, output_paths, artifact_naming_pattern, reference_baseline]
   
   step_2_analysis:
-    action: Assess system against CONTEXT, REQUIREMENTS, and best practices
-    tasks: [assess_current_state, map_dependencies, identify_issues, evaluate_best_practices, validate_requirements, assess_risks, prioritize_improvements]
-    outputs: [assessment_report, dependency_map, prioritized_issues, recommendations, risk_assessment]
+    action: Assess system against CONTEXT, REQUIREMENTS, ALREADY_IMPROVED_REFERENCE_FILES, and best practices
+    tasks: [load_already_improved_reference_files, extract_reference_patterns, assess_current_state, map_dependencies, identify_issues, evaluate_best_practices, validate_requirements, assess_risks, prioritize_improvements]
+    outputs: [assessment_report, dependency_map, prioritized_issues, recommendations, risk_assessment, reference_alignment_analysis]
     complexity_scaling:
       quick: "Critical issues only"
       standard: "All significant issues"
