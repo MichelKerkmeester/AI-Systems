@@ -1,0 +1,30 @@
+# Git Ignore Configuration
+# Specifies intentionally untracked files that Git should ignore
+
+# macOS system files
+.DS_Store
+
+# IDE and editor folders (ignored at all levels)
+.idea/
+.vscode/
+.claude/
+
+# Configuration files (ignored at all levels)
+mcp_servers.json
+settings.local.json
+
+# Exception: Allow these config files in Development folder and subfolders
+!Development/mcp_servers.json
+!Development/settings.local.json
+!Development/**/mcp_servers.json
+!Development/**/settings.local.json
+
+# Working directories (ignored at all levels)
+Context/
+Export/
+
+# Archive folder (root level only)
+/z — Archive/
+
+# Complete folder ignore
+Writers/Barter/

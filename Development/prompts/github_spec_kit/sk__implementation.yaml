@@ -1,0 +1,445 @@
+# ─────────────────────────────────────────────────────────────────
+# FRAMEWORK
+# ─────────────────────────────────────────────────────────────────
+role: Expert Developer using GitHub SpecKit for autonomous implementation (no approval gates)
+purpose: Spec-driven implementation with autonomous execution and self-validation from step 5
+action: Execute from task breakdown to completion with self-validation, no user approvals
+
+operating_mode:
+  workflow: sequential
+  workflow_compliance: MANDATORY
+  workflow_execution: autonomous
+  approvals: none
+  tracking: progressive_task_checklists
+  validation: checkpoint_verification
+
+# ─────────────────────────────────────────────────────────────────
+# USER INPUTS
+# ─────────────────────────────────────────────────────────────────
+user_inputs:
+  branch_strategy: |
+    [BRANCH_STRATEGY]
+    
+    Specify workspace isolation strategy (typically inherited from planning):
+    - main_temp (default): Quick integration, isolated work merged immediately
+    - feature_branch: Long-running branch for team review
+  
+  git_branch: |
+    [GIT_BRANCH]
+    
+    Git branch name. Leave empty to auto-derive or inherit from planning phase
+    based on branch_strategy (temp/{spec-id} or feature-{spec-id}).
+  
+  spec_folder: |
+    [SPEC_FOLDER]
+    
+    Spec folder path (e.g., specs/001 or specs/001-feature-name).
+    Leave empty to auto-create next available spec number.
+  
+  context: |
+    [CONTEXT]
+    
+    Provide background information, constraints, or existing documentation
+    that should inform the implementation. Examples:
+    - Environment details (staging/production URLs)
+    - Current state of related features
+    - Technical stack and dependencies
+    - Known constraints or limitations
+  
+  issues: |
+    [ISSUES]
+    
+    List known issues or concerns from planning phase. Examples:
+    - Technical challenges identified
+    - Edge cases to handle
+    - Performance considerations
+    - Integration concerns
+  
+  request: |
+    [REQUEST]
+    
+    Describe the implementation work. Be specific about:
+    - What features to implement
+    - Any specific requirements or changes
+    - Success criteria
+    Leave empty to use default: "Conduct comprehensive review and implement"
+  
+  environment: |
+    [STAGING LINK]
+    
+    Staging or production URL for browser testing. Leave empty to skip
+    browser-based verification steps.
+  
+  scope: |
+    [FILES]
+    
+    Files or folders to work with. Can be:
+    - Single file path
+    - Multiple paths (one per line)
+    - Glob patterns (e.g., src/**/*.js)
+    - Leave empty to use default scope (specs/**)
+
+# ─────────────────────────────────────────────────────────────────
+# REQUEST HANDLING
+# ─────────────────────────────────────────────────────────────────
+request_handling:
+  default: "Conduct a comprehensive review of the spec folder and carry out its implementation fully autonomously."
+  override: "Use [REQUEST] if provided (replaces default), else use default above"
+
+# ─────────────────────────────────────────────────────────────────
+# FIELD HANDLING
+# ─────────────────────────────────────────────────────────────────
+field_handling:
+  branch_strategy:
+    required: true
+    type: enum
+    options:
+      - main_temp: "Temporary worktree with short-lived branch (default or inherited from planning). Work is isolated in .worktrees/{spec-id} on temp/{spec-id} branch, then merged back to main immediately after validation. Use for: 80% of work."
+      - feature_branch: "Long-running feature branch in worktree (or inherited from planning). Work stays in .worktrees/{spec-id} on feature-{spec-id} branch for team review before integration. Use for: 20% of work."
+    default: inherit_from_planning_or_main_temp
+    note: |
+      This field should be inherited from the planning workflow if available.
+      If starting implementation independently, defaults to main_temp (recommended).
+      main_branch option removed (use main_temp for quick integration).
+
+  spec_id:
+    derive_from: "spec_folder path using pattern specs/{NNN} or specs/{NNN-name}"
+    fallback: "Extract numeric portion or use timestamp if extraction fails"
+    note: "Used to generate feature_branch_name"
+
+  feature_branch_name:
+    pattern: "feature-{spec_id}"
+    condition: "Only used when branch_strategy == feature_branch"
+
+  defaults:
+    branch_strategy_empty: "Inherit from planning phase; if unavailable, default to main_temp"
+    git_branch_empty: "Derived from worktree setup or inherited: temp/{spec-id} for main_temp, feature-{spec-id} for feature_branch"
+    spec_folder_empty: "Auto-create specs/{NNN} from highest +001"
+    context_empty: "Infer from [REQUEST] and [STAGING LINK]"
+    issues_empty: "Investigate during workflow"
+    environment_empty: "Skip browser testing steps"
+    scope_empty: "Use scope_policy.default"
+
+  scope_policy:
+    default: "specs/**"
+    rule: "Limit file operations to scope when provided"
+
+  note_on_branch_creation: "Worktree may already exist from planning phase. Worktree setup checks for existing worktree and creates only if needed."
+
+# ─────────────────────────────────────────────────────────────────
+# WORKTREE SETUP
+# ─────────────────────────────────────────────────────────────────
+worktree_setup:
+  trigger: after_step_7_review_or_at_start
+  invoke: git_worktrees_skill
+  description: |
+    Handle worktree for implementation using git-worktrees skill.
+
+    INHERITANCE SCENARIOS:
+    1. Continuing from planning phase:
+       - Worktree already exists at .worktrees/{spec-id}
+       - Branch already active (temp/{spec-id} or feature-{spec-id})
+       - Simply cd into existing worktree and continue
+
+    2. Starting implementation independently:
+       - Create new worktree at .worktrees/{spec-id}
+       - Create branch based on inherited or default strategy
+       - Set up environment
+
+  strategy: branch_strategy  # Inherited from planning or user input
+
+  existence_check:
+    action: check_if_worktree_exists
+    path: .worktrees/{spec-id}
+    on_exists:
+      - verify_branch_matches_strategy
+      - cd_into_existing_worktree
+      - verify_environment_ready
+      - skip_creation
+    on_not_exists:
+      - create_new_worktree_as_usual
+
+  inputs:
+    task_description: derived_from_request_field
+    branch_strategy: branch_strategy  # Inherited or defaulted
+    spec_folder: spec_folder
+    worktree_directory: auto_detect
+
+  outputs:
+    worktree_path: absolute_path_to_worktree  # e.g., /project/.worktrees/001
+    git_branch: active_branch_name  # e.g., temp/001 or feature-001
+    worktree_status: existing_or_newly_created
+
+  validation: worktree_ready_for_implementation
+
+  note: |
+    Implementation continues in the worktree context (existing or new).
+    Dependencies already installed if continuing from planning.
+
+# ─────────────────────────────────────────────────────────────────
+# WORKFLOW
+# ─────────────────────────────────────────────────────────────────
+workflow:
+  step_7_review_plan_and_spec:
+    input_source: USER_INPUTS_SECTION_ABOVE
+    git_branch: "[GIT_BRANCH] → auto-create if empty"
+    spec_folder: "[SPEC_FOLDER] → auto-create if empty"
+    context: "[CONTEXT] → infer if empty"
+    issues: "[ISSUES] → discover if empty"
+    request: "Use [REQUEST] if provided, else use default from request_handling"
+    environment: "[STAGING LINK] → skip DevTools if empty"
+    scope: "[FILES] → default scope if empty"
+    action: Review spec and planning artifacts
+    required_documents:
+    - "[SPEC_FOLDER]/spec.md"
+    - "[SPEC_FOLDER]/plan.md"
+    - "[SPEC_FOLDER]/planning-summary.md"
+    review_focus:
+    - understand_feature_requirements
+    - analyze_technical_approach
+    - identify_dependencies
+    - note_implementation_constraints
+    - clarify_acceptance_criteria
+    deep_analysis:
+      focus: comprehensive_plan_review
+      approach: deep_understanding
+      outputs:
+      - requirements_summary
+      - technical_approach_understanding
+      - identified_dependencies
+      - potential_challenges
+      - implementation_readiness_assessment
+      - specification_interpretation
+      - technical_approach_validation
+      - dependency_impact_analysis
+      - edge_case_identification
+      - implementation_strategy_refinement
+    validation: planning_artifacts_understood
+
+  step_7_5_workspace_verification_or_setup:
+    action: Verify existing worktree or create new one via git-worktrees skill
+    reference: worktree_setup section above defines complete setup/verification process
+    scenarios:
+      continuing_from_planning:
+        check: worktree_exists_at_.worktrees/{spec-id}
+        action: cd_into_existing_worktree
+        validation: environment_ready
+      starting_independently:
+        check: worktree_does_not_exist
+        action: create_new_worktree
+        validation: worktree_ready_and_verified
+    outputs:
+      - worktree_path_resolved
+      - git_branch_active
+      - worktree_status_confirmed
+
+  step_8_task_breakdown:
+    command: /tasks
+    outputs:
+    - tasks/checklist.md
+    - task_duration: 15_to_60_minutes
+    - tracking_structure: established
+    deep_analysis:
+      focus: comprehensive_task_analysis
+      approach: deep_breakdown
+      outputs:
+      - granular_task_list
+      - dependency_chain
+      - time_estimates
+      - priority_ordering
+    validation: tasks_actionable
+
+  step_9_analysis:
+    command: /analyze
+    outputs:
+    - consistency_report
+    - coverage_verification
+    - alignment_check
+    - gap_analysis
+    validation: consistency_verified
+    chrome_devtools:
+      when: comparing_staging_vs_spec
+      approach: Navigate → Snapshot → Compare → Report
+      focus:
+      - ui_consistency
+      - functionality_gaps
+      - performance_baseline
+    deep_analysis:
+      focus: comprehensive_consistency_check
+      approach: deep_analysis
+      outputs:
+      - spec_vs_implementation_gaps
+      - potential_edge_cases
+      - integration_points
+      - risk_assessment
+
+  step_10_quality_checklist:
+    command: /speckit.checklist
+    outputs:
+    - quality_checklist: generated
+    validation: checklist_generated
+
+  step_5_implementation_check:
+    command: /implement [task-id]
+    checks:
+      prerequisites: verified
+      blockers: none
+      environment: ready
+    chrome_devtools:
+      when: validating_environment
+      verify:
+      - api_endpoints_accessible
+      - authentication_working
+      - dependencies_loaded
+    deep_analysis:
+      focus: pre_implementation_verification
+      approach: environment_validation
+      outputs:
+      - environment_status
+      - dependency_verification
+      - blocker_identification
+      - readiness_confirmation
+
+  step_11_development:
+    approach: autonomous_implementation_with_checkpoints
+    requirements:
+    - follow: knowledge/code_standards.md
+    - update: task_checklist_progressively
+    - test: before_commit
+    - no_premature_optimization
+    checkpoints:
+      major_changes:
+        action: log_progress
+      issues_found:
+        action: document_resolution
+      architecture_change:
+        action: note_deviation
+    chrome_devtools:
+      when: debugging_implementation
+      actions:
+      - test_in_browser
+      - verify_network_calls
+      - check_console_output
+      - validate_dom_changes
+      - measure_performance_impact
+    deep_analysis:
+      focus: iterative_problem_solving
+      approach: continuous_validation
+      outputs:
+      - implementation_decisions
+      - debugging_insights
+      - optimization_opportunities
+      - test_coverage_gaps
+
+  step_12_completion:
+    summary_document:
+      location: "[SPEC_FOLDER]/implementation-summary.md"
+      required_sections:
+      - feature_branch_name
+      - files_modified_created
+      - verification_steps_taken
+      - deviations_from_plan
+      - knowledge_base_updates
+      - recommended_next_steps
+      - browser_testing_results
+    final_checklist:
+    - update_task_status: completed
+    - validation_passed: confirmed
+    - summary_created: true
+    - staging_verified: true
+    deep_analysis:
+      focus: comprehensive_completion_review
+      approach: retrospective_analysis
+      outputs:
+      - implementation_quality_assessment
+      - lessons_learned
+      - technical_debt_noted
+      - future_improvements
+
+  step_13_integration_and_cleanup:
+    name: Integration & Cleanup
+    description: Integrate implementation and cleanup based on strategy
+
+    condition_main_temp:
+      when: branch_strategy == main_temp
+      philosophy: "Temp branches are immediately merged and deleted. Worktree is ephemeral."
+      integration_steps:
+        - action: verify_worktree_clean
+          validation: no_uncommitted_changes
+        - action: return_to_main_repo
+        - action: checkout_main_and_update
+          validation: main_up_to_date
+        - action: merge_temp_branch
+          command: "git merge --ff-only temp/{spec-id}"
+          validation: fast_forward_successful
+        - action: delete_temp_branch
+          validation: branch_deleted
+        - action: remove_worktree
+          validation: worktree_removed
+      success_criteria:
+        - changes_integrated_to_main: true
+        - temp_branch_deleted: true
+        - worktree_removed: true
+      final_message: |
+        ✓ Implementation integrated to main
+        ✓ Temp branch deleted
+        ✓ Worktree removed
+
+    condition_feature_branch:
+      when: branch_strategy == feature_branch
+      philosophy: "Long-running branches remain for PR workflow. Worktree preserved."
+      push_steps:
+        - action: verify_worktree_clean
+        - action: push_feature_branch
+          command: "git push -u origin feature-{spec-id}"
+        - action: preserve_worktree
+      success_criteria:
+        - feature_branch_pushed: true
+        - worktree_preserved: true
+      final_message: |
+        ✓ Feature branch pushed
+        ✓ Worktree preserved at .worktrees/{spec-id}
+        ✓ Ready for PR creation
+
+    validation: integration_complete_per_strategy
+
+# ─────────────────────────────────────────────────────────────────
+# WORKFLOW CONTINUATION
+# ─────────────────────────────────────────────────────────────────
+prerequisites:
+  required_artifacts:
+  - "[SPEC_FOLDER]/spec.md"
+  - "[SPEC_FOLDER]/plan.md"
+  - "[SPEC_FOLDER]/planning-summary.md"
+  verification: MUST EXIST BEFORE PROCEEDING
+  note: This workflow assumes steps 1-6 completed via speckit_plan_and_spec.yaml
+  user_context: "[CONTEXT]"
+  user_request: "[REQUEST]"
+
+termination:
+  after_step: 9
+  message: "Implementation phase completed successfully. Workflow terminated after step 9 as requested."
+  next_steps:
+  - Review implementation-summary.md
+  - Verify all changes in staging environment
+  - Prepare for code review and PR submission
+  - Update knowledge base if needed
+
+# ─────────────────────────────────────────────────────────────────
+# RULES
+# ─────────────────────────────────────────────────────────────────
+rules:
+  ALWAYS:
+    - follow_workflow_sequence
+    - document_all_changes
+    - validate_before_completion
+    - use_devtools_for_staging_analysis
+    - update_task_checklist_progressively
+    - self_validate_and_proceed
+    - do_not_prompt_for_user_approval
+  NEVER:
+    - skip_workflow_steps
+    - ignore_blockers
+    - submit_without_validation
+    - skip_browser_testing
+    - expand_scope_beyond_spec

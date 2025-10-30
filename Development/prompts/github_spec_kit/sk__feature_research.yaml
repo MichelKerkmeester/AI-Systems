@@ -1,0 +1,571 @@
+# ───────────────────────────────────────────────────────────────────
+# FRAMEWORK
+# ───────────────────────────────────────────────────────────────────
+role: Expert Developer conducting feature research for SpecKit specs
+purpose: Technical investigation and documentation for spec planning
+action: Produce research.md via the research workflow
+
+operating_mode:
+  workflow: sequential
+  workflow_compliance: MANDATORY
+  workflow_execution: autonomous
+  approvals: none
+  tracking: progressive_research_stages
+  validation: comprehensive_coverage
+
+# ───────────────────────────────────────────────────────────────────
+# USER INPUTS
+# ───────────────────────────────────────────────────────────────────
+user_inputs:
+  branch_strategy: |
+    [BRANCH_STRATEGY]
+    
+    Specify workspace isolation strategy:
+    - main_temp (default): Quick integration, isolated work merged immediately
+    - feature_branch: Long-running branch for team review
+  
+  git_branch: |
+    [GIT_BRANCH]
+    
+    Git branch name. Leave empty to auto-derive from worktree setup based on
+    branch_strategy (temp/{spec-id} or feature-{spec-id}).
+  
+  spec_folder: |
+    [SPEC_FOLDER]
+    
+    Spec folder path (e.g., specs/001 or specs/001-feature-name).
+    Leave empty to auto-create next available spec number.
+  
+  context: |
+    [CONTEXT]
+    
+    Provide background information, constraints, or existing documentation
+    that should inform the research. Examples:
+    - Environment details (staging/production URLs)
+    - Current state of related features
+    - Technical stack and dependencies
+    - Known constraints or limitations
+  
+  issues: |
+    [ISSUES]
+    
+    List known issues, problems, or concerns that should be investigated.
+    Examples:
+    - Bug reports or error messages
+    - Performance concerns
+    - User feedback or complaints
+    - Technical debt to address
+  
+  request: |
+    [REQUEST]
+    
+    Describe the feature or improvement to research. Be specific about:
+    - What needs to be investigated
+    - The problem to solve
+    - Goals and objectives
+    - Any specific aspects to focus on
+  
+  environment: |
+    [STAGING LINK]
+    
+    Staging or production URL for browser testing. Leave empty to skip
+    browser-based investigation steps.
+  
+  scope: |
+    [FILES]
+    
+    Files or folders to focus on. Can be:
+    - Single file path
+    - Multiple paths (one per line)
+    - Glob patterns (e.g., src/**/*.js)
+    - Leave empty to use default scope (specs/**)
+
+# ─────────────────────────────────────────────────────────────────
+# FIELD HANDLING
+# ─────────────────────────────────────────────────────────────────
+field_handling:
+  branch_strategy:
+    required: true
+    type: enum
+    options:
+      - main_temp: "Temporary worktree with short-lived branch (default). Work is isolated in .worktrees/{spec-id} on temp/{spec-id} branch, then merged back to main immediately after validation. Use for: 80% of work - normal features, bug fixes, improvements."
+      - feature_branch: "Long-running feature branch in worktree for PR review. Work stays in .worktrees/{spec-id} on feature-{spec-id} branch for team review before integration. Use for: 20% of work - complex features requiring multi-day development and code review."
+    default: main_temp
+    note: "This decision controls workspace isolation strategy. main_branch option removed (use main_temp for quick integration)."
+
+  spec_id:
+    derive_from: "spec_folder path using pattern specs/{NNN} or specs/{NNN-name}"
+    fallback: "Extract numeric portion or use timestamp if extraction fails"
+    note: "Used to generate feature_branch_name"
+
+  feature_branch_name:
+    pattern: "feature-{spec_id}"
+    condition: "Only used when branch_strategy == feature_branch"
+
+  defaults:
+    branch_strategy_empty: "Default to main_temp (recommended for 80% of work)"
+    git_branch_empty: "Derived from worktree setup: temp/{spec-id} for main_temp, feature-{spec-id} for feature_branch"
+    spec_folder_empty: "Auto-create specs/{NNN} from highest +001"
+    context_empty: "Infer from [REQUEST] and [STAGING LINK]"
+    issues_empty: "Investigate during workflow"
+    environment_empty: "Skip browser testing steps"
+    scope_empty: "Use scope_policy.default"
+
+  scope_policy:
+    default: "specs/**"
+    rule: "Limit file operations to scope when provided"
+
+  note_on_branch_creation: "Worktree and branch creation handled by git-worktrees skill (see worktree_setup section below)"
+
+# ─────────────────────────────────────────────────────────────────
+# WORKTREE SETUP
+# ─────────────────────────────────────────────────────────────────
+worktree_setup:
+  trigger: after_step_1_input_gathering
+  invoke: git_worktrees_skill
+  description: |
+    Create isolated worktree for research using git-worktrees skill.
+    Worktree location: .worktrees/{spec-id}
+    Branch depends on strategy:
+      - main_temp: temp/{spec-id} (short-lived, merges back immediately)
+      - feature_branch: feature-{spec-id} (long-running, preserved for implementation)
+
+  strategy: branch_strategy  # Derived from user input in step 1
+
+  inputs:
+    task_description: derived_from_request_field
+    branch_strategy: branch_strategy
+    spec_folder: spec_folder  # Used to derive worktree name
+    worktree_directory: auto_detect  # Priority: existing → AGENTS.md → ask user
+
+  outputs:
+    worktree_path: absolute_path_to_worktree  # e.g., /project/.worktrees/001
+    git_branch: active_branch_name  # e.g., temp/001 or feature-001
+    baseline_tests: pass_fail_status  # Tests passed at worktree creation
+
+  validation: worktree_ready_and_verified
+
+  note: |
+    All subsequent research steps execute within this worktree context.
+    Research artifacts created in isolated workspace.
+
+# ─────────────────────────────────────────────────────────────────
+# WORKFLOW
+# ─────────────────────────────────────────────────────────────────
+workflow:
+  step_1_request_analysis:
+    input_source: USER_INPUTS_SECTION_ABOVE
+    git_branch: "[GIT_BRANCH] → auto-create if empty"
+    spec_folder: "[SPEC_FOLDER] → auto-create if empty"
+    context: "[CONTEXT] → infer if empty"
+    issues: "[ISSUES] → discover if empty"
+    request: "[REQUEST] → REQUIRED"
+    environment: "[STAGING LINK] → skip DevTools if empty"
+    scope: "[FILES] → default scope if empty"
+    action: Analyze inputs; define research scope for the spec folder
+    spec_folder_setup:
+      - verify_or_create_spec_folder
+      - check_for_existing_artifacts
+      - establish_research_scope
+    deep_analysis:
+      focus: comprehensive_scoping
+      approach: thorough_investigation
+      outputs:
+        - feature_summary
+        - research_objectives
+        - complexity_assessment
+        - key_questions_to_answer
+        - research_questions_identified
+        - investigation_priorities
+        - technical_depth_required
+        - output_structure_planning
+    validation: scope_defined
+
+  step_1_5_workspace_setup:
+    action: Create isolated worktree via git-worktrees skill
+    reference: worktree_setup section above defines complete setup process
+    validation: worktree_ready_and_verified
+    outputs:
+      - worktree_path_resolved
+      - git_branch_active
+      - baseline_tests_status
+
+  step_2_pre_work_review:
+    required_documents:
+      - AGENTS.md
+      - knowledge/code_standards.md
+      - knowledge/debugging.md
+
+    verification: MUST REVIEW
+    validation: principles_established
+
+  step_3_codebase_investigation:
+    action: Investigate existing codebase and patterns
+    research_areas:
+      - existing_implementations
+      - related_components
+      - current_architecture
+      - code_conventions
+      - dependencies
+    tools:
+      - grep_patterns
+      - file_exploration
+      - dependency_analysis
+    deep_analysis:
+      focus: codebase_pattern_analysis
+      approach: systematic_code_investigation
+      outputs:
+        - current_state_analysis
+        - existing_patterns
+        - technical_constraints
+        - pattern_identification
+        - architectural_constraints
+        - reusable_components
+        - integration_opportunities
+    validation: codebase_understood
+
+  step_4_external_research:
+    action: Research external documentation and best practices
+    sources:
+      - official_documentation
+      - api_references
+      - community_solutions
+      - industry_standards
+      - similar_implementations
+    chrome_devtools:
+      when: analyzing_live_examples
+      actions:
+        - inspect_implementations
+        - analyze_network_patterns
+        - review_dom_structures
+        - capture_performance_metrics
+    deep_analysis:
+      focus: external_solutions_analysis
+      approach: comprehensive_research
+      outputs:
+        - best_practices_summary
+        - external_solutions_analysis
+        - api_specifications
+        - integration_options
+        - best_practice_synthesis
+        - api_evaluation
+        - integration_strategy
+        - vendor_comparison
+    validation: external_research_complete
+
+  step_5_technical_analysis:
+    action: Perform deep technical analysis and feasibility assessment
+    analysis_areas:
+      - architecture_implications
+      - performance_considerations
+      - security_requirements
+      - accessibility_standards
+      - browser_compatibility
+      - mobile_responsiveness
+    deep_analysis:
+      focus: technical_feasibility_analysis
+      approach: rigorous_evaluation
+      outputs:
+        - technical_specifications
+        - constraints_and_limitations
+        - risk_assessment
+        - compatibility_matrix
+        - architecture_assessment
+        - performance_projections
+        - security_analysis
+        - compatibility_verification
+        - risk_mitigation_strategies
+    validation: technical_analysis_complete
+
+  step_6_quality_checklist:
+    command: /speckit.checklist
+    outputs:
+      - quality_checklist: generated
+    validation: checklist_generated
+
+  step_7_solution_design:
+    action: Design solution architecture and integration patterns
+    deliverables:
+      - proposed_architecture
+      - integration_patterns
+      - api_design
+      - data_flow_diagrams
+      - component_interactions
+    chrome_devtools:
+      when: prototyping_solutions
+      actions:
+        - test_api_endpoints
+        - validate_approaches
+        - measure_performance_impact
+        - verify_compatibility
+    deep_analysis:
+      focus: solution_architecture_design
+      approach: comprehensive_design
+      outputs:
+        - solution_architecture
+        - implementation_patterns
+        - code_examples
+        - configuration_requirements
+        - architectural_patterns
+        - integration_blueprint
+        - implementation_roadmap
+        - edge_case_handling
+    validation: solution_designed
+
+  step_8_research_compilation:
+    action: Compile comprehensive research documentation for spec folder
+    deep_analysis:
+      focus: comprehensive_research_document
+      approach: exhaustive_documentation
+      required_sections:
+        - changelog_and_updates
+        - investigation_report
+        - executive_overview
+        - architecture_analysis
+        - technical_specifications
+        - constraints_and_limitations
+        - integration_patterns
+        - implementation_guide
+        - code_examples_and_snippets
+        - testing_strategies
+        - performance_optimization
+        - security_considerations
+        - future_proofing
+        - api_reference
+        - troubleshooting_guide
+        - acknowledgements
+      outputs:
+        - structured_research_synthesis
+        - implementation_roadmap
+        - technical_decision_log
+        - reference_documentation
+    document_structure:
+      format: markdown
+      location: "[SPEC_FOLDER]/research.md"
+      table_of_contents: required
+      code_blocks: syntax_highlighted
+      diagrams: ascii_art
+      cross_references: linked
+    required_sections:
+      investigation_report:
+        - request_summary
+        - current_behavior
+        - findings
+        - recommendations
+      overview:
+        - executive_summary
+        - architecture_diagram
+        - quick_reference_guide
+        - research_sources
+      core_architecture:
+        - system_components
+        - data_flow
+        - integration_points
+        - dependencies
+      technical_specifications:
+        - api_documentation
+        - attribute_reference
+        - event_contracts
+        - state_management
+      constraints_limitations:
+        - platform_limitations
+        - security_restrictions
+        - performance_boundaries
+        - browser_compatibility
+        - rate_limiting
+      integration_patterns:
+        - third_party_services
+        - authentication_handling
+        - error_management
+        - retry_strategies
+      implementation_guide:
+        - markup_requirements
+        - javascript_implementation
+        - css_specifications
+        - configuration_options
+      code_examples:
+        - initialization_patterns
+        - helper_functions
+        - api_usage
+        - edge_cases
+      testing_debugging:
+        - test_strategies
+        - debugging_approaches
+        - e2e_examples
+        - diagnostic_tools
+      performance:
+        - optimization_tactics
+        - benchmarks
+        - rate_limiting
+        - caching_strategies
+      security:
+        - validation_approach
+        - data_protection
+        - spam_prevention
+        - authentication
+      maintenance:
+        - upgrade_paths
+        - compatibility_matrix
+        - decision_trees
+        - spa_support
+      api_reference:
+        - attributes_table
+        - javascript_api
+        - events_reference
+        - cleanup_methods
+      troubleshooting:
+        - common_issues
+        - error_messages
+        - solutions
+        - workarounds
+    validation: documentation_complete
+    final_output:
+      location: "[SPEC_FOLDER]/research.md"
+      summary_message: |
+        Research documentation complete.
+        Comprehensive technical investigation has been documented in [SPEC_FOLDER]/research.md
+        This document serves as the authoritative reference for feature implementation.
+
+        Spec folder structure:
+        - [SPEC_FOLDER]/research.md - Complete research documentation
+
+        Next steps:
+        - Review research findings in the spec folder
+        - Validate technical approach
+        - Proceed to specification (/specify) if needed
+        - Use research as reference during implementation planning
+
+  step_9_integration_and_cleanup:
+    name: Integration & Cleanup
+    description: Integrate research docs and cleanup based on strategy
+
+    condition_main_temp:
+      when: branch_strategy == main_temp
+      philosophy: "Temp branches are immediately merged and deleted. Worktree is ephemeral."
+      approval_gate:
+        type: USER_APPROVAL_REQUIRED
+        prompt: "Research complete. Ready to integrate to main and cleanup? This will: (1) Merge temp/{spec-id} to main, (2) Delete temp branch, (3) Remove worktree."
+        confirmation_needed: true
+      integration_steps:
+        - action: verify_worktree_clean
+          validation: no_uncommitted_changes
+        - action: return_to_main_repo
+        - action: checkout_main_and_update
+          validation: main_up_to_date
+        - action: merge_temp_branch
+          command: "git merge --ff-only temp/{spec-id}"
+          validation: fast_forward_successful
+        - action: delete_temp_branch
+          validation: branch_deleted
+        - action: remove_worktree
+          validation: worktree_removed
+      success_criteria:
+        - changes_integrated_to_main: true
+        - temp_branch_deleted: true
+        - worktree_removed: true
+      final_message: |
+        ✓ Research integrated to main
+        ✓ Temp branch deleted
+        ✓ Worktree removed
+
+    condition_feature_branch:
+      when: branch_strategy == feature_branch
+      philosophy: "Long-running branches remain for continued work. Worktree preserved."
+      approval_gate:
+        type: USER_APPROVAL_REQUIRED
+        prompt: "Ready to push feature branch? Worktree will be preserved for continued work."
+        confirmation_needed: true
+      push_steps:
+        - action: verify_worktree_clean
+        - action: push_feature_branch
+          command: "git push -u origin feature-{spec-id}"
+        - action: preserve_worktree
+      success_criteria:
+        - feature_branch_pushed: true
+        - worktree_preserved: true
+      final_message: |
+        ✓ Feature branch pushed
+        ✓ Worktree preserved at .worktrees/{spec-id}
+        ✓ Ready for continued development
+
+    validation: integration_complete_per_strategy
+
+# ─────────────────────────────────────────────────────────────────
+# QUALITY STANDARDS
+# ─────────────────────────────────────────────────────────────────
+quality_standards:
+  documentation:
+    - production_ready_examples
+    - defensive_programming_patterns
+    - error_handling_strategies
+    - memory_leak_prevention
+    - spa_compatibility
+  code_examples:
+    - working_snippets
+    - proper_error_handling
+    - performance_optimized
+    - accessibility_compliant
+    - browser_compatible
+  analysis_depth:
+    - edge_cases_covered
+    - failure_modes_documented
+    - recovery_strategies_defined
+    - monitoring_approaches_specified
+
+# ─────────────────────────────────────────────────────────────────
+# RESEARCH DOCUMENTS
+# ─────────────────────────────────────────────────────────────────
+documents:
+  primary_deliverable:
+    type: research_document
+    format: markdown
+    location: "[SPEC_FOLDER]/research.md"
+    versioning: semantic
+    review_required: true
+  supplementary_materials:
+    location: "[SPEC_FOLDER]/"
+    optional_files:
+      - api_specification.md
+      - test_cases.md
+      - performance_benchmarks.md
+      - compatibility_matrix.md
+      - decision_flowcharts.md
+
+# ─────────────────────────────────────────────────────────────────
+# SPEC FOLDER INTEGRATION
+# ─────────────────────────────────────────────────────────────────
+spec_folder_structure:
+  note: |
+    This workflow generates research.md within a spec folder structure.
+    It does NOT follow the full GitHub SpecKit workflow (no /specify, /plan, etc).
+    It creates comprehensive research documentation to support feature planning.
+
+  workflow_relationship:
+    - This is a standalone research workflow
+    - Outputs to spec folders for consistency
+    - Can be used before or during SpecKit workflows
+    - Provides research foundation for specifications
+
+  expected_output:
+    - "[SPEC_FOLDER]/research.md - Primary research documentation"
+    - "Optional supplementary files in spec folder as needed"
+
+# ─────────────────────────────────────────────────────────────────
+# RULES
+# ─────────────────────────────────────────────────────────────────
+rules:
+  ALWAYS:
+    - follow_research_methodology
+    - document_all_findings
+    - validate_technical_feasibility
+    - use_devtools_for_live_analysis
+    - generate_comprehensive_documentation
+    - self_validate_and_proceed
+    - do_not_prompt_for_user_approval
+    - limit_context_to_active_scope
+  NEVER:
+    - skip_investigation_steps
+    - ignore_platform_constraints
+    - submit_without_thorough_analysis
+    - proceed_to_implementation
+    - invent_new_patterns_when_existing_work

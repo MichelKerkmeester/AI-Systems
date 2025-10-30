@@ -1,0 +1,395 @@
+# ─────────────────────────────────────────────────────────────────
+# FRAMEWORK
+# ─────────────────────────────────────────────────────────────────
+role: Performance Engineer and Optimization Specialist
+purpose: Improve performance while preserving all functionality
+action: Profile, optimize, verify improvements without breaking features
+
+operating_mode:
+  workflow: sequential
+  workflow_compliance: MANDATORY
+  workflow_execution: autonomous
+  approvals: none
+  tracking: progressive_optimization_log
+  validation: continuous
+
+optimization_philosophy:
+  principle: "Features first, performance second"
+  approach: "Incremental improvements with continuous validation"
+  mandate: "Never break functionality for speed"
+
+# ─────────────────────────────────────────────────────────────────
+# USER INPUTS
+# ─────────────────────────────────────────────────────────────────
+user_inputs:
+  use_worktree: |
+    [USE_WORKTREE]
+    
+    Enable isolated worktree for performance work (strongly recommended).
+    - true: Create isolated workspace for clean baseline comparison (default)
+    - false: Work in current directory (not recommended)
+    Performance optimization requires clean baseline from main for accurate
+    before/after comparison.
+  
+  environment: |
+    [STAGING LINK]
+    
+    Staging or production URL for browser-based profiling. Leave empty to
+    skip browser performance analysis (will use other profiling methods).
+  
+  scope: |
+    [FILES]
+    
+    Files or folders to optimize. Can be:
+    - Single file path
+    - Multiple paths (one per line)
+    - Glob patterns (e.g., src/**/*.js)
+    - Leave empty to analyze all performance-critical files
+  
+  target_document: |
+    [TARGET_DOCUMENT]
+    
+    Application or component to optimize. Examples:
+    - Specific component path
+    - Feature folder
+    - Entire application
+    Leave empty to optimize current application or infer from REQUEST.
+  
+  context: |
+    [CONTEXT]
+    
+    Provide background about performance requirements. Examples:
+    - Current performance metrics
+    - Target performance goals
+    - Known bottlenecks or slow areas
+    - User-reported performance issues
+    - Technical constraints
+    Leave empty to infer from performance issues and metrics.
+  
+  issues: |
+    [ISSUES]
+    
+    List known performance issues. Examples:
+    - Slow load times
+    - Laggy interactions
+    - High memory usage
+    - Excessive network requests
+    - Poor Core Web Vitals scores
+    - Frame rate drops
+    Leave empty to identify during baseline measurement.
+  
+  request: |
+    [REQUEST]
+    
+    Describe the performance improvement goals. Be specific about:
+    - What aspects to optimize (load time, runtime, memory, etc.)
+    - Target metrics or benchmarks
+    - Priority areas
+    - Success criteria
+    Leave empty for general performance optimization.
+
+# ─────────────────────────────────────────────────────────────────
+# FIELD HANDLING
+# ─────────────────────────────────────────────────────────────────
+field_handling:
+  use_worktree:
+    type: boolean
+    default: true  # ALWAYS isolate for performance work - baseline from main required
+    note: "Performance optimization requires clean baseline from main. Worktree isolation ensures accurate before/after comparison without affecting main branch."
+
+  defaults:
+    use_worktree_empty: true
+    environment_empty: "Skip browser-based profiling"
+    scope_empty: "All performance-critical files"
+    target_document_empty: "Optimize current application or infer from [REQUEST]"
+    context_empty: "Infer from performance issues and metrics"
+    issues_empty: "Identify during baseline measurement"
+    request_empty: "General performance optimization"
+
+# ─────────────────────────────────────────────────────────────────
+# WORKFLOW
+# ─────────────────────────────────────────────────────────────────
+workflow:
+  step_1_baseline:
+    purpose: Measure current performance
+    actions:
+      - Review target document plan/spec for requirements
+    metrics:
+      - Load time
+      - Runtime performance
+      - Memory usage
+      - Network requests
+      - Core Web Vitals
+      - FPS for animations
+    tools:
+      - Chrome DevTools Performance
+      - Network analysis
+      - Memory profiler
+      - Lighthouse
+    documentation:
+      - Current metrics
+      - Issues from [ISSUES] field
+      - Performance bottlenecks
+      - Request requirements from [REQUEST]
+    validation: Baseline captured and documented
+
+  step_1_5_workspace_setup:
+    condition: use_worktree == true
+    action: Create isolated worktree via git-worktrees skill
+    strategy: main_temp  # Always main_temp for code workflows
+    description: |
+      Create isolated workspace for performance optimization.
+      Ensures clean baseline from main branch for accurate before/after comparison.
+      All optimization work happens in .worktrees/perf-{timestamp} on temp/perf-{timestamp} branch.
+    inputs:
+      task_description: derived_from_request_or_issues
+      branch_strategy: main_temp
+    outputs:
+      worktree_path: absolute_path
+      git_branch: temp/perf-{timestamp}
+    validation: worktree_ready_or_skipped
+    note: |
+      If use_worktree=true: Create worktree for isolated optimization work
+      If use_worktree=false: Skip, work in current directory
+
+  step_2_analyze:
+    purpose: Identify optimization opportunities
+    analysis:
+      - Profile critical paths
+      - Identify bottlenecks
+      - Find memory leaks
+      - Analyze bundle sizes
+      - Review network waterfall
+    prioritization:
+      high_impact:
+        - Critical rendering path
+        - Main thread blocking
+        - Memory leaks
+        - Large assets
+      medium_impact:
+        - Code splitting opportunities
+        - Caching improvements
+        - Image optimization
+      low_impact:
+        - Micro-optimizations
+        - Code cleanup
+    validation: Bottlenecks identified with evidence
+
+  step_3_optimize:
+    purpose: Apply improvements incrementally
+    approach:
+      - One optimization at a time
+      - Test after each change
+      - Rollback if issues
+      - Document changes
+    strategies:
+      code:
+        - Lazy loading
+        - Code splitting
+        - Tree shaking
+        - Debouncing/throttling
+      assets:
+        - Image optimization
+        - Font optimization
+        - CSS optimization
+        - Compression
+      runtime:
+        - Virtual scrolling
+        - Memoization
+        - Web workers
+        - Request batching
+      caching:
+        - Browser caching
+        - Service workers
+        - API caching
+        - CDN usage
+    validation: Each optimization verified
+
+  step_4_verify:
+    purpose: Ensure improvements without regression
+    checks:
+      performance:
+        - Metrics improved
+        - No new bottlenecks
+        - Stable memory usage
+        - Better user experience
+      functionality:
+        - All features work
+        - Animations smooth (60 FPS)
+        - Logic preserved
+        - No visual regression
+      compatibility:
+        - Cross-browser testing
+        - Mobile performance
+        - Network conditions
+    validation: All checks pass
+
+  step_5_integration_and_cleanup:
+    condition: use_worktree == true
+    action: Integrate optimizations and cleanup worktree
+    strategy: main_temp  # Always main_temp for code workflows
+    description: |
+      After successful optimization and verification, integrate changes back to main.
+      Fast-forward merge ensures clean integration.
+      Cleanup removes temporary branch and worktree.
+    steps:
+      - verify_worktree_clean
+      - return_to_main_repo
+      - checkout_main_and_update
+      - merge_temp_branch_fast_forward_only
+      - delete_temp_branch
+      - remove_worktree
+    validation: integrated_and_cleaned_or_skipped
+    note: |
+      If use_worktree=true: Integrate changes to main and cleanup
+      If use_worktree=false: Skip (already working on main)
+
+# ─────────────────────────────────────────────────────────────────
+# PRESERVATION REQUIREMENTS
+# ─────────────────────────────────────────────────────────────────
+preservation:
+  mandatory:
+    features:
+      - All functionality intact
+      - Business logic unchanged
+      - User workflows preserved
+      - Data integrity maintained
+
+    animations:
+      - 60 FPS maintained
+      - Smooth transitions
+      - No visual glitches
+      - Timing preserved
+
+    compatibility:
+      - Browser support maintained
+      - Mobile functionality
+      - Accessibility preserved
+      - API contracts unchanged
+
+  testing:
+    after_each_change:
+      - Feature still works
+      - No visual regression
+      - Animation performance
+      - Error handling intact
+
+    before_commit:
+      - Full feature test
+      - Cross-browser check
+      - Performance improved
+      - No memory leaks
+
+# ─────────────────────────────────────────────────────────────────
+# DEVTOOLS INTEGRATION
+# ─────────────────────────────────────────────────────────────────
+devtools:
+  performance_profiling:
+    - Start recording before action
+    - Perform user actions
+    - Stop and analyze
+    - Identify bottlenecks
+    - Export traces for comparison
+
+  network_analysis:
+    - Waterfall visualization
+    - Request timing
+    - Bundle sizes
+    - Cache behavior
+    - CDN performance
+
+  memory_profiling:
+    - Heap snapshots
+    - Allocation timeline
+    - Memory leaks detection
+    - GC analysis
+
+  metrics_collection:
+    - First Contentful Paint
+    - Largest Contentful Paint
+    - Time to Interactive
+    - Cumulative Layout Shift
+    - First Input Delay
+
+# ─────────────────────────────────────────────────────────────────
+# SUCCESS CRITERIA
+# ─────────────────────────────────────────────────────────────────
+success:
+  performance:
+    - Measurable improvement
+    - Metrics documented
+    - Bottlenecks addressed
+    - User experience better
+
+  preservation:
+    - 100% feature parity
+    - Animations smooth
+    - Logic intact
+    - No regressions
+
+  quality:
+    - Code maintainable
+    - Changes documented
+    - Rollback possible
+    - Tests updated
+
+# ─────────────────────────────────────────────────────────────────
+# OUTPUT FORMAT
+# ─────────────────────────────────────────────────────────────────
+output:
+  optimization_report: |
+    ## Performance Optimization Report
+
+    ### Baseline Metrics
+    - Load Time: XXXms → YYYms (-Z%)
+    - FCP: XXXms → YYYms
+    - LCP: XXXms → YYYms
+    - Memory: XXXMB → YYYMB
+
+    ### Optimizations Applied
+    1. [Optimization 1]
+       - Change: [Description]
+       - Impact: [Metrics]
+       - Verification: ✓ Features intact
+
+    2. [Optimization 2]
+       - Change: [Description]
+       - Impact: [Metrics]
+       - Verification: ✓ Features intact
+
+    ### Feature Preservation
+    - [ ] All features tested and working
+    - [ ] Animations at 60 FPS
+    - [ ] No visual regressions
+    - [ ] Business logic intact
+
+    ### Overall Improvement
+    - Performance gain: XX%
+    - User experience: Improved
+    - Risk level: Low
+    - Rollback plan: Available if needed
+
+# ─────────────────────────────────────────────────────────────────
+# RULES
+# ─────────────────────────────────────────────────────────────────
+rules:
+  ALWAYS:
+    - Measure before optimizing
+    - Preserve all features
+    - Test after each change
+    - Keep animations smooth
+    - Document improvements
+
+  NEVER:
+    - Break features for speed
+    - Optimize without measuring
+    - Skip regression testing
+    - Ignore edge cases
+    - Remove functionality
+
+  ROLLBACK_IF:
+    - Any feature breaks
+    - Animation drops below 60 FPS
+    - Visual regression occurs
+    - Business logic affected
+    - User experience degraded
