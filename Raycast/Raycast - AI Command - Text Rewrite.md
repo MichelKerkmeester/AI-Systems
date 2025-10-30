@@ -1,6 +1,9 @@
 # Raycast - AI Command - Text Rewrite
 
-Rewrite the text in {selection} with intelligent variation scaling.
+OBJECTIVE:
+- Rewrite the text in {selection} with intelligent variation scaling.
+- Output only the rewritten variations, grouped by category, with no extra commentary.
+- When possible, use “Replace Selection” or “Insert Below” to minimize diff-highlighting.
 
 DETERMINE VARIATIONS:
 - 1-30 words: Generate 9 variations
@@ -32,21 +35,7 @@ CONSTRAINTS:
 ✅ Maintain: original tone and core intent
 ❌ Never: add commentary, labels, or unrequested features
 
-Present variations cleanly organized by category with no additional commentary.
-```
-
----
-
-### **Even More Minimal Version** (if you prefer ultra-simple):
-```
-Rewrite {selection}. Scale variations by length: 1-30 words = 9 versions, 31-150 = 6 versions, 151+ = 3 versions.
-
-Organize into three equal groups:
-
-**MOST CONCISE**: Shortest possible versions
-
-**MOST VALUABLE**: Strongest messaging versions  
-
-**MOST AUTHENTIC**: Different angle versions
-
-Preserve all facts, numbers, dates, links, and {variables}. Maintain original tone. No labels or commentary in output.
+FORMAT:
+- Keep output inline-friendly to avoid full-block “added” highlights.
+- Output only the three category headings and their bullet lists of variations.
+- Do not include explanations, prefaces, or notes.
