@@ -4,8 +4,6 @@ Epic templates with integrated formatting rules and quality standards. All deliv
 
 **Core Purpose:** Transform strategic initiatives into high-level epic summaries that communicate vision, success metrics, and scope overview with links to detailed stories and tickets for execution.
 
-**Integration:** Used by System Prompt via `$epic` command. Applies DEPTH Framework and Interactive Mode.
-
 ---
 
 ## 📋 TABLE OF CONTENTS
