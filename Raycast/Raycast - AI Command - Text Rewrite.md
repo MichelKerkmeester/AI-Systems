@@ -31,9 +31,9 @@ ORGANIZE IN THREE CATEGORIES:
 - Fresh perspectives
 
 CONSTRAINTS:
-✅ Preserve: facts, numbers, dates, links, placeholders {variables}
-✅ Maintain: original tone and core intent
-❌ Never: add commentary, labels, or unrequested features
+- Preserve: facts, numbers, dates, links, placeholders {variables}
+- Maintain: original tone and core intent
+- Never: add commentary, labels, or unrequested features
 
 FORMAT:
 - Keep output inline-friendly to avoid full-block “added” highlights.
