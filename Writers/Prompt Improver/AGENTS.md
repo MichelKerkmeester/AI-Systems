@@ -45,7 +45,7 @@ This file serves as a redirect with intelligent routing based on user input.
 **Follow this dynamic sequence:**
 
 ### **✅ STEP 1: READ SYSTEM PROMPT FIRST** 
-**MANDATORY:** Read `/Knowledge Base/Writer - Prompt Improver - v0.910.md` **COMPLETELY** before proceeding.
+**MANDATORY:** Read `/Knowledge Base/Writer - Prompt Improver - v0.920.md` **COMPLETELY** before proceeding.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
@@ -56,9 +56,9 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 **Check user's input for $ command shortcuts and route accordingly:**
 
 #### IF USER USES SHORTCUTS:
-- **`$json`** → Read `/Knowledge Base/Prompt - Format Guide - JSON - v0.110.md`
-- **`$yaml`** → Read `/Knowledge Base/Prompt - Format Guide - YAML - v0.110.md`
-- **`$markdown` or default** → Read `/Knowledge Base/Prompt - Format Guide - Markdown - v0.100.md`
+- **`$json`** → Read `/Knowledge Base/Prompt - Format Guide - JSON - v0.111.md`
+- **`$yaml`** → Read `/Knowledge Base/Prompt - Format Guide - YAML - v0.111.md`
+- **`$markdown` or default** → Read `/Knowledge Base/Prompt - Format Guide - Markdown - v0.101.md`
 
 #### IF USER SPECIFIES MODE:
 - **`$quick`** → Skip Interactive Mode, apply 1-5 round DEPTH scaling
@@ -77,17 +77,17 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Step 2 routing, read as needed:**
 
-1. **DEPTH Thinking Framework** - `/Knowledge Base/Prompt - DEPTH Thinking Framework - v0.106.md`
+1. **DEPTH Thinking Framework** - `/Knowledge Base/Prompt - DEPTH Thinking Framework - v0.107.md`
    - **ALWAYS READ** (required for all operations)
    - Transparent excellence methodology
    - 10-round standard / 1-5 quick scaling
 
-2. **Patterns & Evaluation** - `/Knowledge Base/Prompt - Patterns, Enhancements & Evaluation - v0.101.md`
+2. **Patterns & Evaluation** - `/Knowledge Base/Prompt - Patterns, Enhancements & Evaluation - v0.102.md`
    - **ALWAYS READ** (contains all frameworks)
    - Jump to specific framework if commanded
    - CLEAR scoring methodology
 
-3. **Interactive Mode** - `/Knowledge Base/Prompt - Interactive Mode - v0.642.md`
+3. **Interactive Mode** - `/Knowledge Base/Prompt - Interactive Mode - v0.643.md`
    - **SKIP if $quick or direct framework specified**
    - DEFAULT conversational enhancement flow
    - Framework selection logic
@@ -99,7 +99,7 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 ```
 START
   ↓
-[Read System Prompt v0.910]
+[Read System Prompt v0.920]
   ↓
 [Check User Input]
   ↓
@@ -197,7 +197,7 @@ User: "improve my prompt"
 ## 6. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
-- ❌ Skip the system prompt (/Knowledge Base/Writer - Prompt Improver - v0.910.md)
+- ❌ Skip the system prompt (/Knowledge Base/Writer - Prompt Improver - v0.920.md)
 - ❌ Proceed without completing Step 1
 - ❌ Skip command / shortcut detection
 - ❌ Read ALL documents unnecessarily (only what's needed)
@@ -208,7 +208,7 @@ User: "improve my prompt"
 - ❌ **Produce code, CLI commands, or implementation details** (Context Override)
 
 ### ALWAYS:
-- ✅ Start with `/Knowledge Base/Writer - Prompt Improver - v0.910.md`
+- ✅ Start with `/Knowledge Base/Writer - Prompt Improver - v0.920.md`
 - ✅ Complete step 1 and understand project context fully
 - ✅ Check for mode/tone commands before routing
 - ✅ Read ONLY required documents based on routing
@@ -231,4 +231,4 @@ User: "improve my prompt"
 7. **Artifact Standards** - Always for formatting
 8. **Output to /export** - Every artifact goes here
 
-**→ GO TO:** `/Knowledge Base/Writer - Prompt Improver - v0.910.md` **NOW**
+**→ GO TO:** `/Knowledge Base/Writer - Prompt Improver - v0.920.md` **NOW**

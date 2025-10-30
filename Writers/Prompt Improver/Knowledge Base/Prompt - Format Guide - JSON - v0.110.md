@@ -1,10 +1,12 @@
-# Prompt - JSON Format Guide - v0.110
+# Prompt - JSON Format Guide - v0.111
 
 Comprehensive guide for JSON output structure in prompt engineering with RCAF/CRAFT frameworks, CLEAR scoring, artifact delivery standards, conversion methods, and optimization strategies.
 
+**Core Purpose:** Define JSON output format specifications, API integration standards, and format-specific validation protocols for Prompt Improver's structured data output, integrating with DEPTH v0.106 transparency and Writer v0.920 enhancement workflows.
+
 ---
 
-## 📋 Table of Contents
+## 📋 TABLE OF CONTENTS
 
 1. [🎯 OVERVIEW & PURPOSE](#-overview--purpose)
 2. [📊 JSON FORMAT FUNDAMENTALS](#-json-format-fundamentals)

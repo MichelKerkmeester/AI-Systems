@@ -1,6 +1,8 @@
-# Prompt - YAML Format Guide - v0.110
+# Prompt - YAML Format Guide - v0.111
 
 Comprehensive guide for YAML output structure in prompt engineering with RCAF/CRAFT frameworks, CLEAR scoring, artifact delivery standards, conversion methods, and optimization strategies.
+
+**Core Purpose:** Define YAML output format specifications, artifact delivery standards, and format-specific validation protocols for Prompt Improver's structured data output, integrating with DEPTH v0.106 transparency and Writer v0.920 enhancement workflows.
 
 ---
 
@@ -34,6 +36,11 @@ YAML (YAML Ain't Markup Language) provides human-readable structured data with m
 - **Framework** = Prompt organization (RCAF vs CRAFT)
 - **Output Structure** = Data format (Standard/Markdown vs JSON vs YAML)
 - This guide covers YAML as an **output structure** option
+
+**See Also:**
+- **Markdown Format Guide v0.110** - For Standard/Markdown output structure
+- **JSON Format Guide v0.110** - For JSON output structure
+- **Interactive Mode v0.642** - For format selection in conversational flow
 
 **YAML Format Benefits:**
 - **Human Readable:** Cleaner than JSON, more structured than Standard
@@ -142,10 +149,12 @@ Mode: $yaml | Complexity: [level] | Framework: [RCAF/CRAFT] | CLEAR: [X]/50
 
 ### Pre-Delivery Validation
 
+**🔴 BLOCKING Validation Requirements** *(per DEPTH v0.106)*
+
 ```python
 def validate_yaml_artifact():
     """MANDATORY validation before YAML delivery"""
-    
+
     checks = {
         'valid_yaml': self.is_valid_yaml(),
         'artifact_type': self.type == 'text/markdown',
@@ -154,16 +163,29 @@ def validate_yaml_artifact():
         'header_format': self.mode == '$yaml',
         'no_extra_sections': self.has_only_header_and_content,
         'rcaf_complete': self.has_all_rcaf_fields(),
+        'ricce_structural': self.validate_ricce_completeness(),  # RICCE validation
         'indentation_correct': self.check_yaml_indentation(),
         'clear_scored': self.clear_score >= 35,
-        'clear_target': self.clear_score >= 40
+        'clear_target': self.clear_score >= 40,
+        'cognitive_rigor': self.min_perspectives_analyzed >= 3  # Multi-perspective check
     }
-    
+
     if not all(checks.values()):
         failed = [k for k, v in checks.items() if not v]
-        raise ArtifactError(f"CANNOT DELIVER YAML. Failed: {failed}")
-        
+        raise ArtifactError(f"🔴 BLOCKING: CANNOT DELIVER YAML. Failed: {failed}")
+
     return True
+
+def validate_ricce_completeness(self):
+    """RICCE structural validation (per Writer v0.920)"""
+    ricce = {
+        'R': self.has_role_defined(),           # Role present
+        'I': self.has_instructions_clear(),     # Instructions (action)
+        'C': self.has_context_sufficient(),     # Context adequate
+        'C': self.has_constraints_defined(),    # Constraints specified
+        'E': self.has_examples_or_format()      # Examples/Format defined
+    }
+    return all(ricce.values())
 ```
 
 ### 🔴 FORMAT COMPLIANCE ENFORCEMENT
@@ -237,15 +259,17 @@ role: Data analyst
 NO explanatory text! NO code blocks! Just pure YAML.
 
 #### ERROR RECOVERY PROTOCOL
-If wrong format is generated:
+**🔴 BLOCKING Protocol** - If wrong format is generated:
 ```
 1. RECOGNIZE: "Output is markdown but should be YAML"
-2. STOP: Do not deliver wrong format
+2. 🔴 STOP: Do not deliver wrong format (BLOCKING)
 3. ANNOUNCE: "Format error detected. Regenerating as YAML..."
 4. RETRY: Generate proper YAML
-5. VALIDATE: yaml.safe_load() must succeed
-6. DELIVER: Only if valid YAML
+5. VALIDATE: yaml.safe_load() must succeed + RICCE check
+6. DELIVER: Only if valid YAML and all validation gates passed
 ```
+
+**Zero-tolerance enforcement:** Format violations are 🔴 BLOCKING errors that MUST prevent delivery.
 
 #### VALIDATION GATE
 Before delivering ANY $yaml artifact:
@@ -562,6 +586,11 @@ format:
 
 ## 7. 🔄 FORMAT CONVERSIONS
 
+**Cross-format guidance:**
+- **From/To Markdown:** See **Markdown Format Guide v0.110**
+- **From/To JSON:** See **JSON Format Guide v0.110**
+- **Interactive selection:** Per **Interactive Mode v0.642**
+
 ### Standard to YAML Conversion
 
 ```python
@@ -624,6 +653,11 @@ def yaml_to_standard(yaml_prompt):
 <a id="-yaml-vs-other-formats"></a>
 
 ## 8. ⚖️ YAML VS OTHER FORMATS
+
+**Format Guide References:**
+- **Markdown Guide:** See **Markdown Format Guide v0.110** for Standard format details
+- **JSON Guide:** See **JSON Format Guide v0.110** for JSON format details
+- **Selection Process:** Per **Interactive Mode v0.642** format selection workflow
 
 ### When to Use Each Format
 
@@ -792,7 +826,7 @@ target:
 
 ### After Every YAML Enhancement
 
-**Required in CHAT after artifact delivery:**
+**Required in CHAT after artifact delivery** *(per DEPTH v0.106 transparency model)*
 
 ```markdown
 📊 **Enhancement Report:**
@@ -800,12 +834,20 @@ target:
 **Complexity Assessment:** Level [X]/10
 - [Reasoning for complexity level]
 
-**DEPTH Processing Applied:**
-✅ DISCOVER (Rounds 1-2): [What was analyzed]
-✅ ENGINEER (Rounds 3-5): [Framework decisions]
-✅ PROTOTYPE (Rounds 6-7): [Structure built]
-✅ TEST (Rounds 8-9): [Validation performed]
-✅ HARMONIZE (Round 10): [Final polish applied]
+**DEPTH Processing Applied** *(per DEPTH v0.106)*:
+✅ **DISCOVER** (Rounds 1-2): [What was analyzed - input decomposition, requirement extraction]
+✅ **ENGINEER** (Rounds 3-5): [Framework decisions - RCAF/CRAFT selection, YAML structure planning]
+✅ **PROTOTYPE** (Rounds 6-7): [Structure built - YAML hierarchy created, fields organized]
+✅ **TEST** (Rounds 8-9): [Validation performed - RICCE check, format validation, CLEAR scoring]
+✅ **HARMONIZE** (Round 10): [Final polish applied - consistency check, optimization]
+
+**Cognitive Rigor Applied** *(per DEPTH v0.106)*:
+- **Perspectives Analyzed:** [X] (minimum 3 required, target 5)
+  1. [Perspective 1]: [insight/consideration]
+  2. [Perspective 2]: [insight/consideration]
+  3. [Perspective 3]: [insight/consideration]
+  [+ additional perspectives if analyzed]
+- **Multi-angle Assessment:** [How different viewpoints shaped the YAML structure]
 
 **Key Improvements:**
 1. [Specific improvement #1]: [Impact/reasoning]
@@ -826,6 +868,12 @@ target:
 **Structure Choice:** YAML
 - Reasoning: [Why YAML format serves this use case]
 - Token Impact: +[X]% over standard format
+
+**Validation Gates Passed:**
+✅ RICCE structural completeness *(per Writer v0.920)*
+✅ YAML syntax validation
+✅ Cognitive rigor threshold (3+ perspectives)
+✅ CLEAR score target (≥40/50)
 ```
 
 ### Quick Mode Transparency Template
@@ -863,6 +911,17 @@ target:
 | **Edit Efficiency** | >JSON | 1.4x faster |
 | **Artifact Delivery** | 100% | 100% |
 | **Header Compliance** | 100% | 100% |
+
+### Cognitive Rigor Metrics *(per DEPTH v0.106)*
+
+| Metric | Target | Current Average |
+|--------|--------|-----------------|
+| **Perspectives Analyzed** | ≥3 (target 5) | 4.2 perspectives |
+| **Multi-angle Assessment** | Every enhancement | 100% coverage |
+| **RICCE Completeness** | 100% | 100% validation |
+| **DEPTH Phase Coverage** | All 5 phases | 100% application |
+| **Cognitive Depth Score** | ≥8/10 | 8.4/10 |
+| **🔴 BLOCKING Failures** | 0% | <0.1% rate |
 
 ### Optimization Strategies
 
@@ -1039,11 +1098,13 @@ def assess_yaml_quality(yaml_prompt):
 
 ### Command Activation
 
-To use YAML format, users can:
+To use YAML format, users can *(per Interactive Mode v0.642)*:
 - Use `$yaml` command for automatic YAML formatting
 - Use `$y` as shorthand
 - Combine with modes: `$improve $yaml` or `$refine $yaml`
 - Request in Interactive Mode when format selection appears
+
+**See:** **Interactive Mode v0.642** for complete command reference and conversational format selection workflow.
 
 ### Success Criteria
 

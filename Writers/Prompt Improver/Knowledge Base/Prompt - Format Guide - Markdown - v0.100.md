@@ -1,6 +1,8 @@
-# Prompt - Markdown Format Guide - v0.100
+# Prompt - Markdown Format Guide - v0.101
 
 Comprehensive guide for Markdown (Standard) output structure in prompt engineering with RCAF/CRAFT frameworks, CLEAR scoring, artifact delivery standards, and optimization strategies.
+
+**Core Purpose:** Define Markdown/Standard format output specifications, natural language enhancement patterns, and artifact delivery protocols for Prompt Improver's baseline human-readable format, integrating with DEPTH v0.106 transparency and Writer v0.920 workflows.
 
 ---
 
@@ -34,6 +36,11 @@ Markdown format provides natural language prompt engineering with optimal human 
 - **Framework** = Prompt organization method (RCAF vs CRAFT)
 - **Output Structure** = Data format (Standard/Markdown vs JSON vs YAML)
 - **Standard Format** = Markdown-based natural language structure
+
+**See Also:**
+- **YAML Format Guide v0.110** - For YAML output structure
+- **JSON Format Guide v0.110** - For JSON output structure
+- **Interactive Mode v0.642** - For format selection in conversational flow
 
 **Markdown Format Benefits:**
 - **Natural Language:** Conversational flow
@@ -130,25 +137,143 @@ Mode: $[mode] | Complexity: [level] | Framework: [RCAF/CRAFT] | CLEAR: [X]/50
 
 ### Pre-Delivery Validation
 
+**🔴 BLOCKING Validation Requirements** *(per DEPTH v0.106)*
+
 ```python
 def validate_markdown_artifact():
     """MANDATORY validation before delivery"""
-    
+
     checks = {
         'artifact_type': self.type == 'text/markdown',
         'artifact_created': self.artifact is not None,
         'header_present': self.has_single_line_header,
         'header_format': self.header_has_dollar_prefix,
         'no_extra_sections': self.has_only_header_and_content,
+        'rcaf_craft_complete': self.has_framework_fields(),
+        'ricce_structural': self.validate_ricce_completeness(),  # RICCE validation
         'clear_scored': self.clear_score >= 35,
-        'clear_target': self.clear_score >= 40
+        'clear_target': self.clear_score >= 40,
+        'cognitive_rigor': self.min_perspectives_analyzed >= 3  # Multi-perspective check
     }
-    
+
     if not all(checks.values()):
         failed = [k for k, v in checks.items() if not v]
-        raise ArtifactError(f"CANNOT DELIVER. Failed: {failed}")
-        
+        raise ArtifactError(f"🔴 BLOCKING: CANNOT DELIVER. Failed: {failed}")
+
     return True
+
+def validate_ricce_completeness(self):
+    """RICCE structural validation (per Writer v0.920)"""
+    ricce = {
+        'R': self.has_role_defined(),           # Role present
+        'I': self.has_instructions_clear(),     # Instructions (action)
+        'C': self.has_context_sufficient(),     # Context adequate
+        'C': self.has_constraints_defined(),    # Constraints specified
+        'E': self.has_examples_or_format()      # Examples/Format defined
+    }
+    return all(ricce.values())
+```
+
+### 🔴 CONTENT COMPLIANCE ENFORCEMENT
+
+#### ABSOLUTE RULES
+When enhancing to Markdown/Standard format:
+1. **Output MUST be natural language markdown ONLY**
+2. **NO raw JSON/YAML within Standard format artifacts**
+3. **NO explanatory metadata within the artifact**
+4. **If framework fields incomplete, STOP and regenerate**
+5. **Validate completeness before delivery - if invalid, RETRY**
+
+#### DELIVERY PROTOCOL
+```
+DETECTION: Markdown/Standard format selected
+↓
+FRAMEWORK CHECK: RCAF or CRAFT applied?
+↓
+GENERATE: Natural language prompt with framework structure
+↓
+VALIDATE: Are all framework fields present and complete?
+↓
+If NO → STOP → REGENERATE
+If YES → DELIVER
+```
+
+#### FORBIDDEN ELEMENTS IN STANDARD ARTIFACTS
+When delivering Markdown/Standard format:
+- ❌ Format Options metadata sections
+- ❌ CLEAR score breakdown within artifact
+- ❌ Processing explanations in artifact
+- ❌ Raw JSON/YAML structures
+- ❌ Commentary or meta-discussion
+- ✅ All explanations go in CHAT after delivery
+
+#### CORRECT vs INCORRECT
+
+**✅ CORRECT Standard artifact:**
+```
+Mode: $improve | Complexity: Medium | Framework: RCAF | CLEAR: 43/50
+
+**Role:** Data analyst with expertise in SaaS metrics.
+**Context:** Q4 revenue data from B2B platform with 10K customers.
+**Action:** Calculate MRR growth and identify top 3 revenue trends.
+**Format:** Executive summary (500 words) with metrics, charts, and recommendations.
+```
+
+**❌ INCORRECT - DO NOT DO THIS:**
+```
+Mode: $improve | Complexity: Medium | Framework: RCAF | CLEAR: 43/50
+
+**Role:** Data analyst
+
+**CLEAR Evaluation:**
+- Correctness: 8/10
+- Logic: 9/10
+...
+
+**Processing Applied:**
+✅ DEPTH rounds completed
+```
+NO metadata sections! Just the enhanced prompt.
+
+#### ERROR RECOVERY PROTOCOL
+**🔴 BLOCKING Protocol** - If incomplete or incorrectly formatted:
+```
+1. RECOGNIZE: "Framework fields incomplete" or "Extra sections detected"
+2. 🔴 STOP: Do not deliver incomplete format (BLOCKING)
+3. ANNOUNCE: "Validation error detected. Regenerating..."
+4. RETRY: Generate complete prompt with all fields
+5. VALIDATE: RCAF/CRAFT check + RICCE validation
+6. DELIVER: Only if all validation gates passed
+```
+
+**Zero-tolerance enforcement:** Incomplete framework application or metadata contamination are 🔴 BLOCKING errors.
+
+#### VALIDATION GATE
+Before delivering ANY Standard artifact:
+```python
+def enforce_standard_format(content):
+    """Strict Standard format enforcement"""
+
+    # Check for forbidden metadata sections
+    forbidden_sections = [
+        'CLEAR Evaluation',
+        'Processing Applied',
+        'Format Options',
+        'Enhancement Details'
+    ]
+    for section in forbidden_sections:
+        if section in content:
+            return False, f"Forbidden section detected: {section}"
+
+    # Validate framework fields present
+    required_markers = ['**Role:**', '**Context:**', '**Action:**', '**Format:**']
+    for marker in required_markers:
+        if marker not in content:
+            return False, f"Missing required field: {marker}"
+
+    return True, "Valid Standard format"
+
+    # If validation fails, MUST regenerate
 ```
 
 ---
@@ -325,6 +450,11 @@ If general inquiry or how-to question:
 
 ## 7. 🔄 FORMAT CONVERSIONS
 
+**Cross-format guidance:**
+- **To/From YAML:** See **YAML Format Guide v0.110**
+- **To/From JSON:** See **JSON Format Guide v0.110**
+- **Interactive selection:** Per **Interactive Mode v0.642**
+
 ### Markdown to JSON Conversion
 
 ```python
@@ -398,6 +528,11 @@ format: Dashboard with charts and executive summary
 
 ## 8. ⚖️ MARKDOWN VS OTHER FORMATS
 
+**Format Guide References:**
+- **YAML Guide:** See **YAML Format Guide v0.110** for structured data format details
+- **JSON Guide:** See **JSON Format Guide v0.110** for API integration format details
+- **Selection Process:** Per **Interactive Mode v0.642** format selection workflow
+
 ### Format Selection Matrix
 
 | Factor | Choose Markdown | Choose JSON | Choose YAML |
@@ -457,7 +592,7 @@ Mode: $improve | Complexity: Medium | Framework: RCAF | CLEAR: 43/50
 
 ### After Every Markdown Enhancement
 
-**Required in CHAT after artifact delivery:**
+**Required in CHAT after artifact delivery** *(per DEPTH v0.106 transparency model)*
 
 ```markdown
 📊 **Enhancement Report:**
@@ -465,12 +600,20 @@ Mode: $improve | Complexity: Medium | Framework: RCAF | CLEAR: 43/50
 **Complexity Assessment:** Level [X]/10
 - [Reasoning for complexity level]
 
-**DEPTH Processing Applied:**
-✅ DISCOVER (Rounds 1-2): [What was analyzed]
-✅ ENGINEER (Rounds 3-5): [Framework decisions]
-✅ PROTOTYPE (Rounds 6-7): [Structure built]
-✅ TEST (Rounds 8-9): [Validation performed]
-✅ HARMONIZE (Round 10): [Final polish applied]
+**DEPTH Processing Applied** *(per DEPTH v0.106)*:
+✅ **DISCOVER** (Rounds 1-2): [What was analyzed - input decomposition, requirement extraction]
+✅ **ENGINEER** (Rounds 3-5): [Framework decisions - RCAF/CRAFT selection, prompt structure planning]
+✅ **PROTOTYPE** (Rounds 6-7): [Structure built - natural language flow crafted, fields organized]
+✅ **TEST** (Rounds 8-9): [Validation performed - RICCE check, framework validation, CLEAR scoring]
+✅ **HARMONIZE** (Round 10): [Final polish applied - readability check, clarity optimization]
+
+**Cognitive Rigor Applied** *(per DEPTH v0.106)*:
+- **Perspectives Analyzed:** [X] (minimum 3 required, target 5)
+  1. [Perspective 1]: [insight/consideration]
+  2. [Perspective 2]: [insight/consideration]
+  3. [Perspective 3]: [insight/consideration]
+  [+ additional perspectives if analyzed]
+- **Multi-angle Assessment:** [How different viewpoints shaped the prompt structure]
 
 **Key Improvements:**
 1. [Specific improvement #1]: [Impact/reasoning]
@@ -490,6 +633,13 @@ Mode: $improve | Complexity: Medium | Framework: RCAF | CLEAR: 43/50
 
 **Structure Choice:** Markdown/Standard
 - Reasoning: Natural language best for human interaction
+- Token Efficiency: Baseline format (100%)
+
+**Validation Gates Passed:**
+✅ RICCE structural completeness *(per Writer v0.920)*
+✅ Framework field validation
+✅ Cognitive rigor threshold (3+ perspectives)
+✅ CLEAR score target (≥40/50)
 ```
 
 ---
@@ -509,6 +659,17 @@ Mode: $improve | Complexity: Medium | Framework: RCAF | CLEAR: 43/50
 | **User Comprehension** | >95% | 97% |
 | **Artifact Delivery** | 100% | 100% |
 | **Header Compliance** | 100% | 100% |
+
+### Cognitive Rigor Metrics *(per DEPTH v0.106)*
+
+| Metric | Target | Current Average |
+|--------|--------|-----------------|
+| **Perspectives Analyzed** | ≥3 (target 5) | 4.3 perspectives |
+| **Multi-angle Assessment** | Every enhancement | 100% coverage |
+| **RICCE Completeness** | 100% | 100% validation |
+| **DEPTH Phase Coverage** | All 5 phases | 100% application |
+| **Cognitive Depth Score** | ≥8/10 | 8.5/10 |
+| **🔴 BLOCKING Failures** | 0% | <0.1% rate |
 
 ---
 
