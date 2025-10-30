@@ -3,7 +3,6 @@
 OBJECTIVE:
 - Rewrite the text in {selection} with intelligent variation scaling.
 - Output only the rewritten variations, grouped by category, with no extra commentary.
-- When possible, use “Replace Selection” or “Insert Below” to minimize diff-highlighting.
 
 DETERMINE VARIATIONS:
 - 1-30 words: Generate 6 variations
