@@ -1,4 +1,4 @@
-# Media Editor - MCP Intelligence - Imagician - v0.110
+# Media Editor - MCP Intelligence - Imagician - v0.200
 
 Technical reference for Imagician MCP server capabilities and integration for image processing operations.
 
@@ -8,8 +8,8 @@ Technical reference for Imagician MCP server capabilities and integration for im
 
 ## 📋 TABLE OF CONTENTS
 
-1. [� SERVER OVERVIEW](#1-server-overview)
-2. [�️ CORE CAPABILITIES](#2-core-capabilities)
+1. [🔌 SERVER OVERVIEW](#1-server-overview)
+2. [🛠️ CORE CAPABILITIES](#2-core-capabilities)
 3. [📊 FORMAT SUPPORT](#3-format-support)
 4. [⚙️ OPERATION SPECIFICATIONS](#4-operation-specifications)
 5. [🎯 QUALITY OPTIMIZATION](#5-quality-optimization)
