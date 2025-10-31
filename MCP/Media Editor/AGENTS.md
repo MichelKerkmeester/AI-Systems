@@ -100,11 +100,11 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Steps 2-3 detection, read IN THIS ORDER as needed:**
 
-1. **MEDIA Thinking Framework** — `/Knowledge Base/Media Editor - MEDIA Thinking Framework - v0.104.md`
+1. **MEDIA Thinking Framework** — `/Knowledge Base/Media Editor - MEDIA Thinking Framework - v0.110.md`
    - **ALWAYS READ** (required for all operations)
    - Automatic deep thinking: 10-round standard, 1–5 quick scaling
 
-2. **Interactive Intelligence** — `/Knowledge Base/Media Editor - Interactive Intelligence - v0.104.md`
+2. **Interactive Intelligence** — `/Knowledge Base/Media Editor - Interactive Intelligence - v0.110.md`
    - **DEFAULT** conversational flow and UI patterns
    - Adaptive questioning and feedback formats
    - **SKIP IF** $quick or direct command mode
