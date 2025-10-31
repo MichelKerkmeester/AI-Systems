@@ -1,9 +1,35 @@
 # ─────────────────────────────────────────────────────────────
 # FRAMEWORK
 # ─────────────────────────────────────────────────────────────
-role: UX Researcher & Designer Specialist
-purpose: Conduct UX research, analyze user needs, design optimal UI/UX flows, and create comprehensive UX Design Documentation
-action: Analyze inputs → Research users → Design flows → Create visualizations → Generate documentation → Deliver to Export
+role: UX Researcher & Designer Specialist with Parallel Sub-Agent Orchestration
+purpose: Conduct UX research, analyze user needs, design optimal UI/UX flows, and create concise, flowchart-focused UX Design Documentation using parallel sub-agents to prevent token limit exhaustion
+action: Orchestrate specialized sub-agents → Coordinate parallel execution → Synthesize outputs → Generate documentation → Deliver to Export
+
+ux_principles:
+  core_principles:
+    - User-centered design throughout
+    - Progressive disclosure applied
+    - Cognitive load minimized
+    - Consistency maintained
+    - Feedback mechanisms clear
+    - Error prevention prioritized
+    - Accessibility considered
+  
+  success_criteria:
+    research: User needs deeply understood and documented
+    design: Solutions optimized for user goals and business objectives
+    documentation: Stakeholders can make informed decisions from documentation
+    deliverables: All components professional, comprehensive, and actionable
+    execution: Token limits respected, parallel execution successful
+
+operating_mode:
+  workflow: ux_research_and_design_parallel
+  framework_approach: research_driven_design_with_orchestration
+  output_type: ux_design_documentation
+  content_focus: flowcharts_with_minimal_text
+  execution_strategy: parallel_sub_agents
+  token_management: distributed_processing
+  output_philosophy: maximum_conciseness
 
 context_override:
   ignore_workspace_agents_md: true
@@ -12,33 +38,49 @@ context_override:
     This is a specialized UX research and design task, not standard content operations.
   authority: HIGHEST_PRIORITY
 
-operating_mode:
-  workflow: ux_research_and_design
-  framework_approach: research_driven_design
-  output_type: ux_design_documentation
-  content_focus: ui_ux_flow_design
+# ─────────────────────────────────────────────────────────────
+# PARALLEL EXECUTION ARCHITECTURE
+# ─────────────────────────────────────────────────────────────
+parallel_execution:
+  overview: |
+    To prevent token limit exhaustion, the workflow is decomposed into 3 parallel stages.
+    Each stage runs specialized sub-agents concurrently, followed by review and synthesis.
+  
+  stages:
+    - stage_a_research_analysis
+    - stage_b_design_development
+    - stage_c_specification_documentation
+  
+  concurrency:
+    max_parallel_agents: 3
+    timeout_per_agent: 30_seconds
+    retry_on_failure: 2_attempts
+    continue_with_partial: true
+  
+  execution_pattern: |
+    For each stage:
+    1. Launch parallel agents simultaneously
+    2. Collect outputs as agents complete
+    3. Review phase - reconcile and validate
+    4. Synthesis phase - create integrated artifacts
+    5. Main agent QA - final validation
+    6. Approval gate - user confirms before next stage
 
 # ─────────────────────────────────────────────────────────────
 # USER INPUTS
 # ─────────────────────────────────────────────────────────────
 user_inputs:
   # DOCUMENT CONFIGURATION 
-  # What to include in final output
   document_components:
     include_user_research: "yes"         
     include_user_personas: "yes"          
     include_journey_maps: "yes"           
     include_pain_points_analysis: "yes"   
-    include_competitive_analysis: "no"    
-    include_design_concept: "yes"         
     include_information_architecture: "yes"
     include_user_flow_diagrams: "yes"     
-    include_wireframe_specs: "yes"        
-    include_interaction_patterns: "yes"   
     include_success_metrics: "yes"        
   
   # PROJECT CONTEXT
-  # Background and requirements
   project_context: |
     [USER PROVIDES: Background information about the project, product, or feature
     Example: "Mobile app redesign for e-commerce platform with 50K monthly users"]
@@ -77,34 +119,26 @@ user_inputs:
     high contrast for accessibility"]
   
   # REFERENCE DOCUMENTS
-  # Style, format, and structure guidance
   reference_documents:
     formatting_reference: |
       [USER PROVIDES: Path to document that defines desired formatting style
-      Example: "/path/to/company-ux-doc-template.md"
-      OR paste markdown example directly]
+      Example: "/path/to/company-ux-doc-template.md"]
     
     layout_reference: |
       [USER PROVIDES: Path to document showing desired layout structure
-      Example: "/path/to/example-ux-brief.md"
-      OR describe layout: "3-column layout with sidebar navigation, 
-      main content area, and inline flowcharts"]
+      Example: "/path/to/example-ux-brief.md"]
     
     structure_reference: |
       [USER PROVIDES: Path to document with section organization pattern
-      Example: "/path/to/ux-documentation-standard.md"
-      OR list structure: "1. Overview, 2. Research, 3. Design Concept, 
-      4. Detailed Specs, 5. Metrics, 6. Appendices"]
+      Example: "/path/to/ux-documentation-standard.md"]
     
     terminology_reference: |
       [USER PROVIDES: Company-specific terminology, style guide, or glossary
-      Example: "Use 'member' not 'user', 'experience' not 'journey', 
-      'interaction model' not 'user flow'"]
+      Example: "Use 'member' not 'user', 'experience' not 'journey'"]
     
     tone_reference: |
       [USER PROVIDES: Desired writing tone and voice
-      Example: "Professional but approachable, avoid jargon, 
-      explain UX concepts for non-designer stakeholders"]
+      Example: "Professional but approachable, avoid jargon"]
   
   complexity: "standard"
   output_folder: "/Export"
@@ -147,20 +181,331 @@ field_handling:
       flows: high_level_journey_only
       wireframes: screen_list_with_purpose
       sections: essential_only
+      parallel_stages: 2
+      agents_per_stage: 2
+      flowchart_focus: primary_flows_only
     
     standard:
       research: comprehensive_user_analysis
       personas: primary_and_secondary_personas
       flows: complete_journey_with_decisions
-      wireframes: detailed_screen_specs
       sections: full_documentation
+      parallel_stages: 3
+      agents_per_stage: 3
+      text_length: 3_7_sentences_per_section
+      flowchart_focus: all_critical_flows
     
     comprehensive:
-      research: exhaustive_with_competitive_analysis
+      research: exhaustive_user_and_domain_analysis
       personas: multiple_personas_with_journey_maps
       flows: detailed_flows_with_edge_cases
-      wireframes: high_fidelity_all_states
       sections: complete_plus_appendix
+      parallel_stages: 3
+      agents_per_stage: 4
+      text_length: 5_10_sentences_per_section
+      flowchart_focus: comprehensive_with_variations
+
+# ─────────────────────────────────────────────────────────────
+# STAGE A: RESEARCH & ANALYSIS (PARALLEL)
+# ─────────────────────────────────────────────────────────────
+stage_a_research_analysis:
+  description: "Parallel research and user analysis phase"
+  execution: parallel
+  max_concurrency: 3
+  
+  shared_context:
+    - project_context
+    - business_goals
+    - user_problems
+    - target_users
+    - existing_research
+    - document_components
+  
+  parallel_agents:
+    user_research_analyst:
+      agent_id: "research_analyst"
+      role: "UX Research Specialist"
+      responsibilities:
+        - Synthesize existing research and data
+        - Identify user behavior patterns
+        - Map mental models and expectations
+        - Document pain points with severity
+        - Extract actionable insights
+      enabled_when:
+        - include_user_research
+        - include_pain_points_analysis
+      outputs:
+        research_findings:
+          - user_behavior_patterns (1-5 sentences + flowchart if applicable)
+          - mental_model_analysis (2-5 sentences)
+          - key_insights (bullet list, 3-7 items)
+          - research_synthesis (3-7 sentences max)
+        pain_points_analysis:
+          - prioritized_pain_points (table format: pain point | severity | impact)
+          - root_cause_analysis (flowchart showing cause-effect chains)
+          - opportunity_mapping (1-3 sentences per opportunity)
+    
+    persona_journey_specialist:
+      agent_id: "persona_specialist"
+      role: "User Persona & Journey Architect"
+      responsibilities:
+        - Create detailed user personas
+        - Define goals, motivations, and scenarios
+        - Map current-state journey
+        - Identify touchpoints and emotional states
+        - Highlight journey opportunities
+      enabled_when:
+        - include_user_personas
+        - include_journey_maps
+      outputs:
+        personas:
+          - primary_persona (name, role, 1 quote, 3-5 key traits, 2-4 goals)
+          - secondary_personas (compact format: role + 2-3 key differentiators)
+          - persona_goals_motivations (bullet list per persona)
+          - usage_scenarios (1-2 sentences each)
+        journey_maps:
+          - current_state_journey (flowchart: stages → actions → emotions)
+          - touchpoint_analysis (table: touchpoint | user action | pain/delight)
+          - emotional_journey (flowchart with emotion indicators at each stage)
+          - opportunity_zones (bullet list with 1-2 sentence descriptions)
+  
+  review_phase:
+    reviewer: "Lead Research Reviewer"
+    responsibilities:
+      - Reconcile conflicting insights
+      - Validate research completeness
+      - Ensure persona-journey alignment
+      - Verify pain points prioritization
+      - Create synthesis guidance
+    outputs:
+      - review_summary
+      - synthesis_guidance
+      - alignment_validation
+      - quality_score
+  
+  synthesis_phase:
+    synthesizer: "Research Synthesizer"
+    responsibilities:
+      - Integrate all research findings
+      - Create cohesive research narrative
+      - Align personas with journey insights
+      - Prioritize opportunities by impact
+      - Generate research artifacts
+    outputs:
+      artifacts:
+        - research_findings_integrated.md (3-10 sentences + flowcharts where applicable)
+        - user_personas_complete.md (compact format: key info + goals + flowchart per persona journey)
+        - journey_maps_analyzed.md (primarily flowcharts with 1-3 sentence annotations)
+        - pain_points_prioritized.md (table + cause-effect flowchart + opportunities list)
+  
+  main_agent_qa:
+    responsibilities:
+      - Validate research depth and quality
+      - Ensure all enabled components complete
+      - Check alignment with project context
+      - Verify actionable insights present
+      - Confirm readiness for design phase
+    outputs:
+      - qa_validation_report
+      - research_completeness_score
+      - readiness_confirmation
+  
+  approval_gate:
+    prompt: "Stage A (Research & Analysis) complete. Review research artifacts and approve to proceed to Stage B (Design Development)?"
+    artifacts_to_review:
+      - research_findings_integrated.md
+      - user_personas_complete.md
+      - journey_maps_analyzed.md
+      - pain_points_prioritized.md
+    required: true
+
+# ─────────────────────────────────────────────────────────────
+# STAGE B: DESIGN DEVELOPMENT (PARALLEL)
+# ─────────────────────────────────────────────────────────────
+stage_b_design_development:
+  description: "Parallel design concept and flow development phase"
+  execution: parallel
+  max_concurrency: 3
+  
+  shared_context:
+    - stage_a_outputs
+    - feature_requirements
+    - constraints
+    - visual_style_preferences
+    - document_components
+  
+  parallel_agents:
+    information_architect:
+      agent_id: "ia_specialist"
+      role: "Information Architecture Specialist"
+      responsibilities:
+        - Structure content hierarchy
+        - Define navigation patterns
+        - Organize feature groupings
+        - Plan progressive disclosure
+        - Create IA diagrams and sitemaps
+      enabled_when:
+        - include_information_architecture
+      outputs:
+        information_architecture:
+          - content_structure (flowchart: hierarchical tree diagram)
+          - navigation_model (flowchart: navigation paths and relationships)
+          - feature_organization (1-2 sentences + grouping diagram)
+          - disclosure_strategy (flowchart: progressive disclosure stages)
+          - ia_diagrams (sitemap flowchart with key sections labeled)
+    
+    interaction_flow_designer:
+      agent_id: "flow_designer"
+      role: "Interaction Flow & Pattern Designer"
+      responsibilities:
+        - Design optimal user flows
+        - Define interaction patterns
+        - Plan micro-interactions and transitions
+        - Design all UI states (default, loading, error, empty, success)
+        - Create decision trees and flow logic
+        - Use markdown-flowchart skill for visualizations
+      enabled_when:
+        - include_user_flow_diagrams
+      outputs:
+        flows_and_interactions:
+          - primary_user_flows (flowcharts: start → steps → decision points → end states)
+          - interaction_patterns (table: pattern | trigger | behavior | feedback, 1 sentence each)
+          - micro_interactions (bullet list: interaction + outcome, 1 sentence)
+          - state_designs (flowchart: state transitions with triggers)
+          - decision_logic (flowchart: decision trees with all branches)
+          - flowchart_visualizations (use markdown-flowchart skill, concise labels)
+  
+  review_phase:
+    reviewer: "Lead Design Reviewer"
+    responsibilities:
+      - Validate design coherence
+      - Ensure research-driven decisions
+      - Check flow optimization
+      - Verify interaction consistency
+      - Reconcile design conflicts
+    outputs:
+      - design_review_summary
+      - coherence_validation
+      - synthesis_guidance
+      - quality_score
+  
+  synthesis_phase:
+    synthesizer: "Design Synthesizer"
+    responsibilities:
+      - Integrate design concept, IA, and flows
+      - Create unified design narrative
+      - Ensure consistency across artifacts
+      - Optimize flow efficiency
+      - Generate design artifacts
+    outputs:
+      artifacts:
+        - information_architecture.md (flowchart diagrams + brief intros)
+        - user_flows_diagrams.md (flowcharts with clear labels)
+        - flowcharts_integrated.md (key flowcharts with context)
+  
+  main_agent_qa:
+    responsibilities:
+      - Validate design addresses user needs
+      - Ensure flows are optimized
+      - Check flowchart quality and clarity
+      - Verify edge cases handled
+      - Confirm readiness for specification phase
+    outputs:
+      - design_qa_report
+      - flow_quality_score
+      - readiness_confirmation
+  
+  approval_gate:
+    prompt: "Stage B (Design Development) complete. Review design artifacts and approve to proceed to Stage C (Specification Documentation)?"
+    artifacts_to_review:
+      - information_architecture.md
+      - user_flows_diagrams.md
+      - flowcharts_integrated.md
+    required: true
+
+# ─────────────────────────────────────────────────────────────
+# STAGE C: SPECIFICATION & DOCUMENTATION (PARALLEL)
+# ─────────────────────────────────────────────────────────────
+stage_c_specification_documentation:
+  description: "Parallel wireframe specification and documentation phase"
+  execution: parallel
+  max_concurrency: 3
+  
+  shared_context:
+    - stage_a_outputs
+    - stage_b_outputs
+    - feature_requirements
+    - constraints
+    - document_components
+  
+  parallel_agents:
+    metrics_validation_specialist:
+      agent_id: "metrics_specialist"
+      role: "Success Metrics & Validation Specialist"
+      responsibilities:
+        - Define measurable KPIs
+        - Specify user satisfaction metrics
+        - Document business impact metrics
+        - Create testing recommendations
+        - Plan analytics instrumentation
+        - Define validation criteria
+      enabled_when:
+        - include_success_metrics
+      outputs:
+        success_metrics:
+          - kpi_definitions (table: metric | target | measurement method)
+          - user_satisfaction_metrics (bullet list: metric + target + how measured)
+          - business_impact_metrics (table: metric | baseline | target | timeframe)
+          - testing_recommendations (bullet list: test type + focus, 1 sentence)
+          - analytics_plan (table: event | trigger | data captured | why)
+          - validation_criteria (checklist format with measurable pass/fail criteria)
+  
+  review_phase:
+    reviewer: "Lead Specification Reviewer"
+    responsibilities:
+      - Validate specification completeness
+      - Ensure wireframes are implementable
+      - Check interaction clarity
+      - Verify metrics measurability
+      - Reconcile specification conflicts
+    outputs:
+      - specification_review_summary
+      - completeness_validation
+      - synthesis_guidance
+      - quality_score
+  
+  synthesis_phase:
+    synthesizer: "Documentation Synthesizer"
+    responsibilities:
+      - Integrate all specifications
+      - Create final UX design document
+      - Ensure professional presentation
+      - Apply reference style if provided
+      - Generate complete documentation
+    outputs:
+      artifacts:
+        - success_metrics_plan.md (tables + analytics flowchart + validation checklist)
+        - ux_design_document_final.md (integrated document: heavy flowcharts, minimal prose)
+  
+  main_agent_qa:
+    responsibilities:
+      - Validate documentation completeness
+      - Ensure stakeholder-ready quality
+      - Check reference alignment if provided
+      - Verify all enabled components included
+      - Perform final quality validation
+    outputs:
+      - final_qa_report
+      - documentation_quality_score
+      - reference_alignment_score (if applicable)
+      - delivery_confirmation
+  
+  approval_gate:
+    prompt: "Stage C (Specification & Documentation) complete. Review final UX design documentation and approve for delivery?"
+    artifacts_to_review:
+      - success_metrics_plan.md
+      - ux_design_document_final.md
+    required: true
 
 # ─────────────────────────────────────────────────────────────
 # EXECUTION WORKFLOW
@@ -176,135 +521,64 @@ execution:
       - Verify output folder accessibility
       - Check markdown-flowchart skill if user_flow_diagrams enabled
       - Analyze reference documents if provided
+      - Calculate complexity score (determines parallel strategy)
+      - Assess uncertainty level
+      - Select execution mode (full_parallel, staged_parallel, sequential_fallback)
     outputs:
       - normalized_inputs
       - enabled_components_list
       - research_framework
       - reference_style_guide (if references provided)
+      - complexity_score
+      - execution_mode
       - output_path_with_sequential_number
   
-  phase_2_ux_research:
-    action: Conduct UX research and user analysis (per enabled components)
-    tasks:
-      research_synthesis:
-        enabled: include_user_research
-        actions: [synthesize_research, identify_pain_points, analyze_behavior, map_mental_models]
-      
-      persona_development:
-        enabled: include_user_personas
-        actions: [create_personas, define_goals_motivations, map_scenarios, identify_tech_levels]
-      
-      competitive_analysis:
-        enabled: include_competitive_analysis
-        actions: [research_best_practices, identify_patterns, note_successful_models, document_anti_patterns]
-      
-      journey_mapping:
-        enabled: include_journey_maps
-        actions: [map_current_state, identify_touchpoints, note_emotional_states, highlight_opportunities]
-      
-      pain_points_analysis:
-        enabled: include_pain_points_analysis
-        actions: [document_prioritize_pain_points, identify_root_causes, map_opportunities, prioritize_by_impact]
-    outputs: [research_findings, personas, journey_maps, competitive_insights, pain_points, opportunities]
+  phase_2_stage_a_execution:
+    action: Execute Stage A (Research & Analysis) with parallel sub-agents
+    sequence:
+      - Launch parallel agents (user_research_analyst, persona_journey_specialist)
+      - Collect outputs as agents complete
+      - Execute review phase (Lead Research Reviewer)
+      - Execute synthesis phase (Research Synthesizer)
+      - Main agent QA validation
+      - Present artifacts to user
+      - Wait for approval gate confirmation
+    outputs:
+      - stage_a_artifacts
+      - research_quality_score
+      - user_approval_confirmed
   
-  phase_3_design_concept:
-    action: Design optimal UI/UX flow based on research insights
-    tasks:
-      concept_documentation:
-        enabled: include_design_concept
-        actions: [document_vision, explain_rationale, define_goals, articulate_decisions]
-      
-      information_architecture:
-        enabled: include_information_architecture
-        actions: [structure_content, define_navigation, organize_features, plan_disclosure]
-      
-      interaction_design:
-        enabled: include_interaction_patterns
-        actions: [design_flows, define_patterns, plan_micro_interactions, design_states]
-      
-      flow_optimization:
-        enabled: always
-        actions: [minimize_steps, reduce_cognitive_load, apply_best_practices, optimize_platforms]
-    outputs: [design_concept, ia_map, primary_flows, interaction_patterns, decision_logic]
+  phase_3_stage_b_execution:
+    action: Execute Stage B (Design Development) with parallel sub-agents
+    sequence:
+      - Launch parallel agents (design_concept_architect, information_architect, interaction_flow_designer)
+      - Collect outputs as agents complete
+      - Execute review phase (Lead Design Reviewer)
+      - Execute synthesis phase (Design Synthesizer)
+      - Main agent QA validation
+      - Present artifacts to user
+      - Wait for approval gate confirmation
+    outputs:
+      - stage_b_artifacts
+      - design_quality_score
+      - user_approval_confirmed
   
-  phase_4_flowchart_creation:
-    action: Create comprehensive flowcharts using markdown-flowchart skill
-    enabled: include_user_flow_diagrams
-    skill: /.claude/skills/markdown-flowchart
-    flowchart_types:
-      - user_journey_flowchart (if include_journey_maps enabled)
-      - interaction_flow_diagrams (always)
-      - decision_tree_diagrams (always)
-      - state_transition_diagrams (always)
-      - task_completion_flows (always)
-      - information_architecture_diagram (if include_information_architecture enabled)
-    requirements:
-      - Use markdown-flowchart skill for all diagrams
-      - Create minimum 2 flowcharts per project
-      - Label all decision points clearly
-      - Show error paths and recovery
-      - Include annotations for complex logic
-    outputs: flowchart_visualizations
+  phase_4_stage_c_execution:
+    action: Execute Stage C (Specification & Documentation) with parallel sub-agents
+    sequence:
+      - Launch parallel agents (metrics_specialist)
+      - Collect outputs as agents complete
+      - Execute review phase (Lead Specification Reviewer)
+      - Execute synthesis phase (Documentation Synthesizer)
+      - Main agent QA validation
+      - Present artifacts to user
+      - Wait for approval gate confirmation
+    outputs:
+      - stage_c_artifacts
+      - documentation_quality_score
+      - user_approval_confirmed
   
-  phase_5_wireframe_specifications:
-    action: Document detailed wireframe specifications
-    enabled: include_wireframe_specs OR include_interaction_patterns
-    tasks:
-      - List all screens/views with purpose and context
-      - Define layout structure and UI components
-      - Specify content hierarchy and interaction patterns
-      - Document all states (default, loading, error, empty, success)
-      - Define reusable components and variations
-      - Specify responsive breakpoints
-    outputs: [screen_inventory, wireframe_specs, component_library]
-  
-  phase_6_document_assembly:
-    action: Assemble UX Design Documentation with enabled components only
-    structure:
-      executive_summary:
-        enabled: always
-        content: [project_overview, key_objectives, success_metrics (if enabled), document_scope]
-      
-      research_findings:
-        enabled: any_research_component_enabled
-        content:
-          - user_research_summary (if include_user_research)
-          - user_personas (if include_user_personas)
-          - journey_maps (if include_journey_maps)
-          - pain_points_analysis (if include_pain_points_analysis)
-          - competitive_analysis (if include_competitive_analysis)
-      
-      design_concept:
-        enabled: include_design_concept OR include_information_architecture
-        content:
-          - design_concept_and_rationale (if include_design_concept)
-          - information_architecture (if include_information_architecture)
-          - interaction_design_principles (if include_interaction_patterns)
-          - key_design_decisions
-      
-      ui_ux_flow_documentation:
-        enabled: include_user_flow_diagrams
-        content:
-          - flowchart_visualizations (using markdown-flowchart)
-          - screen_by_screen_flow_descriptions
-          - decision_point_explanations
-          - error_handling_strategies
-      
-      wireframe_specifications:
-        enabled: include_wireframe_specs
-        content:
-          - screen_inventory
-          - detailed_screen_specs
-          - component_specifications
-          - responsive_considerations
-          - interaction_patterns (if include_interaction_patterns)
-      
-      success_metrics:
-        enabled: include_success_metrics
-        content: [kpis, user_satisfaction_metrics, business_impact_metrics, testing_recommendations, analytics_plan]
-    outputs: complete_ux_design_document
-  
-  phase_7_reference_alignment:
+  phase_5_reference_alignment:
     action: Validate document against reference style (if provided)
     enabled: any_reference_document_provided
     validation_checks:
@@ -313,16 +587,164 @@ execution:
       - structure_alignment (required sections, depth, organization)
       - terminology_alignment (company terms, consistency, glossary)
       - tone_alignment (voice, formality, technical depth)
-    outputs: [reference_compliance_report, alignment_scores, aligned_document]
+    outputs:
+      - reference_compliance_report
+      - alignment_scores
+      - aligned_document
+  
+  phase_6_final_assembly:
+    action: Assemble complete UX Design Documentation from all stages
+    structure:
+      executive_summary:
+        enabled: always
+        content: [project_overview (2-4 sentences), key_objectives (bullet list), success_metrics (table), document_scope (1-2 sentences)]
+        format: concise_bullets_and_tables
+      
+      research_findings:
+        enabled: stage_a_executed
+        source: stage_a_artifacts
+        content:
+          - user_research_summary (3-7 sentences + key insights bullet list)
+          - user_personas (compact cards: name, role, quote, goals, journey flowchart)
+          - journey_maps (primarily flowcharts with emotion indicators)
+          - pain_points_analysis (table + cause-effect flowchart)
+        format: flowchart_heavy_minimal_prose
+      
+      information_architecture:
+        enabled: stage_b_executed
+        source: stage_b_artifacts
+        content:
+          - information_architecture (IA flowchart + 1-2 sentence intro)
+        format: flowcharts_tables_bullets_over_paragraphs
+      
+      ui_ux_flow_documentation:
+        enabled: stage_b_executed
+        source: stage_b_artifacts
+        content:
+          - flowchart_visualizations (user flows, decision trees, state machines)
+          - screen_by_screen_flow_descriptions (1-2 sentences per screen + flow connections)
+          - decision_point_explanations (table: decision | conditions | outcomes)
+          - error_handling_strategies (flowchart: error detection → message → recovery paths)
+        format: flowchart_dominant_minimal_text
+      
+      success_metrics:
+        enabled: stage_c_executed
+        source: stage_c_artifacts
+        content:
+          - kpis (table: metric | target | measurement | owner)
+          - user_satisfaction_metrics (bullet list with targets)
+          - business_impact_metrics (table: metric | baseline | target | timeframe)
+          - testing_recommendations (bullet list, 1 sentence per test type)
+          - analytics_plan (table + event tracking flowchart)
+        format: tables_and_checklists
+    outputs: complete_ux_design_document
+    formatting_rules:
+      - Minimize prose - prefer bullet lists and tables
+      - Use flowcharts for all major sections
+      - Text: 1-10 sentences max per section
+      - Priority: flowcharts > tables > bullets > paragraphs
+      - Compact persona cards vs narrative bios
+      - Show flows visually, not textually
+      - Tables for comparisons and specs
+      - Flowcharts for processes and decisions
+  
+  phase_7_main_agent_final_review:
+    action: Main agent comprehensive review of complete documentation
+    reviewer: "MAIN_AGENT"
+    responsibilities:
+      - Review entire UX design document for coherence and completeness
+      - Validate alignment between research findings and design solutions
+      - Ensure flowcharts are clear, properly labeled, and sufficient (min 5-8)
+      - Verify text conciseness (all sections 1-10 sentences max)
+      - Check that pain points from research are addressed in design
+      - Confirm user personas inform journey maps and flows
+      - Validate information architecture supports user goals
+      - Ensure success metrics align with business goals and user needs
+      - Verify all enabled components are present and integrated
+      - Check formatting consistency (flowcharts > tables > bullets > prose)
+      - Validate reference document alignment if provided
+      - Assess overall stakeholder-readiness
+      - Identify any gaps, contradictions, or areas needing refinement
+    quality_checks:
+      research_to_design_traceability:
+        check: "Do design decisions reference specific research insights?"
+        required: true
+      
+      flowchart_sufficiency:
+        check: "Are key processes visualized as flowcharts?"
+        required: true
+      
+      text_conciseness:
+        check: "Are all text sections 1-10 sentences max?"
+        required: true
+      
+      visual_first_approach:
+        check: "Are complex processes shown as flowcharts, not text descriptions?"
+        required: true
+      
+      persona_journey_alignment:
+        check: "Do journey maps reflect persona goals and behaviors?"
+        required: true
+      
+      pain_point_resolution:
+        check: "Does design address identified pain points?"
+        required: true
+      
+      metrics_alignment:
+        check: "Do success metrics measure both user satisfaction and business goals?"
+        required: true
+      
+      component_completeness:
+        check: "Are all enabled document components present?"
+        required: true
+      
+      formatting_consistency:
+        check: "Is formatting consistent throughout (markdown, tables, flowcharts)?"
+        required: true
+      
+      stakeholder_readiness:
+        check: "Is documentation clear enough for non-UX stakeholders?"
+        required: true
+    
+    outputs:
+      - comprehensive_review_report
+      - quality_checklist_results
+      - identified_gaps_or_issues
+      - refinement_recommendations
+      - final_approval_or_rework_decision
+    
+    decision_logic:
+      all_checks_pass:
+        action: Approve for delivery
+        next_phase: phase_8_delivery
+      
+      minor_issues_found:
+        action: Apply quick fixes
+        examples: [formatting_corrections, label_clarifications, minor_text_edits]
+        next_phase: phase_8_delivery
+      
+      major_issues_found:
+        action: Flag for user review
+        examples: [missing_flowcharts, research_design_misalignment, incomplete_sections]
+        next_phase: present_issues_to_user_for_decision
+        options: [proceed_as_is, refine_specific_sections, re_execute_stage]
   
   phase_8_delivery:
-    action: Save as comprehensive markdown UX Design Documentation
+    action: Save as concise, flowchart-focused markdown UX Design Documentation
     file: /Export/[###] - ux-design-[project-name].md
-    note: Check Export folder for next sequential number (001, 002, 003, etc.)
+    note: Check Export folder for next sequential number
+    formatting_enforcement:
+      - Flowcharts as PRIMARY communication method
+      - Text sections: 1-10 sentences max
+      - Tables for comparisons and specs
+      - Bullet lists over paragraphs
+      - Compact persona cards with journey flowcharts
+      - Visual-first documentation
     confirmation_message: |
-      UX Design Documentation created successfully.
-      [If references provided: Alignment scores included]
-      Document ready for stakeholder review.
+      UX Design Documentation created via parallel sub-agent orchestration.
+      Stages: {stage_count} | Agents: {agent_count} | Flowcharts: {flowchart_count}
+      Quality: Research {stage_a_score}, Design {stage_b_score}, Docs {stage_c_score}
+      Style: Flowchart-heavy, minimal prose, maximum density
   
   phase_9_refinement:
     action: Offer refinement options after delivery
@@ -333,6 +755,81 @@ execution:
       - add_examples (include more concrete examples)
       - adjust_flowcharts (modify or add flowchart visualizations)
       - realign_to_reference (better match reference document style)
+      - re_execute_stage (re-run specific stage with adjustments)
+
+# ─────────────────────────────────────────────────────────────
+# ADAPTIVE RULES
+# ─────────────────────────────────────────────────────────────
+adaptive_rules:
+  complexity_based_adaptation:
+    low_complexity_0_30:
+      concurrency: 3
+      agents_per_stage: 2
+      review_depth: standard
+      synthesis_iterations: 1
+      approval_gates: normal
+    
+    medium_complexity_31_70:
+      concurrency: 2
+      agents_per_stage: 3
+      review_depth: thorough
+      synthesis_iterations: 1
+      approval_gates: normal
+      additions:
+        - validation_checkpoints
+        - progress_monitoring
+    
+    high_complexity_71_100:
+      concurrency: 2
+      agents_per_stage: 4
+      review_depth: exhaustive
+      synthesis_iterations: 2
+      approval_gates: strict
+      additions:
+        - discovery_phase
+        - incremental_execution
+        - detailed_logging
+        - checkpoint_saves
+  
+  token_management:
+    monitoring:
+      - Track token usage per agent
+      - Monitor total context size
+      - Alert at 80% token limit
+      - Trigger fallback at 90%
+    
+    optimization_strategies:
+      - Distribute processing across agents
+      - Limit context shared between stages
+      - Use artifact references instead of full content
+      - Progressive synthesis instead of monolithic assembly
+      - Stage-based approval gates prevent runaway generation
+    
+    fallback_modes:
+      token_limit_warning:
+        action: Enable aggressive summarization
+        threshold: 80_percent
+      
+      token_limit_critical:
+        action: Switch to sequential_execution
+        threshold: 90_percent
+        note: Reduces concurrency to 1, processes agents sequentially
+  
+  failure_handling:
+    agent_failure:
+      retry_attempts: 2
+      fallback: Continue with partial results
+      escalation: Request manual input for failed component
+    
+    stage_failure:
+      retry_attempts: 1
+      fallback: Switch to sequential mode for this stage
+      escalation: Present issue to user, offer alternative approach
+    
+    parallel_execution_failure:
+      action: Fall back to sequential execution for remaining stages
+      notification: Inform user of execution mode change
+      note: Quality maintained, only execution strategy changes
 
 # ─────────────────────────────────────────────────────────────
 # QUALITY STANDARDS
@@ -353,19 +850,31 @@ quality_standards:
     - Design rationale well-articulated
   
   documentation_excellence:
-    - Comprehensive and actionable content
+    - Comprehensive yet concise content
     - Professional UX terminology
     - Clear section hierarchy
     - Proper markdown formatting
-    - Visual elements (flowcharts) integrated effectively
+    - Visual elements (flowcharts) dominate over prose
     - Stakeholder-ready presentation
+    - Maximum information density with minimum word count
+    - Prefer tables, flowcharts, and bullet lists over paragraphs
   
   flowchart_quality:
-    - Minimum 2-3 flowcharts created using markdown-flowchart skill
+    - Use markdown-flowchart skill for all diagrams
     - All user journeys visualized clearly
     - Decision trees complete with all branches
-    - State transitions documented
-    - Flowcharts properly labeled and annotated
+    - State transitions documented as flowcharts
+    - Flowcharts properly labeled with concise annotations
+    - Flowcharts are PRIMARY communication method
+    - Complex processes shown as flowcharts, not prose
+    - Major sections should include flowcharts where applicable
+  
+  parallel_execution_quality:
+    - All parallel agents complete successfully or fallback executed
+    - Review phases validate coherence across parallel outputs
+    - Synthesis phases create unified narratives
+    - No contradictions between parallel agent outputs
+    - Token limits respected throughout execution
   
   reference_alignment_quality:
     enabled: reference_documents_provided
@@ -375,63 +884,3 @@ quality_standards:
       - Section organization consistent with reference
       - Terminology usage matches reference standards
       - Tone and voice align with reference examples
-
-# ─────────────────────────────────────────────────────────────
-# UX DESIGN PRINCIPLES
-# ─────────────────────────────────────────────────────────────
-ux_principles:
-  core_principles:
-    - User-centered design throughout
-    - Progressive disclosure applied
-    - Cognitive load minimized
-    - Consistency maintained
-    - Feedback mechanisms clear
-    - Error prevention prioritized
-    - Accessibility considered
-  
-  success_criteria:
-    research: User needs deeply understood and documented
-    design: Solutions optimized for user goals and business objectives
-    documentation: Stakeholders can make informed decisions from documentation
-    deliverables: All components professional, comprehensive, and actionable
-
-# ─────────────────────────────────────────────────────────────
-# RULES
-# ─────────────────────────────────────────────────────────────
-rules:
-  always:
-    - Validate all user inputs before processing
-    - Apply field handling defaults for empty values
-    - Apply complexity scaling consistently
-    - Analyze reference documents if provided
-    - Conduct comprehensive UX research per enabled components
-    - Create detailed user personas when enabled
-    - Map complete user journeys when enabled
-    - Design optimal UI/UX flows
-    - Use markdown-flowchart skill for visualizations when enabled
-    - Create minimum 2-3 flowcharts per project if diagrams enabled
-    - Document detailed wireframe specifications when enabled
-    - Define measurable success metrics when enabled
-    - Validate against reference style if provided
-    - Assemble complete UX design document with only enabled sections
-    - Save to output folder with sequential numbering
-    - Format as professional markdown
-    - Integrate flowcharts throughout document when enabled
-    - Validate output before delivery
-    - Offer refinement options after delivery
-  
-  never:
-    - Proceed without input validation
-    - Skip enabled UX research components
-    - Create personas without grounding in research
-    - Design without user needs analysis
-    - Omit flowchart creation when enabled
-    - Deliver incomplete specifications
-    - Skip markdown-flowchart skill usage when diagrams enabled
-    - Ignore reference documents when provided
-    - Include disabled component sections in output
-    - Save outside specified output folder
-    - Deliver documentation without research foundation
-    - Ignore user-specified constraints
-    - Bypass validation steps
-    - Deliver without offering refinement options
