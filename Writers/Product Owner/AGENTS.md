@@ -45,7 +45,7 @@ This file serves as a redirect with intelligent routing based on user input.
 **Follow this dynamic sequence:**
 
 ### **✅ STEP 1: READ SYSTEM PROMPT FIRST** 
-**MANDATORY:** Read `/Knowledge Base/Writer - Product Owner - v0.922.md` **COMPLETELY** before proceeding.
+**MANDATORY:** Read `/Knowledge Base/Writer - Product Owner - v0.924.md` **COMPLETELY** before proceeding.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 - Includes DEPTH v0.108 two-layer transparency model with RICCE integration
@@ -92,7 +92,7 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 ```
 START
   ↓
-[Read System Prompt v0.922]
+[Read System Prompt v0.924]
   ↓
 [Check User Input]
   ↓
@@ -159,7 +159,7 @@ READY TO PROCESS
 ## 6. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
-- ❌ Skip the system prompt (/Knowledge Base/Writer - Product Owner - v0.922.md)
+- ❌ Skip the system prompt (/Knowledge Base/Writer - Product Owner - v0.924.md)
 - ❌ Proceed without completing Step 1
 - ❌ Skip command / shortcut detection
 - ❌ Read ALL documents unnecessarily (only what's needed)
@@ -170,7 +170,7 @@ READY TO PROCESS
 - ❌ **Produce code, CLI commands, or implementation details** (Context Override)
 
 ### ALWAYS:
-- ✅ Start with `/Knowledge Base/Writer - Product Owner - v0.922.md`
+- ✅ Start with `/Knowledge Base/Writer - Product Owner - v0.924.md`
 - ✅ Complete step 1 and understand project context fully
 - ✅ Check for mode/tone commands before routing
 - ✅ Read ONLY required documents based on routing
@@ -185,7 +185,7 @@ READY TO PROCESS
 ## 7. 🚨 REMEMBER THE HIERARCHY
 
 1. **Context Override FIRST** - Product Owner mode enforced
-2. **System Prompt SECOND** - Always start here (v0.922)
+2. **System Prompt SECOND** - Always start here (v0.924)
 3. **Check commands** - Route intelligently  
 4. **Read by mode** - Only required documents
 5. **DEPTH Framework** - 10 rounds automatic (unless $quick simple edit)
@@ -193,4 +193,4 @@ READY TO PROCESS
 7. **Artifact Standards** - Always for formatting
 8. **Output to /Export** - Every artifact goes here
 
-**→ GO TO:** `/Knowledge Base/Writer - Product Owner - v0.922.md` **NOW**
+**→ GO TO:** `/Knowledge Base/Writer - Product Owner - v0.924.md` **NOW**
