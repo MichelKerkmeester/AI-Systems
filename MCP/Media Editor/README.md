@@ -1,33 +1,71 @@
-# Media Editor System - User Guide v0.114
+# Media Editor System - User Guide v0.200
 
 An intelligent media processing system that transforms natural language requests into optimized images, videos, and audio through conversational guidance. Features automatic deep analysis with 10 rounds of professional optimization, ensuring every media operation achieves optimal results without manual configuration.
 
 ## 📋 Table of Contents
 
-- [✨ Key Features](#key-features)
-- [🚀 Quick Setup](#quick-setup)
-- [🔧 Installing MCP Tools](#installing-mcp-tools)
-- [🧠 How It Works](#how-it-works)
-- [🎛️ Operating Modes](#operating-modes)
-- [💬 Example Interactions](#example-interactions)
-- [📊 Visual Feedback](#visual-feedback)
-- [⚡ Emergency Commands](#emergency-commands)
-- [🆘 Troubleshooting](#troubleshooting)
-- [⚠️ Important Notes](#important-notes)
-- [📚 Resources](#resources)
+1. [🆕 WHAT'S NEW IN V0.200](#1-whats-new-in-v0200)
+2. [✨ KEY FEATURES](#2-key-features)
+3. [🚀 QUICK SETUP](#3-quick-setup)
+4. [🔧 INSTALLING MCP TOOLS](#4-installing-mcp-tools)
+5. [🧠 HOW IT WORKS](#5-how-it-works)
+6. [🎛️ OPERATING MODES](#6-operating-modes)
+7. [💬 EXAMPLE INTERACTIONS](#7-example-interactions)
+8. [📊 VISUAL FEEDBACK](#8-visual-feedback)
+9. [🆘 TROUBLESHOOTING](#9-troubleshooting)
+10. [⚠️ IMPORTANT NOTES](#10-important-notes)
+11. [📚 RESOURCES](#11-resources)
 
-.
+---
 
-<a id="key-features"></a>
-## ✨ Key Features
+<a id="1-whats-new-in-v0200"></a>
+## 1. 🆕 WHAT'S NEW IN V0.200
+
+### Major Improvements
+
+**Streamlined Cognitive Rigor Framework:**
+- Simplified from complex multi-perspective requirements to **three focused media-specific techniques**
+- Quality-Size Optimization (automatic analysis of compression vs quality)
+- Format Selection Analysis (intelligent format comparison and selection)
+- Platform Compatibility Check (continuous validation of target platform support)
+- **Removed:** Mandatory multi-perspective blocking requirements
+- **Result:** More efficient, media-focused optimization without rigid perspective constraints
+
+**Enhanced MCP Intelligence Files (v0.200):**
+- **Pure capabilities focus** - Removed all processing logic duplication
+- Clean separation: MCP Intelligence = technical specs, MEDIA Framework = thinking methodology
+- Streamlined documentation with YAML-based specifications
+- Easier maintenance with single source of truth for processing logic
+
+**Improved Interactive Intelligence (v0.200):**
+- Better state machine definitions with explicit YAML structure
+- Clearer command detection and routing logic
+- Enhanced response templates with multi-line markdown emphasis
+- Improved error recovery patterns and user guidance
+
+**MEDIA Framework Refinements (v0.200):**
+- Stronger emphasis on automatic 10-round processing
+- Clearer two-layer transparency model (full rigor internally, concise updates externally)
+- Better integration with simplified cognitive rigor approach
+- Enhanced RICCE validation checkpoints throughout phases
+
+### 📊 Evolution: v0.200 → v0.114
+
+**v0.200:** Streamlined cognitive approach, pure MCP capabilities focus, enhanced conversation architecture  
+**v0.114:** Original multi-perspective framework with mixed MCP documentation
+
+---
+
+<a id="2-key-features"></a>
+## 2. ✨ KEY FEATURES
 
 ### Core Capabilities
 - **MCP Connection Verification**: Always checks server availability first
 - **Universal Media Processing**: Images, videos, and audio in one system
 - **Natural Language Understanding**: Describe what you want in plain words
-- **MEDIA Framework**: 5-phase thinking methodology with automatic depth
+- **MEDIA Framework v0.200**: 5-phase thinking methodology with automatic depth
 - **Automatic Deep Thinking**: 10 rounds of optimization for every operation
-- **Quick Mode**: Auto-scaled 1-5 rounds for speed-critical tasks
+- **Streamlined Cognitive Rigor**: 3 focused media-specific optimization techniques
 - **Challenge Mode**: Automatically optimizes complexity
 - **Pattern Learning**: Adapts to your preferences
 - **Visual Feedback**: Real-time progress directly in chat
@@ -61,10 +99,10 @@ An intelligent media processing system that transforms natural language requests
 - ❌ Complex editing (color grading, effects)
 - ❌ Upload to platforms
 
-.
+---
 
-<a id="quick-setup"></a>
-## 🚀 Quick Setup
+<a id="3-quick-setup"></a>
+## 3. 🚀 QUICK SETUP
 
 ### Step 1: Create a Claude Project
 1. Go to claude.ai
@@ -74,16 +112,15 @@ An intelligent media processing system that transforms natural language requests
 ### Step 2: Add System Instructions
 1. Click "Edit project details"
 2. Find "Custom instructions" section
-3. Copy and paste: `Agent - MCP - Media Editor.md`
+3. Copy and paste: `MCP - Media Editor - v0.200.md`
 4. Save the project
 
 ### Step 3: Upload Reference Documents
 Add these documents to your project:
-- `Media Editor - Interactive Intelligence.md`
-- `Media Editor - Patterns & Workflows.md`
-- `Media Editor - MEDIA Thinking Framework.md`
-- `Media Editor - MCP Intelligence - Imagician.md`
-- `Media Editor - MCP Intelligence - Video, Audio.md`
+- `Media Editor - Interactive Intelligence - v0.200.md`
+- `Media Editor - MEDIA Thinking Framework - v0.200.md`
+- `Media Editor - MCP Intelligence - Imagician - v0.200.md`
+- `Media Editor - MCP Intelligence - Video, Audio - v0.200.md`
 
 ### Step 4: Install MCP Tools
 See next section for detailed setup
@@ -93,13 +130,12 @@ See next section for detailed setup
 optimize my vacation photos          # Interactive with auto optimization
 $image resize to 1920px              # Direct mode with deep thinking
 $video compress presentation.mp4     # Video processing with 10 rounds
-$quick resize photo.jpg              # Fast mode with 1-5 auto-scaled rounds
 ```
 
-.
+---
 
-<a id="installing-mcp-tools"></a>
-## 🔧 Installing MCP Tools
+<a id="4-installing-mcp-tools"></a>
+## 4. 🔧 INSTALLING MCP TOOLS
 
 The Media Editor requires two MCP servers:
 
@@ -165,10 +201,10 @@ After installation, restart Claude Desktop and check:
 Ready for professional media processing!
 ```
 
-.
+---
 
-<a id="how-it-works"></a>
-## 🧠 How It Works
+<a id="5-how-it-works"></a>
+## 5. 🧠 HOW IT WORKS
 
 ### MCP Connection Verification
 
@@ -191,7 +227,7 @@ All media operations available with automatic optimization.
 | **Medium** | 0.50-0.79 | Explore → Execute | 10 rounds auto |
 | **Low** | <0.50 | Guide → Execute | 10 rounds auto |
 
-### MEDIA Thinking Framework (Automatic)
+### MEDIA Thinking Framework v0.200 (Automatic)
 1. **Pre-Check**: Verify MCP connections
 2. **M - Measure**: Analyze source media (deep analysis)
 3. **E - Evaluate**: Generate processing strategies (10 rounds)
@@ -199,17 +235,38 @@ All media operations available with automatic optimization.
 5. **I - Implement**: Execute with monitoring
 6. **A - Analyze**: Verify and learn
 
+### Streamlined Cognitive Rigor (v0.200)
+
+The system automatically applies **three focused media-specific techniques** for optimal results:
+
+#### 1. Quality-Size Optimization (Automatic)
+Analyzes quality requirements, evaluates compression options, and selects the optimal balance between file size reduction and visual quality.
+
+**Example:** "User needs web display" → "85% WebP quality ideal" → "8.5MB → 425KB with no visible quality loss"
+
+#### 2. Format Selection Analysis (Automatic)
+Evaluates available formats, compares compression efficiency, checks compatibility, and selects the optimal format with reasoning.
+
+**Example:** "PNG source for web" → "WebP 30% smaller, 96% browser support" → "WebP selected, PNG fallback available"
+
+#### 3. Platform Compatibility Check (Continuous)
+Identifies target platform, validates format support, checks quality requirements, and flags compatibility issues.
+
+**Example:** "WebP supported by 96% of browsers" • "Email clients prefer PNG/JPEG" • `[Note: Email use requires PNG fallback]`
+
+**User sees:** Key optimization decisions and reasoning  
+**System does:** Complete 10-round MEDIA analysis automatically
+
 ### Automatic Optimization
 The system automatically applies:
 - **Standard Mode**: 10 rounds of deep thinking for professional results
-- **Quick Mode ($quick)**: 1-5 rounds auto-scaled based on complexity
 - **No User Input**: System determines optimal depth automatically
 - **Challenge Mode**: Automatically simplifies overly complex requests
 
-.
+---
 
-<a id="operating-modes"></a>
-## 🎛️ Operating Modes
+<a id="6-operating-modes"></a>
+## 6. 🎛️ OPERATING MODES
 
 | Mode | Command | Thinking Applied | Use When |
 |------|---------|-----------------|----------|
@@ -217,7 +274,6 @@ The system automatically applies:
 | **Image** | `$image`/`$img` | 10 rounds auto | Direct image processing |
 | **Video** | `$video`/`$vid` | 10 rounds auto | Direct video processing |
 | **Audio** | `$audio`/`$aud` | 10 rounds auto | Direct audio processing |
-| **Quick** | `$quick` | 1-5 rounds auto | Speed is priority |
 
 ### Mode Activation
 
@@ -235,22 +291,10 @@ What type of media?
 • Audio (music, podcasts)
 ```
 
-**Quick Mode:**
-```
-User: $quick resize photo.jpg
-System: ⚡ Quick mode activated
+---
 
-Auto-scaling optimization...
-• Complexity: Simple resize
-• Using: 2 rounds (optimized for speed)
-
-Processing immediately...
-```
-
-.
-
-<a id="example-interactions"></a>
-## 💬 Example Interactions
+<a id="7-example-interactions"></a>
+## 7. 💬 EXAMPLE INTERACTIONS
 
 ### Simple Image Optimization
 ```
@@ -287,102 +331,16 @@ API calls: 2/60 🟢
 💡 WebP provides better compression than JPEG
    Optimization determined via deep analysis
 
-📁 Output: photo-web.webp
-```
-
-### Quick Processing Example
-```
-User: $quick compress video.mp4
-
-System: ⚡ Quick processing engaged
-
-Auto-scaling optimization (3 rounds detected)...
-• Complexity: Medium (video compression)
-• Speed priority active
-
-🎬 Fast Processing
-
-Results:
-• Size reduced by 60%
-• Processing time: 50% faster
-• Essential quality maintained
-
-📁 Output: video-compressed.mp4
-```
-
-.
-
-<a id="visual-feedback"></a>
-## 📊 Visual Feedback
-
-All operations display real-time feedback:
-
-### Standard Operation Display
-```
-🎬 Media Processing Operation
-
-Thinking: Deep analysis (10 rounds automatic)
-Media Type: [Type]
-Operation: [Description]
-
-📂 Input: [Details]
-🔄 Processing: [Steps with checkmarks]
-Progress: [Visual bar]
-API calls: [X/60] [Status indicator]
-
-✅ Results: [Metrics]
-💡 Insight: [Educational tip]
 📁 Output: [Location]
-```
-
-### Quick Mode Display
-```
-⚡ Quick Processing
-
-Thinking: Auto-scaled ([X] rounds)
-Complexity: [Detected level]
-Speed boost: [Percentage faster]
-
-[Simplified progress indicators]
-
-✅ Complete: [Results]
 ```
 
 ### API Usage Indicators
 - 🟢 **Green (0-30)**: Safe zone
-- 🟡 **Yellow (31-45)**: Caution
-- 🟠 **Orange (46-50)**: Warning
-- 🔴 **Red (51-55)**: Critical
-- ⛔ **Limit (60)**: Wait required
 
-.
+---
 
-<a id="emergency-commands"></a>
-## ⚡ Emergency Commands
-
-| Command | Action | Result | Thinking Impact |
-|---------|--------|--------|-----------------|
-| **`$reset`** | Clear all context | Fresh start | Returns to 10-round auto |
-| **`$quick`** | Fast processing | Speed priority | 1-5 rounds auto-scaled |
-| **`$status`** | Show patterns | Display context | Shows current mode |
-| **`$abort`** | Cancel operation | Stop processing | Cancels current task |
-
-### Command Examples
-```
-$reset
-# Clears patterns, returns to automatic 10-round thinking
-
-$quick resize photo.jpg
-# Auto-scales 1-5 rounds based on complexity
-
-$status
-# Shows MCP status and current thinking mode
-```
-
-.
-
-<a id="troubleshooting"></a>
-## 🆘 Troubleshooting
+<a id="8-troubleshooting"></a>
+## 8. 🆘 TROUBLESHOOTING
 
 ### Common Issues & Solutions
 
@@ -392,7 +350,6 @@ $status
 | **FFmpeg not found** | Not installed | Install FFmpeg |
 | **Format not supported** | Invalid format | Check supported list |
 | **File not found** | Wrong path | Verify file location |
-| **Processing slow** | Standard mode active | Use $quick for speed |
 | **Rate limit hit** | Too many requests | Wait 60 seconds |
 
 ### MCP Connection Issues
@@ -405,47 +362,10 @@ $status
 4. Check server logs
 ```
 
-### Quick Fixes
-```
-$status    # Check current state and thinking mode
-$reset     # Clear patterns, reset to standard
-$quick     # Switch to fast mode (1-5 rounds)
-```
+---
 
-.
-
-<a id="important-notes"></a>
-## ⚠️ Important Notes
-
-### Best Practices
-- **Automatic optimization**: System applies 10 rounds automatically
-- **Use $quick wisely**: Only when speed matters more than quality
-- **Trust the system**: Deep analysis ensures optimal results
-- **Watch rate limits**: Monitor API usage indicator
-- **Use appropriate formats**: WebP for web, MP4 for video
-- **Batch processing**: Each file gets full optimization
-
-### Performance Guidelines
-- **MCP Check**: <1 second
-- **Standard mode (10 rounds)**: Optimal quality, normal speed
-- **Quick mode (1-5 rounds)**: 40-60% faster, essential quality
-- **Images**: <5 seconds for most operations
-- **Videos**: 30-120 seconds depending on size
-- **Audio**: 5-30 seconds for extraction
-- **Batch**: Full optimization per file
-- **Rate limit**: 60 requests per minute
-
-### Quality Recommendations (Automatically Applied)
-- **Web images**: 85% quality, WebP format (10 rounds determine)
-- **Email attachments**: 80% quality, smaller dimensions (auto-optimized)
-- **Social media**: Platform-specific settings (deep analysis)
-- **Archival**: Lossless formats, maximum quality (10 rounds ensure)
-- **General use**: 85-90% quality balance (automatically selected)
-
-.
-
-<a id="resources"></a>
-## 📚 Resources
+<a id="9-resources"></a>
+## 9. 📚 RESOURCES
 
 ### MCP Server Documentation
 - [Imagician MCP](https://github.com/flowy11/imagician) - Image processing
@@ -464,4 +384,4 @@ $quick     # Switch to fast mode (1-5 rounds)
 
 ---
 
-*Transform natural language into professional media operations with automatic deep thinking. Every operation receives 10 rounds of optimization automatically. Quick mode intelligently scales 1-5 rounds for speed. MCP connections verified automatically. Intelligent processing for images, video, and audio with no manual configuration required.*
+*Transform natural language into professional media operations with automatic deep thinking. Every operation receives 10 rounds of optimization automatically using the streamlined MEDIA Framework v0.200. MCP connections verified automatically. Three focused optimization techniques ensure quality-size balance, optimal format selection, and platform compatibility with no manual configuration required.*

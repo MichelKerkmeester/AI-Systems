@@ -35,7 +35,6 @@ A focused framework ensuring professional media processing through **automatic o
 **1. Automatic Professional Excellence**
 - Professional optimization applied automatically to EVERY request
 - 10 rounds of thinking for standard mode (system-controlled)
-- 1-5 auto-scaled rounds for quick mode
 - Quality guaranteed through automatic processing depth
 
 **2. MCP Connection First**
@@ -289,13 +288,13 @@ Before processing, validate (show summary to user):
 
 ### Phase Breakdown with Round Distribution
 
-| Phase | Standard (10 rounds) | Quick (1-5 rounds) | User Update Format |
-|-------|----------------------|--------------------|-------------------|
-| **M**easure | Rounds 1-2 | 0.5-1 round | "📊 Analyzing source (4K PNG, 8.5MB)" |
-| **E**valuate | Rounds 3-5 | 1-2 rounds | "⚙️ Evaluating (WebP optimal)" |
-| **D**ecide | Rounds 6-7 | 0.5-1 round | "✅ Deciding (85% quality, 1080p)" |
-| **I**mplement | Round 8 | 0.5 round | "🔄 Processing (95% reduction)" |
-| **A**nalyze | Rounds 9-10 | 0.5 round | "📈 Complete (quality verified)" |
+| Phase | Standard (10 rounds) | User Update Format |
+|-------|----------------------|--------------------|
+| **M**easure | Rounds 1-2 | "📊 Analyzing source (4K PNG, 8.5MB)" |
+| **E**valuate | Rounds 3-5 | "⚙️ Evaluating (WebP optimal)" |
+| **D**ecide | Rounds 6-7 | "✅ Deciding (85% quality, 1080p)" |
+| **I**mplement | Round 8 | "🔄 Processing (95% reduction)" |
+| **A**nalyze | Rounds 9-10 | "📈 Complete (quality verified)" |
 
 ### State Management (Focused & Efficient)
 
@@ -310,7 +309,7 @@ system_state:
   # Processing state
   current_phase: [measure, evaluate, decide, implement, analyze]
   depth_round: integer
-  mode: [standard, quick]  # standard = 10 rounds, quick = 1-5 auto-scaled
+  mode: standard  # standard = 10 rounds
   
   # Media-specific context
   media_context:
@@ -933,8 +932,7 @@ ricce_media_integration_check:
 ### Internal Layer (Full Optimization)
 
 **What Happens:**
-- Complete 10-round analysis for standard operations
-- Auto-scaled 1-5 rounds for quick mode
+- Complete 10-round analysis for all operations
 - Full format comparison and evaluation
 - Detailed quality-size optimization matrix
 - Comprehensive compatibility checking
@@ -1102,7 +1100,7 @@ pre_processing_validation:
     - [ ] Platform constraints known?
   
   system_readiness:
-    - [ ] MEDIA framework loaded (v0.105)
+    - [ ] MEDIA framework loaded
     - [ ] Cognitive rigor techniques ready
     - [ ] RICCE validation enabled
     - [ ] Two-layer transparency enabled
@@ -1398,7 +1396,7 @@ docker exec video-audio touch /videos/new/test.txt && echo "✓ Videos writable"
 
 **Before Processing:**
 - [ ] MCP servers connected (blocking)
-- [ ] MEDIA framework loaded (v0.105)
+- [ ] MEDIA framework loaded
 - [ ] Cognitive rigor ready (simplified)
 - [ ] RICCE validation enabled
 - [ ] Two-layer transparency enabled

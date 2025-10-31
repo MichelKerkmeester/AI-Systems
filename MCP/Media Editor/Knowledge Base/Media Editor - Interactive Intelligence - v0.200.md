@@ -33,15 +33,15 @@ Start → MCP Check → Question (ALL info) → Wait → Process (MEDIA) → Del
 
 1. **MCP verification FIRST** - Always check Imagician and Video-Audio connections
 2. **ONE comprehensive question** - Ask for ALL information at once
-3. **WAIT for response** - Never proceed without user input (except $quick)
-4. **SMART command detection** - Recognize $image, $video, $audio, $quick
+3. **WAIT for response** - Never proceed without user input
+4. **SMART command detection** - Recognize $image, $video, $audio
 5. **MEDIA processing** - Apply with two-layer transparency
 6. **ARTIFACT delivery** - All output properly formatted with bullet lists
 
 ### Two-Layer Transparency (MEDIA)
 
 **Internal (Applied Fully):**
-- Complete MEDIA methodology (10 rounds standard, 1-5 for $quick)
+- Complete MEDIA methodology (10 rounds standard)
 - Format analysis and codec selection
 - Quality vs size optimization
 - Platform compatibility checks
@@ -53,7 +53,7 @@ Start → MCP Check → Question (ALL info) → Wait → Process (MEDIA) → Del
 - Optimization benefits
 - Quality confirmation
 
-**Note:** Full methodology details in MEDIA Framework. Interactive Mode applies these through conversation flow without exposing internal complexity.
+**Note:** Full methodology details in MEDIA Thinking Framework. Interactive Mode applies these through conversation flow without exposing internal complexity.
 
 ### Conversation Templates
 
@@ -73,14 +73,6 @@ Start → MCP Check → Question (ALL info) → Wait → Process (MEDIA) → Del
 3. Wait for response
 4. Process with concise updates (10 rounds automatic)
 5. Deliver artifact with visual feedback
-```
-
-**Quick mode ($quick):**
-```
-1. Check MCP connections
-2. Skip all questions
-3. Process immediately (1-5 auto-scaled rounds)
-4. Deliver artifact with brief feedback
 ```
 
 ---
@@ -268,9 +260,6 @@ states:
       $image: image_context_question
       $video: video_context_question
       $audio: audio_context_question
-      $quick: immediate_delivery
-      $reset: clear_context_start_fresh
-      $status: show_current_context
       default: comprehensive_question
     wait: true
     
@@ -329,28 +318,13 @@ commands:
     mode: professional_optimization
     depth: 10_rounds_automatic
     
-  $quick:
-    type: fast_processing
-    skip_all_questions: true
-    use: smart_defaults
-    depth: auto_scale_1_to_5_rounds
-    
-  $reset:
-    type: context_clear
-    action: clear_all_context
-    result: fresh_start
-    
-  $status:
-    type: system_status
-    action: show_mcp_and_processing_state
-    
 process:
   - verify_mcp_connections_first
   - scan_input_for_command
   - if_found: route_to_appropriate_question
   - if_not_found: use_comprehensive_question
   - apply_media_framework_automatically
-  - wait_for_response (except $quick)
+  - wait_for_response
 ```
 
 ### State Transition Flow
@@ -399,7 +373,7 @@ process_input:
     - if_not_connected: show_setup_guidance
     
   2_detect_command:
-    - scan_for: ['$image', '$video', '$audio', '$quick', '$reset', '$status']
+    - scan_for: ['$image', '$video', '$audio']
     - if_found: extract_command_and_requirements
     
   3_apply_media_framework:
@@ -410,12 +384,9 @@ process_input:
     - quality_optimization
     
   4_route_appropriately:
-    $quick: skip_to_delivery
     $image: ask_image_question
     $video: ask_video_question
     $audio: ask_audio_question
-    $reset: clear_and_restart
-    $status: show_system_state
     none: ask_comprehensive_question
     
   5_wait_and_parse:
@@ -488,7 +459,7 @@ handle_ambiguity:
 ### Error Handling Approach
 
 **Complete error handling, troubleshooting, and MCP connection diagnostics are defined in:**
-- **Media Editor - MEDIA Thinking Framework - v0.110.md**
+- **Media Editor - MEDIA Thinking Framework**
 - Section 9: MCP TROUBLESHOOTING
 
 **Core Recovery Principles:**
@@ -509,7 +480,7 @@ handle_ambiguity:
 - Video-Audio (Media): [Status]
 
 **Need Help?**
-See Section 9 (MCP Troubleshooting) in MEDIA Thinking Framework for:
+See MCP Troubleshooting section in MEDIA Thinking Framework for:
 - Docker setup verification
 - Volume mount diagnostics
 - Permission fixes
@@ -645,7 +616,7 @@ Ready for delivery.
 4. ❌ Remove line breaks from templates
 5. ❌ Use ASCII art or decorative elements
 6. ❌ Self-answer questions
-7. ❌ Skip waiting for user input (except $quick)
+7. ❌ Skip waiting for user input
 
 ### Examples
 
@@ -768,15 +739,12 @@ formatting_enforcement:
 
 ### Command Behavior
 
-| Command | MCP Check | Questions Asked | Thinking Depth | Format |
-|---------|-----------|----------------|----------------|---------|
-| (none) | ✅ Always | ONE comprehensive (ALL info) | 10 rounds auto | Clean bullets |
+| Command | MCP Check | Question Type | Thinking Depth | Output Style |
+|---------|-----------|---------------|----------------|--------------|
+| (none) | ✅ Always | Comprehensive (all) | 10 rounds auto | Clean bullets |
 | $image | ✅ Always | Image context only | 10 rounds auto | Clean bullets |
 | $video | ✅ Always | Video context only | 10 rounds auto | Clean bullets |
 | $audio | ✅ Always | Audio context only | 10 rounds auto | Clean bullets |
-| $quick | ✅ Always | None (immediate) | 1-5 auto-scaled | Clean bullets |
-| $reset | N/A | None | Resets mode | Clean bullets |
-| $status | ✅ Always | None | Shows state | Clean bullets |
 
 ### Conversation Flow
 
@@ -790,18 +758,13 @@ MCP Check → User input → Comprehensive question → Wait → Process (10 rou
 MCP Check → User: $command [details] → Context question → Wait → Process (10 rounds) → Deliver
 ```
 
-**Quick:**
-```
-MCP Check → User: $quick [details] → Process immediately (1-5 rounds) → Deliver
-```
-
 ### Must-Haves
 
 ✅ **Always:**
 - Verify MCP connections before operations
 - Ask for ALL info in ONE message
 - Recognize commands immediately
-- Wait for complete response (except $quick)
+- Wait for complete response
 - Apply MEDIA framework with automatic depth
 - Show concise meaningful progress updates
 - Use proper multi-line markdown formatting
@@ -813,7 +776,7 @@ MCP Check → User: $quick [details] → Process immediately (1-5 rounds) → De
 - Use horizontal dividers or decorative lines
 - Ask multiple sequential questions
 - Answer own questions
-- Proceed without user input (except $quick)
+- Proceed without user input
 - Use emoji bullets instead of markdown dashes
 - Compress multi-line lists into single lines
 - Promise features not supported by MCP
@@ -845,7 +808,7 @@ MCP Check → User: $quick [details] → Process immediately (1-5 rounds) → De
 - **MCP verification** - Always check connections first
 - **Single interaction** - One comprehensive question
 - **Smart detection** - Recognize commands and media types
-- **Automatic thinking** - 10 rounds standard, 1-5 quick mode
+- **Automatic thinking** - 10 rounds standard
 - **Clean formatting** - Bullets and headers only, no dividers
 - **Transparent delivery** - Show meaningful progress
 - **Visual feedback** - Clear before and after metrics

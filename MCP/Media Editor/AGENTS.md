@@ -50,7 +50,7 @@ This file serves as a redirect with intelligent routing based on user intent and
 **Follow this dynamic sequence:**
 
 ### **✅ STEP 1: READ SYSTEM PROMPT FIRST** 
-**MANDATORY:** Read `/Knowledge Base/Agent - MCP - Media Editor - v0.114.md` **COMPLETELY** before proceeding.
+**MANDATORY:** Read `/Knowledge Base/MCP - Media Editor - v0.200.md` **COMPLETELY** before proceeding.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
@@ -100,24 +100,20 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Steps 2-3 detection, read IN THIS ORDER as needed:**
 
-1. **MEDIA Thinking Framework** — `/Knowledge Base/Media Editor - MEDIA Thinking Framework - v0.110.md`
+1. **MEDIA Thinking Framework** — `/Knowledge Base/Media Editor - MEDIA Thinking Framework - v0.200.md`
    - **ALWAYS READ** (required for all operations)
    - Automatic deep thinking: 10-round standard, 1–5 quick scaling
 
-2. **Interactive Intelligence** — `/Knowledge Base/Media Editor - Interactive Intelligence - v0.110.md`
+2. **Interactive Intelligence** — `/Knowledge Base/Media Editor - Interactive Intelligence - v0.200.md`
    - **DEFAULT** conversational flow and UI patterns
    - Adaptive questioning and feedback formats
    - **SKIP IF** $quick or direct command mode
 
-3. **MCP Intelligence** — `/Knowledge Base/Media Editor - MCP Intelligence - Imagician - v0.104.md`
-   `/Knowledge Base/Media Editor - MCP Intelligence - Video, Audio - v0.104.md`
+3. **MCP Intelligence** — `/Knowledge Base/Media Editor - MCP Intelligence - Imagician - v0.200.md`
+   `/Knowledge Base/Media Editor - MCP Intelligence - Video, Audio - v0.200.md`
    - Capabilities and limits of image (Imagician) and media (Video-Audio) servers
    - Tool names, parameters, supported formats
    - **READ IF** operations need specific tool knowledge
-
-4. **Patterns & Workflows** — `/Knowledge Base/Media Editor - Patterns & Workflows - v0.104.md`
-   - Operation templates, platform presets, and multi-step orchestration
-   - **READ IF** complex or multi-step operations
 
 ---
 
@@ -126,7 +122,7 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 ```
 START
   ↓
-[Read System Prompt v0.114]
+[Read System Prompt v0.200]
   ↓
 [VERIFY MCP CONNECTION] ← CRITICAL FIRST STEP
   ↓
@@ -152,11 +148,9 @@ Has $command? ─── YES ──→ [Route to Mode]
   ↓                         ↓
 [Route to Server]          [Read MCP Intelligence]
   ↓                         ↓
-[Read MEDIA Framework]     [Read Patterns if Complex]
+[Read MEDIA Framework]     [Execute with MCP Tools]
   ↓                         ↓
-[Read MCP Intelligence]    [Execute with MCP Tools]
-  ↓                         ↓
-[Read Patterns if Complex] [Deliver Results]
+[Read MCP Intelligence]    [Deliver Results]
   ↓
 [Execute with MCP Tools]
   ↓
@@ -170,12 +164,12 @@ Has $command? ─── YES ──→ [Route to Mode]
 **Recognize these commands:**
 | Command | Action | Resources to Read |
 |---------|--------|-------------------|
-| `$image`, `$img` | Image operations | MEDIA → MCP (Imagician) → Patterns |
-| `$video`, `$vid` | Video operations | MEDIA → MCP (Video-Audio) → Patterns |
-| `$audio`, `$aud` | Audio operations | MEDIA → MCP (Video-Audio) → Patterns |
+| `$image`, `$img` | Image operations | MEDIA → MCP (Imagician) |
+| `$video`, `$vid` | Video operations | MEDIA → MCP (Video-Audio) |
+| `$audio`, `$aud` | Audio operations | MEDIA → MCP (Video-Audio) |
 | `$quick` | Fast processing | MEDIA (1–5 rounds) → MCP only |
 | `$int`, `$interactive` | Force interactive mode | MEDIA → Interactive → MCP |
-| (no command) | Interactive default | MEDIA → Interactive → MCP → Patterns |
+| (no command) | Interactive default | MEDIA → Interactive → MCP |
 
 **Precedence when multiple commands provided:**
 1. Connection checks (always first)
@@ -188,7 +182,7 @@ Has $command? ─── YES ──→ [Route to Mode]
 **Format-Specific Mode:**
 ```
 User: "$image convert to webp and optimize"
-→ Verify connections → MEDIA → Imagician → Patterns → Execute → Report
+→ Verify connections → MEDIA → Imagician → Execute → Report
 ```
 
 **Quick Mode:**
@@ -215,7 +209,7 @@ User: "extract audio and create thumbnails"
 ## 5. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
-- ❌ Skip the system prompt (`/Knowledge Base/Agent - MCP - Media Editor - v0.114.md`)
+- ❌ Skip the system prompt (`/Knowledge Base/MCP - Media Editor - v0.200.md`)
 - ❌ Proceed without completing Step 1
 - ❌ Proceed without successful MCP connection checks
 - ❌ Skip operating routing guide
@@ -225,7 +219,7 @@ User: "extract audio and create thumbnails"
 - ❌ **Produce code, CLI commands, or implementation details** (Context Override)
 
 ### ALWAYS:
-- ✅ Start with `/Knowledge Base/Agent - MCP - Media Editor - v0.114.md`
+- ✅ Start with `/Knowledge Base/MCP - Media Editor - v0.200.md`
 - ✅ Complete step 1 and understand project context fully
 - ✅ Verify MCP connections BEFORE any operation
 - ✅ Check for mode & operating type
@@ -246,8 +240,7 @@ User: "extract audio and create thumbnails"
 6. **MEDIA Framework** - Structured automatic thinking
 7. **Interactive Intelligence** - Default flow when conversational
 8. **MCP Intelligence** - Tool capabilities and parameters
-9. **Patterns & Workflows** - For complex or multi-step tasks
-10. **Native MCP Tools ONLY** - No content generation
-11. **Output to /export** - Every artifact goes here
+9. **Native MCP Tools ONLY** - No content generation
+10. **Output to /export** - Every artifact goes here
 
-**→ GO TO:** `/Knowledge Base/Agent - MCP - Media Editor - v0.114.md` **NOW**
+**→ GO TO:** `/Knowledge Base/MCP - Media Editor - v0.200.md` **NOW**

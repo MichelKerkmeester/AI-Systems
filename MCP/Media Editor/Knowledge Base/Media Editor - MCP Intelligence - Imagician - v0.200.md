@@ -39,7 +39,7 @@ server:
 
 ### Connection Verification
 
-**Reference:** Connection verification logic is in Interactive Intelligence v0.110.
+**Reference:** Connection verification logic is in Interactive Intelligence.
 
 ```yaml
 verification:
@@ -58,7 +58,7 @@ verification:
 
 ### Available Operations
 
-**Note:** Thinking methodology (10 rounds standard, 1-5 quick) is defined in MEDIA Framework v0.110.
+**Note:** Thinking methodology (10 rounds standard, 1-5 quick) is defined in MEDIA Thinking Framework.
 
 ```yaml
 operations:
@@ -151,7 +151,7 @@ formats:
     best_for: "Next-gen compression, cutting-edge"
 ```
 
-**Note:** Format selection logic and recommendations are in MEDIA Framework Section 2 (Evaluate).
+**Note:** Format selection logic and recommendations are in MEDIA Thinking Framework Section 2 (Evaluate).
 
 ---
 
@@ -519,21 +519,21 @@ tools:
 ```yaml
 related_documents:
   thinking_methodology:
-    file: "Media Editor - MEDIA Thinking Framework - v0.110.md"
+    file: "Media Editor - MEDIA Thinking Framework"
     sections:
       - "Section 2: MEDIA Principles (quality vs size)"
       - "Section 3: Cognitive Rigor (format selection)"
       - "Section 9: MCP Troubleshooting"
     
   conversation_flow:
-    file: "Media Editor - Interactive Intelligence - v0.110.md"
+    file: "Media Editor - Interactive Intelligence"
     sections:
       - "Section 1: Conversation Architecture"
       - "Section 2: Response Templates"
       - "Section 5: Error Recovery"
     
   error_handling:
-    file: "Media Editor - MEDIA Thinking Framework - v0.110.md"
+    file: "Media Editor - MEDIA Thinking Framework"
     section: "Section 9: MCP Troubleshooting"
     includes:
       - "Docker volume configuration"

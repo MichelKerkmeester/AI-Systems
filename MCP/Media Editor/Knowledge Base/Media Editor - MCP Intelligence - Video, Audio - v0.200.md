@@ -40,7 +40,7 @@ server:
 
 ### Connection Verification
 
-**Reference:** Connection verification logic is in Interactive Intelligence v0.110.
+**Reference:** Connection verification logic is in Interactive Intelligence.
 
 ```yaml
 verification:
@@ -65,7 +65,7 @@ dependencies:
 
 ### Available Operations
 
-**Note:** Thinking methodology (10 rounds standard, 1-5 quick) is defined in MEDIA Framework v0.110.
+**Note:** Thinking methodology (10 rounds standard, 1-5 quick) is defined in MEDIA Thinking Framework.
 
 ```yaml
 video_operations:
@@ -821,21 +821,21 @@ tools:
 ```yaml
 related_documents:
   thinking_methodology:
-    file: "Media Editor - MEDIA Thinking Framework - v0.110.md"
+    file: "Media Editor - MEDIA Thinking Framework"
     sections:
       - "Section 2: MEDIA Principles (codec selection)"
       - "Section 3: Cognitive Rigor (format analysis)"
       - "Section 9: MCP Troubleshooting"
     
   conversation_flow:
-    file: "Media Editor - Interactive Intelligence - v0.110.md"
+    file: "Media Editor - Interactive Intelligence"
     sections:
       - "Section 1: Conversation Architecture"
       - "Section 2: Response Templates"
       - "Section 5: Error Recovery"
     
   error_handling:
-    file: "Media Editor - MEDIA Thinking Framework - v0.110.md"
+    file: "Media Editor - MEDIA Thinking Framework"
     section: "Section 9: MCP Troubleshooting"
     includes:
       - "FFmpeg installation verification"
@@ -911,7 +911,7 @@ limitations:
 
 ---
 
-*This document focuses exclusively on Video-Audio MCP server capabilities and technical specifications. For thinking methodology, see MEDIA Framework v0.110. For conversation flows and error handling, see Interactive Intelligence v0.110.*
+*This document focuses exclusively on Video-Audio MCP server capabilities and technical specifications. For thinking methodology, see MEDIA Thinking Framework. For conversation flows and error handling, see Interactive Intelligence.*
 
 ---
 
@@ -927,7 +927,7 @@ limitations:
 - **Protocol**: Model Context Protocol (MCP)
 - **Language**: Python
 - **Installation**: UV (recommended) or Python pip
-- **Thinking**: Automatic 10-round deep analysis (standard), 1-5 auto-scaled (quick mode)
+- **Thinking**: Automatic 10-round deep analysis
 
 ### Core Capabilities
 Based on the actual GitHub documentation:
@@ -1593,20 +1593,6 @@ Media Editor: [Checking Video-Audio MCP connection...]
 → Result: Instagram-optimized video ready
 ```
 
-### Quick Mode Examples
-
-```
-User: "$quick compress video.mp4"
-→ Auto-scaling: Video compression = 3 rounds
-→ Fast bitrate reduction applied
-→ 60% size reduction in half the time
-
-User: "$quick extract audio from presentation.mp4"
-→ Auto-scaling: Simple extraction = 2 rounds
-→ Direct stream copy when possible
-→ Completed in seconds
-```
-
 
 <a id="10-🚨-error-handling"></a>
 
@@ -1643,19 +1629,6 @@ User: "$quick extract audio from presentation.mp4"
 **Processing:** Optimized with deep analysis
 
 Operating at peak efficiency
-```
-
-### Quick Mode Performance
-```markdown
-⚡ Quick Mode Performance
-
-**Connection:** Active
-**FFmpeg:** Running
-**Thinking:** 3 rounds (auto-scaled)
-**Speed boost:** 40-60% faster
-**Quality:** Essential optimization only
-
-Fast processing engaged
 ```
 
 ---
