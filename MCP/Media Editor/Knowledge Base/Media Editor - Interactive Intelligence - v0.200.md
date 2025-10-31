@@ -1,4 +1,4 @@
-# Media Editor - Interactive Intelligence - v0.110
+# Media Editor - Interactive Intelligence - v0.200
 
 Establishes conversation flows, state management, and response patterns for interactive media operations with concise transparency and automatic deep thinking.
 
