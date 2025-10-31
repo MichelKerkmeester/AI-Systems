@@ -317,7 +317,7 @@ execution:
   
   phase_8_delivery:
     action: Save as comprehensive markdown UX Design Documentation
-    file: /Users/michelkerkmeester/MEGA/AI Systems/Writers/Barter/Export/[###] - ux-design-[project-name].md
+    file: /Export/[###] - ux-design-[project-name].md
     note: Check Export folder for next sequential number (001, 002, 003, etc.)
     confirmation_message: |
       UX Design Documentation created successfully.
