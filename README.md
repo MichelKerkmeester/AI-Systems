@@ -47,7 +47,7 @@ Create professional tickets, stories, epics, and documentation with automatic co
 **DEPTH + RICCE Framework**:
   - **DEPTH Methodology**: 10-round thinking (Discover → Engineer → Prototype → Test → Harmonize)
   - **Two-Layer Transparency**: Full rigor internally, concise meaningful updates externally
-  - **RICCE Structure**: Requirements, Implementation, Criteria, Context, Execution
+  - **RICCE Structure**: Role, Instructions, Context, Constraints, Examples
   - **$quick mode**: Auto-scaled 1-5 rounds based on complexity
   
 **Cognitive Rigor (Mandatory)**:
