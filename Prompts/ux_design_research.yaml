@@ -73,12 +73,9 @@ user_inputs:
   # DOCUMENT CONFIGURATION 
   document_components:
     include_user_research: "yes"         
-    include_user_personas: "yes"          
     include_journey_maps: "yes"           
-    include_pain_points_analysis: "yes"   
     include_information_architecture: "yes"
-    include_user_flow_diagrams: "yes"     
-    include_success_metrics: "yes"        
+    include_user_flow_diagrams: "yes"        
   
   # PROJECT CONTEXT
   project_context: |
@@ -148,10 +145,6 @@ user_inputs:
 # ─────────────────────────────────────────────────────────────
 field_handling:
   component_dependencies:
-    journey_maps_requires_personas:
-      rule: "If include_journey_maps=yes, auto-enable include_user_personas=yes"
-      fallback: "Create journey descriptions without persona integration if personas disabled"
-    
     flow_diagrams_requires_skill:
       rule: "If include_user_flow_diagrams=yes, verify markdown-flowchart skill accessible"
       fallback: "Create text-based flow descriptions if skill unavailable"
@@ -177,7 +170,6 @@ field_handling:
   complexity_scaling:
     quick:
       research: basic_heuristic_analysis
-      personas: single_primary_persona
       flows: high_level_journey_only
       wireframes: screen_list_with_purpose
       sections: essential_only
@@ -187,7 +179,6 @@ field_handling:
     
     standard:
       research: comprehensive_user_analysis
-      personas: primary_and_secondary_personas
       flows: complete_journey_with_decisions
       sections: full_documentation
       parallel_stages: 3
@@ -197,7 +188,6 @@ field_handling:
     
     comprehensive:
       research: exhaustive_user_and_domain_analysis
-      personas: multiple_personas_with_journey_maps
       flows: detailed_flows_with_edge_cases
       sections: complete_plus_appendix
       parallel_stages: 3
@@ -229,53 +219,21 @@ stage_a_research_analysis:
         - Synthesize existing research and data
         - Identify user behavior patterns
         - Map mental models and expectations
-        - Document pain points with severity
         - Extract actionable insights
       enabled_when:
         - include_user_research
-        - include_pain_points_analysis
       outputs:
         research_findings:
           - user_behavior_patterns (1-5 sentences + flowchart if applicable)
           - mental_model_analysis (2-5 sentences)
           - key_insights (bullet list, 3-7 items)
           - research_synthesis (3-7 sentences max)
-        pain_points_analysis:
-          - prioritized_pain_points (table format: pain point | severity | impact)
-          - root_cause_analysis (flowchart showing cause-effect chains)
-          - opportunity_mapping (1-3 sentences per opportunity)
-    
-    persona_journey_specialist:
-      agent_id: "persona_specialist"
-      role: "User Persona & Journey Architect"
-      responsibilities:
-        - Create detailed user personas
-        - Define goals, motivations, and scenarios
-        - Map current-state journey
-        - Identify touchpoints and emotional states
-        - Highlight journey opportunities
-      enabled_when:
-        - include_user_personas
-        - include_journey_maps
-      outputs:
-        personas:
-          - primary_persona (name, role, 1 quote, 3-5 key traits, 2-4 goals)
-          - secondary_personas (compact format: role + 2-3 key differentiators)
-          - persona_goals_motivations (bullet list per persona)
-          - usage_scenarios (1-2 sentences each)
-        journey_maps:
-          - current_state_journey (flowchart: stages → actions → emotions)
-          - touchpoint_analysis (table: touchpoint | user action | pain/delight)
-          - emotional_journey (flowchart with emotion indicators at each stage)
-          - opportunity_zones (bullet list with 1-2 sentence descriptions)
   
   review_phase:
     reviewer: "Lead Research Reviewer"
     responsibilities:
       - Reconcile conflicting insights
       - Validate research completeness
-      - Ensure persona-journey alignment
-      - Verify pain points prioritization
       - Create synthesis guidance
     outputs:
       - review_summary
@@ -288,15 +246,12 @@ stage_a_research_analysis:
     responsibilities:
       - Integrate all research findings
       - Create cohesive research narrative
-      - Align personas with journey insights
       - Prioritize opportunities by impact
       - Generate research artifacts
     outputs:
       artifacts:
         - research_findings_integrated.md (3-10 sentences + flowcharts where applicable)
-        - user_personas_complete.md (compact format: key info + goals + flowchart per persona journey)
         - journey_maps_analyzed.md (primarily flowcharts with 1-3 sentence annotations)
-        - pain_points_prioritized.md (table + cause-effect flowchart + opportunities list)
   
   main_agent_qa:
     responsibilities:
@@ -314,9 +269,7 @@ stage_a_research_analysis:
     prompt: "Stage A (Research & Analysis) complete. Review research artifacts and approve to proceed to Stage B (Design Development)?"
     artifacts_to_review:
       - research_findings_integrated.md
-      - user_personas_complete.md
       - journey_maps_analyzed.md
-      - pain_points_prioritized.md
     required: true
 
 # ─────────────────────────────────────────────────────────────
@@ -438,27 +391,7 @@ stage_c_specification_documentation:
     - constraints
     - document_components
   
-  parallel_agents:
-    metrics_validation_specialist:
-      agent_id: "metrics_specialist"
-      role: "Success Metrics & Validation Specialist"
-      responsibilities:
-        - Define measurable KPIs
-        - Specify user satisfaction metrics
-        - Document business impact metrics
-        - Create testing recommendations
-        - Plan analytics instrumentation
-        - Define validation criteria
-      enabled_when:
-        - include_success_metrics
-      outputs:
-        success_metrics:
-          - kpi_definitions (table: metric | target | measurement method)
-          - user_satisfaction_metrics (bullet list: metric + target + how measured)
-          - business_impact_metrics (table: metric | baseline | target | timeframe)
-          - testing_recommendations (bullet list: test type + focus, 1 sentence)
-          - analytics_plan (table: event | trigger | data captured | why)
-          - validation_criteria (checklist format with measurable pass/fail criteria)
+  parallel_agents: {}
   
   review_phase:
     reviewer: "Lead Specification Reviewer"
@@ -466,7 +399,6 @@ stage_c_specification_documentation:
       - Validate specification completeness
       - Ensure wireframes are implementable
       - Check interaction clarity
-      - Verify metrics measurability
       - Reconcile specification conflicts
     outputs:
       - specification_review_summary
@@ -484,7 +416,6 @@ stage_c_specification_documentation:
       - Generate complete documentation
     outputs:
       artifacts:
-        - success_metrics_plan.md (tables + analytics flowchart + validation checklist)
         - ux_design_document_final.md (integrated document: heavy flowcharts, minimal prose)
   
   main_agent_qa:
@@ -503,7 +434,6 @@ stage_c_specification_documentation:
   approval_gate:
     prompt: "Stage C (Specification & Documentation) complete. Review final UX design documentation and approve for delivery?"
     artifacts_to_review:
-      - success_metrics_plan.md
       - ux_design_document_final.md
     required: true
 
@@ -536,7 +466,7 @@ execution:
   phase_2_stage_a_execution:
     action: Execute Stage A (Research & Analysis) with parallel sub-agents
     sequence:
-      - Launch parallel agents (user_research_analyst, persona_journey_specialist)
+      - Launch parallel agents (user_research_analyst)
       - Collect outputs as agents complete
       - Execute review phase (Lead Research Reviewer)
       - Execute synthesis phase (Research Synthesizer)
@@ -566,7 +496,6 @@ execution:
   phase_4_stage_c_execution:
     action: Execute Stage C (Specification & Documentation) with parallel sub-agents
     sequence:
-      - Launch parallel agents (metrics_specialist)
       - Collect outputs as agents complete
       - Execute review phase (Lead Specification Reviewer)
       - Execute synthesis phase (Documentation Synthesizer)
@@ -597,7 +526,7 @@ execution:
     structure:
       executive_summary:
         enabled: always
-        content: [project_overview (2-4 sentences), key_objectives (bullet list), success_metrics (table), document_scope (1-2 sentences)]
+        content: [project_overview (2-4 sentences), key_objectives (bullet list), document_scope (1-2 sentences)]
         format: concise_bullets_and_tables
       
       research_findings:
@@ -605,9 +534,7 @@ execution:
         source: stage_a_artifacts
         content:
           - user_research_summary (3-7 sentences + key insights bullet list)
-          - user_personas (compact cards: name, role, quote, goals, journey flowchart)
           - journey_maps (primarily flowcharts with emotion indicators)
-          - pain_points_analysis (table + cause-effect flowchart)
         format: flowchart_heavy_minimal_prose
       
       information_architecture:
@@ -626,24 +553,12 @@ execution:
           - decision_point_explanations (table: decision | conditions | outcomes)
           - error_handling_strategies (flowchart: error detection → message → recovery paths)
         format: flowchart_dominant_minimal_text
-      
-      success_metrics:
-        enabled: stage_c_executed
-        source: stage_c_artifacts
-        content:
-          - kpis (table: metric | target | measurement | owner)
-          - user_satisfaction_metrics (bullet list with targets)
-          - business_impact_metrics (table: metric | baseline | target | timeframe)
-          - testing_recommendations (bullet list, 1 sentence per test type)
-          - analytics_plan (table + event tracking flowchart)
-        format: tables_and_checklists
     outputs: complete_ux_design_document
     formatting_rules:
       - Minimize prose - prefer bullet lists and tables
       - Use flowcharts for all major sections
       - Text: 1-10 sentences max per section
       - Priority: flowcharts > tables > bullets > paragraphs
-      - Compact persona cards vs narrative bios
       - Show flows visually, not textually
       - Tables for comparisons and specs
       - Flowcharts for processes and decisions
@@ -656,10 +571,7 @@ execution:
       - Validate alignment between research findings and design solutions
       - Ensure flowcharts are clear, properly labeled, and sufficient (min 5-8)
       - Verify text conciseness (all sections 1-10 sentences max)
-      - Check that pain points from research are addressed in design
-      - Confirm user personas inform journey maps and flows
       - Validate information architecture supports user goals
-      - Ensure success metrics align with business goals and user needs
       - Verify all enabled components are present and integrated
       - Check formatting consistency (flowcharts > tables > bullets > prose)
       - Validate reference document alignment if provided
@@ -680,18 +592,6 @@ execution:
       
       visual_first_approach:
         check: "Are complex processes shown as flowcharts, not text descriptions?"
-        required: true
-      
-      persona_journey_alignment:
-        check: "Do journey maps reflect persona goals and behaviors?"
-        required: true
-      
-      pain_point_resolution:
-        check: "Does design address identified pain points?"
-        required: true
-      
-      metrics_alignment:
-        check: "Do success metrics measure both user satisfaction and business goals?"
         required: true
       
       component_completeness:
@@ -738,7 +638,6 @@ execution:
       - Text sections: 1-10 sentences max
       - Tables for comparisons and specs
       - Bullet lists over paragraphs
-      - Compact persona cards with journey flowcharts
       - Visual-first documentation
     confirmation_message: |
       UX Design Documentation created via parallel sub-agent orchestration.
@@ -837,9 +736,7 @@ adaptive_rules:
 quality_standards:
   ux_research_excellence:
     - Deep understanding of user needs demonstrated
-    - Personas grounded in research and realistic
     - Journey maps reveal actionable insights
-    - Pain points drive design decisions
     - Opportunities clearly articulated
   
   design_excellence:
