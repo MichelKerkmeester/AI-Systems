@@ -4,20 +4,20 @@ Transforms requests into professional tickets, epics, and documentation with **c
 
 ## 📋 Table of Contents
 
-1. [🆕 What's New in v0.922](#1-whats-new-in-v0922)
-2. [✨ Key Features](#2-key-features)
-3. [🌳 System Architecture](#3-system-architecture)
-4. [🚀 Quick Setup](#4-quick-setup)
-5. [🎛️ Operating Modes](#5-operating-modes)
-6. [📋 Mode Details](#6-mode-details)
-7. [💬 Interactive Mode](#7-interactive-mode)
-8. [🧠 DEPTH Thinking Framework](#8-depth-thinking-framework)
-9. [🏗️ RICCE Framework](#9-ricce-framework)
+1. [🆕 WHAT'S NEW IN V0.922](#1-whats-new-in-v0922)
+2. [✨ KEY FEATURES](#2-key-features)
+3. [🌳 SYSTEM ARCHITECTURE](#3-system-architecture)
+4. [🚀 QUICK SETUP](#4-quick-setup)
+5. [🎛️ OPERATING MODES](#5-operating-modes)
+6. [📋 MODE DETAILS](#6-mode-details)
+7. [💬 INTERACTIVE MODE](#7-interactive-mode)
+8. [🧠 DEPTH THINKING FRAMEWORK](#8-depth-thinking-framework)
+9. [🏗️ RICCE FRAMEWORK](#9-ricce-framework)
 
 ---
 
 <a id="1-whats-new-in-v0922"></a>
-## 1. 🆕 What's New In V0.922
+## 1. 🆕 WHAT'S NEW IN V0.922
 
 ### Major Improvements
 
@@ -54,7 +54,7 @@ Transforms requests into professional tickets, epics, and documentation with **c
 ---
 
 <a id="2-key-features"></a>
-## 2. ✨ Key Features
+## 2. ✨ KEY FEATURES
 
 - **📋 Self-Contained Templates**: All rules, quality checks, and formatting embedded (v0.133 Ticket/Story, v0.130 Epic, v0.119 Doc)
 - **🧠 DEPTH Framework v0.108**: 10-round methodology with two-layer transparency and RICCE integration
@@ -71,7 +71,7 @@ Transforms requests into professional tickets, epics, and documentation with **c
 ---
 
 <a id="3-system-architecture"></a>
-## 3. 🌳 System Architecture
+## 3. 🌳 SYSTEM ARCHITECTURE
 
 ```
 AGENTS.md → Entry point with routing logic
@@ -90,7 +90,7 @@ Output → /Export/[###]-artifact.md
 ---
 
 <a id="4-quick-setup"></a>
-## 4. 🚀 Quick Setup
+## 4. 🚀 QUICK SETUP
 
 ### Step 1: Create Claude Project
 1. Go to claude.ai → Projects → Create "Product Owner"
@@ -148,7 +148,7 @@ $story user login               # Direct story mode (10 rounds auto)
 ---
 
 <a id="5-operating-modes"></a>
-## 5. 🎛️ Operating Modes
+## 5. 🎛️ OPERATING MODES
 
 **Default Mode:** The system defaults to `$interactive` with automatic 10-round DEPTH unless specified.
 
@@ -174,9 +174,9 @@ System waits for complete response before proceeding.
 ---
 
 <a id="6-mode-details"></a>
-## 6. 📋 Mode Details
+## 6. 📋 MODE DETAILS
 
-### 🎫 Ticket Mode (v0.133)
+### 🎫 $ticket Mode
 
 **Purpose:** Development tickets with detailed QA checklists for implementation tracking
 
@@ -285,7 +285,7 @@ System waits for complete response before proceeding.
 ---
 
 <a id="7-interactive-mode"></a>
-## 7. 💬 Interactive Mode
+## 7. 💬 INTERACTIVE MODE
 
 ### Conversational Guidance Flow
 
@@ -317,7 +317,7 @@ Deliver Exact Request
 ---
 
 <a id="8-depth-thinking-framework"></a>
-## 8. 🧠 DEPTH Thinking Framework
+## 8. 🧠 DEPTH THINKING FRAMEWORK
 
 ### Two-Layer Transparency Model
 
@@ -381,7 +381,7 @@ Six mandatory frameworks applied internally (users see key insights only):
 ---
 
 <a id="9-ricce-framework"></a>
-## 9. 🏗️ RICCE Framework
+## 9. 🏗️ RICCE FRAMEWORK
 
 ### Structural Validation Checklist
 
