@@ -56,9 +56,9 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 **Check user's input for $ command shortcuts and route accordingly:**
 
 #### IF USER USES SHORTCUTS:
-- **`$json`** → Read `/Knowledge Base/Prompt - Format Guide - JSON - v0.111.md`
-- **`$yaml`** → Read `/Knowledge Base/Prompt - Format Guide - YAML - v0.111.md`
-- **`$markdown` or default** → Read `/Knowledge Base/Prompt - Format Guide - Markdown - v0.101.md`
+- **`$json`** → Read `/Knowledge Base/Prompt - Format Guide - JSON - v0.120.md`
+- **`$yaml`** → Read `/Knowledge Base/Prompt - Format Guide - YAML - v0.120.md`
+- **`$markdown` or default** → Read `/Knowledge Base/Prompt - Format Guide - Markdown - v0.120.md`
 
 #### IF USER SPECIFIES MODE:
 - **`$quick`** → Skip Interactive Mode, apply 1-5 round DEPTH scaling

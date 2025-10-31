@@ -1,76 +1,75 @@
-# Prompt Engineering Assistant v0.920
+# Prompt Engineering Assistant v0.921
 
 Transforms vague requests into clear, effective AI prompts using proven frameworks, systematic evaluation, and **concise transparent DEPTH processing**.
 
 ## 📋 Table of Contents
 
-1. [🆕 What's New in v0.920](#1-whats-new-in-v0920)
-2. [✨ Key Features](#2-key-features)
-3. [🌳 System Architecture](#3-system-architecture)
-4. [🚀 Quick Setup](#4-quick-setup)
-5. [🎛️ Operating Modes](#5-operating-modes)
-6. [📋 Mode Details](#6-mode-details)
-7. [💬 Interactive Mode](#7-interactive-mode)
-8. [🧠 DEPTH Thinking Framework](#8-depth-thinking-framework)
-9. [🏗️ RICCE Framework](#9-ricce-framework)
-10. [🎯 Framework Intelligence](#10-framework-intelligence)
-11. [📊 Enhancement System](#11-enhancement-system)
-12. [📈 CLEAR Evaluation](#12-clear-evaluation)
-13. [🛠️ REPAIR+ Protocol](#13-repair-protocol)
+1. [🆕 WHAT'S NEW IN V0.921](#1-whats-new-in-v0921)
+2. [✨ KEY FEATURES](#2-key-features)
+3. [🌳 SYSTEM ARCHITECTURE](#3-system-architecture)
+4. [🚀 QUICK SETUP](#4-quick-setup)
+5. [🎛️ OPERATING MODES](#5-operating-modes)
+6. [📋 MODE DETAILS](#6-mode-details)
+7. [💬 INTERACTIVE MODE](#7-interactive-mode)
+8. [🧠 DEPTH THINKING FRAMEWORK](#8-depth-thinking-framework)
+9. [🏗️ RICCE FRAMEWORK](#9-ricce-framework)
+10. [🎯 FRAMEWORK INTELLIGENCE](#10-framework-intelligence)
+11. [📊 ENHANCEMENT SYSTEM](#11-enhancement-system)
+12. [📈 CLEAR EVALUATION](#12-clear-evaluation)
+13. [🛠️ REPAIR+ PROTOCOL](#13-repair-protocol)
 
 ---
 
-<a id="1-whats-new-in-v0920"></a>
-## 1. 🆕 What's New In V0.920
+<a id="1-whats-new-in-v0921"></a>
+## 1. 🆕 WHAT'S NEW IN V0.921
 
-### Major Improvements
+### 🎯 Major Update: Format Guides Refactored (v0.120)
 
-**System Prompt v0.920:**
-- Enhanced clarity and integration standards across all components
-- Refined terminology consistency (Framework vs Output Structure vs Standard Format)
-- Improved format guide integration with updated version references
-- Better cognitive rigor enforcement with clearer operational guidance
-- Strengthened two-layer transparency throughout processing
-- Enhanced RICCE validation integration within DEPTH methodology
+**All Three Format Guides Completely Restructured:**
 
-**DEPTH Framework v0.106:**
-- RICCE integration enhancement with comprehensive validation checkpoints
-- Improved transparent professional excellence methodology
-- Enhanced cognitive rigor framework with detailed technique descriptions
-- Better validation checkpoint documentation across all five phases
-- Refined transparency model with concrete internal vs external examples
+The JSON, YAML, and Markdown format guides underwent comprehensive refactoring to eliminate redundancy and focus purely on format specifications:
 
-**Interactive Mode v0.642:**
-- Two-layer transparency refinement (internal rigor vs external conciseness)
-- Improved state management and conversation flow documentation
-- Enhanced alignment with DEPTH v0.106 transparency standards
-- Better command detection logic and routing
-- Clearer response template formatting
+**Core Improvements Across All Guides:**
+- **Pure Format Focus** - Removed all processing logic, quality evaluation, and workflow details
+- **Single Source of Truth** - Delegated cognitive processing to DEPTH v0.106, evaluation to Patterns v0.102
+- **Streamlined Structure** - Reduced from 13 sections to 11 focused sections
 
-**Patterns & Evaluation v0.102:**
-- Enhanced framework selection methodology with improved scoring algorithms
-- Refined CLEAR evaluation techniques with context-aware weighting
-- Additional pattern refinements for systematic enhancement
-- Better success rate documentation across all frameworks
+**What Was Removed:**
+- ❌ Transparency Reporting section (now in DEPTH v0.106)
+- ❌ Performance Metrics section (now in Patterns v0.102)
+- ❌ Troubleshooting section (merged into validation)
+- ❌ Python pseudo code (replaced with YAML)
+- ❌ CLEAR scores in file headers (reported separately in chat)
+- ❌ Duplicate processing logic from DEPTH/Interactive Mode
 
-**Format Guide Updates (Markdown v0.101, JSON v0.111, YAML v0.111):**
-- **Markdown v0.101:** Terminology clarification (Framework vs Output Structure vs Standard Format), enhanced artifact delivery standards
-- **JSON v0.111:** Enhanced JSON schema validation, improved API integration standards, better error handling
-- **YAML v0.111:** Significant terminology alignment update, enhanced structure specifications, improved multi-line string handling
+**What Was Enhanced:**
+- ✨ File delivery methods clearly documented (Desktop vs CLI/Agent)
+- ✨ Syntax validation with YAML-based validation rules
+- ✨ Format-specific best practices with Do's/Don'ts categories
+- ✨ Token efficiency sections with practical optimization tips
+- ✨ Format quality checklists for each output type
 
-### 📊 Evolution: v0.920 → v0.910 → v0.900
+**Benefits:**
+- 📉 Reduced maintenance burden (no duplicate logic)
+- 📈 Improved clarity (pure format specifications)
+- 🎯 Better separation of concerns (format vs processing)
+- 🔄 Easier updates (change logic once, not in 4 files)
+- 📚 Cleaner documentation (focused and concise)
 
-**v0.920:** System-wide version synchronization, enhanced clarity and integration  
+### 📊 Evolution: v0.921 → v0.920 → v0.910 → v0.900
+
+**v0.921:** Format guides refactored (v0.120) - pure format focus, YAML pseudo code, file delivery standards  
+**v0.920:** New Thinking Framework (RICCE integration, cognitive rigor), and Interactive Mode (two-layer transparency)
 **v0.910:** Architecture standardization with YAML processing structure  
 **v0.900:** Foundation with framework intelligence and comprehensive patterns
 
 ---
 
 <a id="2-key-features"></a>
-## 2. ✨ Key Features
+## 2. ✨ KEY FEATURES
 
 - **🎯 Seven Frameworks**: RCAF, COSTAR, RACE, CIDI, TIDD-EC, CRISPE, CRAFT with intelligent auto-selection
-- **🧠 DEPTH Framework v0.106**: 10-round methodology with two-layer transparency and RICCE integration
+- **🧠 DEPTH Framework**: 10-round methodology with two-layer transparency and RICCE integration
 - **🔒 Mandatory Perspectives**: Minimum 3 perspectives (BLOCKING requirement), target 5
 - **🔬 Enhanced Cognitive Rigor**: 6 techniques (multi-perspective, assumption audit, perspective inversion, constraint reversal, mechanism-first, RICCE compliance)
 - **📊 Two-Layer Model**: Full rigor internally, concise updates externally
@@ -86,12 +85,12 @@ Transforms vague requests into clear, effective AI prompts using proven framewor
 ---
 
 <a id="3-system-architecture"></a>
-## 3. 🌳 System Architecture
+## 3. 🌳 SYSTEM ARCHITECTURE
 
 ```
 AGENTS.md → Entry point with intelligent routing logic
     ↓
-Writer - Prompt Improver - v0.920.md (System prompt - 38 core rules)
+Writer - Prompt Improver - v0.921.md (System prompt - 38 core rules)
     ↓
 DEPTH Framework v0.106 (Methodology with RICCE & transparency)
     ↓
@@ -99,7 +98,7 @@ Interactive Mode v0.642 (Conversation flow with two-layer model)
     ↓
 Patterns & Evaluation v0.102 (7 frameworks + CLEAR scoring)
     ↓
-Format Guides (Markdown v0.101, JSON v0.111, YAML v0.111)
+Format Guides v0.120 (Markdown, JSON, YAML - pure format specs)
     ↓
 Output → /Export/[###]-enhanced-prompt.[md|json|yaml]
 ```
@@ -107,14 +106,14 @@ Output → /Export/[###]-enhanced-prompt.[md|json|yaml]
 ---
 
 <a id="4-quick-setup"></a>
-## 4. 🚀 Quick Setup
+## 4. 🚀 QUICK SETUP
 
 ### Step 1: Create Claude Project
 1. Go to claude.ai → Projects → Create "Prompt Engineering Assistant"
 
 ### Step 2: Add System Instructions
 1. Edit project details → Custom instructions
-2. Copy and paste: `Writer - Prompt Improver - v0.920.md`
+2. Copy and paste: `Writer - Prompt Improver - v0.921.md`
 3. Save the project
 
 ### Step 3: Upload Supporting Documents
@@ -127,27 +126,36 @@ Add these documents to your project:
 - `Prompt - Patterns, Enhancements & Evaluation - v0.102.md` (complete framework library, CLEAR scoring)
 
 **Format Specifications:**
-Each format guide is fully self-contained with embedded standards:
+Each format guide (v0.120) is fully self-contained with pure format focus:
 
-- **`Prompt - Format Guide - Markdown - v0.101.md`**
+- **`Prompt - Format Guide - Markdown - v0.120.md`**
   - Natural language prompt structure (DEFAULT FORMAT)
   - RCAF/CRAFT framework integration
   - Baseline token usage, optimal human readability
-  - Average CLEAR: 43/50
+  - File delivery standards (Desktop vs CLI/Agent modes)
+  - YAML-based syntax validation
   
-- **`Prompt - Format Guide - JSON - v0.111.md`**
+- **`Prompt - Format Guide - JSON - v0.120.md`**
   - Structured data for API/system integration
   - Schema validation and type safety
   - Token overhead: +5-10%
-  - Average CLEAR: 41/50
+  - File delivery with validation rules
+  - YAML pseudo code for conversions
   
-- **`Prompt - Format Guide - YAML - v0.111.md`**
+- **`Prompt - Format Guide - YAML - v0.120.md`**
   - Human-friendly configuration format
   - Minimal syntax overhead, clear hierarchy
   - Token overhead: +3-7%
-  - Average CLEAR: 42/50
+  - Configuration-ready format specifications
+  - YAML-native validation examples
 
-**Key Advantages:**
+**Key Advantages of v0.120 Refactor:**
+- Pure format specifications (no processing logic duplication)
+- Clear file delivery standards aligned with system prompt
+- YAML pseudo code throughout for consistency
+- Streamlined 11-section structure
+- Token efficiency guidance
+- Format quality checklists
 - Complete framework library (7 frameworks with 87-94% success rates)
 - Automatic complexity detection and scaling
 - Context-aware CLEAR evaluation with dimension weighting
@@ -166,7 +174,7 @@ $yaml config template           # YAML format with hierarchy optimization
 ---
 
 <a id="5-operating-modes"></a>
-## 5. 🎛️ Operating Modes
+## 5. 🎛️ OPERATING MODES
 
 **Default Mode:** The system defaults to `$interactive` with automatic 10-round DEPTH unless specified.
 
@@ -193,7 +201,7 @@ System waits for complete response before proceeding with full DEPTH processing.
 ---
 
 <a id="6-mode-details"></a>
-## 6. 📋 Mode Details
+## 6. 📋 MODE DETAILS
 
 ### 💬 Interactive Mode (Default)
 
@@ -338,7 +346,7 @@ System waits for complete response before proceeding with full DEPTH processing.
 ---
 
 <a id="7-interactive-mode"></a>
-## 7. 💬 Interactive Mode
+## 7. 💬 INTERACTIVE MODE
 
 ### Conversational Guidance Flow
 
@@ -405,7 +413,7 @@ Ready for delivery
 ---
 
 <a id="8-depth-thinking-framework"></a>
-## 8. 🧠 DEPTH Thinking Framework
+## 8. 🧠 DEPTH THINKING FRAMEWORK
 
 ### Two-Layer Transparency Model
 
@@ -478,7 +486,7 @@ Six mandatory frameworks applied internally (users see key insights only):
 ---
 
 <a id="9-ricce-framework"></a>
-## 9. 🏗️ RICCE Framework
+## 9. 🏗️ RICCE FRAMEWORK
 
 ### Structural Validation Checklist
 
@@ -543,7 +551,7 @@ Six mandatory frameworks applied internally (users see key insights only):
 ---
 
 <a id="10-framework-intelligence"></a>
-## 10. 🎯 Framework Intelligence
+## 10. 🎯 FRAMEWORK INTELLIGENCE
 
 ### Automatic Framework Selection
 
@@ -632,7 +640,7 @@ framework_selection:
 ---
 
 <a id="11-enhancement-system"></a>
-## 11. 📊 Enhancement System
+## 11. 📊 ENHANCEMENT SYSTEM
 
 ### Systematic Enhancement Pipeline
 
@@ -684,7 +692,7 @@ by_score:
 ---
 
 <a id="12-clear-evaluation"></a>
-## 12. 📈 CLEAR Evaluation
+## 12. 📈 CLEAR EVALUATION
 
 ### Context-Aware Scoring System
 
