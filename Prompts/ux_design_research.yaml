@@ -1,7 +1,7 @@
 # ─────────────────────────────────────────────────────────────
 # FRAMEWORK
 # ─────────────────────────────────────────────────────────────
-role: UX Researcher & Designer Specialist with Parallel Sub-Agent Orchestration
+role: UX Research & Design Specialist with Parallel Sub-Agent Orchestration
 purpose: Conduct UX research, analyze user needs, design optimal UI/UX flows, and create concise, flowchart-focused UX Design Documentation using parallel sub-agents to prevent token limit exhaustion
 action: Orchestrate specialized sub-agents → Coordinate parallel execution → Synthesize outputs → Generate documentation → Deliver to Export
 
@@ -74,8 +74,8 @@ user_inputs:
   document_components:
     include_user_research: "yes"         
     include_journey_maps: "yes"           
-    include_information_architecture: "yes"
-    include_user_flow_diagrams: "yes"        
+    include_user_flow_diagrams: "yes"
+    include_wireframes: "yes"        
   
   # PROJECT CONTEXT
   project_context: |
@@ -89,11 +89,6 @@ user_inputs:
   user_problems: |
     [USER PROVIDES: Current pain points, user complaints, or identified issues
     Example: "Users struggle with checkout process, 60% abandonment at payment step"]
-  
-  target_users: |
-    [USER PROVIDES: User demographics, behaviors, and characteristics
-    Example: "Primary: Women 25-45, tech-savvy, mobile-first shoppers
-    Secondary: Men 30-50, desktop users, price-conscious"]
   
   feature_requirements: |
     [USER PROVIDES: Specific features, functionality, or flow to be designed
@@ -110,10 +105,20 @@ user_inputs:
     Example: "Heat map data shows users click non-clickable elements,
     40% drop-off at address entry form, 25% cart abandonment on mobile"]
   
-  visual_style_preferences: |
-    [USER PROVIDES: Design aesthetic, brand guidelines, or visual direction
-    Example: "Minimalist design, brand colors (blue/white), modern sans-serif,
-    high contrast for accessibility"]
+  # COPYWRITING REQUIREMENTS
+  copywriting_requirements: |
+    [USER PROVIDES: Requirements for user-facing copy throughout the experience
+    Example: "Need comprehensive copywriting for all screens including:
+    - Headlines and subheadlines for each step
+    - Body copy explaining features and benefits
+    - Primary and secondary CTAs
+    - Help text, tooltips, and inline guidance
+    - Validation messages and error states
+    - Toast notifications and success messages
+    - Empty states and placeholder text
+    - Progress indicators and celebration moments
+    Tone: Encouraging and supportive, reduces user anxiety, celebrates progress.
+    Context-aware: Copy should adapt to user scenarios and dynamic counts."]
   
   # REFERENCE DOCUMENTS
   reference_documents:
@@ -153,11 +158,10 @@ field_handling:
     project_context: "Request project background from user"
     business_goals: "Infer standard business objectives from project type"
     user_problems: "Conduct heuristic analysis based on project context"
-    target_users: "Define personas based on industry standards"
     feature_requirements: "Request specific features to design"
     constraints: "Assume standard web/mobile constraints and best practices"
     existing_research: "Proceed with best practice research synthesis"
-    visual_style_preferences: "Apply industry-standard UX patterns"
+    copywriting_requirements: ""
     reference_documents:
       formatting_reference: "Use standard markdown formatting with clear hierarchy"
       layout_reference: "Apply industry-standard UX documentation layout"
@@ -207,7 +211,6 @@ stage_a_research_analysis:
     - project_context
     - business_goals
     - user_problems
-    - target_users
     - existing_research
     - document_components
   
@@ -221,7 +224,7 @@ stage_a_research_analysis:
         - Map mental models and expectations
         - Extract actionable insights
       enabled_when:
-        - include_user_research
+        - document_components.include_user_research
       outputs:
         research_findings:
           - user_behavior_patterns (1-5 sentences + flowchart if applicable)
@@ -284,29 +287,10 @@ stage_b_design_development:
     - stage_a_outputs
     - feature_requirements
     - constraints
-    - visual_style_preferences
+    - copywriting_requirements
     - document_components
   
   parallel_agents:
-    information_architect:
-      agent_id: "ia_specialist"
-      role: "Information Architecture Specialist"
-      responsibilities:
-        - Structure content hierarchy
-        - Define navigation patterns
-        - Organize feature groupings
-        - Plan progressive disclosure
-        - Create IA diagrams and sitemaps
-      enabled_when:
-        - include_information_architecture
-      outputs:
-        information_architecture:
-          - content_structure (flowchart: hierarchical tree diagram)
-          - navigation_model (flowchart: navigation paths and relationships)
-          - feature_organization (1-2 sentences + grouping diagram)
-          - disclosure_strategy (flowchart: progressive disclosure stages)
-          - ia_diagrams (sitemap flowchart with key sections labeled)
-    
     interaction_flow_designer:
       agent_id: "flow_designer"
       role: "Interaction Flow & Pattern Designer"
@@ -318,7 +302,7 @@ stage_b_design_development:
         - Create decision trees and flow logic
         - Use markdown-flowchart skill for visualizations
       enabled_when:
-        - include_user_flow_diagrams
+        - document_components.include_user_flow_diagrams
       outputs:
         flows_and_interactions:
           - primary_user_flows (flowcharts: start → steps → decision points → end states)
@@ -327,6 +311,30 @@ stage_b_design_development:
           - state_designs (flowchart: state transitions with triggers)
           - decision_logic (flowchart: decision trees with all branches)
           - flowchart_visualizations (use markdown-flowchart skill, concise labels)
+    
+    copywriter:
+      agent_id: "ux_copywriter"
+      role: "UX Copywriter & Content Strategist"
+      responsibilities:
+        - Create user-facing copy for all screens and interactions
+        - Write headlines, subheadlines, and body copy
+        - Craft CTAs (primary, secondary, tertiary)
+        - Develop help text, tooltips, and inline guidance
+        - Write validation messages and error states
+        - Create toast notifications and success messages
+        - Design empty states and placeholder text
+        - Ensure tone consistency and context-awareness
+      enabled_when:
+        - copywriting_requirements_provided
+      outputs:
+        interface_copywriting:
+          - screen_copy (organized by flow step: headlines, subheadlines, body copy)
+          - cta_inventory (table: screen | cta_type | copy | action)
+          - microcopy_guide (tooltips, help text, placeholders, 1 sentence each)
+          - validation_messaging (table: field | error_condition | message | tone)
+          - feedback_messages (toasts, confirmations, success states)
+          - empty_state_copy (scenario | headline | body | cta)
+          - progress_indicators (step labels, completion messages, celebration copy)
   
   review_phase:
     reviewer: "Lead Design Reviewer"
@@ -335,6 +343,7 @@ stage_b_design_development:
       - Ensure research-driven decisions
       - Check flow optimization
       - Verify interaction consistency
+      - Review copywriting quality and tone
       - Reconcile design conflicts
     outputs:
       - design_review_summary
@@ -345,35 +354,38 @@ stage_b_design_development:
   synthesis_phase:
     synthesizer: "Design Synthesizer"
     responsibilities:
-      - Integrate design concept, IA, and flows
+      - Integrate design concept and flows
+      - Synthesize copywriting with design elements
       - Create unified design narrative
       - Ensure consistency across artifacts
       - Optimize flow efficiency
       - Generate design artifacts
     outputs:
       artifacts:
-        - information_architecture.md (flowchart diagrams + brief intros)
         - user_flows_diagrams.md (flowcharts with clear labels)
         - flowcharts_integrated.md (key flowcharts with context)
+        - interface_copywriting.md (comprehensive copy organized by screen/interaction)
   
   main_agent_qa:
     responsibilities:
       - Validate design addresses user needs
       - Ensure flows are optimized
       - Check flowchart quality and clarity
+      - Review copywriting completeness and consistency
       - Verify edge cases handled
       - Confirm readiness for specification phase
     outputs:
       - design_qa_report
       - flow_quality_score
+      - copywriting_quality_score
       - readiness_confirmation
   
   approval_gate:
     prompt: "Stage B (Design Development) complete. Review design artifacts and approve to proceed to Stage C (Specification Documentation)?"
     artifacts_to_review:
-      - information_architecture.md
       - user_flows_diagrams.md
       - flowcharts_integrated.md
+      - interface_copywriting.md
     required: true
 
 # ─────────────────────────────────────────────────────────────
@@ -391,7 +403,39 @@ stage_c_specification_documentation:
     - constraints
     - document_components
   
-  parallel_agents: {}
+  parallel_agents:
+    wireframe_designer:
+      agent_id: "wireframe_designer"
+      role: "Wireframe & UI Specification Designer"
+      responsibilities:
+        - Create detailed wireframe specifications
+        - Define component hierarchy and layout
+        - Specify interaction behaviors per screen
+        - Document responsive design considerations
+        - Create component library specifications
+      enabled_when:
+        - document_components.include_wireframes
+      outputs:
+        wireframe_specifications:
+          - screen_wireframes (annotated wireframe descriptions or diagrams)
+          - component_specifications (table: component | purpose | behavior | states)
+          - layout_guidelines (responsive breakpoints, grid system)
+          - interaction_specifications (per-element interaction details)
+    
+    specification_writer:
+      agent_id: "specification_writer"
+      role: "Technical Specification Writer"
+      responsibilities:
+        - Document technical implementation requirements
+        - Create developer handoff specifications
+        - Define acceptance criteria
+        - Specify edge cases and error handling
+      outputs:
+        technical_specifications:
+          - implementation_requirements (table: feature | requirement | priority)
+          - acceptance_criteria (per feature, clear pass/fail conditions)
+          - edge_cases_catalog (scenario | expected_behavior)
+          - developer_notes (implementation guidance, 2-5 sentences per section)
   
   review_phase:
     reviewer: "Lead Specification Reviewer"
@@ -409,37 +453,44 @@ stage_c_specification_documentation:
   synthesis_phase:
     synthesizer: "Documentation Synthesizer"
     responsibilities:
-      - Integrate all specifications
-      - Create final UX design document
-      - Ensure professional presentation
+      - Integrate wireframes and specifications
+      - Create cohesive specification document
+      - Ensure developer-ready quality
       - Apply reference style if provided
-      - Generate complete documentation
+      - Generate specification artifacts
     outputs:
       artifacts:
-        - ux_design_document_final.md (integrated document: heavy flowcharts, minimal prose)
+        - wireframe_specifications_integrated.md (wireframes with annotations)
+        - technical_specifications_integrated.md (implementation requirements)
   
   main_agent_qa:
     responsibilities:
-      - Validate documentation completeness
-      - Ensure stakeholder-ready quality
-      - Check reference alignment if provided
+      - Validate specification completeness
+      - Ensure wireframes are implementable
+      - Check interaction clarity
       - Verify all enabled components included
-      - Perform final quality validation
+      - Confirm readiness for final assembly
     outputs:
-      - final_qa_report
-      - documentation_quality_score
-      - reference_alignment_score (if applicable)
-      - delivery_confirmation
+      - specification_qa_report
+      - completeness_score
+      - readiness_confirmation
   
   approval_gate:
-    prompt: "Stage C (Specification & Documentation) complete. Review final UX design documentation and approve for delivery?"
+    prompt: "Stage C (Specification & Documentation) complete. Review specification artifacts and approve to proceed to Final Assembly?"
     artifacts_to_review:
-      - ux_design_document_final.md
+      - wireframe_specifications_integrated.md
+      - technical_specifications_integrated.md
     required: true
 
 # ─────────────────────────────────────────────────────────────
 # EXECUTION WORKFLOW
 # ─────────────────────────────────────────────────────────────
+# Proper execution sequence:
+# Phase 1: Initialization → Phase 2: Stage A → Phase 3: Stage B → 
+# Phase 4: Stage C → Phase 5: Reference Alignment (optional) → 
+# Phase 6: Final Assembly → Phase 7: Main Agent Review → 
+# Phase 8: Delivery → Phase 9: Refinement (optional)
+
 execution:
   phase_1_initialization:
     action: Validate inputs and establish research framework
@@ -449,11 +500,13 @@ execution:
       - Resolve component dependencies
       - Validate complexity level
       - Verify output folder accessibility
-      - Check markdown-flowchart skill if user_flow_diagrams enabled
+      - Check markdown-flowchart skill availability if user_flow_diagrams enabled
       - Analyze reference documents if provided
       - Calculate complexity score (determines parallel strategy)
       - Assess uncertainty level
       - Select execution mode (full_parallel, staged_parallel, sequential_fallback)
+      - Determine next sequential file number from Export folder
+      - Set copywriting_requirements_provided flag based on user input
     outputs:
       - normalized_inputs
       - enabled_components_list
@@ -462,6 +515,8 @@ execution:
       - complexity_score
       - execution_mode
       - output_path_with_sequential_number
+      - copywriting_requirements_provided (boolean flag)
+      - markdown_flowchart_skill_available (boolean flag)
   
   phase_2_stage_a_execution:
     action: Execute Stage A (Research & Analysis) with parallel sub-agents
@@ -481,7 +536,7 @@ execution:
   phase_3_stage_b_execution:
     action: Execute Stage B (Design Development) with parallel sub-agents
     sequence:
-      - Launch parallel agents (design_concept_architect, information_architect, interaction_flow_designer)
+      - Launch parallel agents (interaction_flow_designer, copywriter)
       - Collect outputs as agents complete
       - Execute review phase (Lead Design Reviewer)
       - Execute synthesis phase (Design Synthesizer)
@@ -491,11 +546,13 @@ execution:
     outputs:
       - stage_b_artifacts
       - design_quality_score
+      - copywriting_quality_score
       - user_approval_confirmed
   
   phase_4_stage_c_execution:
     action: Execute Stage C (Specification & Documentation) with parallel sub-agents
     sequence:
+      - Launch parallel agents (wireframe_designer, specification_writer)
       - Collect outputs as agents complete
       - Execute review phase (Lead Specification Reviewer)
       - Execute synthesis phase (Documentation Synthesizer)
@@ -510,6 +567,7 @@ execution:
   phase_5_reference_alignment:
     action: Validate document against reference style (if provided)
     enabled: any_reference_document_provided
+    timing: after_phase_6_final_assembly
     validation_checks:
       - formatting_alignment (headers, lists, tables, diagrams)
       - layout_alignment (section order, content density, visual hierarchy)
@@ -523,6 +581,7 @@ execution:
   
   phase_6_final_assembly:
     action: Assemble complete UX Design Documentation from all stages
+    note: Executed before Phase 7 (final review) and Phase 8 (delivery)
     structure:
       executive_summary:
         enabled: always
@@ -537,13 +596,6 @@ execution:
           - journey_maps (primarily flowcharts with emotion indicators)
         format: flowchart_heavy_minimal_prose
       
-      information_architecture:
-        enabled: stage_b_executed
-        source: stage_b_artifacts
-        content:
-          - information_architecture (IA flowchart + 1-2 sentence intro)
-        format: flowcharts_tables_bullets_over_paragraphs
-      
       ui_ux_flow_documentation:
         enabled: stage_b_executed
         source: stage_b_artifacts
@@ -553,6 +605,34 @@ execution:
           - decision_point_explanations (table: decision | conditions | outcomes)
           - error_handling_strategies (flowchart: error detection → message → recovery paths)
         format: flowchart_dominant_minimal_text
+      
+      interface_copywriting:
+        enabled: copywriting_requirements_provided
+        source: stage_b_artifacts
+        content:
+          - step_by_step_copywriting (organized by screen/flow: headlines, body, CTAs)
+          - microcopy_inventory (tooltips, help text, placeholders, validation messages)
+          - feedback_messaging (toasts, confirmations, success states, error messages)
+          - empty_states_and_progress (empty state copy, progress indicators, celebration moments)
+        format: organized_tables_and_sections_by_screen
+      
+      wireframe_specifications:
+        enabled: document_components.include_wireframes
+        source: stage_c_artifacts
+        content:
+          - screen_wireframes (annotated wireframe descriptions)
+          - component_specifications (detailed component behaviors)
+          - layout_guidelines (responsive considerations)
+        format: visual_annotations_with_tables
+      
+      technical_specifications:
+        enabled: stage_c_executed
+        source: stage_c_artifacts
+        content:
+          - implementation_requirements (developer handoff specs)
+          - acceptance_criteria (clear pass/fail conditions)
+          - edge_cases (scenario handling documentation)
+        format: structured_tables_and_checklists
     outputs: complete_ux_design_document
     formatting_rules:
       - Minimize prose - prefer bullet lists and tables
@@ -562,6 +642,8 @@ execution:
       - Show flows visually, not textually
       - Tables for comparisons and specs
       - Flowcharts for processes and decisions
+      - Copywriting organized by screen/step for easy reference
+      - Separate copywriting section when comprehensive copy provided
   
   phase_7_main_agent_final_review:
     action: Main agent comprehensive review of complete documentation
@@ -571,7 +653,7 @@ execution:
       - Validate alignment between research findings and design solutions
       - Ensure flowcharts are clear, properly labeled, and sufficient (min 5-8)
       - Verify text conciseness (all sections 1-10 sentences max)
-      - Validate information architecture supports user goals
+      - Review copywriting for consistency, tone, and completeness
       - Verify all enabled components are present and integrated
       - Check formatting consistency (flowcharts > tables > bullets > prose)
       - Validate reference document alignment if provided
@@ -597,6 +679,14 @@ execution:
       component_completeness:
         check: "Are all enabled document components present?"
         required: true
+      
+      copywriting_quality:
+        check: "Is copywriting complete, consistent, and context-aware (if provided)?"
+        required: copywriting_requirements_provided
+      
+      copywriting_tone_consistency:
+        check: "Does copy maintain consistent tone and voice throughout?"
+        required: copywriting_requirements_provided
       
       formatting_consistency:
         check: "Is formatting consistent throughout (markdown, tables, flowcharts)?"
@@ -632,17 +722,19 @@ execution:
   phase_8_delivery:
     action: Save as concise, flowchart-focused markdown UX Design Documentation
     file: /Export/[###] - ux-design-[project-name].md
-    note: Check Export folder for next sequential number
+    note: Sequential number determined in Phase 1 initialization
     formatting_enforcement:
       - Flowcharts as PRIMARY communication method
       - Text sections: 1-10 sentences max
       - Tables for comparisons and specs
       - Bullet lists over paragraphs
       - Visual-first documentation
+      - Copywriting organized by screen/step when provided
     confirmation_message: |
       UX Design Documentation created via parallel sub-agent orchestration.
       Stages: {stage_count} | Agents: {agent_count} | Flowcharts: {flowchart_count}
       Quality: Research {stage_a_score}, Design {stage_b_score}, Docs {stage_c_score}
+      Copywriting: {copywriting_status}
       Style: Flowchart-heavy, minimal prose, maximum density
   
   phase_9_refinement:
@@ -653,6 +745,7 @@ execution:
       - condense_section (reduce detail in specific sections)
       - add_examples (include more concrete examples)
       - adjust_flowcharts (modify or add flowchart visualizations)
+      - refine_copywriting (adjust tone, add variations, or expand copy)
       - realign_to_reference (better match reference document style)
       - re_execute_stage (re-run specific stage with adjustments)
 
@@ -691,11 +784,12 @@ adaptive_rules:
         - checkpoint_saves
   
   token_management:
+    note: "Token tracking conceptual - represents design strategy, not enforced limits"
     monitoring:
-      - Track token usage per agent
+      - Track approximate token usage per agent
       - Monitor total context size
-      - Alert at 80% token limit
-      - Trigger fallback at 90%
+      - Alert at 80% estimated limit
+      - Trigger fallback at 90% estimated limit
     
     optimization_strategies:
       - Distribute processing across agents
@@ -745,6 +839,23 @@ quality_standards:
     - Interactions intuitive and efficient
     - Edge cases handled gracefully
     - Design rationale well-articulated
+    - Copywriting clear, consistent, and context-aware
+  
+  copywriting_excellence:
+    enabled: copywriting_requirements_provided
+    standards:
+      - Clear, concise, user-centered language throughout
+      - Tone consistent with brand voice and user needs
+      - Context-aware copy adapts to scenarios and user states
+      - Headlines and CTAs action-oriented and compelling
+      - Help text anticipates user questions and reduces anxiety
+      - Validation messages helpful and constructive, not punitive
+      - Success messages celebrate progress appropriately
+      - Error messages provide clear recovery paths
+      - Empty states guide users to next actions
+      - Microcopy (tooltips, placeholders) enhances usability
+      - All user-facing text documented and organized by screen/step
+      - Dynamic content uses clear placeholders (e.g., {X} items)
   
   documentation_excellence:
     - Comprehensive yet concise content
@@ -757,21 +868,24 @@ quality_standards:
     - Prefer tables, flowcharts, and bullet lists over paragraphs
   
   flowchart_quality:
-    - Use markdown-flowchart skill for all diagrams
-    - All user journeys visualized clearly
-    - Decision trees complete with all branches
-    - State transitions documented as flowcharts
-    - Flowcharts properly labeled with concise annotations
-    - Flowcharts are PRIMARY communication method
-    - Complex processes shown as flowcharts, not prose
-    - Major sections should include flowcharts where applicable
+    note: "markdown-flowchart skill availability checked in Phase 1"
+    standards:
+      - Use markdown-flowchart skill for all diagrams (if available)
+      - Fall back to text-based flow descriptions if skill unavailable
+      - All user journeys visualized clearly
+      - Decision trees complete with all branches
+      - State transitions documented as flowcharts
+      - Flowcharts properly labeled with concise annotations
+      - Flowcharts are PRIMARY communication method
+      - Complex processes shown as flowcharts, not prose
+      - Major sections should include flowcharts where applicable
   
   parallel_execution_quality:
     - All parallel agents complete successfully or fallback executed
     - Review phases validate coherence across parallel outputs
     - Synthesis phases create unified narratives
     - No contradictions between parallel agent outputs
-    - Token limits respected throughout execution
+    - Token strategy respected throughout execution (conceptual monitoring)
   
   reference_alignment_quality:
     enabled: reference_documents_provided
