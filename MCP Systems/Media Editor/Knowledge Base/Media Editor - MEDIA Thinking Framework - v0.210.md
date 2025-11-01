@@ -1,4 +1,4 @@
-# Media Editor - MEDIA Thinking Framework - v0.200
+# Media Editor - MEDIA Thinking Framework - v0.210
 
 A comprehensive methodology combining systematic media analysis with **automatic professional optimization** for superior media processing deliverables.
 
@@ -37,9 +37,10 @@ A focused framework ensuring professional media processing through **automatic o
 - 10 rounds of thinking for standard mode (system-controlled)
 - Quality guaranteed through automatic processing depth
 
-**2. MCP Connection First**
-- Always verify Imagician and Video-Audio servers before operations
-- Provide setup guidance if not connected
+**2. MCP & FFmpeg Connection First**
+- Always verify Imagician and Video-Audio servers before MCP operations
+- Verify FFmpeg availability before HLS operations
+- Provide setup guidance if not connected/available
 - Explain available operations if partially connected
 - Reality check capabilities before promising features
 
@@ -56,9 +57,9 @@ A focused framework ensuring professional media processing through **automatic o
 - Focus on value without excessive methodology detail
 
 **5. Media Context Preservation**
-- Format-specific best practices (JPEG, PNG, WebP, AVIF, MP4, etc.)
+- Format-specific best practices (JPEG, PNG, WebP, AVIF, MP4, HLS, etc.)
 - Quality vs size trade-offs for different use cases
-- Platform compatibility considerations (web, email, social, streaming)
+- Platform compatibility considerations (web, email, social, streaming, adaptive streaming)
 - Processing time and efficiency optimization
 
 ---
@@ -85,10 +86,10 @@ USER SEES (Concise):
 
 **Internal Processing (Applied Automatically):**
 - Complete media property analysis (format, resolution, color space, codec)
-- Use case identification (web, email, social, print, streaming)
+- Use case identification (web, email, social, print, streaming, adaptive streaming, HLS)
 - Quality requirements assessment
 - Size constraints evaluation
-- MCP capability verification
+- MCP/FFmpeg capability verification
 
 **Why it works:**
 - Clear understanding of source media before processing
@@ -212,9 +213,9 @@ USER SEES (Concise):
 ### Quality Gates
 
 Before processing, validate:
-- [ ] MCP servers connected (Imagician, Video-Audio as needed)
+- [ ] MCP servers connected (Imagician, Video-Audio as needed) OR FFmpeg available (for HLS)
 - [ ] Source media analyzed (format, size, quality)
-- [ ] Target use case identified (web, email, social, etc.)
+- [ ] Target use case identified (web, email, social, streaming, adaptive streaming, etc.)
 - [ ] Quality-size balance determined
 - [ ] Format compatibility validated
 
@@ -225,7 +226,7 @@ Before processing, validate:
 **Phase M (Measure):**
 - Analyze source media properties
 - Identify processing requirements
-- Verify MCP capabilities
+- Verify MCP/FFmpeg capabilities
 - Automatic 10-round analysis (standard mode)
 
 **Phase E (Evaluate):**
@@ -258,8 +259,8 @@ Before processing, validate:
 
 Before processing, validate (show summary to user):
 
-✅ **MCP Verification:**
-- [ ] Required servers connected?
+✅ **MCP/FFmpeg Verification:**
+- [ ] Required servers connected (or FFmpeg available for HLS)?
 - [ ] Operations supported for media type?
 - [ ] No capability over-promises?
 
@@ -300,10 +301,11 @@ Before processing, validate (show summary to user):
 
 ```yaml
 system_state:
-  # MCP connection tracking
-  mcp_status:
+  # Tool availability tracking
+  tool_status:
     imagician: boolean
     video_audio: boolean
+    ffmpeg: boolean
     required_for_operation: string
   
   # Processing state
@@ -349,26 +351,28 @@ MCP Status: Imagician connected ✅"
 
 **Rounds 1-2: Source Analysis & Requirements**
 ```yaml
-mcp_verification:
-  action: "Verify required servers connected"
-  servers:
+tool_verification:
+  action: "Verify required tools available"
+  mcp_servers:
     imagician: [resize, convert, compress, crop, rotate, batch]
     video_audio: [transcode, trim, overlay, concatenate, extract_audio, subtitles]
+  terminal_tools:
+    ffmpeg: [hls_conversion, multi_quality_streaming, adaptive_bitrate]
   validation: "Check operation support before promising"
 
 source_analysis:
   properties:
-    - format: "PNG, JPEG, WebP, AVIF, MP4, etc."
-    - resolution: "4K, 1080p, 720p, etc."
+    - format: "PNG, JPEG, WebP, AVIF, MP4, HLS, etc."
+    - resolution: "4K, 1080p, 720p, 480p, 360p, etc."
     - size: "8.5MB"
     - quality: "RGB, color space, bitrate"
     - metadata: "EXIF, creation date, etc."
 
 requirements_identification:
-  use_case: [web, email, social, print, streaming]
-  quality_needs: [high, medium, web_sufficient]
+  use_case: [web, email, social, print, streaming, adaptive_streaming, hls]
+  quality_needs: [high, medium, web_sufficient, multi_quality]
   size_constraints: [strict, moderate, flexible]
-  platform_target: [browsers, email_clients, social_media]
+  platform_target: [browsers, email_clients, social_media, streaming_platforms]
   processing_priority: [quality, speed, balance]
 
 automatic_thinking:
@@ -440,6 +444,7 @@ platform_compatibility:
   email_clients: "PNG/JPEG preferred"
   social_media: "Platform-specific requirements"
   streaming: "MP4 H.264 universal, H.265 better quality"
+  adaptive_streaming: "HLS multi-quality for bandwidth adaptation"
 ```
 
 ### Phase D - DECIDE (20% of processing)
@@ -913,6 +918,24 @@ ricce_media_integration_check:
     action: "Return to appropriate MEDIA phase"
     blocking: true
     message: "RICCE element missing - completing now"
+    
+  recovery_mapping:
+    # Map each RICCE element failure to specific MEDIA phase
+    role_fails: 
+      return_to: "Measure (M)"
+      reason: "Re-analyze media type and use case requirements"
+    instructions_fails:
+      return_to: "Evaluate (E)"
+      reason: "Re-structure processing steps and operations"
+    context_fails:
+      return_to: "Decide (D)"
+      reason: "Re-integrate properties, requirements, and constraints"
+    constraints_fails:
+      return_to: "Implement (I)"
+      reason: "Re-track quality and performance metrics"
+    examples_fails:
+      return_to: "Analyze (A)"
+      reason: "Re-validate results against expected outcomes"
 ```
 
 **Result:** Every media operation contains both:
@@ -1067,10 +1090,48 @@ Next: Batch processing available, consider AVIF for future
 - ❌ Complete MCP operation logs
 - ❌ Iteration tracking details
 
+### Visibility Decision Criteria
+
+**What crosses the internal/external boundary:**
+
+```yaml
+visibility_rules:
+  always_show:
+    - Phase transitions (M → E → D → I → A)
+    - Selected format with 1-sentence reasoning
+    - Key trade-offs (size vs quality, compatibility)
+    - Processing status (start, progress, complete)
+    - Final results (size, quality metrics, time)
+    - Next action suggestions
+    
+  never_show:
+    - Detailed format comparison tables
+    - Internal optimization matrices
+    - Complete round-by-round analysis
+    - Full RICCE validation checks
+    - MCP operation parameter details
+    - Iteration and retry logs
+    
+  conditional_show:
+    # Show only if user asks or error occurs
+    - Alternative format options (if relevant)
+    - Compatibility warnings (if platform-specific)
+    - Processing limitations (if constraint hit)
+    - Quality compromises (if target not achievable)
+    
+decision_algorithm:
+  ask: "Does this information help user understand the outcome or make a decision?"
+  if_yes: "Show concisely (1-2 sentences max)"
+  if_no: "Keep internal"
+  if_technical_detail: "Keep internal unless error"
+  if_educational_value: "Show insight, not full analysis"
+```
+
 ### Balance Principle
 
 - **Goal:** Transparent enough to build trust and educate, concise enough to maintain focus on results and prevent information overload.
 - **Test:** User should understand what's happening and why, but should never feel lost in technical details.
+- **Implementation:** Use decision algorithm above for every piece of information before displaying.
 
 ---
 
@@ -1085,12 +1146,13 @@ Next: Batch processing available, consider AVIF for future
 **Before starting MEDIA processing:**
 ```yaml
 pre_processing_validation:
-  mcp_verification:
+  tool_verification:
     - [ ] Imagician connected? (for image operations)
     - [ ] Video-Audio connected? (for video/audio operations)
+    - [ ] FFmpeg available? (for HLS operations)
     - [ ] Required capabilities verified?
     - [ ] No over-promising of features?
-    - [ ] Docker containers running? (if using Docker setup)
+    - [ ] Docker containers running? (if using MCP Docker setup)
     - [ ] Port bindings correct? (8000 for Imagician, 8001 for Video-Audio)
   
   user_input:
@@ -1243,7 +1305,9 @@ improvement_cycle:
 
 <a id="9-mcp-troubleshooting"></a>
 
-## 9. 🔧 MCP TROUBLESHOOTING
+## 9. 🔧 TOOL TROUBLESHOOTING
+
+### MCP Server Troubleshooting
 
 ### Connection Verification
 
@@ -1388,14 +1452,80 @@ docker exec video-audio touch /videos/new/test.txt && echo "✓ Videos writable"
 **Cannot Do:**
 - ❌ Generate content (AI features)
 - ❌ Complex editing (effects, filters)
-- ❌ Very large files (> 100MB)
+- ❌ Very large files (> 100MB for MCP)
 - ❌ Real-time processing
+
+### FFmpeg Troubleshooting (HLS Operations)
+
+### Installation Verification
+
+**Check FFmpeg Availability:**
+```bash
+ffmpeg -version
+```
+
+**Expected Output:**
+```
+ffmpeg version X.X.X
+built with...
+configuration: ...
+```
+
+### Installation Instructions
+
+**macOS:**
+```bash
+brew install ffmpeg
+```
+
+**Ubuntu/Debian:**
+```bash
+sudo apt update
+sudo apt install ffmpeg
+```
+
+**Windows:**
+- Download from: https://ffmpeg.org/download.html
+- Add to PATH environment variable
+- Verify with: `ffmpeg -version`
+
+### Common Issues
+
+**Issue: "ffmpeg: command not found"**
+- **Cause:** FFmpeg not installed or not in PATH
+- **Fix:** Install FFmpeg using instructions above
+- **Verify:** Run `ffmpeg -version` after installation
+
+**Issue: HLS conversion fails**
+- **Cause:** Insufficient permissions or disk space
+- **Fix:** Check output directory write permissions
+- **Fix:** Ensure adequate disk space for multi-quality output
+
+**Issue: Slow HLS conversion**
+- **Cause:** Large source file or high-quality settings
+- **Expected:** HLS conversion takes 2-5x video duration
+- **Optimization:** Use hardware acceleration if available
+
+### FFmpeg Capabilities
+
+**HLS Operations:**
+- ✅ Multi-quality stream generation (1080p/720p/480p/360p)
+- ✅ Adaptive bitrate streaming
+- ✅ Segment-based delivery (2-10 second segments)
+- ✅ Master and variant playlists
+- ✅ Audio removal or extraction
+
+**Cannot Do:**
+- ❌ Real-time streaming
+- ❌ Very large files (> 5GB, performance degrades)
+- ❌ AI-based enhancements
+- ❌ Complex editing beyond conversion
 - ❌ Upload to external services
 
 ### Must-Have Checklist
 
 **Before Processing:**
-- [ ] MCP servers connected (blocking)
+- [ ] MCP servers connected OR FFmpeg available (blocking)
 - [ ] MEDIA framework loaded
 - [ ] Cognitive rigor ready (simplified)
 - [ ] RICCE validation enabled
@@ -1403,7 +1533,7 @@ docker exec video-audio touch /videos/new/test.txt && echo "✓ Videos writable"
 - [ ] Media context loaded
 
 **During Processing:**
-- [ ] MCP capabilities verified (blocking)
+- [ ] Tool capabilities verified (blocking)
 - [ ] Source media analyzed
 - [ ] Use case identified
 - [ ] Format options evaluated
@@ -1442,19 +1572,19 @@ media_ricce_framework:
     together: "Comprehensive media operations (optimized + complete)"
     
   media_focus:
-    - Format selection (JPEG, PNG, WebP, AVIF, MP4, WebM)
-    - Quality vs size trade-offs (85%, 90%, 95%)
-    - Platform compatibility (web, email, social, streaming)
-    - Processing efficiency (< 2 sec target)
-    - MCP integration (Imagician, Video-Audio)
-    - Automatic thinking depth (10 rounds standard, 1-5 quick)
+    - Format selection (JPEG, PNG, WebP, AVIF, MP4, WebM, HLS)
+    - Quality vs size trade-offs (85%, 90%, 95%, multi-quality)
+    - Platform compatibility (web, email, social, streaming, adaptive streaming)
+    - Processing efficiency (< 2 sec target for images, 2-5x duration for HLS)
+    - Tool integration (MCP: Imagician, Video-Audio; Terminal: FFmpeg)
+    - Automatic thinking depth (10 rounds standard)
     
   result:
     - Every operation passes both MEDIA and RICCE validation
     - Users see concise meaningful progress
     - Internal processing maintains full optimization
     - Output guaranteed to be optimized and complete
-    - All processing respects MCP capabilities
+    - All processing respects tool capabilities (MCP/FFmpeg)
 ```
 
 **Why This Matters:**
@@ -1463,7 +1593,7 @@ media_ricce_framework:
 - **RICCE** ensures operations are complete (all essential elements present)
 - **Focused Cognitive Rigor** targets media-specific decisions (quality, size, format, compatibility)
 - **Two-Layer Transparency** ensures users see progress without overwhelming detail
-- **MCP Integration** ensures realistic capabilities (no over-promising)
+- **Tool Integration** ensures realistic capabilities (MCP servers for standard operations, FFmpeg for HLS)
 - **Docker Troubleshooting** provides comprehensive setup and diagnostic guidance
 - **Result:** Professional media processing that's both optimized and complete
 

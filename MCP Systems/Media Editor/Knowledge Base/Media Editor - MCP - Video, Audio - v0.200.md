@@ -1419,8 +1419,8 @@ async def process_with_fallback(operation, mode='standard'):
             'guide': 'See installation instructions'
         }
     
-    # Apply automatic thinking
-    thinking_rounds = 10 if mode == 'standard' else auto_scale(1, 5)
+    # Apply automatic thinking (always 10 rounds)
+    thinking_rounds = 10
     
     try:
         return await video_audio_mcp.process(operation, {'thinking': thinking_rounds})
@@ -1529,14 +1529,14 @@ pip list | grep mcp
 
 ```python
 # Complete video production workflow
-async def produce_final_video(raw_footage, mode='standard'):
+async def produce_final_video(raw_footage):
     # 0. Verify connection
     connection = await verify_video_audio_connection()
     if not connection['connected']:
         raise Exception("Video-Audio MCP not connected. Please setup.")
     
-    # Automatic deep thinking applied throughout
-    thinking = 10 if mode == 'standard' else auto_scale(1, 5)
+    # Automatic deep thinking applied throughout (always 10 rounds)
+    thinking = 10
     
     # 1. Extract and process audio (10 rounds optimization)
     audio = await extract_audio_from_video(raw_footage)

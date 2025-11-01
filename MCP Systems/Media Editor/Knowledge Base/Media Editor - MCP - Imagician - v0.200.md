@@ -21,7 +21,7 @@ Technical reference for Imagician MCP server capabilities and integration for im
 
 <a id="1-server-overview"></a>
 
-## 1. �🔌 SERVER OVERVIEW
+## 1. 🔌 SERVER OVERVIEW
 
 ### MCP Server Details
 
