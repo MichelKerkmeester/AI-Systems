@@ -60,6 +60,49 @@
 - **Prevention:** Solve ONLY the stated problem; reject premature optimization; confirm scope via a clarifying question when in doubt
 - **Example:** Creating a complex state management system when a simple variable suffices
 
+### Hook-Based Quality Validation
+
+**🔨 Automated Tool Validation System**
+
+Your tool usage automatically triggers validation hooks that provide quality reminders and suggestions. Understanding this system helps you anticipate and respond to these helpful checks.
+
+**Three Types of Hooks:**
+
+1. **PreToolUse Hooks** - Run before tool execution
+   - Example: `.claude/scripts/validate-bash.sh` validates Bash commands before execution
+   - Prevents potentially harmful operations
+   - Can block execution if safety concerns detected
+
+2. **PostToolUse Hooks** - Run after tool execution
+   - Example: `.claude/scripts/validate-post-response.sh` checks file edits against risk patterns
+   - Provides quality reminders based on `skill-rules.json` patterns
+   - Non-blocking - issues gentle reminders, doesn't prevent changes
+
+3. **UserPromptSubmit Hooks** - Run when users submit prompts
+   - Example: `.claude/scripts/validate-skill-activation.sh` suggests relevant skills
+   - Analyzes prompt content to recommend appropriate knowledge/workflow skills
+   - Helps surface relevant documentation at the right time
+
+**How Hooks Check Your Work:**
+
+When you edit files or run commands, hooks automatically:
+- Compare your actions against risk patterns defined in `.claude/scripts/skill-rules.json`
+- Surface relevant reminders from the knowledge base
+- Suggest skills that might help with your current task
+- Provide quality checks without disrupting your workflow
+
+**Example Flow:**
+1. You edit a JavaScript file with complex logic
+2. PostToolUse hook detects patterns matching "complexLogic" risk category
+3. You see a reminder about simplicity and maintainability from skill-rules.json
+4. The reminder helps you reconsider if there's a simpler approach
+
+**Key Points:**
+- Hooks are your quality assistants, not blockers (except for safety-critical PreToolUse checks)
+- Reminders come from `.claude/scripts/skill-rules.json` risk patterns
+- All hooks exit with code 0 (non-blocking) to maintain workflow continuity
+- Consider hook feedback as helpful suggestions for improvement
+
 ---
 
 ## 🧑‍🏫 2. CONFIDENCE & CLARIFICATION FRAMEWORK
@@ -379,6 +422,7 @@ Request: "Add loading spinner to form submission"
 4. [knowledge/animation_strategy.md](./knowledge/animation_strategy.md)
 5. [knowledge/debugging.md](./knowledge/debugging.md)
 6. [knowledge/document_style_guide.md](./knowledge/document_style_guide.md)
+7. [knowledge/serena_mcp.md](./knowledge/serena_mcp.md)
 
 ### Core Principles & Decision Mantras
 **Request Analysis:**
@@ -455,12 +499,45 @@ Request: "Add loading spinner to form submission"
 - [ ] Risk assessment and rollback plan noted for risky changes
 - [ ] Docs updated (README/knowledge/ or inline)
 - [ ] Screenshots/gifs for UI changes
-- [ ] Evidence and confidence noted; UNKNOWNs explicitly marked
 
-### Security & Secrets Handling
+### MCP Tool Selection & Serena Usage
 
-- Never expose secrets or PII in plain text (prompts, logs, PRs, or screenshots).
-- Use environment variables for all secrets; avoid echoing or printing them.
-- Redact sensitive values in artifacts: replace with REDACTED or {{SECRET_NAME}}.
-- Do not upload or commit credentials/tokens; scrub logs before sharing.
-- Minimize data: collect only what is necessary for the task.
+**Decision Framework: When to Use Which Approach**
+
+1. **Native Tools (Read/Grep/Glob/Bash)**
+   - File exploration and discovery
+   - Text-based searches
+   - Simple file operations
+   - Quick content checks
+   - Default choice for most tasks
+
+2. **Serena MCP (Semantic Code Intelligence)**
+   - Symbol-level navigation (find_symbol, find_referencing_symbols)
+   - Complex refactoring across files
+   - Large, structured codebases (>10k LOC)
+   - Cross-file dependency analysis
+   - When token efficiency matters
+   - **Don't use for**: Greenfield projects, tiny codebases (<5 files), exploratory work
+
+3. **Chrome DevTools MCP**
+   - Browser automation and testing
+   - Performance analysis
+   - Live debugging web applications
+   - Screenshot capture and element inspection
+
+**Serena Quick Check:**
+```markdown
+□ Is this a structured codebase >10k LOC?
+□ Do I need symbol-level navigation or refactoring?
+□ Am I working with well-defined code structure?
+□ Is token efficiency important?
+
+If YES to most: Consider Serena
+If NO to most: Use native tools (Read/Grep/Glob)
+```
+
+**Tool Selection Anti-Patterns:**
+- ❌ Using Serena for simple file reading (use Read instead)
+- ❌ Using Serena for new code creation (it's for navigation/refactoring)
+- ❌ Using Serena in tiny projects (overhead outweighs benefits)
+- ❌ Ignoring native tools when they're simpler
