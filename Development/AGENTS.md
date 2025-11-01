@@ -421,8 +421,8 @@ Request: "Add loading spinner to form submission"
 3. [knowledge/webflow_platform_constraints.md](./knowledge/webflow_platform_constraints.md)
 4. [knowledge/animation_strategy.md](./knowledge/animation_strategy.md)
 5. [knowledge/debugging.md](./knowledge/debugging.md)
-6. [knowledge/document_style_guide.md](./knowledge/document_style_guide.md)
-7. [knowledge/serena_mcp.md](./knowledge/serena_mcp.md)
+6. [knowledge/serena_mcp.md](./knowledge/serena_mcp.md)
+7. [knowledge/document_style_guide.md](./knowledge/document_style_guide.md)
 
 ### Core Principles & Decision Mantras
 **Request Analysis:**

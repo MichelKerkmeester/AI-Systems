@@ -149,6 +149,50 @@
         "contentPatterns": []
       }
     },
+    "serena-mcp": {
+      "type": "knowledge",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Semantic code intelligence using LSP for symbol-level operations (knowledge/serena_mcp.md)",
+      "promptTriggers": {
+        "keywords": [
+          "refactor",
+          "rename",
+          "find references",
+          "symbol",
+          "definition",
+          "implementation",
+          "call hierarchy",
+          "type hierarchy",
+          "semantic search",
+          "code structure",
+          "dependency analysis",
+          "cross-file",
+          "serena",
+          "mcp"
+        ],
+        "intentPatterns": [
+          "(find|search|locate).*?(symbol|definition|implementation|references)",
+          "(rename|refactor).*?(function|class|variable|method)",
+          "(analyze|check|trace).*?(dependencies|call|hierarchy|structure)",
+          "(cross-file|multi-file).*?(change|edit|refactor)",
+          "where.*?(used|called|defined|implemented)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "src/**/*.js",
+          "src/**/*.ts",
+          "src/**/*.py",
+          "src/**/*.go",
+          "src/**/*.rs",
+          "src/**/*.java",
+          "knowledge/serena_mcp.md",
+          ".serena/project.yml"
+        ],
+        "contentPatterns": []
+      }
+    },
     "git-worktrees": {
       "type": "workflow",
       "enforcement": "suggest",
@@ -304,6 +348,15 @@
         "document\\.readyState"
       ],
       "reminder": "✅ INITIALIZATION CHECK:\n- Using CDN-safe pattern with unique INIT_FLAG?\n- Guard against double initialization?\n- Proper delay (INIT_DELAY_MS) configured?\n- Webflow.push integration present?"
+    },
+    "semanticOperations": {
+      "patterns": [
+        "find_symbol",
+        "find_referencing_symbols",
+        "insert_after_symbol",
+        "serena"
+      ],
+      "reminder": "✅ SERENA MCP CHECK:\n- Project indexed for optimal performance?\n- Appropriate for structured codebase (>10k LOC)?\n- Symbol-level operation vs simple file read?\n- Consider native tools (Read/Grep) for simpler tasks?"
     }
   }
 }
