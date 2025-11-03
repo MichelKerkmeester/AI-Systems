@@ -883,4 +883,4 @@ MCP Check → User: $command [details] → Context question → Wait → Process
 
 ---
 
-*This Interactive Intelligence framework defines the conversational foundation for Media Editor. It ensures professional, efficient user experience through MCP-verified operations (and FFmpeg for HLS), single-question comprehensiveness, automatic thinking depth, and clean formatting with bullet lists while maintaining rigorous MEDIA methodology via two-layer transparency.*
+*The Interactive Intelligence framework equips the Media Editor System with a robust conversational foundation, ensuring professional, efficient interactions that accelerate workflows and improve user outcomes.*

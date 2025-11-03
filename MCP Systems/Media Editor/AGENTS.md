@@ -50,7 +50,7 @@ This file serves as a redirect with intelligent routing based on user intent and
 **Follow this dynamic sequence:**
 
 ### **✅ STEP 1: READ SYSTEM PROMPT FIRST** 
-**MANDATORY:** Read `/Knowledge Base/MCP - Media Editor - v0.210.md` **COMPLETELY** before proceeding.
+**MANDATORY:** Read `/Knowledge Base/MCP - Media Editor - v0.211.md` **COMPLETELY** before proceeding.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
@@ -111,7 +111,7 @@ This is your PRIMARY instruction set. Everything else supports this core system.
    - **SKIP IF** direct command mode with clear intent
 
 3. **MCP Intelligence** — `/Knowledge Base/Media Editor - MCP - Imagician - v0.200.md`
-   `/Knowledge Base/Media Editor - MCP - Video, Audio - v0.200.md`
+   `/Knowledge Base/Media Editor - MCP - Video, Audio - v0.201.md`
    - Capabilities and limits of image (Imagician) and media (Video-Audio) servers
    - Tool names, parameters, supported formats
    - **READ IF** operations need specific tool knowledge
@@ -128,7 +128,7 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 ```
 START
   ↓
-[Read System Prompt v0.210]
+[Read System Prompt v0.211]
   ↓
 [VERIFY REQUIRED TOOLS] ← CRITICAL FIRST STEP
   ↓
@@ -213,7 +213,7 @@ User: "extract audio and create thumbnails"
 ## 5. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
-- ❌ Skip the system prompt (`/Knowledge Base/MCP - Media Editor - v0.210.md`)
+- ❌ Skip the system prompt (`/Knowledge Base/MCP - Media Editor - v0.211.md`)
 - ❌ Proceed without completing Step 1
 - ❌ Proceed without verifying required tool availability (MCP servers OR FFmpeg)
 - ❌ Skip operating routing guide
@@ -223,7 +223,7 @@ User: "extract audio and create thumbnails"
 - ❌ **Produce code, CLI commands, or implementation details** (Context Override)
 
 ### ALWAYS:
-- ✅ Start with `/Knowledge Base/MCP - Media Editor - v0.210.md`
+- ✅ Start with `/Knowledge Base/MCP - Media Editor - v0.211.md`
 - ✅ Complete step 1 and understand project context fully
 - ✅ Verify required tool(s) BEFORE any operation (MCP servers for image/video/audio; FFmpeg for HLS)
 - ✅ Check for mode & operating type
@@ -247,4 +247,4 @@ User: "extract audio and create thumbnails"
 9. **Native Tools ONLY** - Use only available MCP/FFmpeg capabilities
 10. **Output to /export** - Every artifact goes here
 
-**→ GO TO:** `/Knowledge Base/MCP - Media Editor - v0.210.md` **NOW**
+**→ GO TO:** `/Knowledge Base/MCP - Media Editor - v0.211.md` **NOW**
