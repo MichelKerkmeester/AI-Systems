@@ -1,20 +1,18 @@
 # Media Editor System - User Guide v0.210
 
-An intelligent media processing system that transforms natural language requests into optimized images, videos, audio, and HLS streaming through conversational guidance. Features automatic deep analysis with 10 rounds of professional optimization, ensuring every media operation achieves optimal results without manual configuration.
+Transforms natural language requests into optimized images, videos, audio, and HLS streaming with **automatic MEDIA processing and 10-round optimization**.
 
-## 📋 Table of Contents
+## 📋 TABLE OF CONTENTS
 
 1. [🆕 WHAT'S NEW IN V0.210](#1-whats-new-in-v0210)
 2. [✨ KEY FEATURES](#2-key-features)
-3. [🚀 QUICK SETUP](#3-quick-setup)
-4. [🔧 INSTALLING MCP TOOLS](#4-installing-mcp-tools)
-5. [🧠 HOW IT WORKS](#5-how-it-works)
-6. [🎛️ OPERATING MODES](#6-operating-modes)
-7. [💬 EXAMPLE INTERACTIONS](#7-example-interactions)
-8. [📊 VISUAL FEEDBACK](#8-visual-feedback)
-9. [🆘 TROUBLESHOOTING](#9-troubleshooting)
-10. [⚠️ IMPORTANT NOTES](#10-important-notes)
-11. [📚 RESOURCES](#11-resources)
+3. [🌳 SYSTEM ARCHITECTURE](#3-system-architecture)
+4. [🚀 QUICK SETUP](#4-quick-setup)
+5. [🔧 INSTALLING MCP TOOLS](#5-installing-mcp-tools)
+6. [🧠 HOW IT WORKS](#6-how-it-works)
+7. [🎛️ OPERATING MODES](#7-operating-modes)
+8. [💬 EXAMPLE INTERACTIONS](#8-example-interactions)
+9. [📚 RESOURCES](#9-resources)
 
 ---
 
@@ -114,8 +112,32 @@ An intelligent media processing system that transforms natural language requests
 
 ---
 
-<a id="3-quick-setup"></a>
-## 3. 🚀 QUICK SETUP
+<a id="3-system-architecture"></a>
+## 3. 🌳 SYSTEM ARCHITECTURE
+
+```
+AGENTS.md → Entry point with intelligent routing logic
+    ↓
+MCP System - Media Editor - v0.211.md (System prompt with MEDIA integration)
+    ↓
+MEDIA Thinking Framework v0.210 (5-phase methodology with cognitive rigor)
+    ↓
+Interactive Intelligence v0.210 (Conversation flow with two-layer transparency)
+    ↓
+MCP Tools:
+  ├─ Imagician v0.200 (Image operations)
+  ├─ Video-Audio v0.201 (Video & audio operations)
+  └─ FFmpeg Terminal (HLS adaptive streaming)
+    ↓
+HLS Video Conversion v0.100 (Multi-quality streaming guide)
+    ↓
+Output → Optimized media files via MCP servers or Terminal commands
+```
+
+---
+
+<a id="4-quick-setup"></a>
+## 4. 🚀 QUICK SETUP
 
 ### Step 1: Create a Claude Project
 1. Go to claude.ai
@@ -150,8 +172,8 @@ $video compress presentation.mp4     # Video processing with 10 rounds
 
 ---
 
-<a id="4-installing-mcp-tools"></a>
-## 4. 🔧 INSTALLING MCP TOOLS
+<a id="5-installing-mcp-tools"></a>
+## 5. 🔧 INSTALLING MCP TOOLS
 
 The Media Editor requires two MCP servers:
 
@@ -225,8 +247,8 @@ Ready for professional media processing including HLS streaming!
 
 ---
 
-<a id="5-how-it-works"></a>
-## 5. 🧠 HOW IT WORKS
+<a id="6-how-it-works"></a>
+## 6. 🧠 HOW IT WORKS
 
 ### MCP Connection Verification
 
@@ -289,8 +311,8 @@ The system automatically applies:
 
 ---
 
-<a id="6-operating-modes"></a>
-## 6. 🎛️ OPERATING MODES
+<a id="7-operating-modes"></a>
+## 7. 🎛️ OPERATING MODES
 
 | Mode | Command | Thinking Applied | Tool Used | Use When |
 |------|---------|-----------------|-----------|----------|
@@ -318,8 +340,8 @@ What type of media?
 
 ---
 
-<a id="7-example-interactions"></a>
-## 7. 💬 EXAMPLE INTERACTIONS
+<a id="8-example-interactions"></a>
+## 8. 💬 EXAMPLE INTERACTIONS
 
 ### Simple Image Optimization
 ```
@@ -409,39 +431,6 @@ Operation: Multi-quality adaptive streaming
 
 ---
 
-<a id="8-troubleshooting"></a>
-## 8. 🆘 TROUBLESHOOTING
-
-### Common Issues & Solutions
-
-| Issue | Cause | Solution |
-|-------|-------|----------|
-| **MCP not connected** | Server not running | Restart Claude Desktop |
-| **FFmpeg not found** | Not installed | `brew install ffmpeg` (Mac) or see setup |
-| **HLS conversion fails** | FFmpeg unavailable | Verify: `ffmpeg -version` |
-| **Format not supported** | Invalid format | Check supported list |
-| **File not found** | Wrong path | Verify file location |
-| **Rate limit hit** | Too many requests | Wait 60 seconds |
-
-### Tool Connection Issues
-```
-⚠️ Tool Connection Failed
-
-**For MCP Servers (Image/Video/Audio):**
-1. Check configuration file
-2. Verify installation paths
-3. Restart Claude Desktop
-4. Check server logs
-
-**For FFmpeg (HLS Streaming):**
-1. Run: ffmpeg -version
-2. Install if missing
-3. Verify PATH variable
-4. Restart terminal/Claude
-```
-
----
-
 <a id="9-resources"></a>
 ## 9. 📚 RESOURCES
 
@@ -461,7 +450,3 @@ Operation: Multi-quality adaptive streaming
 - [HLS Specification](https://datatracker.ietf.org/doc/html/rfc8216) - Adaptive streaming (NEW)
 - [H.264 Overview](https://en.wikipedia.org/wiki/Advanced_Video_Coding) - Video codec
 - [Audio Formats Comparison](https://www.adobe.com/creativecloud/video/discover/audio-file-formats.html)
-
----
-
-*Transform natural language into professional media operations including HLS adaptive streaming with automatic deep thinking. Every operation receives 10 rounds of optimization automatically using the MEDIA Framework v0.210. Tool verification ensures required capabilities (MCP servers or FFmpeg) are available. Three focused optimization techniques ensure quality-size balance, optimal format selection, and platform compatibility with no manual configuration required.*
