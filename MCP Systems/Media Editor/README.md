@@ -1,10 +1,10 @@
-# Media Editor System - User Guide v0.211
+# Media Editor System - User Guide v0.212
 
 Transforms natural language requests into optimized images, videos, audio, and HLS streaming with **automatic MEDIA processing and 10-round optimization**.
 
 ## 📋 TABLE OF CONTENTS
 
-1. [🆕 WHAT'S NEW IN V0.211](#1-whats-new-in-v0211)
+1. [🆕 WHAT'S NEW IN V0.212](#1-whats-new-in-v0212)
 2. [✨ KEY FEATURES](#2-key-features)
 3. [🌳 SYSTEM ARCHITECTURE](#3-system-architecture)
 4. [🚀 QUICK SETUP](#4-quick-setup)
@@ -16,12 +16,17 @@ Transforms natural language requests into optimized images, videos, audio, and H
 
 ---
 
-<a id="1-whats-new-in-v0211"></a>
-## 1. 🆕 WHAT'S NEW IN V0.211
+<a id="1-whats-new-in-v0212"></a>
+## 1. 🆕 WHAT'S NEW IN V0.212
 
-### 🎉 NEW: HLS Adaptive Streaming Support
+### Documentation Improvements
+- **Enhanced Readability**: Improved balance between YAML and markdown prose across MCP Intelligence documents
+- **MCP Intelligence Updates**: Updated to v0.201 (Imagician) and v0.202 (Video-Audio) with clearer technical specifications
+- **Better Structure**: Converted heavily YAML-formatted sections to readable markdown while preserving technical accuracy
 
-**HLS Video Conversion (via Terminal FFmpeg):**
+### Features from V0.211
+
+**HLS Adaptive Streaming Support:**
 - **Multi-quality streaming**: Generate 1080p, 720p, 480p, 360p variants automatically
 - **Adaptive bitrate**: Browser selects optimal quality based on viewer's bandwidth
 - **Segment-based delivery**: 2-10 second segments for fast playback start
@@ -118,15 +123,15 @@ Transforms natural language requests into optimized images, videos, audio, and H
 ```
 AGENTS.md → Entry point with intelligent routing logic
     ↓
-MCP System - Media Editor - v0.211.md (System prompt with MEDIA integration)
+MCP System - Media Editor - v0.212.md (System prompt with MEDIA integration)
     ↓
 MEDIA Thinking Framework v0.220 (5-phase methodology with cognitive rigor)
     ↓
 Interactive Intelligence v0.211 (Conversation flow with two-layer transparency)
     ↓
 MCP Tools:
-  ├─ Imagician v0.200 (Image operations)
-  ├─ Video-Audio v0.201 (Video & audio operations)
+  ├─ Imagician v0.201 (Image operations)
+  ├─ Video-Audio v0.202 (Video & audio operations)
   └─ FFmpeg Terminal (HLS adaptive streaming)
     ↓
 HLS Video Conversion v0.100 (Multi-quality streaming guide)
@@ -147,18 +152,16 @@ Output → Optimized media files via MCP servers or Terminal commands
 ### Step 2: Add System Instructions
 1. Click "Edit project details"
 2. Find "Custom instructions" section
-3. Copy and paste: `MCP - Media Editor - v0.211.md`
+3. Copy and paste: `MCP - Media Editor - v0.212.md`
 4. Save the project
 
 ### Step 3: Upload Reference Documents
 Add these documents to your project:
 - `Media Editor - Interactive Intelligence - v0.211.md`
 - `Media Editor - MEDIA Thinking Framework - v0.211.md`
-- `Media Editor - MCP - Imagician - v0.200.md`
-- `Media Editor - MCP - Video, Audio - v0.200.md`
-- `Media Editor - HLS - Video Conversion - v0.100.md` (NEW)
-- `Media Editor - MCP Intelligence - Imagician - v0.200.md`
-- `Media Editor - MCP Intelligence - Video, Audio - v0.200.md`
+- `Media Editor - HLS - Video Conversion - v0.100.md`
+- `Media Editor - MCP Intelligence - Imagician - v0.201.md`
+- `Media Editor - MCP Intelligence - Video, Audio - v0.202.md`
 
 ### Step 4: Install MCP Tools
 See next section for detailed setup

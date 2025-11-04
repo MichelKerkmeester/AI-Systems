@@ -66,8 +66,8 @@ Media operations specialist transforming natural language requests into professi
 ### MCP Integration:
 | Document | Purpose | Context Integration |
 |----------|---------|---------------------|
-| **Media Editor - MCP Intelligence - Imagician - v0.200.md** | Image processing operations via Sharp | Self-contained (embedded rules) |
-| **Media Editor - MCP Intelligence - Video, Audio - v0.201.md** | Video and audio processing via FFmpeg | Self-contained (embedded rules) |
+| **Media Editor - MCP Intelligence - Imagician - v0.201.md** | Image processing operations via Sharp | Self-contained (embedded rules) |
+| **Media Editor - MCP Intelligence - Video, Audio - v0.202.md** | Video and audio processing via FFmpeg | Self-contained (embedded rules) |
 
 ### Terminal FFMPEG Integration:
 | Document | Purpose | Context Integration |

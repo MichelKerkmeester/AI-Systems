@@ -1,4 +1,4 @@
-# Media Editor - MCP Intelligence - Video, Audio - v0.201
+# Media Editor - MCP Intelligence - Video, Audio - v0.202
 
 Technical reference for Video-Audio MCP server capabilities and integration for video and audio processing operations.
 
@@ -25,37 +25,33 @@ Technical reference for Video-Audio MCP server capabilities and integration for 
 
 ### MCP Server Details
 
-```yaml
-server:
-  name: "Video-Audio MCP Server"
-  package: "@misbahsy/video-audio-mcp"
-  repository: "https://github.com/misbahsy/video-audio-mcp"
-  engine: "FFmpeg (comprehensive media framework)"
-  protocol: "Model Context Protocol (MCP)"
-  language: "Python"
-  installation:
-    recommended: "UV (uv sync)"
-    alternative: "Python pip"
-```
+The Video-Audio MCP Server (`@misbahsy/video-audio-mcp`) provides comprehensive video and audio processing capabilities powered by FFmpeg. It enables format conversion, editing, optimization, and advanced effects through native MCP integration.
+
+**Key Information:**
+- **Package:** `@misbahsy/video-audio-mcp`
+- **Repository:** https://github.com/misbahsy/video-audio-mcp
+- **Engine:** FFmpeg (comprehensive media framework)
+- **Protocol:** Model Context Protocol (MCP)
+- **Language:** Python
+
+**Installation:**
+- **Recommended:** UV package manager (`uv sync`)
+- **Alternative:** Python pip
 
 ### Connection Verification
 
 **Reference:** Connection verification logic is in Interactive Intelligence.
 
-```yaml
-verification:
-  priority: "first_action_before_all_operations"
-  tool: "health_check"
-  displays:
-    connected: "✅ Video-Audio MCP Connected - Media processing available"
-    disconnected: "❌ Video-Audio MCP Not Connected - Setup required"
-  
-dependencies:
-  required:
-    - "FFmpeg installed on system"
-    - "Python environment configured"
-    - "MCP server running"
-```
+Connection verification must be the **first action before all operations**. Use the `health_check` tool to verify server status and FFmpeg availability.
+
+**Status Messages:**
+- ✅ **Connected:** "Video-Audio MCP Connected - Media processing available"
+- ❌ **Disconnected:** "Video-Audio MCP Not Connected - Setup required"
+
+**Required Dependencies:**
+- FFmpeg must be installed on the system
+- Python environment properly configured
+- MCP server running and accessible
 
 ---
 
@@ -67,48 +63,44 @@ dependencies:
 
 **Note:** Thinking methodology (10 rounds standard, 1-5 quick) is defined in MEDIA Thinking Framework.
 
-```yaml
-video_operations:
-  format_conversion:
-    tools: [convert_video_format, convert_video_properties]
-    
-  editing:
-    tools: [trim_video, concatenate_videos, adjust_video_speed]
-    
-  properties:
-    tools: [set_video_resolution, change_aspect_ratio, set_video_codec]
-    
-  optimization:
-    tools: [set_video_bitrate, set_video_frame_rate]
-    
-  effects:
-    tools: [fade_in_out, add_transition_effect]
+The Video-Audio MCP server provides comprehensive media processing capabilities organized into several categories:
 
-audio_operations:
-  extraction:
-    tools: [extract_audio_from_video]
-    
-  conversion:
-    tools: [convert_audio_format, convert_audio_properties]
-    
-  processing:
-    tools: [remove_silence]
+**Video Format Conversion:**
+- `convert_video_format` - Convert between video formats (MP4, MOV, AVI, WebM, MKV)
+- `convert_video_properties` - Advanced conversion with codec and quality control
 
-advanced_features:
-  overlays:
-    tools: [add_text_overlay, add_image_overlay]
-    
-  subtitles:
-    tools: [add_subtitle]
-    
-  composition:
-    tools: [insert_broll, concatenate_videos]
-    
-system_tools:
-  health_check:
-    description: "Server status verification"
-    returns: [status, ffmpeg_version]
-```
+**Video Editing:**
+- `trim_video` - Extract specific time segments
+- `concatenate_videos` - Join multiple videos with optional transitions
+- `adjust_video_speed` - Create slow motion or timelapse effects
+
+**Video Properties:**
+- `set_video_resolution` - Change video dimensions
+- `change_aspect_ratio` - Adjust aspect ratio (16:9, 4:3, 1:1, 9:16, 21:9)
+- `set_video_codec` - Change video encoding codec
+
+**Video Optimization:**
+- `set_video_bitrate` - Control video quality and file size
+- `set_video_frame_rate` - Adjust frames per second (24, 30, 60)
+
+**Visual Effects:**
+- `fade_in_out` - Add smooth fade transitions
+- `add_transition_effect` - Apply various transition effects
+
+**Audio Operations:**
+- `extract_audio_from_video` - Extract audio tracks
+- `convert_audio_format` - Convert between audio formats
+- `convert_audio_properties` - Advanced audio conversion
+- `remove_silence` - Automatically remove silent segments
+
+**Advanced Features:**
+- `add_text_overlay` - Add text to videos
+- `add_image_overlay` - Add watermarks or logos
+- `add_subtitle` - Embed subtitle files
+- `insert_broll` - Insert B-roll footage
+
+**System Tools:**
+- `health_check` - Verify server status and FFmpeg version
 
 ---
 
@@ -234,61 +226,41 @@ adjust_video_speed:
 
 ### Resolution and Aspect Ratio
 
+**Set Video Resolution:**
+
+Change video dimensions to specific width and height values.
+
 ```yaml
 set_video_resolution:
   parameters:
-    video_path:
-      type: string
-      required: true
-      
-    output_video_path:
-      type: string
-      required: true
-      
-    width:
-      type: integer
-      required: true
-      
-    height:
-      type: integer
-      required: true
-      
+    video_path: string (required)
+    output_video_path: string (required)
+    width: integer (required)
+    height: integer (required)
+```
+
+**Change Aspect Ratio:**
+
+Adjust video aspect ratio to common formats. This operation may crop or add letterboxing depending on the source and target ratios.
+
+```yaml
 change_aspect_ratio:
   parameters:
-    video_path:
-      type: string
-      required: true
-      
-    output_video_path:
-      type: string
-      required: true
-      
-    aspect_ratio:
-      type: string
-      required: true
+    video_path: string (required)
+    output_video_path: string (required)
+    aspect_ratio: string (required)
       options: ["16:9", "4:3", "1:1", "9:16", "21:9"]
-      
-common_aspect_ratios:
-  "16:9":
-    use: "Standard video"
-    resolutions: ["1920x1080", "1280x720"]
-    
-  "4:3":
-    use: "Legacy content"
-    resolutions: ["640x480", "800x600"]
-    
-  "1:1":
-    use: "Social media square"
-    resolutions: ["1080x1080", "720x720"]
-    
-  "9:16":
-    use: "Vertical video"
-    resolutions: ["1080x1920", "720x1280"]
-    
-  "21:9":
-    use: "Cinematic"
-    resolutions: ["2560x1080", "3440x1440"]
 ```
+
+**Common Aspect Ratios:**
+
+| Ratio | Use Case | Common Resolutions |
+|-------|----------|-------------------|
+| 16:9 | Standard video (YouTube, TV) | 1920x1080, 1280x720 |
+| 4:3 | Legacy content | 640x480, 800x600 |
+| 1:1 | Social media square (Instagram) | 1080x1080, 720x720 |
+| 9:16 | Vertical video (Stories, TikTok) | 1080x1920, 720x1280 |
+| 21:9 | Cinematic ultrawide | 2560x1080, 3440x1440 |
 
 ---
 
@@ -372,40 +344,26 @@ convert_audio_properties:
 
 **Note:** Quality vs size optimization logic is in MEDIA Framework Section 2 (Evaluate).
 
-```yaml
-bitrate_presets:
-  voice_only:
-    bitrate: "96k"
-    use: "Speech, podcasts"
-    file_size: "smallest"
-    
-  standard:
-    bitrate: "128k"
-    use: "General audio"
-    file_size: "small"
-    
-  music_streaming:
-    bitrate: "192k"
-    use: "Music, good quality"
-    file_size: "moderate"
-    
-  high_quality:
-    bitrate: "256k"
-    use: "High quality music"
-    file_size: "large"
-    
-  maximum:
-    bitrate: "320k"
-    use: "Archival, production"
-    file_size: "largest"
+Audio bitrate determines the quality and file size of audio output. Choose the appropriate preset based on your content type and quality requirements.
 
-sample_rate_presets:
-  voice:
-    rate: 22050
-    use: "Voice/speech minimal"
-    
-  cd_quality:
-    rate: 44100
+**Bitrate Recommendations:**
+
+| Preset | Bitrate | Use Case | File Size | Quality |
+|--------|---------|----------|-----------|---------|
+| Voice Only | 96k | Speech, podcasts | Smallest | Acceptable for voice |
+| Standard | 128k | General audio | Small | Good for most uses |
+| Music Streaming | 192k | Music, good quality | Moderate | High quality audio |
+| High Quality | 256k | High quality music | Large | Very high quality |
+| Maximum | 320k | Archival, production | Largest | Maximum quality |
+
+**Sample Rate Options:**
+- **22.05 kHz** - Voice/speech minimal quality
+- **44.1 kHz** - CD quality (standard for music)
+- **48 kHz** - Professional audio/video production
+
+**Channel Options:**
+- **1** - Mono (voice, podcasts)
+- **2** - Stereo (music, video)
     use: "Standard music"
     
   professional:
