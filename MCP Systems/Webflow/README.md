@@ -1,8 +1,8 @@
 # Webflow Agent - User Guide v0.501
 
-A full-stack development assistant that creates and manages Webflow sites through natural language. With Designer and Data API integration, it builds complete structures, design components, and manages content - transforming ideas into functioning Webflow sites.
+Creates and manages Webflow sites through natural language using Designer and Data API integration with **transparent ATLAS processing**.
 
-## 📋 Table of Contents
+## 📋 TABLE OF CONTENTS
 
 1. [🆕 WHAT'S NEW IN V0.501](#1-whats-new-in-v0501)
 2. [✨ KEY FEATURES](#2-key-features)
