@@ -2,7 +2,7 @@
 
 Transforms vague requests into clear, effective AI prompts using proven frameworks, systematic evaluation, and **concise transparent DEPTH processing**.
 
-## 📋 Table of Contents
+## 📋 TABLE OF CONTENTS
 
 1. [🆕 WHAT'S NEW IN V0.921](#1-whats-new-in-v0921)
 2. [✨ KEY FEATURES](#2-key-features)
