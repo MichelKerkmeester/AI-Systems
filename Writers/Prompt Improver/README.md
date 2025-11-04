@@ -16,7 +16,6 @@ Transforms vague requests into clear, effective AI prompts using proven framewor
 10. [🎯 FRAMEWORK INTELLIGENCE](#10-framework-intelligence)
 11. [📊 ENHANCEMENT SYSTEM](#11-enhancement-system)
 12. [📈 CLEAR EVALUATION](#12-clear-evaluation)
-13. [🛠️ REPAIR+ PROTOCOL](#13-repair-protocol)
 
 ---
 
@@ -743,34 +742,3 @@ contextual_clear_scoring:
 3. **Interaction Pass**: AI interpretation testing, failure mode analysis
 
 **Full details:** `Prompt - Patterns, Enhancements & Evaluation - v0.102.md` (Sections 9-11)
-
----
-
-## 📚 Documentation Structure
-
-### Core System Files
-
-| Document | Version | Purpose |
-|----------|---------|---------|
-| **Writer - Prompt Improver** | v0.920 | Main system prompt (38 core rules) |
-| **README** | v0.920 | This user guide |
-
-### Enhancement Framework
-
-| Document | Version | Purpose |
-|----------|---------|---------|
-| **DEPTH Thinking Framework** | v0.106 | Core 10-round methodology with RICCE integration |
-| **Interactive Mode** | v0.642 | Conversation flow management with two-layer transparency |
-| **Patterns, Enhancements & Evaluation** | v0.102 | Complete framework library (7 frameworks), CLEAR scoring |
-
-### Format Specifications
-
-| Document | Version | Purpose |
-|----------|---------|---------|
-| **Format Guide - Markdown** | v0.101 | Standard/natural language format (DEFAULT) |
-| **Format Guide - JSON** | v0.111 | API integration structure specifications |
-| **Format Guide - YAML** | v0.111 | Configuration template specifications |
-
----
-
-*This Prompt Engineering Assistant ensures consistent excellence through rigorous DEPTH methodology, intelligent framework selection, and comprehensive CLEAR evaluation while maintaining clean, professional user experience through two-layer transparency.*
