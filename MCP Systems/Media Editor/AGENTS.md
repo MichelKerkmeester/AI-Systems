@@ -50,7 +50,7 @@ This file serves as a redirect with intelligent routing based on user intent and
 **Follow this dynamic sequence:**
 
 ### **✅ STEP 1: READ SYSTEM PROMPT FIRST** 
-**MANDATORY:** Read `/Knowledge Base/MCP - Media Editor - v0.211.md` **COMPLETELY** before proceeding.
+**MANDATORY:** Read `/Knowledge Base/MCP System - Media Editor - v0.211.md` **COMPLETELY** before proceeding.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
@@ -101,17 +101,17 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Steps 2-3 detection, read IN THIS ORDER as needed:**
 
-1. **MEDIA Thinking Framework** — `/Knowledge Base/Media Editor - MEDIA Thinking Framework - v0.210.md`
+1. **MEDIA Thinking Framework** — `/Knowledge Base/Media Editor - MEDIA Thinking Framework - v0.220.md`
    - **ALWAYS READ** (required for all operations)
-   - Automatic deep thinking: 10-round standard analysis
+   - Intelligent context assessment with systematic depth analysis
 
 2. **Interactive Intelligence** — `/Knowledge Base/Media Editor - Interactive Intelligence - v0.210.md`
    - **DEFAULT** conversational flow and UI patterns
    - Adaptive questioning and feedback formats
    - **SKIP IF** direct command mode with clear intent
 
-3. **MCP Intelligence** — `/Knowledge Base/Media Editor - MCP - Imagician - v0.200.md`
-   `/Knowledge Base/Media Editor - MCP - Video, Audio - v0.201.md`
+3. **MCP Intelligence** — `/Knowledge Base/Media Editor - MCP Intelligence - Imagician - v0.200.md`
+   `/Knowledge Base/Media Editor - MCP Intelligence - Video, Audio - v0.201.md`
    - Capabilities and limits of image (Imagician) and media (Video-Audio) servers
    - Tool names, parameters, supported formats
    - **READ IF** operations need specific tool knowledge
@@ -213,7 +213,7 @@ User: "extract audio and create thumbnails"
 ## 5. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
-- ❌ Skip the system prompt (`/Knowledge Base/MCP - Media Editor - v0.211.md`)
+- ❌ Skip the system prompt (`/Knowledge Base/MCP System - Media Editor - v0.211.md`)
 - ❌ Proceed without completing Step 1
 - ❌ Proceed without verifying required tool availability (MCP servers OR FFmpeg)
 - ❌ Skip operating routing guide
@@ -223,7 +223,7 @@ User: "extract audio and create thumbnails"
 - ❌ **Produce code, CLI commands, or implementation details** (Context Override)
 
 ### ALWAYS:
-- ✅ Start with `/Knowledge Base/MCP - Media Editor - v0.211.md`
+- ✅ Start with `/Knowledge Base/MCP System - Media Editor - v0.211.md`
 - ✅ Complete step 1 and understand project context fully
 - ✅ Verify required tool(s) BEFORE any operation (MCP servers for image/video/audio; FFmpeg for HLS)
 - ✅ Check for mode & operating type
@@ -241,10 +241,10 @@ User: "extract audio and create thumbnails"
 3. **Tool Verification THIRD** - Check required tools before operations (MCP servers OR FFmpeg)
 4. **Check commands** - Route intelligently
 5. **Read by mode** - Only required documents
-6. **MEDIA Framework** - Structured automatic thinking
+6. **MEDIA Framework v0.220** - Intelligent context assessment with systematic depth
 7. **Interactive Intelligence** - Default flow when conversational
 8. **MCP Intelligence** - Tool capabilities and parameters
 9. **Native Tools ONLY** - Use only available MCP/FFmpeg capabilities
 10. **Output to /export** - Every artifact goes here
 
-**→ GO TO:** `/Knowledge Base/MCP - Media Editor - v0.211.md` **NOW**
+**→ GO TO:** `/Knowledge Base/MCP System - Media Editor - v0.211.md` **NOW**

@@ -1,10 +1,10 @@
-# Media Editor System - User Guide v0.210
+# Media Editor System - User Guide v0.211
 
 Transforms natural language requests into optimized images, videos, audio, and HLS streaming with **automatic MEDIA processing and 10-round optimization**.
 
 ## 📋 TABLE OF CONTENTS
 
-1. [🆕 WHAT'S NEW IN V0.210](#1-whats-new-in-v0210)
+1. [🆕 WHAT'S NEW IN V0.211](#1-whats-new-in-v0211)
 2. [✨ KEY FEATURES](#2-key-features)
 3. [🌳 SYSTEM ARCHITECTURE](#3-system-architecture)
 4. [🚀 QUICK SETUP](#4-quick-setup)
@@ -16,8 +16,8 @@ Transforms natural language requests into optimized images, videos, audio, and H
 
 ---
 
-<a id="1-whats-new-in-v0210"></a>
-## 1. 🆕 WHAT'S NEW IN V0.210
+<a id="1-whats-new-in-v0211"></a>
+## 1. 🆕 WHAT'S NEW IN V0.211
 
 ### 🎉 NEW: HLS Adaptive Streaming Support
 
@@ -33,7 +33,7 @@ Transforms natural language requests into optimized images, videos, audio, and H
 ### 🔧 System Improvements
 
 **Critical Bug Fixes:**
-- **Version reference corrections**: Fixed all file references from v0.200 to v0.210
+- **Version reference corrections**: Fixed all file references from v0.200 to v0.211
 - **Tool verification logic**: Improved blocking behavior when required tools unavailable
 - **Circular references**: Removed confusing self-referential documentation loops
 - **Recovery mapping**: Added explicit RICCE validation recovery paths to MEDIA phases
@@ -48,9 +48,9 @@ Transforms natural language requests into optimized images, videos, audio, and H
   - HLS Streaming → FFmpeg (Terminal)
 - **Better error handling**: Clear setup guidance when tools unavailable
 
-### 📊 Evolution: v0.210 → v0.200 → v0.114
+### 📊 Evolution: v0.211 → v0.200 → v0.114
 
-**v0.210:** HLS streaming support, critical bug fixes, improved tool integration, enhanced documentation  
+**v0.211:** HLS streaming support, critical bug fixes, improved tool integration, enhanced documentation  
 **v0.200:** Streamlined cognitive approach, pure MCP capabilities focus, enhanced conversation architecture  
 **v0.114:** Original multi-perspective framework with mixed MCP documentation
 
@@ -120,9 +120,9 @@ AGENTS.md → Entry point with intelligent routing logic
     ↓
 MCP System - Media Editor - v0.211.md (System prompt with MEDIA integration)
     ↓
-MEDIA Thinking Framework v0.210 (5-phase methodology with cognitive rigor)
+MEDIA Thinking Framework v0.220 (5-phase methodology with cognitive rigor)
     ↓
-Interactive Intelligence v0.210 (Conversation flow with two-layer transparency)
+Interactive Intelligence v0.211 (Conversation flow with two-layer transparency)
     ↓
 MCP Tools:
   ├─ Imagician v0.200 (Image operations)
@@ -147,13 +147,13 @@ Output → Optimized media files via MCP servers or Terminal commands
 ### Step 2: Add System Instructions
 1. Click "Edit project details"
 2. Find "Custom instructions" section
-3. Copy and paste: `MCP - Media Editor - v0.210.md`
+3. Copy and paste: `MCP - Media Editor - v0.211.md`
 4. Save the project
 
 ### Step 3: Upload Reference Documents
 Add these documents to your project:
-- `Media Editor - Interactive Intelligence - v0.210.md`
-- `Media Editor - MEDIA Thinking Framework - v0.210.md`
+- `Media Editor - Interactive Intelligence - v0.211.md`
+- `Media Editor - MEDIA Thinking Framework - v0.211.md`
 - `Media Editor - MCP - Imagician - v0.200.md`
 - `Media Editor - MCP - Video, Audio - v0.200.md`
 - `Media Editor - HLS - Video Conversion - v0.100.md` (NEW)
@@ -271,7 +271,7 @@ All media operations available with automatic optimization.
 | **Medium** | 0.50-0.79 | Explore → Execute | 10 rounds auto |
 | **Low** | <0.50 | Guide → Execute | 10 rounds auto |
 
-### MEDIA Thinking Framework v0.210 (Automatic)
+### MEDIA Thinking Framework v0.220 (Automatic)
 1. **Pre-Check**: Verify required tools for operation type
 2. **M - Measure**: Analyze source media (deep analysis)
 3. **E - Evaluate**: Generate processing strategies (10 rounds)
@@ -279,7 +279,7 @@ All media operations available with automatic optimization.
 5. **I - Implement**: Execute with monitoring
 6. **A - Analyze**: Verify and learn
 
-### Streamlined Cognitive Rigor (v0.210)
+### Streamlined Cognitive Rigor (v0.211)
 
 The system automatically applies **three focused media-specific techniques** for optimal results:
 

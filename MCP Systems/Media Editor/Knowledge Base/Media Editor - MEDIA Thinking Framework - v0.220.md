@@ -1,8 +1,8 @@
-# Media Editor - MEDIA Thinking Framework - v0.210
+# Media Editor - MEDIA Thinking Framework - v0.220
 
 A comprehensive methodology combining systematic media analysis with **automatic professional optimization** for superior media processing deliverables.
 
-**Core Purpose:** Define the focused media optimization, quality analysis, and processing systems that operate with **automatic depth** for every media operation.
+**Core Purpose:** Define the focused media optimization, quality analysis, and processing systems that operate with **automatic depth and professional excellence** for every media operation.
 
 ---
 
@@ -16,8 +16,7 @@ A comprehensive methodology combining systematic media analysis with **automatic
 6. [🔗 RICCE-MEDIA INTEGRATION](#6-ricce-media-integration)
 7. [🔄 TRANSPARENCY MODEL](#7-transparency-model)
 8. [✅ QUALITY ASSURANCE](#8-quality-assurance)
-9. [🔧 MCP TROUBLESHOOTING](#9-mcp-troubleshooting)
-10. [🏎️ QUICK REFERENCE](#10-quick-reference)
+9. [🏎️ QUICK REFERENCE](#9-quick-reference)
 
 ---
 
@@ -28,39 +27,37 @@ A comprehensive methodology combining systematic media analysis with **automatic
 ### Core Definition
 **MEDIA** - **M**easure **E**valuate **D**ecide **I**mplement **A**nalyze
 
-A focused framework ensuring professional media processing through **automatic optimization depth** applied to every operation, with cognitive rigor tailored for media-specific decisions.
+An intelligent framework that acts as a **perfect media context assessor** and **optimization solution finder** for media processing operations. MEDIA understands media intent, evaluates available processing capabilities, and suggests optimal approaches through systematic analysis.
 
-### Fundamental Principles
+**Core Philosophy:** Every media request contains context clues about what the user needs. MEDIA extracts these signals, matches them to optimal processing techniques (format, quality, compression), and proposes the best optimization path.
 
-**1. Automatic Professional Excellence**
-- Professional optimization applied automatically to EVERY request
-- 10 rounds of thinking for standard mode (system-controlled)
-- Quality guaranteed through automatic processing depth
+### Core Capabilities & Principles
+
+**1. Intelligent Media Context Assessment**
+- Extracts user intent from minimal information, understanding both stated and unstated needs
+- Identifies implicit requirements (quality preservation, size optimization, compatibility)
+- Recognizes patterns from similar use cases and applies proven optimization solutions
+- Reality-checks feasibility before committing to any processing approach
 
 **2. MCP & FFmpeg Connection First**
-- Always verify Imagician and Video-Audio servers before MCP operations
-- Verify FFmpeg availability before HLS operations
-- Provide setup guidance if not connected/available
-- Explain available operations if partially connected
-- Reality check capabilities before promising features
+- NEVER processes without verifying tool availability - 100% capability validation before operations
+- ALL image operations through Imagician MCP server (resize, convert, compress, crop, rotate, batch)
+- ALL video/audio operations through Video-Audio MCP server (transcode, trim, overlay, concatenate, extract_audio, subtitles)
+- ALL HLS operations through FFmpeg terminal tool (multi-quality streaming, adaptive bitrate)
+- Zero over-promising tolerance - validates capabilities before suggesting features
+- Validates MCP connection first with test operations before any processing
 
-**3. Focused Cognitive Approach**
-- Media-specific optimization decisions (quality vs size, format selection)
-- Clear processing reasoning for concrete media outcomes
-- Focus on measurable results (file size, quality metrics, compatibility)
-- Streamlined analysis targeted at media operations
+**3. Intelligent Optimization Finding**
+- Evaluates multiple format/quality approaches automatically, selecting optimal balance
+- Balances trade-offs intelligently (quality vs size, compatibility vs compression, processing time vs results)
+- Provides reasoning for recommendations and explains why they work best for the use case
+- Always prepares backup plans and alternatives when constraints exist
 
-**4. Educational User Experience**
-- Processing progress updates during operations
-- Key optimization decisions explained
-- Results delivered with clear reasoning
-- Focus on value without excessive methodology detail
-
-**5. Media Context Preservation**
-- Format-specific best practices (JPEG, PNG, WebP, AVIF, MP4, HLS, etc.)
-- Quality vs size trade-offs for different use cases
-- Platform compatibility considerations (web, email, social, streaming, adaptive streaming)
-- Processing time and efficiency optimization
+**4. Proactive Guidance & Education**
+- Suggests improvements beyond immediate request, identifying optimization opportunities before users ask
+- Recommends best practices automatically and educates on format/quality patterns
+- Offers next steps for future enhancements (batch processing, alternative formats, further optimization)
+- Builds understanding through clear explanations of optimization approaches
 
 ---
 
@@ -70,104 +67,292 @@ A focused framework ensuring professional media processing through **automatic o
 
 ### The MEDIA Method
 
-These five principles produce optimized media through focused analysis, **applied automatically with system-controlled depth**:
+These five principles produce optimized media through focused analysis, **applied with systematic depth**:
 
 ### M - Measure Source Media
-**Process:** Analyze current media properties and requirements
-**User Sees:** Source analysis and processing plan
+**Process:** Deeply understand media requirements and determine optimal processing approach
+**User Sees:** Intelligent analysis of their media with optimization recommendations
+
+**Core Measurement Skills:**
+1. **Intent Recognition** - What is the user really trying to achieve with this media?
+2. **Context Extraction** - What clues reveal requirements (quality needs, size constraints, use case)?
+3. **Capability Mapping** - What processing techniques solve this best?
+4. **Feasibility Check** - Can this be done with available tools (MCP/FFmpeg)?
+5. **Alternative Identification** - What other optimization approaches exist?
 
 **User-Facing Format:**
 ```markdown
 USER SEES (Concise):
-"📊 **Source Analysis:** 4K image, 8.5MB PNG, RGB color
-**Target:** Web display, quality vs size optimization needed
-**Plan:** Convert to WebP, 1080p, quality 85% (estimated 400KB)"
+"📊 **Measure:** 4K image detected, 8.5MB PNG, RGB color
+**Intent:** Web display optimization needed
+**Context Signals:** High resolution, large size, web target, quality preservation important
+**Optimal Solution:** WebP format (30-50% compression) + 1080p resize (web-optimized)
+**Why Optimal:** Scalable, quality preserved, massive size reduction, wide browser support"
 ```
 
-**Internal Processing (Applied Automatically):**
-- Complete media property analysis (format, resolution, color space, codec)
-- Use case identification (web, email, social, print, streaming, adaptive streaming, HLS)
-- Quality requirements assessment
-- Size constraints evaluation
-- MCP/FFmpeg capability verification
-
-**Why it works:**
-- Clear understanding of source media before processing
-- Automatic depth ensures no details missed
-- User gets optimization plan without overwhelming detail
+**Why This Works:**
+- Understands context from minimal input (file format, size, target use)
+- Identifies implied needs proactively (compatibility, size optimization, quality preservation)
+- Maps to optimal processing solution automatically (format, resolution, quality level)
+- Explains reasoning clearly (compression efficiency, compatibility, quality preservation)
+- Suggests improvements beyond immediate request (batch processing, alternative formats)
+- Reality-checks feasibility before committing (tool availability, processing capabilities)
+- Provides fallback options if needed (PNG for email, JPEG for compatibility)
 
 ### E - Evaluate Processing Options
-**Process:** Analyze multiple processing approaches automatically
-**User Sees:** Selected approach with reasoning
+**Process:** Evaluate multiple optimization solutions and select the best processing approach
+**User Sees:** Chosen solution with clear reasoning and alternatives
+
+**Core Evaluation Skills:**
+1. **Multi-Path Evaluation** - Consider multiple format/quality approaches
+2. **Trade-off Analysis** - Balance quality, size, compatibility, processing time
+3. **Pattern Matching** - Apply proven optimization patterns to context
+4. **Optimization Logic** - Select approach with best long-term value
+5. **Alternative Preparation** - Have backup optimization solutions ready
 
 **User-Facing Format:**
 ```markdown
 USER SEES (Concise):
-"⚙️ **Optimization Strategy:** WebP format selected
-**Reasoning:** 30-50% smaller than PNG, 25-35% smaller than JPEG, excellent quality, wide browser support (96%+)
-**Alternative:** AVIF for even better compression (if compatibility allows)"
+"⚙️ **Evaluate:** Analyzed 3 optimization approaches
+**Selected:** WebP @ 85% quality + 1080p resize
+**Reasoning:** Best for web display (95% size reduction, quality preserved), wide compatibility (96%+ browsers), fast processing (<2s)
+**Trade-off:** Accepts lossy compression for massive size savings, but quality visually identical (SSIM 0.98)
+**Alternative:** AVIF for even better compression (50% better than JPEG) if compatibility allows"
 ```
 
-**Internal Processing (Applied Automatically):**
-- Format comparison (JPEG, PNG, WebP, AVIF for images; MP4, WebM for video)
-- Quality level evaluation (85%, 90%, 95%)
-- Compression strategy analysis (lossy vs lossless)
-- Processing time estimation
-- Platform compatibility check
+**Internal Processing (Applied Systematically):**
+
+**Step 1: Solution Space Exploration**
+```yaml
+explore_optimization_approaches:
+  approach_1:
+    name: "WebP + Quality Optimization"
+    format: "WebP lossy"
+    quality: "85%"
+    resolution: "1080p"
+    pros:
+      - "30-50% smaller than PNG ✅"
+      - "25-35% smaller than JPEG ✅"
+      - "96%+ browser support ✅"
+      - "Visually identical quality ✅"
+      - "Fast processing (<2s) ✅"
+    cons:
+      - "Lossy compression (minimal quality loss) ⚠️"
+      - "Email client support variable ⚠️"
+    score: 95/100
+    recommended: true
+  
+  approach_2:
+    name: "PNG Lossless"
+    format: "PNG lossless"
+    quality: "100%"
+    resolution: "1080p"
+    pros:
+      - "Perfect quality preservation ✅"
+      - "100% universal support ✅"
+    cons:
+      - "Large file size (3-5MB typical) ❌"
+      - "Slow loading on web ❌"
+      - "No compression benefit ❌"
+    score: 50/100
+    recommended: false
+  
+  approach_3:
+    name: "AVIF Next-Gen"
+    format: "AVIF"
+    quality: "85%"
+    resolution: "1080p"
+    pros:
+      - "50% better than JPEG ✅"
+      - "Excellent quality/size ✅"
+    cons:
+      - "85% browser support (growing) ⚠️"
+      - "Slower encoding ⚠️"
+      - "Less tool support ⚠️"
+    score: 75/100
+    recommended: false
+```
+
+**Step 2: Trade-off Analysis**
+```yaml
+decision_matrix:
+  quality_preservation:
+    webp_85: "Excellent (SSIM 0.98, visually identical)"
+    png_lossless: "Perfect (SSIM 1.00, mathematically identical)"
+    avif_85: "Excellent (SSIM 0.98+, visually identical)"
+    winner: "All meet quality needs, PNG overkill for web"
+  
+  size_efficiency:
+    webp: "Excellent (425KB from 8.5MB = 95% reduction)"
+    png: "Poor (3-5MB = only 40% reduction)"
+    avif: "Excellent (280KB = 97% reduction)"
+    winner: "AVIF best, WebP excellent, PNG poor"
+  
+  compatibility:
+    webp: "Excellent (96%+ browsers, modern standard)"
+    png: "Perfect (100% universal, legacy support)"
+    avif: "Good (85%+ browsers, growing)"
+    winner: "PNG universal, WebP excellent, AVIF growing"
+  
+  processing_speed:
+    webp: "Fast (<2s, MCP optimized)"
+    png: "Very fast (<1s, simple conversion)"
+    avif: "Slow (5-10s, complex encoding)"
+    winner: "PNG fastest, WebP fast, AVIF slow"
+  
+  web_suitability:
+    webp: "Optimal (balance all factors)"
+    png: "Poor (too large for web)"
+    avif: "Excellent (but compatibility concerns)"
+    trade_off: "Accept slight quality loss for massive size savings"
+
+final_decision:
+  selected: "WebP @ 85% + 1080p"
+  reasoning: "Best balance for web: size efficiency, quality preservation, compatibility"
+  acceptable_trade_offs:
+    - "Lossy compression = minimal quality loss (but 95% size reduction)"
+    - "Email clients = PNG fallback available"
+    - "Processing time = <2s acceptable for quality"
+```
+
+**Step 3: Pattern Application**
+```yaml
+proven_patterns:
+  web_optimization_pattern:
+    image_types:
+      photos: "WebP/JPEG (lossy compression ideal)"
+      graphics: "WebP/PNG (transparency support)"
+      icons: "SVG (vector scalability)"
+    
+    quality_levels:
+      web_display: "85% (sweet spot for size/quality)"
+      high_quality: "90-95% (portfolio, product images)"
+      maximum: "95-100% (print preparation)"
+    
+    resolution_targets:
+      desktop: "1920x1080 (Full HD standard)"
+      tablet: "1024x768 (iPad standard)"
+      mobile: "750px width (mobile-optimized)"
+    
+    compatibility_layers:
+      primary: "WebP (modern browsers)"
+      fallback: "JPEG/PNG (legacy support)"
+      progressive: "AVIF (future-ready)"
+  
+  applied_to_context:
+    immediate: "WebP 85% @ 1080p (primary)"
+    fallback: "PNG lossless (email compatibility)"
+    future: "AVIF 85% (when support reaches 90%+)"
+    batch: "Same settings for multiple files"
+```
+
+**Step 4: Optimization Logic**
+```yaml
+optimization_decisions:
+  format_selection:
+    decision: "WebP (lossy) over PNG/JPEG"
+    reasoning: "30-50% better compression, 96%+ support, quality preserved"
+    fallback: "PNG for email clients, JPEG for universal compatibility"
+  
+  quality_determination:
+    decision: "85% quality level"
+    reasoning: "Sweet spot: SSIM 0.98 (visually identical), 95% size reduction"
+    validation: "User testing confirms no visible quality loss"
+  
+  resolution_optimization:
+    decision: "1080p from 4K source"
+    reasoning: "Web display optimal, 75% pixel reduction, maintains clarity"
+    alternative: "720p for mobile-only, 1440p for high-end displays"
+  
+  processing_efficiency:
+    mcp_operations: "Imagician MCP (resize, convert, compress)"
+    sequencing: "Resize first (smaller processing), then convert"
+    monitoring: "Progress tracking, quality checkpoints"
+```
+
+**Why This Works:**
+- Evaluates multiple solutions objectively (not just first idea)
+- Explains reasoning with specific benefits (compression, quality, compatibility)
+- Acknowledges trade-offs honestly (lossy compression, email compatibility)
+- Provides alternatives if constraints change (AVIF future, PNG email)
+- Applies proven patterns from similar use cases (web optimization standards)
+- Optimizes for long-term value, not quick wins (quality preservation, future-ready)
+- Prepares implementation sequence logically (resize → convert → optimize)
 
 ### D - Decide Optimal Strategy
-**Process:** Select best processing approach based on analysis
-**User Sees:** Decision summary and key trade-offs
+**Process:** Build from processing primitives in logical sequence
+**User Sees:** Processing sequence with progress
 
 **User-Facing Format:**
 ```markdown
 USER SEES (Concise):
-"✅ **Processing Decision:** WebP at 85% quality, 1080p resolution
-**Trade-offs:** 95% file size reduction, visually identical quality, < 2 sec processing
-**Compatibility:** Web (96%+ browsers), not suitable for email (PNG fallback available)"
+"🔄 **Decide:** Building optimization pipeline...
+**Progress:** Source analyzed → Format selected → Quality determined → Processing ready
+**Status:** MCP connection verified ✅ Operations sequenced ✅"
 ```
 
-**Internal Processing (Applied Automatically):**
-- Quality vs size optimization matrix
-- Platform compatibility validation
-- Processing efficiency calculation
-- Fallback strategy planning
+**Internal Processing (Applied Systematically):**
+- Operation ordering (dependencies managed: resize before convert, convert before optimize)
+- Processing primitive assembly (MCP calls: resize, convert, compress, optimize)
+- Progress monitoring per operation
+- Error handling with fallbacks
+
+**Why it works:**
+- Clear sequence shows logical building blocks
+- Dependencies handled automatically (resize reduces processing load for conversion)
+- User sees real progress without overwhelming detail
 
 ### I - Implement Processing
-**Process:** Execute with monitoring
-**User Sees:** Progress and completion confirmation
+**Process:** Ensure quality with media optimization standards
+**User Sees:** Quality validation confirmation
 
 **User-Facing Format:**
 ```markdown
 USER SEES (Concise):
-"🔄 **Processing:** Converting to WebP...
-✅ **Complete:** Original 8.5MB → Optimized 425KB (95% reduction)
-**Quality:** Visually identical, SSIM 0.98"
+"✅ **Implement:** Media optimization standards validated
+**Standards:** Format optimal ✅ Quality preserved ✅ Compatibility verified ✅
+**Confirmation:** MCP operations successful, processing efficient"
 ```
 
-**Internal Processing (Applied Automatically):**
-- MCP operation execution
-- Progress monitoring
-- Quality verification
-- Error handling and recovery
+**Internal Processing (Applied Systematically):**
+- Format optimization validation
+- Quality preservation check (SSIM, visual comparison)
+- Compatibility verification (browser support, platform requirements)
+- Size reduction targets met
+- Processing time acceptable
+- MCP operation success confirmation
+
+**Why it works:**
+- Quality guaranteed through systematic checks
+- Tool capability enforcement prevents over-promising
+- Best practices baked into every operation
 
 ### A - Analyze Results
-**Process:** Verify outcome and document learnings
-**User Sees:** Results summary and next suggestions
+**Process:** Deliver integrated optimized result with documentation
+**User Sees:** Results summary and next steps
 
 **User-Facing Format:**
 ```markdown
 USER SEES (Concise):
-"📈 **Results:** 95% size reduction, quality target achieved
-**Metrics:** 8.5MB → 425KB, SSIM 0.98, 1.8 sec processing
-**Suggestions:** Consider AVIF for future (better compression), batch processing available"
+"📈 **Analyze:** Media optimization complete
+**Delivered:** WebP @ 85% quality, 1080p, 425KB (95% reduction from 8.5MB)
+**Quality Confirmed:** SSIM 0.98 (visually identical), processing time 1.8s
+**Compatibility:** Web 96%+ browsers, PNG fallback available for email
+**Next:** Batch processing available, consider AVIF for future projects, apply to similar images"
 ```
 
-**Internal Processing (Applied Automatically):**
-- Quality metrics calculation
-- Size reduction validation
-- Processing time analysis
-- Pattern learning for future operations
+**Internal Processing (Applied Systematically):**
+- Integration validation across operations
+- Processing completeness check
+- Results documentation (size, quality, time metrics)
+- Next steps identification (batch processing, alternative formats, further optimization)
+- Pattern learning for future operations (quality level sweet spots, format preferences)
+
+**Why it works:**
+- Complete solution delivered, nothing missing
+- Clear next steps guide user forward
+- Pattern learning improves future operations
+- Documentation provides full transparency
 
 ---
 
@@ -210,76 +395,50 @@ USER SEES (Concise):
 
 **Output:** Compatibility notes where relevant • Show critical considerations
 
-### Quality Gates
-
-Before processing, validate:
-- [ ] MCP servers connected (Imagician, Video-Audio as needed) OR FFmpeg available (for HLS)
-- [ ] Source media analyzed (format, size, quality)
-- [ ] Target use case identified (web, email, social, streaming, adaptive streaming, etc.)
-- [ ] Quality-size balance determined
-- [ ] Format compatibility validated
-
-**If any gate fails → Address issue → Re-validate → Confirm to user**
-
-### Integration with MEDIA Phases
-
-**Phase M (Measure):**
-- Analyze source media properties
-- Identify processing requirements
-- Verify MCP/FFmpeg capabilities
-- Automatic 10-round analysis (standard mode)
-
-**Phase E (Evaluate):**
-- Quality-size optimization analysis
-- Format selection evaluation
-- Compatibility checking
-- Processing strategy ranking
-
-**Phase D (Decide):**
-- Select optimal format and settings
-- Validate platform compatibility
-- Confirm processing approach
-- Document key trade-offs
-
-**Phase I (Implement):**
-- Execute MCP operations
-- Monitor processing progress
-- Verify quality checkpoints
-- Handle errors gracefully
-
-**Phase A (Analyze):**
-- Validate results vs targets
-- Calculate quality metrics
-- Document processing outcomes
-- Learn patterns for future operations
-
-**User Visibility:** Concise processing updates, key decisions explained, results clearly presented
-
 ### Quality Gates for Cognitive Rigor
 
 Before processing, validate (show summary to user):
 
 ✅ **MCP/FFmpeg Verification:**
-- [ ] Required servers connected (or FFmpeg available for HLS)?
+- [ ] Required tools connected (Imagician, Video-Audio, or FFmpeg)?
+- [ ] Test operations successful?
 - [ ] Operations supported for media type?
 - [ ] No capability over-promises?
 
-✅ **Quality-Size Optimization:**
-- [ ] Quality requirements identified?
-- [ ] Size constraints evaluated?
-- [ ] Optimal balance determined?
+✅ **Media Analysis:**
+- [ ] Media analyzed (format, resolution, quality, size)?
+- [ ] Use case identified (web, email, social, streaming)?
+- [ ] Processing requirements clear (quality, size, compatibility)?
+- [ ] Optimization strategy defined?
 
-✅ **Format Selection:**
-- [ ] Available formats compared?
-- [ ] Compression efficiency evaluated?
-- [ ] Best format selected with reasoning?
+✅ **Optimization Pattern Validation:**
+- [ ] Format patterns applied (WebP for web, PNG for email, etc.)?
+- [ ] Quality levels appropriate (85% web, 95% print)?
+- [ ] Compatibility requirements met?
+- [ ] Best practices followed?
+- [ ] Tool capability approach confirmed?
 
-✅ **Platform Compatibility:**
-- [ ] Target platform identified?
-- [ ] Format support validated?
-- [ ] Compatibility issues flagged?
+✅ **Tool Capability Check:**
+- [ ] MCP operations available for image/video/audio?
+- [ ] FFmpeg available for HLS if needed?
+- [ ] Tool status verified before operations?
+- [ ] Fallback to alternative tools if unavailable?
 
-**If any gate fails → Apply technique properly → Re-validate → Show confirmation to user**
+**If any gate fails → Address issue → Re-validate → Show confirmation to user**
+
+### Handling Ambiguous Requests
+
+**MEDIA excels at understanding unclear requests through context clues:**
+
+**MEDIA Response Patterns:**
+
+1. **When Confident:** Propose optimization with reasoning, ask for confirmation
+2. **When Uncertain:** Ask targeted questions to clarify context (use case, quality needs, size constraints)
+3. **When Partially Possible:** Explain what's doable with available tools, what's not, suggest alternatives
+4. **When Impossible:** Explain why (tool limitations), suggest alternative approaches, educate on constraints
+5. **When Better Approach Exists:** Suggest improvement over stated request (better format, quality level, resolution)
+
+**User Visibility:** Concise operation updates, key optimization decisions explained, results clearly presented
 
 ---
 
@@ -1139,80 +1298,54 @@ decision_algorithm:
 
 ## 8. ✅ QUALITY ASSURANCE
 
-### Three-Stage Quality Control
+### Quality Control Integration
 
-#### Pre-Processing Checklist
+**Quality gates are validated through the Cognitive Rigor section (Section 3) before operations begin.**
 
-**Before starting MEDIA processing:**
-```yaml
-pre_processing_validation:
-  tool_verification:
-    - [ ] Imagician connected? (for image operations)
-    - [ ] Video-Audio connected? (for video/audio operations)
-    - [ ] FFmpeg available? (for HLS operations)
-    - [ ] Required capabilities verified?
-    - [ ] No over-promising of features?
-    - [ ] Docker containers running? (if using MCP Docker setup)
-    - [ ] Port bindings correct? (8000 for Imagician, 8001 for Video-Audio)
-  
-  user_input:
-    - [ ] Source media identified?
-    - [ ] Target use case clear?
-    - [ ] Quality requirements understood?
-    - [ ] Platform constraints known?
-  
-  system_readiness:
-    - [ ] MEDIA framework loaded
-    - [ ] Cognitive rigor techniques ready
-    - [ ] RICCE validation enabled
-    - [ ] Two-layer transparency enabled
-    - [ ] Automatic thinking depth configured
-  
-  scope_discipline:
-    - [ ] Operation limited to request only
-    - [ ] No feature invention planned
-    - [ ] Capabilities reality-checked
-    - [ ] MCP limitations acknowledged
-```
+Refer to **Section 3: Quality Gates for Cognitive Rigor** for the comprehensive validation checklist covering:
+- ✅ MCP/FFmpeg Verification (connection, tool availability, capability validation)
+- ✅ Media Analysis (format, use case, requirements, strategy)
+- ✅ Optimization Pattern Validation (format patterns, quality levels, compatibility, best practices)
+- ✅ Tool Capability Check (MCP operations, FFmpeg availability, fallbacks)
 
-#### Processing Quality Gates
+### Processing Validation
 
 **During MEDIA processing (show summary only):**
 ```yaml
 phase_m_gates:
-  - [ ] MCP servers verified (BLOCKING if not connected)
-  - [ ] Source media analyzed (format, size, quality)
-  - [ ] Use case identified (web, email, social, etc.)
+  - [ ] MCP/FFmpeg tools verified (BLOCKING if not available)
+  - [ ] Source media analyzed (format, resolution, size, quality)
+  - [ ] Use case identified (web, email, social, streaming)
   - [ ] RICCE Role elements populated
-  - "✅ Phase M: MCP verified, source analyzed, use case defined"
+  - "✅ Phase M: Tools verified, source analyzed, use case defined"
 
 phase_e_gates:
-  - [ ] Format options evaluated (JPEG, PNG, WebP, AVIF, etc.)
+  - [ ] Format options evaluated (JPEG, PNG, WebP, AVIF, MP4, HLS)
   - [ ] Quality-size optimization analyzed
   - [ ] Platform compatibility checked
   - [ ] RICCE Instructions structured
-  - "✅ Phase E: 4 formats evaluated, WebP optimal for web use"
+  - "✅ Phase E: 3+ formats evaluated, optimal format selected for use case"
 
 phase_d_gates:
-  - [ ] Optimal format selected with reasoning
-  - [ ] Quality level determined (85%, 90%, etc.)
-  - [ ] Compatibility validated for target platform
+  - [ ] Processing sequence defined with dependencies
+  - [ ] Operations structured logically
+  - [ ] Progress monitoring enabled
   - [ ] RICCE Context integrated
-  - "✅ Phase D: WebP 85% selected, compatibility confirmed"
+  - "✅ Phase D: Processing pipeline sequenced, dependencies managed"
 
 phase_i_gates:
-  - [ ] MCP operations executed successfully
-  - [ ] Processing progress monitored
-  - [ ] Quality checkpoints verified
+  - [ ] Best practices validated (format optimization, quality preservation)
+  - [ ] Compatibility requirements verified
+  - [ ] Size reduction targets confirmed
   - [ ] RICCE Constraints tracked
-  - "✅ Phase I: Processing complete, quality verified"
+  - "✅ Phase I: Best practices verified, quality standards met"
 
 phase_a_gates:
+  - [ ] Integration complete (all operations successful)
   - [ ] Results validated (size, quality, time)
-  - [ ] Quality metrics calculated (SSIM, etc.)
-  - [ ] Pattern learning documented
+  - [ ] Documentation delivered
   - [ ] RICCE Examples complete
-  - "✅ Phase A: Results validated, metrics confirmed"
+  - "✅ Phase A: Integration complete, results validated"
 ```
 
 #### Post-Processing Validation
@@ -1233,12 +1366,19 @@ post_processing_checklist:
     - [ ] Constraints: Quality metrics tracked ✅
     - [ ] Examples: Results validated ✅
   
-  media_standards:
-    - [ ] MCP capabilities respected ✅
+  tool_standards:
+    - [ ] Tool capabilities respected (MCP/FFmpeg) ✅
     - [ ] Format best practices applied ✅
     - [ ] Quality-size balance optimal ✅
     - [ ] Platform compatibility verified ✅
     - [ ] Processing time acceptable ✅
+  
+  media_standards:
+    - [ ] Format optimization: Optimal format selected ✅
+    - [ ] Quality preservation: SSIM target met ✅
+    - [ ] Size efficiency: Reduction target achieved ✅
+    - [ ] Compatibility: Platform requirements met ✅
+    - [ ] Processing efficiency: Time target met ✅
   
   results_validation:
     - [ ] File size target met ✅
@@ -1255,6 +1395,7 @@ user_communication:
     **Quality Metrics:** SSIM 0.98 (target 0.95+) ✅
     **Processing:** 1.8 sec (target < 2 sec) ✅
     **Compatibility:** Web 96%+ browser support ✅
+    **Best Practices:** Format optimal, quality preserved, size efficient ✅
     
     Results ready for delivery."
 ```
@@ -1267,26 +1408,28 @@ user_communication:
 | **Size Reduction** | Target% | 80% of target | Re-evaluate format or quality settings |
 | **Processing Time** | < 2 sec | < 5 sec | Optimize operation sequence |
 | **Compatibility** | 95%+ | 90% | Provide fallback format |
+| **Tool Availability** | 100% | 100% | BLOCKING - verify connection, provide setup guidance |
 
 ### Improvement Protocol
 
 ```yaml
 improvement_cycle:
-  trigger: "Any metric below threshold OR quality concern"
+  trigger: "Any metric below threshold OR tool unavailable"
   max_iterations: 3
+  blocking_issues: [tool_unavailable, mcp_disconnected, format_unsupported]
   
   process:
     iteration_1:
-      - identify_constraint_not_met
-      - adjust_quality_or_format
-      - re_process_and_validate
+      - identify_issue
+      - apply_optimization_solution
+      - re_validate
       - if_threshold_met: deliver
       - if_not: continue_to_iteration_2
     
     iteration_2:
       - analyze_remaining_gaps
-      - try_alternative_format
-      - re_process_and_validate
+      - try_alternative_format_or_quality
+      - re_validate
       - if_threshold_met: deliver
       - if_not: continue_to_iteration_3
     
@@ -1294,120 +1437,37 @@ improvement_cycle:
       - use_fallback_strategy
       - apply_best_compromise
       - final_validation
-      - deliver_best_version
+      - deliver_optimized_version
   
   user_communication:
-    show: "Applied [X] optimization cycles to meet quality targets"
-    hide: "Detailed iteration tracking and metric calculations"
+    show: "Applied optimization to ensure quality and size targets met"
+    hide: "Detailed iteration tracking and validation logs"
 ```
 
 ---
 
-<a id="9-mcp-troubleshooting"></a>
+<a id="9-quick-reference"></a>
 
-## 9. 🔧 TOOL TROUBLESHOOTING
-
-### MCP Server Troubleshooting
-
-### Connection Verification
-
-**Automatic Status Check:**
-```yaml
-on_startup:
-  verify: [imagician, video-audio]
-  show_status: "✅ Connected | ⚠️ Not connected"
-  
-if_disconnected:
-  block_operation: true
-  message: "⚠️ MCP Server Required - Check Docker setup below"
-```
-
-### Docker Volume Configuration
-
-**CRITICAL:** Containers can only access mounted directories.
-
-**Current Volume Setup:**
-```yaml
-services:
-  imagician:
-    volumes:
-      # Images: Original and processed outputs
-      - /AI Systems/MCP/Media Editor/Export/images/Original:/images/original:rw
-      - /AI Systems/MCP/Media Editor/Export/images/New:/images/new:rw
-  
-  video-audio:
-    volumes:
-      # Videos: Original and processed outputs
-      - /AI Systems/MCP/Media Editor/Export/videos/Original:/videos/original:rw
-      - /AI Systems/MCP/Media Editor/Export/videos/New:/videos/new:rw
-```
-
-**Container Paths:**
-- Images: `/images/original` (source), `/images/new` (output)
-- Videos: `/videos/original` (source), `/videos/new` (output)
-- CleanShot: `/cleanshot` (screenshots, read-only)
-
-**Common Issues:**
-
-| Problem | Solution |
-|---------|----------|
-| **File not found** | Add volume mount for directory containing file |
-| **Permission denied** | `chmod 755` directory, or enable Docker full disk access (macOS) |
-| **Output not saved** | Verify output directory mounted with `:rw` flag |
-
-**Quick Diagnostics:**
-```bash
-# Check containers running
-docker ps
-
-# Verify image mounts
-docker inspect imagician --format='{{range .Mounts}}{{.Source}} → {{.Destination}}{{"\n"}}{{end}}'
-
-# Verify video mounts
-docker inspect video-audio --format='{{range .Mounts}}{{.Source}} → {{.Destination}}{{"\n"}}{{end}}'
-
-# Test image access
-docker exec imagician ls /images/original
-docker exec imagician ls /images/new
-
-# Test video access
-docker exec video-audio ls /videos/original
-docker exec video-audio ls /videos/new
-
-# Test write permissions
-docker exec imagician touch /images/new/test.txt && echo "✓ Images writable" || echo "✗ FAILED"
-docker exec video-audio touch /videos/new/test.txt && echo "✓ Videos writable" || echo "✗ FAILED"
-```
-
-**Path Translation Examples:**
-- User: `"Export/images/Original/photo.jpg"` → Container: `/images/original/photo.jpg`
-- User: `"CleanShot screenshot"` → Container: `/cleanshot/media_xyz/screenshot.png`
-- Output: Container saves to `/images/new/photo-optimized.jpg` → Appears at `Export/images/New/photo-optimized.jpg`
-
----
-
-<a id="10-quick-reference"></a>
-
-## 10. 🏎️ QUICK REFERENCE
+## 9. 🏎️ QUICK REFERENCE
 
 ### MEDIA Phase Summary
 
 | Phase | Standard | Quick | Key Actions | User Sees |
 |-------|----------|-------|-------------|-----------|
-| **M** | 1-2 | 0.5-1 | MCP verify, source analysis, use case | "📊 Analyzing (4K PNG, 8.5MB)" |
-| **E** | 3-5 | 1-2 | Format evaluation, quality-size analysis | "⚙️ Evaluating (WebP optimal)" |
-| **D** | 6-7 | 0.5-1 | Format selection, compatibility check | "✅ Deciding (85% quality)" |
-| **I** | 8 | 0.5 | MCP execution, progress monitoring | "🔄 Processing (95% reduction)" |
-| **A** | 9-10 | 0.5 | Results validation, pattern learning | "📈 Complete (quality verified)" |
+| **M**easure | Full analysis | Fast check | Tool verify, media analyzed | "📊 Measuring (4K PNG, 8.5MB, web target)" |
+| **E**valuate | Pattern eval | Quick select | Optimization patterns selected | "⚙️ Evaluating (WebP optimal for web)" |
+| **D**ecide | Sequential | Streamlined | Processing pipeline sequenced | "🔄 Deciding (Resize → Convert → Optimize)" |
+| **I**mplement | Full validation | Quick check | Best practices verified | "✅ Implementing (Quality standards met)" |
+| **A**nalyze | Complete | Summary | Integration delivered | "📈 Analyzing (95% reduction, quality preserved)" |
 
 ### Cognitive Rigor Quick Check
 
-**Three Core Techniques (Automatic):**
-1. ✅ **Quality-Size Optimization** - Balance compression and quality automatically
-2. ✅ **Format Selection Analysis** - Compare formats and select optimal
-3. ✅ **Platform Compatibility Check** - Validate target platform support
+**Three Core Techniques (Systematic):**
+1. ✅ **Quality-Size Optimization** - Balance compression and quality systematically
+2. ✅ **Format Selection Analysis** - Compare formats and select optimal approach
+3. ✅ **Platform Compatibility Check** - Validate target platform support continuously
 
-**Validation:** All techniques applied automatically; key decisions shown to user; full analysis internal.
+**Validation:** All techniques applied systematically; key decisions shown to user; full analysis internal.
 
 ### RICCE Quick Check
 
@@ -1437,114 +1497,75 @@ docker exec video-audio touch /videos/new/test.txt && echo "✓ Videos writable"
 - ❌ Complete MCP operation logs
 - ❌ Iteration tracking details
 
-### MCP Reality Check
+### Tool Reality Check
 
-**Imagician Capabilities:**
+**Imagician MCP Capabilities:**
 - ✅ Resize, convert (JPEG/PNG/WebP/AVIF)
 - ✅ Compress, crop, rotate
 - ✅ Batch processing
+- ⚠️ Requires: MCP server connection
 
-**Video-Audio Capabilities:**
+**Video-Audio MCP Capabilities:**
 - ✅ Transcode, trim, overlay
 - ✅ Concatenate, extract audio
 - ✅ Subtitles
+- ⚠️ Requires: MCP server connection
 
-**Cannot Do:**
-- ❌ Generate content (AI features)
-- ❌ Complex editing (effects, filters)
-- ❌ Very large files (> 100MB for MCP)
-- ❌ Real-time processing
+**FFmpeg Capabilities:**
+- ✅ HLS multi-quality streaming
+- ✅ Adaptive bitrate delivery
+- ✅ Segment-based streaming
+- ⚠️ Requires: FFmpeg installation
 
-### FFmpeg Troubleshooting (HLS Operations)
-
-### Installation Verification
-
-**Check FFmpeg Availability:**
-```bash
-ffmpeg -version
-```
-
-**Expected Output:**
-```
-ffmpeg version X.X.X
-built with...
-configuration: ...
-```
-
-### Installation Instructions
-
-**macOS:**
-```bash
-brew install ffmpeg
-```
-
-**Ubuntu/Debian:**
-```bash
-sudo apt update
-sudo apt install ffmpeg
-```
-
-**Windows:**
-- Download from: https://ffmpeg.org/download.html
-- Add to PATH environment variable
-- Verify with: `ffmpeg -version`
-
-### Common Issues
-
-**Issue: "ffmpeg: command not found"**
-- **Cause:** FFmpeg not installed or not in PATH
-- **Fix:** Install FFmpeg using instructions above
-- **Verify:** Run `ffmpeg -version` after installation
-
-**Issue: HLS conversion fails**
-- **Cause:** Insufficient permissions or disk space
-- **Fix:** Check output directory write permissions
-- **Fix:** Ensure adequate disk space for multi-quality output
-
-**Issue: Slow HLS conversion**
-- **Cause:** Large source file or high-quality settings
-- **Expected:** HLS conversion takes 2-5x video duration
-- **Optimization:** Use hardware acceleration if available
-
-### FFmpeg Capabilities
-
-**HLS Operations:**
-- ✅ Multi-quality stream generation (1080p/720p/480p/360p)
-- ✅ Adaptive bitrate streaming
-- ✅ Segment-based delivery (2-10 second segments)
-- ✅ Master and variant playlists
-- ✅ Audio removal or extraction
-
-**Cannot Do:**
+**NEVER Available:**
+- ❌ AI content generation
+- ❌ Complex editing (effects, advanced filters)
 - ❌ Real-time streaming
-- ❌ Very large files (> 5GB, performance degrades)
-- ❌ AI-based enhancements
-- ❌ Complex editing beyond conversion
+- ❌ Files > 100MB (MCP limitation)
 - ❌ Upload to external services
+
+### Performance Benchmarks
+
+| Operation | Time | Success Rate | Tool Type |
+|-----------|------|--------------|----------|
+| Tool verification | 1-2s | 99% | System |
+| Image resize | 1-2s | 98% | MCP |
+| Format conversion | 2-3s | 95% | MCP |
+| Video transcode | 10-30s | 90% | MCP |
+| HLS generation | 2-5x duration | 95% | FFmpeg |
+| Batch processing | 1-2s per file | 98% | MCP |
+
+### Quality Indicators
+- Tool availability: 100% (REQUIRED, blocking)
+- Processing efficiency: <2s for images, <5s for video
+- Quality preservation: SSIM >0.95
+- Size reduction: Target-dependent (typically 80-95%)
+- Compatibility: Platform-specific (90-100%)
+- Format optimization: 100% (format best practices applied)
 
 ### Must-Have Checklist
 
 **Before Processing:**
-- [ ] MCP servers connected OR FFmpeg available (blocking)
+- [ ] MCP servers connected OR FFmpeg available (REQUIRED, blocking)
 - [ ] MEDIA framework loaded
-- [ ] Cognitive rigor ready (simplified)
+- [ ] Cognitive rigor ready (systematic)
 - [ ] RICCE validation enabled
 - [ ] Two-layer transparency enabled
 - [ ] Media context loaded
 
 **During Processing:**
-- [ ] Tool capabilities verified (blocking)
-- [ ] Source media analyzed
-- [ ] Use case identified
-- [ ] Format options evaluated
-- [ ] Quality-size balance determined
-- [ ] Compatibility validated
+- [ ] Tool capabilities verified (REQUIRED, blocking)
+- [ ] Source media analyzed (format, resolution, size, quality)
+- [ ] Use case identified (web, email, social, streaming)
+- [ ] Format options evaluated (JPEG, PNG, WebP, AVIF, MP4, HLS)
+- [ ] Quality-size balance determined (optimization matrix)
+- [ ] Compatibility validated (browser support, platform requirements)
 
 **After Processing:**
 - [ ] All quality gates passed
-- [ ] Results validated (size, quality, time)
-- [ ] RICCE elements complete
-- [ ] Next suggestions provided
+- [ ] Results validated (size reduction, quality metrics, processing time)
+- [ ] RICCE elements complete (Role, Instructions, Context, Constraints, Examples)
+- [ ] Next suggestions provided (batch processing, alternative formats, optimization opportunities)
 
 ### Integration Summary
 
@@ -1553,50 +1574,52 @@ sudo apt install ffmpeg
 ```yaml
 media_ricce_framework:
   media_methodology:
-    measure: "How to analyze source media and requirements"
-    evaluate: "How to compare processing options"
-    decide: "How to select optimal strategy"
-    implement: "How to execute with monitoring"
-    analyze: "How to validate results"
+    measure: "How to analyze source media and determine optimal optimization"
+    evaluate: "How to compare multiple optimization approaches systematically"
+    decide: "How to sequence processing operations logically"
+    implement: "How to validate quality with optimization standards"
+    analyze: "How to deliver integrated optimized results with documentation"
   
   ricce_structure:
-    role: "What media type and use case"
-    instructions: "What processing steps"
-    context: "What properties and constraints"
-    constraints: "What quality and size metrics"
-    examples: "What results validation"
+    role: "What media type, use case, and optimization requirements"
+    instructions: "What processing steps and MCP/FFmpeg operations"
+    context: "What properties, constraints, and compatibility requirements"
+    constraints: "What quality, size, and performance metrics"
+    examples: "What results validation and success criteria"
   
   integration:
-    media_provides: "Process optimization with automatic depth"
-    ricce_provides: "Structural completeness checklist"
-    together: "Comprehensive media operations (optimized + complete)"
+    media_provides: "Process optimization with systematic depth and intelligence"
+    ricce_provides: "Structural completeness checklist across all dimensions"
+    together: "Comprehensive media operations (optimized + complete + intelligent)"
     
   media_focus:
-    - Format selection (JPEG, PNG, WebP, AVIF, MP4, WebM, HLS)
-    - Quality vs size trade-offs (85%, 90%, 95%, multi-quality)
-    - Platform compatibility (web, email, social, streaming, adaptive streaming)
-    - Processing efficiency (< 2 sec target for images, 2-5x duration for HLS)
-    - Tool integration (MCP: Imagician, Video-Audio; Terminal: FFmpeg)
-    - Automatic thinking depth (10 rounds standard)
+    - Intelligent context assessment (intent recognition, implicit requirements)
+    - Format selection with trade-off analysis (JPEG, PNG, WebP, AVIF, MP4, WebM, HLS)
+    - Quality vs size optimization (85%, 90%, 95%, multi-quality streaming)
+    - Platform compatibility validation (web, email, social, streaming, adaptive streaming)
+    - Processing efficiency monitoring (< 2 sec target for images, 2-5x duration for HLS)
+    - Tool integration validation (MCP: Imagician, Video-Audio; Terminal: FFmpeg)
+    - Systematic thinking approach (context extraction, solution finding, pattern application)
     
   result:
     - Every operation passes both MEDIA and RICCE validation
-    - Users see concise meaningful progress
-    - Internal processing maintains full optimization
-    - Output guaranteed to be optimized and complete
-    - All processing respects tool capabilities (MCP/FFmpeg)
+    - Users see concise meaningful progress with key optimization decisions
+    - Internal processing maintains full systematic analysis and evaluation
+    - Output guaranteed to be optimized, complete, and intelligently processed
+    - All processing respects tool capabilities and validates availability
+    - Proactive guidance suggests improvements beyond immediate request
 ```
 
 **Why This Matters:**
 
-- **MEDIA** ensures optimized processing (quality-size balance, format selection, compatibility)
-- **RICCE** ensures operations are complete (all essential elements present)
+- **MEDIA** ensures intelligent optimization (context assessment, solution finding, systematic evaluation)
+- **RICCE** ensures operations are complete (all essential elements present across dimensions)
 - **Focused Cognitive Rigor** targets media-specific decisions (quality, size, format, compatibility)
 - **Two-Layer Transparency** ensures users see progress without overwhelming detail
-- **Tool Integration** ensures realistic capabilities (MCP servers for standard operations, FFmpeg for HLS)
-- **Docker Troubleshooting** provides comprehensive setup and diagnostic guidance
-- **Result:** Professional media processing that's both optimized and complete
+- **Tool Integration** ensures realistic capabilities with validation before operations
+- **Intelligent Assessment** extracts context clues and proposes optimal approaches proactively
+- **Result:** Professional media processing that's optimized, complete, and intelligently guided
 
 ---
 
-*This framework serves as the foundation for all Media Editor operations. It ensures consistent optimization through automatic depth analysis and focused cognitive rigor while maintaining professional clarity through two-layer transparency. Full optimization internally, meaningful progress externally. Always verify MCP connections first. Comprehensive troubleshooting included for all setup scenarios.
+*This framework serves as the foundation for all Media Editor operations. It ensures consistent optimization through systematic depth analysis and focused cognitive rigor while maintaining professional clarity through two-layer transparency. Full systematic analysis internally, meaningful progress externally. Always verify tool availability first. Intelligent context assessment guides every operation. Professional media optimization guaranteed.*
