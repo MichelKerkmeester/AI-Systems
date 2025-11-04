@@ -1,30 +1,39 @@
-# Webflow Agent - User Guide v0.415
+# Webflow Agent - User Guide v0.501
 
 A full-stack development assistant that creates and manages Webflow sites through natural language. With Designer and Data API integration, it builds complete structures, design components, and manages content - transforming ideas into functioning Webflow sites.
 
 ## 📋 Table of Contents
 
-- [✨ What's New in v0.415](#whats-new-in-v0415)
-- [🚀 Key Features](#key-features)
-- [⚡ Quick Setup](#quick-setup)
-- [🔧 Installing Webflow MCP](#installing-webflow-mcp)
-- [🎨 Designer API Setup](#designer-api-setup)
-- [🔌 Connection Verification](#connection-verification)
-- [🧠 How It Works](#how-it-works)
-- [💬 Example Interactions](#example-interactions)
-- [📊 What Gets Created](#what-gets-created)
-- [📦 Version History](#version-history)
-- [📚 Resources](#resources)
+1. [🆕 WHAT'S NEW IN V0.501](#1-whats-new-in-v0501)
+2. [✨ KEY FEATURES](#2-key-features)
+3. [🌳 SYSTEM ARCHITECTURE](#3-system-architecture)
+4. [🚀 QUICK SETUP](#4-quick-setup)
+5. [🔧 INSTALLING WEBFLOW MCP](#5-installing-webflow-mcp)
+6. [🎨 DESIGNER API SETUP](#6-designer-api-setup)
+7. [🔌 CONNECTION VERIFICATION](#7-connection-verification)
+8. [🧠 HOW IT WORKS](#8-how-it-works)
+9. [💬 EXAMPLE INTERACTIONS](#9-example-interactions)
+10. [📊 WHAT GETS CREATED](#10-what-gets-created)
+11. [📦 VERSION HISTORY](#11-version-history)
+12. [📚 RESOURCES](#12-resources)
 
-.
+---
 
-<a id="whats-new-in-v0415"></a>
-## ✨ What's New in v0.415
+<a id="1-whats-new-in-v0501"></a>
 
-### Major Update: Simplified Architecture
-- **Simplified Logic**: Removed pattern learning for more predictable behavior
-- **Connection Verification**: System checks MCP connection before operations
-- **Clear Feedback**: Visual progress for every operation
+## 1. 🆕 WHAT'S NEW IN V0.501
+
+### Major Update: Transparent ATLAS Processing
+- **ATLAS Framework**: Intelligent 5-phase methodology (Assess → Transform → Layer → Apply → Synthesize) for optimal Webflow operations
+- **Two-Layer Transparency**: Full cognitive rigor internally, concise progress updates externally
+- **Smart API Coordination**: Automatic selection of optimal API strategy (Data first, Designer second, or parallel)
+
+### Enhanced System Intelligence
+- **Intelligent Context Assessment**: Extracts user intent from minimal information and suggests optimal native approaches
+- **Native API Optimization**: Balance structure vs design automatically based on use case
+- **Proactive Guidance**: Suggests improvements beyond immediate request
+- **Reality Check**: Verifies MCP capabilities before promising features
+- **Clean Interface**: No dividers rule - only bullets and headers for cleaner responses
 
 ### Core Capabilities Remain
 - Full Designer API integration for visual development
@@ -33,14 +42,15 @@ A full-stack development assistant that creates and manages Webflow sites throug
 - Build components and design systems
 - Manage responsive layouts and SEO
 
-.
+---
 
-<a id="key-features"></a>
-## 🚀 Key Features
+<a id="2-key-features"></a>
+
+## 2. ✨ KEY FEATURES
 
 ### Complete Development Capabilities
 
-**Designer API Features (NO CUSTOM CODE):**
+**Designer API Features:**
 - Build elements using native Webflow Designer API
 - Apply styles through API calls only
 - Create reusable components natively
@@ -60,14 +70,35 @@ A full-stack development assistant that creates and manages Webflow sites throug
 
 ### System Features
 - **Connection First**: Always verifies MCP connection
-- **Emergency Commands**: Quick recovery with $reset, $status, $quick
+- **ATLAS Processing**: Transparent 5-phase methodology
+- **Interactive Mode**: Single comprehensive questions
 - **Clear Feedback**: Visual progress for every operation
-- **REPAIR Protocol**: Structured error recovery
 
-.
+---
 
-<a id="quick-setup"></a>
-## ⚡ Quick Setup
+<a id="3-system-architecture"></a>
+
+## 3. 🌳 SYSTEM ARCHITECTURE
+
+```
+AGENTS.md → Entry point with intelligent routing logic
+    ↓
+MCP System - Webflow - v0.501.md (System prompt with ATLAS integration)
+    ↓
+ATLAS Thinking Framework v0.301 (5-phase methodology with cognitive rigor)
+    ↓
+Interactive Intelligence v0.400 (Conversation flow with two-layer transparency)
+    ↓
+MCP Knowledge v0.400 (Designer & Data API specifications)
+    ↓
+Output → Native Webflow operations via MCP server
+```
+
+---
+
+<a id="4-quick-setup"></a>
+
+## 4. 🚀 QUICK SETUP
 
 ### Step 1: Create a Claude Project
 1. Go to claude.ai
@@ -77,15 +108,14 @@ A full-stack development assistant that creates and manages Webflow sites throug
 ### Step 2: Add System Instructions
 1. Click "Edit project details"
 2. Find "Custom instructions" section
-3. Copy and paste: `Agent - MCP - Webflow.md` (v0.414)
+3. Copy and paste: `MCP System - Webflow.md` (v0.501)
 4. Save the project
 
 ### Step 3: Upload Reference Documents
 Add these documents to your project:
-- `Webflow - MCP Knowledge.md` (v0.314)
-- `Webflow - Interactive Intelligence.md` (v0.314)
-- `Webflow - Patterns & Workflows.md` (v0.314)
-- `Webflow - ATLAS Framework.md` (v0.214)
+- `Webflow - MCP Knowledge.md` (v0.400)
+- `Webflow - Interactive Intelligence.md` (v0.400)
+- `Webflow - ATLAS Thinking Framework.md` (v0.301)
 
 ### Step 4: Continue to MCP Installation
 Follow the installation guide in the next section
@@ -96,14 +126,13 @@ Create complete blog with categories
 Build hero component with animations
 Design responsive navigation
 Setup e-commerce catalog
-
-Note: Use $quick prefix for faster execution when needed.
 ```
 
-.
+---
 
-<a id="installing-webflow-mcp"></a>
-## 🔧 Installing Webflow MCP
+<a id="5-installing-webflow-mcp"></a>
+
+## 5. 🔧 INSTALLING WEBFLOW MCP
 
 ### Recommended: OAuth Remote Setup
 
@@ -146,10 +175,11 @@ After saving:
 
 Get your token from [Webflow API Settings](https://webflow.com/dashboard/account/apps).
 
-.
+---
 
-<a id="designer-api-setup"></a>
-## 🎨 Designer API Setup
+<a id="6-designer-api-setup"></a>
+
+## 6. 🎨 DESIGNER API SETUP
 
 ### Enabling Designer Operations
 
@@ -182,10 +212,11 @@ Get your token from [Webflow API Settings](https://webflow.com/dashboard/account
 - Managing content
 - Publishing items
 
-.
+---
 
-<a id="connection-verification"></a>
-## 🔌 Connection Verification
+<a id="7-connection-verification"></a>
+
+## 7. 🔌 CONNECTION VERIFICATION
 
 ### Automatic Connection Check
 
@@ -203,12 +234,30 @@ The system automatically verifies MCP connection before operations:
 ### Test Query Protocol
 - Executes `webflow:sites_list()` to verify connection
 - If successful: Proceeds with operations
-- If failed: Applies REPAIR protocol
+- If failed: Provides setup guidance
 
-.
+---
 
-<a id="how-it-works"></a>
-## 🧠 How It Works
+<a id="8-how-it-works"></a>
+
+## 8. 🧠 HOW IT WORKS
+
+### ATLAS Processing Framework
+
+The system uses intelligent 5-phase ATLAS methodology:
+
+```markdown
+📊 ATLAS Processing:
+
+A - Assess: Understanding context and requirements
+T - Transform: Converting to optimal native approach
+L - Layer: Structuring operations intelligently
+A - Apply: Executing through native APIs
+S - Synthesize: Validating and delivering results
+
+Internal: Full cognitive rigor (10 rounds optimization)
+External: Concise progress updates only
+```
 
 ### Native API Operations Only
 
@@ -236,29 +285,16 @@ The system provides two execution modes:
 📊 Standard Mode:
 
 • Default for all operations
-• Full processing and verification
+• Full ATLAS processing (5 phases)
 • Best for complex tasks
-• Shows: "Processing..."
-
-⚡ $quick Mode:
-• Type "$quick" before any command
-• Minimal processing steps
-• Optimized for speed
-• Best for simple tasks
+• Shows concise progress updates
 ```
 
-### Emergency Commands
+---
 
-| Command | Purpose | When to Use |
-|---------|---------|-------------|
-| **$reset** | Clear all context | Start fresh |
-| **$status** | Show current state | Check what's happening |
-| **$quick** | Fast execution | Need speed |
+<a id="9-example-interactions"></a>
 
-.
-
-<a id="example-interactions"></a>
-## 💬 Example Interactions
+## 9. 💬 EXAMPLE INTERACTIONS
 
 ### Creating a Blog System
 ```
@@ -272,7 +308,13 @@ System:
 
 I'll create a complete blog system for you!
 
-## Processing...
+📊 ATLAS Processing:
+
+A - Assess: Blog system with scalable architecture
+T - Transform: Collections + relationships structure
+L - Layer: Posts → Authors → Categories
+A - Apply: Creating via Data API...
+S - Synthesize: Validating structure...
 
 🔧 Webflow Operation
 
@@ -296,27 +338,11 @@ API calls: 15/60 🟢
 💡 Reference fields link your content!
 ```
 
-### Quick Mode Example
-```
-User: $quick add product collection
+---
 
-System:
-⚡ Quick Mode Active!
+<a id="10-what-gets-created"></a>
 
-✔ Connection verified
-
-Creating Products collection via Data API...
-
-✅ Collection created
-✅ Basic fields added
-
-Done! Need additional fields?
-```
-
-.
-
-<a id="what-gets-created"></a>
-## 📊 What Gets Created
+## 10. 📊 WHAT GETS CREATED
 
 ### Full Stack Example - Blog System
 
@@ -343,19 +369,23 @@ Components: {
 }
 ```
 
-### Execution Modes
+---
 
-| Mode | Speed | Best For |
-|------|-------|----------|
-| **Standard** | Normal | Complex operations, full structures |
-| **$quick** | Faster | Simple updates, basic operations |
+<a id="11-version-history"></a>
 
-.
+## 11. 📦 VERSION HISTORY
 
-<a id="version-history"></a>
-## 📦 Version History
+### v0.501 (Current)
+- Introduced transparent ATLAS processing framework (5-phase methodology)
+- Enhanced MCP integration with mandatory connection verification
+- Improved intelligent context assessment and solution finding
+- Added two-layer transparency model (internal rigor + concise updates)
+- Streamlined conversation architecture with comprehensive questions
+- Updated all knowledge base files to latest versions
+- Removed deprecated pattern learning system
+- Enhanced native API coordination and optimization
 
-### v0.415 (Current)
+### v0.415
 - Simplified architecture removing complex thinking mechanisms
 - Streamlined execution flow
 - Cleaner codebase with direct operations
@@ -371,10 +401,11 @@ Components: {
 - Designer and Data API support
 - Basic command structure
 
-.
+---
 
-<a id="resources"></a>
-## 📚 Resources
+<a id="12-resources"></a>
+
+## 12. 📚 RESOURCES
 
 ### Essential Links
 - [Webflow MCP Server](https://github.com/webflow/mcp-server)

@@ -24,7 +24,7 @@ Webflow Design & Content Assistant transforming natural language requests into p
 ### Core Process Rules (1-8)
 1. **MCP verification mandatory:** Check Webflow MCP server first (blocking): Data API for structure/content, Designer API for visual/components
 2. **Default mode:** Interactive Mode is always default unless user specifies direct operation
-3. **ATLAS processing:** 5 phases standard (ATLAS v0.300 with Webflow integration)
+3. **ATLAS processing:** 5 phases standard (ATLAS v0.301 with Webflow integration)
 4. **Single question:** Ask ONE comprehensive question, wait for response
 5. **Two-layer transparency:** Full rigor internally, concise updates externally
 6. **Reality check features:** Verify MCP support before promising capabilities
@@ -59,7 +59,7 @@ Webflow Design & Content Assistant transforming natural language requests into p
 ### Core Framework & Intelligence:
 | Document | Purpose | Key Insight |
 |----------|---------|-------------|
-| **Webflow - ATLAS Thinking Framework - v0.300.md** | Universal Webflow methodology with automatic depth | **ATLAS Thinking** |
+| **Webflow - ATLAS Thinking Framework - v0.301.md** | Universal Webflow methodology with automatic depth | **ATLAS Thinking** |
 | **Webflow - Interactive Intelligence - v0.400.md** | Conversational interface for all Webflow operations | Single comprehensive question |
 
 ### MCP Integration:
@@ -141,7 +141,7 @@ Handled by **Interactive Intelligence v0.400** with:
 | **Apply** | Best practices check, quality validation | "Applying (standards)" |
 | **Synthesize** | Integration verification, next steps | "Synthesizing (results)" |
 
-**Reference:** Complete methodology in **Webflow - ATLAS Thinking Framework - v0.300**
+**Reference:** Complete methodology in **Webflow - ATLAS Thinking Framework - v0.301**
 
 ### RICCE Structure
 
@@ -362,7 +362,7 @@ Before operations, validate:
 
 ### Must-Haves:
 ✅ **Always:**
-- Use latest framework versions (ATLAS v0.300, Interactive v0.400, MCP Knowledge v0.400)
+- Use latest framework versions (ATLAS v0.301, Interactive v0.400, MCP Knowledge v0.400)
 - Apply ATLAS with two-layer transparency
 - Verify MCP connection FIRST (blocking)
 - Check companion app for Designer operations
