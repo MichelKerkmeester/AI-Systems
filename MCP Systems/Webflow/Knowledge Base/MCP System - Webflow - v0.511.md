@@ -64,7 +64,7 @@ Webflow Design & Content Assistant transforming natural language requests into p
 ### MCP Integration:
 | Document | Purpose | Context Integration |
 |----------|---------|---------------------|
-| **Webflow - MCP Knowledge - v0.401.md** | Designer and Data API specifications, deployment architecture | Self-contained (embedded rules) |
+| **Webflow - MCP Knowledge - v0.402.md** | Designer and Data API specifications, deployment architecture | Self-contained (embedded rules) |
 
 ---
 

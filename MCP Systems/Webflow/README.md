@@ -1,10 +1,10 @@
-# Webflow Agent - User Guide v0.510
+# Webflow Agent - User Guide v0.511
 
 Creates and manages Webflow sites through natural language using Designer and Data API integration with **transparent SYNC processing**.
 
 ## 📋 TABLE OF CONTENTS
 
-1. [🆕 WHAT'S NEW IN V0.510](#1-whats-new-in-v0510)
+1. [🆕 WHAT'S NEW IN V0.511](#1-whats-new-in-v0511)
 2. [✨ KEY FEATURES](#2-key-features)
 3. [🌳 SYSTEM ARCHITECTURE](#3-system-architecture)
 4. [🚀 QUICK SETUP](#4-quick-setup)
@@ -19,11 +19,16 @@ Creates and manages Webflow sites through natural language using Designer and Da
 
 ---
 
-<a id="1-whats-new-in-v0510"></a>
+<a id="1-whats-new-in-v0511"></a>
 
-## 1. 🆕 WHAT'S NEW IN V0.510
+## 1. 🆕 WHAT'S NEW IN V0.511
 
-### Major Update: SYNC Framework (4-Phase Methodology)
+### Documentation Improvements
+- **Enhanced Readability**: Improved balance between YAML and markdown prose across all knowledge documents
+- **MCP Knowledge Update**: Updated Webflow - MCP Knowledge to v0.402 with clearer technical specifications
+- **Better Structure**: Converted heavily YAML-formatted sections to readable markdown while preserving technical accuracy
+
+### Major Features from V0.510
 - **SYNC Framework**: Superior 4-phase methodology (Survey → Yield → Navigate → Create) with clearer phase naming
 - **Streamlined Processing**: Consolidated validation + integration into final Create phase for efficiency
 - **Enhanced Clarity**: More intuitive phase names that better describe actual operations
@@ -85,13 +90,13 @@ Creates and manages Webflow sites through natural language using Designer and Da
 ```
 AGENTS.md → Entry point with intelligent routing logic
     ↓
-MCP System - Webflow - v0.510.md (System prompt with SYNC integration)
+MCP System - Webflow - v0.511.md (System prompt with SYNC integration)
     ↓
 SYNC Thinking Framework v0.400 (4-phase methodology with cognitive rigor)
     ↓
 Interactive Intelligence v0.401 (Conversation flow with two-layer transparency)
     ↓
-MCP Knowledge v0.401 (Designer & Data API specifications)
+MCP Knowledge v0.402 (Designer & Data API specifications)
     ↓
 Output → Native Webflow operations via MCP server
 ```
@@ -375,7 +380,13 @@ Components: {
 
 ## 11. 📦 VERSION HISTORY
 
-### v0.510 (Current)
+### v0.511 (Current)
+- **Documentation Improvements**: Enhanced balance between YAML and markdown prose in all knowledge documents
+- **MCP Knowledge Update**: Upgraded to v0.402 with improved readability and structure
+- **Better Technical Specs**: Clearer presentation of API specifications while maintaining accuracy
+- **Maintained All Capabilities**: No functional changes, only documentation clarity improvements
+
+### v0.510
 - **SYNC Framework**: Transitioned from ATLAS (5 phases) to SYNC (4 phases) for improved clarity
 - **Better Phase Naming**: Survey, Yield, Navigate, Create more intuitive than Assess, Transform, Layer, Apply, Synthesize
 - **Streamlined Processing**: Combined validation + integration into final Create phase

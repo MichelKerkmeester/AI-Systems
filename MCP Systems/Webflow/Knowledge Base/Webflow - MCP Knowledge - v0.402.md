@@ -1,4 +1,4 @@
-# Webflow - MCP Knowledge - v0.401
+# Webflow - MCP Knowledge - v0.402
 
 Technical reference for Webflow MCP server capabilities and integration for Designer and Data API operations.
 
@@ -25,142 +25,111 @@ Technical reference for Webflow MCP server capabilities and integration for Desi
 
 ### MCP Server Details
 
-```yaml
-server:
-  name: "Webflow MCP Server"
-  repository: "https://github.com/webflow/mcp-server"
-  npm_package: "https://www.npmjs.com/package/webflow-mcp-server"
-  protocol: "Model Context Protocol (MCP)"
-  deployment:
-    recommended: "Remote (OAuth-based)"
-    alternative: "Local (API token-based)"
-  node_requirement: "Node.js 22.3.0 or higher"
-  apis:
-    - "Designer API (native operations)"
-    - "Data API (native operations)"
-  authentication:
-    remote:
-      type: "OAuth 2.0"
-      method: "Remote SSE via mcp-remote package"
-      url: "https://mcp.webflow.com/sse"
-    local:
-      type: "API Token"
-      method: "Direct connection with WEBFLOW_TOKEN"
-  custom_code_generation: "NEVER (0%)"
-  companion_requirement: "MCP Bridge App (Designer API only)"
-```
+The Webflow MCP Server provides native integration with both Designer API and Data API for visual design and content management operations. It supports OAuth 2.0 (recommended) and API token-based authentication.
+
+**Key Information:**
+- **Repository:** https://github.com/webflow/mcp-server
+- **NPM Package:** https://www.npmjs.com/package/webflow-mcp-server
+- **Protocol:** Model Context Protocol (MCP)
+- **Node Requirement:** Node.js 22.3.0 or higher
+- **APIs:** Designer API (native) and Data API (native)
+
+**Authentication Methods:**
+- **Remote (Recommended):** OAuth 2.0 via mcp-remote package at https://mcp.webflow.com/sse
+- **Local (Alternative):** Direct connection with WEBFLOW_TOKEN environment variable
+
+**Important:** This server executes **ZERO custom code**. All operations use native Webflow API endpoints exclusively. Custom JavaScript, CSS, or HTML generation is absolutely forbidden (0% custom code generation). The Designer API requires the MCP Bridge App companion application.
 
 ### System Architecture
 
-```yaml
-workflow:
-  sequence:
-    - "Connection Check (ALWAYS FIRST)"
-    - "User Request"
-    - "Intent Recognition"
-    - "API Selection (Designer/Data)"
-    - "Native Operation (NO custom code)"
-    - "Feedback & Confirmation"
-  
-  deployment_architecture:
-    remote_recommended:
-      method: "OAuth via mcp-remote package"
-      benefits:
-        - "No API token management"
-        - "Multi-site authorization"
-        - "Secure token-based access"
-      connection: "https://mcp.webflow.com/sse"
-    
-    local_alternative:
-      method: "Direct with API token"
-      requirements:
-        - "Manual bridge app creation"
-        - "Workspace admin permissions"
-        - "API token in environment"
-  
-  api_routing:
-    designer_api:
-      requires: "MCP Bridge App (Companion)"
-      operations: "Visual elements, styles, components"
-    
-    data_api:
-      requires: "OAuth (remote) or API token (local)"
-      operations: "Collections, content, publishing"
-```
+The Webflow MCP workflow follows a strict sequence to ensure proper connectivity and API access:
+
+**Operation Sequence:**
+1. **Connection Check** (ALWAYS FIRST) - Verify MCP server is active
+2. **User Request** - Receive and parse user intent
+3. **Intent Recognition** - Determine operation type needed
+4. **API Selection** - Choose between Designer/Data API
+5. **Native Operation** (NO custom code) - Execute using official Webflow API
+6. **Feedback & Confirmation** - Return results to user
+
+**Deployment Architecture:**
+
+*Remote Deployment (Recommended):*
+- OAuth via mcp-remote package
+- No API token management required
+- Multi-site authorization support
+- Secure token-based access
+- Connection: https://mcp.webflow.com/sse
+
+*Local Deployment (Alternative):*
+- Direct with API token in WEBFLOW_TOKEN
+- Manual bridge app creation required
+- Workspace admin permissions needed
+- API token in environment variables
+
+**API Routing:**
+- **Designer API:** Requires MCP Bridge App companion for visual elements, styles, and components
+- **Data API:** Requires OAuth (remote) or API token (local) for collections, content, and publishing
 
 ### Core Principle
 
-```yaml
-operation_policy:
-  allowed:
-    - "Native Webflow API calls exclusively"
-    - "webflow:collections_create()"
-    - "webflow:components_create()"
-    - "webflow:pages_update_static_content()"
-    - "All official Webflow API endpoints"
-  
-  forbidden:
-    - "Custom JavaScript generation (0%)"
-    - "Custom CSS creation (0%)"
-    - "HTML template generation (0%)"
-    - "Any custom code whatsoever"
-  
-  enforcement: "ABSOLUTE - No exceptions"
-```
+**ABSOLUTE RULE:** Only native Webflow API calls are allowed. Custom code generation of any kind is strictly forbidden with 0% tolerance.
+
+**✅ Allowed Operations:**
+- Native Webflow API calls exclusively
+- `webflow:collections_create()` - Collection operations
+- `webflow:components_create()` - Component management
+- `webflow:pages_update_static_content()` - Page updates
+- All official Webflow API endpoints
+
+**❌ Forbidden Operations:**
+- Custom JavaScript generation (0%)
+- Custom CSS creation (0%)
+- HTML template generation (0%)
+- Any custom code whatsoever
+
+This policy has **ABSOLUTE enforcement with no exceptions**.
 
 ### Connection Verification
 
 **Reference:** Connection verification logic is in Interactive Intelligence v0.401. SYNC methodology phases in SYNC Thinking Framework v0.400.
 
-```yaml
-verification:
-  priority: "first_action_before_all_operations"
-  tool: "sites_list"
-  displays:
-    connected: "✅ Webflow MCP Connected - All APIs available"
-    disconnected: "❌ Webflow MCP Not Connected - Setup required"
-    auth_failed: "⚠️ Authentication Issue - Re-authorization needed"
-    app_missing: "⚠️ Companion App Required - Launch MCP Bridge App"
+Connection verification must be the **first action before all operations**. Use the `sites_list` tool to test connectivity and authentication.
 
-connection_protocol:
-  steps:
-    1: "Check MCP server status"
-    2: "Run test query (sites_list)"
-    3: "Verify OAuth authentication"
-    4: "Check companion app (if Designer API needed)"
-    5: "Proceed with operations"
-  
-  test_implementation: |
-    async function verifyConnection() {
-        try {
-            await webflow:sites_list();
-            return { 
-                connected: true, 
-                apis: 'ready'
-            };
-        } catch (error) {
-            // Apply REPAIR protocol
-            return { connected: false, error: error };
-        }
+**Status Messages:**
+- ✅ **Connected:** "Webflow MCP Connected - All APIs available"
+- ❌ **Disconnected:** "Webflow MCP Not Connected - Setup required"
+- ⚠️ **Auth Failed:** "Authentication Issue - Re-authorization needed"
+- ⚠️ **App Missing:** "Companion App Required - Launch MCP Bridge App"
+
+**Connection Protocol:**
+1. Check MCP server status
+2. Run test query (`sites_list`)
+3. Verify OAuth authentication
+4. Check companion app status (if Designer API needed)
+5. Proceed with operations only if all checks pass
+
+**Example Implementation:**
+```javascript
+async function verifyConnection() {
+    try {
+        await webflow:sites_list();
+        return { 
+            connected: true, 
+            apis: 'ready'
+        };
+    } catch (error) {
+        // Apply REPAIR protocol
+        return { connected: false, error: error };
     }
-
-connection_states:
-  connected:
-    description: "All systems operational"
-    action: "Proceed with operations"
-  
-  disconnected:
-    description: "No MCP access"
-    action: "Restart Claude Desktop"
-  
-  auth_failed:
-    description: "OAuth issue"
-    action: "Re-authorize Webflow connection"
-  
-  app_missing:
-    description: "Designer API unavailable"
-    action: "Launch MCP Bridge App"
+}
 ```
+
+**Connection States & Actions:**
+- **Connected:** All systems operational → Proceed with operations
+- **Disconnected:** No MCP access → Restart Claude Desktop
+- **Auth Failed:** OAuth issue → Re-authorize Webflow connection
+- **App Missing:** Designer API unavailable → Launch MCP Bridge App
 
 ---
 
@@ -233,78 +202,70 @@ data_api_operations:
 
 ### What You CAN Do ✅
 
-```yaml
-designer_api_native:
-  description: "Visual design operations using native Webflow APIs"
-  capabilities:
-    - "Create elements using native API calls"
-    - "Apply styles through Designer API"
-    - "Build components with Webflow's system"
-    - "Manage variables via native operations"
-    - "Control breakpoints programmatically"
-    - "Design pages using API methods"
-  method: "Native API calls only"
-  custom_code: "NEVER"
+**Designer API Operations (Native API Only):**
 
-data_api_native:
-  description: "Content and structure operations using native APIs"
-  capabilities:
-    - "Create collections with custom fields"
-    - "Add any field type to collections"
-    - "Manage content items (CRUD operations)"
-    - "Handle publishing workflows"
-    - "Optimize SEO at scale"
-    - "Manage relationships between collections"
-  method: "Native API calls only"
-  custom_code: "NEVER"
-```
+Visual design operations using native Webflow APIs:
+- Create elements using native API calls
+- Apply styles through Designer API
+- Build components with Webflow's component system
+- Manage variables via native operations
+- Control breakpoints programmatically
+- Design pages using API methods
+
+All Designer API operations require the MCP Bridge App companion application.
+
+**Data API Operations (Native API Only):**
+
+Content and structural operations using native APIs:
+- Create collections with custom field types
+- Add any field type to collections
+- Manage content items (full CRUD operations)
+- Handle publishing workflows
+- Optimize SEO at scale
+- Manage relationships between collections
+
+**IMPORTANT:** All operations use native API calls only. Custom code generation is **NEVER** allowed (0% tolerance).
 
 ### What You CANNOT Do ❌
 
-```yaml
-system_limitations:
-  custom_code:
-    restriction: "ABSOLUTE"
-    cannot_generate:
-      - "Custom JavaScript"
-      - "Custom CSS"
-      - "HTML templates"
-      - "Any code whatsoever"
-    enforcement: "0% custom code generation"
-  
-  media_upload:
-    restriction: "Direct upload not supported"
-    workaround: "Use external URLs only"
-    services: ["Cloudinary", "Amazon S3", "Imgur"]
-  
-  connection_requirements:
-    restriction: "Cannot work without connection"
-    requirement: "MCP must be verified first"
-    protocol: "Connection check ALWAYS first"
-  
-  companion_app:
-    restriction: "Designer API requires app"
-    requirement: "MCP Bridge App must be running"
-    applies_to: "All Designer API operations"
-  
-  authorization:
-    restriction: "Owner/admin access only"
-    requirement: "OAuth with proper scope"
-    verification: "Test query must pass"
-  
-  rate_limits:
-    restriction: "60 calls per minute maximum"
-    safe_operating: "50 calls per minute"
-    warning_threshold: "55 calls per minute"
-    cooldown_period: "60 seconds"
-  
-  access_control:
-    restrictions:
-      - "Only public or authorized resources"
-      - "Cannot modify locked elements"
-      - "Cannot access private assets"
-      - "Respects Webflow's protected components"
-```
+**Custom Code Restriction (ABSOLUTE):**
+- ❌ Custom JavaScript generation (0%)
+- ❌ Custom CSS creation (0%)
+- ❌ HTML template generation (0%)
+- ❌ Any code whatsoever
+- **Enforcement:** Zero tolerance policy
+
+**Media Upload Limitation:**
+- Direct upload is not supported
+- **Workaround:** Use external URLs only
+- Recommended services: Cloudinary, Amazon S3, Imgur
+
+**Connection Requirements:**
+- Cannot work without MCP connection verification
+- Connection check must ALWAYS be performed first
+- All operations require active MCP session
+
+**Companion App Requirement:**
+- Designer API requires MCP Bridge App
+- App must be running for Designer API operations
+- Applies to all visual design operations
+
+**Authorization:**
+- Owner/admin access required
+- OAuth with proper scope needed
+- Test query must pass before operations
+
+**Rate Limits:**
+- Maximum: 60 calls per minute
+- Safe operating zone: 50 calls per minute
+- Warning threshold: 55 calls per minute
+- Cooldown period: 60 seconds after limit
+
+**Access Control:**
+- Only public or authorized resources accessible
+- Cannot modify locked elements
+- Cannot access private assets
+- Respects Webflow's protected components
 
 ---
 
