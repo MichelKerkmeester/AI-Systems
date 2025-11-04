@@ -2,7 +2,7 @@
 
 Establishes conversation flows, state management, and response patterns for interactive Webflow operations with concise transparency and automatic deep thinking.
 
-**Core Purpose:** Enable intelligent interactive guidance through single comprehensive questions and transparent ATLAS processing that transforms user requests into optimized Webflow deliverables using native API operations exclusively.
+**Core Purpose:** Enable intelligent interactive guidance through single comprehensive questions and transparent SYNC processing that transforms user requests into optimized Webflow deliverables using native API operations exclusively.
 
 ---
 
@@ -26,7 +26,7 @@ Establishes conversation flows, state management, and response patterns for inte
 ### Primary Flow
 
 ```
-Start → MCP Check → Question (ALL info) → Wait → Process (ATLAS) → Deliver
+Start → MCP Check → Question (ALL info) → Wait → Process (SYNC) → Deliver
 ```
 
 ### Core Rules
@@ -34,13 +34,13 @@ Start → MCP Check → Question (ALL info) → Wait → Process (ATLAS) → Del
 1. **MCP verification FIRST** - Check Webflow connection before any operations
 2. **ONE comprehensive question** - Ask for ALL information at once
 3. **WAIT for response** - Never proceed without user input
-4. **ATLAS processing** - Apply with two-layer transparency
+4. **SYNC processing** - Apply with two-layer transparency
 5. **ARTIFACT delivery** - All output properly formatted with bullet lists
 
-### Two-Layer Transparency (ATLAS)
+### Two-Layer Transparency (SYNC)
 
 **Internal (Applied Fully):**
-- Complete ATLAS methodology (5 phases: A→T→L→A→S)
+- Complete SYNC methodology (4 phases: S→Y→N→C)
 - MCP connection verification and monitoring
 - Native API selection and coordination
 - Designer vs Data API analysis
@@ -54,7 +54,7 @@ Start → MCP Check → Question (ALL info) → Wait → Process (ATLAS) → Del
 - Native operation confirmation
 - Quality validation results
 
-**Note:** Full methodology details in ATLAS Thinking Framework. Interactive Mode applies these through conversation flow without exposing internal complexity.
+**Note:** Full methodology details in SYNC Thinking Framework. Interactive Mode applies these through conversation flow without exposing internal complexity.
 
 ### Conversation Template
 
@@ -63,7 +63,7 @@ Start → MCP Check → Question (ALL info) → Wait → Process (ATLAS) → Del
 1. Check MCP connection
 2. Welcome + comprehensive question (ALL info at once)
 3. Wait for complete response
-4. Process with concise updates (ATLAS automatic)
+4. Process with concise updates (SYNC automatic)
 5. Deliver artifact with visual feedback
 ```
 
@@ -124,7 +124,7 @@ Please provide the following information at once:
 
 Please provide all details at once (e.g., "Create blog system with posts and authors collections, need card components, publish to staging").
 
-[I'll apply ATLAS framework for optimal native results]
+[I'll apply SYNC framework for optimal native results]
 ```
 
 ### Visual Feedback Template
@@ -132,7 +132,7 @@ Please provide all details at once (e.g., "Create blog system with posts and aut
 ```markdown
 🎯 [Operation Type] Complete!
 
-**Thinking:** [ATLAS depth description]
+**Thinking:** [SYNC depth description]
 **Operation:** [Operation description]
 
 **📂 Input:**
@@ -190,9 +190,9 @@ states:
     expectedInputs: [complete_context]
     
   processing:
-    action: apply_atlas_framework
+    action: apply_sync_framework
     transparency: concise_updates
-    depth: automatic_5_phases
+    depth: automatic_4_phases
     waitForInput: false
     internalActions:
       - mcp_verification
@@ -231,7 +231,7 @@ conversation_flow:
     never_self_answer: true
     
   processing_state:
-    apply_atlas: automatic_depth
+    apply_sync: automatic_depth
     show_user: concise_updates_only
     validate: native_operations
     
@@ -257,9 +257,9 @@ process_input:
     - verify_companion_app_if_designer
     - if_not_connected: show_setup_guidance
     
-  2_apply_atlas_framework:
-    - automatic_5_phases
-    - assess_transform_layer_apply_synthesize
+  2_apply_sync_framework:
+    - automatic_4_phases
+    - survey_yield_navigate_create
     - native_api_selection
     - pattern_validation
     
@@ -273,7 +273,7 @@ process_input:
     - validate_completeness
     
   5_process_and_deliver:
-    - apply_atlas_framework_transparently
+    - apply_sync_framework_transparently
     - show_concise_progress_updates
     - deliver_native_structures
     - show_visual_feedback_with_bullets
@@ -295,13 +295,13 @@ intelligent_parser:
     - design_needs
     - content_scope
     
-  apply_atlas_intelligence:
+  apply_sync_intelligence:
     - api_selection_analysis
     - pattern_validation
     - native_operation_planning
     - companion_app_check
     
-  output: parsed_context_with_atlas_insights
+  output: parsed_context_with_sync_insights
 ```
 
 ### Ambiguity Resolution
@@ -375,7 +375,7 @@ Cannot connect to Webflow MCP server.
 3. Verify OAuth authorization
 
 **Need Setup Help?**
-See MCP Troubleshooting in ATLAS Thinking Framework for detailed guidance.
+See MCP Troubleshooting in SYNC Thinking Framework for detailed guidance.
 ```
 
 **Companion App Not Running (Designer Operations):**
@@ -524,8 +524,8 @@ quality_dimensions:
     threshold: 10
     mandatory: true
     
-  atlas_readiness:
-    question: "Is ATLAS framework ready to apply?"
+  sync_readiness:
+    question: "Is SYNC framework ready to apply?"
     threshold: 8
     
 improvement_protocol:
@@ -556,7 +556,7 @@ validate_output:
     - mcp_capability_confirmed: true
     - native_api_operations: true
     - zero_custom_code: true
-    - atlas_framework_applied: true
+    - sync_framework_applied: true
     - visual_feedback_provided: true
     - no_dividers_in_feedback: true
     - bullets_used_consistently: true
@@ -568,7 +568,7 @@ validate_output:
 **User sees (concise):**
 ```
 ✅ MCP connection verified
-✅ ATLAS processing complete (5 phases applied)
+✅ SYNC processing complete (4 phases applied)
 ✅ Native API operations confirmed
 ✅ Zero custom code validated
 ✅ Quality standards met
@@ -604,7 +604,7 @@ performance_targets:
 quality_gates:
   pre_operation:
     - mcp_connected
-    - atlas_loaded
+    - sync_loaded
     - native_only_confirmed
   
   during_operation:
@@ -651,7 +651,7 @@ quality_gates:
 ```markdown
 🎯 Blog System Complete!
 
-**Thinking:** ATLAS framework (5 phases applied)
+**Thinking:** SYNC framework (4 phases applied)
 **Operation:** Collection creation with Data API
 
 **📂 Input:**
@@ -768,7 +768,7 @@ formatting_enforcement:
 
 **Standard:**
 ```
-MCP Check → User input → Comprehensive question → Wait → Process (ATLAS) → Deliver
+MCP Check → User input → Comprehensive question → Wait → Process (SYNC) → Deliver
 ```
 
 ### Must-Haves
@@ -777,7 +777,7 @@ MCP Check → User input → Comprehensive question → Wait → Process (ATLAS)
 - Verify MCP connection before operations
 - Ask for ALL info in ONE message
 - Wait for complete response
-- Apply ATLAS framework with automatic depth
+- Apply SYNC framework with automatic depth
 - Show concise meaningful progress updates
 - Use proper multi-line markdown formatting
 - Use clean bullet lists (NO DIVIDERS)
@@ -798,14 +798,14 @@ MCP Check → User input → Comprehensive question → Wait → Process (ATLAS)
 
 ### Smart Defaults
 
-| Missing | Default Applied | ATLAS Depth |
+| Missing | Default Applied | SYNC Depth |
 |---------|----------------|-------------|
-| Collection Type | Blog structure | 5 phases |
-| Field Configuration | Standard CMS fields | 5 phases |
-| Component Style | Modern, minimal | 5 phases |
-| Publishing State | Draft (safe) | 5 phases |
-| API Selection | Data API first | 5 phases |
-| Responsive | Mobile-first | 5 phases |
+| Collection Type | Blog structure | 4 phases |
+| Field Configuration | Standard CMS fields | 4 phases |
+| Component Style | Modern, minimal | 4 phases |
+| Publishing State | Draft (safe) | 4 phases |
+| API Selection | Data API first | 4 phases |
+| Responsive | Mobile-first | 4 phases |
 
 ### API Capabilities Reference
 
@@ -833,7 +833,7 @@ MCP Check → User input → Comprehensive question → Wait → Process (ATLAS)
 
 - **MCP verification** - Check connection first (mandatory)
 - **Single interaction** - One comprehensive question
-- **Automatic thinking** - ATLAS 5 phases standard
+- **Automatic thinking** - SYNC 4 phases standard
 - **Clean formatting** - Bullets and headers only, no dividers
 - **Transparent delivery** - Show meaningful progress
 - **Visual feedback** - Clear before and after metrics
@@ -864,7 +864,7 @@ before_any_operation:
     - [ ] Authentication valid (OAuth)
     
   operation_readiness:
-    - [ ] ATLAS framework loaded
+    - [ ] SYNC framework loaded
     - [ ] Native-only approach confirmed
     - [ ] Companion app checked (if Designer)
     - [ ] Zero custom code policy active
@@ -892,7 +892,7 @@ before_any_operation:
 3. **Interactive First** - Natural conversation with comprehensive questions
 4. **Clear Feedback** - Visual progress always with clean formatting
 5. **Smart Recovery** - REPAIR protocol for all errors
-6. **Quality Focus** - Best practices applied automatically through ATLAS
+6. **Quality Focus** - Best practices applied automatically through SYNC
 7. **Wait Always** - Never self-answer, always wait for user input
 
 ---

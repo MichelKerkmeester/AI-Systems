@@ -1,8 +1,8 @@
-# Webflow - MCP Knowledge - v0.400
+# Webflow - MCP Knowledge - v0.401
 
 Technical reference for Webflow MCP server capabilities and integration for Designer and Data API operations.
 
-**Purpose:** Document Webflow-specific features, supported operations, API specifications, and technical constraints. Conversation flows and thinking methodology are in Interactive Intelligence and companion framework documents respectively.
+**Purpose:** Document Webflow-specific features, supported operations, API specifications, and technical constraints. Conversation flows and thinking methodology are in Interactive Intelligence v0.401 and SYNC Thinking Framework v0.400 respectively.
 
 ---
 
@@ -110,7 +110,7 @@ operation_policy:
 
 ### Connection Verification
 
-**Reference:** Connection verification logic is in Interactive Intelligence.
+**Reference:** Connection verification logic is in Interactive Intelligence v0.401. SYNC methodology phases in SYNC Thinking Framework v0.400.
 
 ```yaml
 verification:
@@ -170,7 +170,7 @@ connection_states:
 
 ### Available Operations
 
-**Note:** Thinking methodology and conversation flows are defined in Interactive Intelligence.
+**Note:** SYNC thinking methodology (Survey → Yield → Navigate → Create) and conversation flows are defined in SYNC Thinking Framework v0.400 and Interactive Intelligence v0.401.
 
 ```yaml
 designer_api_operations:
@@ -1132,25 +1132,33 @@ official_documentation:
     note: "Add to AI clients for enhanced context"
 
 related_documents:
-  thinking_methodology:
-    file: "Webflow - Thinking Framework"
+  sync_thinking_framework:
+    file: "Webflow - SYNC Thinking Framework - v0.400"
+    purpose: "4-phase methodology (Survey → Yield → Navigate → Create)"
     sections:
-      - "Section 2: Decision principles"
-      - "Section 3: Cognitive rigor"
-      - "Section 9: Troubleshooting"
-    note: "Document may not exist yet - placeholder for future"
+      - "Section 2: SYNC Principles (4 phases)"
+      - "Section 3: Cognitive Rigor Framework"
+      - "Section 4: The SYNC Methodology"
+      - "Section 6: RICCE-SYNC Integration"
+    key_concepts:
+      - "Survey: Context assessment and API identification"
+      - "Yield: Native pattern selection and optimization"
+      - "Navigate: Sequential API operations"
+      - "Create: Quality validation + integration delivery"
   
-  conversation_flow:
-    file: "Webflow - Interactive Intelligence"
+  interactive_intelligence:
+    file: "Webflow - Interactive Intelligence - v0.401"
+    purpose: "Conversation flows and interaction patterns"
     sections:
       - "Section 1: Conversation Architecture"
       - "Section 2: Response Templates"
-      - "Section 5: Error Recovery"
-    note: "Document may not exist yet - placeholder for future"
+      - "Section 5: Error Recovery (REPAIR protocol)"
+    integration: "Works with SYNC framework for complete workflow"
   
   error_handling:
-    file: "Webflow - Thinking Framework"
-    section: "Section 9: Troubleshooting"
+    file: "Webflow - SYNC Thinking Framework - v0.400"
+    section: "Section 8: Quality Assurance"
+    note: "Quality gates and validation procedures"
     includes:
       - "Connection diagnostics"
       - "REPAIR protocol application"
@@ -1240,4 +1248,4 @@ performance:
 
 ---
 
-*This document focuses exclusively on Webflow MCP server capabilities and technical specifications. For thinking methodology, see Webflow Thinking Framework. For conversation flows and error handling, see Webflow Interactive Intelligence.*
+*This document focuses exclusively on Webflow MCP server capabilities and technical specifications. For SYNC thinking methodology (Survey → Yield → Navigate → Create), see Webflow - SYNC Thinking Framework v0.400. For conversation flows and error handling (REPAIR protocol), see Webflow - Interactive Intelligence v0.401.*

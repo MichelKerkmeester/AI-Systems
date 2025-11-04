@@ -46,7 +46,7 @@ This file serves as a redirect with intelligent routing based on user input.
 **Follow this dynamic sequence:**
 
 ### **✅ STEP 1: READ SYSTEM PROMPT FIRST** 
-**MANDATORY:** Read `/Knowledge Base/MCP System - Webflow - v0.501.md` **COMPLETELY** before proceeding.
+**MANDATORY:** Read `/Knowledge Base/MCP System - Webflow - v0.510.md` **COMPLETELY** before proceeding.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
@@ -88,18 +88,18 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Steps 2-3 detection, read IN THIS ORDER as needed:**
 
-1. **ATLAS Thinking Framework** — `/Knowledge Base/Webflow - ATLAS Thinking Framework - v0.301.md`
+1. **SYNC Thinking Framework** — `/Knowledge Base/Webflow - SYNC Thinking Framework - v0.400.md`
    - **ALWAYS READ** for structured operations
-   - 5-phase methodology (Assess → Transform → Layer → Apply → Synthesize)
+   - 4-phase methodology (Survey → Yield → Navigate → Create)
    - Connection verification integrated
    - Native API enforcement
 
-2. **Interactive Intelligence** — `/Knowledge Base/Webflow - Interactive Intelligence - v0.400.md`
+2. **Interactive Intelligence** — `/Knowledge Base/Webflow - Interactive Intelligence - v0.401.md`
    - **DEFAULT** conversational flow and UI patterns
    - Adaptive questioning and feedback formats
    - **SKIP IF** direct operation with clear intent
 
-3. **MCP Knowledge** — `/Knowledge Base/Webflow - MCP Knowledge - v0.400.md`
+3. **MCP Knowledge** — `/Knowledge Base/Webflow - MCP Knowledge - v0.401.md`
    - **ALWAYS READ** (single source of truth)
    - API reference and specifications
    - Native operations only principle
@@ -113,7 +113,7 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 ```
 START
   ↓
-[Read System Prompt v0.500]
+[Read System Prompt v0.510]
   ↓
 [VERIFY MCP CONNECTION] ← CRITICAL FIRST STEP
   ↓
@@ -129,7 +129,7 @@ Connection OK? ─── NO ──→ [Apply REPAIR Protocol]
   ↓
 [Route to API]
   ↓
-[Read ATLAS Framework]
+[Read SYNC Framework]
   ↓
 [Read Interactive Intelligence]
   ↓
@@ -147,31 +147,31 @@ Connection OK? ─── NO ──→ [Apply REPAIR Protocol]
 **Recognize these operation types:**
 | Request Type | Action | Resources to Read |
 |--------------|--------|-------------------|
-| "Collection/field/CMS" | Data API operations | ATLAS → MCP Knowledge (Data API) |
-| "Component/design" | Designer API operations | ATLAS → MCP Knowledge (Designer API) |
-| "Page/section/layout" | Both APIs potentially | ATLAS → Interactive → MCP Knowledge |
-| "Content/item/publish" | Data API operations | ATLAS → MCP Knowledge (Data API) |
+| "Collection/field/CMS" | Data API operations | SYNC → MCP Knowledge (Data API) |
+| "Component/design" | Designer API operations | SYNC → MCP Knowledge (Designer API) |
+| "Page/section/layout" | Both APIs potentially | SYNC → Interactive → MCP Knowledge |
+| "Content/item/publish" | Data API operations | SYNC → MCP Knowledge (Data API) |
 | "Broken/error" | Connection troubleshooting | REPAIR Protocol |
-| (unclear) | Interactive default | ATLAS → Interactive → MCP Knowledge |
+| (unclear) | Interactive default | SYNC → Interactive → MCP Knowledge |
 
 ### EXAMPLES
 
 **Data API Operation:**
 ```
 User: "create blog collection"
-→ Verify connections → ATLAS → MCP Knowledge (Data API) → Execute → Report
+→ Verify connections → SYNC → MCP Knowledge (Data API) → Execute → Report
 ```
 
 **Designer API Operation:**
 ```
 User: "build hero component"
-→ Verify connections → Check app status → ATLAS → MCP Knowledge (Designer) → Execute → Report
+→ Verify connections → Check app status → SYNC → MCP Knowledge (Designer) → Execute → Report
 ```
 
 **Interactive Default:**
 ```
 User: "help me build a portfolio site"
-→ Verify connections → ATLAS → Interactive questions → MCP Knowledge → Report
+→ Verify connections → SYNC → Interactive questions → MCP Knowledge → Report
 ```
 
 **Partial Connectivity:**
@@ -186,7 +186,7 @@ User: "create components and collections"
 ## 5. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
-- ❌ Skip the system prompt (`/Knowledge Base/MCP System - Webflow - v0.500.md`)
+- ❌ Skip the system prompt (`/Knowledge Base/MCP System - Webflow - v0.510.md`)
 - ❌ Proceed without completing Step 1
 - ❌ Proceed without verifying required tool availability (MCP servers)
 - ❌ Skip operating routing guide
@@ -196,7 +196,7 @@ User: "create components and collections"
 - ❌ **Produce code, CLI commands, or implementation details** (Context Override)
 
 ### ALWAYS:
-- ✅ Start with `/Knowledge Base/MCP System - Webflow - v0.500.md`
+- ✅ Start with `/Knowledge Base/MCP System - Webflow - v0.510.md`
 - ✅ Complete step 1 and understand project context fully
 - ✅ Verify required tool(s) BEFORE any operation (MCP servers)
 - ✅ Check for mode & operation type
@@ -214,10 +214,10 @@ User: "create components and collections"
 3. **Tool Verification THIRD** - Check required tools before operations (MCP servers)
 4. **Check commands** - Route intelligently
 5. **Read by mode** - Only required documents
-6. **ATLAS Framework** - Structured automatic thinking
+6. **SYNC Framework** - Structured automatic thinking
 7. **Interactive Intelligence** - Default flow when conversational
 8. **MCP Knowledge** - Tool capabilities and parameters
 9. **Native Tools ONLY** - Use only available MCP capabilities
 10. **Output to /Export** - Every artifact goes here
 
-**→ GO TO:** `/Knowledge Base/MCP System - Webflow - v0.500.md` **NOW**
+**→ GO TO:** `/Knowledge Base/MCP System - Webflow - v0.510.md` **NOW**

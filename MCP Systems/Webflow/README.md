@@ -1,10 +1,10 @@
-# Webflow Agent - User Guide v0.501
+# Webflow Agent - User Guide v0.510
 
-Creates and manages Webflow sites through natural language using Designer and Data API integration with **transparent ATLAS processing**.
+Creates and manages Webflow sites through natural language using Designer and Data API integration with **transparent SYNC processing**.
 
 ## 📋 TABLE OF CONTENTS
 
-1. [🆕 WHAT'S NEW IN V0.501](#1-whats-new-in-v0501)
+1. [🆕 WHAT'S NEW IN V0.510](#1-whats-new-in-v0510)
 2. [✨ KEY FEATURES](#2-key-features)
 3. [🌳 SYSTEM ARCHITECTURE](#3-system-architecture)
 4. [🚀 QUICK SETUP](#4-quick-setup)
@@ -19,14 +19,14 @@ Creates and manages Webflow sites through natural language using Designer and Da
 
 ---
 
-<a id="1-whats-new-in-v0501"></a>
+<a id="1-whats-new-in-v0510"></a>
 
-## 1. 🆕 WHAT'S NEW IN V0.501
+## 1. 🆕 WHAT'S NEW IN V0.510
 
-### Major Update: Transparent ATLAS Processing
-- **ATLAS Framework**: Intelligent 5-phase methodology (Assess → Transform → Layer → Apply → Synthesize) for optimal Webflow operations
-- **Two-Layer Transparency**: Full cognitive rigor internally, concise progress updates externally
-- **Smart API Coordination**: Automatic selection of optimal API strategy (Data first, Designer second, or parallel)
+### Major Update: SYNC Framework (4-Phase Methodology)
+- **SYNC Framework**: Superior 4-phase methodology (Survey → Yield → Navigate → Create) with clearer phase naming
+- **Streamlined Processing**: Consolidated validation + integration into final Create phase for efficiency
+- **Enhanced Clarity**: More intuitive phase names that better describe actual operations
 
 ### Enhanced System Intelligence
 - **Intelligent Context Assessment**: Extracts user intent from minimal information and suggests optimal native approaches
@@ -34,6 +34,8 @@ Creates and manages Webflow sites through natural language using Designer and Da
 - **Proactive Guidance**: Suggests improvements beyond immediate request
 - **Reality Check**: Verifies MCP capabilities before promising features
 - **Clean Interface**: No dividers rule - only bullets and headers for cleaner responses
+- **Two-Layer Transparency**: Full cognitive rigor internally, concise progress updates externally
+- **Smart API Coordination**: Automatic selection of optimal API strategy (Data first, Designer second, or parallel)
 
 ### Core Capabilities Remain
 - Full Designer API integration for visual development
@@ -70,7 +72,7 @@ Creates and manages Webflow sites through natural language using Designer and Da
 
 ### System Features
 - **Connection First**: Always verifies MCP connection
-- **ATLAS Processing**: Transparent 5-phase methodology
+- **SYNC Processing**: Transparent 4-phase methodology
 - **Interactive Mode**: Single comprehensive questions
 - **Clear Feedback**: Visual progress for every operation
 
@@ -83,13 +85,13 @@ Creates and manages Webflow sites through natural language using Designer and Da
 ```
 AGENTS.md → Entry point with intelligent routing logic
     ↓
-MCP System - Webflow - v0.501.md (System prompt with ATLAS integration)
+MCP System - Webflow - v0.510.md (System prompt with SYNC integration)
     ↓
-ATLAS Thinking Framework v0.301 (5-phase methodology with cognitive rigor)
+SYNC Thinking Framework v0.400 (4-phase methodology with cognitive rigor)
     ↓
-Interactive Intelligence v0.400 (Conversation flow with two-layer transparency)
+Interactive Intelligence v0.401 (Conversation flow with two-layer transparency)
     ↓
-MCP Knowledge v0.400 (Designer & Data API specifications)
+MCP Knowledge v0.401 (Designer & Data API specifications)
     ↓
 Output → Native Webflow operations via MCP server
 ```
@@ -108,14 +110,14 @@ Output → Native Webflow operations via MCP server
 ### Step 2: Add System Instructions
 1. Click "Edit project details"
 2. Find "Custom instructions" section
-3. Copy and paste: `MCP System - Webflow.md` (v0.501)
+3. Copy and paste: `MCP System - Webflow.md` (v0.510)
 4. Save the project
 
 ### Step 3: Upload Reference Documents
 Add these documents to your project:
-- `Webflow - MCP Knowledge.md` (v0.400)
-- `Webflow - Interactive Intelligence.md` (v0.400)
-- `Webflow - ATLAS Thinking Framework.md` (v0.301)
+- `Webflow - MCP Knowledge.md` (v0.401)
+- `Webflow - Interactive Intelligence.md` (v0.401)
+- `Webflow - SYNC Thinking Framework.md` (v0.400)
 
 ### Step 4: Continue to MCP Installation
 Follow the installation guide in the next section
@@ -242,20 +244,19 @@ The system automatically verifies MCP connection before operations:
 
 ## 8. 🧠 HOW IT WORKS
 
-### ATLAS Processing Framework
+### SYNC Processing Framework
 
-The system uses intelligent 5-phase ATLAS methodology:
+The system uses intelligent 4-phase SYNC methodology:
 
 ```markdown
-📊 ATLAS Processing:
+📊 SYNC Processing:
 
-A - Assess: Understanding context and requirements
-T - Transform: Converting to optimal native approach
-L - Layer: Structuring operations intelligently
-A - Apply: Executing through native APIs
-S - Synthesize: Validating and delivering results
+S - Survey: Understanding context and requirements
+Y - Yield: Converting to optimal native approach
+N - Navigate: Executing operations through native APIs
+C - Create: Validating quality and delivering results
 
-Internal: Full cognitive rigor (10 rounds optimization)
+Internal: Full cognitive rigor (optimized workflow)
 External: Concise progress updates only
 ```
 
@@ -279,13 +280,13 @@ External: Concise progress updates only
 
 ### Execution Modes
 
-The system provides two execution modes:
+The system provides intelligent execution:
 
 ```markdown
 📊 Standard Mode:
 
 • Default for all operations
-• Full ATLAS processing (5 phases)
+• Full SYNC processing (4 phases)
 • Best for complex tasks
 • Shows concise progress updates
 ```
@@ -308,13 +309,12 @@ System:
 
 I'll create a complete blog system for you!
 
-📊 ATLAS Processing:
+📊 SYNC Processing:
 
-A - Assess: Blog system with scalable architecture
-T - Transform: Collections + relationships structure
-L - Layer: Posts → Authors → Categories
-A - Apply: Creating via Data API...
-S - Synthesize: Validating structure...
+S - Survey: Blog system with scalable architecture
+Y - Yield: Collections + relationships structure
+N - Navigate: Posts → Authors → Categories
+C - Create: Validating structure and delivering...
 
 🔧 Webflow Operation
 
@@ -375,7 +375,15 @@ Components: {
 
 ## 11. 📦 VERSION HISTORY
 
-### v0.501 (Current)
+### v0.510 (Current)
+- **SYNC Framework**: Transitioned from ATLAS (5 phases) to SYNC (4 phases) for improved clarity
+- **Better Phase Naming**: Survey, Yield, Navigate, Create more intuitive than Assess, Transform, Layer, Apply, Synthesize
+- **Streamlined Processing**: Combined validation + integration into final Create phase
+- **Updated Knowledge Base**: All documents aligned with SYNC methodology (v0.400, v0.401)
+- **Maintained Intelligence**: All cognitive rigor and two-layer transparency preserved
+- **Same Capabilities**: All Webflow operations and features unchanged
+
+### v0.501
 - Introduced transparent ATLAS processing framework (5-phase methodology)
 - Enhanced MCP integration with mandatory connection verification
 - Improved intelligent context assessment and solution finding
