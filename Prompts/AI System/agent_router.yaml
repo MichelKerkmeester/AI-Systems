@@ -29,6 +29,30 @@ user_inputs:
     or problem to solve. The agent will process this according to AGENTS.md and
     Knowledge Base guidelines.
 
+  analysis_scope: |
+    [ANALYSIS_SCOPE] (Optional)
+    
+    Specify additional files, folders, or reference materials that should inform
+    the analysis and execution of the request. This helps the agent understand
+    relevant patterns, standards, or context beyond AGENTS.md.
+    
+    Components (all optional):
+    
+    reference_materials:
+      - "[Path to folder containing relevant documentation]"
+      - "[Path to brand guidelines or style guide]"
+      - "[Path to document template or example]"
+      - "[Path to ticket template or standard]"
+      - "[Path to research framework or example]"
+    
+    extract_principles:
+      - "[Brand voice and tone guidelines]"
+      - "[Documentation structure patterns]"
+      - "[Ticket formatting conventions]"
+      - "[Research methodology frameworks]"
+    
+    Leave empty or omit if not applicable.
+
 # ───────────────────────────────────────────────────────────────
 # RESOURCES
 # ───────────────────────────────────────────────────────────────
@@ -40,6 +64,40 @@ agents_md_locations:
     - "CLAUDE.md: STOP - READ AGENTS.md INSTEAD"
     - "Any redirect pattern pointing to AGENTS.md"
 
+# ───────────────────────────────────────────────────────────────
+# FIELD HANDLING
+# ───────────────────────────────────────────────────────────────
+field_handling:
+  defaults:
+    context_empty: "Infer from REQUEST and AGENTS.md routing analysis"
+    request_empty: "Error: REQUEST required - describe the task or goal"
+    analysis_scope_empty: "Proceed with AGENTS.md and routed Knowledge Base documents only"
+    
+  context_inference:
+    from_request:
+      - extract_task_type
+      - identify_domain_or_topic
+      - detect_urgency_signals
+      - determine_output_expectations
+    from_workspace:
+      - scan_for_agents_md
+      - detect_project_structure
+      - identify_existing_standards
+      - map_export_folder_availability
+    from_routing:
+      - knowledge_base_documents_accessed
+      - guardrails_applied
+      - workflow_requirements_identified
+  
+  analysis_scope_handling:
+    reference_materials:
+      present: "Load and scan files/folders for patterns, standards, and context"
+      empty: "Proceed with AGENTS.md routing only"
+      not_accessible: "Log warning and proceed without external references"
+    extract_principles:
+      present: "Extract and apply specified frameworks or patterns"
+      empty: "Use AGENTS.md and Knowledge Base principles only"
+  
 # ───────────────────────────────────────────────────────────────
 # RULES
 # ───────────────────────────────────────────────────────────────
@@ -100,6 +158,15 @@ workflow:
     action: Extract environment, state, constraints
     clarify: Ask targeted questions if critical info missing
     validation: context_understood
+
+  step_5a_process_analysis_scope:
+    input: "[ANALYSIS_SCOPE]" (if provided)
+    action: Load and analyze reference materials and extract specified principles
+    understand:
+      - Reference materials provide supplementary context
+      - Principles to extract guide the analysis approach
+      - This enriches but does not override AGENTS.md routing
+    validation: analysis_scope_incorporated_or_skipped
 
   step_6_execute:
     input: "[REQUEST]"
