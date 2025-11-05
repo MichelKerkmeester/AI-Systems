@@ -5,17 +5,17 @@
 
 ## 📋 Table of Contents
 
-#### ✏️ Writer Systems
+#### ✏️ Specialized Writer Systsms
 1. [Product Owner](#1-product-owner)
 2. [Prompt Engineering Assistant](#2-prompt-engineering-assistant)
 
-#### 💬 MCP Systems
+#### 💬 MCP's Made Easy
 3. [Media Editor Agent](#3-media-editor-agent)
 4. [Webflow Agent](#4-webflow-agent)
 5. [Notion Agent](#5-notion-agent)
 6. [ClickUp Agent](#6-clickup-agent)
 
-#### 🤖 Development
+#### 🤖 Context Engineering for Developers
 7. [DEV: Context, Prompts & Workflows](#8-dev-context-prompts-workflows)
 
 #### 📚 Resources
