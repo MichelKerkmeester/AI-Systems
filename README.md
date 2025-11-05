@@ -195,7 +195,7 @@ Structured prompts for code workflows and GitHub SpecKit integration.
 
 ---
 
-⚡ **Skills** — Executable Workflows**
+⚡ **Skills** — Executable Workflows
 
 Claude Skills for browser automation, Git workflows, and visual documentation.
 
@@ -208,7 +208,7 @@ Claude Skills for browser automation, Git workflows, and visual documentation.
 
 ---
 
-🛠️ **Hooks** — Automated Validation**
+🛠️ **Hooks** — Automated Validation
 
 Hook-based validation scripts that run automatically during development.
 
