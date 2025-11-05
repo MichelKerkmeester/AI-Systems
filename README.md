@@ -156,7 +156,7 @@ Automate ClickUp task management and agile workflows through natural language.
 #### 🤖 Development
 
 <a id="7-dev-context-prompts-workflows"></a>
-### 7. Development: Context, Prompts & Workflows
+### 7. Context, Prompts & Workflows
 
 Professional development system with AI guardrails, automated quality validation, and comprehensive workflow tooling for GitHub SpecKit integration, browser automation, and code quality enforcement.
 
