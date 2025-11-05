@@ -89,10 +89,10 @@ Edit image, video, and audio files through natural language with MCP tools and t
   - MEDIA Thinking Framework (Measure → Evaluate → Decide → Implement → Analyze)
 
 **Capabilities**:
-  - **Image Operations**: Resize, convert, compress, crop, batch processing
-  - **Audio Operations**: Extract, convert, normalize, quality optimization
-  - **Video Operations**: Transcode, trim, overlay, subtitles, format conversion
-  - **HLS Video Conversion**: FFmpeg-powered terminal commands to convert videos to HLS playslists
+  - **Image**: Resize, convert, compress, crop, batch processing
+  - **Audio**: Extract, convert, normalize, quality optimization
+  - **Video**: Transcode, trim, overlay, subtitles, format conversion
+  - **HLS**: FFmpeg-powered terminal commands to convert videos to HLS playslists
 
 ---
 
