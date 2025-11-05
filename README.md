@@ -152,7 +152,7 @@ Automate ClickUp task management and agile workflows through natural language.
 <a id="7-dev-context-prompts-workflows"></a>
 ### 🤖 7. Development: Context, Prompts & Workflows
 
-Developer Context Engineering: AI guardrails, automated quality validation, and workflow tooling.
+AI guardrails, anti-hallucination, quality validation, and workflow tooling.
 
 **Smart development with quality enforcement**:
   - AI behavior guardrails with confidence gates and anti-pattern prevention
