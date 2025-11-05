@@ -28,7 +28,7 @@
 
 ---
 
-#### ✏️ Writer Systems
+#### ✏️ WRITER SYSTEMS
 
 <a id="1-product-owner-writer"></a>
 ### 1. Product Owner Writer
@@ -80,7 +80,7 @@ Create effective AI prompts using 7 specialized frameworks, systematic evaluatio
 
 ---
 
-#### 💬 MCP Systems
+#### 💬 MCP SYSTEMS
 
 <a id="3-media-editor-agent"></a>
 ### 3. Media Editor Agent
@@ -153,7 +153,7 @@ Automate ClickUp task management and agile workflows through natural language.
 
 ---
 
-#### 🤖 Development
+#### 🤖 DEVELOPMENT
 
 <a id="7-dev-context-prompts-workflows"></a>
 ### 7. Context, Prompts & Workflows
