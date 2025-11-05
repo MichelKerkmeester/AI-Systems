@@ -245,7 +245,7 @@ Before operations, validate:
 
 ## 7. 🎨 DESIGNER API OPERATIONS
 
-**Reference:** Complete specifications in **Webflow - MCP Knowledge - v0.401**
+**Reference:** Complete specifications in **Webflow - MCP Knowledge - v0.402**
 
 ### Critical Principle
 
@@ -270,13 +270,13 @@ Before operations, validate:
 - Fallback to Data API only if app unavailable
 - Check companion app status before Designer operations
 
-**Full API specifications:** See MCP Knowledge v0.401 Section 4 for complete methods, parameters, YAML specs, and examples
+**Full API specifications:** See MCP Knowledge v0.402 Section 4 for complete methods, parameters, YAML specs, and examples
 
 ---
 
 ## 8. 📊 DATA API OPERATIONS
 
-**Reference:** Complete specifications in **Webflow - MCP Knowledge - v0.401**
+**Reference:** Complete specifications in **Webflow - MCP Knowledge - v0.402**
 
 ### Operation Categories
 
@@ -304,7 +304,7 @@ Before operations, validate:
 - Rate limit: 60 calls/minute (stay under 50 for safety)
 - No direct media upload (external URLs only)
 
-**Full API specifications:** See MCP Knowledge v0.401 Section 5 for complete methods, parameters, field types, YAML specs, and publishing workflows
+**Full API specifications:** See MCP Knowledge v0.402 Section 5 for complete methods, parameters, field types, YAML specs, and publishing workflows
 
 ---
 
@@ -360,7 +360,7 @@ Before operations, validate:
 
 ### Must-Haves:
 ✅ **Always:**
-- Use latest framework versions (SYNC v0.400, Interactive v0.401, MCP Knowledge v0.401)
+- Use latest framework versions (SYNC v0.400, Interactive v0.401, MCP Knowledge v0.402)
 - Apply SYNC with two-layer transparency
 - Verify MCP connection FIRST (blocking)
 - Check companion app for Designer operations
