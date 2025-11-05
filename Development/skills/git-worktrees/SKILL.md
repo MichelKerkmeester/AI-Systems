@@ -573,16 +573,6 @@ git worktree prune
 
 ## 12. 📚 REFERENCES
 
-### Related Documentation
-- specs/002-claude-skill-git-worktree/git-worktrees-guide.md - Complete conceptual guide
-- specs/002-claude-skill-git-worktree/implementation-guide.md - Practical implementation
-- specs/002-claude-skill-git-worktree/quick-reference.md - Command cheat sheet
-
-### Knowledge Base
-- knowledge/code_standards.md - Code standards to follow during implementation
-- knowledge/debugging.md - If baseline tests fail
-
-### External Resources
 - [Git Documentation: git-worktree](https://git-scm.com/docs/git-worktree)
 - [Superpowers using-git-worktrees skill](https://github.com/obra/superpowers/blob/main/skills/using-git-worktrees/SKILL.md)
 
