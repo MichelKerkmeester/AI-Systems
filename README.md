@@ -15,7 +15,7 @@
 5. [Notion Agent](#5-notion-agent)
 6. [ClickUp Agent](#6-clickup-agent)
 
-#### 🤖 Development | Context Engineering
+#### 🧠 Development | Context Engineering
 7. [DEV: Context, Prompts & Workflows](#8-dev-context-prompts-workflows)
 
 #### 📚 Resources
@@ -157,30 +157,77 @@ Automate ClickUp task management and agile workflows through natural language.
 ###  Development | Context Engineering
 
 <a id="7-dev-context-prompts-workflows"></a>
-#### 7. 🤖 Development: Context, Prompts & Workflows
+#### 7. 🧠 Development: Context, Prompts & Workflows
 
-Context engineering for development workflows: AGENTS.md guardrails, Prompts, Claude Skills, GitHub SpecKit workflows, and Knowledge Base examples.
+Professional development system with AI guardrails, automated quality validation, and comprehensive workflow tooling for GitHub SpecKit integration, browser automation, and code quality enforcement.
 
-**Core Components**:
-  - **AGENTS.md**: AI behavior guardrails preventing common failure patterns (rush to code, assumptions, over-engineering)
-  - **Knowledge Base**: Code standards, initialization patterns, Webflow constraints, animation strategy, debugging guides
-  - **Claude Skills**: Specialized validators, component generators, and SpecKit integration helpers
-  - **Workflow Prompts**: Complete, Plan, Research, Implementation modes with parallel sub-agent support
+🤖 **AGENTS.md** — AI Behavior Guardrails
 
-**AI Guardrails & Quality Framework**:
-  - Confidence gating (<80% → ask clarifying questions), scope discipline, evidence > assumptions
-  - Request analysis phases: Classification → Scope → Context → Solution → Validation → Review
-  - Solution effectiveness matrix: Simplicity, performance, maintainability, scope checks
-  - Anti-patterns prevention: Rush to code, assumption-based changes, task misinterpretation, cascading breaks
+Comprehensive quality framework preventing common AI failures and enforcing rigorous development standards.
 
-**GitHub SpecKit Workflows**:
-  - **Standard Flow**: Specify → Plan → Tasks → Implementation → Complete
-  - **Parallel Execution**: Multiple sub-agents for faster feature delivery
-  - **Adaptive Modes**: Investigation, hotfix, performance optimization
-  - **Progressive Deliverables**: Spec → Plan → Tasks → Analysis → Implementation → Summary
+**Key Features**:
+  - **Collaboration First**: No implementation without explicit approval; analysis-only mode by default
+  - **Confidence Gates**: <80% → clarify | 40-79% → proceed with caution | 80-100% → proceed
+  - **Anti-Pattern Prevention**: Rush to code, assumption-based changes, task misinterpretation, cascading breaks, over-engineering, clever over clear
+  - **Explicit Uncertainty**: Mandatory "I'M UNCERTAIN ABOUT THIS:" prefix when confidence <100%
+  - **Request Analysis Framework**: Classification → Scope → Context → Solution → Validation → Review
+  - **Hook-Based Validation**: PreToolUse, PostToolUse, UserPromptSubmit hooks with skill-rules.json integration
 
-**Code Quality & Debugging**:
-  - **Pattern Validation**: Automated checks against project standards
-  - **Component Generation**: Templates for base, form, modal, CMS, video components
-  - **Debug Workflow**: Understand → Investigate → Debug → Fix → Test → Review
-  - **Chrome DevTools MCP**: Browser-based debugging with evidence-based approach
+.
+
+📝 **Prompts** — Workflow Automation
+
+Structured prompts for code workflows and GitHub SpecKit integration.
+
+**Code Workflows** (`prompts/code/`):
+  - `code_debugger.yaml` — Systematic debug workflow with evidence-based troubleshooting
+  - `code_implementer.yaml` — Implementation workflow with quality checks
+  - `code_performance_improvement.yaml` — Performance optimization strategies
+  - `code_plan.yaml` — Planning and architecture workflows
+
+**GitHub SpecKit** (`prompts/github_spec_kit/`):
+  - `sk__complete.yaml` — Full spec-driven development with manual approval gates
+  - `sk__spec_plan.yaml` — Specification and planning phase
+  - `sk__implementation.yaml` — Implementation-only mode
+  - `sk__feature_research.yaml` — Feature research and analysis
+  - `parallel_agents/` — Multi-agent parallel execution for complex features
+
+.
+
+⚡ **Skills** — Executable Workflows**
+
+Claude Skills for browser automation, Git workflows, and visual documentation.
+
+**Available Skills**:
+  - **`chrome-devtools/`** — Browser automation, debugging, performance analysis with Puppeteer
+  - **`git-commit/`** — Automated Git commit workflows with conventional commits
+  - **`git-worktrees/`** — Git worktree management for parallel development
+  - **`markdown-flowchart/`** — Generate Mermaid flowcharts from descriptions
+  - **`workflow-spec-kit/`** — GitHub SpecKit automation and integration
+
+.
+
+🛠️ **Hooks** — Automated Validation**
+
+Hook-based validation scripts that run automatically during development.
+
+**Validation Hooks**:
+  - **`validate-bash.sh`** — PreToolUse hook: Validates bash commands before execution
+  - **`validate-post-response.sh`** — PostToolUse hook: Checks file edits against risk patterns
+  - **`validate-skill-activation.sh`** — UserPromptSubmit hook: Suggests relevant skills based on context
+  - **`skill-rules.json`** (409 lines) — Risk patterns, prompt triggers, file triggers, enforcement rules
+
+.
+
+📚 **Knowledge Base** — Reference Guides
+
+Development standards, platform constraints, and best practices documentation.
+
+**Available Guides**:
+  - **`code_standards.md`** — JS/CSS naming conventions, file headers, comment standards, BEM methodology
+  - **`animation_strategy.md`** — Motion.dev integration, performance patterns, sequence orchestration
+  - **`debugging.md`** — Systematic debug workflow, evidence-based troubleshooting methodology
+  - **`webflow_platform_constraints.md`** — Webflow-specific limitations, workarounds, and best practices
+  - **`initialization_pattern.md`** — Component lifecycle, setup patterns, and initialization strategies
+  - **`document_style_guide.md`** — Documentation formatting standards and writing guidelines
+  - **`serena_mcp.md`** — Serena MCP server integration guide and usage patterns
