@@ -193,6 +193,41 @@
         "contentPatterns": []
       }
     },
+    "git-commit": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Professional commit workflow - analyze changes, filter artifacts, write Conventional Commits messages",
+      "promptTriggers": {
+        "keywords": [
+        "commit",
+        "git commit",
+        "commit message",
+        "conventional commits",
+        "staging",
+        "staged",
+        "unstaged",
+        "git add",
+        "commit strategy",
+        "atomic commit",
+        "commit format",
+        "commit type"
+      ],
+        "intentPatterns": [
+          "(ready to|need to|want to|should).*?(commit|check in)",
+          "(write|create|make).*?(commit message|commit)",
+          "(commit|stage|add).*?(changes|files)",
+          "(what|how).*?(commit|commit message|staging)",
+          "(analyze|review|check).*?(changes|staged|unstaged)",
+          "(conventional|atomic).*?(commit)",
+          "(split|separate).*?(commit)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [".git/**", ".claude/skills/git-commit/**"],
+        "contentPatterns": ["git commit", "git add", "git status"]
+      }
+    },
     "git-worktrees": {
       "type": "workflow",
       "enforcement": "suggest",
@@ -311,6 +346,17 @@
     }
   },
   "riskPatterns": {
+    "commitOperations": {
+      "patterns": [
+        "git commit",
+        "git add",
+        "git status",
+        "staged",
+        "unstaged",
+        "commit message"
+      ],
+      "reminder": "✅ COMMIT CHECK:\n- Internal artifacts excluded (task lists, debug notes, coverage)?\n- Non-conventional files skipped (test files in wrong location)?\n- Following Conventional Commits format (type(scope): description)?\n- Commit message under 50 chars, imperative mood?\n- Changes atomic (one logical unit)?\n- Using 'git add <files>' not 'git add .'?"
+    },
     "animation": {
       "patterns": [
         "Motion\\.",
