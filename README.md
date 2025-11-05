@@ -161,6 +161,8 @@ Automate ClickUp task management and agile workflows through natural language.
 
 Professional development system with AI guardrails, automated quality validation, and comprehensive workflow tooling for GitHub SpecKit integration, browser automation, and code quality enforcement.
 
+
+
 🤖 **AGENTS.md** — AI Behavior Guardrails
 
 Comprehensive quality framework preventing common AI failures and enforcing rigorous development standards.
@@ -173,7 +175,7 @@ Comprehensive quality framework preventing common AI failures and enforcing rigo
   - **Request Analysis Framework**: Classification → Scope → Context → Solution → Validation → Review
   - **Hook-Based Validation**: PreToolUse, PostToolUse, UserPromptSubmit hooks with skill-rules.json integration
 
-.
+
 
 📝 **Prompts** — Workflow Automation
 
@@ -192,7 +194,7 @@ Structured prompts for code workflows and GitHub SpecKit integration.
   - `sk__feature_research.yaml` — Feature research and analysis
   - `parallel_agents/` — Multi-agent parallel execution for complex features
 
-.
+
 
 ⚡ **Skills** — Executable Workflows**
 
@@ -205,7 +207,7 @@ Claude Skills for browser automation, Git workflows, and visual documentation.
   - **`markdown-flowchart/`** — Generate Mermaid flowcharts from descriptions
   - **`workflow-spec-kit/`** — GitHub SpecKit automation and integration
 
-.
+
 
 🛠️ **Hooks** — Automated Validation**
 
@@ -217,7 +219,7 @@ Hook-based validation scripts that run automatically during development.
   - **`validate-skill-activation.sh`** — UserPromptSubmit hook: Suggests relevant skills based on context
   - **`skill-rules.json`** (409 lines) — Risk patterns, prompt triggers, file triggers, enforcement rules
 
-.
+
 
 📚 **Knowledge Base** — Reference Guides
 
