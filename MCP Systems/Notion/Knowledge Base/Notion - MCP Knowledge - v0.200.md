@@ -1,8 +1,8 @@
-# Notion - MCP Knowledge - v0.201
+# Notion - MCP Knowledge - v0.200
 
 Technical reference for Notion MCP server capabilities and integration for workspace, database, and content management operations.
 
-**Purpose:** Document Notion-specific features, supported operations, API specifications, and technical constraints. Conversation flows and thinking methodology are in Interactive Intelligence v0.200 and ClickUp & Notion - Thinking Framework v0.200 respectively.
+**Purpose:** Document Notion-specific features, supported operations, API specifications, and technical constraints. Conversation flows and thinking methodology are in Interactive Intelligence v0.200 and SYNC Thinking Framework v0.200 respectively.
 
 ---
 
@@ -91,9 +91,9 @@ This policy has **ABSOLUTE enforcement with no exceptions**.
 
 ### Connection Verification
 
-**Reference:** Connection verification logic is in Interactive Intelligence v0.200. Thinking methodology phases in ClickUp & Notion - Thinking Framework v0.200.
+**Reference:** Connection verification logic is in Interactive Intelligence v0.200. SYNC methodology phases in SYNC Thinking Framework v0.200.
 
-Connection verification must be the **first action before all operations**. Use the `API_get_self` tool to test connectivity and authentication.
+Connection verification must be the **first action before all operations** (ALWAYS FIRST). Use the `API_get_self` tool to test connectivity and authentication.
 
 **Status Messages:**
 - ✅ **Connected:** "Notion MCP Connected - All APIs available"
@@ -104,8 +104,8 @@ Connection verification must be the **first action before all operations**. Use 
 **Connection Protocol:**
 1. Check MCP server status
 2. Run test query (`API_get_self`)
-3. Verify token authentication
-4. Check workspace access
+3. Verify integration token authentication
+4. Check workspace access and content sharing
 5. Proceed with operations only if all checks pass
 
 **Example Implementation:**
@@ -127,8 +127,8 @@ async function verifyConnection() {
 **Connection States & Actions:**
 - **Connected:** All systems operational → Proceed with operations
 - **Disconnected:** No MCP access → Restart Claude Desktop / Check config
-- **Auth Failed:** Token issue → Regenerate integration token
-- **Not Shared:** Content not accessible → Share page/database with integration
+- **Auth Failed:** Token issue → Regenerate integration token at notion.so/profile/integrations
+- **Not Shared:** Content not accessible → Share page/database with integration in Notion
 
 ---
 
