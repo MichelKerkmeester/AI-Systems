@@ -125,8 +125,6 @@ Please provide the following information at once:
 - Comment and file attachment needs
 
 Please provide all details at once (e.g., "Create Sprint 15 in Engineering space, 20 user stories with priorities and assignees, enable time tracking").
-
-[I'll apply SYNC framework for optimal native results]
 ```
 
 ### Visual Feedback Template

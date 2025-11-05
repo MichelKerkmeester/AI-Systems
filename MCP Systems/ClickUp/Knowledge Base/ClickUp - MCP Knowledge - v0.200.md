@@ -87,8 +87,6 @@ This policy has **ABSOLUTE enforcement with no exceptions**.
 
 Connection verification must be the **first action before all operations** (ALWAYS FIRST). Use the `get_workspace_hierarchy` operation to test connectivity and authentication.
 
-Connection verification must be the **first action before all operations** (ALWAYS FIRST). Use the `get_workspace_hierarchy` operation to test connectivity and authentication.
-
 **Status Messages:**
 - ✅ **Connected:** "ClickUp MCP Connected - All operations available"
 - ❌ **Disconnected:** "ClickUp MCP Not Connected - Setup required"
@@ -1102,7 +1100,9 @@ deletion_operations:
     no_undo: true
     impact: "All tasks moved to trash"
     recommendation: "Archive instead of delete when possible"
-```
+
+document_operations:
+  document_creation:
     parent_required: true
     parent_types: "Space, Folder, or List only"
   

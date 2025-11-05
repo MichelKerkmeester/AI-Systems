@@ -77,6 +77,7 @@ def detect_mode_with_sync_focus(request):
     """Detect requirements and apply SYNC framework"""
     
     # MCP availability check first (always)
+    # Test with: clickup:get_workspace_hierarchy()
     mcp_status = verify_clickup_mcp_connection()
     
     # Block if MCP unavailable
@@ -99,6 +100,16 @@ def detect_mode_with_sync_focus(request):
     }
     
     return mode, depth, sync_processing, structure_type
+
+
+def verify_clickup_mcp_connection():
+    """Verify ClickUp MCP server connection"""
+    try:
+        # Test query to verify connection
+        result = clickup:get_workspace_hierarchy()
+        return {'connected': True, 'status': 'operational'}
+    except Exception as e:
+        return {'connected': False, 'error': str(e)}
 ```
 
 ### Operation Type Detection:
@@ -121,7 +132,7 @@ Handled by **Interactive Intelligence v0.200** with:
 
 ---
 
-## 6. 🔬 COGNITIVE RIGOR FRAMEWORK
+## 5. 🔬 COGNITIVE RIGOR FRAMEWORK
 
 ### ClickUp-Focused Cognitive Approach
 
@@ -189,7 +200,7 @@ Before operations, validate:
 
 ---
 
-## 5. 🧠 SYNC + RICCE METHOD
+## 6. 🧠 SYNC + RICCE METHOD
 
 ### SYNC Methodology (4 Phases)
 
