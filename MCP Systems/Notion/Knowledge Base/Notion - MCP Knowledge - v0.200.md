@@ -138,7 +138,7 @@ async function verifyConnection() {
 
 ### Available Operations
 
-**Note:** Thinking methodology (Survey → Yield → Navigate → Create analog) and conversation flows are defined in ClickUp & Notion - Thinking Framework v0.200 and Interactive Intelligence v0.200.
+**Note:** Thinking methodology (Survey → Yield → Navigate → Create analog) and conversation flows are defined in Notion - SYNC Thinking Framework v0.200 and Notion - Interactive Intelligence v0.200.
 
 ```yaml
 workspace_operations:
@@ -1677,7 +1677,7 @@ official_documentation:
 
 related_documents:
   thinking_framework:
-    file: "ClickUp & Notion - Thinking Framework - v0.200"
+    file: "Notion - SYNC Thinking Framework - v0.200"
     purpose: "Methodology and cognitive framework"
     sections:
       - "Decision-making processes"
@@ -1690,7 +1690,7 @@ related_documents:
       - "Create: Quality validation + integration delivery"
   
   interactive_intelligence:
-    file: "ClickUp & Notion - Interactive Intelligence - v0.200"
+    file: "Notion - Interactive Intelligence - v0.200"
     purpose: "Conversation flows and interaction patterns"
     sections:
       - "Conversation Architecture"
@@ -1818,33 +1818,33 @@ Queue: 0 operations
 Operating normally
 ```
 
-### Integration with ClickUp & Notion Helper
+### Notion MCP Integration
 
 ```yaml
-helper_integration:
+notion_integration:
   workflow:
-    1: "Helper verifies Notion connection"
+    1: "Verify Notion MCP connection"
     2: "Receives natural language request"
-    3: "Identifies Notion as best platform for content/knowledge"
-    4: "Routes to Notion MCP"
+    3: "Identifies operation type (database, page, content)"
+    4: "Routes to appropriate Notion MCP operations"
     5: "Applies smart defaults based on use case"
     6: "Executes operation with progress tracking"
     7: "Returns organized workspace with next steps"
   
   use_case_routing:
-    knowledge_management: "Route to Notion (wikis, docs, knowledge bases)"
-    task_management: "Route to ClickUp (tasks, projects, workflows)"
-    documentation: "Route to Notion (specs, guides, references)"
-    project_tracking: "Route to ClickUp (milestones, sprints, deliverables)"
-    content_calendar: "Route to Notion (publishing, content planning)"
-    team_collaboration: "Both (Notion for docs, ClickUp for execution)"
+    knowledge_management: "Notion (wikis, docs, knowledge bases)"
+    documentation: "Notion (specs, guides, references)"
+    content_calendar: "Notion (publishing, content planning)"
+    databases: "Notion (structured data, properties, relations)"
+    hierarchical_content: "Notion (nested pages, wikis)"
+    team_collaboration: "Notion (docs, comments, sharing)"
   
   example_conversation:
     input: "Set up a knowledge base for our team"
     process: |
-      Helper: [Checking Notion connection...]
+      Notion MCP: [Checking connection...]
       → Connection verified ✔
-      → Notion best for knowledge management
+      → Notion optimal for knowledge management
       → Creating hierarchical structure
       → Adding templates for consistency
       → Result: Knowledge base ready with 5 sections
@@ -1852,4 +1852,4 @@ helper_integration:
 
 ---
 
-*This document focuses exclusively on Notion MCP server capabilities and technical specifications. For thinking methodology and cognitive framework, see ClickUp & Notion - Thinking Framework v0.200. For conversation flows and error handling (REPAIR protocol), see ClickUp & Notion - Interactive Intelligence v0.200.*
+*This document focuses exclusively on Notion MCP server capabilities and technical specifications. For thinking methodology and cognitive framework, see Notion - SYNC Thinking Framework v0.200. For conversation flows and error handling (REPAIR protocol), see Notion - Interactive Intelligence v0.200.*
