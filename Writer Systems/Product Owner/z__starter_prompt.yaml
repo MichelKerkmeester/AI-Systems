@@ -16,19 +16,23 @@ operating_mode:
 # ───────────────────────────────────────────────────────────────
 user_inputs:
   context: |
-    [CONTEXT]
-
-    Provide background information about the current environment, project state,
-    existing constraints, or relevant documentation. This helps the agent understand
-    the broader situation before executing the request.
+    Ticket regarding an update to the Create Company/Barter deals logic of Phase 1 Epic.
 
   request: |
-    [REQUEST]
+    Create a ticket with this change:
+    Steps / Breadcrumbs of Create Barter deal or Company:
+    - Active = Dark Label + 100% Opacity Form
+    - To-Do = Light Label with 50% opacity and 50% opacity Form
+    - Finished = Light label (with check) and with 100% opacity and 100% opacity form
+    
+    A step doesn't go into the finished state untill all requirements are met.
+    When requirements are met, the active state moves to the item below it, and the previous one goes to finished.
 
-    Describe what you want the agent to do. Be specific about the task, goals,
-    or problem to solve. The agent will process this according to AGENTS.md and
-    Knowledge Base guidelines.
-
+  analysis_scope: |
+    /Users/michelkerkmeester/MEGA/AI Systems/Writer Systems/Product Owner/Context/Stories/Story - Barter deals.md
+    /Users/michelkerkmeester/MEGA/AI Systems/Writer Systems/Product Owner/Context/Stories/Story - Companies.md
+    /Users/michelkerkmeester/MEGA/AI Systems/Writer Systems/Product Owner/Context/App Screens
+  
 # ───────────────────────────────────────────────────────────────
 # RESOURCES
 # ───────────────────────────────────────────────────────────────
@@ -40,6 +44,40 @@ agents_md_locations:
     - "CLAUDE.md: STOP - READ AGENTS.md INSTEAD"
     - "Any redirect pattern pointing to AGENTS.md"
 
+# ───────────────────────────────────────────────────────────────
+# FIELD HANDLING
+# ───────────────────────────────────────────────────────────────
+field_handling:
+  defaults:
+    context_empty: "Infer from REQUEST and AGENTS.md routing analysis"
+    request_empty: "Error: REQUEST required - describe the task or goal"
+    analysis_scope_empty: "Proceed with AGENTS.md and routed Knowledge Base documents only"
+    
+  context_inference:
+    from_request:
+      - extract_task_type
+      - identify_domain_or_topic
+      - detect_urgency_signals
+      - determine_output_expectations
+    from_workspace:
+      - scan_for_agents_md
+      - detect_project_structure
+      - identify_existing_standards
+      - map_export_folder_availability
+    from_routing:
+      - knowledge_base_documents_accessed
+      - guardrails_applied
+      - workflow_requirements_identified
+  
+  analysis_scope_handling:
+    reference_materials:
+      present: "Load and scan files/folders for patterns, standards, and context"
+      empty: "Proceed with AGENTS.md routing only"
+      not_accessible: "Log warning and proceed without external references"
+    extract_principles:
+      present: "Extract and apply specified frameworks or patterns"
+      empty: "Use AGENTS.md and Knowledge Base principles only"
+  
 # ───────────────────────────────────────────────────────────────
 # RULES
 # ───────────────────────────────────────────────────────────────
@@ -101,6 +139,15 @@ workflow:
     clarify: Ask targeted questions if critical info missing
     validation: context_understood
 
+  step_5a_process_analysis_scope:
+    input: "[ANALYSIS_SCOPE]" (if provided)
+    action: Load and analyze reference materials and extract specified principles
+    understand:
+      - Reference materials provide supplementary context
+      - Principles to extract guide the analysis approach
+      - This enriches but does not override AGENTS.md routing
+    validation: analysis_scope_incorporated_or_skipped
+
   step_6_execute:
     input: "[REQUEST]"
     action: Process request strictly per AGENTS.md + Knowledge Base guidelines
@@ -108,7 +155,7 @@ workflow:
     validation: request_completed
     output_handling:
       - if_export_folder_exists: "Deliver to ./Export/ with [###] - filename format"
-      - if_folder_missing: "Notify user and request folder creation"
+      - if_folder_missing: "Notify user and request folder creation if relevant"
       - sequential_numbering: "Check existing files, use next number (001, 002, etc.)"
 
 # ───────────────────────────────────────────────────────────────
