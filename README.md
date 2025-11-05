@@ -28,10 +28,8 @@
 
 ---
 
-#### → WRITER SYSTEMS
-
-<a id="1-product-owner-writer"></a>
-### 👨‍💻 1. Product Owner Writer
+<a id="1-product-owner"></a>
+### 👨‍💻 1. Product Owner
 
 Create professional tickets, stories, epics, and documentation with automatic complexity scaling and concise transparent DEPTH processing.
 
@@ -79,8 +77,6 @@ Create effective AI prompts using 7 specialized frameworks, systematic evaluatio
   - Target scores: 40+/50 standard, 45+/50 excellence
 
 ---
-
-#### → MCP SYSTEMS
 
 <a id="3-media-editor-agent"></a>
 ### 🎬 3. Media Editor Agent
@@ -153,10 +149,8 @@ Automate ClickUp task management and agile workflows through natural language.
 
 ---
 
-#### → DEVELOPMENT
-
 <a id="7-dev-context-prompts-workflows"></a>
-### 🤖 7. Context, Prompts & Workflows
+### 🤖 7. Development: Context, Prompts & Workflows
 
 Professional development system with AI guardrails, automated quality validation, and comprehensive workflow tooling for GitHub SpecKit integration, browser automation, and code quality enforcement.
 
