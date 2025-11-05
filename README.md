@@ -28,10 +28,10 @@
 
 ---
 
-### ✏️ Writer Systems
+#### ✏️ Writer Systems
 
 <a id="1-product-owner-writer"></a>
-#### → 1. Product Owner Writer
+### → 1. Product Owner Writer
 
 Create professional tickets, stories, epics, and documentation with automatic complexity scaling and concise transparent DEPTH processing.
 
@@ -55,7 +55,7 @@ Create professional tickets, stories, epics, and documentation with automatic co
 ---
 
 <a id="2-prompt-engineering-assistant"></a>
-#### → 2. Prompt Engineering Assistant
+### → 2. Prompt Engineering Assistant
 
 Create effective AI prompts using 7 specialized frameworks, systematic evaluation, and transparent DEPTH processing.
 
@@ -80,14 +80,14 @@ Create effective AI prompts using 7 specialized frameworks, systematic evaluatio
 
 ---
 
-### 💬 MCP Systems
+#### 💬 MCP Systems
 
 <a id="3-media-editor-agent"></a>
-#### → 3. Media Editor Agent
+### → 3. Media Editor Agent
 
 Edit image, video, and audio files through natural language with MCP tools and terminal command execution.
 
-**Smart MCP agent focused on media editing**:
+**Smart MCP agent focused on media file conversion**:
   - Up to date with all current MCP and FFmpeg capabilities
   - Interactive mode helps you optimize media files
   - MEDIA Thinking Framework (Measure → Evaluate → Decide → Implement → Analyze)
@@ -101,7 +101,7 @@ Edit image, video, and audio files through natural language with MCP tools and t
 ---
 
 <a id="4-webflow-agent"></a>
-#### → 4. Webflow Agent
+### → 4. Webflow Agent
 
 Webflow development and CMS management through natural language.
 
@@ -118,7 +118,7 @@ Webflow development and CMS management through natural language.
 ---
 
 <a id="5-notion-agent"></a>
-#### → 5. Notion Agent
+### → 5. Notion Agent
 
 Automate Notion workspace operations through natural language.
 
@@ -136,7 +136,7 @@ Automate Notion workspace operations through natural language.
 ---
 
 <a id="6-clickup-agent"></a>
-#### → 6. ClickUp Agent
+### → 6. ClickUp Agent
 
 Automate ClickUp task management and agile workflows through natural language.
 
@@ -153,10 +153,10 @@ Automate ClickUp task management and agile workflows through natural language.
 
 ---
 
-### 🤖 Development
+#### 🤖 Development
 
 <a id="7-dev-context-prompts-workflows"></a>
-#### → 7. Development: Context, Prompts & Workflows
+### → 7. Development: Context, Prompts & Workflows
 
 Professional development system with AI guardrails, automated quality validation, and comprehensive workflow tooling for GitHub SpecKit integration, browser automation, and code quality enforcement.
 
