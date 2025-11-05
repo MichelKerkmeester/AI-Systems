@@ -6,25 +6,19 @@
 ## 📋 Table of Contents
 
 #### ✏️ Writer Systems
-
 1. [Product Owner](#1-product-owner)
 2. [Prompt Engineering Assistant](#2-prompt-engineering-assistant)
 
 #### 💬 MCP Systems
-
 3. [Media Editor Agent](#3-media-editor-agent)
 4. [Webflow Agent](#4-webflow-agent)
-5. [ClickUp & Notion Agent](#5-clickup--notion-agent)
+5. [Notion Agent](#5-notion-agent)
+6. [ClickUp Agent](#6-clickup-agent)
 
-
-
-#### 🧠 Context Engineering
-
-6. [Effective GPT](#6-effective-gpt)
-7. [DEV: Context, Prompts & Workflows](#7-dev-context-prompts-workflows)
+#### 🤖 Development | Context Engineering
+7. [DEV: Context, Prompts & Workflows](#8-dev-context-prompts-workflows)
 
 #### 📚 Resources
-
 - [Claude Desktop](https://claude.ai/desktop)
 - [Claude Skills](https://www.anthropic.com/news/skills)
 - [Claude Subagents](https://docs.claude.com/en/docs/claude-code/sub-agents)
@@ -92,77 +86,78 @@ Create effective AI prompts using 7 specialized frameworks, systematic evaluatio
 <a id="3-media-editor-agent"></a>
 #### 3. 🎬 Media Editor Agent
 
-Edit image, video, and audio files via natural language.
+Edit image, video, and audio files through natural language with MCP tools and terminal command execution.
 
-**Universal Media Operations & Intelligence**:
-  - Image: Resize, convert, compress, crop, batch
-  - Video: Transcode, trim, overlay, subtitles
-  - Audio: Extract, convert, normalize
+**Smart MCP agent focused on media editing**:
+  - Up to date with all current MCP and FFmpeg capabilities
+  - Interactive mode helps you optimize media files
+  - MEDIA Thinking Framework (Measure → Evaluate → Decide → Implement → Analyze)
 
-**MEDIA Framework & Challenge Mode**:
-  - 5-phase: Measure/Evaluate/Decide/Implement/Analyze
-  - Challenge at 3+ rounds ("85% quality, 50% smaller")
-  - REPAIR protocol for error recovery
+**Capabilities**:
+  - **Image Operations**: Resize, convert, compress, crop, batch processing
+  - **Audio Operations**: Extract, convert, normalize, quality optimization
+  - **Video Operations**: Transcode, trim, overlay, subtitles, format conversion
+  - **HLS Video Conversion**: FFmpeg-powered terminal commands to convert videos to HLS playslists
 
 .
 
 <a id="4-webflow-agent"></a>
 #### 4. 🌐 Webflow Agent
 
-Full-stack Webflow development through natural language with Designer and Data APIs.
+Webflow development and CMS management through natural language.
 
-**Smart MCP agent focused on Webflow = better results**:
-  - Up to date with all current MCP and CMS capabilities 
-  - ATLAS Thinking Framework 
-  - REPAIR protocol for error recovery
+**Smart MCP agent focused on Webflow**:
+  - Up to date with all current MCP capabilities
+  - Interactive mode helps you build optimal structures
+  - SYNC Thinking Framework (Survey → Yield → Navigate → Create)
 
-**Complete Development Capabilities**:
-  - Create collections, fields, and relationships
-  - Build components and layours with Designer integratiom
-  - SEO optimization and analysis
+**Capabilities**:
+  - **CMS Operations**: Create collections, fields, and relationships
+  - **Designer Integration**: Build components and layouts with Designer API
+  - **Content Management**: SEO optimization, content publishing, site analysis
 
 .
 
-<a id="5-clickup--notion-agent"></a>
-#### 5. 📊 ClickUp & Notion Agent
+<a id="5-notion-agent"></a>
+#### 5. 📊 Notion Agent
 
-Automate ClickUp & Notion actions with this focused MCP Agent.
+Automate Notion workspace operations through natural language.
 
-**Smart Notion & ClickUp automation guidance**:
-  - Interactive mode helps you get results
-  - SYNC Thinking Framework
-  - REPAIR protocol for error recovery
+**Smart MCP agent focused on Notion**:
+  - Up to date with all current MCP capabilities
+  - Interactive mode helps you build optimal structures
+  - SYNC Thinking Framework (Survey → Yield → Navigate → Create)
 
-**Dual-Platform Intelligence & MCP Verification**:
-  - Notion: Databases, pages, rich content, wikis
-  - ClickUp: Tasks, time tracking, sprints, projects
-  - Always verifies MCP connections before operations
+**Capabilities**:
+  - **Database Operations**: Create databases with flexible properties, relations, rollups, formulas
+  - **Page Management**: Build hierarchical pages, nested structures, rich content blocks
+  - **Search & Collaboration**: Workspace search, comments, page sharing
+  - **Smart Structure Selection**: Auto-balance database vs page hierarchies based on use case
+
+.
+
+<a id="6-clickup-agent"></a>
+#### 6. ✅ ClickUp Agent
+
+Automate ClickUp task management and agile workflows through natural language.
+
+**Smart MCP agent focused on ClickUp**:
+  - Up to date with all current MCP capabilities
+  - Interactive mode helps you organize projects efficiently
+  - SYNC Thinking Framework (Survey → Yield → Navigate → Create)
+
+**Capabilities**:
+  - **Hierarchy Operations**: Create spaces, folders, lists with organizational structure
+  - **Task Management**: Single/bulk task creation, updates, assignments, priorities, custom fields
+  - **Time Tracking**: Start/stop timers, manage time entries, generate reports
+  - **Collaboration**: Comments, tags, file attachments, team assignments
 
 ---
 
-###  Context Engineering
-
-<a id="6-effective-gpt"></a>
-#### 6. 💬 Effective GPT
-
-System instructions for direct, efficient AI communication without filler.
-
-**Core Communication Principles**:
-  - Eliminates emojis, filler, hype, and conversational transitions
-  - Blunt, directive phrasing focused on cognitive clarity
-  - No engagement-boosting or sentiment-softening behaviors
-  - Immediate termination after information delivery
-
-**Session Isolation & Privacy**:
-  - Each conversation treated as new user
-  - No continuity between sessions
-  - No memory of past interactions
-  - Dutch exception: Softened rules (non-tech user)
-
-.
+###  Development | Context Engineering
 
 <a id="7-dev-context-prompts-workflows"></a>
-#### 7. 📜 Development: Context, Prompts & Workflows
+#### 7. 🤖 Development: Context, Prompts & Workflows
 
 Context engineering for development workflows: AGENTS.md guardrails, Prompts, Claude Skills, GitHub SpecKit workflows, and Knowledge Base examples.
 
@@ -189,9 +184,3 @@ Context engineering for development workflows: AGENTS.md guardrails, Prompts, Cl
   - **Component Generation**: Templates for base, form, modal, CMS, video components
   - **Debug Workflow**: Understand → Investigate → Debug → Fix → Test → Review
   - **Chrome DevTools MCP**: Browser-based debugging with evidence-based approach
-
-**Context Management**:
-  - Context extraction prompts for workflow reuse
-  - Token-aware skill loading (progressive disclosure)
-  - Source attribution standards with confidence scoring
-  - Uncertainty explicit marking (UNKNOWN vs fabrication)
