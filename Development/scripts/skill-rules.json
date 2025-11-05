@@ -343,6 +343,53 @@
         "pathPatterns": ["specs/**/", "specs/**/spec.md", "specs/**/plan.md", "specs/**/implementation_plan.md"],
         "contentPatterns": []
       }
+    },
+    "markdown-flowchart": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Create comprehensive ASCII flowcharts in markdown for visualizing workflows, user journeys, system architectures, and decision trees",
+      "promptTriggers": {
+        "keywords": [
+          "flowchart",
+          "flow chart",
+          "workflow diagram",
+          "process diagram",
+          "process map",
+          "decision tree",
+          "user journey",
+          "system flow",
+          "process visualization",
+          "ascii diagram",
+          "workflow visualization",
+          "process flow",
+          "data flow"
+        ],
+        "intentPatterns": [
+          "(create|make|generate|draw).*?(flowchart|flow chart|diagram|process map)",
+          "(visualize|map|show|diagram).*?(workflow|process|flow|journey)",
+          "(document|explain).*?(process|workflow|flow).*?(visual|diagram)",
+          "(need|want).*?(flowchart|diagram|visualization)",
+          "how.*?(visualize|show|map).*?(process|workflow)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "**/*.md",
+          "specs/**",
+          "knowledge/**",
+          "docs/**",
+          "README.md"
+        ],
+        "contentPatterns": [
+          "┌─────",
+          "╭─────",
+          "╱───",
+          "───────────────",
+          "PARALLEL EXECUTION",
+          "APPROVAL GATE"
+        ]
+      }
     }
   },
   "riskPatterns": {
