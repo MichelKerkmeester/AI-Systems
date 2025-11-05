@@ -1,19 +1,21 @@
-# ClickUp - MCP Knowledge - v0.201
+# ClickUp - MCP Knowledge - v0.200
 
-Complete technical reference for the ClickUp Model Context Protocol server integration. This document provides comprehensive specifications for task management, project tracking, time tracking, and agile workflow operations through native MCP capabilities.
+Technical reference for ClickUp MCP server capabilities and integration for task management, project tracking, and agile workflow operations.
+
+**Purpose:** Document ClickUp-specific features, supported operations, API specifications, and technical constraints. Conversation flows and thinking methodology are in Interactive Intelligence v0.200 and SYNC Thinking Framework v0.200 respectively.
 
 ---
 
-## Table of Contents
+## 📋 TABLE OF CONTENTS
 
 1. [🔌 SERVER OVERVIEW](#1-server-overview)
-2. [🎯 CORE CAPABILITIES](#2-core-capabilities)
-3. [📋 FORMAT SUPPORT](#3-format-support)
+2. [🛠️ CORE CAPABILITIES](#2-core-capabilities)
+3. [📊 FORMAT SUPPORT](#3-format-support)
 4. [✅ TASK & PROJECT OPERATIONS](#4-task-project-operations)
 5. [📊 WORKSPACE & HIERARCHY OPERATIONS](#5-workspace-hierarchy-operations)
 6. [⏱️ TIME TRACKING & COLLABORATION](#6-time-tracking-collaboration)
-7. [⚠️ LIMITATIONS & CONSTRAINTS](#7-limitations-constraints)
-8. [⚡ QUICK REFERENCE](#8-quick-reference)
+7. [⚠️ LIMITATIONS](#7-limitations)
+8. [🏎️ QUICK REFERENCE](#8-quick-reference)
 
 ---
 
@@ -21,40 +23,106 @@ Complete technical reference for the ClickUp Model Context Protocol server integ
 
 ## 1. 🔌 SERVER OVERVIEW
 
-### Server Details
+### MCP Server Details
 
 The ClickUp MCP Server (`@clickup/mcp-server-clickup`) provides native Model Context Protocol integration for task management and project tracking operations. It enables agile workflows, sprint management, time tracking, and collaboration features directly through MCP.
 
 **Key Information:**
 - **Repository:** https://github.com/clickup/mcp-server-clickup
-- **Integration Type:** Native MCP Server
-- **Primary Use Cases:** Agile workflows, sprints, time tracking
-- **Complementary System:** Works alongside Notion MCP for documentation
+- **NPM Package:** `@clickup/mcp-server-clickup`
+- **Protocol:** Model Context Protocol (MCP)
+- **Authentication:** API Key (environment variable)
+- **APIs:** Task, Hierarchy, Time Tracking, Collaboration (native)
 
-**Core Functions:**
-- Task creation and management
-- Project hierarchy (Spaces/Folders/Lists)
-- Time tracking and reporting
-- Custom fields and bulk operations
-- Document and comment management
-- Tag and assignee management
+**Important:** This server executes **ZERO custom code**. All operations use native ClickUp MCP operations exclusively. Custom scripts or external integrations are not applicable (N/A). The server provides direct MCP access to ClickUp workspace features.
+
+### System Architecture
+
+The ClickUp MCP workflow follows a strict sequence to ensure proper connectivity and API access:
+
+**Operation Sequence:**
+1. **Connection Check** (ALWAYS FIRST) - Verify MCP server is active
+2. **User Request** - Receive and parse user intent
+3. **Intent Recognition** - Determine operation type needed
+4. **Operation Selection** - Choose between Hierarchy/Task/Tracking operations
+5. **Native MCP Call** - Execute using official ClickUp MCP (NO custom code)
+6. **Feedback & Confirmation** - Return results to user
+
+**Deployment Architecture:**
+
+*NPM Deployment (Standard):*
+- Direct API key management in environment
+- Configuration via Claude Desktop config file
+- Workspace-level access with API key permissions
+- Uses stdio transport (default MCP connection)
+
+**MCP Routing:**
+- **Hierarchy Operations:** Requires API key with workspace access (folders, lists, spaces)
+- **Task Operations:** Requires API key with task management permissions (CRUD on tasks)
+- **Time Tracking:** Requires API key with time tracking scope (timers, entries, reports)
+- **Collaboration:** Requires API key with collaboration access (comments, tags, assignments)
+
+### Core Principle
+
+**ABSOLUTE RULE:** Only native ClickUp MCP operations are allowed. Custom scripts, external integrations, or non-MCP workflows are not applicable.
+
+**✅ Allowed Operations:**
+- Native ClickUp MCP operations exclusively
+- `create_task()` - Task creation
+- `create_bulk_tasks()` - Bulk task operations
+- `start_time_tracking()` - Time tracking
+- All official ClickUp MCP operations
+
+**❌ Forbidden Operations:**
+- Custom script generation (N/A)
+- External integration setup (N/A)
+- Non-MCP workflows (N/A)
+- Any operations outside MCP scope
+
+This policy has **ABSOLUTE enforcement with no exceptions**.
 
 ### Connection Verification
 
-**⚠️ CRITICAL:** Always verify ClickUp MCP connection before performing any operation.
+**Reference:** Connection verification logic is in Interactive Intelligence v0.200. SYNC methodology phases in SYNC Thinking Framework v0.200.
 
-Before executing any ClickUp operation, you must verify the connection is active. Use the `get_workspace_hierarchy` operation to test connectivity and retrieve workspace structure. This ensures the MCP server is properly configured and authenticated.
+Connection verification must be the **first action before all operations** (ALWAYS FIRST). Use the `get_workspace_hierarchy` operation to test connectivity and authentication.
 
-**Connection Check Procedure:**
-1. Execute `get_workspace_hierarchy` operation
-2. Verify response contains spaces, folders, and lists arrays
-3. If connection fails, display setup instructions to user
-4. Do not proceed with operations until connection is confirmed
+Connection verification must be the **first action before all operations** (ALWAYS FIRST). Use the `get_workspace_hierarchy` operation to test connectivity and authentication.
 
-**Error Messages:**
-- ❌ **No Connection:** "ClickUp MCP not connected. Please setup server."
-- ⚠️ **Setup Required:** Display Installation & Setup guide (see below)
-- 🔄 **Retry Logic:** Attempt reconnection after user confirms configuration
+**Status Messages:**
+- ✅ **Connected:** "ClickUp MCP Connected - All operations available"
+- ❌ **Disconnected:** "ClickUp MCP Not Connected - Setup required"
+- ⚠️ **Auth Failed:** "Authentication Issue - API key invalid or expired"
+- ⚠️ **Access Denied:** "Permission Issue - Insufficient workspace access"
+
+**Connection Protocol:**
+1. Check MCP server status
+2. Run test query (`get_workspace_hierarchy`)
+3. Verify API key authentication
+4. Check workspace access permissions
+5. Proceed with operations only if all checks pass
+
+**Example Implementation:**
+```javascript
+async function verifyConnection() {
+    try {
+        await clickup:get_workspace_hierarchy();
+        return { 
+            connected: true, 
+            operations: 'ready'
+        };
+    } catch (error) {
+        // Apply REPAIR protocol
+        return { connected: false, error: error };
+    }
+}
+```
+
+**Connection States & Actions:**
+- **Connected:** All systems operational → Proceed with operations
+- **Disconnected:** No MCP access → Restart Claude Desktop / Check config
+- **Auth Failed:** API key issue → Regenerate API key in ClickUp settings
+- **Access Denied:** Permission issue → Verify workspace access rights
 
 ### Installation & Setup
 
@@ -105,61 +173,145 @@ npm install @clickup/mcp-server-clickup
 
 <a id="2-core-capabilities"></a>
 
-## 2. 🎯 CORE CAPABILITIES
+## 2. 🛠️ CORE CAPABILITIES
 
 ### Available Operations
 
-The ClickUp MCP server provides **13 operations** organized into four main categories:
+**Note:** SYNC thinking methodology (Survey → Yield → Navigate → Create) and conversation flows are defined in SYNC Thinking Framework v0.200 and Interactive Intelligence v0.200.
 
-**Task Management (4 operations):**
-- `create_task` - Create individual tasks with full configuration
-- `update_task` - Modify existing task properties
-- `create_bulk_tasks` - Create multiple tasks efficiently
-- `get_workspace_tasks` - Search and filter tasks with pagination
+```yaml
+task_operations:
+  task_management:
+    tools:
+      - create_task
+      - update_task
+      - create_bulk_tasks
+      - get_workspace_tasks
+    method: "Native MCP only"
+    requires: "API key"
+  
+hierarchy_operations:
+  workspace_structure:
+    tools:
+      - create_list
+      - create_folder
+      - create_list_in_folder
+      - update_list
+      - delete_list
+      - get_workspace_hierarchy
+    method: "Native MCP only"
+    requires: "API key"
+  
+time_tracking_operations:
+  tracking_management:
+    tools:
+      - start_time_tracking
+      - stop_time_tracking
+      - add_time_entry
+      - get_task_time_entries
+      - get_current_time_entry
+    method: "Native MCP only"
+    requires: "API key"
+  
+collaboration_operations:
+  team_features:
+    tools:
+      - create_task_comment
+      - get_task_comments
+      - attach_task_file
+      - add_tag_to_task
+      - remove_tag_from_task
+      - get_space_tags
+    method: "Native MCP only"
+    requires: "API key"
+  
+document_operations:
+  document_management:
+    tools:
+      - create_document
+      - create_document_page
+      - update_document_page
+      - list_documents
+    method: "Native MCP only"
+    requires: "API key"
+```
 
-**Hierarchy Management (6 operations):**
-- `create_list` - Create lists within spaces
-- `create_folder` - Create organizational folders
-- `create_list_in_folder` - Add lists to specific folders
-- `update_list` - Modify list settings and properties
-- `delete_list` - Remove lists from workspace
-- `get_workspace_hierarchy` - Retrieve complete workspace structure
+### What You CAN Do ✅
 
-**Time Tracking (5 operations):**
-- `start_time_tracking` - Begin timer on a task
-- `stop_time_tracking` - End active timer
-- `add_time_entry` - Manually log time entries
-- `get_task_time_entries` - Retrieve time logs for tasks
-- `get_current_time_entry` - Check currently running timer
+**Task Operations (Native MCP Only):**
 
-**Collaboration:**
-- `create_task_comment` / `get_task_comments` - Task discussion management
-- `attach_task_file` - Upload files to tasks
-- `add_tag_to_task` / `remove_tag_from_task` - Tag management
-- `get_space_tags` - List available tags in a space
+Task management operations using native ClickUp MCP:
+- Create individual tasks with full configuration
+- Update existing task properties
+- Create multiple tasks efficiently via bulk operations
+- Search and filter tasks across workspace
+- Manage priorities, statuses, and assignments
+- Configure custom fields at list level
 
-**Document Operations:**
-- `create_document` / `create_document_page` / `update_document_page` / `list_documents`
+**Hierarchy Operations (Native MCP Only):**
 
-All operations use native MCP tools with direct invocation via MCP protocol, returning structured JSON responses. Authentication uses API key via environment variable.
+Workspace organizational operations using native MCP:
+- Create folders for project grouping
+- Create lists within spaces or folders
+- Build hierarchical structures (Space → Folder → List)
+- Manage list configurations and settings
+- Retrieve complete workspace structure
+- Update and delete organizational elements
 
-### Operation Summary Table
+**Time Tracking Operations (Native MCP Only):**
 
-| Operation | Category | Purpose | Key Parameters |
-|-----------|----------|---------|----------------|
-| `create_task` | Tasks | Create single task | name, listId, assignees, priority |
-| `update_task` | Tasks | Update task properties | taskId, fields to update |
-| `create_bulk_tasks` | Tasks | Create multiple tasks | listId, tasks array |
-| `get_workspace_tasks` | Tasks | Search/filter tasks | filters, pagination |
-| `create_list` | Hierarchy | Create list in space | name, spaceId, settings |
-| `create_folder` | Hierarchy | Create folder | name, spaceId |
-| `create_list_in_folder` | Hierarchy | List within folder | name, folderId |
-| `get_workspace_hierarchy` | Hierarchy | Full workspace structure | (no parameters) |
-| `start_time_tracking` | Time | Start timer on task | taskId, description |
-| `stop_time_tracking` | Time | Stop running timer | description, tags |
-| `add_time_entry` | Time | Manual time entry | taskId, start, duration |
-| `create_task_comment` | Collaboration | Add comment | taskId, commentText |
-| `attach_task_file` | Collaboration | Upload attachment | taskId, file_url or file_data |
+Time management operations using native MCP:
+- Start/stop timers on specific tasks
+- Add manual time entries retroactively
+- Retrieve time logs for tasks and reporting
+- Track billable hours and descriptions
+- Monitor currently running timers
+- Generate time-based analytics
+
+**Collaboration Operations (Native MCP Only):**
+
+Team collaboration operations using native MCP:
+- Add comments to tasks for discussions
+- Attach files via URL or base64 encoding
+- Manage tags for categorization
+- Assign tasks to team members
+- Retrieve space-level tag collections
+- Handle team communication workflows
+
+**IMPORTANT:** All operations use native MCP operations only. Custom scripts are **NOT applicable** (N/A).
+
+### What You CANNOT Do ❌
+
+**Custom Script Restriction (NOT APPLICABLE):**
+- ❌ Custom automation scripts (N/A)
+- ❌ External integration setup (N/A)
+- ❌ Non-MCP workflows (N/A)
+- **Enforcement:** MCP operations only
+
+**File Upload Limitation:**
+- Direct upload supported via base64 (10MB limit)
+- **Alternative:** Use external URLs for larger files
+- Recommended services: Cloudinary, Amazon S3, Imgur
+
+**Connection Requirements:**
+- Cannot work without MCP connection verification
+- Connection check must ALWAYS be performed first (ALWAYS FIRST)
+- All operations require active MCP session
+
+**API Key Requirement:**
+- Valid ClickUp API key required
+- Workspace access permissions needed
+- Test query must pass before operations
+
+**Rate Limits:**
+- Respect ClickUp API rate limits
+- Optimize bulk operations for efficiency
+- Use batch processing for large operations
+
+**Access Control:**
+- Only accessible workspaces/spaces available
+- Cannot modify locked or archived items
+- Respects ClickUp's permission system
 
 ---
 
@@ -848,104 +1000,109 @@ attach_task_file:
 
 ---
 
-<a id="7-limitations-constraints"></a>
+<a id="7-limitations"></a>
 
-## 7. ⚠️ LIMITATIONS & CONSTRAINTS
+## 7. ⚠️ LIMITATIONS
 
-### API Rate Limits
+### Critical Limitations
 
 ```yaml
+custom_script_generation:
+  restriction: "NOT APPLICABLE"
+  note: "MCP operations only - no custom scripts"
+  
+  native_alternatives:
+    task_operations: "Native MCP task management"
+    hierarchy_operations: "Native MCP workspace structure"
+    time_tracking: "Native MCP timers and entries"
+    collaboration: "Native MCP comments and tags"
+  
+  custom_code_generated: "N/A (MCP operations only)"
+
+file_handling:
+  direct_upload:
+    supported: true
+    method: "Base64 encoding"
+    size_limit: "10MB"
+  
+  url_upload:
+    supported: true
+    method: "External URL reference"
+    size_limit: "Depends on ClickUp plan"
+  
+  recommended_services:
+    cloudinary:
+      free_tier: "25GB"
+      api: true
+      best_for: "General use"
+    
+    amazon_s3:
+      free_tier: "5GB"
+      api: true
+      best_for: "Scale operations"
+    
+    imgur:
+      free_tier: "Unlimited"
+      api: true
+      best_for: "Quick hosting"
+
+connection_requirements:
+  dependencies:
+    - "MCP server must be connected"
+    - "API key must be valid"
+    - "Test query must pass (get_workspace_hierarchy)"
+    - "Workspace access permissions required"
+  
+  enforcement: "Cannot proceed without these (ALWAYS FIRST)"
+
 rate_limiting:
-  requests_per_minute: 100
-  applies_to: "All API operations"
-  throttling_behavior: "429 error returned"
+  limits:
+    api_calls: "100 per minute (typical)"
+    bulk_operations: "10 tasks per batch (recommended)"
+    concurrent_operations: "3 parallel (recommended)"
   
-handling_rate_limits:
-  automatic_retry:
-    enabled: true
-    backoff: "Exponential"
-    max_retries: 3
-  
-  bulk_operations:
-    use_batching: true
-    recommended_batch_size: 10
-    concurrent_limit: 3
-  
-  best_practices:
-    - "Use bulk operations when possible"
-    - "Implement exponential backoff"
-    - "Cache workspace hierarchy"
-    - "Group related operations"
-```
+  enforcement: "Automatic throttling and retry with exponential backoff"
 
-### Connection Requirements
-
-```yaml
-mandatory_verification:
-  required_before: "ALL operations"
-  method: "get_workspace_hierarchy"
-  failure_result: "Operation blocked with error message"
+access_requirements:
+  connection:
+    requirement: "Must verify first (ALWAYS FIRST)"
+    protocol: "Connection check before all operations"
   
-connection_dependencies:
-  api_key: "Valid ClickUp API token"
-  network: "Internet connectivity"
-  mcp_server: "Server running and accessible"
+  authentication:
+    type: "API Key"
+    method: "Environment variable CLICKUP_API_KEY"
+    scope: "Workspace-level permissions"
   
-setup_requirements:
-  - "NPM package installed"
-  - "Configuration file updated"
-  - "Claude Desktop restarted"
-  - "API key generated in ClickUp"
-
-error_when_not_connected:
-  message: "❌ ClickUp MCP not connected"
-  user_action: "Please setup ClickUp MCP server"
-  documentation: "See Installation & Setup section"
-```
-
-### Operation Constraints
-
-```yaml
-task_operations:
-  custom_fields:
-    limitation: "Must exist in list first"
-    no_creation: "Cannot create custom fields via MCP"
-    workaround: "Create in ClickUp UI, then reference by ID"
+  permissions:
+    requirement: "Workspace member or admin access"
+    scope: "Space, folder, and list access"
   
-  task_id_formats:
-    uuid: "Standard ClickUp UUID"
-    custom: "Custom task IDs like 'DEV-123'"
-    limitation: "Custom IDs require proper workspace setup"
-  
-  assignees:
-    format: "User ID array"
-    limitation: "Users must exist in workspace"
-    no_creation: "Cannot invite users via MCP"
+  custom_scripts:
+    allowed: "N/A (MCP operations only)"
+    enforcement: "MCP operations exclusively"
 
-list_operations:
-  deletion:
+custom_field_limitations:
+  problem: "Cannot create custom fields via MCP"
+  solution: "Create in ClickUp UI first, then reference by ID"
+  
+  workaround_steps:
+    - "Open ClickUp list settings"
+    - "Add custom field via UI"
+    - "Note the field ID"
+    - "Reference field ID in MCP operations"
+
+task_id_formats:
+  uuid_support: "Standard ClickUp UUIDs fully supported"
+  custom_id_support: "Custom task IDs (e.g., 'DEV-123') require workspace setup"
+  limitation: "Custom ID format must be configured in ClickUp first"
+
+deletion_operations:
+  list_deletion:
     permanent: true
     no_undo: true
-    tasks_impact: "Moved to trash"
-    recommendation: "Archive instead of delete"
-  
-  status_configuration:
-    limitation: "Statuses are list-specific"
-    customization: "Set in ClickUp UI"
-    api_access: "Read-only via MCP"
-
-time_tracking:
-  active_timer:
-    limit: "One per user"
-    auto_stop: "Starting new timer stops previous"
-  
-  manual_entries:
-    past_entries: "Fully supported"
-    future_entries: "Not allowed"
-    duration_format: "Must be valid format"
-
-document_operations:
-  creation:
+    impact: "All tasks moved to trash"
+    recommendation: "Archive instead of delete when possible"
+```
     parent_required: true
     parent_types: "Space, Folder, or List only"
   
@@ -1033,240 +1190,225 @@ data_preservation:
 
 <a id="8-quick-reference"></a>
 
-## 8. ⚡ QUICK REFERENCE
+## 8. 🏎️ QUICK REFERENCE
 
-### Common Operation Patterns
+### MCP Operations Summary
 
-```yaml
-task_creation_workflow:
-  step_1: "Verify connection: get_workspace_hierarchy()"
-  step_2: "Get list ID from hierarchy"
-  step_3: "Create task: create_task(name, listId, options)"
-  step_4: "Verify creation: check returned task object"
+**Complete operation list:** 13 core operations across task management, hierarchy, time tracking, and collaboration.
 
-project_setup_workflow:
-  step_1: "Verify connection"
-  step_2: "Get workspace hierarchy"
-  step_3: "Create folder: create_folder(name, spaceId)"
-  step_4: "Create lists: create_list_in_folder(name, folderId)"
-  step_5: "Add initial tasks: create_bulk_tasks(listId, tasks)"
-
-time_tracking_workflow:
-  step_1: "Verify connection"
-  step_2: "Start timer: start_time_tracking(taskId)"
-  step_3: "Work on task..."
-  step_4: "Stop timer: stop_time_tracking()"
-  step_5: "Verify: get_task_time_entries(taskId)"
-```
-
-### Error Handling Patterns
+**Key operations:**
 
 ```yaml
-connection_error:
-  error_code: "ECONNREFUSED"
-  check: "Server not running or not configured"
-  solution: "Restart Claude Desktop, verify configuration"
+operations:
+  get_workspace_hierarchy:
+    purpose: "Connection check, retrieve structure"
+    parameters: []
+    category: "Connection verification"
+  
+  create_task:
+    purpose: "Create single task"
+    key_params: [name, listId, assignees, priority]
+    category: "Task Operations"
+  
+  create_bulk_tasks:
+    purpose: "Create multiple tasks"
+    key_params: [listId, tasks_array]
+    category: "Task Operations"
+  
+  create_folder:
+    purpose: "Create organizational folder"
+    key_params: [name, spaceId]
+    category: "Hierarchy Operations"
+  
+  create_list_in_folder:
+    purpose: "Create list in folder"
+    key_params: [name, folderId]
+    category: "Hierarchy Operations"
+  
+  start_time_tracking:
+    purpose: "Start timer on task"
+    key_params: [taskId, description]
+    category: "Time Tracking"
+  
+  create_task_comment:
+    purpose: "Add comment to task"
+    key_params: [taskId, commentText]
+    category: "Collaboration"
+  
+  add_tag_to_task:
+    purpose: "Add tag to task"
+    key_params: [taskId, tagName]
+    category: "Collaboration"
 
-authentication_error:
-  error_code: "UNAUTHORIZED"
-  check: "Invalid or expired API key"
-  solution: "Generate new API key, update configuration"
-
-not_found_error:
-  error_code: "NOT_FOUND"
-  check: "Invalid ID or resource doesn't exist"
-  solution: "Verify ID with get_workspace_hierarchy()"
-
-rate_limit_error:
-  error_code: "RATE_LIMITED"
-  check: "Too many requests"
-  solution: "Wait 60s, use bulk operations, implement backoff"
-
-permission_error:
-  error_code: "PERMISSION_DENIED"
-  check: "Insufficient access rights"
-  solution: "Check workspace permissions, use different resource"
-
-error_recovery_strategy:
-  - "Always check connection first"
-  - "Verify IDs before operations"
-  - "Implement exponential backoff for retries"
-  - "Log errors for debugging"
-  - "Provide clear user feedback"
+operation_categories:
+  task_operations:
+    - "create_task - Single task creation"
+    - "update_task - Task property updates"
+    - "create_bulk_tasks - Efficient multi-task creation"
+    - "get_workspace_tasks - Search and filter tasks"
+  
+  hierarchy_operations:
+    - "get_workspace_hierarchy - Structure retrieval"
+    - "create_folder - Folder creation"
+    - "create_list - List creation in space"
+    - "create_list_in_folder - List creation in folder"
+    - "update_list - List property updates"
+    - "delete_list - List deletion (permanent)"
+  
+  time_tracking_operations:
+    - "start_time_tracking - Start timer"
+    - "stop_time_tracking - Stop active timer"
+    - "add_time_entry - Manual time logging"
+    - "get_task_time_entries - Retrieve time logs"
+    - "get_current_time_entry - Check active timer"
+  
+  collaboration_operations:
+    - "create_task_comment - Add comment"
+    - "get_task_comments - Retrieve comments"
+    - "attach_task_file - File attachment"
+    - "add_tag_to_task - Add tag"
+    - "remove_tag_from_task - Remove tag"
+    - "get_space_tags - List space tags"
+  
+  document_operations:
+    - "create_document - Document creation"
+    - "create_document_page - Page creation"
+    - "update_document_page - Page updates"
+    - "list_documents - Document listing"
 ```
 
-### Status Display Templates
+### Integration References
+
+```yaml
+official_documentation:
+  clickup_mcp_github:
+    url: "https://github.com/clickup/mcp-server-clickup"
+    description: "Official ClickUp MCP server repository"
+  
+  npm_package:
+    url: "https://www.npmjs.com/package/@clickup/mcp-server-clickup"
+    description: "NPM package documentation"
+  
+  clickup_api_docs:
+    url: "https://clickup.com/api"
+    description: "ClickUp API reference documentation"
+
+related_documents:
+  sync_thinking_framework:
+    file: "ClickUp - SYNC Thinking Framework - v0.200"
+    purpose: "4-phase methodology (Survey → Yield → Navigate → Create)"
+    sections:
+      - "Section 2: SYNC Principles (4 phases)"
+      - "Section 3: Cognitive Rigor Framework"
+      - "Section 4: The SYNC Methodology"
+      - "Section 6: RICCE-SYNC Integration"
+    key_concepts:
+      - "Survey: Context assessment and MCP identification"
+      - "Yield: Native pattern selection and optimization"
+      - "Navigate: Sequential MCP operations"
+      - "Create: Quality validation + integration delivery"
+  
+  interactive_intelligence:
+    file: "ClickUp - Interactive Intelligence - v0.200"
+    purpose: "Conversation flows and interaction patterns"
+    sections:
+      - "Section 1: Conversation Architecture"
+      - "Section 2: Response Templates"
+      - "Section 5: Error Recovery (REPAIR protocol)"
+    integration: "Works with SYNC framework for complete workflow"
+```
+
+### Decision Tree
+
+```
+Request received
+    ↓
+Verify MCP connection (ALWAYS FIRST) → Failed → Apply REPAIR
+    ↓ Success
+Check operation type:
+    ↓
+Needs task management? → Yes → Task Operations
+    ↓ No
+Needs workspace structure? → Yes → Hierarchy Operations
+    ↓ No
+Needs time tracking? → Yes → Time Tracking Operations
+    ↓ No
+Needs collaboration? → Yes → Collaboration Operations
+    ↓ No
+Ask for clarification
+```
+
+### Capability Check
+
+```python
+can_do = {
+    'connection_required': True,  # ALWAYS FIRST
+    'task_create': True,
+    'task_update': True,
+    'bulk_tasks': True,
+    'folders': True,
+    'lists': True,
+    'time_tracking': True,
+    'comments': True,
+    'tags': True,
+    'custom_fields': True,  # Must pre-exist
+    'file_attachments': True,
+    'direct_upload': True,  # Base64, 10MB limit
+    'url_upload': True,
+    'custom_scripts': False,  # N/A
+    'native_operations': True  # ALWAYS
+}
+```
+
+### Pre-Operation Protocol
 
 ```markdown
-# Task Operation Status
-📊 ClickUp Task Management
+Every Operation Requires:
 
-Operation: Creating sprint tasks
-Status: In progress
-Progress: 15/20 tasks created
-
-Connection: Active ✓
-API calls: 45/100 per minute
-Queue: 5 operations pending
-
-# Time Tracking Status
-⏱️ Time Tracking Active
-
-Task: Implement authentication
-Started: 10:30 AM
-Duration: 1h 23m
-Billable: Yes
-
-Timer: Running ✓
-
-# Workspace Status
-🏢 Workspace Structure
-
-Spaces: 3
-Folders: 12
-Lists: 45
-Tasks: 1,247
-
-Last sync: 2 minutes ago
-Connection: Active ✓
+1. Connection verification ✓ (ALWAYS FIRST)
+2. Test query successful ✓ (get_workspace_hierarchy)
+3. Native approach confirmed ✓ (MCP operations only)
+4. Workspace access verified ✓
+5. APIs identified ✓
+6. Ready to execute ✓
 ```
 
-### Integration Examples
+### Critical Rules Summary
 
-```yaml
-sprint_setup_complete:
-  """
-  async function setupSprint(sprintName, teamId) {
-    // 1. Verify connection
-    const connection = await clickup.get_workspace_hierarchy();
-    if (!connection.spaces) throw new Error("Not connected");
-    
-    // 2. Create folder
-    const folder = await clickup.create_folder({
-      name: sprintName,
-      spaceId: connection.spaces[0].id,
-      override_statuses: true
-    });
-    
-    // 3. Create workflow lists
-    const lists = await Promise.all([
-      'Backlog', 'To Do', 'In Progress', 'Review', 'Done'
-    ].map(name => clickup.create_list_in_folder({
-      name, folderId: folder.id
-    })));
-    
-    // 4. Create initial tasks
-    await clickup.create_bulk_tasks({
-      listId: lists[0].id,
-      tasks: [
-        { name: '🎯 Sprint Planning', priority: 1, assignees: [teamId] },
-        { name: '📊 Sprint Review', dueDate: '2 weeks', priority: 2 },
-        { name: '🔄 Retrospective', dueDate: '2 weeks', priority: 2 }
-      ]
-    });
-    
-    return { folder, lists };
-  }
-  """
+```markdown
+THE FIVE ABSOLUTES:
 
-natural_language_routing:
-  """
-  User: "Set up a sprint for next week"
-  
-  System:
-  → Checking ClickUp connection... ✓
-  → ClickUp optimal for sprint management
-  → Creating sprint folder structure
-  → Adding workflow lists (5)
-  → Creating initial tasks (3)
-  → Result: Sprint ready with complete workflow
-  """
+1. Connection verified before EVERY operation (ALWAYS FIRST)
+2. Native MCP operations ONLY - no custom scripts (N/A)
+3. Test query must pass before proceeding
+4. API key must be valid and have proper permissions
+5. REPAIR protocol for all errors
 ```
 
-### Companion Documents
+### Performance Characteristics
 
 ```yaml
-related_documents:
-  interactive_intelligence:
-    file: "ClickUp & Notion - Interactive Intelligence - v0.200.md"
-    purpose: "Conversational interface and example interactions"
-    
-  thinking_framework:
-    file: "ClickUp & Notion - SYNC Thinking Framework - v0.200.md"
-    purpose: "Cognitive methodology for ClickUp & Notion operations"
-    
-  agent_specification:
-    file: "Agent - MCP - ClickUp & Notion - v0.101.md"
-    purpose: "Agent configuration and routing logic"
-
-recommended_reading_order:
-  - "This Knowledge document (technical reference)"
-  - "SYNC Thinking Framework (methodology)"
-  - "Interactive Intelligence (usage patterns)"
-```
-
-### Key Differences from Generic Task Tools
-
-```yaml
-clickup_mcp_specific:
-  - "Connection verification mandatory before all operations"
-  - "Custom fields must be pre-configured in lists"
-  - "Time tracking native to ClickUp (one timer per user)"
-  - "Workspace hierarchy (Space → Folder → List → Task)"
-  - "Custom task IDs support (e.g., 'DEV-123')"
-  - "Billable time tracking built-in"
-  - "Document and page management within tasks"
-  - "Tag management at space level"
-
-not_supported:
-  - "Custom field creation via MCP"
-  - "User invitation or management"
-  - "Workspace creation"
-  - "Custom status creation"
-  - "Webhook configuration"
-  - "Automation rules"
-  - "Template management"
-```
-
-### Performance Benchmarks
-
-```yaml
-operation_timing:
-  single_task_create: "< 1s"
-  bulk_10_tasks: "2-5s"
-  bulk_50_tasks: "5-15s"
-  bulk_100_tasks: "15-30s"
+performance:
+  engine: "ClickUp REST APIs via MCP"
+  characteristics:
+    - "API key authentication"
+    - "Rate limited (100/min typical)"
+    - "Native MCP operations"
   
-  update_task: "< 1s"
-  search_tasks: "< 2s (simple)"
-  search_tasks_complex: "2-4s"
-  
-  get_hierarchy: "1-3s"
-  create_list: "< 1s"
-  create_folder: "< 1s"
-  
-  start_timer: "< 1s"
-  stop_timer: "< 1s"
-  add_time_entry: "< 1s"
-  get_time_entries: "1-2s"
-
-optimization_tips:
-  - "Use bulk operations for > 5 tasks"
-  - "Cache workspace hierarchy"
-  - "Batch related operations"
-  - "Use concurrent operations (max 3-5)"
-  - "Implement request queuing for large batches"
+  benchmarks:
+    connection_check: "1-3 seconds"
+    task_create: "< 1 second"
+    bulk_10_tasks: "2-5 seconds"
+    bulk_50_tasks: "5-15 seconds"
+    folder_create: "< 1 second"
+    list_create: "< 1 second"
+    time_tracking_start: "< 1 second"
+    comment_create: "< 1 second"
 ```
 
 ---
 
-## Notes
-
-- **Native MCP Operations Only**: All operations use official ClickUp MCP server tools. No API wrappers or external dependencies.
-- **Connection Verification Required**: Every workflow begins with connection verification via `get_workspace_hierarchy()`.
-- **Custom Fields Pre-Configuration**: Custom fields must be created in ClickUp UI before use via MCP.
-- **Complementary to Notion**: ClickUp handles tasks/projects/time, Notion handles documentation/knowledge bases.
-- **Real Documentation**: All specifications based on actual ClickUp MCP server implementation and ClickUp API capabilities.
+*This document focuses exclusively on ClickUp MCP server capabilities and technical specifications. For SYNC thinking methodology (Survey → Yield → Navigate → Create), see ClickUp - SYNC Thinking Framework v0.200. For conversation flows and error handling (REPAIR protocol), see ClickUp - Interactive Intelligence v0.200.*
 
 ---
 
