@@ -52,8 +52,7 @@ Create professional tickets, stories, epics, and documentation with automatic co
   - Perspective inversion: Analyze opposition, strengthen solution
   - Constraint reversal: Non-obvious insights through backward logic
   - Mechanism-first: WHY before WHAT validation in all solutions
-
-.
+---
 
 <a id="2-prompt-engineering-assistant"></a>
 #### 2. 🎯 Prompt Engineering Assistant
@@ -99,7 +98,7 @@ Edit image, video, and audio files through natural language with MCP tools and t
   - **Video Operations**: Transcode, trim, overlay, subtitles, format conversion
   - **HLS Video Conversion**: FFmpeg-powered terminal commands to convert videos to HLS playslists
 
-.
+---
 
 <a id="4-webflow-agent"></a>
 #### 4. 🌐 Webflow Agent
@@ -116,7 +115,7 @@ Webflow development and CMS management through natural language.
   - **Designer Integration**: Build components and layouts with Designer API
   - **Content Management**: SEO optimization, content publishing, site analysis
 
-.
+---
 
 <a id="5-notion-agent"></a>
 #### 5. 📊 Notion Agent
@@ -134,7 +133,7 @@ Automate Notion workspace operations through natural language.
   - **Search & Collaboration**: Workspace search, comments, page sharing
   - **Smart Structure Selection**: Auto-balance database vs page hierarchies based on use case
 
-.
+---
 
 <a id="6-clickup-agent"></a>
 #### 6. ✅ ClickUp Agent
@@ -161,7 +160,7 @@ Automate ClickUp task management and agile workflows through natural language.
 
 Professional development system with AI guardrails, automated quality validation, and comprehensive workflow tooling for GitHub SpecKit integration, browser automation, and code quality enforcement.
 
--
+---
 
 🤖 **AGENTS.md** — AI Behavior Guardrails
 
@@ -175,7 +174,7 @@ Comprehensive quality framework preventing common AI failures and enforcing rigo
   - **Request Analysis Framework**: Classification → Scope → Context → Solution → Validation → Review
   - **Hook-Based Validation**: PreToolUse, PostToolUse, UserPromptSubmit hooks with skill-rules.json integration
 
--
+---
 
 📝 **Prompts** — Workflow Automation
 
@@ -194,7 +193,7 @@ Structured prompts for code workflows and GitHub SpecKit integration.
   - `sk__feature_research.yaml` — Feature research and analysis
   - `parallel_agents/` — Multi-agent parallel execution for complex features
 
--
+---
 
 ⚡ **Skills** — Executable Workflows**
 
@@ -207,7 +206,7 @@ Claude Skills for browser automation, Git workflows, and visual documentation.
   - **`markdown-flowchart/`** — Generate Mermaid flowcharts from descriptions
   - **`workflow-spec-kit/`** — GitHub SpecKit automation and integration
 
--
+---
 
 🛠️ **Hooks** — Automated Validation**
 
@@ -219,7 +218,7 @@ Hook-based validation scripts that run automatically during development.
   - **`validate-skill-activation.sh`** — UserPromptSubmit hook: Suggests relevant skills based on context
   - **`skill-rules.json`** (409 lines) — Risk patterns, prompt triggers, file triggers, enforcement rules
 
--
+---
 
 📚 **Knowledge Base** — Reference Guides
 
