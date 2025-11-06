@@ -71,8 +71,8 @@ For user story format (narrative without QA checklists), use `$story` command wh
 #### Symbol Hierarchy
 - **H1:** ⌘ (About), ❖ (Requirements), ✓ (Resolution Checklist)
 - **H2:** ✦ (Success), ⌥ (Designs)
-- **H3:** Clean headers (no symbols)
-- **H4:** Clean headers (no symbols)
+- **H3:** Used for Requirements subsections with numbered format (1., 2., 3.)
+- **H4:** NOT used in Ticket mode
 
 #### Structure Order
 1. Header (Mode | Complexity | Template) - FIRST LINE
@@ -83,7 +83,7 @@ For user story format (narrative without QA checklists), use `$story` command wh
 6. Business Value (numbered) - Why it matters to business
 7. Success Criteria (✦) - After Business Value
 8. Designs & References (⌥) - Bulleted list format
-9. Requirements (❖) - Specifications with H3/H4 subsections
+9. Requirements (❖) - Specifications with H3 subsections (numbered format)
 10. Resolution Checklist (✓) - QA verification items
 
 #### Formatting Standards
@@ -100,7 +100,8 @@ For user story format (narrative without QA checklists), use `$story` command wh
 - No blank lines between dividers and section headers
 - H1 for title and major sections (⌘, ❖, ✓)
 - H2 for secondary sections (✦, ⌥, ∅)
-- H3/H4 for subsections (clean, no symbols)
+- H3 for Requirements subsections (numbered format: 1., 2., 3.)
+- H4 NOT used in Ticket mode
 - Consistent spacing throughout
 
 ### Content Integration
@@ -182,7 +183,7 @@ For user story format (narrative without QA checklists), use `$story` command wh
 - [] Lists use `-` bullets?
 - [] Checkboxes use `[]` format?
 - [] Dividers between all sections?
-- [] Clean H3/H4 headers?
+- [] H3 headers for Requirements subsections (numbered format)?
 - [] Placeholder links included?
 - [] No Table of Contents?
 - [] No unrequested features?
@@ -207,7 +208,7 @@ For user story format (narrative without QA checklists), use `$story` command wh
 ### Common Errors & Fixes
 
 #### Wrong Symbol Hierarchy
-**Fix:** Update to H1: ⌘/❖/✓, H2: ✦/⌥, H3/H4: clean
+**Fix:** Update to H1: ⌘/❖/✓, H2: ✦/⌥, H3: for Requirements subsections (numbered format)
 
 #### Success Criteria Before Business Value
 **Fix:** Move Success Criteria after Business Value section

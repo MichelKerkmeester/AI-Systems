@@ -1084,7 +1084,7 @@ pre_creation_validation:
     - [ ] Success criteria provided or inferable?
   
   system_readiness:
-    - [ ] DEPTH framework loaded (v0.106)
+    - [ ] DEPTH framework loaded (v0.108)
     - [ ] Cognitive rigor techniques ready
     - [ ] RICCE validation enabled
     - [ ] Two-layer transparency enabled
