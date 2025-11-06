@@ -64,7 +64,7 @@ perspective_analysis:
     - motion_designer: "Animation personality, timing, transitions, micro-interactions, 60fps"
     - prototype_craftsperson: "Pixel-perfect precision, visual balance, spacing, alignment, polish"
     - interaction_designer: "State transitions, feedback, hover effects, loading states"
-    - accessibility_advocate: "WCAG compliance, keyboard nav, inclusive design maintaining aesthetics"
+    - performance_engineer: "Load time, rendering efficiency, optimization, responsive design"
     - technical_implementer: "Vanilla code quality, performance, responsive, production-ready"
     
   validation_check:
@@ -82,7 +82,7 @@ perspective_analysis:
 **User-Facing Format:**
 ```markdown
 USER SEES (Concise):
-"🔍 **Analyzing from 7 perspectives:** Visual Design Expert, UX Flow, Motion Designer, Prototype Craft, Interaction Designer, Accessibility, Technical
+"🔍 **Analyzing from 7 perspectives:** Visual Design Expert, UX Flow, Motion Designer, Prototype Craft, Interaction Designer, Performance, Technical
 
 **Key Insights:**
 - UX: [1-2 sentence insight]
@@ -141,20 +141,20 @@ Current validation: Meeting all targets ✅"
 **User-Facing Format:**
 ```markdown
 USER SEES (Concise):
-"🧩 **Context layers built:** User Flow, Interactions, States, Transitions, Accessibility
+"🧩 **Context layers built:** User Flow, Interactions, States, Transitions, Performance
 
 **Key Factors:**
 - Flow: [clear entry→goal path]
 - States: [interaction states count]
-- Accessibility: [keyboard nav status]"
+- Performance: [60fps validation status]"
 ```
 
 **Internal Processing (Applied Fully):**
 - Complete user flow analysis with entry/exit points
 - Detailed interaction state mapping (minimum 7 states)
-- Comprehensive accessibility evaluation (WCAG AA)
 - Full keyboard navigation planning
 - Animation timing and transition strategies
+- Performance optimization validation
 
 ### V - Visual Design Application
 **Internal Process:** Systematic design token and visual hierarchy execution
@@ -189,8 +189,8 @@ Timing optimized, 60fps performance validated"
 - Complete animation timing definitions (150-400ms ranges)
 - Detailed easing function selections
 - Comprehensive performance testing (60fps target)
-- Full accessibility considerations (prefers-reduced-motion)
 - GPU acceleration optimization (transform/opacity only)
+- Smooth transition optimization
 
 ### S - Ship Quality Validation
 **Internal Process:** Self-critique and improvement cycles
@@ -219,7 +219,7 @@ Excellence confirmed, ready for delivery"
 
 **Status:** MANDATORY - BLOCKING requirement (minimum 3 perspectives, target 7)
 
-**Required Perspectives:** UX Designer, Visual Designer, Technical Architect, Business Stakeholder, Component Engineer, Accessibility Expert, Performance Engineer
+**Required Perspectives:** UX Designer, Visual Designer, Technical Architect, Business Stakeholder, Component Engineer, Motion Designer, Performance Engineer
 
 **Validation Gates:** Phase C (BLOCKING) → Phase A (BLOCKING) → Phase V (VALIDATION) → Phase S (CONFIRMATION)
 
@@ -412,7 +412,7 @@ system_state:
 
 **Variant Count:** Simple: 2-3 | Standard: 3-5 | Complex: 5-10 | User-specified: honor request
 
-**8 Variant Strategies:** Minimalist, Bold/Expressive, Classic/Traditional, Modern/Trendy, Data-Dense, Playful/Creative, Accessible-First, Mobile-Optimized
+**7 Variant Strategies:** Minimalist, Bold/Expressive, Classic/Traditional, Modern/Trendy, Data-Dense, Playful/Creative, Mobile-Optimized
 
 **Variant Process:** (1) Diverge: generate distinct approaches → (2) Document: ASCII + description each → (3) Present: show all with pros/cons → (4) User selects → (5) Refine: full CANVAS on chosen
 
@@ -438,7 +438,7 @@ VARIANT 1: [Strategy Name]
 **User-Facing Update (Concise):**
 ```markdown
 "🔍 **Phase C - Concept**
-Analyzing from 7 perspectives (UX, Visual, Technical, Business, Component, Accessibility, Performance)
+Analyzing from 7 perspectives (UX, Visual, Technical, Business, Component, Motion, Performance)
 Key insight: [most important finding]
 Assumptions identified: [number], critical ones flagged"
 ```
@@ -462,10 +462,10 @@ perspective_analysis:  # MANDATORY - CANNOT BE SKIPPED
   perspectives:
     - UX Designer: [usability, user_journey, interaction_patterns, cognitive_load]
     - Visual Designer: [hierarchy, aesthetics, brand_alignment, emotional_response]
-    - Technical Architect: [feasibility, performance, accessibility, maintainability]
+    - Technical Architect: [feasibility, performance, maintainability, scalability]
     - Business Stakeholder: [value, ROI, user_needs, competitive_advantage]
     - Component Engineer: [reusability, patterns, scalability, design_system]
-    - Accessibility Expert: [wcag_compliance, keyboard_nav, screen_readers, inclusive]
+    - Motion Designer: [animation_personality, timing, transitions, micro_interactions]
     - Performance Engineer: [load_time, animation_fps, optimization, responsive]
 
 current_state_mapping:
@@ -545,7 +545,7 @@ optimization:
 ```markdown
 "🧭 **Phase N - Navigation**
 7 interaction states mapped
-Keyboard navigation + accessibility integrated
+Keyboard navigation integrated
 Context layers: User flow, transitions, feedback mechanisms"
 ```
 
@@ -562,14 +562,9 @@ interaction_design:
   
 keyboard_navigation:
   tab_order: "Logical focus sequence following visual hierarchy"
-  focus_indicators: "Visible 2px outline with high contrast"
+  focus_indicators: "Visible 2px outline for clarity"
   shortcuts: "Common keyboard patterns (Esc, Enter, Arrow keys)"
-  
-accessibility:
-  aria_labels: "Comprehensive screen reader descriptions"
-  color_contrast: "WCAG AA compliance (4.5:1 minimum for text)"
   semantic_html: "Proper HTML5 elements for meaning"
-  live_regions: "Dynamic content announcements"
   
 user_flow:
   entry_point: "Clear, intuitive starting point"
@@ -652,18 +647,13 @@ micro_interactions:
 performance:
   gpu_acceleration: "Transform and opacity only (avoid layout thrashing)"
   target: "Consistent 60fps during all animations"
-  accessibility: "Prefers-reduced-motion media query support"
   optimization: "Will-change hints for animated properties"
-  
+  smooth_transitions: "Optimized easing functions for natural feel"
+
 timing_functions:
   ease_out: "Natural deceleration (cubic-bezier(0, 0, 0.2, 1))"
   ease_in_out: "Smooth start and end (cubic-bezier(0.4, 0, 0.2, 1))"
   spring: "Playful bounce effect for micro-interactions"
-  
-accessibility_considerations:
-  reduced_motion: "Instant state changes when prefers-reduced-motion: reduce"
-  focus_visible: "Clear focus indicators remain during transitions"
-  timing: "Animations short enough to not impede task completion"
 ```
 
 ### Phase S - SHIP (Quality Validation & Delivery)
@@ -701,7 +691,7 @@ final_validation:
   self_rating: "All dimensions meet minimum thresholds"
 
 code_generation:
-  html: "Semantic HTML5 elements, comprehensive ARIA attributes"
+  html: "Semantic HTML5 elements, clean structure"
   css: "Inline <style> tag, CSS custom properties, mobile-first media queries"
   javascript: "Inline <script> tag, vanilla ES6+, no external dependencies"
   structure: "Single self-contained HTML file for easy deployment"
@@ -764,7 +754,7 @@ design_quality_validation:
   perspective_analysis:
     minimum: 3  # BLOCKING requirement
     target: 7
-    types: [visual_design_expert, ux_flow, motion_designer, prototype_craft, interaction_designer, accessibility, technical]
+    types: [visual_design_expert, ux_flow, motion_designer, prototype_craft, interaction_designer, performance, technical]
   
   visual_excellence:
     - Exceptional aesthetic choices (colors, typography, spacing feel sophisticated)
@@ -835,13 +825,7 @@ experience_validation:
     - Interactive enough for user testing
     - Demonstrates key user journeys completely
     - Realistic content and imagery
-  
-  accessibility_integration:
-    - WCAG AA without compromising aesthetics
-    - Keyboard navigation polished (not afterthought)
-    - Screen reader friendly with semantic HTML + ARIA
-    - Touch targets appropriately sized (44px minimum)
-  
+
   completeness:
     check: "Could we user test this prototype right now? Does it feel alive?"
     on_fail: "Add missing interactions or polish existing states"
@@ -853,7 +837,7 @@ experience_validation:
 - Fully interactive: 18 micro-interactions with spring animations
 - Complete user journey: Entry→exploration→conversion with delightful feedback
 - 7 polished states per interactive element (hover, focus, loading, success...)
-- WCAG AA + full keyboard nav + realistic content = ready for user testing"
+- Full keyboard nav + realistic content = ready for user testing"
 ```
 
 ### S - Structure (10 pts)
@@ -974,7 +958,7 @@ growth_validation:
     - Usage instructions for interactive elements
     - Browser compatibility notes
     - Performance considerations documented
-    - Accessibility implementation notes
+    - Responsive design implementation notes
   
   iteration_planning:
     - Next steps for taking prototype to production
@@ -1058,47 +1042,252 @@ improvement_cycle:
 - **DESIGN** = The **WHAT** (structural checklist for completeness)
 - **Together** = Rigorous process + Complete structure = Superior deliverables
 
-### Integration Map
+### Visual Integration Map
 
-| CANVAS Phase | DESIGN Element | Validation |
-|--------------|----------------|------------|
-| **Concept (C)** | Design Quality (D) | Perspectives identified, strategy defined |
-| **Architecture (A)** | Structure (S) | Component hierarchy, wireframes created |
-| **Navigation (N)** | Experience (E) | Interaction states, accessibility integrated |
-| **Visual (V)** | Design Quality (D) | Tokens applied, hierarchy established |
-| **Animate (A)** | Experience (E) | Micro-interactions, feedback polished |
-| **Ship (S)** | Implementation (I) + Growth (G) | Code generated, documented |
+```
+CANVAS → DESIGN Integration:
 
-### Final Validation
+C (Concept)      → D (Design Quality)     [7 perspectives, visual strategy]
+A (Architecture) → S (Structure)          [Wireframes, component hierarchy]
+N (Navigation)   → E (Experience)         [8 states, keyboard nav, user flow]
+V (Visual)       → D (Design Quality)     [32 tokens, hierarchy, polish]
+A (Animate)      → E (Experience)         [18 animations, 60fps, brand personality]
+S (Ship)         → I+G (Impl + Growth)    [Vanilla code, docs, score ≥40]
+```
+
+### Phase Integration Details
+
+| CANVAS Phase | DESIGN Elements | Key Activities | Validation Gate |
+|--------------|----------------|----------------|-----------------|
+| **C - Concept** | D (initial), E (initial) | 7 perspectives, design strategy, assumption audit | Multi-perspective analysis complete (BLOCKING) |
+| **A - Architecture** | S (complete), D (enhanced) | ASCII wireframes, component hierarchy, constraint reversal | Component structure defined, 3+ reusable patterns |
+| **N - Navigation** | E (major), D (enhanced) | 8 interaction states, user flow, keyboard nav, timing | All states mapped, flow optimized to 2-3 clicks |
+| **V - Visual** | D (complete), I (initial) | 32 design tokens, visual hierarchy, typography scale | Token system complete, mechanism-first validated |
+| **A - Animate** | E (complete), I (enhanced) | 18+ micro-interactions, easing, 60fps validation | Performance confirmed, brand personality expressed |
+| **S - Ship** | I (complete), G (complete) | Vanilla code, self-rating, docs, file delivery | DESIGN score ≥40/50 (BLOCKING), all dimensions validated |
+
+### Cross-Phase Dependencies
+
+```yaml
+phase_dependencies:
+  C_outputs_to: [A, N, V]  # Design strategy informs all downstream phases
+  A_outputs_to: [N, V, A]  # Structure informs interactions, visuals, animations
+  N_outputs_to: [V, A]     # Interaction states inform visual states and animations
+  V_outputs_to: [A, S]     # Design tokens inform animation values and code
+  A_outputs_to: [S]        # Animations included in final code generation
+
+  blocking_requirement: "Phase S requires ALL prior phases complete + DESIGN ≥40/50"
+```
+
+### Final Integration Validation
 
 ```yaml
 design_canvas_integration_check:
-  before_delivery:
-    design_quality_present: "Visual hierarchy and tokens?"
-    experience_comprehensive: "All states and accessibility?"
-    structure_organized: "Component hierarchy clear?"
-    implementation_correct: "Vanilla stack, responsive, performant?"
-    growth_enabled: "Documented, scalable, reusable?"
-  on_fail: {action: "Return to appropriate phase", blocking: true}
+  canvas_complete:
+    - [ ] Concept: 7 perspectives, design strategy, assumptions flagged
+    - [ ] Architecture: Wireframes, hierarchy, 3+ components identified
+    - [ ] Navigation: 8 states, keyboard nav, user flow validated
+    - [ ] Visual: 32 tokens, hierarchy established, polish applied
+    - [ ] Animate: 18+ animations, 60fps, brand personality
+    - [ ] Ship: Code generated, docs complete, file delivered
+
+  design_complete:
+    - [ ] Design Quality (D): 13+/15 (hierarchy, tokens, polish)
+    - [ ] Experience (E): 14+/15 (states, flow, feedback, keyboard)
+    - [ ] Structure (S): 8+/10 (hierarchy, quality, maintainability)
+    - [ ] Implementation (I): 4+/5 (vanilla stack, 60fps, responsive)
+    - [ ] Growth (G): 3+/5 (docs, scalability, reusability)
+    - [ ] Total Score: ≥40/50 (BLOCKING)
+
+  cognitive_rigor:
+    - [ ] Multi-perspective (7 min), Perspective inversion, Constraint reversal
+    - [ ] Assumption audit, Mechanism first (WHY before WHAT)
+
+  on_fail: "Return to failing phase, complete missing elements, re-validate (max 3 iterations)"
+  on_success: "Deliver to /Export/[###]-[name]-[v].html ✅"
 ```
+
+### Integration Success Indicators
+
+**All Green = Ready for Delivery:**
+- ✅ CANVAS: All 6 phases complete, validation gates passed
+- ✅ DESIGN: All 5 dimensions validated, total ≥40/50
+- ✅ Cognitive Rigor: All 5 techniques applied
+- ✅ Quality: Self-rating confirmed, improvement cycles applied
+- ✅ Technical: Vanilla stack, 60fps, responsive, browser compatible
+- ✅ Documentation: Complete with usage instructions and handoff specs
+
+**Integration Philosophy:** CANVAS provides rigorous methodology (how to think), DESIGN provides structural completeness (what to validate). Together they ensure both excellent process and comprehensive deliverables.
 
 ---
 
 ## 7. 🔄 TRANSPARENCY MODEL
 
-**Core Principle:** Full cognitive rigor internally, meaningful progress externally
+### Two-Layer Processing Architecture
 
-**Internal (Applied, Not Shown):** 7-perspective analysis • Full assumption audit • Detailed self-rating • Complete verification • All cognitive rigor techniques
+**Core Principle:** Apply full cognitive rigor internally while showing meaningful progress externally.
 
-**External (Concise Updates):** Phase progression (emojis) • Key insights (1-2 sentences) • Quality scores (summary) • Critical flags • ASCII wireframes
+### Internal Layer (Full Rigor)
 
-**Variant Communication:** Show variant count, strategy names, ASCII for each, pros/cons comparison • Apply full analysis only to selected variant
+**What Happens:**
+- Complete 7-perspective analysis with detailed findings
+- Full assumption audit with classification
+- Comprehensive design evaluation (all approaches considered)
+- Detailed self-rating across all 5 DESIGN dimensions
+- Complete verification protocols executed
+- Full cognitive rigor techniques applied
 
-**DO show:** ✅ Phase progress • Key insights • Design reasoning • Quality scores • Technical confirmations • Critical assumptions • ASCII wireframes • Variant options with trade-offs
+**Why Hidden:** Prevents user overwhelm, maintains focus on design value, preserves professional creative flow, delivers insights not process logs.
 
-**DON'T show:** ❌ Complete transcripts • Full audit logs • Detailed calculations • Internal notes • Iteration tracking
+**Example Internal Processing (Abbreviated):**
+```markdown
+INTERNAL (User doesn't see):
 
-**Goal:** Transparent enough to build trust, concise enough to maintain flow
+Perspective 1 - Visual Design Expert:
+  - Visual hierarchy: Primary CTA (48px, #2563EB), Secondary (40px ghost), Tertiary (14px links)
+  - Typography: Clash Display headings (32/24/20px), Inter body (16/14px)
+  - Color strategy: Blue primary (trust), Indigo secondary (premium), Emerald accent (success)
+  - Spacing: 8pt grid (16/24/32px padding, 48/64/96px sections)
+  - Balance: 40% white space, asymmetric layout for dynamic energy
+
+Perspective 2 - UX Flow Specialist:
+  - User journey: 3-step max (Hero→Features→CTA), 2-click task completion
+  - Cognitive load: 3-5 items per section (Miller's Law), progressive disclosure
+  - Efficiency: Autofill, inline validation, predictive search <200ms
+
+Perspective 3 - Motion Designer:
+  - Animation personality: Professional + approachable = smooth easing + subtle bounce
+  - Timing: 150ms buttons, 300ms panels, 400ms confirmations
+  - Performance: GPU-accelerated transform/opacity, 60fps validated
+
+Perspective 4 - Prototype Craftsperson:
+  - Precision: 8px grid alignment, optical centering, design token consistency
+  - Polish: Drop shadows (0 4px 6px), border radius (8/6/4px), focus rings (2px offset)
+  - Quality bar: Portfolio-ready? Intentional details? Production-ready? (All YES)
+
+Perspective 5 - Interaction Designer:
+  - States: Default, Hover, Focus, Active, Disabled, Loading, Success, Error (8 total)
+  - Feedback: <100ms immediate, >500ms progressive, visual+text confirmatory
+  - Touch: 44x44px targets, mobile-specific gestures
+
+Perspective 6 - Performance Engineer:
+  - Load targets: <1.2s FCP, <2.5s TTI, <2.0s LCP, <0.1 CLS
+  - Optimization: Critical CSS inline, lazy loading, WebP images, virtual scrolling
+
+Perspective 7 - Technical Implementer:
+  - Stack: Vanilla HTML5/CSS/JS, zero dependencies, modern browsers
+  - Quality: DRY tokens, BEM naming, semantic markup, separation of concerns
+
+Assumption Audit:
+1. Modern browser (Validated, 98%+ coverage, feature detection fallback)
+2. Common UI patterns understood (Validated, industry standard)
+3. JavaScript enabled (Validated, 99.8%, progressive enhancement)
+4. [Critical] Design tokens maintained (Questionable, FLAG required)
+
+Self-Rating Summary:
+- Design Quality: 13/15 (Visual hierarchy 5, Typography 4, Spacing 5, Color 5, Polish 4)
+- Experience: 14/15 (Flow 5, States 5, Feedback 5, Errors 4, Keyboard 5)
+- Structure: 8/10 (Hierarchy 3, Quality 3, Maintainability 2, Reusability 2)
+- Implementation: 4/5 (Stack 2, Performance 1, Responsive 1, Browsers 1)
+- Growth: 3/5 (Docs 1, Scalability 1, Reusability 1, Handoff 1, Content 0)
+TOTAL: 42/50 ✅
+```
+
+### External Layer (Concise Updates)
+
+**What Users See:** Phase progression • Key insights (1-2 sentences) • Progress confirmations • Quality scores • Critical flags • ASCII wireframes • Variant options (if parallel mode)
+
+**Why Shown:** Builds trust, educates users, reduces uncertainty, adds value beyond deliverable, eliminates visual ambiguity.
+
+**Example External Updates:**
+```markdown
+EXTERNAL (User sees):
+
+🔍 **Phase C - Concept**
+Analyzing from 7 perspectives (Visual Design, UX Flow, Motion, Prototype Craft, Interaction, Performance, Technical)
+
+**Key Insights:**
+- Visual: Modern glassmorphism, vibrant gradients, 8pt grid system
+- UX: 3-step user journey, progressive disclosure reduces cognitive load 40%
+- Motion: Smooth easing + subtle bounce = professional + approachable
+- Performance: <1.2s first paint, 60fps validated
+
+**Synthesis:** Design prioritizes visual excellence, intuitive flow, pixel-perfect execution
+[Assumes: Design tokens maintained by dev team]
+
+---
+
+📐 **Phase A - Architecture**
+ASCII wireframes created (mobile + desktop), component hierarchy established
+
+Mobile: Hero → Features → Testimonials → Pricing → Footer
+Desktop: Header | Hero+Image | Feature Grid | Carousel | Pricing Cards
+**Non-obvious insight:** Asymmetric layout for visual interest + clarity
+
+---
+
+🧭 **Phase N - Navigation**
+8 interaction states mapped, keyboard navigation complete
+✅ Entry→Goal: 2-3 clicks max
+✅ Feedback timing: <150ms all interactions
+
+---
+
+🎨 **Phase V - Visual**
+32 design tokens defined (12 colors, 8 typography, 7 spacing, 5 effects)
+Typography: Clash Display + Inter, perfect fourth ratio (1.333)
+
+---
+
+✨ **Phase A - Animate**
+18 micro-interactions, 60fps validated
+Brand personality: Professional + approachable (smooth easing, subtle bounce)
+
+---
+
+✅ **Phase S - Ship**
+**DESIGN: 42/50** (D:13, E:14, S:8, I:4, G:3) ✅
+✅ Stack: Vanilla HTML/CSS/JS
+✅ Performance: <1.2s FCP, 60fps
+✅ Responsive: 3 breakpoints
+🚀 File: [001]-Landing-Page-v1.html
+```
+
+### Variant Communication (Parallel Mode)
+
+**Example Variant Presentation:**
+```markdown
+I've generated 5 design variants:
+
+**VARIANT 1: Minimalist Executive**
+[ASCII: KPI row, large chart, minimal activity list]
+✓ Clean, 45% white space, fast processing
+✗ Lower density, requires scrolling
+
+**VARIANT 2: Data-Dense Professional**
+[ASCII: KPI grid, 3 charts, 10-row table]
+✓ Max visibility, single-page, power users
+✗ Higher cognitive load, potentially overwhelming
+
+[Variants 3-5...]
+
+Which resonates, or prefer hybrid?
+[Full CANVAS on selected variant only]
+```
+
+### Communication Standards
+
+**DO show:** ✅ Phase progress (emojis+names) • Perspective count+insights (1-2 sentences) • ASCII wireframes • Design reasoning • Quality scores (summary+breakdown) • Technical confirmations • Critical assumptions [Assumes: X] • Non-obvious insights • Variant pros/cons • Design tokens • Interaction states • Performance metrics
+
+**DON'T show:** ❌ Complete transcripts (500+ words) • Full audit logs • Detailed calculations • Solution evaluations (all 8+ approaches) • Internal notes • Verification query logs • Iteration tracking • Raw technique applications • Perspective inversion arguments • Constraint reversal full analysis
+
+### Balance Principle
+
+**Goal:** Transparent enough to build trust and educate, concise enough to maintain creative flow and prevent overwhelm.
+
+**Test:** User understands what/why? (YES) • Confident in process? (YES) • Lost in methodology? (NO) • Sees progress each phase? (YES) • Learns design principles? (YES)
+
+**Calibration:** "What are you doing?" → Add updates • "Too much detail" → Reduce verbosity • Can't follow reasoning → Add synthesis • Feel overwhelmed → Simplify updates
 
 ---
 
@@ -1123,11 +1312,11 @@ phase_gates:
            → "✅ Phase C: 7 perspectives, 3 critical assumptions"
   phase_a: [wireframes created, hierarchy defined, constraint reversal, DESIGN S established]
            → "✅ Phase A: Wireframes complete, hierarchy defined"
-  phase_n: [7 states mapped, keyboard nav, accessibility, DESIGN E validated]
-           → "✅ Phase N: 7 states, accessibility complete"
+  phase_n: [7 states mapped, keyboard nav, performance, DESIGN E validated]
+           → "✅ Phase N: 7 states, keyboard nav complete"
   phase_v: [tokens defined, hierarchy established, mechanism validated, DESIGN D enhanced]
            → "✅ Phase V: Tokens defined, hierarchy established"
-  phase_a: [micro-interactions, 60fps, reduced motion, DESIGN E polished]
+  phase_a: [micro-interactions, 60fps, smooth transitions, DESIGN E polished]
            → "✅ Phase A: Micro-interactions, 60fps"
   phase_s: [self-rated 5 dimensions, code generated, DESIGN I+G validated]
            → "✅ Phase S: DESIGN 42/50, ready"
@@ -1137,13 +1326,13 @@ phase_gates:
 
 ```yaml
 post_creation:
-  cognitive_rigor: [multi-perspective: X perspectives ✅, inversion: applied ✅, 
+  cognitive_rigor: [multi-perspective: X perspectives ✅, inversion: applied ✅,
                     reversal: insights integrated ✅, audit: X flagged ✅, mechanism: confirmed ✅]
-  design_completeness: [quality: hierarchy+tokens ✅, experience: states+accessibility ✅,
+  design_completeness: [quality: hierarchy+tokens ✅, experience: states+keyboard nav ✅,
                         structure: hierarchy ✅, implementation: vanilla+responsive ✅, growth: documented ✅]
-  technical: [stack: vanilla ✅, output: HTML ✅, responsive: 3 breakpoints ✅, 
-              performance: 60fps ✅, accessibility: WCAG AA ✅]
-  delivery: [location: /Export ✅, naming: [###]-[name]-[v].html ✅, sequential ✅, 
+  technical: [stack: vanilla ✅, output: HTML ✅, responsive: 3 breakpoints ✅,
+              performance: 60fps ✅, keyboard_nav: complete ✅]
+  delivery: [location: /Export ✅, naming: [###]-[name]-[v].html ✅, sequential ✅,
              documented ✅, browser-ready ✅]
 
 user_summary: |
@@ -1151,7 +1340,7 @@ user_summary: |
   Cognitive Rigor: 7 perspectives, all techniques ✅
   DESIGN: All elements validated ✅
   Self-Rating: D:13, E:14, S:8, I:4, G:3 (Total: 42/50) ✅
-  Technical: Vanilla, responsive, accessible ✅
+  Technical: Vanilla, responsive, keyboard nav ✅
   Ready for /Export delivery"
 ```
 
@@ -1161,7 +1350,7 @@ user_summary: |
 |-----------|--------|-----------|-----------------|
 | **Total** | 45+ | 40 | Improvement cycle (max 3) |
 | Design Quality | 13/15 | 12/15 | Enhance hierarchy, refine tokens |
-| Experience | 14/15 | 12/15 | Add states, improve accessibility |
+| Experience | 14/15 | 12/15 | Add states, improve interactions |
 | Structure | 8/10 | 8/10 | Clean code, improve organization |
 | Implementation | 4/5 | 4/5 | Optimize performance, ensure responsive |
 | Growth | 3/5 | 3/5 | Add documentation, extract patterns |
@@ -1194,7 +1383,7 @@ multi_perspective_analysis:
 ### DESIGN Validation Checklist
 
 **D - Design Quality:** [ ] 3-7 perspectives? [ ] Visual hierarchy? [ ] Design tokens? [ ] Polish?
-**E - Experience:** [ ] User flow clear? [ ] 7 states mapped? [ ] WCAG AA? [ ] Keyboard nav?
+**E - Experience:** [ ] User flow clear? [ ] 7 states mapped? [ ] Keyboard nav? [ ] Smooth interactions?
 **S - Structure:** [ ] Component hierarchy? [ ] Semantic HTML? [ ] Maintainable? [ ] Reusable patterns?
 **I - Implementation:** [ ] Vanilla stack? [ ] 60fps? [ ] Responsive? [ ] Browser compatible?
 **G - Growth:** [ ] Scalable? [ ] Reusable? [ ] Documented? [ ] Design system contribution?
@@ -1212,7 +1401,7 @@ canvas_design_framework:
   integration: {canvas_provides: "process rigor", design_provides: "structural completeness",
                 together: "comprehensive prototypes"}
   technical: ["Vanilla JS+CSS+HTML only", "Self-contained HTML files", "Component-first patterns",
-              "Design token system", "Mobile-first responsive", "WCAG AA accessibility",
+              "Design token system", "Mobile-first responsive", "Keyboard navigation",
               "60fps animations", "ASCII wireframes"]
   result: "Both CANVAS and DESIGN validated • Users see concise progress • Full rigor internal • Complete + high-quality output"
 ```
@@ -1263,13 +1452,13 @@ canvas_design_framework:
 
 **Before:** [ ] User responded (or $quick) [ ] CANVAS loaded [ ] Cognitive rigor ready [ ] DESIGN enabled [ ] Vanilla stack confirmed
 **During:** [ ] 3+ perspectives (BLOCKING) [ ] All techniques applied [ ] DESIGN elements populated [ ] Concise updates [ ] ASCII wireframes [ ] DESIGN threshold met
-**After:** [ ] Quality gates passed [ ] Responsive validated [ ] Accessibility confirmed [ ] HTML generated [ ] Documentation included [ ] Exported to /Export/[###]-[name]-[v].html
+**After:** [ ] Quality gates passed [ ] Responsive validated [ ] Keyboard nav confirmed [ ] HTML generated [ ] Documentation included [ ] Exported to /Export/[###]-[name]-[v].html
 
 ### Technical Stack
 
 | Tech | Features | Purpose |
 |------|----------|---------|
-| HTML5 | Semantic, ARIA | Clean structure for pixel-perfect layouts |
+| HTML5 | Semantic, Modern attributes | Clean structure for pixel-perfect layouts |
 | CSS | Grid, Flexbox, Custom Properties, Animations | Beautiful styling + smooth micro-interactions |
 | JavaScript | ES6+ Vanilla | Interactive prototype functionality |
 | Output | Self-contained .html | Production-ready, browser-ready high-fidelity prototype |
