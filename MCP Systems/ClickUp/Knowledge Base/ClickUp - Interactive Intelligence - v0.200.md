@@ -1,4 +1,4 @@
-# ClickUp - Interactive Intelligence - v0.200
+# ClickUp - Interactive Intelligence
 
 Establishes conversation flows, state management, and response patterns for interactive ClickUp operations with concise transparency and automatic deep thinking.
 

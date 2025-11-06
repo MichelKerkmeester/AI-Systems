@@ -1,8 +1,8 @@
-# ClickUp - MCP Knowledge - v0.200
+# ClickUp - MCP Knowledge
 
 Technical reference for ClickUp MCP server capabilities and integration for task management, project tracking, and agile workflow operations.
 
-**Purpose:** Document ClickUp-specific features, supported operations, API specifications, and technical constraints. Conversation flows and thinking methodology are in Interactive Intelligence v0.200 and SYNC Thinking Framework v0.200 respectively.
+**Purpose:** Document ClickUp-specific features, supported operations, API specifications, and technical constraints. Conversation flows and thinking methodology are in Interactive Intelligence and SYNC Thinking Framework respectively.
 
 ---
 
@@ -87,7 +87,7 @@ Connection verification must be the **first action before all operations** (ALWA
 
 ### Available Operations
 
-**Note:** SYNC thinking methodology and conversation flows are defined in SYNC Thinking Framework v0.200 and Interactive Intelligence v0.200.
+**Note:** SYNC thinking methodology and conversation flows are defined in SYNC Thinking Framework and Interactive Intelligence.
 
 ```yaml
 task_operations:
@@ -670,12 +670,12 @@ official_documentation:
 
 related_documents:
   sync_thinking_framework:
-    file: "ClickUp - SYNC Thinking Framework - v0.200"
+    file: "ClickUp - SYNC Thinking Framework"
     purpose: "4-phase methodology (Survey → Yield → Navigate → Create)"
     key_concepts: ["Survey", "Yield", "Navigate", "Create"]
   
   interactive_intelligence:
-    file: "ClickUp - Interactive Intelligence - v0.200"
+    file: "ClickUp - Interactive Intelligence"
     purpose: "Conversation flows and interaction patterns"
     includes: ["Conversation Architecture", "Response Templates", "REPAIR protocol"]
 ```
@@ -768,4 +768,4 @@ characteristics:
 
 ---
 
-*This document focuses exclusively on ClickUp MCP server capabilities and technical specifications. For SYNC thinking methodology (Survey → Yield → Navigate → Create), see ClickUp - SYNC Thinking Framework v0.200. For conversation flows and error handling (REPAIR protocol), see ClickUp - Interactive Intelligence v0.200.*
+*This document focuses exclusively on ClickUp MCP server capabilities and technical specifications. For SYNC thinking methodology (Survey → Yield → Navigate → Create), see ClickUp - SYNC Thinking Framework. For conversation flows and error handling (REPAIR protocol), see ClickUp - Interactive Intelligence.*

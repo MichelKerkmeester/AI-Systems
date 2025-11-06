@@ -47,7 +47,7 @@ This file serves as a redirect with intelligent routing based on user input.
 **Follow this dynamic sequence:**
 
 ### **✅ STEP 1: READ SYSTEM PROMPT FIRST** 
-**MANDATORY:** Read `/Knowledge Base/Agent - MCP - ClickUp - v0.200.md` **COMPLETELY** before proceeding.
+**MANDATORY:** Read `/Knowledge Base/Agent - MCP - ClickUp.md` **COMPLETELY** before proceeding.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
@@ -90,18 +90,18 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Steps 2-3 detection, read IN THIS ORDER as needed:**
 
-1. **SYNC Thinking Framework** — `/Knowledge Base/ClickUp - SYNC Thinking Framework - v0.200.md`
+1. **SYNC Thinking Framework** — `/Knowledge Base/ClickUp - SYNC Thinking Framework.md`
    - **ALWAYS READ** for structured operations
    - 4-phase methodology (Survey → Yield → Navigate → Create)
    - Connection verification integrated
    - Native MCP enforcement
 
-2. **Interactive Intelligence** — `/Knowledge Base/ClickUp - Interactive Intelligence - v0.200.md`
+2. **Interactive Intelligence** — `/Knowledge Base/ClickUp - Interactive Intelligence.md`
    - **DEFAULT** conversational flow and UI patterns
    - Adaptive questioning and feedback formats
    - **SKIP IF** direct operation with clear intent
 
-3. **MCP Knowledge** — `/Knowledge Base/ClickUp - MCP Knowledge - v0.200.md`
+3. **MCP Knowledge** — `/Knowledge Base/ClickUp - MCP Knowledge.md`
    - ClickUp MCP server specifications
    - **ALWAYS CHECK** before operations requiring MCP calls
    - Connection verification procedures
@@ -113,7 +113,7 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 ```
 START
   ↓
-[Read System Prompt v0.200]
+[Read System Prompt]
   ↓
 [VERIFY MCP CONNECTION] ← CRITICAL FIRST STEP
   ↓
@@ -193,7 +193,7 @@ User: "create tasks but connection is failing"
 ## 5. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
-- ❌ Skip the system prompt (`/Knowledge Base/Agent - MCP - ClickUp - v0.200.md`)
+- ❌ Skip the system prompt (`/Knowledge Base/Agent - MCP - ClickUp.md`)
 - ❌ Proceed without completing Step 1
 - ❌ Proceed without verifying required tool availability (MCP server)
 - ❌ Skip operation routing guide
@@ -203,7 +203,7 @@ User: "create tasks but connection is failing"
 - ❌ **Produce code, CLI commands, or implementation details** (Context Override)
 
 ### ALWAYS:
-- ✅ Start with `/Knowledge Base/Agent - MCP - ClickUp - v0.200.md`
+- ✅ Start with `/Knowledge Base/Agent - MCP - ClickUp.md`
 - ✅ Complete step 1 and understand project context fully
 - ✅ Verify required tool(s) BEFORE any operation (MCP server)
 - ✅ Check for operation type detection
@@ -218,11 +218,13 @@ User: "create tasks but connection is failing"
 
 1. **Context Override FIRST** - ClickUp MCP Agent mode enforced
 2. **Connection Verification SECOND** - Always before operations
-3. **System Prompt THIRD** - Always start here (`Agent - MCP - ClickUp - v0.200.md`)
+3. **System Prompt THIRD** - Always start here (`Agent - MCP - ClickUp.md`)
 4. **Check operation routing guide** - Route intelligently
 5. **Read by operation type** - Only required documents
 6. **SYNC Framework** — Structured 4-phase methodology
 7. **Interactive Intelligence** — Default flow when conversational
 8. **MCP Knowledge** — Tool capabilities and parameters
 
-**→ GO TO:** `/Knowledge Base/Agent - MCP - ClickUp - v0.200.md` **NOW**
+---
+
+**→ GO TO:** `/Knowledge Base/Agent - MCP - ClickUp.md` **NOW**
