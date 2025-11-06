@@ -45,10 +45,10 @@ This file serves as a redirect with intelligent routing based on user input.
 **Follow this dynamic sequence:**
 
 ### **✅ STEP 1: READ SYSTEM PROMPT FIRST** 
-**MANDATORY:** Read `/Knowledge Base/Writer - Product Owner - v0.924.md` **COMPLETELY** before proceeding.
+**MANDATORY:** Read `/Knowledge Base/Writer - Product Owner.md` **COMPLETELY** before proceeding.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
-- Includes DEPTH v0.108 two-layer transparency model with RICCE integration
+- Includes DEPTH two-layer transparency model with RICCE integration
 - Multi-perspective analysis MANDATORY (minimum 3, target 5)
 - Concise user communication with full internal rigor
 
@@ -59,13 +59,13 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 **Check user's input for $ command shortcuts and route accordingly:**
 
 #### IF USER USES SHORTCUTS:
-- **`$ticket`** → Read `/Knowledge Base/Product Owner - Template - Ticket Mode - v0.133.md`
-- **`$story`** → Read `/Knowledge Base/Product Owner - Template - Story Mode - v0.133.md`
-- **`$epic`** → Read `/Knowledge Base/Product Owner - Template - Epic Mode - v0.130.md`
-- **`$doc`** → Read `/Knowledge Base/Product Owner - Template - Doc Mode - v0.119.md`
+- **`$ticket`** → Read `/Knowledge Base/Product Owner - Template - Ticket Mode.md`
+- **`$story`** → Read `/Knowledge Base/Product Owner - Template - Story Mode.md`
+- **`$epic`** → Read `/Knowledge Base/Product Owner - Template - Epic Mode.md`
+- **`$doc`** → Read `/Knowledge Base/Product Owner - Template - Doc Mode.md`
 
 #### IF NO SHORTCUT DETECTED:
-1. **FIRST** → Read `/Knowledge Base/Product Owner - Interactive Mode - v0.307.md`
+1. **FIRST** → Read `/Knowledge Base/Product Owner - Interactive Mode.md`
 2. **WAIT** for user response about what they want
 3. **THEN** read the appropriate template based on their answer:
    - User wants ticket → Read Ticket Mode template
@@ -78,7 +78,7 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 ### **📚 STEP 3: READ SUPPORTING FRAMEWORK** 
 **ONLY AFTER** completing Steps 1-2, read:
 
-**DEPTH Thinking Framework** - `/Knowledge Base/Product Owner - DEPTH Thinking Framework - v0.108.md`
+**DEPTH Thinking Framework** - `/Knowledge Base/Product Owner - DEPTH Thinking Framework.md`
 - 10-round automatic processing (standard) or auto-scaled for $quick
 - Two-layer transparency model (full rigor internally, concise updates externally)
 - Multi-perspective analysis MANDATORY enforcement (minimum 3, target 5)
@@ -92,11 +92,11 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 ```
 START
   ↓
-[Read System Prompt v0.924]
+[Read System Prompt]
   ↓
 [Check User Input]
   ↓
-Has Shortcut? ─── NO ──→ [Read Interactive Mode v0.307]
+Has Shortcut? ─── NO ──→ [Read Interactive Mode]
   │                         ↓
   │                    [Ask User & Wait]
   │                         ↓
@@ -106,7 +106,7 @@ Has Shortcut? ─── NO ──→ [Read Interactive Mode v0.307]
   ↓
 [Read Specific Template]
   ↓
-[Read DEPTH Framework v0.108]
+[Read DEPTH Framework]
   ↓
 READY TO PROCESS
 ```
@@ -118,10 +118,10 @@ READY TO PROCESS
 **Recognize these commands:**
 | Shortcut | Template to Read | Purpose |
 |----------|------------------|---------|
-| `$ticket` | Ticket Mode v0.133 | Development task with QA checklist |
-| `$story` | Story Mode v0.133 | User story narrative format |
-| `$epic` | Epic Mode v0.130 | Epic with links to stories and tickets |
-| `$doc` | Doc Mode v0.119 | Technical or user documentation |
+| `$ticket` | Ticket Mode | Development task with QA checklist |
+| `$story` | Story Mode | User story narrative format |
+| `$epic` | Epic Mode | Epic with links to stories and tickets |
+| `$doc` | Doc Mode | Technical or user documentation |
 | `$quick` | Auto-detect template | Skip questions, use defaults |
 
 **No shortcut?** → Use Interactive Mode to determine user needs
@@ -159,7 +159,7 @@ READY TO PROCESS
 ## 6. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
-- ❌ Skip the system prompt (/Knowledge Base/Writer - Product Owner - v0.924.md)
+- ❌ Skip the system prompt (/Knowledge Base/Writer - Product Owner.md)
 - ❌ Proceed without completing Step 1
 - ❌ Skip command / shortcut detection
 - ❌ Read ALL documents unnecessarily (only what's needed)
@@ -170,7 +170,7 @@ READY TO PROCESS
 - ❌ **Produce code, CLI commands, or implementation details** (Context Override)
 
 ### ALWAYS:
-- ✅ Start with `/Knowledge Base/Writer - Product Owner - v0.924.md`
+- ✅ Start with `/Knowledge Base/Writer - Product Owner.md`
 - ✅ Complete step 1 and understand project context fully
 - ✅ Check for mode/tone commands before routing
 - ✅ Read ONLY required documents based on routing
@@ -185,7 +185,7 @@ READY TO PROCESS
 ## 7. 🚨 REMEMBER THE HIERARCHY
 
 1. **Context Override FIRST** - Product Owner mode enforced
-2. **System Prompt SECOND** - Always start here (v0.924)
+2. **System Prompt SECOND** - Always start here
 3. **Check commands** - Route intelligently  
 4. **Read by mode** - Only required documents
 5. **DEPTH Framework** - 10 rounds automatic (unless $quick simple edit)
@@ -193,4 +193,4 @@ READY TO PROCESS
 7. **Artifact Standards** - Always for formatting
 8. **Output to /Export** - Every artifact goes here
 
-**→ GO TO:** `/Knowledge Base/Writer - Product Owner - v0.924.md` **NOW**
+**→ GO TO:** `/Knowledge Base/Writer - Product Owner.md` **NOW**

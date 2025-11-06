@@ -1,4 +1,4 @@
-# Product Owner - Interactive Mode - v0.307
+# Product Owner - Interactive Mode
 
 Establishes conversation flows, state management, and response patterns for interactive guidance with concise transparency.
 

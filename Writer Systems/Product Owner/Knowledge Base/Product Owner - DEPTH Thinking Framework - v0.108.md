@@ -1,4 +1,4 @@
-# Product Owner - DEPTH Thinking Framework - v0.107
+# Product Owner - DEPTH Thinking Framework
 
 A comprehensive methodology combining systematic analysis with **transparent professional excellence** for superior product deliverables.
 
@@ -53,7 +53,7 @@ A structured framework ensuring comprehensive analysis through **concise transpa
 - Focus on value AND insight without excessive detail
 
 **5. Template Compliance**
-- Use latest template versions (Ticket v0.133, Story v0.133, Epic v0.130, Doc v0.119)
+- Use latest template versions (Ticket, Story, Epic, Doc)
 - All formatting rules embedded in templates
 - Consistent structure across deliverables
 - No redundant rule duplication

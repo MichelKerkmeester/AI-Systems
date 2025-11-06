@@ -1,4 +1,4 @@
-# Product Owner - Template - Epic Mode - v0.130
+# Product Owner - Template - Epic Mode
 
 Epic templates with integrated formatting rules and quality standards. All delivery logic consolidated for self-contained operation.
 
@@ -50,7 +50,7 @@ Epic templates with integrated formatting rules and quality standards. All deliv
   - Standard modes: 10 rounds automatic (not user choice)
   - Quick mode: 1-5 rounds auto-scaled based on complexity
 - **Wait for Input:** NEVER proceed without user response to questions
-- **Template Compliance:** Use v0.130 structure exactly
+- **Template Compliance:** Use structure exactly
 
 ### Epic-Specific Standards
 - **Scaling:** 
@@ -175,11 +175,8 @@ Epic templates with integrated formatting rules and quality standards. All deliv
 ## 5. ✅ QUALITY CHECKLIST
 
 ### Pre-Creation Validation
-- [] DEPTH methodology applied (10 rounds standard, 1-5 quick)?
-- [] User responded to comprehensive question?
-- [] System waited for response (never answered own questions)?
-- [] Scale determined correctly?
-- [] Template version confirmed (v0.130)?
+- [] Complexity determined correctly?
+- [] Template version confirmed?
 - [] Output scope limited to user request?
 
 ### Structure Validation
@@ -265,7 +262,7 @@ Epic templates with integrated formatting rules and quality standards. All deliv
 ## 7. 📊 INITIATIVE EPIC TEMPLATE
 
 ```markdown
-Mode: $epic | Scale: Initiative | Template: v0.130
+Mode: $epic | Scale: Initiative | Template: Epic
 ---
 # [Epic Name]
 
@@ -383,7 +380,7 @@ Exit Criteria:
 ## 8. 🎯 PROGRAM EPIC TEMPLATE
 
 ```markdown
-Mode: $epic | Scale: Program | Template: v0.130
+Mode: $epic | Scale: Program | Template: Epic
 ---
 # [Program Name] Epic
 
@@ -550,7 +547,7 @@ Key Deliverables:
 ## 9. 🚀 STRATEGIC EPIC TEMPLATE
 
 ```markdown
-Mode: $epic | Scale: Strategic | Template: v0.130
+Mode: $epic | Scale: Strategic | Template: Epic
 ---
 # [Strategic Initiative] Epic
 
@@ -730,9 +727,9 @@ Major Milestones:
 5. **Designs as bullets** organized by category (Documentation, Flows, Components, Related Stories/Tickets)
 7. **Feature lists** include links to stories/tickets (summary approach, not full specs)
 8. **Use H4 for subsections** - H3 never used in Epic mode
-9. **NO ◻ symbol** - removed in v0.130
+9. **NO ◻ symbol** - removed
 10. **Use `---` dividers** between all major sections
-10. **Interactive questions** handled by Interactive Mode v0.306 file
+10. **Interactive questions** handled by Interactive Mode file
 11. **Header at top** as first line (Mode | Scale | Template)
 12. **No Table of Contents** (ClickUp/Jira provide native TOC)
 13. **Only requested features** - no scope expansion

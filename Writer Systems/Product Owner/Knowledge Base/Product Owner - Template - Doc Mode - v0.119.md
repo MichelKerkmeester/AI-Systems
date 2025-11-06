@@ -1,4 +1,4 @@
-# Product Owner - Template - Doc Mode - v0.119
+# Product Owner - Template - Doc Mode
 
 Documentation templates with integrated formatting rules and quality standards. All delivery logic consolidated for self-contained operation.
 
@@ -27,7 +27,7 @@ Documentation templates with integrated formatting rules and quality standards. 
 - **Purpose:** Create product documentation that auto-scales complexity
 - **Output:** Always as `text/markdown` artifact
 - **Thinking:** 10 rounds automatic (DEPTH methodology), 1-5 auto-scaled for $quick
-- **Interactive Mode:** Handled by Interactive Mode v0.306
+- **Interactive Mode:** Handled by Interactive Mode
 - **Key Focus:** Product features, performance metrics, strategy docs - ONLY what user requests
 - **Header Position:** Always at top as first line
 - **Silent Processing:** User sees simple messages, not methodology details
@@ -50,7 +50,7 @@ Documentation templates with integrated formatting rules and quality standards. 
   - Standard modes: 10 rounds automatic (not user choice)
   - Quick mode: 1-5 rounds auto-scaled based on complexity
 - **Wait for Input:** NEVER proceed without user response to questions
-- **Template Compliance:** Use v0.119 structure exactly
+- **Template Compliance:** Use structure exactly
 
 ### Doc-Specific Standards
 - **Scaling:** 
@@ -182,7 +182,7 @@ Documentation templates with integrated formatting rules and quality standards. 
 - [] User responded to comprehensive question?
 - [] System waited for response (never answered own questions)?
 - [] Complexity determined correctly?
-- [] Template version confirmed (v0.119)?
+- [] Template version confirmed?
 - [] Output scope limited to user request?
 
 ### Structure Validation
@@ -263,7 +263,7 @@ Documentation templates with integrated formatting rules and quality standards. 
 ## 7. 📝 SIMPLE DOCUMENTATION TEMPLATE
 
 ```markdown
-Mode: $doc | Complexity: Simple | Template: v0.119
+Mode: $doc | Complexity: Simple | Template: Doc
 ---
 # [Document Title]
 
@@ -348,7 +348,7 @@ High-level description of the main capabilities and value proposition
 ## 8. 📖 STANDARD DOCUMENTATION TEMPLATE
 
 ```markdown
-Mode: $doc | Complexity: Standard | Template: v0.119
+Mode: $doc | Complexity: Standard | Template: Doc
 ---
 # [Document Title]
 
@@ -511,7 +511,7 @@ the product [limited to requested system only].
 ## 9. 📗 COMPLEX DOCUMENTATION TEMPLATE
 
 ```markdown
-Mode: $doc | Complexity: Complex | Template: v0.119
+Mode: $doc | Complexity: Complex | Template: Doc
 ---
 # [Platform/Ecosystem Documentation]
 
@@ -844,12 +844,12 @@ The north star that guides all platform decisions and investments
 6. **Use H3 for subsections** - number them (### 1. Title) only when multiple subsections exist
 7. **Single subsection** uses clean H3 (no numbers, no symbols)
 8. **Use `---` dividers** between all major sections
-10. **Interactive questions** handled by Interactive Mode v0.306 file
+10. **Interactive questions** handled by Interactive Mode file
 11. **Header at top** as first line (Mode | Complexity | Template)
 12. **No Table of Contents** (ClickUp/Jira provide native TOC)
 13. **Only requested topic** - no scope expansion beyond user request
 14. **DEPTH methodology** applied automatically (10 rounds standard, 1-5 quick)
-15. **Template version** v0.119 confirmed before creation
+15. **Template version** confirmed before creation
 16. **Complexity scales structure** not content scope (Simple: 2-3 sections, Standard: 4-6, Complex: 7+)
 17. **Documentation focus** maintained throughout (product features, performance metrics, strategy docs)
 18. **H3 NEVER used** - use H4 for all subsections

@@ -1,4 +1,4 @@
-# Product Owner - Template - Ticket Mode - v0.133
+# Product Owner - Template - Ticket Mode
 
 Streamlined ticket templates aligned with real-world usage patterns. Concise, practical format with integrated formatting rules and quality standards.
 
@@ -27,7 +27,7 @@ Streamlined ticket templates aligned with real-world usage patterns. Concise, pr
 - **Purpose:** Create development tickets with QA checklists that auto-scale complexity
 - **Output:** Always as `text/markdown` artifact
 - **Thinking:** 10 rounds automatic (DEPTH methodology), 1-5 auto-scaled for $quick
-- **Interactive Mode:** Handled by Interactive Mode v0.306 file (all question logic lives there)
+- **Interactive Mode:** Handled by Interactive Mode file (all question logic lives there)
 - **Header Position:** Always at top as first line
 - **Output Constraints:** Ticket contains ONLY the requested feature/fix/change
 - **Key Feature:** Includes Resolution Checklist for QA verification
@@ -37,10 +37,10 @@ Streamlined ticket templates aligned with real-world usage patterns. Concise, pr
 - **NEVER answer own questions - always wait for user response**
 - **NO TABLE OF CONTENTS** - ClickUp/Jira provide native TOC functionality
 - **HEADER AT TOP:** System metadata appears as first line of artifact
-- **INTERACTIVE QUESTIONS:** All question logic is in Interactive Mode v0.306 (not duplicated here)
+- **INTERACTIVE QUESTIONS:** All question logic is in Interactive Mode (not duplicated here)
 
 ### Note on User Stories
-For user story format (narrative without QA checklists), use `$story` command which references **Product Owner - Template - Story Mode - v0.133.md**
+For user story format (narrative without QA checklists), use `$story` command which references **Product Owner - Template - Story Mode**
 
 ---
 
@@ -53,7 +53,7 @@ For user story format (narrative without QA checklists), use `$story` command wh
   - Standard modes: 10 rounds automatic (not user choice)
   - Quick mode: 1-5 rounds auto-scaled based on complexity
 - **Wait for Input:** NEVER proceed without user response to questions
-- **Template Compliance:** Use v0.133 structure exactly
+- **Template Compliance:** Use structure exactly
 
 ### Ticket-Specific Standards
 - **Scaling:** 
@@ -89,7 +89,7 @@ For user story format (narrative without QA checklists), use `$story` command wh
 #### Formatting Standards
 - **Dividers:** Use `---` between all major sections (not between description and User Need)
 - **Lists:** Always use `-` for bullets, `[]` for checkboxes
-- **Designs & References:** Bulleted list with categories (like Story v0.133)
+- **Designs & References:** Bulleted list with categories (like Story Mode)
 - **Links:** Use `[Description](URL)` format with actual URLs or `[Link - to be added]`
 - **Priority:** Format as `**→ Priority:** Critical/High/Medium/Low` in About section
 - **Status Notes:** Format as `[Status note: "description"]` when needed
@@ -159,7 +159,7 @@ For user story format (narrative without QA checklists), use `$story` command wh
 - [] User responded to comprehensive question?
 - [] System waited for response (never answered own questions)?
 - [] Complexity determined correctly?
-- [] Template version confirmed (v0.133)?
+- [] Template version confirmed?
 - [] Output scope limited to user request?
 
 ### Structure Validation
@@ -172,7 +172,7 @@ For user story format (narrative without QA checklists), use `$story` command wh
 - [] Success criteria after Business Value?
 - [] Problems integrated in About narrative?
 - [] Correct symbol hierarchy applied?
-- [] Designs in bulleted list format (like Story v0.133)?
+- [] Designs in bulleted list format (like Story Mode)?
 - [] Resolution checklist scaled properly?
 - [] Status notes use standard format?
 - [] Priority label included in About?
@@ -222,7 +222,7 @@ For user story format (narrative without QA checklists), use `$story` command wh
 **Fix:** Integrate into About narrative
 
 **Pattern:** Sequential questions
-**Fix:** Stop, apologize, ask comprehensive question (in Interactive Mode v0.306), WAIT
+**Fix:** Stop, apologize, ask comprehensive question (in Interactive Mode), WAIT
 
 #### Added Unrequested Features
 **Fix:** Remove extras, keep only requested scope
@@ -240,12 +240,12 @@ For user story format (narrative without QA checklists), use `$story` command wh
 **Fix:** Remove ToC, rely on external tools
 
 #### Designs & References as Numbered List or Table
-**Fix:** Convert to bulleted list with categories (following Story v0.133 pattern)
+**Fix:** Convert to bulleted list with categories (following Story Mode pattern)
 
 ### Prevention Strategies
 1. Apply DEPTH automatically (10 rounds standard, 1-5 quick)
 2. Wait for comprehensive response
-3. Check template version (v0.133)
+3. Check template version
 4. Verify symbol hierarchy
 5. Position sections correctly
 6. Include short description after title
@@ -263,7 +263,7 @@ For user story format (narrative without QA checklists), use `$story` command wh
 ## 6. 🔵 SIMPLE TICKET TEMPLATE
 
 ```markdown
-Mode: $ticket | Complexity: Simple | Template: v0.133
+Mode: $ticket | Complexity: Simple | Template: Ticket
 ---
 # ⌘ About
 
@@ -338,7 +338,7 @@ Mode: $ticket | Complexity: Simple | Template: v0.133
 ## 7. 🟠 STANDARD TICKET TEMPLATE
 
 ```markdown
-Mode: $ticket | Complexity: Standard | Template: v0.133
+Mode: $ticket | Complexity: Standard | Template: Ticket
 ---
 # ⌘ About
 
@@ -460,7 +460,7 @@ Mode: $ticket | Complexity: Standard | Template: v0.133
 ## 8. 🔴 COMPLEX TICKET TEMPLATE
 
 ```markdown
-Mode: $ticket | Complexity: Complex | Template: v0.133
+Mode: $ticket | Complexity: Complex | Template: Ticket
 ---
 # ⌘ About
 
@@ -643,7 +643,7 @@ Mode: $ticket | Complexity: Complex | Template: v0.133
 ### Simple Quick Mode
 
 ```markdown
-Mode: $ticket | Complexity: Simple | Template: v0.133 | Quick
+Mode: $ticket | Complexity: Simple | Template: Ticket | Quick
 ---
 # ⌘ About
 
@@ -677,7 +677,7 @@ Mode: $ticket | Complexity: Simple | Template: v0.133 | Quick
 ### Standard Quick Mode
 
 ```markdown
-Mode: $ticket | Complexity: Standard | Template: v0.133 | Quick
+Mode: $ticket | Complexity: Standard | Template: Ticket | Quick
 ---
 # ⌘ About
 
@@ -729,7 +729,7 @@ Mode: $ticket | Complexity: Standard | Template: v0.133 | Quick
 9. **H3 subsections** in Requirements (NEVER H4, numbered format like 1., 2., 3.)
 10. **Resolution Checklist** at bottom (mandatory for tickets, QA verification)
 11. **Use `---` dividers** between all sections
-12. **Interactive questions** handled by Interactive Mode v0.306 file
+12. **Interactive questions** handled by Interactive Mode file
 13. **Header at top** as first line (Mode | Complexity | Template)
 14. **No Table of Contents**
 15. **Only requested features** - no scope expansion
