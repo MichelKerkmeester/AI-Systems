@@ -12,7 +12,9 @@
       "mcp__chrome-devtools__take_snapshot",
       "mcp__chrome-devtools__list_console_messages",
       "WebSearch",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(node --version:*)"
     ],
     "deny": [],
     "ask": [],
@@ -25,9 +27,21 @@
     "chrome-devtools-2",
     "chrome-devtools-3",
     "chrome-devtools-4",
-    "serena"
+    "claude-mem"
   ],
   "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node '/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem/plugin/scripts/context-hook.js'",
+            "timeout": 300000
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
@@ -41,7 +55,7 @@
     ],
     "PostToolUse": [
       {
-        "matcher": "replace_string_in_file",
+        "matcher": "Edit",
         "hooks": [
           {
             "type": "command",
@@ -50,11 +64,21 @@
         ]
       },
       {
-        "matcher": "create_file",
+        "matcher": "Write",
         "hooks": [
           {
             "type": "command",
             "command": "bash $CLAUDE_PROJECT_DIR/.claude/scripts/validate-post-response.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node '/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem/plugin/scripts/save-hook.js'",
+            "timeout": 120000
           }
         ]
       }
@@ -65,6 +89,33 @@
           {
             "type": "command",
             "command": "bash $CLAUDE_PROJECT_DIR/.claude/scripts/validate-skill-activation.sh"
+          },
+          {
+            "type": "command",
+            "command": "node '/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem/plugin/scripts/new-hook.js'",
+            "timeout": 120000
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node '/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem/plugin/scripts/summary-hook.js'",
+            "timeout": 120000
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node '/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem/plugin/scripts/cleanup-hook.js'",
+            "timeout": 120000
           }
         ]
       }

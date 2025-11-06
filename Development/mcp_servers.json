@@ -36,18 +36,16 @@
       "env": {},
       "working_directory": null
     },
-    "serena": {
-      "command": "/Users/michelkerkmeester/.local/bin/uvx",
+    "claude-mem": {
+      "command": "node",
       "args": [
-        "--from",
-        "git+https://github.com/oraios/serena",
-        "serena",
-        "start-mcp-server",
-        "--context",
-        "ide-assistant"
+        "/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem/plugin/scripts/search-server.mjs"
       ],
-      "env": {},
-      "working_directory": null
+      "env": {
+        "CLAUDE_MEM_MODEL": "claude-sonnet-4-5",
+        "CLAUDE_MEM_WORKER_PORT": "37777"
+      },
+      "working_directory": "/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem"
     }
   }
 }

@@ -18,6 +18,18 @@ if [ -z "$COMMAND" ]; then
   exit 0
 fi
 
+# Define whitelisted patterns (always allow these)
+WHITELISTED_PATTERNS=(
+  "\.claude/logs/"
+)
+
+# Check if command matches any whitelisted patterns
+for pattern in "${WHITELISTED_PATTERNS[@]}"; do
+  if echo "$COMMAND" | grep -qE "$pattern"; then
+    exit 0  # Whitelisted, allow immediately
+  fi
+done
+
 # Define forbidden patterns
 FORBIDDEN_PATTERNS=(
   "node_modules"

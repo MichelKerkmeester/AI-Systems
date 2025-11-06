@@ -96,6 +96,48 @@
       },
       "alwaysActive": true
     },
+    "conversation-documentation": {
+      "type": "knowledge",
+      "enforcement": "strict",
+      "priority": "critical",
+      "description": "Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)",
+      "promptTriggers": {
+        "keywords": [
+          "spec",
+          "specification",
+          "spec folder",
+          "implementation",
+          "code changes",
+          "create folder",
+          "plan.md",
+          "spec.md",
+          "documentation level",
+          "level 0",
+          "level 1",
+          "level 2",
+          "level 3",
+          "readme",
+          "speckit"
+        ],
+        "intentPatterns": [
+          "(create|implement|add|build|write).*?(feature|component|function|change)",
+          "(make|perform|do).*?(code change|file change|implementation)",
+          "(need|require|must).*?(spec|documentation|spec folder)",
+          "(what|which).*?(level|documentation level)",
+          "(before|need to).*?(implement|code|write)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "specs/**/",
+          "specs/**/*.md",
+          ".specify/templates/**",
+          "knowledge/conversation_documentation.md"
+        ],
+        "contentPatterns": []
+      },
+      "alwaysActive": true
+    },
     "debugging": {
       "type": "knowledge",
       "enforcement": "suggest",
@@ -146,50 +188,6 @@
       },
       "fileTriggers": {
         "pathPatterns": ["**/*.md", "knowledge/document_style_guide.md"],
-        "contentPatterns": []
-      }
-    },
-    "serena-mcp": {
-      "type": "knowledge",
-      "enforcement": "suggest",
-      "priority": "high",
-      "description": "Semantic code intelligence using LSP for symbol-level operations (knowledge/serena_mcp.md)",
-      "promptTriggers": {
-        "keywords": [
-          "refactor",
-          "rename",
-          "find references",
-          "symbol",
-          "definition",
-          "implementation",
-          "call hierarchy",
-          "type hierarchy",
-          "semantic search",
-          "code structure",
-          "dependency analysis",
-          "cross-file",
-          "serena",
-          "mcp"
-        ],
-        "intentPatterns": [
-          "(find|search|locate).*?(symbol|definition|implementation|references)",
-          "(rename|refactor).*?(function|class|variable|method)",
-          "(analyze|check|trace).*?(dependencies|call|hierarchy|structure)",
-          "(cross-file|multi-file).*?(change|edit|refactor)",
-          "where.*?(used|called|defined|implemented)"
-        ]
-      },
-      "fileTriggers": {
-        "pathPatterns": [
-          "src/**/*.js",
-          "src/**/*.ts",
-          "src/**/*.py",
-          "src/**/*.go",
-          "src/**/*.rs",
-          "src/**/*.java",
-          "knowledge/serena_mcp.md",
-          ".serena/project.yml"
-        ],
         "contentPatterns": []
       }
     },
@@ -288,6 +286,53 @@
         ]
       }
     },
+    "markdown-flowchart": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Create comprehensive ASCII flowcharts in markdown for visualizing workflows, user journeys, system architectures, and decision trees",
+      "promptTriggers": {
+        "keywords": [
+          "flowchart",
+          "flow chart",
+          "workflow diagram",
+          "process diagram",
+          "process map",
+          "decision tree",
+          "user journey",
+          "system flow",
+          "process visualization",
+          "ascii diagram",
+          "workflow visualization",
+          "process flow",
+          "data flow"
+        ],
+        "intentPatterns": [
+          "(create|make|generate|draw).*?(flowchart|flow chart|diagram|process map)",
+          "(visualize|map|show|diagram).*?(workflow|process|flow|journey)",
+          "(document|explain).*?(process|workflow|flow).*?(visual|diagram)",
+          "(need|want).*?(flowchart|diagram|visualization)",
+          "how.*?(visualize|show|map).*?(process|workflow)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "**/*.md",
+          "specs/**",
+          "knowledge/**",
+          "docs/**",
+          "README.md"
+        ],
+        "contentPatterns": [
+          "┌─────",
+          "╭─────",
+          "╱───",
+          "───────────────",
+          "PARALLEL EXECUTION",
+          "APPROVAL GATE"
+        ]
+      }
+    },
     "webflow-platform-constraints": {
       "type": "knowledge",
       "enforcement": "suggest",
@@ -343,67 +388,9 @@
         "pathPatterns": ["specs/**/", "specs/**/spec.md", "specs/**/plan.md", "specs/**/implementation_plan.md"],
         "contentPatterns": []
       }
-    },
-    "markdown-flowchart": {
-      "type": "workflow",
-      "enforcement": "suggest",
-      "priority": "medium",
-      "description": "Create comprehensive ASCII flowcharts in markdown for visualizing workflows, user journeys, system architectures, and decision trees",
-      "promptTriggers": {
-        "keywords": [
-          "flowchart",
-          "flow chart",
-          "workflow diagram",
-          "process diagram",
-          "process map",
-          "decision tree",
-          "user journey",
-          "system flow",
-          "process visualization",
-          "ascii diagram",
-          "workflow visualization",
-          "process flow",
-          "data flow"
-        ],
-        "intentPatterns": [
-          "(create|make|generate|draw).*?(flowchart|flow chart|diagram|process map)",
-          "(visualize|map|show|diagram).*?(workflow|process|flow|journey)",
-          "(document|explain).*?(process|workflow|flow).*?(visual|diagram)",
-          "(need|want).*?(flowchart|diagram|visualization)",
-          "how.*?(visualize|show|map).*?(process|workflow)"
-        ]
-      },
-      "fileTriggers": {
-        "pathPatterns": [
-          "**/*.md",
-          "specs/**",
-          "knowledge/**",
-          "docs/**",
-          "README.md"
-        ],
-        "contentPatterns": [
-          "┌─────",
-          "╭─────",
-          "╱───",
-          "───────────────",
-          "PARALLEL EXECUTION",
-          "APPROVAL GATE"
-        ]
-      }
     }
   },
   "riskPatterns": {
-    "commitOperations": {
-      "patterns": [
-        "git commit",
-        "git add",
-        "git status",
-        "staged",
-        "unstaged",
-        "commit message"
-      ],
-      "reminder": "✅ COMMIT CHECK:\n- Internal artifacts excluded (task lists, debug notes, coverage)?\n- Non-conventional files skipped (test files in wrong location)?\n- Following Conventional Commits format (type(scope): description)?\n- Commit message under 50 chars, imperative mood?\n- Changes atomic (one logical unit)?\n- Using 'git add <files>' not 'git add .'?"
-    },
     "animation": {
       "patterns": [
         "Motion\\.",
@@ -424,6 +411,17 @@
       ],
       "reminder": "✅ ASYNC CHECK:\n- Error handling with try-catch?\n- Loading states managed?\n- Timeout handling present?\n- Network failure scenarios covered?"
     },
+    "commitOperations": {
+      "patterns": [
+        "git commit",
+        "git add",
+        "git status",
+        "staged",
+        "unstaged",
+        "commit message"
+      ],
+      "reminder": "✅ COMMIT CHECK:\n- Internal artifacts excluded (task lists, debug notes, coverage)?\n- Non-conventional files skipped (test files in wrong location)?\n- Following Conventional Commits format (type(scope): description)?\n- Commit message under 50 chars, imperative mood?\n- Changes atomic (one logical unit)?\n- Using 'git add <files>' not 'git add .'?"
+    },
     "formHandling": {
       "patterns": [
         "form\\.",
@@ -442,14 +440,17 @@
       ],
       "reminder": "✅ INITIALIZATION CHECK:\n- Using CDN-safe pattern with unique INIT_FLAG?\n- Guard against double initialization?\n- Proper delay (INIT_DELAY_MS) configured?\n- Webflow.push integration present?"
     },
-    "semanticOperations": {
+    "specFolderRequired": {
       "patterns": [
-        "find_symbol",
-        "find_referencing_symbols",
-        "insert_after_symbol",
-        "serena"
+        "function ",
+        "class ",
+        "const ",
+        "let ",
+        "var ",
+        "export ",
+        "import "
       ],
-      "reminder": "✅ SERENA MCP CHECK:\n- Project indexed for optimal performance?\n- Appropriate for structured codebase (>10k LOC)?\n- Symbol-level operation vs simple file read?\n- Consider native tools (Read/Grep) for simpler tasks?"
+      "reminder": "✅ SPEC FOLDER CHECK:\n- Does this change involve code modifications?\n- Have you created /specs/###-short-name/ folder?\n- Determined documentation level (0/1/2/3)?\n- Filled appropriate template (README.md/spec.md/plan.md)?\n- Got user approval before implementing?\n- See knowledge/conversation_documentation.md for full requirements"
     }
   }
 }

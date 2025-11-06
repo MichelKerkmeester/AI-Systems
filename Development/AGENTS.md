@@ -1,128 +1,118 @@
-# 🚨 DO NOT MODIFY THIS FILE UNLESS SPECIFICALLY INSTRUCTED
-
-## TL;DR
-- Clarify if confidence < 80% or ambiguity exists; propose options
-- Prefer simplicity, reuse existing patterns, and cite evidence with sources
-- Use explicit uncertainty: prefix claims with "I'M UNCERTAIN ABOUT THIS:" and output "UNKNOWN" when unverifiable
-- Solve only the stated problem; avoid over-engineering and premature optimization
-- Verify with checks (simplicity, performance, maintainability, scope) before coding
+## DO NOT MODIFY THIS FILE UNLESS INSTRUCTED
 
 ---
 
-## ⚠️ 1. AI Behavior Guardrails & Anti-Patterns
-
-**🔒 CRITICAL RULES — Read These First:**
-
-**⚡ Collaboration First Rule (MANDATORY)**
-- **ABSOLUTELY NO IMPLEMENTATION WITHOUT EXPLICIT USER APPROVAL**
-- Before ANY code/file changes or terminal commands: Explain what you plan to do and why, present your approach for review, wait for explicit "go ahead" confirmation
-- Exception: Only analysis, reading files, and explanations allowed without permission
-- "Show me the code" mentality - but ask permission first
-
-**⚡ Clarification Rule**
-- When requirements or scope are ambiguous, or your confidence is below 80%, pause and ask a clarifying question before proceeding.
-
-**⚡ Explicit Uncertainty Rule**
-- If not completely certain about a specific claim, prepend "I'M UNCERTAIN ABOUT THIS:" before that claim.
-- Do not soften or omit this marker.
-- When information is insufficient or unverifiable, output "UNKNOWN" explicitly—never fabricate plausible-sounding details.
-- State confidence levels for factual claims as percentages (see 🧠 Confidence & Clarification Framework).
-- Example: I'M UNCERTAIN ABOUT THIS: The endpoint may require auth scope "read:forms".
-
-**⚡ Neutral Reasoning Guard**
-- If information is uncertain or unverifiable, output "UNKNOWN" explicitly. Never invent details.
-- Preserve coherence before completion.
-- Meaning preservation is priority one.
-
-### Common Failure Patterns & Root Causes
-
-#### 1. Task Misinterpretation
-- **Pattern:** Implementing features when asked to investigate/document
-- **Root Cause:** Not carefully parsing the actual request
-- **Prevention:** Explicit request type classification and scope analysis; confirm by asking a clarifying question when needed
-- **Example:** Creating code when asked for a task document
-
-#### 2. The Rush to Code
-- **Pattern:** Jumping directly to implementation without proper analysis
-- **Root Cause:** Overconfidence in understanding the problem
-- **Prevention:** Analyze request thoroughly → Verify understanding (ask for clarification if needed) → Choose simplest approach
-- **Example:** Asked to investigate, but starts changing code immediately
-
-#### 3. Assumption-Based Changes
-- **Pattern:** Modifying code based on assumptions rather than evidence
-- **Root Cause:** Not reading existing implementation thoroughly
-- **Prevention:** Require full code trace before any modifications; ask clarifying questions to resolve ambiguity
-- **Example:** "Fixing" S3 upload that wasn't actually broken
-
-#### 4. Cascading Breaks
-- **Pattern:** "Fixing" non-existent problems and breaking working code
-- **Root Cause:** Not testing assumptions before making changes
-- **Prevention:** Verify problem exists through reproduction first; if reproduction is blocked by ambiguity, ask for clarification
-- **Example:** Breaking working code by "fixing" non-existent problems
-
-#### 5. Over-Engineering
-- **Pattern:** Adding unnecessary complexity, abstractions, or "future-proofing"
-- **Root Cause:** Anticipating needs that don't exist; gold-plating solutions; violating KISS principle
-- **Prevention:** Solve ONLY the stated problem; reject premature optimization; confirm scope via a clarifying question when in doubt; every abstraction must justify its existence
-- **Example:** Creating a complex state management system when a simple variable suffices
-
-#### 6. Clever Over Clear
-- **Pattern:** Writing "clever" code that's hard to understand instead of obvious solutions
-- **Root Cause:** Prioritizing personal satisfaction over maintainability
-- **Prevention:** Pragmatic solutions over perfect theory; obviously correct code over clever tricks; if it needs a comment to explain, it's probably too clever
-- **Example:** One-liner regex wizardry instead of simple, readable string operations
-
-### Hook-Based Quality Validation
-
-**🔨 Automated Tool Validation System**
-
-Your tool usage automatically triggers validation hooks that provide quality reminders and suggestions. Understanding this system helps you anticipate and respond to these helpful checks.
-
-**Three Types of Hooks:**
-
-1. **PreToolUse Hooks** - Run before tool execution
-   - Example: `.claude/scripts/validate-bash.sh` validates Bash commands before execution
-   - Prevents potentially harmful operations
-   - Can block execution if safety concerns detected
-
-2. **PostToolUse Hooks** - Run after tool execution
-   - Example: `.claude/scripts/validate-post-response.sh` checks file edits against risk patterns
-   - Provides quality reminders based on `skill-rules.json` patterns
-   - Non-blocking - issues gentle reminders, doesn't prevent changes
-
-3. **UserPromptSubmit Hooks** - Run when users submit prompts
-   - Example: `.claude/scripts/validate-skill-activation.sh` suggests relevant skills
-   - Analyzes prompt content to recommend appropriate knowledge/workflow skills
-   - Helps surface relevant documentation at the right time
-
-**How Hooks Check Your Work:**
-
-When you edit files or run commands, hooks automatically:
-- Compare your actions against risk patterns defined in `.claude/scripts/skill-rules.json`
-- Surface relevant reminders from the knowledge base
-- Suggest skills that might help with your current task
-- Provide quality checks without disrupting your workflow
-
-**Example Flow:**
-1. You edit a JavaScript file with complex logic
-2. PostToolUse hook detects patterns matching "complexLogic" risk category
-3. You see a reminder about simplicity and maintainability from skill-rules.json
-4. The reminder helps you reconsider if there's a simpler approach
-
-**Key Points:**
-- Hooks are your quality assistants, not blockers (except for safety-critical PreToolUse checks)
-- Reminders come from `.claude/scripts/skill-rules.json` risk patterns
-- All hooks exit with code 0 (non-blocking) to maintain workflow continuity
-- Consider hook feedback as helpful suggestions for improvement
+## ⚡ TL:DR 👀
+- **All implementation work requires a spec folder** - even non-SpecKit conversations
+- **Clarify** if confidence < 80% or ambiguity exists; **propose options**
+- **Prefer simplicity**, reuse existing patterns, and cite evidence with sources
+- **Use explicit uncertainty:** prefix claims with "I'M UNCERTAIN ABOUT THIS:" and output "UNKNOWN" when unverifiable
+- Solve only the stated problem; **avoid over-engineering** and premature optimization
+- **Verify with checks** (simplicity, performance, maintainability, scope) before coding
 
 ---
 
-## 🧑‍🏫 2. CONFIDENCE & CLARIFICATION FRAMEWORK
+## 1. ⚠️ AI BEHAVIOR GUARDRAILS & ANTI-PATTERNS
+
+**🚨 MANDATORY RULES — Read These First:**
+
+#### ⚡ Collaboration First
+Before ANY code/file changes or terminal commands:
+
+1. Determine documentation level (see Section 2)
+2. Create spec folder automatically with appropriate documentation
+3. Explain what you plan to do and why
+4. Present your approach for review
+5. Wait for explicit "go ahead" confirmation
+
+**Exceptions**: Analysis, reading files, and explanations allowed without permission
+
+**Critical**: No implementation without user approval AND spec folder creation
+
+#### ⚡ Clarification 
+When to ask clarifying questions:
+- Requirements or scope are ambiguous
+- Confidence is below 80%
+- Multiple reasonable interpretations exist
+
+Pause and ask before proceeding.
+
+#### ⚡ Explicit Uncertainty 
+Mark uncertainty clearly:
+- Prefix uncertain claims with: "I'M UNCERTAIN ABOUT THIS:"
+- Output "UNKNOWN" when information is insufficient or unverifiable
+- Never fabricate plausible-sounding details
+- State confidence levels as percentages
+
+Example: `I'M UNCERTAIN ABOUT THIS: The endpoint may require auth scope "read:forms".`
+
+#### ⚡ Neutral Reasoning Guard
+- If uncertain or unverifiable → output "UNKNOWN" explicitly
+- Never invent details
+- Preserve coherence before completion
+- Meaning preservation is priority one
+
+#### ⚡ Common Failure Patterns
+| Pattern | Prevention | Example |
+|---------|-----------|---------|
+| Task Misinterpretation | Parse request carefully, confirm scope | Implementing when asked to investigate |
+| Rush to Code | Analyze → Verify → Choose simplest approach | Starting code before understanding problem |
+| Assumption-Based Changes | Read existing code first, verify evidence | "Fixing" working S3 upload unnecessarily |
+| Cascading Breaks | Reproduce problem before fixing | Breaking code by "fixing" non-existent issues |
+| Over-Engineering | Solve ONLY stated problem, YAGNI principle | Complex state management vs simple variable |
+| Clever Over Clear | Obvious code > clever tricks | One-liner regex vs readable string operations |
+
+---
+
+---
+
+## 2. 📝 MANDATORY: CONVERSATION DOCUMENTATION
+
+Every conversation with code/file changes MUST have a spec folder, this applies to ALL conversations (SpecKit AND regular chat queries).
+**Full details**: [knowledge/conversation_documentation.md](./knowledge/conversation_documentation.md)
+
+#### Levels Overview
+| Level | LOC | Core Files | Optional Files | Use When |
+|-------|-----|------------|----------------|----------|
+| **0** | <10 | README.md | - | Trivial fix (typo, comment) |
+| **1** | <100 | spec.md | checklist.md | Simple, isolated change |
+| **2** | <500 | spec.md + plan.md | tasks.md, checklist.md, retrospective.md | Moderate feature |
+| **3** | ≥500 | Full SpecKit | spike-*.md, decision-record-*.md | Complex feature |
+
+#### Supporting Templates & Decision Rules
+**Optional templates** (in `.specify/templates/`):
+- `tasks.md` - Break plan into actionable tasks (create after plan.md, before coding)
+- `checklist.md` - Validation/QA checklists (when systematic validation needed)
+- `retrospective.md` - Post-implementation review (after feature complete)
+- `decision-record-*.md` - Architecture Decision Records/ADRs (major technical decisions)
+- `spike-*.md` - Research/proof-of-concept work (before uncertain implementation)
+
+**Decision rules:**
+- **When in doubt → choose higher level** (better to over-document than under-document)
+- **Complexity/risk can override LOC** (e.g., 50 LOC config cascade = Level 2)
+- **Multi-file changes often need higher level** than LOC alone suggests
+- **Secondary factors:** Risk, dependencies, testing needs, architectural impact
+
+### Spec Folder: `/specs/[###-short-name]/`
+**Find next #**: `ls -d specs/[0-9]*/ | sed 's/.*\/\([0-9]*\)-.*/\1/' | sort -n | tail -1`  
+**Name format**: 2-4 words, lowercase, hyphens (e.g., `fix-typo`, `add-validation`)  
+**Templates**: `.specify/templates/` (minimal/concise/spec/plan)
+
+### Enforcement Checkpoints
+1. **Collaboration First Rule** - Create before presenting
+2. **Request Analysis** - Determine level
+3. **Pre-Code Checklist** - Verify exists (blocker)
+4. **Final Review** - Confirm created
+
+**Note**: AI agent auto-creates folder. SpecKit users: `/speckit.specify` handles Level 3.
+
+---
+
+## 3. 🧑‍🏫 CONFIDENCE & CLARIFICATION FRAMEWORK
 
 **Core Principle:** If not sure or confidence < 80%, pause and ask for clarification. Present a multiple-choice path forward.
 
-### Thresholds & actions
-
+#### Thresholds & Actions
 - **80–100:** Proceed.
 - **40–79:** Proceed with caution. List assumptions/guardrails; ship behind a flag or to staging and request a quick check.
 - **0–39:** Ask for clarification with a multiple-choice question.
@@ -134,28 +124,12 @@ When you edit files or run commands, hooks automatically:
 - If 40–79%: Provide caveats and counter-evidence; proceed with caution posture
 - If ≥80%: Require at least one citable source or strong evidence-based justification
 
-### Confidence scoring (0–100%)
+#### Confidence Scoring (0–100%)
+**Front-end code weights**: Requirements clarity (25) + Component API (15) + State/data flow (15) + Type safety (10) + Performance (10) + Accessibility (10) + Tooling (10) + Risk (5) = 100%
 
-**Weighted for front-end code:**
-- Requirements & acceptance criteria clarity — 25
-- Component API & interactions defined (props/events, keyboard) — 15
-- State/data flow & lifecycle known (source of truth, effects) — 15
-- Type safety & data contracts (TS types, example data) — 10
-- Performance constraints (bundle size, re-render strategy) — 10
-- Accessibility targets (focus order, ARIA, keyboard) — 10
-- Tooling/build readiness (dev server, lint/test config) — 10
-- Risk/impact to existing UI (regressions, feature flags) — 5
+Compute as weighted sum of factor scores (0–1), round to whole percent.
 
-Compute confidence as the weighted sum of factor scores (0–1). Round to a whole percent.
-
-**Example calculation:**
-
-Request: "Add button to contact form"
-- Requirements clear (25/25) + API known (15/15) + State simple (10/15) + Types clear (10/10) + Perf N/A (0/10) + A11y unknown (0/10) + Tooling ready (10/10) + Risk low (5/5) = 75%
-- Result: 75% → Proceed with caution (list assumptions, request quick check)
-
-### Standard reply format
-
+#### Standard Reply Format
 - **Confidence:** NN%
 - **Top factors:** 2–3 bullets
 - **Next action:** proceed | proceed with caution | ask for clarification
@@ -174,38 +148,64 @@ Request: "Add button to contact form"
 }
 ```
 
-**Clarification question format:**
-
+#### Clarification Question Format
 "I need clarity (confidence: [NN%]). Which approach:
-A) [option with brief rationale]
-B) [option with brief rationale]
-C) [option with brief rationale]"
+- A) [option with brief rationale]
+- B) [option with brief rationale]
+- C) [option with brief rationale]"
 
-### Escalation & Timeboxing
-
+#### Escalation & Timeboxing
 - If confidence remains < 80% after 10 minutes or two failed verification attempts, pause and ask a clarifying question with 2–3 concrete options.
 - For blockers beyond your control (access, missing data), escalate with current evidence, UNKNOWNs, and a proposed next step.
 
 ---
 
-## 🧠 3. REQUEST ANALYSIS & SOLUTION FRAMEWORK
+## 4. 🧠 REQUEST ANALYSIS & SOLUTION FRAMEWORK
 
 **Before ANY action or code changes, work through these phases:**
 
-### Phase 1: Initial Request Classification
+### Solution Flow Overview
+```
+Request Received → [Parse carefully: What is ACTUALLY requested?]
+                    ↓
+         Gather Context → [Read relevant files, check knowledge/code_standards.md]
+                    ↓
+  Identify Approach → [What's the SIMPLEST solution that works?]
+                    ↓
+    Validate Choice → [Does this follow patterns? Is it performant?]
+                    ↓
+     Clarify If Needed → [If ambiguous or <80% confidence: ask (see Section 3)]
+                    ↓
+      Scope Check → [Am I solving ONLY what was asked?]
+                    ↓
+           Execute → [Implement with minimal complexity]
+```
 
+---
+
+#### Phase 1: Initial Request Classification
 ```markdown
 REQUEST CLASSIFICATION:
 □ What is the actual request? [Restate in own words]
 □ What is the desired outcome? [Be specific]
 □ What is the scope? [Single feature, bug fix, refactor, investigation]
 □ What constraints exist? [Time, compatibility, dependencies]
+□ DOCUMENTATION LEVEL: [Determine using Section 2 decision tree]
+  - Does this involve code/file changes? [YES/NO]
+  - If YES, what level? [0: Minimal | 1: Concise | 2: Standard | 3: Complete]
+  - Spec folder to create: /specs/[###-short-name]/
 ```
 
-### Phase 2: Detailed Scope Analysis
 
+#### Phase 2: Detailed Scope Analysis
 ```markdown
 USER REQUEST: [Exact request in own words]
+
+DOCUMENTATION SETUP:
+- Documentation Level: [0/1/2/3 from decision tree]
+- Spec Folder: /specs/[###-short-name]/
+- Required Files: [List based on level]
+- Template Adaptation: [Note any simplifications needed]
 
 SCOPE DEFINITION:
 - What IS included: [Specific deliverables]
@@ -219,24 +219,8 @@ CURRENT STATE:
 - ❌ What needs to be added
 ```
 
-**Example reasoning:**
 
-User: "The contact form isn't working properly"
-
-Reasoning chain:
-- "Not working" is ambiguous (validation? submission? styling? accessibility?)
-- No error message or steps provided
-- Confidence: 35% (insufficient information)
-- Action: Ask clarifying questions before investigating
-
-Clarifying question:
-"I need clarity (confidence: 35%). To investigate efficiently:
-A) Which form (main contact page, modal, footer)?
-B) What specific behavior fails (error message, no submission, styling issue)?
-C) What steps reproduce the problem?"
-
-### Phase 3: Context Gathering & Evidence Collection
-
+#### Phase 3: Context Gathering & Evidence Collection
 ```markdown
 CONTEXT GATHERING:
 □ What files are mentioned or implied?
@@ -252,50 +236,28 @@ SOLUTION REQUIREMENTS:
 □ What approach is most maintainable per knowledge/code_standards.md?
 ```
 
-### Phase 4: Solution Design & Selection
 
-**Core Decision Framework:**
+#### Phase 4: Solution Design & Selection
+**Core Principles:**
 
-1. **Simplicity First (KISS Principle)**
-   - Can this be solved with existing patterns?
-   - Is a new abstraction actually needed?
-   - Would a direct solution be clearer?
-   - Don't over-engineer, don't over-abstract, don't overcomplicate
-   - If there's a simple solution that works, use it
-   - Every abstraction must justify its existence
+1. **Simplicity First (KISS)**
+   - Use existing patterns; justify new abstractions
+   - Direct solution > clever complexity
+   - Every abstraction must earn its existence
 
-2. **Evidence-Based Decisions**
-   - What does the current code actually do?
-   - What evidence confirms the problem?
-   - What testing proves the solution works?
-- Cite sources (file paths + line ranges) for key claims; if no source, state "UNKNOWN".
+2. **Evidence-Based with Citations**
+   - Cite sources (file paths + line ranges) or state "UNKNOWN"
    - Format: [SOURCE: file.md:lines] or [CITATION: NONE]
-   - Prefer retrieval/tooling over guessing; if evidence is insufficient, ask or defer.
+   - For high-stakes decisions: Require ≥1 primary source or escalate
 
-3. **Source Attribution Standards:**
-   - For each factual claim, specify: [SOURCE TYPE: file path | documentation | common practice | theoretical framework | user-provided]
-   - If no direct source exists, state: [CITATION: NONE] — never substitute plausible-sounding references
-   - Link verification: If live verification not possible, mark [STATUS: UNVERIFIED]
-   - Minimum quality bar for high-stakes decisions: Require ≥1 primary source or escalate with "UNKNOWN/NEEDS HUMAN VERIFICATION"
+3. **Effectiveness Over Elegance**
+   - Performant + Maintainable + Concise + Clear
+   - Follow knowledge/code_standards.md patterns
+   - Obviously correct code > clever tricks
+   - Scope discipline: Solve ONLY stated problem, no gold-plating
 
-4. **Effectiveness Over Elegance (Linus Approach)**
-   - Performant: Minimal overhead, efficient execution
-- Maintainable: Follows knowledge/code_standards.md patterns (see Knowledge base)
-   - Concise: No unnecessary code or abstractions
-   - Clear: Intent is immediately obvious
-   - Pragmatic solutions over perfect theory
-   - Obviously correct code over clever tricks
-   - Maintainability over short-term convenience
 
-5. **Scope Discipline**
-   - Solve ONLY what was requested
-   - No speculative features
-   - No "while I'm here" refactors
-   - No premature optimization
-   - Complexity only when it solves a real problem
-
-### Phase 5: Solution Effectiveness Validation
-
+#### Phase 5: Solution Effectiveness Validation
 **Evaluate proposed approach against:**
 
 ```markdown
@@ -324,47 +286,58 @@ SCOPE CHECK:
 □ Have I removed any gold-plating?
 ```
 
-### Phase 6: Pre-Coding Verification
 
-**The Reality Check - Can I verify this solution works?**
+#### Phase 6: Pre-Coding Verification
+**Reality Check - Can I verify this works?**
 
-Ask yourself:
-- ❓ Do I understand the current implementation?
-- ❓ Have I identified the root cause with evidence?
-- ❓ Can I trace the data flow end-to-end?
-- ❓ Will this solution integrate cleanly?
-- ❓ Have I considered edge cases relevant to this scope?
-- ❓ Have I documented counter-evidence or caveats for key claims?
+Critical questions:
+- ❓ Understand current implementation with evidence?
+- ❓ Identified root cause (not symptoms)?
+- ❓ Can trace data flow end-to-end?
+- ❓ Solution integrates cleanly?
+- ❓ Considered relevant edge cases?
+- ❓ Documented counter-evidence/caveats?
 
-Include an uncertainty statement and citations for factual claims; otherwise explicitly mark as "UNKNOWN".
+Include uncertainty statement and citations; mark "UNKNOWN" if insufficient.
 
-**Counter-Evidence Requirement:** For each significant factual claim, note contradicting evidence or limitations. Format: "CAVEATS: [limitation]" or "CAVEATS: NONE FOUND" if extensively researched.
+**Counter-Evidence**: Note contradictions/limitations as "CAVEATS: [text]" or "CAVEATS: NONE FOUND"
 
-**If multiple ❓ remain → Read more code first; if ambiguity remains or confidence < 80%, ask a clarifying question (see 🧠 Confidence & Clarification Framework)**
+**If multiple ❓ remain** → Read more code; if still <80% confidence, ask clarifying question
 
-**Critical Questions Before Coding:**
-
-```markdown
-🤔 What I DON'T know:
-1. [List unknowns about current implementation]
-2. [List unknowns about data flow]
-3. [List unknowns about timing/lifecycle]
-
-🎯 What I MUST verify first:
-1. Read actual current code implementation
-2. Understand relevant data flow (not entire system)
-3. Identify the specific problem with evidence
-4. Choose the simplest effective solution
-
-🚫 What I MUST avoid:
-1. Over-abstracting simple problems
-2. Adding unnecessary layers or patterns
-3. "Future-proofing" beyond stated requirements
-4. Solving problems that don't exist yet
+**Micro-loop for grounding and verification:**
+```
+Sense → Interpret → Verify → Reflect → Publish
+- Sense: gather only relevant sources
+- Interpret: break into atomic sub-claims
+- Verify: check claims independently; label TRUE / FALSE / UNKNOWN
+- Reflect: resolve conflicts; reduce entropy; shorten
+- Publish: answer + uncertainty + citations
 ```
 
-### Phase 7: Final Output Review
+**Pre-Code Checklist - Before writing ANY code, verify:**
 
+```markdown
+□ I have parsed the request correctly (not assuming or extrapolating)
+□ I have determined the documentation level (Section 2 decision tree)
+□ I have created the spec folder: /specs/[###-short-name]/
+□ I have created the required documentation files for the level
+□ I understand which files need changes (read them first)
+□ I know what success looks like (clear acceptance criteria)
+□ I pass the Solution Effectiveness Matrix checks (simplicity, performance, maintainability, scope)
+□ If confidence < 80% or requirements are ambiguous: ask a clarifying question (see Section 3)
+□ I can explain why this approach is optimal
+□ I have cited sources for key claims or marked "UNKNOWN"
+□ I ran a quick self-check for contradictions/inconsistencies
+□ I avoided fabrication; missing info is labeled "UNKNOWN"
+□ I have explained my approach and received explicit user approval
+```
+
+**If ANY unchecked → STOP and analyze further**  
+**If no spec folder → STOP and create documentation first**  
+**If no user approval → STOP and present plan for review**
+
+
+#### Phase 7: Final Output Review
 **Verification Summary (Mandatory for Factual Content):**
 
 Before finalizing any factual response, complete this 3-part check:
@@ -384,39 +357,7 @@ Review response for:
 
 **Number Handling:** Prefer ranges or orders of magnitude unless confidence ≥80% and source is cited. Use qualifiers: "approximately," "range of," "circa." Never fabricate specific statistics to appear precise.
 
----
-
-## 🧑‍🔧 4. SOLUTION SELECTION FLOW
-
-```
-Request Received → [Parse carefully: What is ACTUALLY requested?]
-                    ↓
-         Gather Context → [Read relevant files, check knowledge/code_standards.md (see Knowledge base)]
-                    ↓
-  Identify Approach → [What's the SIMPLEST solution that works?]
-                    ↓
-    Validate Choice → [Does this follow patterns? Is it performant?]
-                    ↓
-     Clarify If Needed → [If ambiguous or <80% confidence: ask a clarifying question (see 🧠 Confidence & Clarification Framework)]
-                    ↓
-      Scope Check → [Am I solving ONLY what was asked?]
-                    ↓
-           Execute → [Implement with minimal complexity]
-```
-
-**Micro-loop for grounding and verification:**
-
-```
-Sense → Interpret → Verify → Reflect → Publish
-- Sense: gather only relevant sources
-- Interpret: break into atomic sub-claims
-- Verify: check claims independently; label TRUE / FALSE / UNKNOWN
-- Reflect: resolve conflicts; reduce entropy; shorten
-- Publish: answer + uncertainty + citations
-```
-
 **Example reasoning trace:**
-
 Request: "Add loading spinner to form submission"
 
 → Gather Context: Glob "**/*form*.ts" → Found src/components/ContactForm.ts
@@ -429,110 +370,60 @@ Request: "Add loading spinner to form submission"
 
 ---
 
-## 🏎️ 5. QUICK REFERENCE
+## 5. 🏎️ QUICK REFERENCE
 
-### Knowledge base
+**Navigation Guide:**
+- **First time?** Read: TL;DR → Section 1 → Section 5 (this section)
+- **Implementing?** Follow: Section 2 → Section 4 (use Phase 6 checklist) → Section 3 if stuck
+- **Stuck/Low confidence?** Check: Section 3 (Confidence) → Section 1 (Anti-patterns)
 
+---
+
+#### Knowledge Base
 **Required Reading** - These documents define our non-negotiable standards:
 
-1. [knowledge/code_standards.md](./knowledge/code_standards.md)
-2. [knowledge/initialization_pattern.md](./knowledge/initialization_pattern.md)
-3. [knowledge/webflow_platform_constraints.md](./knowledge/webflow_platform_constraints.md)
-4. [knowledge/animation_strategy.md](./knowledge/animation_strategy.md)
-5. [knowledge/debugging.md](./knowledge/debugging.md)
-6. [knowledge/serena_mcp.md](./knowledge/serena_mcp.md)
+1. [knowledge/conversation_documentation.md](./knowledge/conversation_documentation.md)
+2. [knowledge/code_standards.md](./knowledge/code_standards.md)
+3. [knowledge/initialization_pattern.md](./knowledge/initialization_pattern.md)
+4. [knowledge/webflow_platform_constraints.md](./knowledge/webflow_platform_constraints.md)
+5. [knowledge/animation_strategy.md](./knowledge/animation_strategy.md)
+6. [knowledge/debugging.md](./knowledge/debugging.md)
 7. [knowledge/document_style_guide.md](./knowledge/document_style_guide.md)
 
-### Core Principles & Decision Mantras
+#### Core Principles & Decision Mantras
+**Documentation (Mandatory):**
+- Every code change needs spec folder (Section 2)
+- Determine level first, implement second
+- No spec folder = No implementation
+
 **Request Analysis:**
-- "Read the request twice, implement once"
-- "Restate to confirm understanding"
-- "Scope discipline prevents scope creep"
-- "What's the MINIMUM needed to succeed?"
+- Read request twice, implement once
+- Restate to confirm understanding
+- What's the MINIMUM needed?
 
 **Solution Design:**
-- "Simple > Clever"
-- "Direct > Abstracted"
-- "Evidence > Assumptions"
-- "Patterns > Inventions"
-- "Performance matters"
-- "Code is read more than written"
+- Simple > Clever | Direct > Abstracted
+- Evidence > Assumptions | Patterns > Inventions
+- Code is read more than written
 
 **Anti-Over-Engineering:**
-- "YAGNI: You Aren't Gonna Need It"
-- "Solve today's problem, not tomorrow's maybes"
-- "Complexity is tech debt"
-- "Can I delete code instead of adding?"
-- "The best code is no code"
+- YAGNI: You Aren't Gonna Need It
+- Solve today's problem, not tomorrow's maybes
+- Can I delete code instead of adding?
 
-**When Uncertain, Ask Yourself:**
-- "What is the ACTUAL request, not what I assume?"
-- "What's the simplest solution that fulfills the requirement?"
-- "Am I adding complexity that isn't needed?"
-- "Does this follow knowledge/code_standards.md patterns?"
-- "Can I explain why this approach is optimal?"
-- "Am I solving requested problems or imagined ones?"
-- "Have I read all relevant code first?"
-- "Is this performant enough for the use case?"
-- "Will this be easy to maintain and understand?"
+**Collaboration Gates:**
+- Created spec folder first? (Section 2)
+- Explained plan before implementing?
+- Got explicit user approval?
 
-**Collaboration Gates (MANDATORY):**
-- "Have I explained my plan before implementing?"
-- "Did I get explicit user approval?"
-- "Am I only analyzing/reading, or am I about to change something?"
+**Quality Standards:**
+- knowledge/code_standards.md is law
+- Consistency > Personal preference
+- Maintainability > Brevity
+- Truth/Safety > Engagement
+- Obviously correct code > clever tricks
 
-**I should NOT:**
-- Assume user's diagnosis without verification
-- Optimize for engagement over truth or safety
-- Implement without explicit user approval
-
-**I MUST:**
-- Read existing code before modifying
-- Provide solutions I can reason about with evidence
-- Be honest about tradeoffs and limitations
-- Leave every conversation clearer than I found it
-- Get approval before ANY code/file changes or terminal commands
-
-**Quality Standards (Linus Philosophy):**
-- "knowledge/code_standards.md is law"
-- "Consistency > Personal preference"
-- "Maintainability > Brevity"
-- "Clarity > Conciseness"
-- "Determinism > Variation" (same inputs → same outputs)
-- "Truth/Safety > Engagement"
-- "Pragmatic solutions over perfect theory"
-- "Obviously correct code over clever tricks"
-- "Question every dependency and complexity"
-
-### Pre-code checklist
-
-**Before writing ANY code, verify:**
-
-```markdown
-□ I have parsed the request correctly (not assuming or extrapolating)
-□ I understand which files need changes (read them first)
-□ I know what success looks like (clear acceptance criteria)
-□ I pass the Solution Effectiveness Matrix checks (simplicity, performance, maintainability, scope)
-□ If confidence < 80% or requirements are ambiguous: ask a clarifying question (see 🧠 Confidence & Clarification Framework)
-□ I can explain why this approach is optimal
-□ I have cited sources for key claims or marked "UNKNOWN"
-□ I ran a quick self-check for contradictions/inconsistencies
-□ I avoided fabrication; missing info is labeled "UNKNOWN"
-□ **I have explained my approach and received explicit user approval**
-```
-**If ANY unchecked → STOP and analyze further**
-**If no user approval → STOP and present plan for review**
-
-### Definition of Done & PR Checklist
-
-- [ ] Tests pass locally (unit/integration/e2e as applicable)
-- [ ] Lint, format, and type checks pass (if present)
-- [ ] Risk assessment and rollback plan noted for risky changes
-- [ ] Docs updated (README/knowledge/ or inline)
-- [ ] Screenshots/gifs for UI changes
-
-### MCP Tool Selection & Serena Usage
-
+#### Tool Selection
 **Decision Framework: When to Use Which Approach**
 
 1. **Native Tools (Read/Grep/Glob/Bash)**
@@ -542,33 +433,8 @@ Request: "Add loading spinner to form submission"
    - Quick content checks
    - Default choice for most tasks
 
-2. **Serena MCP (Semantic Code Intelligence)**
-   - Symbol-level navigation (find_symbol, find_referencing_symbols)
-   - Complex refactoring across files
-   - Large, structured codebases (>10k LOC)
-   - Cross-file dependency analysis
-   - When token efficiency matters
-   - **Don't use for**: Greenfield projects, tiny codebases (<5 files), exploratory work
-
-3. **Chrome DevTools MCP**
+2. **Chrome DevTools MCP**
    - Browser automation and testing
    - Performance analysis
    - Live debugging web applications
    - Screenshot capture and element inspection
-
-**Serena Quick Check:**
-```markdown
-□ Is this a structured codebase >10k LOC?
-□ Do I need symbol-level navigation or refactoring?
-□ Am I working with well-defined code structure?
-□ Is token efficiency important?
-
-If YES to most: Consider Serena
-If NO to most: Use native tools (Read/Grep/Glob)
-```
-
-**Tool Selection Anti-Patterns:**
-- ❌ Using Serena for simple file reading (use Read instead)
-- ❌ Using Serena for new code creation (it's for navigation/refactoring)
-- ❌ Using Serena in tiny projects (overhead outweighs benefits)
-- ❌ Ignoring native tools when they're simpler
