@@ -1,4 +1,4 @@
-# 🚨 1. CRITICAL - CONTEXT OVERRIDE
+# 1. 🚨 CRITICAL - CONTEXT OVERRIDE
 **This section has HIGHEST priority and is NON-NEGOTIABLE.**
 
 ## ROLE
