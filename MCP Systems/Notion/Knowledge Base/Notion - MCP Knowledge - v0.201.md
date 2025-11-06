@@ -1,8 +1,8 @@
-# Notion - MCP Knowledge - v0.200
+# Notion - MCP Knowledge
 
 Technical reference for Notion MCP server capabilities and integration for workspace, database, and content management operations.
 
-**Purpose:** Document Notion-specific features, supported operations, API specifications, and technical constraints. Conversation flows and thinking methodology are in Interactive Intelligence v0.200 and SYNC Thinking Framework v0.200 respectively.
+**Purpose:** Document Notion-specific features, supported operations, API specifications, and technical constraints. Conversation flows and thinking methodology are in Interactive Intelligence and SYNC Thinking Framework respectively.
 
 ---
 
@@ -80,7 +80,7 @@ Connection verification must be the **first action before all operations** (ALWA
 
 ### Available Operations
 
-**Note:** Thinking methodology and conversation flows are defined in Notion - SYNC Thinking Framework v0.200 and Notion - Interactive Intelligence v0.200.
+**Note:** Thinking methodology and conversation flows are defined in Notion - SYNC Thinking Framework and Notion - Interactive Intelligence.
 
 ```yaml
 workspace_operations:
@@ -781,12 +781,12 @@ official_documentation:
 
 related_documents:
   thinking_framework:
-    file: "Notion - SYNC Thinking Framework - v0.200"
+    file: "Notion - SYNC Thinking Framework"
     purpose: "Methodology and cognitive framework"
     key_concepts: ["Survey", "Yield", "Navigate", "Create"]
   
   interactive_intelligence:
-    file: "Notion - Interactive Intelligence - v0.200"
+    file: "Notion - Interactive Intelligence"
     purpose: "Conversation flows and interaction patterns"
     includes: ["Conversation Architecture", "Response Templates", "REPAIR protocol"]
 ```
@@ -913,4 +913,4 @@ notion_integration:
 
 ---
 
-*This document focuses exclusively on Notion MCP server capabilities and technical specifications. For thinking methodology and cognitive framework, see Notion - SYNC Thinking Framework v0.200. For conversation flows and error handling (REPAIR protocol), see Notion - Interactive Intelligence v0.200.*
+*This document focuses exclusively on Notion MCP server capabilities and technical specifications. For thinking methodology and cognitive framework, see Notion - SYNC Thinking Framework. For conversation flows and error handling (REPAIR protocol), see Notion - Interactive Intelligence.*
