@@ -39,13 +39,13 @@
     "claude-mem": {
       "command": "node",
       "args": [
-        "/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem/plugin/scripts/search-server.mjs"
+        "/Users/MCP Servers/claude-mem/plugin/scripts/search-server.mjs"
       ],
       "env": {
         "CLAUDE_MEM_MODEL": "claude-sonnet-4-5",
         "CLAUDE_MEM_WORKER_PORT": "37777"
       },
-      "working_directory": "/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem"
+      "working_directory": "/Users/MCP Servers/claude-mem"
     }
   }
 }

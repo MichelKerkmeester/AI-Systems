@@ -19,7 +19,7 @@
     "deny": [],
     "ask": [],
     "additionalDirectories": [
-      "/Users/michelkerkmeester/MEGA"
+      "/Users"
     ]
   },
   "enabledMcpjsonServers": [
@@ -36,7 +36,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node '/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem/plugin/scripts/context-hook.js'",
+            "command": "node '/Users/MCP Servers/claude-mem/plugin/scripts/context-hook.js'",
             "timeout": 300000
           }
         ]
@@ -77,7 +77,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node '/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem/plugin/scripts/save-hook.js'",
+            "command": "node '/Users/MCP Servers/claude-mem/plugin/scripts/save-hook.js'",
             "timeout": 120000
           }
         ]
@@ -92,7 +92,7 @@
           },
           {
             "type": "command",
-            "command": "node '/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem/plugin/scripts/new-hook.js'",
+            "command": "node '/Users/MCP Servers/claude-mem/plugin/scripts/new-hook.js'",
             "timeout": 120000
           }
         ]
@@ -103,7 +103,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node '/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem/plugin/scripts/summary-hook.js'",
+            "command": "node '/Users/MCP Servers/claude-mem/plugin/scripts/summary-hook.js'",
             "timeout": 120000
           }
         ]
@@ -114,7 +114,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node '/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem/plugin/scripts/cleanup-hook.js'",
+            "command": "node '/Users/MCP Servers/claude-mem/plugin/scripts/cleanup-hook.js'",
             "timeout": 120000
           }
         ]
