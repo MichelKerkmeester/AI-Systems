@@ -17,7 +17,7 @@ Formatting guide for YAML output structure in prompt engineering with RCAF/CRAFT
 7. [🔄 FORMAT CONVERSIONS](#-format-conversions)
 8. [⚖️ YAML VS OTHER FORMATS](#-yaml-vs-other-formats)
 9. [💡 EXAMPLES & TEMPLATES](#-examples--templates)
-10. [� SYNTAX VALIDATION](#-syntax-validation)
+10. [✅ SYNTAX VALIDATION](#-syntax-validation)
 11. [🎓 BEST PRACTICES](#-best-practices)
 
 ---
@@ -889,7 +889,7 @@ target:
 
 <a id="-syntax-validation"></a>
 
-## 10. � SYNTAX VALIDATION
+## 10. ✅ SYNTAX VALIDATION
 
 ### Format Enforcement Checklist
 
