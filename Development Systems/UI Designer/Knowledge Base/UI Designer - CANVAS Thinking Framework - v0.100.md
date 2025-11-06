@@ -1139,59 +1139,14 @@ design_canvas_integration_check:
 
 **Why Hidden:** Prevents user overwhelm, maintains focus on design value, preserves professional creative flow, delivers insights not process logs.
 
-**Example Internal Processing (Abbreviated):**
-```markdown
-INTERNAL (User doesn't see):
+**Internal Processing Format:**
+- **7 Perspectives:** Each analyzed in full detail (visual hierarchy decisions, UX flow mapping, motion timing strategies, pixel-perfect precision requirements, interaction state definitions, performance optimization tactics, technical implementation standards)
+- **Assumption Audit:** All assumptions classified (validated/questionable/unknown) with risk assessment and mitigation strategies
+- **Self-Rating:** Detailed scoring breakdown across all 5 DESIGN dimensions with specific sub-scores and improvement areas identified
+- **Cognitive Rigor:** Complete application of perspective inversion, constraint reversal, mechanism-first analysis
+- **Design Decisions:** Every color choice, typography decision, spacing value, animation timing justified with design rationale
 
-Perspective 1 - Visual Design Expert:
-  - Visual hierarchy: Primary CTA (48px, #2563EB), Secondary (40px ghost), Tertiary (14px links)
-  - Typography: Clash Display headings (32/24/20px), Inter body (16/14px)
-  - Color strategy: Blue primary (trust), Indigo secondary (premium), Emerald accent (success)
-  - Spacing: 8pt grid (16/24/32px padding, 48/64/96px sections)
-  - Balance: 40% white space, asymmetric layout for dynamic energy
-
-Perspective 2 - UX Flow Specialist:
-  - User journey: 3-step max (Hero→Features→CTA), 2-click task completion
-  - Cognitive load: 3-5 items per section (Miller's Law), progressive disclosure
-  - Efficiency: Autofill, inline validation, predictive search <200ms
-
-Perspective 3 - Motion Designer:
-  - Animation personality: Professional + approachable = smooth easing + subtle bounce
-  - Timing: 150ms buttons, 300ms panels, 400ms confirmations
-  - Performance: GPU-accelerated transform/opacity, 60fps validated
-
-Perspective 4 - Prototype Craftsperson:
-  - Precision: 8px grid alignment, optical centering, design token consistency
-  - Polish: Drop shadows (0 4px 6px), border radius (8/6/4px), focus rings (2px offset)
-  - Quality bar: Portfolio-ready? Intentional details? Production-ready? (All YES)
-
-Perspective 5 - Interaction Designer:
-  - States: Default, Hover, Focus, Active, Disabled, Loading, Success, Error (8 total)
-  - Feedback: <100ms immediate, >500ms progressive, visual+text confirmatory
-  - Touch: 44x44px targets, mobile-specific gestures
-
-Perspective 6 - Performance Engineer:
-  - Load targets: <1.2s FCP, <2.5s TTI, <2.0s LCP, <0.1 CLS
-  - Optimization: Critical CSS inline, lazy loading, WebP images, virtual scrolling
-
-Perspective 7 - Technical Implementer:
-  - Stack: Vanilla HTML5/CSS/JS, zero dependencies, modern browsers
-  - Quality: DRY tokens, BEM naming, semantic markup, separation of concerns
-
-Assumption Audit:
-1. Modern browser (Validated, 98%+ coverage, feature detection fallback)
-2. Common UI patterns understood (Validated, industry standard)
-3. JavaScript enabled (Validated, 99.8%, progressive enhancement)
-4. [Critical] Design tokens maintained (Questionable, FLAG required)
-
-Self-Rating Summary:
-- Design Quality: 13/15 (Visual hierarchy 5, Typography 4, Spacing 5, Color 5, Polish 4)
-- Experience: 14/15 (Flow 5, States 5, Feedback 5, Errors 4, Keyboard 5)
-- Structure: 8/10 (Hierarchy 3, Quality 3, Maintainability 2, Reusability 2)
-- Implementation: 4/5 (Stack 2, Performance 1, Responsive 1, Browsers 1)
-- Growth: 3/5 (Docs 1, Scalability 1, Reusability 1, Handoff 1, Content 0)
-TOTAL: 42/50 ✅
-```
+**Note:** Full internal analysis can be 500+ words per perspective but users only see concise 1-2 sentence insights.
 
 ### External Layer (Concise Updates)
 
