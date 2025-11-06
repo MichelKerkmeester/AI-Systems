@@ -39,6 +39,14 @@ Memory persists through:
 - Multiple concurrent projects
 - Days or weeks between sessions
 
+### Multi-Project Support
+
+The single-worker setup automatically handles multiple projects:
+- Context is captured across all projects you work on
+- Project-specific context is weighted higher when relevant
+- Database stores observations from all projects
+- Intelligent filtering ensures relevant context injection
+
 ---
 
 ## 2. 🔍 SEARCH CAPABILITIES
@@ -149,23 +157,20 @@ Response: `{"status":"ok"}` indicates worker is operational.
 
 ### Change AI Model
 
-Edit `.claude/mcp_servers.json`:
+Edit `.claude/settings.json` or use environment variables:
 
 ```json
 {
-  "claude-mem": {
-    "env": {
-      "CLAUDE_MEM_MODEL": "claude-opus-4",  // Change model here
-      "CLAUDE_MEM_WORKER_PORT": "37777"
-    }
+  "enabledPlugins": {
+    "claude-mem@thedotmack": true
   }
 }
 ```
 
-Available models:
-- `claude-sonnet-4-5` (default, balanced)
-- `claude-opus-4` (highest quality, slower)
-- `claude-haiku-4` (fastest, lower cost)
+Available models via environment:
+- `CLAUDE_MEM_MODEL=claude-sonnet-4-5` (default, balanced)
+- `CLAUDE_MEM_MODEL=claude-opus-4` (highest quality, slower)
+- `CLAUDE_MEM_MODEL=claude-haiku-4` (fastest, lower cost)
 
 ### Adjust Hook Timeouts
 
@@ -191,7 +196,7 @@ Increase timeouts if:
 
 ### Environment Variables
 
-Set in `.claude/mcp_servers.json` or shell:
+Set in shell or configuration:
 
 ```bash
 export CLAUDE_MEM_MODEL="claude-sonnet-4-5"
@@ -309,8 +314,8 @@ npm run worker:restart
 ### Search Not Working
 
 ```bash
-# 1. Verify MCP server is enabled
-cat .claude/settings.local.json | grep "claude-mem"
+# 1. Verify plugin is enabled
+cat ~/.claude/settings.json | grep "claude-mem"
 
 # 2. Check database exists
 ls -lh ~/.claude-mem/claude-mem.db
@@ -456,18 +461,32 @@ Memory improves over time:
 
 | File | Contains |
 |------|----------|
-| `.claude/mcp_servers.json` | MCP server configuration, model selection |
-| `.claude/settings.local.json` | Hook configuration, timeouts, enabled servers |
+| `~/.claude/settings.json` | Plugin enable/disable |
 | `~/.claude-mem/claude-mem.db` | SQLite database with all observations |
 
 ### Key Locations
 
 | Location | Purpose |
 |----------|---------|
-| `/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem` | Repository and worker code |
+| `/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem` | Installation directory |
 | `~/.claude-mem/` | Data directory and database |
 | `http://localhost:37777` | Worker HTTP API endpoint |
+| `~/.claude/settings.json` | Claude Code plugin settings |
+| `~/.pm2/dump.pm2` | PM2 saved process list |
+
+### Auto-Start Configuration
+
+**Enable auto-start on system boot:**
+```bash
+cd "/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem"
+./setup-autostart.sh
+```
+
+**Disable auto-start:**
+```bash
+npx pm2 unstartup launchd
+```
 
 ---
 
-**Reference**: Installation details in `/specs/015-install-claude-mem/` • GitHub: https://github.com/thedotmack/claude-mem
+**Reference**: GitHub: https://github.com/thedotmack/claude-mem
