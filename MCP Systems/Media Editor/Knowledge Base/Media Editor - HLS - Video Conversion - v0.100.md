@@ -1,4 +1,4 @@
-# Media Editor - HLS - Video Conversion - v0.100
+# Media Editor - HLS - Video Conversion
 
 Technical reference for Terminal-based FFMPEG commands for HLS (HTTP Live Streaming) video conversion operations.
 

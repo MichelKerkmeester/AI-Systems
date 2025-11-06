@@ -50,7 +50,7 @@ This file serves as a redirect with intelligent routing based on user intent and
 **Follow this dynamic sequence:**
 
 ### **✅ STEP 1: READ SYSTEM PROMPT FIRST** 
-**MANDATORY:** Read `/Knowledge Base/MCP System - Media Editor - v0.213.md` **COMPLETELY** before proceeding.
+**MANDATORY:** Read `/Knowledge Base/MCP System - Media Editor.md` **COMPLETELY** before proceeding.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
@@ -101,22 +101,22 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Steps 2-3 detection, read IN THIS ORDER as needed:**
 
-1. **MEDIA Thinking Framework** — `/Knowledge Base/Media Editor - MEDIA Thinking Framework - v0.222.md`
+1. **MEDIA Thinking Framework** — `/Knowledge Base/Media Editor - MEDIA Thinking Framework.md`
    - **ALWAYS READ** (required for all operations)
    - Intelligent context assessment with systematic depth analysis
 
-2. **Interactive Intelligence** — `/Knowledge Base/Media Editor - Interactive Intelligence - v0.210.md`
+2. **Interactive Intelligence** — `/Knowledge Base/Media Editor - Interactive Intelligence.md`
    - **DEFAULT** conversational flow and UI patterns
    - Adaptive questioning and feedback formats
    - **SKIP IF** direct command mode with clear intent
 
-3. **MCP Intelligence** — `/Knowledge Base/Media Editor - MCP Intelligence - Imagician - v0.201.md`
-   `/Knowledge Base/Media Editor - MCP Intelligence - Video, Audio - v0.202.md`
+3. **MCP Intelligence** — `/Knowledge Base/Media Editor - MCP Intelligence - Imagician.md`
+   `/Knowledge Base/Media Editor - MCP Intelligence - Video, Audio.md`
    - Capabilities and limits of image (Imagician) and media (Video-Audio) servers
    - Tool names, parameters, supported formats
    - **READ IF** operations need specific tool knowledge
 
-4. **HLS Video Conversion** — `/Knowledge Base/Media Editor - HLS - Video Conversion - v0.100.md`
+4. **HLS Video Conversion** — `/Knowledge Base/Media Editor - HLS - Video Conversion.md`
    - Terminal-based FFMPEG commands for HLS streaming
    - Multi-quality adaptive bitrate conversion
    - **READ IF** HLS mode or streaming keywords detected
@@ -128,7 +128,7 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 ```
 START
   ↓
-[Read System Prompt v0.213]
+[Read System Prompt]
   ↓
 [VERIFY REQUIRED TOOLS] ← CRITICAL FIRST STEP
   ↓
@@ -213,7 +213,7 @@ User: "extract audio and create thumbnails"
 ## 5. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
-- ❌ Skip the system prompt (`/Knowledge Base/MCP System - Media Editor - v0.213.md`)
+- ❌ Skip the system prompt (`/Knowledge Base/MCP System - Media Editor.md`)
 - ❌ Proceed without completing Step 1
 - ❌ Proceed without verifying required tool availability (MCP servers OR FFmpeg)
 - ❌ Skip operating routing guide
@@ -223,7 +223,7 @@ User: "extract audio and create thumbnails"
 - ❌ **Produce code, CLI commands, or implementation details** (Context Override)
 
 ### ALWAYS:
-- ✅ Start with `/Knowledge Base/MCP System - Media Editor - v0.213.md`
+- ✅ Start with `/Knowledge Base/MCP System - Media Editor.md`
 - ✅ Complete step 1 and understand project context fully
 - ✅ Verify required tool(s) BEFORE any operation (MCP servers for image/video/audio; FFmpeg for HLS)
 - ✅ Check for mode & operating type
@@ -241,10 +241,10 @@ User: "extract audio and create thumbnails"
 3. **Tool Verification THIRD** - Check required tools before operations (MCP servers OR FFmpeg)
 4. **Check commands** - Route intelligently
 5. **Read by mode** - Only required documents
-6. **MEDIA Framework v0.221** - Intelligent context assessment with systematic depth
+6. **MEDIA Framework** - Intelligent context assessment with systematic depth
 7. **Interactive Intelligence** - Default flow when conversational
 8. **MCP Intelligence** - Tool capabilities and parameters
 9. **Native Tools ONLY** - Use only available MCP/FFmpeg capabilities
 10. **Output to /export** - Every artifact goes here
 
-**→ GO TO:** `/Knowledge Base/MCP System - Media Editor - v0.213.md` **NOW**
+**→ GO TO:** `/Knowledge Base/MCP System - Media Editor.md` **NOW**

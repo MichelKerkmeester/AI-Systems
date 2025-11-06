@@ -1,4 +1,4 @@
-# Media Editor - MCP Intelligence - Video, Audio - v0.202
+# Media Editor - MCP Intelligence - Video, Audio
 
 Technical reference for Video-Audio MCP server capabilities and integration for video and audio processing operations.
 
