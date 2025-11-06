@@ -101,7 +101,7 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Steps 2-3 detection, read IN THIS ORDER as needed:**
 
-1. **MEDIA Thinking Framework** — `/Knowledge Base/Media Editor - MEDIA Thinking Framework - v0.221.md`
+1. **MEDIA Thinking Framework** — `/Knowledge Base/Media Editor - MEDIA Thinking Framework - v0.222.md`
    - **ALWAYS READ** (required for all operations)
    - Intelligent context assessment with systematic depth analysis
 
