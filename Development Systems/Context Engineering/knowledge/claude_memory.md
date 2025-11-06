@@ -94,7 +94,7 @@ mcp__claude-mem__search({ type: "bugfix", timeframe: "7d" })
 ### Check Service Status
 
 ```bash
-cd "/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem"
+cd "<claude-mem-installation-dir>"
 npx pm2 list
 ```
 
@@ -468,7 +468,7 @@ Memory improves over time:
 
 | Location | Purpose |
 |----------|---------|
-| `/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem` | Installation directory |
+| `<claude-mem-installation-dir>` | Installation directory (check your setup) |
 | `~/.claude-mem/` | Data directory and database |
 | `http://localhost:37777` | Worker HTTP API endpoint |
 | `~/.claude/settings.json` | Claude Code plugin settings |
@@ -477,9 +477,23 @@ Memory improves over time:
 ### Auto-Start Configuration
 
 **Enable auto-start on system boot:**
+
+1. Navigate to claude-mem installation:
 ```bash
-cd "/Users/michelkerkmeester/MEGA/MCP Servers/claude-mem"
-./setup-autostart.sh
+cd "<claude-mem-installation-dir>"
+```
+
+2. Run the setup command (requires sudo):
+```bash
+# For paths with spaces, use quotes:
+sudo env PATH=$PATH:$HOME/.nvm/versions/node/v24.9.0/bin \
+  "$(pwd)/node_modules/pm2/bin/pm2" startup launchd \
+  -u $(whoami) --hp $HOME
+```
+
+3. Save current configuration:
+```bash
+npx pm2 save
 ```
 
 **Disable auto-start:**
