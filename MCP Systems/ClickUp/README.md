@@ -161,7 +161,7 @@ Setup time tracking for team velocity
   "mcpServers": {
     "clickup": {
       "command": "npx",
-      "args": ["-y", "@clickup/mcp-server-clickup"],
+      "args": ["-y", "@taazkareem/clickup-mcp-server"],
       "env": {
         "CLICKUP_API_KEY": "your-api-key-here"
       }
@@ -551,7 +551,7 @@ Organization:
 - [ClickUp API Documentation](https://clickup.com/api)
 - [ClickUp Help Center](https://help.clickup.com/)
 - [ClickUp API Settings](https://app.clickup.com/settings/apps)
-- [ClickUp MCP Server](https://github.com/clickup/mcp-server-clickup)
+- [ClickUp MCP Server](https://github.com/taazkareem/clickup-mcp-server)
 
 ### MCP Resources
 - [Model Context Protocol](https://modelcontextprotocol.io/)

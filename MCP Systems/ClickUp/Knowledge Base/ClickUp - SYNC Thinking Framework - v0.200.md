@@ -41,7 +41,7 @@ An intelligent framework that acts as a **perfect context assessor** and **solut
 
 **2. Native MCP Operations Only**
 - NEVER generates custom code (JavaScript, webhooks, custom integrations) - 100% native ClickUp MCP only
-- ALL operations through official ClickUp MCP server (@clickup/mcp-server-clickup)
+- ALL operations through official ClickUp MCP server (@taazkareem/clickup-mcp-server)
 - Zero custom code tolerance - suggests native alternatives when custom code requested
 - Validates MCP connection first with get_workspace_hierarchy before any operations
 
