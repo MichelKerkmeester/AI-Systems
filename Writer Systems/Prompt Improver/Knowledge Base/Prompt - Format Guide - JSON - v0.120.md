@@ -46,7 +46,7 @@ JSON format provides structured, machine-parseable prompt engineering with consi
 | **Best For** | Human interaction | API/System integration | Configuration |
 | **Framework Fit** | RCAF/CRAFT | RCAF preferred | RCAF optimal |
 
-**Note:** Quality evaluation (CLEAR scoring) and enhancement processing are handled by separate guides (Patterns v0.102, DEPTH v0.106).
+**Note:** Quality evaluation (CLEAR scoring) and enhancement processing are handled by separate guides (Patterns guide, DEPTH guide).
 
 ---
 
@@ -124,7 +124,7 @@ Mode: $json | Complexity: [level] | Framework: [RCAF/CRAFT]
 - **Complexity level:** Low/Medium/High or 1-10
 - **Framework used:** RCAF or CRAFT
 
-**Note:** Quality scores (CLEAR) are evaluated separately per Patterns v0.102 and reported in chat, not in file header.
+**Note:** Quality scores (CLEAR) are evaluated separately per Patterns guide and reported in chat, not in file header.
 
 #### JSON File Content Structure
 

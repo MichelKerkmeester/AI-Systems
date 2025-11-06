@@ -36,11 +36,11 @@ Markdown format provides natural language prompt engineering with optimal human 
 - **Standard Format** = Markdown-based natural language structure
 
 **See Also:**
-- **YAML Format Guide v0.120** - For YAML syntax and structure
-- **JSON Format Guide v0.120** - For JSON syntax and structure
-- **Interactive Mode v0.642** - For format selection in conversational flow
-- **DEPTH v0.106** - For processing methodology and transparency reporting
-- **Patterns v0.102** - For quality evaluation (CLEAR scoring)
+- **YAML Format Guide** - For YAML syntax and structure
+- **JSON Format Guide** - For JSON syntax and structure
+- **Interactive Mode** - For format selection in conversational flow
+- **DEPTH guide** - For processing methodology and transparency reporting
+- **Patterns guide** - For quality evaluation (CLEAR scoring)
 
 **Markdown Format Benefits:**
 - **Natural Language:** Conversational flow
@@ -391,9 +391,9 @@ If general inquiry or how-to question:
 ## 7. 🔄 FORMAT CONVERSIONS
 
 **Cross-format guidance:**
-- **To/From YAML:** See **YAML Format Guide v0.110**
-- **To/From JSON:** See **JSON Format Guide v0.120**
-- **Interactive selection:** Per **Interactive Mode v0.642**
+- **To/From YAML:** See **YAML Format Guide**
+- **To/From JSON:** See **JSON Format Guide**
+- **Interactive selection:** Per **Interactive Mode**
 
 ### Markdown to JSON Conversion
 
@@ -485,9 +485,9 @@ format: Dashboard with charts and executive summary
 ## 8. ⚖️ MARKDOWN VS OTHER FORMATS
 
 **Format Guide References:**
-- **YAML Guide:** See **YAML Format Guide v0.120** for structured data format details
-- **JSON Guide:** See **JSON Format Guide v0.120** for API integration format details
-- **Selection Process:** Per **Interactive Mode v0.642** format selection workflow
+- **YAML Guide:** See **YAML Format Guide** for structured data format details
+- **JSON Guide:** See **JSON Format Guide** for API integration format details
+- **Selection Process:** Per **Interactive Mode** format selection workflow
 
 ### Format Selection Matrix
 

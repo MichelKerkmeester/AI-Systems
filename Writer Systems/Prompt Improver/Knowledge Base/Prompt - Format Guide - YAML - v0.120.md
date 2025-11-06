@@ -36,9 +36,9 @@ YAML (YAML Ain't Markup Language) provides human-readable structured data with m
 - This guide covers YAML as an **output structure** option
 
 **See Also:**
-- **Markdown Format Guide v0.110** - For Standard/Markdown output structure
-- **JSON Format Guide v0.110** - For JSON output structure
-- **Interactive Mode v0.642** - For format selection in conversational flow
+- **Markdown Format Guide** - For Standard/Markdown output structure
+- **JSON Format Guide** - For JSON output structure
+- **Interactive Mode** - For format selection in conversational flow
 
 **YAML Format Benefits:**
 - **Human Readable:** Cleaner than JSON, more structured than Standard
@@ -56,7 +56,7 @@ YAML (YAML Ain't Markup Language) provides human-readable structured data with m
 | **Best For** | Human interaction | API integration | Configuration, templates |
 | **Framework Fit** | RCAF/CRAFT | RCAF preferred | RCAF optimal |
 
-**Note:** Quality evaluation (CLEAR scoring) and enhancement processing are handled by separate guides (Patterns v0.102, DEPTH v0.106).
+**Note:** Quality evaluation (CLEAR scoring) and enhancement processing are handled by separate guides (Patterns guide, DEPTH guide).
 
 ---
 
@@ -138,7 +138,7 @@ Mode: $yaml | Complexity: [level] | Framework: [RCAF/CRAFT]
 - **Complexity level:** Low/Medium/High or 1-10
 - **Framework used:** RCAF or CRAFT
 
-**Note:** Quality scores (CLEAR) are evaluated separately per Patterns v0.102 and reported in chat, not in file header.
+**Note:** Quality scores (CLEAR) are evaluated separately per Patterns guide and reported in chat, not in file header.
 
 #### YAML File Content Structure
 
@@ -615,9 +615,9 @@ format:
 ## 7. 🔄 FORMAT CONVERSIONS
 
 **Cross-format guidance:**
-- **From/To Markdown:** See **Markdown Format Guide v0.110**
-- **From/To JSON:** See **JSON Format Guide v0.110**
-- **Interactive selection:** Per **Interactive Mode v0.642**
+- **From/To Markdown:** See **Markdown Format Guide**
+- **From/To JSON:** See **JSON Format Guide**
+- **Interactive selection:** Per **Interactive Mode**
 
 ### Standard to YAML Conversion
 
@@ -722,9 +722,9 @@ yaml_to_standard_conversion:
 ## 8. ⚖️ YAML VS OTHER FORMATS
 
 **Format Guide References:**
-- **Markdown Guide:** See **Markdown Format Guide v0.110** for Standard format details
-- **JSON Guide:** See **JSON Format Guide v0.110** for JSON format details
-- **Selection Process:** Per **Interactive Mode v0.642** format selection workflow
+- **Markdown Guide:** See **Markdown Format Guide** for Standard format details
+- **JSON Guide:** See **JSON Format Guide** for JSON format details
+- **Selection Process:** Per **Interactive Mode** format selection workflow
 
 ### When to Use Each Format
 
@@ -991,7 +991,7 @@ validate_yaml_syntax:
 | **Artifact Delivery** | 100% | 100% |
 | **Header Compliance** | 100% | 100% |
 
-### Cognitive Rigor Metrics *(per DEPTH v0.106)*
+### Cognitive Rigor Metrics *(per DEPTH guide)*
 
 | Metric | Target | Current Average |
 |--------|--------|-----------------|
@@ -1212,13 +1212,13 @@ task_1:
 
 ### Command Activation
 
-To use YAML format, users can *(per Interactive Mode v0.642)*:
+To use YAML format, users can *(per Interactive Mode)*:
 - Use `$yaml` command for automatic YAML formatting
 - Use `$y` as shorthand
 - Combine with modes: `$improve $yaml` or `$refine $yaml`
 - Request in Interactive Mode when format selection appears
 
-**See:** **Interactive Mode v0.642** for complete command reference and conversational format selection workflow.
+**See:** **Interactive Mode** for complete command reference and conversational format selection workflow.
 
 ### Success Criteria
 

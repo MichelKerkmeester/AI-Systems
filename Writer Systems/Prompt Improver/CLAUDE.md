@@ -2,7 +2,7 @@
 
 **If you have already read AGENTS.md during this conversation round, proceed without reading it again.**
 
-**This file serves as a redirect.**All instructions are located here: AI Systems/Writer - Prompt Improver/AGENTS.md
+**This file serves as a redirect.**All instructions are located here: /AI Systems/Writer Systems/Prompt Improver/AGENTS.md
 
 🚨 **Action Required:**
 - **First time this round?** Go to AGENTS.md immediately and read it thoroughly

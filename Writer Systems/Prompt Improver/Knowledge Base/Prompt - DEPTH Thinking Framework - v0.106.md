@@ -1,4 +1,4 @@
-# Prompt - DEPTH Thinking Framework - v0.106
+# Prompt - DEPTH Thinking Framework
 
 A comprehensive methodology combining systematic analysis with **transparent professional excellence** for superior prompt engineering deliverables.
 
@@ -54,7 +54,7 @@ A structured framework ensuring comprehensive prompt enhancement through **trans
 - Focus on value AND understanding
 
 **5. Format Compliance**
-- Use latest format guides (JSON v0.110, YAML v0.110, Markdown v0.100)
+- Use latest format guides (JSON, YAML, Markdown)
 - All formatting rules embedded in guides
 - Consistent structure across deliverables
 - No redundant rule duplication
@@ -374,16 +374,16 @@ system_state:
   decisions_log: []
   alternatives_considered: []
 
-  # Framework state (per Patterns v0.101)
+  # Framework state (per Patterns guide)
   complexity: integer
   framework_selected: string
   structure_selected: [standard, json, yaml]
 
-  # Format references (updated versions)
+  # Format references
   format_guides:
-    json: v0.110
-    yaml: v0.110
-    markdown: v0.100
+    json: latest
+    yaml: latest
+    markdown: latest
 
   # Quality control
   quality:
@@ -511,7 +511,7 @@ internal_activities:
     not: "Other possible prompts"
 
   framework_selection:
-    source: "Patterns v0.101 algorithm"
+    source: "Patterns algorithm"
     examples:
       - "Framework matching use case"
       - "Success rate consideration"
@@ -574,7 +574,7 @@ assumption_audit:
 "🔨 **Phase P - Prototype**
 Building enhanced prompt with RCAF structure
 Applying RICCE validation: All elements present
-Format: Standard Markdown per v0.100 guide"
+Format: Standard Markdown per guide"
 ```
 
 **Internal Processing (Full Rigor Applied):**
@@ -589,9 +589,9 @@ mechanism_first_validation:
 
 build_framework:
   format_selection:
-    standard: "Use Markdown guide v0.100"
-    json: "Use JSON guide v0.110"
-    yaml: "Use YAML guide v0.110"
+    standard: "Use Markdown guide"
+    json: "Use JSON guide"
+    yaml: "Use YAML guide"
 
   structure_assembly:
     - "Apply selected format guide"
@@ -1137,7 +1137,7 @@ Non-obvious insight: Simplicity better than comprehensive detail for this case
 🔨 **Phase P - Prototype**
 Building enhanced prompt with RCAF structure
 Applying RICCE validation: All elements present
-Format: Standard Markdown per v0.100 guide
+Format: Standard Markdown per guide
 
 ---
 
@@ -1199,7 +1199,7 @@ pre_creation_validation:
     - [ ] Complexity level inferable?
   
   system_readiness:
-    - [ ] DEPTH framework loaded (v0.106)
+    - [ ] DEPTH framework loaded
     - [ ] Cognitive rigor techniques ready
     - [ ] RICCE validation enabled
     - [ ] Two-layer transparency enabled
@@ -1231,7 +1231,7 @@ phase_e_gates:
   - "✅ Phase E: COSTAR framework selected, reframing insight applied"
 
 phase_p_gates:
-  - [ ] Structure built per format guides (v0.110/v0.100)
+  - [ ] Structure built per format guides
   - [ ] Mechanism-first validated (why before what)
   - [ ] RICCE Context integrated
   - [ ] Framework pattern evident
@@ -1272,14 +1272,14 @@ post_creation_checklist:
     - [ ] Examples: Validation and use cases included ✅
   
   prompt_standards:
-    - [ ] Framework: Optimal pattern selected (Patterns v0.101) ✅
+    - [ ] Framework: Optimal pattern selected (Patterns guide) ✅
     - [ ] Format: Correct guide applied (JSON/YAML/Markdown) ✅
     - [ ] CLEAR: 40+/50 total, each dimension 8+/10 ✅
     - [ ] Self-Rating: All 8+, accuracy 9+ ✅
     - [ ] Structure: RICCE complete, mechanism-first ✅
   
   format_compliance:
-    - [ ] Correct format guide applied (v0.110/v0.100) ✅
+    - [ ] Correct format guide applied ✅
     - [ ] All required elements present ✅
     - [ ] Professional quality confirmed ✅
     - [ ] Token efficiency optimized ✅
@@ -1292,7 +1292,7 @@ user_communication:
     **RICCE:** All elements validated ✅
     **CLEAR Score:** 43/50 (Target: 40+) ✅
     **Prompt Standards:** Framework, format, structure confirmed ✅
-    **Format:** [JSON/YAML/Markdown] guide v0.110/v0.100 compliant ✅
+    **Format:** [JSON/YAML/Markdown] guide compliant ✅
     
     Deliverable ready for export."
 ```
@@ -1398,7 +1398,7 @@ improvement_cycle:
 
 **Before Creation:**
 - [ ] User input received (or $quick mode)
-- [ ] DEPTH v0.106 loaded
+- [ ] DEPTH framework loaded
 - [ ] Cognitive rigor ready
 - [ ] RICCE validation enabled
 - [ ] Two-layer transparency enabled
@@ -1445,9 +1445,9 @@ depth_ricce_framework:
     
   prompt_context:
     - Prompt engineering specialist focus
-    - Format guides (JSON/YAML/Markdown v0.110/v0.100)
+    - Format guides (JSON/YAML/Markdown)
     - CLEAR scoring methodology (5 dimensions)
-    - Framework selection (Patterns v0.101)
+    - Framework selection (Patterns guide)
     - Two-layer transparency
     - Cognitive rigor enforcement (BLOCKING gates)
     
