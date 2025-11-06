@@ -269,7 +269,6 @@ def apply_design_rigor(complexity):
 - **Modern/Trendy**: Contemporary styles, latest design trends
 - **Data-Dense**: Information-rich, compact, professional
 - **Playful/Creative**: Unique layouts, experimental, attention-grabbing
-- **Accessible-First**: Maximum accessibility, high contrast, clear hierarchy
 - **Mobile-Optimized**: Mobile-first thinking, touch-friendly, streamlined
 
 **Example Variant Presentation:**
@@ -322,7 +321,7 @@ Which approach resonates with your needs, or would you like a hybrid?
 **Every deliverable must include:**
 
 1. **Design Quality** (15 pts) - Visual hierarchy, typography, spacing, color, consistency
-2. **Experience** (15 pts) - Usability, interaction patterns, feedback, error handling, accessibility
+2. **Experience** (15 pts) - Usability, interaction patterns, feedback, error handling, smooth interactions
 3. **Structure** (10 pts) - Code organization, cleanliness, maintainability, clarity
 4. **Implementation** (5 pts) - Technical execution, performance, responsiveness
 5. **Growth** (5 pts) - Prototype refinement, iteration quality, documentation
@@ -345,12 +344,12 @@ Which approach resonates with your needs, or would you like a hybrid?
 
 | Technology | Version/Features | Purpose |
 |------------|------------------|---------|
-| **HTML5** | Semantic elements, accessibility attributes | Structure and content |
+| **HTML5** | Semantic elements, modern attributes | Structure and content |
 | **CSS** | Grid, Flexbox, Custom Properties, Animations | Styling and layout |
 | **JavaScript** | ES6+ (const/let, arrow functions, modules) | Interactivity and behavior |
 
 **Implementation Standards:**
-- **HTML:** Semantic markup, proper heading hierarchy, ARIA labels, meta tags
+- **HTML:** Semantic markup, proper heading hierarchy, meta tags
 - **CSS:** Mobile-first responsive, CSS custom properties for theming, modern layout techniques
 - **JavaScript:** Event-driven architecture, clean DOM manipulation, no dependencies
 - **Output:** Single self-contained HTML file with inline CSS and JavaScript
@@ -399,7 +398,7 @@ Mobile (< 640px):           Desktop (≥ 1024px):
 - Establish keyboard navigation
 - Define loading/error states
 
-**Deliverables:** Interaction specs, state definitions, keyboard shortcuts, accessibility notes
+**Deliverables:** Interaction specs, state definitions, keyboard shortcuts
 
 ### Phase 4: Visual (V)
 **Activities:**
@@ -449,7 +448,6 @@ Mobile (< 640px):           Desktop (≥ 1024px):
 - Self-contained HTML file
 - Inline CSS and JavaScript
 - Usage instructions in comments
-- Accessibility implementation
 - Browser compatibility notes
 - DESIGN score breakdown
 
@@ -462,7 +460,7 @@ Mobile (< 640px):           Desktop (≥ 1024px):
 | **Component** | **Points** | **Key Questions** | **Minimum** |
 |--------------|-----------|------------------|-------------|
 | **Design Quality** | 15 | Visual hierarchy clear? Typography refined? Spacing intentional? Color harmonious? | 12 |
-| **Experience** | 15 | Intuitive navigation? Clear feedback? Accessible? Error handling? Smooth interactions? | 12 |
+| **Experience** | 15 | Intuitive navigation? Clear feedback? Error handling? Smooth interactions? User-friendly? | 12 |
 | **Structure** | 10 | Code organized? Clean implementation? Maintainable? Clear patterns? | 8 |
 | **Implementation** | 5 | Technically sound? Responsive? Performant? Browser compatible? | 4 |
 | **Growth** | 5 | Prototype refined? Well documented? Iteration-ready? Polished details? | 3 |
