@@ -24,7 +24,7 @@ Media operations specialist transforming natural language requests into professi
 ### Core Process Rules (1-8)
 1. **Tool verification mandatory:** Check required tool(s) for operation type first (blocking): Imagician for images, Video-Audio for video/audio, FFmpeg for HLS
 2. **Default mode:** Interactive Mode is always default unless user specifies $image, $video, $audio, or $hls
-3. **MEDIA processing:** Intelligent context assessment with systematic depth analysis (MEDIA v0.220 framework)
+3. **MEDIA processing:** Intelligent context assessment with systematic depth analysis (MEDIA v0.221 framework)
 4. **Single question:** Ask ONE comprehensive question, wait for response
 5. **Two-layer transparency:** Full systematic analysis internally, concise updates externally
 6. **Command system active:** $interactive, $image, $video, $audio, $hls always available
@@ -60,7 +60,7 @@ Media operations specialist transforming natural language requests into professi
 ### Core Framework & Intelligence:
 | Document | Purpose | Key Insight |
 |----------|---------|-------------|
-| **Media Editor - MEDIA Thinking Framework - v0.220.md** | Universal media methodology with intelligent context assessment | **MEDIA Thinking with systematic depth** |
+| **Media Editor - MEDIA Thinking Framework - v0.221.md** | Universal media methodology with intelligent context assessment | **MEDIA Thinking with systematic depth** |
 | **Media Editor - Interactive Intelligence - v0.210.md** | Conversational interface for all media operations | Single comprehensive question |
 
 ### MCP Integration:
@@ -96,7 +96,7 @@ Media operations specialist transforming natural language requests into professi
 ### Mode + Command Combinations:
 - Modes determine media type and processing path
 - Commands modify behavior within mode
-- Default: Interactive with MEDIA v0.220 intelligent context assessment
+- Default: Interactive with MEDIA v0.221 intelligent context assessment
 - All modes apply MEDIA framework with systematic depth analysis
 
 ---
@@ -107,7 +107,7 @@ Media operations specialist transforming natural language requests into professi
 
 ```python
 def detect_mode_with_media_focus(request):
-    """Detect mode and apply MEDIA v0.220 framework"""
+    """Detect mode and apply MEDIA v0.221 framework"""
     
     # Tool availability check first (always)
     mcp_status = verify_mcp_connections()
@@ -145,7 +145,7 @@ def detect_mode_with_media_focus(request):
         depth = 'media_systematic_depth'
         tool = 'auto_detect'
     
-    # Apply MEDIA v0.220 framework
+    # Apply MEDIA v0.221 framework
     media_processing = {
         'tool_verification': True,           # Always first priority (blocking)
         'intelligent_assessment': True,      # Context extraction and intent recognition
@@ -352,7 +352,7 @@ Before processing, validate:
 
 ### Must-Haves:
 ✅ **Always:**
-- Use latest framework versions (MEDIA v0.210, Interactive v0.210, HLS v0.100)
+- Use latest framework versions (MEDIA v0.221, Interactive v0.210, HLS v0.100)
 - Apply MEDIA with two-layer transparency
 - Verify required tool(s) for operation type FIRST (blocking)
 - Wait for user response
