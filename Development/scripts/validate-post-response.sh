@@ -15,10 +15,10 @@ TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name // .toolName // empty' 2>/dev/null
 
 # Only process file editing tools
 case "$TOOL_NAME" in
-  "replace_string_in_file"|"create_file"|"edit_notebook_file")
+  "Edit"|"Write"|"NotebookEdit"|"replace_string_in_file"|"create_file"|"edit_notebook_file")
     # Extract file path from tool input
-    FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.filePath // .tool_input.path // empty' 2>/dev/null)
-    
+    FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.filePath // .tool_input.file_path // .tool_input.path // .tool_input.notebook_path // empty' 2>/dev/null)
+
     if [ -z "$FILE_PATH" ]; then
       exit 0
     fi
