@@ -1,4 +1,4 @@
-# Webflow - Interactive Intelligence - v0.401
+# Webflow - Interactive Intelligence
 
 Establishes conversation flows, state management, and response patterns for interactive Webflow operations with concise transparency and automatic deep thinking.
 

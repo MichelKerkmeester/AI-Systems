@@ -1,10 +1,10 @@
-# Webflow Agent - User Guide v0.511
+# Webflow Agent - User Guide
 
 Creates and manages Webflow sites through natural language using Designer and Data API integration with **transparent SYNC processing**.
 
 ## 📋 TABLE OF CONTENTS
 
-1. [🆕 WHAT'S NEW IN V0.511](#1-whats-new-in-v0511)
+1. [🆕 WHAT'S NEW](#1-whats-new)
 2. [✨ KEY FEATURES](#2-key-features)
 3. [🌳 SYSTEM ARCHITECTURE](#3-system-architecture)
 4. [🚀 QUICK SETUP](#4-quick-setup)
@@ -19,16 +19,17 @@ Creates and manages Webflow sites through natural language using Designer and Da
 
 ---
 
-<a id="1-whats-new-in-v0511"></a>
+<a id="1-whats-new"></a>
 
-## 1. 🆕 WHAT'S NEW IN V0.511
+## 1. 🆕 WHAT'S NEW
 
-### Documentation Improvements
+### Latest Updates
+- **Version Number Cleanup**: Removed version numbers from all internal document references for cleaner maintenance
 - **Enhanced Readability**: Improved balance between YAML and markdown prose across all knowledge documents
-- **MCP Knowledge Update**: Updated Webflow - MCP Knowledge to v0.402 with clearer technical specifications
+- **MCP Knowledge Update**: Updated Webflow - MCP Knowledge with clearer technical specifications
 - **Better Structure**: Converted heavily YAML-formatted sections to readable markdown while preserving technical accuracy
 
-### Major Features from V0.510
+### Major Features
 - **SYNC Framework**: Superior 4-phase methodology (Survey → Yield → Navigate → Create) with clearer phase naming
 - **Streamlined Processing**: Consolidated validation + integration into final Create phase for efficiency
 - **Enhanced Clarity**: More intuitive phase names that better describe actual operations
@@ -90,13 +91,13 @@ Creates and manages Webflow sites through natural language using Designer and Da
 ```
 AGENTS.md → Entry point with intelligent routing logic
     ↓
-MCP System - Webflow - v0.511.md (System prompt with SYNC integration)
+MCP System - Webflow.md (System prompt with SYNC integration)
     ↓
-SYNC Thinking Framework v0.400 (4-phase methodology with cognitive rigor)
+SYNC Thinking Framework (4-phase methodology with cognitive rigor)
     ↓
-Interactive Intelligence v0.401 (Conversation flow with two-layer transparency)
+Interactive Intelligence (Conversation flow with two-layer transparency)
     ↓
-MCP Knowledge v0.402 (Designer & Data API specifications)
+MCP Knowledge (Designer & Data API specifications)
     ↓
 Output → Native Webflow operations via MCP server
 ```
@@ -115,14 +116,14 @@ Output → Native Webflow operations via MCP server
 ### Step 2: Add System Instructions
 1. Click "Edit project details"
 2. Find "Custom instructions" section
-3. Copy and paste: `MCP System - Webflow.md` (v0.510)
+3. Copy and paste: `MCP System - Webflow.md`
 4. Save the project
 
 ### Step 3: Upload Reference Documents
 Add these documents to your project:
-- `Webflow - MCP Knowledge.md` (v0.401)
-- `Webflow - Interactive Intelligence.md` (v0.401)
-- `Webflow - SYNC Thinking Framework.md` (v0.400)
+- `Webflow - MCP Knowledge.md`
+- `Webflow - Interactive Intelligence.md`
+- `Webflow - SYNC Thinking Framework.md`
 
 ### Step 4: Continue to MCP Installation
 Follow the installation guide in the next section
@@ -380,22 +381,23 @@ Components: {
 
 ## 11. 📦 VERSION HISTORY
 
-### v0.511 (Current)
+### Latest Release
+- **Version Number Cleanup**: Removed version numbers from all internal document references
 - **Documentation Improvements**: Enhanced balance between YAML and markdown prose in all knowledge documents
-- **MCP Knowledge Update**: Upgraded to v0.402 with improved readability and structure
+- **MCP Knowledge Update**: Improved readability and structure
 - **Better Technical Specs**: Clearer presentation of API specifications while maintaining accuracy
 - **Maintained All Capabilities**: No functional changes, only documentation clarity improvements
 
-### v0.510
+### Previous Release
 - **SYNC Framework**: Transitioned from ATLAS (5 phases) to SYNC (4 phases) for improved clarity
 - **Better Phase Naming**: Survey, Yield, Navigate, Create more intuitive than Assess, Transform, Layer, Apply, Synthesize
 - **Streamlined Processing**: Combined validation + integration into final Create phase
-- **Updated Knowledge Base**: All documents aligned with SYNC methodology (v0.400, v0.401)
+- **Updated Knowledge Base**: All documents aligned with SYNC methodology
 - **Maintained Intelligence**: All cognitive rigor and two-layer transparency preserved
 - **Same Capabilities**: All Webflow operations and features unchanged
 
-### v0.501
-- Introduced transparent ATLAS processing framework (5-phase methodology)
+### Earlier Release
+- Introduced transparent processing framework (4-phase methodology)
 - Enhanced MCP integration with mandatory connection verification
 - Improved intelligent context assessment and solution finding
 - Added two-layer transparency model (internal rigor + concise updates)
@@ -404,18 +406,14 @@ Components: {
 - Removed deprecated pattern learning system
 - Enhanced native API coordination and optimization
 
-### v0.415
+### Earlier Releases
 - Simplified architecture removing complex thinking mechanisms
 - Streamlined execution flow
 - Cleaner codebase with direct operations
 - Maintained all core Webflow capabilities
-
-### v0.414
 - Introduced automatic processing systems
 - Enhanced connection verification
 - Improved error handling
-
-### v0.413
 - Initial MCP integration
 - Designer and Data API support
 - Basic command structure

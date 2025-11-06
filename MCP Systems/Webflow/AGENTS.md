@@ -46,7 +46,7 @@ This file serves as a redirect with intelligent routing based on user input.
 **Follow this dynamic sequence:**
 
 ### **✅ STEP 1: READ SYSTEM PROMPT FIRST** 
-**MANDATORY:** Read `/Knowledge Base/MCP System - Webflow - v0.511.md` **COMPLETELY** before proceeding.
+**MANDATORY:** Read `/Knowledge Base/MCP System - Webflow.md` **COMPLETELY** before proceeding.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
@@ -88,18 +88,18 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Steps 2-3 detection, read IN THIS ORDER as needed:**
 
-1. **SYNC Thinking Framework** — `/Knowledge Base/Webflow - SYNC Thinking Framework - v0.400.md`
+1. **SYNC Thinking Framework** — `/Knowledge Base/Webflow - SYNC Thinking Framework.md`
    - **ALWAYS READ** for structured operations
    - 4-phase methodology (Survey → Yield → Navigate → Create)
    - Connection verification integrated
    - Native API enforcement
 
-2. **Interactive Intelligence** — `/Knowledge Base/Webflow - Interactive Intelligence - v0.401.md`
+2. **Interactive Intelligence** — `/Knowledge Base/Webflow - Interactive Intelligence.md`
    - **DEFAULT** conversational flow and UI patterns
    - Adaptive questioning and feedback formats
    - **SKIP IF** direct operation with clear intent
 
-3. **MCP Knowledge** — `/Knowledge Base/Webflow - MCP Knowledge - v0.402.md`
+3. **MCP Knowledge** — `/Knowledge Base/Webflow - MCP Knowledge.md`
    - Designer API and Data API specifications
    - **ALWAYS CHECK** before operations requiring API calls
    - Connection verification procedures
@@ -111,7 +111,7 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 ```
 START
   ↓
-[Read System Prompt v0.511]
+[Read System Prompt]
   ↓
 [VERIFY MCP CONNECTION] ← CRITICAL FIRST STEP
   ↓
@@ -184,7 +184,7 @@ User: "create components and collections"
 ## 5. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
-- ❌ Skip the system prompt (`/Knowledge Base/MCP System - Webflow - v0.511.md`)
+- ❌ Skip the system prompt (`/Knowledge Base/MCP System - Webflow.md`)
 - ❌ Proceed without completing Step 1
 - ❌ Proceed without verifying required tool availability (MCP servers)
 - ❌ Skip operating routing guide
@@ -194,7 +194,7 @@ User: "create components and collections"
 - ❌ **Produce code, CLI commands, or implementation details** (Context Override)
 
 ### ALWAYS:
-- ✅ Start with `/Knowledge Base/MCP System - Webflow - v0.511.md`
+- ✅ Start with `/Knowledge Base/MCP System - Webflow.md`
 - ✅ Complete step 1 and understand project context fully
 - ✅ Verify required tool(s) BEFORE any operation (MCP servers)
 - ✅ Check for mode & operation type
@@ -218,4 +218,4 @@ User: "create components and collections"
 9. **Native Tools ONLY** - Use only available MCP capabilities
 10. **Output to /Export** - Every artifact goes here
 
-**→ GO TO:** `/Knowledge Base/MCP System - Webflow - v0.511.md` **NOW**
+**→ GO TO:** `/Knowledge Base/MCP System - Webflow.md` **NOW**
