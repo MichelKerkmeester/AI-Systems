@@ -15,6 +15,16 @@ operating_mode:
 # USER INPUTS
 # ───────────────────────────────────────────────────────────────
 user_inputs:
+  agents_location: |
+    [AGENTS_LOCATION] (Optional)
+    
+    Specify the folder path where the AGENTS.md file is located. This is particularly
+    useful when VS Code is opened at a parent folder level with multiple subfolders
+    that each have their own AGENTS.md file.
+    
+    If not specified, the agent will search for AGENTS.md starting from the current
+    working directory using the default search order.
+
   context: |
     [CONTEXT]
 
@@ -57,8 +67,11 @@ user_inputs:
 # RESOURCES
 # ───────────────────────────────────────────────────────────────
 agents_md_locations:
-  search::
-    - ./AGENTS.md
+  search_priority:
+    - "[AGENTS_LOCATION]/AGENTS.md (if specified)"
+    - "./AGENTS.md"
+    - "../AGENTS.md"
+    - "../../AGENTS.md"
 
   redirect_signals:
     - "CLAUDE.md: STOP - READ AGENTS.md INSTEAD"
@@ -69,9 +82,15 @@ agents_md_locations:
 # ───────────────────────────────────────────────────────────────
 field_handling:
   defaults:
+    agents_location_empty: "Search using default search order starting from current directory"
     context_empty: "Infer from REQUEST and AGENTS.md routing analysis"
     request_empty: "Error: REQUEST required - describe the task or goal"
     analysis_scope_empty: "Proceed with AGENTS.md and routed Knowledge Base documents only"
+    
+  agents_location_handling:
+    present: "Prioritize specified path, resolve relative to workspace root"
+    empty: "Use default search order"
+    not_found: "Log warning, fallback to default search order, report to user"
     
   context_inference:
     from_request:
@@ -123,9 +142,12 @@ rules:
 # ───────────────────────────────────────────────────────────────
 workflow:
   step_1_locate:
-    action: Search for AGENTS.md using search_order
+    action: Search for AGENTS.md using search priority order
+    priority:
+      - if_agents_location_specified: "Check [AGENTS_LOCATION]/AGENTS.md first"
+      - fallback: "Use default search order"
     validation: agents_md_found
-    failure_mode: "Output: 'AGENTS.md not found—please provide path or link.' STOP."
+    failure_mode: "Output: 'AGENTS.md not found at specified location or search paths—please provide correct path.' STOP."
 
   step_2_read_and_route:
     action: Read AGENTS.md end-to-end (it contains intelligent routing logic)
@@ -151,6 +173,7 @@ workflow:
   step_4_acknowledge:
     action: Confirm compliance in first response
     format: "AGENTS.md read and applied: [path]. Summary: [1-3 line summary]. Knowledge Base routing: [documents read]"
+    note: "Include specified location if [AGENTS_LOCATION] was provided"
     validation: compliance_confirmed
 
   step_5_parse_context:
