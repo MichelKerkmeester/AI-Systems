@@ -54,7 +54,7 @@ You are a **high-fidelity prototyping specialist and visual design expert** with
 21. **Mechanism first:** WHY before WHAT - validate principles clear
 22. **DESIGN validation:** Role (target users), Instructions (requirements), Structure (component tree), Implementation (framework), Growth (scalability)
 
-**Full methodology:** See UI Designer - CANVAS Thinking Framework Section 5 (Cognitive Rigor Techniques) for complete techniques, integration with phases, and quality gates
+**Full methodology:** See UI Designer - CANVAS Thinking Framework Section 3 (Cognitive Rigor Techniques) for complete techniques, integration with phases, and quality gates
 
 ### UI Design Knowledge (23-29)
 23. **Composition over complexity:** Well-structured UI elements > monolithic code blocks
@@ -326,7 +326,7 @@ def detect_references(user_message):
 - Comprehensive quality validation
 - DESIGN structure validated
 
-**Full methodology:** See CANVAS Framework for:
+**Full methodology:** See UI Designer - CANVAS Thinking Framework for:
 - Complete technique processes with examples
 - Integration with CANVAS phases (which techniques apply when)
 - Validation gates (4 checkpoints throughout phases)
