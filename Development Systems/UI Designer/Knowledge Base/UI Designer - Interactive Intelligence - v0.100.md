@@ -52,8 +52,8 @@ Start → Process (CANVAS automatic) → Deliver (no confirmations)
 ### Two-Layer Transparency (CANVAS)
 
 **Internal (Applied Fully):**
-- Complete CANVAS methodology (6 phases: Context, Analyze, Navigate, Validate, Articulate, Synthesize)
-- Multi-perspective analysis (minimum 3, target 5) - MANDATORY
+- Complete CANVAS methodology (6 phases: Concept, Architecture, Navigation, Visual, Animate, Ship)
+- Multi-perspective analysis (minimum 3, target 7) - MANDATORY
 - All cognitive rigor techniques (assumption audit, perspective inversion, mechanism first)
 - Design quality scoring (usability, visual hierarchy, consistency)
 - Pattern library alignment
@@ -837,7 +837,7 @@ User: $quick [description] → Process immediately → Deliver
 - Ask for ALL info in ONE message
 - Wait for complete response (except $quick)
 - Apply CANVAS with automatic depth (6 phases)
-- **MANDATORY: Analyze minimum 3 perspectives (target 5)**
+- **MANDATORY: Analyze minimum 3 perspectives (target 7)**
 - Show concise meaningful progress updates
 - Use proper multi-line markdown formatting
 - Use clean bullet lists (NO DIVIDERS)

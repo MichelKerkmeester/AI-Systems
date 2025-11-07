@@ -80,6 +80,71 @@ mobile_optimized_strategy:
     cta: "Fixed bottom CTAs for easy thumb access"
 ```
 
+### Strategy 4: Impact First (Bold/Expressive)
+
+```yaml
+bold_expressive_strategy:
+  philosophy: "Make a statement, command attention"
+
+  visual_markers:
+    typography: "Extra large headings (64px+), bold weights (700-900)"
+    color_palette: "High saturation, vibrant primary colors"
+    contrast: "Maximum contrast ratios, dramatic size differences"
+    spacing: "Generous padding (40px+), dramatic whitespace"
+    accents: "Bold accent colors, gradient overlays"
+    effects: "Large shadows, transform animations, striking visuals"
+    fonts: "Clash Display, Montserrat, Bebas Neue"
+```
+
+### Strategy 5: Trust & Stability (Classic/Traditional)
+
+```yaml
+classic_traditional_strategy:
+  philosophy: "Timeless, trustworthy, familiar"
+
+  visual_markers:
+    typography: "Serif fonts for headings, traditional pairings"
+    color_palette: "Conservative (navy, gray, burgundy), muted tones"
+    layout: "Symmetric, grid-based, centered alignment"
+    spacing: "Moderate, predictable rhythm (16px-24px)"
+    borders: "Subtle borders (1px solid), traditional dividers"
+    shadows: "Minimal, subtle elevation"
+    fonts: "Merriweather, Georgia, Times New Roman, Baskerville"
+```
+
+### Strategy 6: Information Density (Data-Dense Professional)
+
+```yaml
+data_dense_strategy:
+  philosophy: "Maximum information density, efficiency over aesthetics"
+
+  visual_markers:
+    spacing: "Compact (8px-12px), tight line-height (1.4)"
+    layout: "Multi-column grids, table-heavy, sidebar navigation"
+    typography: "Smaller fonts (13px-14px body), condensed fonts"
+    colors: "Neutral grays, minimal color for hierarchy"
+    components: "Tables, charts, KPI cards, dense forms"
+    chrome: "Always-visible toolbars, persistent filters, status bars"
+    fonts: "Roboto, Inter, System UI (optimized for density)"
+```
+
+### Strategy 7: Joy & Delight (Playful/Creative)
+
+```yaml
+playful_creative_strategy:
+  philosophy: "Delight users, break conventions, spark joy"
+
+  visual_markers:
+    color_palette: "Bright, saturated, multiple colors (4-6 primaries)"
+    borders: "Large border-radius (16px-24px), organic shapes"
+    typography: "Rounded, friendly fonts, variable sizes"
+    illustrations: "Custom illustrations, mascots, icons"
+    animations: "Bouncy, spring easing, micro-interactions everywhere"
+    effects: "Playful hover states, fun loading animations, confetti"
+    personality: "Emojis, casual copy, unexpected interactions"
+    fonts: "Poppins, Fredoka, Comic Neue, Baloo, Nunito"
+```
+
 ---
 
 ## 2. 📝 TYPOGRAPHY TEMPLATES
