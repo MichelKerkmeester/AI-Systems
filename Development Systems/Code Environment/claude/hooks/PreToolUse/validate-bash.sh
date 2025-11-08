@@ -6,12 +6,15 @@
 # PreToolUse hook that prevents wasted tokens by blocking reads of
 # large, irrelevant files before they consume your context window
 
+# Source output helpers (completely silent on success)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"
+source "$SCRIPT_DIR/../lib/output-helpers.sh" || exit 0
 
 # Read JSON input from stdin
 INPUT=$(cat)
 
-# Extract the command from JSON - correct path
-COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
+# Extract the command from JSON - correct path (silent on error)
+COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty' 2>/dev/null)
 
 # If no command found, allow it
 if [ -z "$COMMAND" ]; then
@@ -77,7 +80,43 @@ FORBIDDEN_PATTERNS=(
 # Check if command contains any forbidden patterns
 for pattern in "${FORBIDDEN_PATTERNS[@]}"; do
   if echo "$COMMAND" | grep -qE "$pattern"; then
-    echo "ERROR: Access to '$pattern' is blocked by security policy" >&2
+    # Determine the category and provide helpful message
+    case "$pattern" in
+      "node_modules"|"build/"|"dist/"|"venv/"|"__pycache__")
+        print_error_box "COMMAND BLOCKED - Performance" \
+          "Pattern: $pattern" \
+          "Reason: Large directory wastes tokens and slows execution" \
+          "" \
+          "Alternative: Use targeted file reads:" \
+          "  • Read specific files directly" \
+          "  • Use grep/glob patterns to find files" \
+          "  • Search with code-specific tools"
+        ;;
+      "\.env"|"\.ssh/"|"\.aws/"|"\.pem$"|"\.key$"|"id_rsa"|"credentials\.json"|"secrets\."|"password")
+        print_error_box "COMMAND BLOCKED - Security" \
+          "Pattern: $pattern" \
+          "Reason: Sensitive files may contain credentials" \
+          "" \
+          "Security Risk: This could expose:" \
+          "  • API keys and tokens" \
+          "  • Passwords and secrets" \
+          "  • Private SSH keys" \
+          "" \
+          "Do not access sensitive files in conversations."
+        ;;
+      *)
+        print_error_box "COMMAND BLOCKED - Security" \
+          "Pattern: $pattern" \
+          "Reason: Dangerous command blocked by security policy" \
+          "" \
+          "This command could:" \
+          "  • Delete important files" \
+          "  • Modify system settings" \
+          "  • Compromise system security" \
+          "" \
+          "Please use safer alternatives."
+        ;;
+    esac
     exit 2  # Exit code 2 = blocking error
   fi
 done

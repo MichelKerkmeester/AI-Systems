@@ -6,12 +6,18 @@
 # Pre-UserPromptSubmit hook that analyzes prompts and suggests
 # relevant skills based on keywords, intent, and file context
 
+# Source output helpers (completely silent on success)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"
+source "$SCRIPT_DIR/../lib/output-helpers.sh" || exit 0
+
+# Check dependencies (silent on success)
+check_dependency "jq" "brew install jq (macOS) or apt install jq (Linux)" || exit 0
 
 # Read JSON input from stdin
 INPUT=$(cat)
 
-# Extract the prompt from JSON
-PROMPT=$(echo "$INPUT" | jq -r '.prompt // empty')
+# Extract the prompt from JSON (silent on error)
+PROMPT=$(echo "$INPUT" | jq -r '.prompt // empty' 2>/dev/null)
 
 # If no prompt found, allow it
 if [ -z "$PROMPT" ]; then
@@ -19,13 +25,15 @@ if [ -z "$PROMPT" ]; then
 fi
 
 # Load skill rules configuration
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILL_RULES="$(cd "$SCRIPT_DIR/../.." && pwd)/configs/skill-rules.json"
 
 if [ ! -f "$SKILL_RULES" ]; then
   # No rules file, silently allow
   exit 0
 fi
+
+# Validate JSON
+validate_json "$SKILL_RULES" || exit 0
 
 # Convert prompt to lowercase for case-insensitive matching
 PROMPT_LOWER=$(echo "$PROMPT" | tr '[:upper:]' '[:lower:]')
@@ -149,7 +157,7 @@ done <<< "$SKILL_NAMES"
 # ───────────────────────────────────────────────────────────────
 
 if [ ${#MATCHED_SKILLS[@]} -eq 0 ]; then
-  # No skills matched, allow request as-is
+  # No skills matched, exit silently
   exit 0
 fi
 
@@ -162,7 +170,7 @@ MEDIUM_SKILLS=()
 for skill in "${MATCHED_SKILLS[@]}"; do
   priority=$(jq -r ".skills[\"$skill\"].priority" "$SKILL_RULES" 2>/dev/null)
   description=$(jq -r ".skills[\"$skill\"].description" "$SKILL_RULES" 2>/dev/null)
-  
+
   case "$priority" in
     critical)
       CRITICAL_SKILLS+=("$skill|$description")
@@ -176,51 +184,64 @@ for skill in "${MATCHED_SKILLS[@]}"; do
   esac
 done
 
-# Format output by priority
-if [ ${#CRITICAL_SKILLS[@]} -gt 0 ]; then
-  ACTIVATION_MSG="${ACTIVATION_MSG}
+# Only log if there are skills to recommend
+# Log to file instead of stderr to keep interface clean
 
-⚠️ CRITICAL SKILLS (Must Apply):
-"
-  for item in "${CRITICAL_SKILLS[@]}"; do
-    skill_name=$(echo "$item" | cut -d'|' -f1)
-    desc=$(echo "$item" | cut -d'|' -f2)
-    ACTIVATION_MSG="${ACTIVATION_MSG}   • $skill_name - $desc
-"
-  done
-fi
+# Prepare log directory
+LOG_DIR="$SCRIPT_DIR/../logs"
+mkdir -p "$LOG_DIR"
+LOG_FILE="$LOG_DIR/skill-recommendations.log"
 
-if [ ${#HIGH_SKILLS[@]} -gt 0 ]; then
-  ACTIVATION_MSG="${ACTIVATION_MSG}
+# Prepare log entry with timestamp
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
-🚨 HIGH PRIORITY SKILLS (Strongly Recommended):
-"
-  for item in "${HIGH_SKILLS[@]}"; do
-    skill_name=$(echo "$item" | cut -d'|' -f1)
-    desc=$(echo "$item" | cut -d'|' -f2)
-    ACTIVATION_MSG="${ACTIVATION_MSG}   • $skill_name - $desc
-"
-  done
-fi
+# Write to log file
+{
+  echo ""
+  echo "═══════════════════════════════════════════════════════════════"
+  echo "[$TIMESTAMP] SKILL RECOMMENDATIONS"
+  echo "───────────────────────────────────────────────────────────────"
+  echo "Prompt: ${PROMPT:0:100}..."
+  echo "───────────────────────────────────────────────────────────────"
 
-if [ ${#MEDIUM_SKILLS[@]} -gt 0 ]; then
-  ACTIVATION_MSG="${ACTIVATION_MSG}
+  # Format output by priority
+  if [ ${#CRITICAL_SKILLS[@]} -gt 0 ]; then
+    echo ""
+    echo "🔴 CRITICAL (Must Apply)"
+    for item in "${CRITICAL_SKILLS[@]}"; do
+      skill_name=$(echo "$item" | cut -d'|' -f1)
+      desc=$(echo "$item" | cut -d'|' -f2)
+      echo "   • $skill_name"
+      echo "     $desc"
+    done
+  fi
 
-🤔 RELEVANT SKILLS (Consider):
-"
-  for item in "${MEDIUM_SKILLS[@]}"; do
-    skill_name=$(echo "$item" | cut -d'|' -f1)
-    desc=$(echo "$item" | cut -d'|' -f2)
-    ACTIVATION_MSG="${ACTIVATION_MSG}   • $skill_name - $desc
-"
-  done
-fi
+  if [ ${#HIGH_SKILLS[@]} -gt 0 ]; then
+    echo ""
+    echo "🟡 HIGH PRIORITY (Strongly Recommended)"
+    for item in "${HIGH_SKILLS[@]}"; do
+      skill_name=$(echo "$item" | cut -d'|' -f1)
+      desc=$(echo "$item" | cut -d'|' -f2)
+      echo "   • $skill_name"
+      echo "     $desc"
+    done
+  fi
 
-# Output the activation message to stderr (visible to user but doesn't modify prompt)
-echo "───────────────────────────────────────────────────────────────" >&2
-echo "SKILL ACTIVATION CHECK" >&2
-echo "$ACTIVATION_MSG" >&2
-echo "───────────────────────────────────────────────────────────────" >&2
+  if [ ${#MEDIUM_SKILLS[@]} -gt 0 ]; then
+    echo ""
+    echo "🔵 RELEVANT SKILLS (Consider)"
+    for item in "${MEDIUM_SKILLS[@]}"; do
+      skill_name=$(echo "$item" | cut -d'|' -f1)
+      desc=$(echo "$item" | cut -d'|' -f2)
+      echo "   • $skill_name"
+      echo "     $desc"
+    done
+  fi
 
-# Allow the request to proceed (exit 0)
+  echo ""
+  echo "═══════════════════════════════════════════════════════════════"
+  echo ""
+} >> "$LOG_FILE"
+
+# Allow the request to proceed silently (exit 0)
 exit 0

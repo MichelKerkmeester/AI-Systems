@@ -2,7 +2,7 @@
 
 Automated workflows and quality checks for Claude Code interactions.
 
-**Version**: 1.0.0
+**Version**: 1.0.1
 **Last Updated**: 2025-11-08
 
 ---
@@ -149,7 +149,7 @@ QUALITY CHECK REMINDERS
 - Timeout handling present?
 
 ───────────────────────────────────────
-💾 Logged to: .claude/logs/quality-checks.log
+💾 Logged to: .claude/hooks/logs/skill-recommendations.log
 ```
 
 ---
@@ -168,9 +168,98 @@ QUALITY CHECK REMINDERS
 │   └── validate-bash.sh                   # Security validation
 ├── PostToolUse/
 │   └── validate-post-response.sh          # Quality checks
-└── lib/
-    └── transform-transcript.js            # JSONL → JSON transformer
+├── lib/
+│   ├── output-helpers.sh                  # Shared formatting functions
+│   └── transform-transcript.js            # JSONL → JSON transformer
+└── logs/
+    └── skill-recommendations.log          # Skill suggestion history
 ```
+
+---
+
+## Shared Libraries
+
+### `lib/output-helpers.sh`
+**Purpose**: Standardized visual output formatting for all hooks
+
+**Provides**:
+- Consistent color-coded messages (INFO, SUCCESS, WARN, ERROR)
+- Visual separators and section headers
+- Emoji indicators for severity and process states
+- Terminal capability detection (colors disabled on non-TTY)
+- Silent dependency checking and JSON validation
+
+**Usage in Hooks**:
+```bash
+#!/bin/bash
+source "$(dirname "$0")/../lib/output-helpers.sh"
+
+print_section "MY HOOK NAME"
+print_message "SUCCESS" "Operation completed"
+print_bullet "First item"
+print_bullet "Second item"
+```
+
+**Key Functions**:
+- `print_message <level> <title> [message]` - Print status message
+- `print_section <title>` - Print boxed section header
+- `print_separator` - Print horizontal line
+- `print_bullet <text>` - Print bullet point
+- `check_dependency <cmd> [hint]` - Silently check if command exists
+- `validate_json <path>` - Silently validate JSON file
+
+### `lib/transform-transcript.js`
+**Purpose**: Convert Claude Code transcript (JSONL) to save-context format (JSON)
+
+**Usage**:
+```bash
+node lib/transform-transcript.js input.jsonl output.json
+```
+
+**Transforms**:
+- Extracts user prompts and assistant responses
+- Filters system messages and tool calls
+- Structures conversation flow for documentation
+- Prepares data for generate-context.js processing
+
+---
+
+## Logs Directory
+
+### `logs/skill-recommendations.log`
+**Purpose**: Historical record of skill suggestions and quality checks
+
+**Contains**:
+- Timestamp of each hook execution
+- Detected trigger keywords and patterns
+- Recommended skills for each prompt
+- Priority levels (CRITICAL, HIGH, MEDIUM)
+- Quality check reminders issued
+
+**Usage**:
+```bash
+# View recent recommendations
+tail -n 50 .claude/hooks/logs/skill-recommendations.log
+
+# Search for specific skill mentions
+grep "save-context" .claude/hooks/logs/skill-recommendations.log
+```
+
+**Format**:
+```
+[2025-11-08 17:40:23] UserPromptSubmit Hook
+Keywords detected: save, context
+Recommended: save-context (HIGH), git-commit (MEDIUM)
+
+[2025-11-08 17:42:15] PostToolUse Hook
+File: src/javascript/form.js
+Quality checks: ASYNC, FORM, INITIALIZATION
+```
+
+**Maintenance**:
+- Log file grows over time with session history
+- Can be safely deleted to reset (regenerates automatically)
+- Not tracked in git (add to .gitignore if needed)
 
 ---
 
@@ -386,6 +475,14 @@ User Action
 
 ## Version History
 
+### v1.0.1 (2025-11-08)
+- ✅ Added output-helpers.sh shared library for standardized formatting
+- ✅ Implemented file-based logging system (skill-recommendations.log)
+- ✅ Silenced all hook output to prevent verbose console messages
+- ✅ Removed test suite after successful validation
+- ✅ Updated documentation to reflect current hook structure
+- ✅ Added logs directory documentation
+
 ### v1.0.0 (2025-11-08)
 - ✅ Created new hook directory structure
 - ✅ Implemented SessionEnd auto-save hook
@@ -403,7 +500,3 @@ User Action
 - [save-context Skill](../.claude/skills/save-context/SKILL.md)
 - [Skill Rules Configuration](../.claude/configs/skill-rules.json)
 - [Claude Code Documentation](https://code.claude.com/docs/en/hooks.md)
-
----
-
-**End of Documentation**

@@ -10,14 +10,22 @@
 # Last Updated: 2025-11-08
 # ───────────────────────────────────────────────────────────────
 
+# Source output helpers (completely silent on success)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"
+source "$SCRIPT_DIR/../lib/output-helpers.sh" || exit 0
+
+# Check dependencies (silent on success)
+check_dependency "jq" "brew install jq (macOS) or apt install jq (Linux)" || exit 0
+check_dependency "node" "Install from https://nodejs.org/" || exit 0
+
 # Read JSON input from stdin
 INPUT=$(cat)
 
-# Extract hook data
-SESSION_ID=$(echo "$INPUT" | jq -r '.session_id // empty')
-TRANSCRIPT_PATH=$(echo "$INPUT" | jq -r '.transcript_path // empty')
-REASON=$(echo "$INPUT" | jq -r '.reason // empty')
-CWD=$(echo "$INPUT" | jq -r '.cwd // empty')
+# Extract hook data (silent on error)
+SESSION_ID=$(echo "$INPUT" | jq -r '.session_id // empty' 2>/dev/null)
+TRANSCRIPT_PATH=$(echo "$INPUT" | jq -r '.transcript_path // empty' 2>/dev/null)
+REASON=$(echo "$INPUT" | jq -r '.reason // empty' 2>/dev/null)
+CWD=$(echo "$INPUT" | jq -r '.cwd // empty' 2>/dev/null)
 
 # Debug logging (uncomment for troubleshooting)
 # echo "DEBUG: SessionEnd triggered" >&2
@@ -98,7 +106,7 @@ if [ ! -f "$TRANSFORMER" ]; then
 fi
 
 # Run transformation
-echo "🔄 Transforming transcript data..." >&2
+print_message "PROCESS" "Transforming transcript data..."
 
 node "$TRANSFORMER" "$TRANSCRIPT_PATH" "$TEMP_JSON" 2>&1
 
@@ -129,8 +137,8 @@ if [ ! -f "$SAVE_CONTEXT_SCRIPT" ]; then
 fi
 
 # Execute save-context script
-echo "💾 Auto-saving context to: $SPEC_FOLDER_NAME/context/" >&2
-echo "" >&2
+print_message "SAVE" "Auto-saving context to: $SPEC_FOLDER_NAME/context/"
+print_line
 
 # Run with automatic overwrite (no interactive prompt)
 echo "O" | node "$SAVE_CONTEXT_SCRIPT" "$TEMP_JSON" 2>&1
@@ -141,16 +149,15 @@ EXIT_CODE=$?
 rm -f "$TEMP_JSON"
 
 # Report result
+print_line
 if [ $EXIT_CODE -eq 0 ]; then
-  echo "" >&2
-  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >&2
-  echo "✅ Context saved successfully!" >&2
-  echo "   Location: $SPEC_FOLDER_NAME/context/" >&2
-  echo "   Trigger: Session ended ($REASON)" >&2
-  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >&2
+  print_separator
+  print_message "SUCCESS" "Context saved successfully!"
+  print_detail "Location: $SPEC_FOLDER_NAME/context/"
+  print_detail "Trigger: Session ended ($REASON)"
+  print_separator
 else
-  echo "" >&2
-  echo "⚠️  save-context script exited with code $EXIT_CODE" >&2
+  print_message "WARN" "save-context script exited with code $EXIT_CODE"
 fi
 
 # Always exit with success to not block session end

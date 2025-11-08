@@ -10,17 +10,25 @@
 # Last Updated: 2025-11-08
 # ───────────────────────────────────────────────────────────────
 
+# Source output helpers (completely silent on success)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"
+source "$SCRIPT_DIR/../lib/output-helpers.sh" || exit 0
+
+# Check dependencies (silent on success)
+check_dependency "jq" "brew install jq (macOS) or apt install jq (Linux)" || exit 0
+check_dependency "node" "Install from https://nodejs.org/" || exit 0
+
 # Read JSON input from stdin
 INPUT=$(cat)
 
-# Extract the prompt from JSON
-PROMPT=$(echo "$INPUT" | jq -r '.prompt // empty')
+# Extract the prompt from JSON (silent on error)
+PROMPT=$(echo "$INPUT" | jq -r '.prompt // empty' 2>/dev/null)
 
-# Extract session metadata
-SESSION_ID=$(echo "$INPUT" | jq -r '.session_id // empty')
-CWD=$(echo "$INPUT" | jq -r '.cwd // empty')
+# Extract session metadata (silent on error)
+SESSION_ID=$(echo "$INPUT" | jq -r '.session_id // empty' 2>/dev/null)
+CWD=$(echo "$INPUT" | jq -r '.cwd // empty' 2>/dev/null)
 
-# If no prompt found, allow it
+# If no prompt found, allow it silently
 if [ -z "$PROMPT" ]; then
   exit 0
 fi
@@ -78,8 +86,7 @@ fi
 
 # Construct transcript path from session ID
 if [ -z "$SESSION_ID" ]; then
-  echo "⚠️  No session ID available - cannot locate transcript" >&2
-  exit 0
+  exit 0  # Silently exit
 fi
 
 # Try to find transcript in standard location
@@ -90,16 +97,12 @@ TRANSCRIPT_DIR="$HOME/.claude/projects/$PROJECT_SLUG"
 TRANSCRIPT_PATH=$(find "$TRANSCRIPT_DIR" -name "${SESSION_ID}.jsonl" 2>/dev/null | head -1)
 
 if [ -z "$TRANSCRIPT_PATH" ] || [ ! -f "$TRANSCRIPT_PATH" ]; then
-  echo "⚠️  Transcript not found for session: $SESSION_ID" >&2
-  echo "    Expected location: $TRANSCRIPT_DIR/" >&2
-  exit 0
+  exit 0  # Silently exit
 fi
 
 # Check if project has specs/ folder
 if [ ! -d "$CWD/specs" ]; then
-  echo "⚠️  No specs/ folder found in project" >&2
-  echo "    Create one first: mkdir -p specs/###-topic-name" >&2
-  exit 0
+  exit 0  # Silently exit
 fi
 
 # ───────────────────────────────────────────────────────────────
@@ -110,9 +113,7 @@ fi
 SPEC_FOLDER=$(find "$CWD/specs" -maxdepth 1 -type d -name "[0-9][0-9][0-9]-*" 2>/dev/null | sort -r | head -1)
 
 if [ -z "$SPEC_FOLDER" ]; then
-  echo "⚠️  No spec folder (###-name) found in $CWD/specs/" >&2
-  echo "    Create a spec folder first: mkdir -p specs/###-topic-name" >&2
-  exit 0
+  exit 0  # Silently exit
 fi
 
 SPEC_FOLDER_NAME=$(basename "$SPEC_FOLDER")
@@ -133,66 +134,61 @@ HOOK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TRANSFORMER="$HOOK_DIR/../lib/transform-transcript.js"
 
 if [ ! -f "$TRANSFORMER" ]; then
-  echo "❌ Transformer script not found: $TRANSFORMER" >&2
-  exit 0
+  exit 0  # Silently exit
 fi
 
-# Notify user that auto-save is triggered
-echo "" >&2
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >&2
-echo "🚀 AUTO-SAVE TRIGGERED" >&2
-echo "   Keyword detected: '$MATCHED_KEYWORD'" >&2
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >&2
-echo "" >&2
-
-# Transform transcript
-echo "🔄 Transforming transcript data..." >&2
-node "$TRANSFORMER" "$TRANSCRIPT_PATH" "$TEMP_JSON" 2>&1
+# Transform transcript (silently)
+node "$TRANSFORMER" "$TRANSCRIPT_PATH" "$TEMP_JSON" >/dev/null 2>&1
 
 if [ ! -f "$TEMP_JSON" ]; then
-  echo "❌ Transformation failed" >&2
-  exit 0
+  exit 0  # Silently exit
 fi
 
 # Change to project directory
 cd "$CWD" || {
-  echo "❌ Failed to change to project directory" >&2
   rm -f "$TEMP_JSON"
-  exit 0
+  exit 0  # Silently exit
 }
 
 # Check if save-context skill exists
 SAVE_CONTEXT_SCRIPT="$CWD/.claude/skills/save-context/scripts/generate-context.js"
 
 if [ ! -f "$SAVE_CONTEXT_SCRIPT" ]; then
-  echo "❌ save-context skill not found" >&2
   rm -f "$TEMP_JSON"
-  exit 0
+  exit 0  # Silently exit
 fi
 
-# Execute save-context script
-echo "💾 Saving context to: $SPEC_FOLDER_NAME/context/" >&2
-echo "" >&2
-
-# Run with automatic overwrite
-echo "O" | node "$SAVE_CONTEXT_SCRIPT" "$TEMP_JSON" 2>&1
-
+# Execute save-context script (silently)
+echo "O" | node "$SAVE_CONTEXT_SCRIPT" "$TEMP_JSON" >/dev/null 2>&1
 EXIT_CODE=$?
 
 # Clean up
 rm -f "$TEMP_JSON"
 
-# Report result
-if [ $EXIT_CODE -eq 0 ]; then
-  echo "" >&2
-  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >&2
-  echo "✅ Context saved successfully!" >&2
-  echo "   Location: $SPEC_FOLDER_NAME/context/" >&2
-  echo "   Trigger: Keyword ('$MATCHED_KEYWORD')" >&2
-  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" >&2
-else
-  echo "⚠️  Save completed with warnings (exit code: $EXIT_CODE)" >&2
-fi
+# Log result to file
+LOG_DIR="$SCRIPT_DIR/../logs"
+mkdir -p "$LOG_DIR"
+LOG_FILE="$LOG_DIR/auto-save-context.log"
 
-# Allow prompt to proceed to Claude
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+
+{
+  echo ""
+  echo "═══════════════════════════════════════════════════════════════"
+  echo "[$TIMESTAMP] AUTO-SAVE TRIGGERED"
+  echo "───────────────────────────────────────────────────────────────"
+  echo "Keyword: '$MATCHED_KEYWORD'"
+  echo "Session: $SESSION_ID"
+  echo "Target: $SPEC_FOLDER_NAME/context/"
+  echo "Exit Code: $EXIT_CODE"
+  if [ $EXIT_CODE -eq 0 ]; then
+    echo "Status: ✅ Success"
+  else
+    echo "Status: ⚠️  Completed with warnings"
+  fi
+  echo "═══════════════════════════════════════════════════════════════"
+  echo ""
+} >> "$LOG_FILE"
+
+# Allow prompt to proceed to Claude (silently)
 exit 0

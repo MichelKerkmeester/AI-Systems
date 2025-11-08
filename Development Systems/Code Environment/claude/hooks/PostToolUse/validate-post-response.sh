@@ -6,17 +6,23 @@
 # Runs after tools are used and provides gentle self-check
 # Reminders based on file edits and code patterns
 
+# Source output helpers (completely silent on success)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"
+source "$SCRIPT_DIR/../lib/output-helpers.sh" || exit 0
+
+# Check dependencies (silent on success)
+check_dependency "jq" "brew install jq (macOS) or apt install jq (Linux)" || exit 0
 
 # Read JSON input from stdin
 INPUT=$(cat)
 
-# Extract tool information from the input
+# Extract tool information from the input (silent on error)
 TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name // .toolName // empty' 2>/dev/null)
 
 # Only process file editing tools
 case "$TOOL_NAME" in
   "Edit"|"Write"|"NotebookEdit"|"replace_string_in_file"|"create_file"|"edit_notebook_file")
-    # Extract file path from tool input
+    # Extract file path from tool input (silent on error)
     FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.filePath // .tool_input.file_path // .tool_input.path // .tool_input.notebook_path // empty' 2>/dev/null)
 
     if [ -z "$FILE_PATH" ]; then
@@ -119,7 +125,7 @@ if [ ${#TRIGGERED_REMINDERS[@]} -gt 0 ]; then
   TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
   LOG_ENTRY="[$TIMESTAMP] File: $FILE_PATH"
 
-  # Write to log file
+  # Write to log file (no stderr output)
   {
     echo ""
     echo "═══════════════════════════════════════════════════════════════"
@@ -132,21 +138,7 @@ if [ ${#TRIGGERED_REMINDERS[@]} -gt 0 ]; then
     echo "═══════════════════════════════════════════════════════════════"
     echo ""
   } >> "$LOG_FILE"
-
-  # Also output to stderr (original behavior)
-  echo "" >&2
-  echo "───────────────────────────────────────────────────────────────" >&2
-  echo "QUALITY CHECK REMINDERS" >&2
-  echo "" >&2
-
-  for reminder in "${TRIGGERED_REMINDERS[@]}"; do
-    echo "$reminder" >&2
-    echo "" >&2
-  done
-
-  echo "───────────────────────────────────────────────────────────────" >&2
-  echo "💾 Logged to: $LOG_FILE" >&2
 fi
 
-# Always allow (non-blocking)
+# Always allow silently (non-blocking)
 exit 0

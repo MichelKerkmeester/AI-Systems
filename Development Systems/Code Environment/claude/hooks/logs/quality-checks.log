@@ -1,0 +1,32 @@
+
+═══════════════════════════════════════════════════════════════
+[2025-11-08 18:05:56] File: /Users/michelkerkmeester/MEGA/Websites/anobel.com/src/html/global.html
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See knowledge/conversation_documentation.md for full requirements
+
+═══════════════════════════════════════════════════════════════
+
