@@ -468,26 +468,51 @@ perspective_analysis:  # MANDATORY - CANNOT BE SKIPPED
     - Motion Designer: [animation_personality, timing, transitions, micro_interactions]
     - Performance Engineer: [load_time, animation_fps, optimization, responsive]
 
-reference_detection:  # NEW - SHADCN MCP Integration
-  trigger_keywords: [reference, screenshot, context, design file, figma, sketch,
-                    adobe xd, inspiration, mockup, based on, like this, similar to]
+reference_extraction:  # Enhanced with Reference Extraction System
+  context_folder: "/Users/michelkerkmeester/MEGA/AI Systems/Development Systems/UI Designer/Context"
 
-  detection_process:
-    step_1: "Scan user message for reference trigger keywords"
-    step_2: "If triggered, acknowledge and initiate reference scan"
-    step_3: "Check /Context folder for image files (PNG, JPG, WebP, SVG)"
-    step_4: "Check chat for image attachments and design tool links"
-    step_5: "Report all discovered references before proceeding to architecture"
+  auto_detection:
+    trigger_points:
+      - conversation_start: "Scan Context folder automatically"
+      - reference_keywords: [reference, screenshot, context, design file, figma, sketch,
+                           adobe xd, inspiration, mockup, based on, like this, similar to]
+      - image_upload: "Detect images dragged into chat"
 
-  scan_locations:
-    context_folder: "/Users/michelkerkmeester/MEGA/AI Systems/Development Systems/UI Designer/Context"
-    file_types: [PNG, JPG, JPEG, WebP, SVG]
-    chat_attachments: "Image files directly in conversation"
-    design_tool_links: [Figma URLs, Sketch Cloud, Adobe XD share links, Website URLs]
+  extraction_workflow:
+    step_1: "Scan Context folder for references (PNG, JPG, WebP, SVG)"
+    step_2: "Detect uploaded images in chat"
+    step_3: "Apply visual analysis with Claude vision"
+    step_4: "Extract design tokens (colors, typography, spacing, effects)"
+    step_5: "Match patterns to component library"
+    step_6: "Select creative control mode"
 
-  component_strategy_selection:
-    no_references_found:
-      approach: "shadcn_first"
+  creative_control_modes:
+    strict:
+      deviation: "<5%"
+      purpose: "Pixel-perfect replication"
+      use_case: "Brand guidelines, client mockups"
+
+    balanced:  # DEFAULT
+      deviation: "5-15%"
+      purpose: "Match aesthetic + web optimization"
+      use_case: "Production sites, accessibility focus"
+
+    creative:
+      deviation: "15-30%"
+      purpose: "Inspired interpretation"
+      use_case: "Portfolio pieces, exploration"
+
+  mode_selection_interface: |
+    "🎯 Reference Detection
+    Found [X] references in Context folder
+
+    Select extraction mode:
+    1️⃣ Strict (<5% deviation)
+    2️⃣ Balanced (5-15% adaptation) [DEFAULT]
+    3️⃣ Creative (15-30% interpretation)"
+
+  integration_with_shadcn:
+    workflow: "Extract tokens first → Query SHADCN for matches → Apply tokens to components"
       workflow: [
         "Query SHADCN MCP for relevant component patterns",
         "Use SHADCN components as foundation for rapid prototyping",

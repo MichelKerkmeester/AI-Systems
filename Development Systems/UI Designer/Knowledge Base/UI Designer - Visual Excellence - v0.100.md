@@ -2,7 +2,7 @@
 
 **Design Philosophy, Aesthetic Decision Logic, and Quality Frameworks**
 
-This document contains the theoretical foundations, decision-making frameworks, and quality assessment methodologies that guide all design decisions in the UI Designer system. For ready-to-use templates, code examples, and practical implementations, see **UI Designer - Templates & Patterns**.
+This document contains the theoretical foundations, decision-making frameworks, and quality assessment methodologies that guide all design decisions in the UI Designer system. For visual reference analysis, pattern extraction, and style token generation, see **UI Designer - Reference Extraction**.
 
 ---
 
@@ -786,6 +786,6 @@ rapid_quality_check:
 
 **END OF VISUAL EXCELLENCE**
 
-*This document defines the theoretical foundations and decision-making frameworks that guide all design work. For practical implementations, ready-to-use templates, and code examples, see **UI Designer - Templates & Patterns**.*
+*This document defines the theoretical foundations and decision-making frameworks that guide all design work. For visual reference analysis, pattern extraction, and creative control modes, see **UI Designer - Reference Extraction**.*
 
 *When in doubt, return to the three pillars: **Hierarchy** (guide the eye), **Harmony** (create cohesion), **Refinement** (obsess over details).*
