@@ -2,13 +2,15 @@
 
 Provides persistent memory across Claude Code sessions through automatic context capture, AI-powered compression, and intelligent retrieval. Seven specialized search tools enable querying historical observations, summaries, and decisions.
 
+**Github**: https://github.com/thedotmack/claude-mem
+
 ---
 
 ## 1. 🎯 CORE FEATURES
 
 ### Automatic Context Injection
 
-Context from the previous 10 sessions appears automatically at session start. No manual retrieval needed.
+Context from the previous sessions appears automatically at session start. No manual retrieval needed.
 
 ```
 # [claude-mem] recent context
@@ -20,7 +22,7 @@ Context from the previous 10 sessions appears automatically at session start. No
 
 Worker service continuously processes observations in the background:
 - Compresses raw observations into searchable summaries
-- Uses Claude Sonnet 4.5 for intelligent context extraction
+- Uses Claude Haiki or Sonnet 4.5 for intelligent context extraction
 - Stores in SQLite database with FTS5 full-text indexing
 - Generates layered information: Index → Details → Full recall
 
@@ -499,8 +501,4 @@ npx pm2 save
 **Disable auto-start:**
 ```bash
 npx pm2 unstartup launchd
-```
-
----
-
-**Reference**: GitHub: https://github.com/thedotmack/claude-mem
+``

@@ -9,6 +9,7 @@ Follow these conventions to ensure documentation remains accessible, maintainabl
 ## 1. 📄 DOCUMENT STRUCTURE
 
 ### Standard Layout
+
 ```markdown
 # Title - Descriptive Subtitle
 
@@ -31,6 +32,31 @@ Content here...
 - Use three dashes (`---`) on its own line between major sections
 - Creates visual breathing room without cluttering
 - Place before and after section breaks
+
+### File Naming Convention
+**Markdown files MUST follow these naming rules:**
+- **Use lowercase snake_case**: `document_name.md`, `api_reference.md`, `user_guide.md`
+- **Never use ALL CAPS**: ❌ `SUMMARY.md`, ❌ `CHANGELOG.md`, ❌ `LICENSE.md`
+- **Exception**: ✅ `README.md` is the ONLY allowed ALL CAPS filename
+- **Use descriptive names**: `animation_libraries.md` instead of `anim.md`
+- **Separate words with underscores**: `document_style_guide.md` not `documentstyleguide.md`
+
+**Examples:**
+```
+✅ CORRECT:
+- README.md (exception allowed)
+- document_style_guide.md
+- knowledge_base.md
+- save_context_skill.md
+- api_reference.md
+
+❌ WRONG:
+- SUMMARY.md
+- CHANGELOG.md
+- DocumentStyleGuide.md
+- document-style-guide.md
+- documentStyleGuide.md
+```
 
 ---
 
