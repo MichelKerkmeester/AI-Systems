@@ -1,7 +1,7 @@
 ---
 name: markdown-flowchart
 description: Create comprehensive ASCII flowcharts in markdown for visualizing complex workflows, user journeys, system architectures, and decision trees. Supports multi-path flows, parallel execution, approval gates, and nested processes with clear visual hierarchy.
-license: MIT
+allowed-tools: Read, Write, Edit
 ---
 
 # Markdown Flowchart - Workflow & Process Visualization

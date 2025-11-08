@@ -333,6 +333,63 @@
         ]
       }
     },
+    "save-context": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Save conversation context when completing features or architectural discussions. Preserves full dialogue, decision rationale, visual flowcharts, and file changes for team sharing.",
+      "promptTriggers": {
+        "keywords": [
+          "save context",
+          "save conversation",
+          "save session",
+          "export conversation",
+          "preserve context",
+          "document conversation",
+          "capture context",
+          "conversation history",
+          "session history",
+          "context export",
+          "conversation export",
+          "save discussion",
+          "preserve dialogue",
+          "document session",
+          "save chat",
+          "export context",
+          "ultrathink",
+          "save memory",
+          "preserve memory",
+          "conversation documentation",
+          "session documentation",
+          "document this",
+          "record this",
+          "write this down",
+          "store this",
+          "backup conversation"
+        ],
+        "intentPatterns": [
+          "(save|export|preserve|capture|document).*?(context|conversation|session|discussion|dialogue|chat)",
+          "(save|export|preserve).*?(this|the|current).*?(context|conversation|session)",
+          "(document|capture|record).*?(what we (discussed|talked about|did))",
+          "(keep|store|save).*?(conversation|discussion|session).*?(history|record)",
+          "(export|save).*?(expanded|full|complete).*?(context|conversation)",
+          "(want|need).*?(save|export|preserve).*?(context|conversation)",
+          "ultrathink"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          ".claude/skills/save-context/**",
+          "specs/**/context/**"
+        ],
+        "contentPatterns": [
+          "save-context",
+          "generate-context.js",
+          "conversation-flow.md",
+          "decisions.md"
+        ]
+      }
+    },
     "webflow-platform-constraints": {
       "type": "knowledge",
       "enforcement": "suggest",

@@ -1,0 +1,8 @@
+{
+  "maxResultPreview": 500,
+  "maxConversationMessages": 100,
+  "maxToolOutputLines": 100,
+  "messageTimeWindow": 300000,
+  "contextPreviewHeadLines": 50,
+  "contextPreviewTailLines": 20
+}

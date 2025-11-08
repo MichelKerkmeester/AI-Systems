@@ -18,9 +18,10 @@ if [ -z "$COMMAND" ]; then
   exit 0
 fi
 
-# Define whitelisted patterns (always allow these)
+# Define whitelisted patterns (always allow these specific paths)
 WHITELISTED_PATTERNS=(
-  "\.claude/logs/"
+  "\.claude/logs/"       # Allow reading hook/skill logs
+  "\.claude/configs/"    # Allow reading configuration files
 )
 
 # Check if command matches any whitelisted patterns
@@ -30,21 +31,47 @@ for pattern in "${WHITELISTED_PATTERNS[@]}"; do
   fi
 done
 
-# Define forbidden patterns
+# Define forbidden patterns (security + performance)
 FORBIDDEN_PATTERNS=(
+  # Large directories (performance)
   "node_modules"
   "frontend/node_modules"
-  # "pipelines/data"
-  "\.env"
+  "__pycache__"
   "build/"
   "dist/"
-  # "data/"
-  "__pycache__"
-  "\.git/"
   "venv/"
+
+  # Binary/data files (performance)
   "\.pyc$"
   "\.csv$"
   "\.log$"
+
+  # Sensitive files (security)
+  "\.env"
+  "\.git/config"
+  "\.git/objects"
+  "\.ssh/"
+  "\.aws/"
+  "\.pem$"
+  "\.key$"
+  "id_rsa"
+  "credentials\.json"
+  "secrets\."
+  "password"
+
+  # Dangerous commands (security)
+  "rm -rf /"
+  "rm -rf \*"
+  ":(){:\|:&};:"
+  "chmod 777"
+  "chmod -R 777"
+  "sudo rm"
+  "curl.*\|.*sh"
+  "wget.*\|.*sh"
+  "eval "
+  "> /etc/"
+  "dd if=/dev/zero"
+  "mkfs\."
 )
 
 # Check if command contains any forbidden patterns

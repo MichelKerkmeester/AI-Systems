@@ -31,7 +31,7 @@ esac
 
 # Load risk patterns configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SKILL_RULES="$SCRIPT_DIR/skill-rules.json"
+SKILL_RULES="$(cd "$SCRIPT_DIR/../.." && pwd)/configs/skill-rules.json"
 
 if [ ! -f "$SKILL_RULES" ]; then
   # No rules file, silently exit
