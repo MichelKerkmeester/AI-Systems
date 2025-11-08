@@ -2,7 +2,7 @@
 
 > Capture comprehensive conversation context with intelligent summaries, visual flowcharts, and decision documentation.
 
-**Version**: 1.1.0
+**Version**: 1.2.0
 **License**: Apache-2.0
 **Node.js**: v18+ required
 **Dependencies**: None (Node.js built-in modules only)
@@ -543,15 +543,27 @@ cd specs/###-topic-name
 Skill(skill: "save-context")
 ```
 
-#### Issue: "Context folder already exists"
+#### Issue: Context alignment score low
 
-**Cause**: Previous context output exists for this spec
+**Cause**: Conversation topics don't match the most recent spec folder name
 
-**Solution**: Choose one of three options when prompted:
+**Behavior**: When alignment < 70%, skill prompts you to select the correct folder
 
-- **(O)verwrite**: Replaces existing context (recommended for updates)
-- **(V)ersion**: Creates timestamped backup before overwriting
-- **(A)bort**: Cancels skill execution
+**Example**:
+```
+⚠️  Conversation topic may not align with most recent spec folder
+Most recent: 020-page-loader (25% match)
+
+Alternative spec folders:
+1. 018-auth-improvements (85% match)
+2. 017-authentication-refactor (90% match)
+3. 020-page-loader (25% match)
+4. Specify custom folder path
+
+Select target folder (1-4): 2
+```
+
+**Solution**: Select the folder that best matches your conversation topic, or choose option 4 to specify a custom path.
 
 #### Issue: "Warning: No user prompts captured"
 
@@ -665,8 +677,13 @@ The output template (`context.template.md`) uses these placeholders:
 **`main(collectedData)`**
 Entry point. Orchestrates entire skill execution.
 
-**`detectSpecFolder()`**
-Finds most recent `specs/###-name/` folder.
+**`detectSpecFolder(collectedData = null)`**
+Finds most recent `specs/###-name/` folder with intelligent alignment checking.
+
+- If `collectedData` provided: Calculates alignment score between conversation topics and folder name
+- If alignment < 70%: Prompts user to select correct folder
+- If `AUTO_SAVE_MODE=true`: Skips alignment check (used by hooks)
+- Automatically filters out archive folders (`z_*`, `*archive*`, `old*`)
 
 **`collectSessionData(collectedData, specFolderName)`**
 Extracts session metadata (date, folder, counts).
@@ -882,15 +899,25 @@ Yes! The skill has **zero external dependencies**. All processing is local using
 - `readline` - User input
 - `process` - Environment access
 
-### How do I version the output files?
+### How does the single context folder work?
 
-When the skill detects existing context, you have 3 options:
+The skill uses a **single `context/` folder** with **timestamped markdown files**. Each save creates a new file:
 
-1. **(O)verwrite**: Replace existing file
-2. **(V)ersion**: Create backup as `{filename}.v1.md`, `{filename}.v2.md`, etc.
-3. **(A)bort**: Cancel execution
+**File naming**: `{date}_{time}__{topic}.md`
 
-For team workflows, use versioning to preserve history.
+**Example**:
+```
+specs/020-skill-refinement/context/
+├── 2025-11-08_18-07-42__skill-refinement.md
+├── 2025-11-08_18-37-02__skill-refinement.md  ← New saves add files
+└── metadata.json
+```
+
+**Benefits**:
+- No conflicts - each save creates unique file
+- Preserves history automatically
+- No prompts for overwrite/version/abort
+- Easy to compare different sessions
 
 ### Can I run this outside of a spec folder?
 
@@ -950,6 +977,29 @@ limitations under the License.
 ---
 
 ## Changelog
+
+### v1.2.0 (2025-11-08)
+
+**New Features**:
+- **Context Alignment**: Intelligent folder detection with 70% threshold
+  - Extracts conversation topics from request and observations
+  - Calculates alignment score with spec folder names
+  - Prompts user when alignment < 70% to select correct folder
+  - Shows top 5 alternatives sorted by match percentage
+- **Archive Filtering**: Automatically excludes `z_*`, `*archive*`, `old*` folders
+- **Single Context Folder**: No more versioning - uses timestamped files
+  - Format: `{date}_{time}__{topic}.md`
+  - No prompts for overwrite/version/abort
+  - Preserves history automatically
+- **Auto-Save Mode**: `AUTO_SAVE_MODE=true` for hook integration
+  - Bypasses alignment prompts for automated saves
+  - Used by SessionEnd and UserPromptSubmit hooks
+
+**Improvements**:
+- Removed `createVersionedPath()` function (no longer needed)
+- Simplified `setupContextDirectory()` - just ensures folder exists
+- Updated `detectSpecFolder()` to accept `collectedData` parameter
+- Enhanced hooks to use `AUTO_SAVE_MODE` instead of stdin piping
 
 ### v1.1.0 (2025-11-08)
 

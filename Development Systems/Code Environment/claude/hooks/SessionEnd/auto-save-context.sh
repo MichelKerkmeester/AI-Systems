@@ -140,8 +140,8 @@ fi
 print_message "SAVE" "Auto-saving context to: $SPEC_FOLDER_NAME/context/"
 print_line
 
-# Run with automatic overwrite (no interactive prompt)
-echo "O" | node "$SAVE_CONTEXT_SCRIPT" "$TEMP_JSON" 2>&1
+# Run in auto-save mode (bypasses alignment prompts, uses single context/ folder)
+AUTO_SAVE_MODE=true node "$SAVE_CONTEXT_SCRIPT" "$TEMP_JSON" 2>&1
 
 EXIT_CODE=$?
 

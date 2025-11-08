@@ -1,6 +1,6 @@
 ---
 name: markdown-flowchart
-description: Create comprehensive ASCII flowcharts in markdown for visualizing complex workflows, user journeys, system architectures, and decision trees. Supports multi-path flows, parallel execution, approval gates, and nested processes with clear visual hierarchy.
+description: This skill creates comprehensive ASCII flowcharts in markdown for visualizing complex workflows, user journeys, system architectures, and decision trees. This skill should be used when documenting processes with multi-path flows, parallel execution, approval gates, and nested processes with clear visual hierarchy.
 allowed-tools: Read, Write, Edit
 ---
 
@@ -238,10 +238,10 @@ This skill enables creation of professional ASCII flowcharts using standardized 
 └────────────────────┘
          │
          ▼
-╔════════════════════╗
-║  ⚠️  APPROVAL GATE  ║
-║  Review Required   ║
-╚════════════════════╝
+┌────────────────────┐
+│ ⚠️  APPROVAL GATE  │
+│  Review Required   │
+└────────────────────┘
     │         │
  Approve   Reject
     │         │
@@ -314,14 +314,7 @@ This skill enables creation of professional ASCII flowcharts using standardized 
 └─────────────────────┘
 ```
 
-**Important/Highlight Box**:
-```
-╔═════════════════════╗
-║  Important Step     ║
-╚═════════════════════╝
-```
-
-**Rounded Terminal Box**:
+**Rounded Terminal Box** (Start/End):
 ```
 ╭─────────────────────╮
 │    Start/End        │
@@ -332,6 +325,8 @@ This skill enables creation of professional ASCII flowcharts using standardized 
 ```
 [ Quick Action ]
 ```
+
+**Note**: Use emoji (⚠️, ✅, 🔒) within standard boxes to indicate importance/special status rather than changing box style.
 
 ### Arrow Styles
 
@@ -551,7 +546,7 @@ This skill includes comprehensive reference examples in the `references/` direct
 | Review cycles | approval-workflow-loops.md | Loops, escalation, iterations |
 | System architecture | system-architecture-swimlane.md | Layers, components, data flow |
 
-### Inline Example: Simple Decision Flow### Inline Example: Simple Decision Flow
+### Inline Example: Simple Decision Flow
 
 ```
 ┌──────────────────┐
@@ -575,111 +570,24 @@ This skill includes comprehensive reference examples in the `references/` direct
 ```
 
 **For complete, production-ready examples**, see the `references/` directory which contains 6 beautifully crafted flowcharts demonstrating all patterns and techniques from this skill.
-```
-            ▼                     ▼
-      ╱──────────╲          ╱──────────╲
-     ╱  Approved? ╲        ╱  Revision? ╲
-     ╲            ╱        ╲            ╱
-      ╲──────────╱          ╲──────────╱
-            │                     │
-         Approved             Revision
-            │                     │
-            ▼                     ▼
-      ╱──────────╲          ╱──────────╲
-     ╱  No       ╲        ╱  No        ╲
-     ╲  Response ╱        ╲  Response  ╱
-      ╲──────────╱          ╲──────────╱
-            │                     │
-            │                     │
-            └──────────┬──────────┘
-                       │
-     ┌─────────────────┼─────────────────┐
-     │                 │                 │
-     ▼                 ▼                 ▼
-┌─────────┐    ┌──────────────┐    ┌─────────┐
-│Publishing│    │  Implement   │    │  Send   │
-│  Queue   │    │  Revisions   │    │Reminders│
-└─────────┘    └──────────────┘    └─────────┘
-     │                 │                 │
-     │                 │                 │
-     │                 └────┐    ┌───────┘
-     │                      │    │
-     │                  Loop back│
-     │                      │    │
-     ▼                      ▼    ▼
-┌─────────┐          ┌──────────────┐
-│Schedule │          │     Past     │
-│  Posts  │          │  Deadline?   │
-└─────────┘          └──────────────┘
-     │                      │
-     │                      ▼
-     │              ┌──────────────┐
-     │              │   Escalate   │
-     │              │    to AM     │
-     │              └──────────────┘
-     │
-     ▼
-╭──────────────────────────────────╮
-│      Content Published           │
-╰──────────────────────────────────╯
-```
 
 ---
 
 ## 8. ⚠️ COMMON MISTAKES
 
-### Mistake 1: Inconsistent Spacing
+### Inconsistent Spacing
+Makes flow hard to follow. Use consistent spacing between all elements (single blank line for simple steps, double for major sections).
 
-**Problem**: Makes flow hard to follow visually
+### Ambiguous Arrows
+Unclear connections create confusion. Always align arrows clearly and merge paths explicitly when multiple boxes lead to one destination.
+
 **Example**:
-```
-┌────┐
-│Step│
-└────┘
-│
-▼
-┌────┐
-
-│Step│
-
-
-└────┘
-```
-
-**Fix**: Use consistent spacing between elements
-```
-┌────────┐
-│  Step  │
-└────────┘
-     │
-     ▼
-┌────────┐
-│  Step  │
-└────────┘
-```
-
-### Mistake 2: Ambiguous Arrows
-
-**Problem**: Unclear which box arrow connects to
-**Example**:
-```
-┌────┐     ┌────┐
-│ A  │     │ B  │
-└────┘     └────┘
-    │
-    ▼
-┌────┐
-│ C  │  (Does arrow come from A or B?)
-└────┘
-```
-
-**Fix**: Align arrows clearly
 ```
 ┌────┐     ┌────┐
 │ A  │     │ B  │
 └────┘     └────┘
   │           │
-  └─────┬─────┘
+  └─────┬─────┘  ← Explicit merge
         │
         ▼
     ┌────┐
@@ -687,71 +595,13 @@ This skill includes comprehensive reference examples in the `references/` direct
     └────┘
 ```
 
-### Mistake 3: Missing Decision Outcomes
+### Missing Decision Outcomes
+Every decision branch must show all possible outcomes. Don't leave paths unlabeled or assume they're obvious.
 
-**Problem**: Not all paths from decision are shown
-**Example**:
-```
-    ╱────────╲
-   ╱ Valid?   ╲
-   ╲          ╱
-    ╲────────╱
-        │
-       Yes
-        │
-        ▼
-    (What about No?)
-```
-
-**Fix**: Show all outcomes
-```
-    ╱────────╲
-   ╱ Valid?   ╲
-   ╲          ╱
-    ╲────────╱
-      │    │
-     Yes   No
-      │    │
-      ▼    ▼
-```
-
-### Mistake 4: Orphaned Processes
-
-**Problem**: Boxes with no entry or exit points
-
-**Fix**: Ensure every box connects to the flow
-
-### Mistake 5: Over-Complexity
-
-**Problem**: Trying to show too much detail in one diagram
-
-**Fix**: Break into multiple diagrams or use nested sub-processes
-
-### Mistake 6: Poor Box Alignment
-
-**Problem**: Boxes don't line up, creating visual chaos
-```
-┌────────┐
-│  Step  │
-└────────┘
-    │
-    ▼
-  ┌────────┐
-  │  Step  │
-  └────────┘
-```
-
-**Fix**: Align vertically or horizontally
-```
-┌────────┐
-│  Step  │
-└────────┘
-    │
-    ▼
-┌────────┐
-│  Step  │
-└────────┘
-```
+### Other Critical Errors to Avoid
+- **Orphaned processes**: Every box must have entry and exit points
+- **Over-complexity**: Break diagrams with >40 boxes into multiple views
+- **Poor alignment**: Maintain vertical/horizontal alignment throughout
 
 ---
 
@@ -759,12 +609,12 @@ This skill includes comprehensive reference examples in the `references/` direct
 
 ### ALWAYS
 
-- Use consistent box styles throughout diagram
+- Use consistent box styles throughout diagram (standard single-line boxes only)
 - Align elements vertically or horizontally
 - Label all decision branches clearly
 - Show complete paths from start to end
 - Include context/timing when relevant
-- Use visual hierarchy (size, style) for importance
+- Use emoji within boxes for importance (⚠️, ✅, 🔒)
 - Test readability at different zoom levels
 - Validate all paths lead to logical conclusions
 
@@ -814,134 +664,15 @@ This skill includes comprehensive reference examples in the `references/` direct
 
 ## 11. 🔧 ADVANCED TECHNIQUES
 
-### Multi-Column Layouts
+**Multi-Column Layouts**: Use table-like structures for parallel tracks (Frontend | Backend | Database)
 
-For wide processes with parallel tracks:
+**Swimlane Diagrams**: Show responsibility across roles/systems with horizontal dividers
 
-```
-┌─────────────┬─────────────┬─────────────┐
-│  Track 1    │  Track 2    │  Track 3    │
-│  Frontend   │  Backend    │  Database   │
-├─────────────┼─────────────┼─────────────┤
-│             │             │             │
-│  ┌───────┐  │  ┌───────┐  │  ┌───────┐  │
-│  │ Step  │  │  │ Step  │  │  │ Step  │  │
-│  └───────┘  │  └───────┘  │  └───────┘  │
-│      │      │      │      │      │      │
-│      ▼      │      ▼      │      ▼      │
-│  ┌───────┐  │  ┌───────┐  │  ┌───────┐  │
-│  │ Step  │  │  │ Step  │  │  │ Step  │  │
-│  └───────┘  │  └───────┘  │  └───────┘  │
-└─────────────┴─────────────┴─────────────┘
-```
+**Conditional Loops**: Combine decision diamonds with loop-back arrows for iteration with exit conditions
 
-### Swimlane Diagrams
+**Error Handling**: Nest error handlers with retry logic inside decision branches
 
-For showing responsibility across roles:
-
-```
-───────────────────────────────────────────────────
-  User          │    System        │   Database
-───────────────────────────────────────────────────
-                │                 │
-  ┌──────┐      │                 │
-  │Login │──────▶ ┌──────────┐    │
-  └──────┘      │ │ Validate │────▶ ┌─────────┐
-                │ └──────────┘    │ │  Query  │
-                │      │          │ └─────────┘
-                │      ▼          │      │
-                │ ┌──────────┐    │      │
-  ┌──────┐ ◀────│─│ Generate │ ◀──┴──────┘
-  │Token │      │ │   Token  │    │
-  └──────┘      │ └──────────┘    │
-───────────────────────────────────────────────────
-```
-
-### Conditional Loops with Exit Conditions
-
-```
-        ┌────────────────┐
-        │  Initialize    │
-        │  Counter = 0   │
-        └────────────────┘
-                │
-                ▼
-        ┌───────────────┐
-    ┌──▶│  Process Item │◀──┐
-    │   └───────────────┘   │
-    │           │            │
-    │           ▼            │
-    │   ╱──────────────╲     │
-    │  ╱  Counter < 10  ╲    │
-    │  ╲  AND More Data ╱    │
-    │   ╲──────────────╱     │
-    │       │        │       │
-    │      Yes      No       │
-    │       │        │       │
-    │       │        ▼       │
-    │       │    ┌───────┐   │
-    │       │    │  End  │   │
-    │       │    └───────┘   │
-    │       │                │
-    │       ▼                │
-    │   ┌──────────┐         │
-    │   │Increment │         │
-    │   │ Counter  │         │
-    │   └──────────┘         │
-    │       │                │
-    └───────┘                │
-                             │
-        Loop continues  ─────┘
-```
-
-### Error Handling Flows
-
-```
-┌────────────────┐
-│  Execute Task  │
-└────────────────┘
-        │
-        ▼
-    ╱──────╲
-   ╱ Success ╲
-   ╲         ╱
-    ╲──────╱
-     │   │
-    Yes  No (Error)
-     │   │
-     │   ▼
-     │ ╭──────────────────╮
-     │ │  ERROR HANDLER   │
-     │ ╰──────────────────╯
-     │         │
-     │         ▼
-     │     ╱──────╲
-     │    ╱Retryable╲
-     │    ╲         ╱
-     │     ╲──────╱
-     │       │   │
-     │      Yes  No
-     │       │   │
-     │       │   ▼
-     │       │ ┌──────────┐
-     │       │ │  Log &   │
-     │       │ │  Alert   │
-     │       │ └──────────┘
-     │       │      │
-     │       │      ▼
-     │       │  ┌────────┐
-     │       │  │  Fail  │
-     │       │  └────────┘
-     │       │
-     │       └──(Retry)──┐
-     │                   │
-     └───────────────────┘
-             │
-             ▼
-      ┌──────────┐
-      │ Continue │
-      └──────────┘
-```
+**For detailed examples of these techniques**, see `references/system-architecture-swimlane.md` and `references/approval-workflow-loops.md` which demonstrate production implementations.
 
 ---
 
@@ -973,7 +704,6 @@ For showing responsibility across roles:
 
 **Box Drawing Characters**:
 - `─` `│` `┌` `┐` `└` `┘` - Single line
-- `═` `║` `╔` `╗` `╚` `╝` - Double line
 - `├` `┤` `┬` `┴` `┼` - Line intersections
 - `╭` `╮` `╰` `╯` - Rounded corners
 
@@ -995,33 +725,11 @@ For showing responsibility across roles:
 
 ## 14. 💡 TIPS & BEST PRACTICES
 
-### Clarity Over Complexity
-- If diagram needs more than 40 boxes, split into multiple diagrams
-- Use nested sub-process notation for complex steps
-- Link to separate detailed diagrams when needed
-
-### Consistent Terminology
-- Use same terms throughout (e.g., "User" vs "Customer")
-- Match terminology to your domain/project
-- Define acronyms on first use
-
-### Consider Your Audience
-- Technical audience: Can include system details
-- Business audience: Focus on high-level flow
-- Mixed audience: Use layers (overview + detailed views)
-
-### Maintenance
-- Keep flowcharts near related code/docs
-- Update when process changes
-- Include version/date in header
-- Document major process changes in git commits
-
-### Testing Your Diagram
-1. Ask someone unfamiliar to trace a path
-2. Check if all questions are answered visually
-3. Verify no ambiguous connections
-4. Confirm all outcomes are shown
-5. Test readability at different zoom levels
+- **Clarity over complexity**: Split diagrams with >40 boxes into multiple views or nested sub-processes
+- **Consistent terminology**: Use identical terms throughout; define acronyms on first use
+- **Audience adaptation**: Technical = system details; Business = high-level flow; Mixed = layered views
+- **Maintenance**: Keep flowcharts near related code; update when process changes; version in header
+- **Validation**: Have someone unfamiliar trace a path; verify all outcomes shown; test readability at zoom levels
 
 ---
 
@@ -1046,11 +754,10 @@ For showing responsibility across roles:
 
 ```
 Standard box:     ┌─────┐
-Important box:    ╔═════╗
 Terminal:         ╭─────╮
 Decision:         ╱─────╲
 Down arrow:       │ ▼
 Branch:           ├───┐
-Parallel divider: ═════
-Section header:   ─────
+Parallel divider: ─────
+Emoji markers:    ⚠️ ✅ 🔒
 ```

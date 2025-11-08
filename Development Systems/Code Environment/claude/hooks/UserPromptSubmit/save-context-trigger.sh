@@ -159,7 +159,8 @@ if [ ! -f "$SAVE_CONTEXT_SCRIPT" ]; then
 fi
 
 # Execute save-context script (silently)
-echo "O" | node "$SAVE_CONTEXT_SCRIPT" "$TEMP_JSON" >/dev/null 2>&1
+# Run in auto-save mode (bypasses alignment prompts, uses single context/ folder)
+AUTO_SAVE_MODE=true node "$SAVE_CONTEXT_SCRIPT" "$TEMP_JSON" >/dev/null 2>&1
 EXIT_CODE=$?
 
 # Clean up
