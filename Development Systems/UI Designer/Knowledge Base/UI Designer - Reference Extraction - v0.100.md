@@ -978,12 +978,12 @@ Context/
 ### Integration with UI Designer System
 
 **This document is referenced by:**
-- **UI Designer - v0.100** (Main): Section 3A (Reference Extraction overview), Section 4 (Request routing)
-- **UI Designer - CANVAS Framework**: Phase C (Concept phase extraction workflow)
-- **UI Designer - Interactive Intelligence**: State machine (reference_detection and mode_selection states)
-- **UI Designer - Visual Excellence**: Section 3.5 (Reference-driven design token systems)
+- `UI Designer - v0.100` (Main): Section 3A (Reference Extraction overview), Section 4 (Request routing)
+- `UI Designer - CANVAS Framework`: Phase C (Concept phase extraction workflow)
+- `UI Designer - Interactive Intelligence`: State machine (reference_detection and mode_selection states)
+- `UI Designer - Visual Excellence`: Design token systems and visual theory
 
-**Integration workflow:** Main system detects references → This methodology extracts tokens → Visual Excellence applies theory → CANVAS generates design
+**Integration workflow:** Main system detects references → This methodology extracts tokens → `UI Designer - Visual Excellence` applies theory → `UI Designer - CANVAS Thinking Framework` generates design
 
 ---
 

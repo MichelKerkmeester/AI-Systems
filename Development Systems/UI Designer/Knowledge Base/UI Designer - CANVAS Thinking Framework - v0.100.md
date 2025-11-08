@@ -4,6 +4,8 @@ A comprehensive methodology for exceptional **high-fidelity UI/UX prototypes** c
 
 **Core Purpose:** Define the multi-perspective analysis, visual excellence systems, and rapid prototyping methodology that create stunning, production-ready prototypes with **concise transparency** - showing users meaningful progress without overwhelming detail.
 
+**Scope:** This document covers CANVAS methodology and cognitive rigor. For conversation flows, templates, and state management, see `UI Designer - Interactive Intelligence`.
+
 ---
 
 ## 📋 TABLE OF CONTENTS
@@ -501,13 +503,10 @@ reference_extraction:  # Enhanced with Reference Extraction System
       use_case: "Portfolio pieces, exploration"
 
   mode_selection_interface: |
-    "🎯 Reference Detection
-    Found [X] references in Context folder
-
-    Select extraction mode:
-    1️⃣ Strict - Pixel-perfect replication
-    2️⃣ Balanced - Web-optimized aesthetic match [DEFAULT]
-    3️⃣ Creative - Inspired interpretation"
+    "🎯 Reference Detection - Found [X] references
+    Select: Strict | Balanced [DEFAULT] | Creative"
+    
+    # Full template in `UI Designer - Interactive Intelligence`
 
   workflow_order:
     1: "Scan for references (Context folder + uploads)"
@@ -518,7 +517,7 @@ reference_extraction:  # Enhanced with Reference Extraction System
     workflow: "Extract tokens first → Query SHADCN for matches → Apply tokens to components"
 
   full_methodology:
-    location: "UI Designer - Reference Extraction"
+    location: "`UI Designer - Reference Extraction`"
     details: [
       "Complete extraction pipeline (5 steps)",
       "Pattern recognition confidence scoring",
@@ -678,7 +677,7 @@ mechanism_first_validation:
 reference_token_application:  # NEW - Extracted Token Usage
   when_references_exist:
     priority: "Extracted tokens take precedence over generated tokens"
-    validation: "Ensure mode compliance per UI Designer - Reference Extraction specifications"
+    validation: "Ensure mode compliance per `UI Designer - Reference Extraction` specifications"
 
   token_source_hierarchy:
     1: "Extracted tokens (from Context folder or uploaded images)"
@@ -1497,7 +1496,9 @@ multi_perspective_analysis:
 
 **Always (External):** Current phase • Perspective count + insights • Quality scores • Critical assumptions • Decision points • ASCII wireframes
 
-**Never:** Skip perspectives • Answer own questions • Expand scope • Overwhelm users • Skip cognitive rigor • Use frameworks
+**Never:** Skip perspectives • Expand scope • Overwhelm users • Skip cognitive rigor • Use frameworks
+
+**Note:** Conversation rules (wait for input, never self-answer) in Interactive Intelligence document.
 
 ### DESIGN Validation Checklist
 
@@ -1559,13 +1560,12 @@ canvas_design_framework:
 2. Apply cognitive rigor (multi-perspective MANDATORY)
 3. Apply CANVAS (6 phases with updates)
 4. Show ASCII wireframe before coding
-5. Ask questions and wait (except $quick)
-6. Parse response for all info
-7. Detect complexity (1-10 scale)
-8. Confirm vanilla stack
-9. Create self-contained HTML
-10. Validate DESIGN score (40/50 minimum)
-11. Deliver to /Export with instructions
+5. **Conversation flow** (see Interactive Intelligence: question → wait → parse)
+6. Detect complexity (1-10 scale)
+7. Confirm vanilla stack
+8. Create self-contained HTML
+9. Validate DESIGN score (40/50 minimum)
+10. Deliver to /Export with instructions
 
 ### Must-Have Checklist
 
