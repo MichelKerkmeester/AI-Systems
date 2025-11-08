@@ -1,23 +1,25 @@
-# UI Designer - Reference Extraction v1.0
+# UI Designer - Reference Extraction
 
-**Transform visual references into exceptional UI designs through intelligent pattern extraction and creative control**
+Transforms visual references into production-ready prototypes through intelligent pattern extraction, style token generation, and creative control modes.
 
----
-
-## TABLE OF CONTENTS
-
-1. 🎯 [REFERENCE EXTRACTION OVERVIEW](#reference-extraction-overview)
-2. 📸 [EXTRACTION WORKFLOWS](#extraction-workflows)
-3. 🔍 [PATTERN RECOGNITION METHODOLOGY](#pattern-recognition-methodology)
-4. 🎨 [STYLE TOKEN EXTRACTION](#style-token-extraction)
-5. 🎛️ [CREATIVE CONTROL SYSTEM](#creative-control-system)
-6. 🔗 [INTEGRATION WITH CANVAS](#integration-with-canvas)
-7. 📊 [QUALITY ASSURANCE](#quality-assurance)
-8. 🏎️ [QUICK REFERENCE](#quick-reference)
+**Core Purpose:** Enable reference-driven design workflows that extract precise design tokens from visual sources (screenshots, mockups, URLs) and apply them through flexible creative modes while maintaining the systematic rigor of the CANVAS methodology.
 
 ---
 
-## 1. REFERENCE EXTRACTION OVERVIEW
+## 📋 TABLE OF CONTENTS
+
+1. [🎯 REFERENCE EXTRACTION OVERVIEW](#1-reference-extraction-overview)
+2. [📸 EXTRACTION WORKFLOWS](#2-extraction-workflows)
+3. [🔍 PATTERN RECOGNITION METHODOLOGY](#3-pattern-recognition-methodology)
+4. [🎨 STYLE TOKEN EXTRACTION](#4-style-token-extraction)
+5. [🎛️ CREATIVE CONTROL SYSTEM](#5-creative-control-system)
+6. [🔗 CANVAS INTEGRATION](#6-canvas-integration)
+7. [✅ QUALITY ASSURANCE](#7-quality-assurance)
+8. [🏎️ QUICK REFERENCE](#8-quick-reference)
+
+---
+
+## 1. 🎯 REFERENCE EXTRACTION OVERVIEW
 
 ### The Reference-Driven Philosophy
 
@@ -46,11 +48,11 @@ Reference-driven approach: User shows → AI analyzes → Tokens extracted → C
 
 ---
 
-## 2. EXTRACTION WORKFLOWS
+## 2. 📸 EXTRACTION WORKFLOWS
 
 ### Primary Workflow: Context Folder Scanning
 
-**Location**: `/Users/michelkerkmeester/MEGA/AI Systems/Development Systems/UI Designer/Context/`
+**Location**: `/AI Systems/Development Systems/UI Designer/Context/`
 
 ```yaml
 context_folder_workflow:
@@ -197,7 +199,7 @@ url_workflow:
 
 ---
 
-## 3. PATTERN RECOGNITION METHODOLOGY
+## 3. 🔍 PATTERN RECOGNITION METHODOLOGY
 
 ### Component Classification System
 
@@ -287,9 +289,65 @@ def extract_patterns(reference_image):
 | **Medium** | 50-80% | Adapt with modifications | Card with unique layout |
 | **Low** | <50% | Build custom component | Novel interaction pattern |
 
+### SHADCN Pattern Reference with Extraction
+
+**CRITICAL:** SHADCN MCP is used as a **pattern reference only**. All implementations are vanilla HTML/CSS/JS with no framework dependencies.
+
+```yaml
+pattern_library_reference:
+  description: "SHADCN MCP provides structural patterns for vanilla JS implementation"
+  workflow: "Extract tokens → Query SHADCN MCP for patterns → Implement vanilla component with tokens"
+  output: "Self-contained HTML with inline CSS/JS - zero dependencies"
+
+  decision_tree:
+    extracted_pattern_matches_shadcn:
+      confidence_high: "Reference SHADCN pattern structure closely, implement in vanilla JS"
+      confidence_medium: "Use SHADCN structural guidance + extensive vanilla customization"
+      confidence_low: "Custom vanilla implementation from scratch with extracted tokens"
+
+  example_application:
+    reference_button:
+      extracted_tokens:
+        - border_radius: "8px"
+        - primary_color: "#3B82F6"
+        - padding: "16px 24px"
+        - font_weight: "600"
+
+      shadcn_pattern_query:
+        query: "Show me button component structure with all states"
+        component: "Button pattern"
+        confidence: "82% structural match"
+
+      shadcn_provides:
+        structure: "HTML button element with variant classes"
+        states: ["default", "hover", "focus", "active", "disabled"]
+        accessibility: "ARIA labels, keyboard navigation"
+
+      vanilla_implementation:
+        approach: "Reference SHADCN structure → Implement vanilla CSS with extracted tokens"
+        html: "<button class=\"btn btn-primary\">Label</button>"
+        css: |
+          .btn {
+            border-radius: 8px;           /* Extracted token */
+            padding: 16px 24px;           /* Extracted token */
+            font-weight: 600;             /* Extracted token */
+            transition: all 0.15s;        /* SHADCN pattern */
+          }
+          .btn-primary {
+            background: #3B82F6;          /* Extracted token */
+            color: white;
+          }
+          .btn:hover { opacity: 0.9; }    /* SHADCN pattern */
+          .btn:focus {                     /* SHADCN accessibility pattern */
+            outline: 2px solid currentColor;
+            outline-offset: 2px;
+          }
+        result: "Vanilla button with SHADCN structure + extracted design tokens"
+```
+
 ---
 
-## 4. STYLE TOKEN EXTRACTION
+## 4. 🎨 STYLE TOKEN EXTRACTION
 
 ### Color Extraction System
 
@@ -451,7 +509,7 @@ effects_extraction:
 
 ---
 
-## 5. CREATIVE CONTROL SYSTEM
+## 5. 🎛️ CREATIVE CONTROL SYSTEM
 
 ### Mode Selection Interface
 
@@ -672,7 +730,7 @@ creative_mode:
 
 ---
 
-## 6. INTEGRATION WITH CANVAS
+## 6. 🔗 CANVAS INTEGRATION
 
 ### Phase C (Concept) Enhancement
 
@@ -751,7 +809,7 @@ perspective_enhancement:
 
 ---
 
-## 7. QUALITY ASSURANCE
+## 7. ✅ QUALITY ASSURANCE
 
 ### Extraction Validation
 
@@ -818,31 +876,42 @@ quality_gates:
 
 ---
 
-## 8. QUICK REFERENCE
+## 8. 🏎️ QUICK REFERENCE
 
 ### Command Shortcuts
 
-```bash
-# Strict extraction from Context folder
-$extract strict
+```yaml
+extraction_commands:
+  strict_mode:
+    command: "$extract strict"
+    description: "Pixel-perfect replication from Context folder"
 
-# Balanced extraction (default)
-$extract
+  balanced_default:
+    command: "$extract"
+    description: "Default extraction with web optimization"
 
-# Creative extraction with specific image
-$extract creative homepage.png
+  creative_mode:
+    command: "$extract creative [image]"
+    example: "$extract creative homepage.png"
+    description: "Creative interpretation with 15-30% deviation"
 
-# Extract only tokens (no prototype)
-$extract tokens
+  tokens_only:
+    command: "$extract tokens"
+    description: "Extract design tokens without generating prototype"
 
-# Extract from URL
-$extract https://example.com
+  url_extraction:
+    command: "$extract [url]"
+    example: "$extract https://example.com"
+    description: "Extract from live website"
 
-# Batch extraction from Context folder
-$extract batch
+  batch_processing:
+    command: "$extract batch"
+    description: "Process all references in Context folder"
 
-# Extract with focus
-$extract --focus "colors typography"
+  focused_extraction:
+    command: "$extract --focus [elements]"
+    example: "$extract --focus 'colors typography'"
+    description: "Extract specific design elements only"
 ```
 
 ### Best Practices Checklist
@@ -906,10 +975,16 @@ Context/
 | **Visual Excellence** | Quality validation | `UI Designer - Visual Excellence` |
 | **Main Router** | Extraction workflow trigger | `UI Designer - v0.100` |
 
+### Integration with UI Designer System
+
+**This document is referenced by:**
+- **UI Designer - v0.100** (Main): Section 3A (Reference Extraction overview), Section 4 (Request routing)
+- **UI Designer - CANVAS Framework**: Phase C (Concept phase extraction workflow)
+- **UI Designer - Interactive Intelligence**: State machine (reference_detection and mode_selection states)
+- **UI Designer - Visual Excellence**: Section 3.5 (Reference-driven design token systems)
+
+**Integration workflow:** Main system detects references → This methodology extracts tokens → Visual Excellence applies theory → CANVAS generates design
+
 ---
 
-**END OF DOCUMENT**
-
-*Version 1.0 - Reference Extraction System*
-*Replaces: UI Designer - Templates & Patterns*
-*Part of: UI Designer Knowledge Base System*
+*The Reference Extraction system enables precision visual analysis and flexible creative control for reference-driven design workflows, integrating seamlessly with CANVAS methodology for systematic rigor and exceptional quality.*

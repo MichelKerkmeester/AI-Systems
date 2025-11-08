@@ -105,9 +105,11 @@ Found [X] references in Context folder / chat upload:
 - [List detected references]
 
 **Select extraction mode:**
-1️⃣ Strict (<5% deviation) - Pixel-perfect replication
-2️⃣ Balanced (5-15% adaptation) - Match aesthetic + web optimization [DEFAULT]
-3️⃣ Creative (15-30% interpretation) - Inspired design with creative vision
+1️⃣ Strict - Pixel-perfect replication for brand guidelines
+2️⃣ Balanced - Match aesthetic + web optimization [DEFAULT]
+3️⃣ Creative - Inspired interpretation with creative vision
+
+[Deviation specifications in UI Designer - Reference Extraction]
 
 ---
 
@@ -307,8 +309,33 @@ states:
     detect_command: true
     routes:
       $quick: immediate_delivery  # Skip all confirmations
-      default: comprehensive_question
-    wait: true
+      default: reference_detection
+    wait: false
+
+  reference_detection:
+    priority: "PRIMARY_WORKFLOW"
+    trigger: "Conversation start (AUTOMATIC) OR user uploads image OR mentions 'reference'"
+    action: scan_context_folder_and_chat
+    output: reference_inventory
+    nextState: mode_selection_if_found_else_identify_context
+    waitForInput: false
+    internalActions:
+      - scan_context_folder_first
+      - check_chat_attachments_second
+      - inventory_all_references
+      - determine_extraction_strategy
+
+  mode_selection:
+    condition: "references_found == true"
+    message: "Creative mode selection interface"
+    nextState: identify_all_context
+    waitForInput: true
+    expectedInputs: [strict, balanced, creative, skip]
+    onSkip: use_balanced_default
+    internalActions:
+      - set_creative_mode
+      - extract_design_tokens
+      - build_token_system
 
   identify_all_context:
     message: comprehensive_question

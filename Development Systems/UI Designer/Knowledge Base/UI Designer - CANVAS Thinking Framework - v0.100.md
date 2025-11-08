@@ -426,7 +426,7 @@ VARIANT 1: [Strategy Name]
 ✗ [Key tradeoff]
 ```
 
-**Fork Workflow:** Save original with v1 (`[001]-Dashboard-v1.html`) → Create fork with descriptive suffix (`[002]-Dashboard-v2-minimal.html`) → Document changes → Export to: `/Users/michelkerkmeester/MEGA/AI Systems/Development Systems/UI Designer/Export`
+**Fork Workflow:** Save original with v1 (`[001]-Dashboard-v1.html`) → Create fork with descriptive suffix (`[002]-Dashboard-v2-minimal.html`) → Document changes → Export to: `/AI Systems/Development Systems/UI Designer/Export`
 
 **Quality:** Each variant maintains DESIGN 40+/50, selected variant gets full refinement
 
@@ -469,11 +469,12 @@ perspective_analysis:  # MANDATORY - CANNOT BE SKIPPED
     - Performance Engineer: [load_time, animation_fps, optimization, responsive]
 
 reference_extraction:  # Enhanced with Reference Extraction System
-  context_folder: "/Users/michelkerkmeester/MEGA/AI Systems/Development Systems/UI Designer/Context"
+  context_folder: "/AI Systems/Development Systems/UI Designer/Context/"
 
   auto_detection:
+    priority: "PRIMARY - Execute before other Phase C activities"
     trigger_points:
-      - conversation_start: "Scan Context folder automatically"
+      - conversation_start: "Scan Context folder FIRST, before user questions"
       - reference_keywords: [reference, screenshot, context, design file, figma, sketch,
                            adobe xd, inspiration, mockup, based on, like this, similar to]
       - image_upload: "Detect images dragged into chat"
@@ -488,17 +489,14 @@ reference_extraction:  # Enhanced with Reference Extraction System
 
   creative_control_modes:
     strict:
-      deviation: "<5%"
       purpose: "Pixel-perfect replication"
       use_case: "Brand guidelines, client mockups"
 
     balanced:  # DEFAULT
-      deviation: "5-15%"
       purpose: "Match aesthetic + web optimization"
       use_case: "Production sites, accessibility focus"
 
     creative:
-      deviation: "15-30%"
       purpose: "Inspired interpretation"
       use_case: "Portfolio pieces, exploration"
 
@@ -507,20 +505,29 @@ reference_extraction:  # Enhanced with Reference Extraction System
     Found [X] references in Context folder
 
     Select extraction mode:
-    1️⃣ Strict (<5% deviation)
-    2️⃣ Balanced (5-15% adaptation) [DEFAULT]
-    3️⃣ Creative (15-30% interpretation)"
+    1️⃣ Strict - Pixel-perfect replication
+    2️⃣ Balanced - Web-optimized aesthetic match [DEFAULT]
+    3️⃣ Creative - Inspired interpretation"
+
+  workflow_order:
+    1: "Scan for references (Context folder + uploads)"
+    2: "If found: Present mode selection → Extract tokens → Proceed with CANVAS"
+    3: "If not found: Standard CANVAS workflow with generated tokens"
 
   integration_with_shadcn:
     workflow: "Extract tokens first → Query SHADCN for matches → Apply tokens to components"
-      workflow: [
-        "Query SHADCN MCP for relevant component patterns",
-        "Use SHADCN components as foundation for rapid prototyping",
-        "Build with SHADCN-first mindset (buttons, forms, cards, navigation)",
-        "Maintain vanilla HTML/CSS/JS output (SHADCN provides patterns only)"
-      ]
 
-    references_found:
+  full_methodology:
+    location: "UI Designer - Reference Extraction"
+    details: [
+      "Complete extraction pipeline (5 steps)",
+      "Pattern recognition confidence scoring",
+      "Style token extraction (colors, typography, spacing, effects)",
+      "Creative mode implementation (Strict/Balanced/Creative)",
+      "Quality validation and deviation reporting"
+    ]
+
+  references_found:
       approach: "hybrid_adaptive"
       workflow: [
         "Analyze reference designs in detail",
@@ -668,7 +675,31 @@ mechanism_first_validation:
   check_4: "Not just a list of design tactics?"
   on_fail: "Add mechanism depth and principle explanation"
 
-shadcn_component_integration:  # NEW - Component Selection & Application
+reference_token_application:  # NEW - Extracted Token Usage
+  when_references_exist:
+    priority: "Extracted tokens take precedence over generated tokens"
+    validation: "Ensure mode compliance per UI Designer - Reference Extraction specifications"
+
+  token_source_hierarchy:
+    1: "Extracted tokens (from Context folder or uploaded images)"
+    2: "Brand guidelines (if provided separately)"
+    3: "Generated tokens (standard CANVAS flow)"
+
+  application_process:
+    colors: "Apply extracted semantic palette with mode-specific deviation"
+    typography: "Use extracted font pairings and scales"
+    spacing: "Implement extracted grid system"
+    effects: "Apply extracted shadows, borders, gradients"
+
+  deviation_tracking:
+    strict: "Document any changes >1% with justification"
+    balanced: "Document optimizations (accessibility, performance)"
+    creative: "Document creative enhancements and rationale"
+
+shadcn_component_integration:  # Component Selection & Application
+  description: "SHADCN MCP used as pattern reference library for vanilla JS implementation"
+  philosophy: "Query SHADCN for patterns → Extract structure/states/accessibility → Implement in vanilla HTML/CSS/JS"
+  output: "Self-contained HTML with inline CSS/JS - no framework dependencies"
   when_to_apply: "After mechanism validated, before token creation"
 
   component_query_process:

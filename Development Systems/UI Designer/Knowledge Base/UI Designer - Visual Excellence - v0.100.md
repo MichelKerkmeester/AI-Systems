@@ -2,7 +2,9 @@
 
 **Design Philosophy, Aesthetic Decision Logic, and Quality Frameworks**
 
-This document contains the theoretical foundations, decision-making frameworks, and quality assessment methodologies that guide all design decisions in the UI Designer system. For visual reference analysis, pattern extraction, and style token generation, see **UI Designer - Reference Extraction**.
+This document contains the theoretical foundations, decision-making frameworks, and quality assessment methodologies that guide all design decisions in the UI Designer system.
+
+**CRITICAL:** All implementations use **vanilla JavaScript, CSS, and HTML only** - no frameworks, no build tools. Design theory applies to self-contained HTML files with inline CSS/JS.
 
 ---
 
@@ -25,44 +27,11 @@ This document contains the theoretical foundations, decision-making frameworks, 
 
 **Core Belief:** Great design is felt before it's understood. Visual excellence comes from obsessive attention to detail, deep understanding of aesthetic principles, and the courage to make bold choices.
 
-### Foundational Principles
+**Technical Foundation:** All visual excellence principles apply to vanilla JavaScript, CSS, and HTML implementations. No frameworks means we control every pixel, animation, and interaction directly through web standards.
 
-#### 1.1 Aesthetic Decision-Making Framework
+**Output Philosophy:** Every design becomes a self-contained HTML file with inline CSS and JavaScript - immediately usable in any modern browser, no build step required.
 
-```yaml
-aesthetic_decision_process:
-  step_1_intuition: "First, trust your design intuition"
-    questions: ["Does this feel right?", "Would I want to use this?", "Does it spark joy or friction?"]
-
-  step_2_principles: "Validate with design principles"
-    checks: [visual_hierarchy, balance, contrast, consistency]
-
-  step_3_systematic: "Apply systematic validation"
-    frameworks: [gestalt_principles, color_theory, typography_scale, spacing_rhythm]
-```
-
-#### 1.2 Design Intuition vs Systematic Thinking
-
-**The Balance:**
-- **Intuition First**: Start with what feels right aesthetically
-- **System Validates**: Use frameworks to confirm or challenge intuition
-- **Iteration Refines**: Let both inform improvements
-
-**When Intuition Leads:**
-- Initial design direction
-- Color palette selection
-- Typography personality
-- Layout asymmetry
-- Creative exploration
-
-**When System Leads:**
-- Accessibility validation
-- Responsive breakpoints
-- Performance optimization
-- Component structure
-- Consistency checks
-
-#### 1.3 The Three Pillars of Visual Excellence
+### The Three Pillars of Visual Excellence
 
 ```yaml
 pillar_1_hierarchy:
@@ -81,8 +50,6 @@ pillar_3_refinement:
   techniques: [pixel_perfect_alignment, subtle_shadows, transition_polish, color_subtlety]
 ```
 
-*For detailed techniques, see Section 3 (Visual Systems) and Section 5 (Precision & Polish)*
-
 ### Design Philosophy in Practice
 
 - **"Why before What"**: Never apply patterns without understanding WHY (shadows create depth hierarchy, not just "looks nice")
@@ -97,7 +64,7 @@ pillar_3_refinement:
 
 **Core Concept:** Generate multiple design variations simultaneously to explore the solution space, give users choice, and discover non-obvious approaches.
 
-### 2.1 When to Generate Variants
+### When to Generate Variants
 
 ```yaml
 variant_triggers:
@@ -122,7 +89,7 @@ variant_triggers:
     variant_count: "1 (no variants needed)"
 ```
 
-### 2.2 Variant Strategy Selection Philosophy
+### Variant Strategy Selection
 
 **Choosing Which Strategies to Explore:**
 
@@ -146,17 +113,13 @@ strategy_selection_logic:
       - "What tradeoffs it accepts"
 ```
 
-### 2.3 Variant Generation Process
+### Variant Generation Process
 
 ```yaml
 parallel_generation_workflow:
   1_diverge: "Select 3-7 strategies → Create ASCII wireframes → Document pros/cons for each"
-
   2_present: "Show all variants with equal treatment → Be honest about tradeoffs → Recommend but let user decide"
-    format: "[Strategy Name] + ASCII diagram + ✓ Strengths + ✗ Tradeoffs"
-
   3_selection: "User chooses: Single variant | Hybrid approach | Request iteration"
-
   4_refinement: "Apply full CANVAS methodology → High-fidelity prototype → Target DESIGN 40+/50"
 ```
 
@@ -164,7 +127,7 @@ parallel_generation_workflow:
 
 ## 3. 📐 VISUAL SYSTEMS THEORY
 
-### 3.1 Typography Hierarchy Principles
+### Typography Hierarchy Principles
 
 **Why Typography Hierarchy Matters:**
 Typography creates information architecture. Without clear hierarchy, users can't scan, prioritize, or understand content flow.
@@ -175,17 +138,12 @@ Typography creates information architecture. Without clear hierarchy, users can'
 font_pairing_rules:
   rule_1_contrast:
     principle: "Pair fonts with clear personality differences"
-    reasoning: "Similar fonts compete, contrasting fonts complement"
-    examples: "✓ Serif+Sans (Merriweather/Open Sans) ✓ Display+Neutral (Clash/Inter) ✗ Similar sans (Helvetica+Arial) ✗ Two decorative fonts"
+    examples: "✓ Serif+Sans (Merriweather/Open Sans) ✓ Display+Neutral (Clash/Inter)"
+    avoid: "✗ Similar sans (Helvetica+Arial) ✗ Two decorative fonts"
 
   rule_2_hierarchy:
     principle: "Use font weight and size, not just different fonts"
-    reasoning: "Weight creates hierarchy within same font family"
-    technique:
-      heading: "Font A, Bold (700), 48px"
-      subheading: "Font A, Semibold (600), 24px"
-      body: "Font B, Regular (400), 16px"
-      caption: "Font B, Regular (400), 14px, lighter color"
+    technique: "Bold headings, regular body, light captions"
 
   rule_3_limit:
     principle: "Maximum 2 font families per design"
@@ -198,117 +156,199 @@ font_pairing_rules:
       font_size: "16px minimum for body text"
       line_height: "1.5-1.8 for comfortable reading"
       line_length: "45-75 characters per line (optimal: 66)"
-      letter_spacing: "0 for body text, slight tracking for headings"
 ```
 
-**Typography Scale Philosophy:**
+**Readability Science - Evidence-Based Rules:**
 
-Different scale ratios communicate different design personalities:
-- **Perfect Fourth (1.333)**: Balanced, professional, harmonious - best for business applications
-- **Major Third (1.25)**: Subtle, elegant, refined - best for sophisticated brands
-- **Golden Ratio (1.618)**: Dramatic, bold, expressive - best for attention-grabbing designs
+*"95% of web is typography"* - Typography is the primary user interface, not decoration.
 
-### 3.2 Color Theory Foundations
+```yaml
+line_length:
+  optimal: "45-75 characters (66 scientifically ideal)"
+  too_short: "<45 chars → choppy reading, excessive eye jumping"
+  too_long: ">75 chars → lost return tracking, re-reading"
+  implementation: "max-width: 35em or 45-75ch on text containers"
 
-**Color Harmony Philosophy:**
+line_height:
+  optimal: "1.5-1.8 for body (1.6 ideal)"
+  long_lines: "1.7-1.8 (more vertical space)"
+  short_lines: "1.5-1.6 (less space needed)"
+  headings: "1.2-1.3 (tighter for impact)"
 
-| Harmony Type | Principle | Psychology | Best For |
-|--------------|-----------|------------|----------|
-| **Monochromatic** | Single hue, varying saturation/lightness | Unity, calm, sophistication | Minimalist elegance, strong brand focus |
-| **Analogous** | Adjacent colors on color wheel | Harmonious, natural, comfortable | Cohesion without monotony |
-| **Complementary** | Opposite colors on wheel | Maximum contrast, vibrant | High energy, clear differentiation |
-| **Triadic** | Three evenly spaced colors | Balanced yet vibrant, playful | Variety while maintaining balance |
-| **Split Complementary** | Base + two adjacent to complement | Vibrant, less tension | Contrast without aggression |
+font_size:
+  minimum: "16px body text (18px comfortable)"
+  mobile: "16-18px"
+  desktop: "16-21px (21px for long-form)"
+  never: "Below 12px - inaccessible"
+```
 
-**Color Psychology Decision Framework:**
+**Modular Scale Philosophy:**
 
-| Color | Emotions | Best For | Avoid When |
-|-------|----------|----------|------------|
-| **Blue** | Trust, calm, professional, stable | Financial, healthcare, tech, enterprise | Need energy, urgency, appetite appeal |
-| **Red** | Urgency, passion, excitement, danger | Sales, food, alerts, action-required | Need calm, trust, professional tone |
-| **Green** | Growth, health, nature, success | Eco-friendly, wellness, finance | Need urgency or premium luxury feel |
-| **Purple** | Luxury, creativity, wisdom | Premium brands, creative tools | Need approachable, mainstream appeal |
-| **Orange** | Energy, enthusiasm, warmth, playful | CTAs, affordable brands, social | Need luxury, premium, corporate feel |
-| **Yellow** | Optimism, happiness, caution | Accents, highlights (use sparingly) | Professionalism, large backgrounds |
-| **Black/Gray** | Sophistication, luxury, timeless | Premium brands, minimalist, photography | Need friendliness, approachability |
+| Ratio | Feel | Example Scale (from 16px) | Use Case |
+|-------|------|---------------------------|----------|
+| **1.2** (Minor Third) | Subtle, refined | 16→19→23→28 | Conservative corporate |
+| **1.25** (Major Third) | Balanced, professional | 16→20→25→31 | Standard business apps |
+| **1.333** (Perfect Fourth) | Strong contrast | 16→21→28→38 | Modern interfaces |
+| **1.618** (Golden Ratio) | Dramatic, expressive | 16→26→42→68 | Bold marketing sites |
 
-**Color Subtlety Philosophy:**
+**Font Psychology:**
 
-**Avoid Pure Colors:** Nature rarely shows pure colors - add slight warmth/coolness for sophistication.
+| Type | Characteristics | Emotional Signals | Best For |
+|------|----------------|-------------------|----------|
+| **Serif** | Small strokes at letter ends | Trust, tradition, sophistication, formality | Long-form, luxury, finance, law |
+| **Sans-Serif** | Clean lines, no decoration | Modern, friendly, efficient, approachable | Interfaces, tech, versatile body text |
+| **Display** | Decorative, expressive | Bold, creative, attention-grabbing | Headlines only, large sizes, short text |
+| **Monospace** | Fixed-width characters | Technical, precise, code-like | Code blocks, technical docs, data |
 
-| Pure Color | Issue | Use Instead | Why |
-|------------|-------|-------------|-----|
-| `#000000` (pure black) | Harsh, digital, artificial | `#1a1a1a` or `#0f172a` | Rich darks feel sophisticated, natural |
-| `#FFFFFF` (pure white) | Eye strain, stark | `#fafafa` or `#f8f9fa` | Soft whites reduce harshness, feel refined |
+### Color Theory Foundations
 
-### 3.3 Spacing Systems Philosophy
+**Core Principle:** Color is not decoration - it's communication. Every color choice should serve clear functional and emotional purpose.
+
+**Color Harmony Systems:**
+
+| System | Definition | When to Use | Implementation Rule |
+|--------|-----------|-------------|---------------------|
+| **Monochromatic** | Single hue, varied saturation/lightness | Minimalist, content-focused | Generate 50-900 shades from base, add tinted grays |
+| **Analogous** | 3-5 adjacent colors on wheel | Cohesive with variety | 60% dominant, 30% support, 10% accent |
+| **Complementary** | Opposite colors on wheel | High energy, attention-grabbing | 90/10 or 80/20 split (NEVER 50/50) |
+| **Split-Complementary** | Base + two adjacent to complement | Contrast without aggression | Softer than pure complementary |
+| **Triadic** | Three equally spaced colors | Playful, creative, children | 65% dominant, 25% secondary, 10% accent |
+| **Tetradic** | Two complementary pairs | Complex interfaces, categories | One color dominant (60%+), advanced skill |
+
+**Color Psychology:**
+
+| Color | Biological Effect | Emotional Signals | Brand Applications | Caution |
+|-------|-------------------|-------------------|-------------------|---------|
+| **Blue** | Lowers heart rate, calming | Trust, professionalism, stability | Finance, tech, healthcare | Can feel cold/distant |
+| **Red** | Raises heart rate, urgency | Passion, excitement, danger | Food, sales, alerts | Use sparingly - causes stress |
+| **Green** | Neutral, restful to eyes | Environment, health, growth | Nature, finance, wellness | — |
+| **Yellow** | Stimulates mental activity | Optimism, happiness, energy | Small accents, highlights | Eye strain, hard to read |
+| **Purple** | Mystery, imagination | Royalty, luxury, creativity | Premium, creative tools | Can feel overly decorative |
+| **Orange** | Energetic, warm | Enthusiasm, affordability, friendliness | Social, CTAs, accessible brands | — |
+| **Black/Gray** | — | Sophistication, power, neutrality | Luxury, interfaces, photography | Pure black harsh, tint it |
+
+**Color Accessibility:**
+
+| Standard | Requirement | Application |
+|----------|-------------|-------------|
+| **WCAG AA Normal** | 4.5:1 minimum | Text under 18px (or under 14px bold) |
+| **WCAG AA Large** | 3:1 minimum | Text 18px+ (or 14px+ bold) |
+| **WCAG AAA** | 7:1 minimum | Enhanced accessibility |
+
+**Color Blindness Design (~8% males, ~0.5% females):**
+- **Never use color alone** - Always add icon, label, or pattern
+- **Avoid:** Red/green exclusive combos, blue/purple, light green/yellow
+- **Safe:** Blue/orange (colorblind-safe), blue/red, dark/light contrast
+- **Semantic consistency:** Green=success, Red=error, Yellow=warning, Blue=info (everywhere)
+
+**Refinement Techniques:**
+
+```yaml
+sophistication:
+  avoid_pure_black: "Use #1a1a1a or tinted darks (softer)"
+  avoid_pure_white: "Use #fafafa or warm whites (less strain)"
+  harmonious_grays: "Tint grays with brand color for cohesion"
+
+gradients:
+  when: "Modern aesthetic, depth without shadow"
+  execution: "Analogous colors only (avoid complementary = mud)"
+  accessibility: "Text contrast valid across entire gradient"
+
+scale_generation:
+  method: "Choose base (500), generate lighter (50-400) and darker (600-900)"
+  usage: "50-100 (backgrounds), 400-500 (buttons), 800-900 (text)"
+```
+
+### Spacing Systems Philosophy
 
 **Why 8-Point Grid:**
 
-```yaml
-eight_point_grid_philosophy:
-  mathematical_foundation:
-    divisibility: "8 divides evenly (8, 16, 24, 32, 48, 64)"
-    device_compatibility: "Most screens use even pixel dimensions"
-    touch_targets: "44px = 5.5 × 8 (iOS minimum touch target)"
+| Reason | Benefit |
+|--------|---------|
+| **Mathematical** | Divides evenly (8, 16, 24, 32, 48, 64), device-compatible |
+| **Touch Targets** | 44px = 5.5 × 8 (iOS minimum) |
+| **Psychological** | Subconscious rhythm, hierarchy through scale |
+| **Designer** | Faster decisions (no debating 13px vs 15px) |
+| **Developer** | Clear system, easier implementation |
+| **User** | Feels polished (even if they don't know why) |
 
-  psychological_foundation:
-    consistency: "Users subconsciously feel rhythm and order"
-    predictability: "Equal spacing creates calm, professional feel"
-    hierarchy: "Larger multiples = more important sections"
+**Progressive Spacing Theory:**
 
-  practical_benefits:
-    designer: "Faster decisions (no debating 13px vs 15px)"
-    developer: "Easier implementation (clear system)"
-    user: "Feels polished even if they don't know why"
+*Spacing increases with scope - tighter within, wider between*
 
-  when_to_use:
-    standard: "8px grid for most professional applications"
-    compact: "4px grid for data-dense interfaces (admin panels)"
-    dramatic: "Golden ratio spacing for expressive, organic designs"
-```
+| Scope | Spacing | Example |
+|-------|---------|---------|
+| **Within component** | 8px | Elements within button, card padding |
+| **Between components** | 16px | Cards in a section, form fields |
+| **Between sections** | 32px | Major content areas |
+| **Between page sections** | 64px+ | Hero → features → testimonials |
 
-**Progressive Spacing Philosophy:**
+### Gestalt Principles - Perception Psychology
 
-```yaml
-progressive_spacing_theory:
-  principle: "Spacing increases with scope"
+**Core Theory:** Humans perceive unified wholes rather than individual parts. Understanding perception enables intuitive interfaces.
 
-  hierarchy:
-    within_component: "8px - Elements within a button, card, or group"
-    between_components: "16px - Between cards in a section"
-    between_sections: "32px - Between major content areas"
-    between_page_sections: "64px+ - Between hero, features, testimonials"
+**12 Gestalt Laws:**
 
-  reasoning:
-    visual_grouping: "Closer items feel related, distant items feel separate"
-    breathing_room: "Larger concepts deserve more space"
-    hierarchy_reinforcement: "Space = importance"
-```
+| Principle | Definition | Design Application |
+|-----------|------------|-------------------|
+| **Proximity** | Near objects perceived as related | Reduce spacing between related elements (4-8px), increase for separation (24px+) |
+| **Similarity** | Similar elements perceived as grouped | All CTAs same style, all H2s identical, consistent patterns |
+| **Closure** | Mind completes incomplete forms | Simplified logos (IBM lines), outline icons, minimal strokes |
+| **Continuity** | Eye follows paths and lines | Left-aligned text creates vertical line, single-column forms create clear path |
+| **Figure/Ground** | Distinguish foreground from background | Darken overlay for modals, white cards on gray background, depth hierarchy |
+| **Symmetry** | Favor orderly arrangements | Centered layouts (formal/traditional) or intentional asymmetry (modern/dynamic) |
+| **Common Region** | Bounded areas create groups | Cards with borders/backgrounds, form sections with distinct colors |
+| **Common Fate** | Elements moving together are related | Accordion items collapse together, related elements animate as unit |
+| **Prägnanz** | Prefer simplest interpretation | Reduce icons to simplest form, basic shapes over complex, clear categories |
+| **Multistability** | Ambiguous forms shift perception | Clever logos (FedEx arrow) - intentional only, never for functional UI |
+| **Invariance** | Recognize despite transformation | Icons recognizable at all sizes, consistent across light/dark themes |
+| **Emergence** | Whole emerges from simple parts | Simple components (cards + grid) create sophisticated dashboards |
 
-### 3.4 Visual Rhythm & Balance Theory
+**Validation Checklist:**
+- Proximity: Related elements closer than unrelated?
+- Similarity: Same-level items look similar, different levels distinct?
+- Continuity: Clear visual paths through interface?
+- Figure/Ground: Primary content distinguished from background?
+- Common Region: Content groups have clear boundaries?
 
-**Visual Rhythm Techniques:**
+### Usability Heuristics - Balancing Aesthetics & Function
 
-| Technique | Description | Result | Psychology |
-|-----------|-------------|--------|------------|
-| **Consistent Spacing** | Use same spacing values repeatedly (24px sections, 16px elements) | Predictable, harmonious, professional | Humans find patterns comforting |
-| **Progressive Spacing** | Increase spacing with content scope (8px→16px→32px→64px) | Natural hierarchy, scope-based breathing room | Mirrors information processing |
-| **Rhythmic Repetition** | Repeat visual patterns (size, color, spacing) | Scannable, predictable, cohesive | Creates expectation and comfort |
+**Core Principle:** Attractive interfaces feel more usable (Aesthetic-Usability Effect) - BUT beauty cannot mask broken functionality.
 
-**Visual Balance Types:**
+**Nielsen's 10 Usability Heuristics:**
 
-| Type | Description | Best For | Psychology | Example |
-|------|-------------|----------|------------|---------|
-| **Symmetric** | Equal visual weight on both sides | Traditional, formal, stable | Safe, trustworthy, established | Centered hero layout |
-| **Asymmetric** | Different elements balanced by visual weight | Modern, dynamic, interesting | Contemporary, energetic | Large image left + small elements right |
-| **Radial** | Elements arranged around central point | Focus attention, drama | Eye drawn to center, completeness | Circular navigation |
+| Heuristic | Principle | Visual Application |
+|-----------|-----------|-------------------|
+| **System Status** | Keep users informed | Loading states, progress bars, form validation feedback |
+| **Real World Match** | Speak users' language | Universal icons (🔍 search, 🏠 home), color conventions |
+| **User Control** | Easy exits, undo, redo | Prominent X, cancel equally visible, undo notifications |
+| **Consistency** | Platform conventions, internal consistency | All primary CTAs identical, same spacing everywhere |
+| **Error Prevention** | Prevent problems | Date pickers vs text, disabled submit until valid, confirmations |
+| **Recognition > Recall** | Make options visible | Visible nav, autocomplete, recent items, tooltips |
+| **Flexibility** | Accelerators for experts | Keyboard shortcuts, bulk actions, customization |
+| **Minimalist Design** | Remove unnecessary | Clear hierarchy, progressive disclosure, no clutter |
+| **Error Recovery** | Clear, constructive messages | Red + icon + prominent, tell user how to fix |
+| **Help Documentation** | Contextual assistance | Tooltips, inline hints, helpful empty states |
+
+**Priority Order:** 1. Works → 2. Usable → 3. Beautiful (aesthetics enhance, never replace function)
+
+### Laws of UX - Cognitive Psychology Applied to Design
+
+| Law | Principle | Design Application |
+|-----|-----------|-------------------|
+| **Fitts's Law** | Time to target = f(distance, size) | 44x44px min touch targets, related actions near each other, corners = infinite targets |
+| **Hick's Law** | More choices = slower decisions | 5-7 nav items, one primary action/section, progressive disclosure |
+| **Miller's Law** | Working memory holds 4-7 items | Chunk info (123-456-7890), 5-7 nav items, break long forms into steps |
+| **Jakob's Law** | Users expect familiar patterns | Logo top-left → home, search top-right, links look like links |
+| **Serial Position** | Remember first & last items best | Important items at start and end of lists/menus/forms |
+| **Doherty Threshold** | <400ms response = high engagement | Optimistic UI, skeleton screens, 100ms instant / 400ms acceptable |
+| **Tesler's Law** | Complexity can't vanish, only move | Make complex features manageable (progressive disclosure), don't oversimplify |
 
 ---
 
 ## 4. 🧩 PATTERN SELECTION LOGIC
 
-### 4.1 When to Use Which Component Pattern
+### When to Use Which Component Pattern
 
 **Buttons:**
 
@@ -335,7 +375,7 @@ progressive_spacing_theory:
 | **Sidebar Nav** | Complex structure (10+ items) | Scalable, always visible, better for apps |
 | **Tab Navigation** | Switching related views in same context | Keeps user in same mental space |
 
-### 4.2 Layout Pattern Selection Logic
+### Layout Pattern Selection Logic
 
 | Pattern | Best For | Reasoning | Avoid When |
 |---------|----------|-----------|------------|
@@ -350,442 +390,473 @@ progressive_spacing_theory:
 
 ## 5. ✨ PRECISION & POLISH FRAMEWORKS
 
-### 5.1 Pixel-Perfect Precision Philosophy
-
-```yaml
-pixel_perfection_philosophy:
-  alignment: "Everything aligns to grid → Use 8px snapping, verify visually at multiple viewports"
-
-  spacing: "Same values throughout → Define scale (8, 16, 24, 32, 48, 64), never arbitrary values"
-
-  visual_balance: "Squint test: Blur page, check balance → Heavy elements balanced with light, empty space matters"
-
-  typography: "Adjust letter-spacing for headings (-0.02em) → Line-height 1.5-1.8 for body → Check orphans/widows"
-
-  shadows: "Mimic natural light (all point same direction) → Layer shadows (subtle + soft) for depth"
-```
-
-### 5.2 Polish & Refinement Philosophy
-
-**The Four Levels of Polish:**
+### The Four Levels of Polish
 
 | Level | Description | Key Characteristics | User Perception |
 |-------|-------------|---------------------|-----------------|
 | **1. Functional** | Works, minimal polish | Basic styling, no transitions, inconsistent spacing, harsh colors | Prototype/MVP |
 | **2. Refined** | Clear design system | 8px grid, basic transitions (200ms), typography hierarchy, color palette | Real product |
 | **3. Sophisticated** | Highly polished | Pixel-perfect, 60fps animations, subtle shadows, rich colors (no pure black), micro-interactions | Professional & premium |
-| **4. Exceptional** | Portfolio-quality | Optical balance, spring easing, texture/depth, typographic micro-adjustments, all states polished, responsive intentional | Top tech company |
+| **4. Exceptional** | Portfolio-quality | Optical balance, spring easing, texture/depth, typographic micro-adjustments, all states polished | Top tech company |
 
 **Target:** Level 3 (Sophisticated) for production | Level 4 (Exceptional) for showcase work
 
-### 5.3 Contemporary Design Trends - When & Why
+### Contemporary Design Trends - When & Why
 
-| Trend | Best For | Why It Works | Caution |
-|-------|----------|--------------|---------|
-| **Glassmorphism** | Modern apps, overlays, nav bars | Depth without heaviness, premium feel | Performance impact, contrast risk |
-| **Gradient Meshes** | Hero backgrounds, brand expression | Visual interest, organic feel | Can overwhelm, check text readability |
-| **Neumorphism** | Minimalist interfaces, tactile UI | Subtle 3D effect, tangible feel | Low contrast, decorative only |
-| **Bold Typography** | Landing pages, marketing, headers | Immediate impact, scale hierarchy | Overwhelming if overused |
-| **Dark Mode** | Low-light apps, creative tools | Reduces eye strain, premium look | Requires desaturation, maintain contrast |
-| **Micro Animations** | All interactive elements | Confirms interactions, polished feel | Must be 60fps (transform/opacity), 150-300ms |
-| **Asymmetric Layouts** | Modern, creative, design-forward | Breaks monotony, contemporary tension | Harder responsive, can feel chaotic |
+| Trend | Best For | Why It Works | Caution | Vanilla Implementation |
+|-------|----------|--------------|---------|------------------------|
+| **Glassmorphism** | Modern apps, overlays, nav bars | Depth without heaviness, premium feel | Performance impact, contrast risk | `backdrop-filter: blur(10px)` + semi-transparent bg |
+| **Gradient Meshes** | Hero backgrounds, brand expression | Visual interest, organic feel | Can overwhelm, check text readability | `linear-gradient()` or `radial-gradient()` |
+| **Neumorphism** | Minimalist interfaces, tactile UI | Subtle 3D effect, tangible feel | Low contrast, decorative only | Inset shadows with matching background |
+| **Bold Typography** | Landing pages, marketing, headers | Immediate impact, scale hierarchy | Overwhelming if overused | `clamp()` for responsive font scaling |
+| **Dark Mode** | Low-light apps, creative tools | Reduces eye strain, premium look | Requires desaturation, maintain contrast | `@media (prefers-color-scheme: dark)` + CSS variables |
+| **Micro Animations** | All interactive elements | Confirms interactions, polished feel | Must be 60fps, 150-300ms timing | GPU-accelerated: `transform`/`opacity` only |
+| **Asymmetric Layouts** | Modern, creative, design-forward | Breaks monotony, contemporary tension | Harder responsive, can feel chaotic | CSS Grid with varied column definitions |
+
+**Performance Best Practices for Vanilla CSS:**
+
+```yaml
+gpu_accelerated_properties:
+  use: [transform, opacity, filter]
+  add: "will-change for elements that will animate"
+  timing: "150-300ms for most interactions"
+
+cpu_bound_properties:
+  avoid: [width, height, top, left, margin, padding]
+  why: "Forces layout recalculation, causes jank"
+
+implementation_strategy:
+  glassmorphism: "backdrop-filter with transparency and blur"
+  dark_mode: "Media queries detect preference, CSS variables switch theme"
+  micro_interactions: "Transform and opacity only, 200ms standard timing"
+```
 
 ---
 
 ## 6. 🎯 AESTHETIC DECISION TREES
 
-### 6.1 Visual Style Selection Decision Tree
+### Visual Style Selection Decision Tree
 
 ```yaml
-style_selection_decision_tree:
-  question_1_audience:
-    prompt: "Who is the primary audience?"
+style_selection_by_audience:
+  enterprise_professionals: "→ Professional Classic or Minimalist Executive"
+  young_consumers: "→ Bold Expressive or Playful Creative"
+  general_public: "→ Modern Trendy or Clean Minimalist"
+  creative_industry: "→ Bold Expressive or Playful Creative"
+  technical_users: "→ Data-Dense Professional or Minimalist"
 
-    enterprise_professionals:
-      recommended: "Professional Classic or Minimalist Executive"
-      avoid: "Playful Creative or Bold Expressive"
-      reasoning: "Enterprise users expect professionalism and clarity, judge credibility by visual maturity"
+style_selection_by_industry:
+  finance_legal_healthcare: "→ Professional Classic (trust + authority signals)"
+  tech_startups: "→ Modern Trendy (innovation + contemporary feel)"
+  creative_agencies: "→ Bold Expressive (showcase design capability)"
+  ecommerce: "→ Modern Trendy or Minimalist (product focus, don't distract)"
+  enterprise_software: "→ Minimalist Executive or Data-Dense Professional"
 
-    young_consumers:
-      recommended: "Bold Expressive or Playful Creative"
-      avoid: "Classic Traditional"
-      reasoning: "Younger audiences respond to energy and personality, expect contemporary aesthetics"
-
-    general_public:
-      recommended: "Modern Trendy or Minimalist"
-      avoid: "Extreme styles (very bold or very minimal)"
-      reasoning: "Broad appeal requires balanced approach, accessible to all ages"
-
-  question_2_industry:
-    prompt: "What industry or domain?"
-
-    finance_legal_healthcare:
-      recommended: "Professional Classic or Minimalist Executive"
-      must_have: "Trust signals, security, professionalism"
-      reasoning: "Regulated industries require conservative, trustworthy aesthetics"
-
-    tech_startups:
-      recommended: "Modern Trendy or Bold Expressive"
-      must_have: "Innovation signals, contemporary feel"
-      reasoning: "Tech expects cutting-edge design, differentiates from traditional"
-
-    creative_agencies:
-      recommended: "Bold Expressive or Playful Creative"
-      must_have: "Showcase creativity, unique personality"
-      reasoning: "Portfolio piece, must demonstrate design capability"
-
-    ecommerce_retail:
-      recommended: "Modern Trendy or Clean Minimalist"
-      must_have: "Product focus, easy browsing, trust"
-      reasoning: "Don't distract from products, prioritize conversion"
-
-  question_3_content_density:
-    prompt: "How much information needs to be visible?"
-
-    high_density:
-      recommended: "Data-Dense Professional"
-      layout: "Multi-column grids, compact spacing (8-12px)"
-      example: "Analytics dashboards, admin panels, trading platforms"
-      reasoning: "Power users want max info per screen, efficiency over aesthetics"
-
-    medium_density:
-      recommended: "Standard Modern or Professional Classic"
-      layout: "Balanced spacing (16-24px), clear sections"
-      example: "Business applications, SaaS products"
-      reasoning: "Balance information and usability"
-
-    low_density:
-      recommended: "Minimalist Executive or Playful Creative"
-      layout: "Generous whitespace (40-60% negative space), large elements"
-      example: "Landing pages, portfolio sites, marketing"
-      reasoning: "Focus on message, not overwhelming with information"
-
-  question_4_interaction_complexity:
-    prompt: "How complex are the interactions?"
-
-    simple_linear:
-      recommended: "Minimalist or Mobile-Optimized"
-      focus: "Clear CTAs, simple flows, obvious next steps"
-      example: "Marketing sites, informational pages, simple forms"
-      reasoning: "Simplicity reinforces straightforward task flow"
-
-    moderate_interactive:
-      recommended: "Modern Trendy or Professional"
-      focus: "Clear interaction patterns, intuitive nav, standard components"
-      example: "Web apps, e-commerce, content platforms"
-      reasoning: "Familiar patterns reduce cognitive load"
-
-    highly_interactive:
-      recommended: "Data-Dense Professional or Custom"
-      focus: "Rich interactions, power user features, keyboard shortcuts"
-      example: "Design tools, trading platforms, IDEs, creative software"
-      reasoning: "Power users accept complexity for capability"
+style_selection_by_content_density:
+  high_density: "→ Data-Dense Professional (analytics, admin panels, trading)"
+  medium_density: "→ Standard Modern or Professional Classic (business apps, SaaS)"
+  low_density: "→ Minimalist Executive or Playful Creative (landing pages, portfolios)"
 ```
 
-### 6.2 Color Scheme Selection Logic
+### Color Scheme Selection Logic
 
 **Quick Decision Flow:**
 
 1. **Has brand colors?** → Use as primary, extend with complementary palette
-2. **No brand colors?** → Select based on industry (Blue=trust | Green=health | Red/Orange=energy | Purple/Gold=luxury)
-3. **Choose harmony:** Monochromatic (minimalist) | Complementary/Triadic (bold) | Analogous (professional)
-4. **Validate accessibility:** WCAG AA contrast (4.5:1 text, 3:1 UI) - non-negotiable
+2. **No brand colors?** → Select based on industry:
+   - Finance/Legal: Blue (#2563EB, #1E40AF) for trust
+   - Health/Wellness: Green (#10B981) for growth
+   - Energy/Excitement: Red/Orange (#EF4444, #F97316)
+   - Luxury/Premium: Purple/Gold (#8B5CF6, #F59E0B)
+3. **Choose harmony:**
+   - Monochromatic (minimalist, content-focused)
+   - Complementary/Triadic (bold, high energy)
+   - Analogous (professional, cohesive)
+4. **Validate accessibility:** WCAG AA contrast minimum (4.5:1 text, 3:1 UI) - non-negotiable
 
-*For detailed color theory, psychology, and harmony types, see Section 3.2 Color Theory Foundations*
-
-### 6.3 Typography Pairing Algorithm
+### Typography Pairing Algorithm
 
 **Quick Decision Flow:**
 
-1. **Choose heading personality:** Professional (Inter) | Elegant (Merriweather) | Bold (Clash Display) | Friendly (Poppins)
-2. **Pair with readable body:** Serif heading → Sans body | Display heading → Neutral sans | Sans heading → Same font/different weight
-3. **Validate contrast:** Heading 2x+ larger | Bold (600-700) vs Regular (400) | Style contrast (serif vs sans)
-4. **Apply scale ratio:** Professional (1.333) | Elegant (1.25) | Bold/Dramatic (1.618)
+1. **Choose heading personality:**
+   - Professional: Inter, Roboto
+   - Elegant: Merriweather, Playfair Display
+   - Bold: Clash Display, Montserrat
+   - Friendly: Poppins, Nunito
 
-*For detailed typography principles, font pairing rules, and examples, see Section 3.1 Typography Hierarchy Principles*
+2. **Pair with readable body:**
+   - Serif heading → Sans body
+   - Display heading → Neutral sans
+   - Sans heading → Same font different weight
 
-### 6.4 Layout Pattern Selection
+3. **Validate contrast:**
+   - Heading 2x+ larger than body
+   - Bold (600-700) vs Regular (400)
+   - Style contrast (serif vs sans)
 
-```yaml
-layout_selection_decision_tree:
-  question_1_page_type:
-    prompt: "What type of page is this?"
-
-    landing_marketing:
-      recommended: "Hero section → Features grid → Social proof → CTA"
-      hero_style: "Centered or Split Hero"
-      features: "3-column icon grid"
-      reasoning: "Proven conversion pattern, guides user to action"
-
-    application_dashboard:
-      recommended: "Sidebar nav → Header → Main content grid"
-      layout: "Sidebar (240px) + Main (flexible)"
-      content: "KPI cards + charts + tables"
-      reasoning: "Efficient for complex apps, navigation always visible"
-
-    content_blog:
-      recommended: "Header → Article (centered, max-width 680px) → Sidebar"
-      layout: "Asymmetric (2fr main, 1fr sidebar)"
-      reasoning: "Optimal reading length, related content accessible"
-
-    ecommerce_product:
-      recommended: "Header → Product grid or list → Filters sidebar"
-      layout: "Filters left (240px) + Products grid (flexible)"
-      reasoning: "Standard pattern, easy browsing and filtering"
-
-  question_2_content_priority:
-    prompt: "What's the most important content?"
-
-    single_primary_cta:
-      layout: "Centered hero with prominent CTA"
-      size: "CTA button large (48px height, 32px padding-x)"
-      reasoning: "Focus all attention on single action"
-
-    multiple_equal_options:
-      layout: "Equal-width grid (3-4 columns)"
-      treatment: "All cards same visual weight"
-      reasoning: "No bias, let user choose based on content"
-
-    primary_with_supporting:
-      layout: "Asymmetric (main content 60%, supporting 40%)"
-      visual_weight: "Main content larger, bolder, higher contrast"
-      reasoning: "Clear hierarchy guides attention without forcing"
-
-  question_3_user_scanning_behavior:
-    prompt: "How will users scan this page?"
-
-    f_pattern:
-      description: "Users scan top-left to right, then down left"
-      layout: "Horizontal nav + left-aligned content"
-      cta_placement: "Top-right or middle-left"
-      best_for: "Text-heavy pages, blogs, articles"
-      reasoning: "Matches natural reading pattern (Western languages)"
-
-    z_pattern:
-      description: "Users scan top-left → top-right → bottom-left → bottom-right"
-      layout: "Hero content zigzags down the page"
-      best_for: "Landing pages, simple marketing pages"
-      reasoning: "Guides eye through deliberate path to CTA"
-
-    layer_cake_pattern:
-      description: "Users scan horizontally across each section"
-      layout: "Full-width horizontal sections, alternating backgrounds"
-      best_for: "Long-form landing pages, storytelling"
-      reasoning: "Clear section breaks, easy to scan and understand structure"
-```
+4. **Apply scale ratio:**
+   - Professional: 1.333 (Perfect Fourth)
+   - Elegant: 1.25 (Major Third)
+   - Bold/Dramatic: 1.618 (Golden Ratio)
 
 ---
 
 ## 7. 📊 DESIGN QUALITY ASSESSMENT
 
-### 7.1 Visual Hierarchy Scoring
+### Visual Hierarchy Scoring (50 points total)
+
+| Criterion | Excellent (10 pts) | Good (7-9 pts) | Poor (1-6 pts) |
+|-----------|-------------------|----------------|----------------|
+| **Focal Point Clarity** | Most important element identified in <1 sec | Clear within 2 seconds | Unclear or competing elements |
+| **Size Contrast** | Primary 2x+ larger than secondary | Primary 1.5x larger, noticeable | Similar sizes, no hierarchy |
+| **Color Contrast** | High contrast primary (4.5:1+), subtle secondary | Noticeable difference | Similar contrast everywhere |
+| **Whitespace Emphasis** | More space around important elements | Some spatial differentiation | Cramped, equal spacing |
+| **Visual Flow** | Clear path: entry → primary → secondary → action | Mostly clear, minor uncertainty | Jumps around, confusing |
+
+**Scoring:** Sum of 5 criteria → 80%+ excellent, 60-79% good, <60% needs improvement
+
+### Aesthetic Sophistication Measurement (40 points)
+
+| Category | Novice (1-2) | Intermediate (3-4) | Advanced (5-6) | Expert (7-8) |
+|----------|--------------|-------------------|----------------|--------------|
+| **Color** | Primary colors, pure black | Extended palette, some tints | Rich darks, subtle tints, harmonious | Sophisticated, perfect harmony, cultural awareness |
+| **Typography** | System fonts, no scale | 2 fonts, basic scale | Intentional pairing, mathematical scale | Perfect pairing, golden ratio, typographic details |
+| **Spacing** | Random spacing, no system | Some consistency | 8px grid, clear rhythm | Perfect rhythm, optical balance |
+| **Balance** | Unbalanced, random placement | Mostly balanced | Intentionally balanced, purposeful asymmetry | Perfect balance, sophisticated asymmetry, optical adjustments |
+| **Micro-Details** | No polish, instant transitions | Basic 200ms transitions | Subtle shadows, all states designed | Obsessive detail, 60fps, pixel-perfect |
+
+**Scoring:** 30+ expert, 25-29 advanced, 20-24 intermediate, <20 needs work
+
+### Rapid Quality Checklist (30-second version)
 
 ```yaml
-visual_hierarchy_assessment:
-  scoring_criteria:
-    focal_point_clarity:
-      question: "Can you identify the most important element in <1 second?"
-      excellent: "Immediate - one element clearly dominates (10/10)"
-      good: "Within 2 seconds - clear but not immediate (7-9/10)"
-      poor: "Unclear or multiple competing elements (1-6/10)"
-      test_method: "Show design for 1 second, ask user what they saw first"
+rapid_checks:
+  - "Can you identify the most important element in 1 second? (Hierarchy)"
+  - "Is spacing consistent and follows 8px grid? (System)"
+  - "Do all interactive elements have hover states? (Interaction)"
+  - "Are colors subtle (no pure black #000 or pure white #fff)? (Sophistication)"
+  - "Does it feel polished and professional? (Overall)"
+  - "Is contrast accessible (4.5:1 for text minimum)? (Accessibility)"
+  - "Are animations smooth and 60fps? (Performance)"
+  - "Does it work on mobile (test at 375px width)? (Responsive)"
+  - "Is it vanilla JS/CSS/HTML (no frameworks)? (Technical)"
+  - "Does it work as self-contained HTML file? (Delivery)"
 
-    size_contrast:
-      question: "Is there clear size differentiation between importance levels?"
-      excellent: "Primary 2x+ larger than secondary (10/10)"
-      good: "Primary 1.5x larger, noticeable difference (7-9/10)"
-      poor: "Similar sizes, no clear hierarchy (1-6/10)"
-      test_method: "Measure primary vs secondary element sizes"
-
-    color_contrast:
-      question: "Does color emphasize importance?"
-      excellent: "High contrast for primary (4.5:1+), subtle for secondary (10/10)"
-      good: "Noticeable contrast difference (7-9/10)"
-      poor: "Similar contrast across all elements (1-6/10)"
-      test_method: "Use contrast checker on primary vs secondary elements"
-
-    whitespace_emphasis:
-      question: "Is whitespace used to elevate importance?"
-      excellent: "More space around important elements, creates breathing room (10/10)"
-      good: "Some spatial differentiation (7-9/10)"
-      poor: "Cramped, equal spacing everywhere (1-6/10)"
-      test_method: "Measure spacing around primary vs secondary elements"
-
-    visual_flow:
-      question: "Does the eye naturally flow through the design in intended order?"
-      excellent: "Clear path from entry → primary → secondary → action (10/10)"
-      good: "Mostly clear with minor uncertainty (7-9/10)"
-      poor: "Jumps around, no natural path, confusing (1-6/10)"
-      test_method: "Eye-tracking or ask user to describe viewing order"
-
-  total_score:
-    calculation: "Sum of 5 criteria / 50 × 100"
-    target: "80%+ (excellent), 60-79% (good), <60% (needs improvement)"
-    action_if_poor: "Increase size contrast by 50%, boost primary color saturation, add 16px+ spacing around primary"
+passing_criteria: "8+ out of 10 checks = pass, <8 = needs refinement"
 ```
-
-### 7.2 Aesthetic Sophistication Measurement
-
-```yaml
-aesthetic_sophistication_rubric:
-  color_sophistication:
-    novice: "Primary colors, pure black, no subtlety (1-2 pts) → Learn color theory, use rich darks"
-    intermediate: "Extended palette, some tints/shades (3-4 pts) → Eliminate pure colors, improve harmony"
-    advanced: "Rich darks, subtle tints, harmonious (5-6 pts) → Refine saturation, cultural awareness"
-    expert: "Sophisticated palette, perfect harmony, cultural awareness (7-8 pts)"
-
-  typography_sophistication:
-    novice: "System fonts, no scale, inconsistent (1-2 pts) → Choose 2 fonts, create scale"
-    intermediate: "2 fonts, basic scale, mostly consistent (3-4 pts) → Apply mathematical scale, refine line-height"
-    advanced: "Intentional pairing, mathematical scale, refined spacing (5-6 pts) → Micro-adjustments, optical sizing"
-    expert: "Perfect pairing, golden ratio/perfect fourth scale, typographic details (7-8 pts)"
-
-  spacing_sophistication:
-    novice: "Random spacing, no system (1-2 pts) → Adopt 8px grid, create scale"
-    intermediate: "Some consistency, attempted system (3-4 pts) → Strict 8px grid, progressive logic"
-    advanced: "8px grid throughout, clear rhythm (5-6 pts) → Optical adjustments, golden ratio"
-    expert: "Perfect rhythm, golden ratio or 8px grid, optical balance (7-8 pts)"
-
-  visual_balance:
-    novice: "Unbalanced, random placement (1-2 pts) → Learn grid systems, visual weight"
-    intermediate: "Mostly balanced, some awkward areas (3-4 pts) → Intentional asymmetry, weight distribution"
-    advanced: "Intentionally balanced, purposeful asymmetry (5-6 pts) → Optical balance, sophisticated asymmetry"
-    expert: "Perfect balance, sophisticated asymmetry, optical adjustments (7-8 pts)"
-
-  micro_details:
-    novice: "No polish, harsh edges, instant transitions (1-2 pts) → Add radius, transitions, shadows"
-    intermediate: "Some polish, basic 200ms transitions (3-4 pts) → Refine shadows, animation timing"
-    advanced: "Subtle shadows, smooth transitions, all states designed (5-6 pts) → 60fps, spring easing"
-    expert: "Obsessive detail, buttery 60fps, pixel-perfect, all states polished (7-8 pts)"
-
-  scoring:
-    total: "40 points max (5 categories × 8 pts)"
-    targets: "30+ (expert) | 25-29 (advanced) | 20-24 (intermediate) | <20 (needs work)"
-    action_thresholds:
-      below_20: "Major refinement - revisit fundamentals"
-      20_to_24: "Good foundation - focus on consistency"
-      25_to_29: "Strong work - refine micro-details"
-      30_plus: "Expert level - maintain quality, explore trends"
-```
-
-### 7.3 Polish Level Assessment
-
-**Polish Levels:** See Section 5.2 for detailed 4-level framework (Functional → Refined → Sophisticated → Exceptional)
-
-**Assessment Methods:**
-
-| Test | Method | Pass Criteria |
-|------|--------|---------------|
-| **Squint Test** | Blur design, check balance | Primary element identifiable, balance feels right |
-| **Interaction Test** | Click/hover everything | All interactions smooth and intentional |
-| **Spacing Test** | Measure spacing values | All values follow 8px grid or documented system |
-| **Animation Test** | Check FPS in dev tools | 60fps maintained, timing feels right |
-| **Accessibility Test** | Check contrast, keyboard nav, screen reader | WCAG AA minimum, AAA aspirational |
-
-### 7.4 Brand Personality Alignment
-
-**Assessment Framework (40 points total):**
-
-| Category | Criteria | Scoring |
-|----------|----------|---------|
-| **Visual Personality** (10 pts) | Color/typography/spacing/animations match brand personality | 10=Perfect | 7-9=Good | 4-6=Partial | 1-3=Poor |
-| **Emotional Impact** (10 pts) | First impression, brand values, consistency | 10=Perfect | 7-9=Strong | 4-6=Mixed | 1-3=Wrong |
-| **Audience Resonance** (10 pts) | Appeals to demographics, appropriate complexity | 10=Perfect | 7-9=Good | 4-6=Partial | 1-3=Alienating |
-| **Differentiation** (10 pts) | Visually distinct, unique voice, memorable | 10=Highly distinct | 7-9=Somewhat | 4-6=Low | 1-3=None |
-
-**Targets:** 32+ pts (excellent) | 24-31 pts (good) | <24 pts (needs work)
 
 ---
 
 ## 8. 🏎️ DECISION QUICK REFERENCE
 
-### 8.1 Visual Style Selection Shortcuts
+### Visual Style Selection Shortcuts
 
 ```yaml
-quick_style_guide:
-  by_audience:
-    enterprise_professionals: "→ Minimalist Executive or Professional Classic"
-    young_consumers: "→ Bold Expressive or Playful Creative"
-    general_public: "→ Modern Trendy or Clean Minimalist"
-    creative_industry: "→ Bold Expressive or Playful Creative"
-    technical_users: "→ Data-Dense Professional or Minimalist"
+by_audience:
+  enterprise_professionals: "→ Minimalist Executive or Professional Classic"
+  young_consumers: "→ Bold Expressive or Playful Creative"
+  general_public: "→ Modern Trendy or Clean Minimalist"
+  creative_industry: "→ Bold Expressive or Playful Creative"
 
-  by_industry:
-    finance_legal_healthcare: "→ Professional Classic (trust + authority)"
-    tech_startups: "→ Modern Trendy (innovation + contemporary)"
-    creative_agencies: "→ Bold Expressive (showcase capability)"
-    ecommerce: "→ Modern Trendy or Minimalist (product focus)"
-    enterprise_software: "→ Minimalist Executive or Data-Dense"
+by_industry:
+  finance_legal_healthcare: "→ Professional Classic (trust + authority)"
+  tech_startups: "→ Modern Trendy (innovation + contemporary)"
+  creative_agencies: "→ Bold Expressive (showcase capability)"
+  ecommerce: "→ Modern Trendy or Minimalist (product focus)"
 ```
 
-### 8.2 Color Selection Shortcuts
+### Color Selection Shortcuts
 
 ```yaml
-quick_color_guide:
-  has_brand_colors: "→ Use existing, extend with tints/shades via color wheel"
-  trust_needed: "→ Blue (#2563EB, #1E40AF)"
-  energy_needed: "→ Red/Orange (#EF4444, #F97316)"
-  premium_feel: "→ Purple/Gold (#8B5CF6, #F59E0B) + generous whitespace"
-  natural_organic: "→ Green/Earth tones (#10B981, terracotta)"
-  playful_friendly: "→ Warm colors with high saturation (orange, pink, yellow accents)"
-  no_direction: "→ Start with analogous harmony from color wheel"
+has_brand_colors: "→ Use existing, extend with tints/shades via color wheel"
+trust_needed: "→ Blue (#2563EB, #1E40AF) + complementary orange accents"
+energy_needed: "→ Red/Orange (#EF4444, #F97316) + triadic complements"
+premium_feel: "→ Purple/Gold (#8B5CF6, #F59E0B) + generous whitespace"
+natural_organic: "→ Green (#10B981) + earth tones (terracotta, cream)"
+playful_friendly: "→ Warm colors with high saturation (orange, pink, yellow accents)"
+no_direction: "→ Start with analogous harmony from color wheel"
 ```
 
-### 8.3 Typography Selection Shortcuts
+### Typography Selection Shortcuts
 
 ```yaml
-quick_typography_guide:
-  professional_neutral: "→ Inter + Inter (single font, different weights)"
-  elegant_editorial: "→ Playfair Display + Source Sans Pro"
-  bold_modern: "→ Clash Display + Inter"
-  friendly_approachable: "→ Poppins + Poppins"
-  technical_precise: "→ Roboto + Roboto Mono (for code emphasis)"
-  traditional_trustworthy: "→ Merriweather + Open Sans"
+professional_neutral: "→ Inter + Inter (single font, different weights)"
+elegant_editorial: "→ Playfair Display + Source Sans Pro"
+bold_modern: "→ Clash Display + Inter"
+friendly_approachable: "→ Poppins + Poppins"
+technical_precise: "→ Roboto + Roboto Mono (for code emphasis)"
+traditional_trustworthy: "→ Merriweather + Open Sans"
 
-  scale_selection:
-    professional: "→ 1.333 Perfect Fourth (balanced)"
-    elegant: "→ 1.25 Major Third (subtle)"
-    dramatic: "→ 1.618 Golden Ratio (bold)"
+scale_selection:
+  professional: "→ 1.333 Perfect Fourth (balanced)"
+  elegant: "→ 1.25 Major Third (subtle)"
+  dramatic: "→ 1.618 Golden Ratio (bold)"
 ```
 
-### 8.4 Spacing Selection Shortcuts
+### Spacing Selection Shortcuts
 
 ```yaml
-quick_spacing_guide:
-  standard_professional: "→ 8px grid (8, 16, 24, 32, 48, 64)"
-  dramatic_expressive: "→ Golden ratio (16, 26, 42, 68, 110)"
-  compact_efficient: "→ 4px increments for data-dense (4, 8, 12, 16, 20, 24)"
-  generous_premium: "→ 8px grid with 2x multipliers (16, 32, 64, 96)"
+standard_professional: "→ 8px grid (8, 16, 24, 32, 48, 64)"
+dramatic_expressive: "→ Golden ratio (16, 26, 42, 68, 110)"
+compact_efficient: "→ 4px increments for data-dense (4, 8, 12, 16, 20, 24)"
+generous_premium: "→ 8px grid with 2x multipliers (16, 32, 64, 96)"
 ```
 
-### 8.5 Variant Generation Decision
+### Vanilla CSS Architecture
 
-**Generate Variants When:** Complexity 7+ | User requests | User uncertain | Creative/subjective | High stakes
+**Complete Design Token Structure:**
 
-**Single Implementation When:** User provides mockup | Clear direction | Simple request | $quick mode | Iteration
+```css
+:root {
+  /* Color Tokens */
+  --primary-50: #e3f2fd;
+  --primary-500: #2196f3;
+  --primary-900: #0d47a1;
+  --gray-50: #fafafa;
+  --gray-900: #1a1a1a;
+  
+  /* Semantic Colors */
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+  
+  /* Typography Tokens */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: 'Courier New', monospace;
+  --text-xs: 0.75rem;      /* 12px */
+  --text-sm: 0.875rem;     /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg: 1.125rem;     /* 18px */
+  --text-xl: 1.25rem;      /* 20px */
+  --text-2xl: 1.5rem;      /* 24px */
+  --text-3xl: 1.875rem;    /* 30px */
+  --text-4xl: 2.25rem;     /* 36px */
+  
+  /* Spacing Tokens (8px grid) */
+  --space-1: 0.5rem;       /* 8px */
+  --space-2: 1rem;         /* 16px */
+  --space-3: 1.5rem;       /* 24px */
+  --space-4: 2rem;         /* 32px */
+  --space-6: 3rem;         /* 48px */
+  --space-8: 4rem;         /* 64px */
+  
+  /* Shadow Tokens */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+  --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+  
+  /* Border Radius Tokens */
+  --radius-sm: 0.25rem;    /* 4px */
+  --radius-md: 0.375rem;   /* 6px */
+  --radius-lg: 0.5rem;     /* 8px */
+  --radius-xl: 0.75rem;    /* 12px */
+  --radius-full: 9999px;
+  
+  /* Transition Tokens */
+  --transition-fast: 150ms;
+  --transition-base: 200ms;
+  --transition-slow: 300ms;
+  --easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-**Count:** 3 (simple) | 5 (standard) | 7-10 (complex/high stakes)
+/* Button Component Pattern */
+.btn {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: all var(--transition-base) var(--easing);
+  cursor: pointer;
+  border: none;
+  font-size: var(--text-base);
+}
 
-### 8.6 Quality Gate Checklist (Rapid 30-Second Version)
+.btn-primary {
+  background: var(--primary-500);
+  color: white;
+}
 
-```yaml
-rapid_quality_check:
-  - [ ] Can you identify the most important element in 1 second? (Hierarchy test)
-  - [ ] Is spacing consistent and follows 8px grid? (Spacing test)
-  - [ ] Do all interactive elements have hover states? (Interaction test)
-  - [ ] Are colors subtle (no pure black #000 or pure white #fff)? (Color test)
-  - [ ] Does it feel polished and professional? (Polish test)
-  - [ ] Is contrast accessible (4.5:1 for text minimum)? (Accessibility test)
-  - [ ] Are animations smooth and 60fps? (Performance test)
-  - [ ] Does it work on mobile (test at 375px width)? (Responsive test)
+.btn-primary:hover {
+  background: var(--primary-600);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
 
-  passing_criteria: "6+ out of 8 checks = pass, <6 = needs refinement"
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary-500);
+  border: 2px solid var(--primary-500);
+}
+
+.btn-secondary:hover {
+  background: var(--primary-50);
+}
+
+/* Card Component Pattern */
+.card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-base) var(--easing);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Responsive Grid System */
+.container {
+  width: 100%;
+  padding: var(--space-4);
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .container { max-width: 640px; }
+}
+
+@media (min-width: 768px) {
+  .container { max-width: 768px; }
+}
+
+@media (min-width: 1024px) {
+  .container { max-width: 1024px; }
+}
+
+@media (min-width: 1280px) {
+  .container { max-width: 1280px; }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --gray-50: #1a1a1a;
+    --gray-900: #fafafa;
+  }
+}
+```
+
+### JavaScript Component Pattern
+
+```javascript
+// Modal Component Pattern
+class Modal {
+  constructor(modalId) {
+    this.modal = document.getElementById(modalId);
+    this.overlay = this.modal.querySelector('.modal-overlay');
+    this.closeBtn = this.modal.querySelector('.modal-close');
+    this.init();
+  }
+  
+  init() {
+    this.closeBtn.addEventListener('click', () => this.close());
+    this.overlay.addEventListener('click', () => this.close());
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+        this.close();
+      }
+    });
+  }
+  
+  open() {
+    this.modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    this.trapFocus();
+  }
+  
+  close() {
+    this.modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  
+  trapFocus() {
+    const focusable = this.modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    
+    this.modal.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === first) {
+          last.focus();
+          e.preventDefault();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          first.focus();
+          e.preventDefault();
+        }
+      }
+    });
+  }
+}
+
+// Form Validation Pattern
+class FormValidator {
+  constructor(formId) {
+    this.form = document.getElementById(formId);
+    this.fields = this.form.querySelectorAll('[required]');
+    this.init();
+  }
+  
+  init() {
+    this.fields.forEach(field => {
+      field.addEventListener('blur', () => this.validateField(field));
+    });
+    this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+  }
+  
+  validateField(field) {
+    if (!field.value.trim()) {
+      this.showError(field, 'This field is required');
+      return false;
+    }
+    this.clearError(field);
+    return true;
+  }
+  
+  showError(field, message) {
+    field.classList.add('error');
+    let errorMsg = field.nextElementSibling;
+    if (!errorMsg || !errorMsg.classList.contains('error-message')) {
+      errorMsg = document.createElement('span');
+      errorMsg.className = 'error-message';
+      field.after(errorMsg);
+    }
+    errorMsg.textContent = message;
+  }
+  
+  clearError(field) {
+    field.classList.remove('error');
+    const errorMsg = field.nextElementSibling;
+    if (errorMsg && errorMsg.classList.contains('error-message')) {
+      errorMsg.remove();
+    }
+  }
+  
+  handleSubmit(e) {
+    e.preventDefault();
+    let isValid = true;
+    this.fields.forEach(field => {
+      if (!this.validateField(field)) isValid = false;
+    });
+    if (isValid) {
+      console.log('Form is valid, submitting...');
+      // Submit form logic here
+    }
+  }
+}
 ```
 
 ---
 
-**END OF VISUAL EXCELLENCE**
+**Return to the three pillars when in doubt:** **Hierarchy** (guide the eye), **Harmony** (create cohesion), **Refinement** (obsess over details).
 
-*This document defines the theoretical foundations and decision-making frameworks that guide all design work. For visual reference analysis, pattern extraction, and creative control modes, see **UI Designer - Reference Extraction**.*
-
-*When in doubt, return to the three pillars: **Hierarchy** (guide the eye), **Harmony** (create cohesion), **Refinement** (obsess over details).*
+**Technical Foundation:** All theory translates to vanilla JavaScript, CSS, and HTML - self-contained, framework-free, browser-ready implementations.
