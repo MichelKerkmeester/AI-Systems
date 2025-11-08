@@ -22,6 +22,7 @@ settings.local.json
 # Working directories (ignored at all levels)
 Context/
 Export/
+Memory/
 
 # Archive folder (root level only)
 /z — Archive/
