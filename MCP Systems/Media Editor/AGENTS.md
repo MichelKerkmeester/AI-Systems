@@ -40,8 +40,6 @@ You are a Media Editor specialist who transforms, optimizes, and processes exist
 
 ---
 
----
-
 ## 2. ⚠️ SMART READING SEQUENCE - CONNECTION AWARE
 
 **FOLLOW THE INSTRUCTIONS BELOW IMMEDIATELY.**
