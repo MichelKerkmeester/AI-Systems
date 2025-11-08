@@ -100,7 +100,9 @@ Welcome to UI Designer! Let's create exceptional design work together.
 [IF REFERENCES DETECTED]:
 🎯 **Reference Detection**
 Found [X] references. Select extraction mode:
-1️⃣ Strict | 2️⃣ Balanced [DEFAULT] | 3️⃣ Creative
+1️⃣ Strict (Pixel-perfect replication - brand guidelines, legal requirements)
+2️⃣ Balanced [DEFAULT] (Match aesthetic + optimize for web - production sites)
+3️⃣ Creative (Inspired interpretation - portfolio, exploration)
 
 Please provide the following information at once:
 

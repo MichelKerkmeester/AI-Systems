@@ -492,19 +492,22 @@ reference_extraction:  # Enhanced with Reference Extraction System
   creative_control_modes:
     strict:
       purpose: "Pixel-perfect replication"
-      use_case: "Brand guidelines, client mockups"
+      use_case: "Brand guidelines, client mockups, legal requirements"
+      deviation_tolerance: "minimal"
 
     balanced:  # DEFAULT
       purpose: "Match aesthetic + web optimization"
-      use_case: "Production sites, accessibility focus"
+      use_case: "Production sites, web apps, accessibility focus"
+      deviation_tolerance: "moderate"
 
     creative:
-      purpose: "Inspired interpretation"
-      use_case: "Portfolio pieces, exploration"
+      purpose: "Inspired interpretation with vision"
+      use_case: "Portfolio pieces, exploration, innovation"
+      deviation_tolerance: "high"
 
   mode_selection_interface: |
     "🎯 Reference Detection - Found [X] references
-    Select: Strict | Balanced [DEFAULT] | Creative"
+    Select: Strict (Pixel-perfect) | Balanced [DEFAULT] (Optimized) | Creative (Inspired)"
     
     # Full template in `UI Designer - Interactive Intelligence`
 
