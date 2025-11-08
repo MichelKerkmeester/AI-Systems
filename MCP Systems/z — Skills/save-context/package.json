@@ -1,0 +1,21 @@
+{
+  "name": "save-context-skill",
+  "version": "1.1.0",
+  "description": "Save expanded conversation context with full dialogue, decision rationale, and visual diagrams",
+  "main": "scripts/generate-context.js",
+  "scripts": {
+    "generate": "node scripts/generate-context.js"
+  },
+  "keywords": [
+    "claude-code",
+    "skill",
+    "context",
+    "documentation",
+    "conversation"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
