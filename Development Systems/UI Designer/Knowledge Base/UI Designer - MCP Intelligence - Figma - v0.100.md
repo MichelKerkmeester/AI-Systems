@@ -296,16 +296,6 @@ strict_mode_with_figma:
 
 **Extraction Flow:** Connect → Extract styles → Extract components → Transform to CSS/HTML → Apply creative mode
 
-### System Integration Map
-
-| Document | Relevant Sections |
-|----------|-------------------|
-| `UI Designer - v0.100` | Pre-flight questions, Figma routing |
-| `UI Designer - Reference Extraction` | Creative modes, extraction methodology |
-| `UI Designer - CANVAS Thinking Framework` | Phase C (Concept) - token extraction |
-| `UI Designer - Interactive Intelligence` | Pre-flight questions, state machine |
-| `UI Designer - Visual Excellence` | CSS Variables, fluid responsive design |
-
 ### Troubleshooting
 
 | Issue | Solution |

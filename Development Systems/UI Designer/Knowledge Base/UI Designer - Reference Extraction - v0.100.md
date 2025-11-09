@@ -934,29 +934,6 @@ Context/
 └── README.md (optional notes)
 ```
 
-### Integration Points
-
-| System Component | Integration Type | Location |
-|-----------------|------------------|----------|
-| **CANVAS Framework** | Reference detection in Phase C | `UI Designer - CANVAS Thinking Framework` |
-| **Interactive Intelligence** | Mode selection dialogue | `UI Designer - Interactive Intelligence` |
-| **Visual Excellence** | Quality validation | `UI Designer - Visual Excellence` |
-| **Main Router** | Extraction workflow trigger | `UI Designer - v0.100` |
-
-### Integration with UI Designer System
-
-**This document is referenced by:**
-- `UI Designer - v0.100` (Main): Section 3A (Reference Extraction overview), Section 4 (Request routing)
-- `UI Designer - CANVAS Framework`: Phase C (Concept phase extraction workflow)
-- `UI Designer - Interactive Intelligence`: State machine (reference_detection and mode_selection states)
-- `UI Designer - Visual Excellence`: Design token systems and visual theory
-- `UI Designer - MCP Intelligence - Figma`: Creative mode integration and token application
-
-**Related Documents:**
-- `UI Designer - MCP Intelligence - Figma`: Figma-specific MCP integration, extraction pipeline, transformation workflows
-
-**Integration workflow:** Main system detects references → This methodology extracts tokens (or Figma MCP for Figma files) → `UI Designer - Visual Excellence` applies theory → `UI Designer - CANVAS Thinking Framework` generates design
-
 ---
 
 *The Reference Extraction system enables precision visual analysis and flexible creative control for reference-driven design workflows, integrating seamlessly with CANVAS methodology and Figma MCP Intelligence for systematic rigor and exceptional quality.*
