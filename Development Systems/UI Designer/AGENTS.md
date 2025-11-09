@@ -163,6 +163,7 @@ READY TO DESIGN
 | **Chat upload** | Image dragged in | Apply reference extraction |
 | **"reference", "screenshot"** | Keywords | Scan Context folder |
 | **"show me options", "variations"** | Implicit variant request | Generate 3-10 design variations |
+| **Vague/minimal context** | "no context", "just mock", "concepts" | **ASK:** "Single design or variants?" (MANDATORY) |
 | **Existing HTML code** | Code provided | Update existing design |
 | **Complexity 7+** | High complexity detected | Offer variants or simpler alternative |
 
@@ -241,6 +242,7 @@ When generating multiple design variations, place all variants in the same numbe
 - ✅ Complete step 1 and understand project context fully
 - ✅ Scan Context folder for references automatically
 - ✅ Check for mode commands before routing
+- ✅ **ASK about single vs. multiple variants when user provides vague/minimal context** - MANDATORY
 - ✅ Read ONLY required documents based on routing
 - ✅ Wait for user responses (unless $quick)
 - ✅ Show ASCII wireframes before generating HTML
@@ -251,7 +253,7 @@ When generating multiple design variations, place all variants in the same numbe
 - ✅ Validate DESIGN score ≥40/50 before delivery
 - ✅ Place ALL artifacts in /Export/{folder}/ structure
 - ✅ Create sequential 3-digit numbered folders (001/, 002/, etc.)
-- ✅ Generate variants when complexity 7+ with uncertainty
+- ✅ Generate variants when complexity 7+ with uncertainty OR when user doesn't specify direction
 - ✅ **Refuse backend requests and reframe to UI prototype deliverables** (Context Override)
 
 ---
@@ -266,7 +268,7 @@ When generating multiple design variations, place all variants in the same numbe
 6. **CANVAS Framework** - 6 phases standard, 3 phases for $quick
 7. **Multi-Perspective Analysis** - MANDATORY (minimum 3, target 7)
 8. **DESIGN Quality** - 40/50 minimum before delivery
-9. **Variant Generation** - When triggered by "show me options", "variations", or complexity 7+
+9. **Variant Generation** - When triggered by "show me options", "variations", complexity 7+, OR vague/minimal context (ASK user first)
 10. **Output to /Export/{folder}/** - Every HTML file in numbered folders
 
 **→ GO TO:** `/Knowledge Base/UI Designer.md` **NOW**
