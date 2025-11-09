@@ -133,26 +133,35 @@ if [ -z "$TRANSCRIPT_PATH" ] || [ ! -f "$TRANSCRIPT_PATH" ]; then
   exit 0  # Silently exit
 fi
 
+# ───────────────────────────────────────────────────────────────
+# FIND TARGET SPEC FOLDER OR USE MEMORY FALLBACK
+# ───────────────────────────────────────────────────────────────
+
 # Check if project has specs/ folder
-if [ ! -d "$CWD/specs" ]; then
-  exit 0  # Silently exit
+if [ -d "$CWD/specs" ]; then
+  # Find most recent spec folder
+  SPEC_FOLDER=$(find "$CWD/specs" -maxdepth 1 -type d -name "[0-9][0-9][0-9]-*" 2>/dev/null | sort -r | head -1)
+
+  if [ -n "$SPEC_FOLDER" ]; then
+    SPEC_FOLDER_NAME=$(basename "$SPEC_FOLDER")
+    # Create memory directory inside spec folder
+    CONTEXT_DIR="$SPEC_FOLDER/memory"
+  else
+    # No spec folders found - use fallback "Memory" folder
+    SPEC_FOLDER="$CWD/Memory"
+    SPEC_FOLDER_NAME="Memory"
+    # Memory fallback: save directly in Memory/ without subfolder
+    CONTEXT_DIR="$SPEC_FOLDER"
+  fi
+else
+  # No specs directory - use fallback "Memory" folder
+  SPEC_FOLDER="$CWD/Memory"
+  SPEC_FOLDER_NAME="Memory"
+  # Memory fallback: save directly in Memory/ without subfolder
+  CONTEXT_DIR="$SPEC_FOLDER"
 fi
 
-# ───────────────────────────────────────────────────────────────
-# FIND TARGET SPEC FOLDER
-# ───────────────────────────────────────────────────────────────
-
-# Find most recent spec folder
-SPEC_FOLDER=$(find "$CWD/specs" -maxdepth 1 -type d -name "[0-9][0-9][0-9]-*" 2>/dev/null | sort -r | head -1)
-
-if [ -z "$SPEC_FOLDER" ]; then
-  exit 0  # Silently exit
-fi
-
-SPEC_FOLDER_NAME=$(basename "$SPEC_FOLDER")
-
-# Create memory directory
-CONTEXT_DIR="$SPEC_FOLDER/memory"
+# Create directory
 mkdir -p "$CONTEXT_DIR"
 
 # ───────────────────────────────────────────────────────────────
@@ -192,7 +201,9 @@ if [ ! -f "$SAVE_CONTEXT_SCRIPT" ]; then
 fi
 
 # Execute save-context script (silently)
-# Run in auto-save mode (bypasses alignment prompts, uses single memory/ folder)
+# Run in auto-save mode (bypasses alignment prompts)
+# Spec folders: saves to memory/ subfolder
+# Memory fallback: saves directly to Memory/ folder
 AUTO_SAVE_MODE=true node "$SAVE_CONTEXT_SCRIPT" "$TEMP_JSON" >/dev/null 2>&1
 EXIT_CODE=$?
 
@@ -219,7 +230,11 @@ TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
     echo "Threshold: $CONTEXT_THRESHOLD messages"
   fi
   echo "Session: $SESSION_ID"
-  echo "Target: $SPEC_FOLDER_NAME/memory/"
+  if [ "$SPEC_FOLDER_NAME" = "Memory" ]; then
+    echo "Target: Memory/"
+  else
+    echo "Target: $SPEC_FOLDER_NAME/memory/"
+  fi
   echo "Exit Code: $EXIT_CODE"
   if [ $EXIT_CODE -eq 0 ]; then
     echo "Status: ✅ Success"

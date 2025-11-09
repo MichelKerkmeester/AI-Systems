@@ -22,8 +22,7 @@ fi
 # Configuration
 LOG_DIR="$(dirname "$(dirname "$SCRIPT_DIR")")/logs"
 LOG_FILE="$LOG_DIR/naming-corrections.log"
-# Use environment variable or relative path for style guide
-STYLE_GUIDE="${PROJECT_ROOT:-$HOME/MEGA}/Websites/anobel.com/knowledge/document_style_guide.md"
+STYLE_GUIDE="/Users/michelkerkmeester/MEGA/Websites/anobel.com/knowledge/document_style_guide.md"
 
 # Ensure log directory exists
 mkdir -p "$LOG_DIR"

@@ -85,8 +85,8 @@ fi
 
 SPEC_FOLDER_NAME=$(basename "$SPEC_FOLDER")
 
-# Create context directory if it doesn't exist
-CONTEXT_DIR="$SPEC_FOLDER/context"
+# Create memory directory if it doesn't exist
+CONTEXT_DIR="$SPEC_FOLDER/memory"
 mkdir -p "$CONTEXT_DIR"
 
 # ───────────────────────────────────────────────────────────────
@@ -137,10 +137,12 @@ if [ ! -f "$SAVE_CONTEXT_SCRIPT" ]; then
 fi
 
 # Execute save-context script
-print_message "SAVE" "Auto-saving context to: $SPEC_FOLDER_NAME/context/"
+print_message "SAVE" "Auto-saving context to: $SPEC_FOLDER_NAME/memory/"
 print_line
 
-# Run in auto-save mode (bypasses alignment prompts, uses single context/ folder)
+# Run in auto-save mode (bypasses alignment prompts)
+# Spec folders: saves to memory/ subfolder
+# Memory fallback: saves directly to Memory/ folder
 AUTO_SAVE_MODE=true node "$SAVE_CONTEXT_SCRIPT" "$TEMP_JSON" 2>&1
 
 EXIT_CODE=$?
@@ -153,7 +155,11 @@ print_line
 if [ $EXIT_CODE -eq 0 ]; then
   print_separator
   print_message "SUCCESS" "Context saved successfully!"
-  print_detail "Location: $SPEC_FOLDER_NAME/context/"
+  if [ "$SPEC_FOLDER_NAME" = "Memory" ]; then
+    print_detail "Location: Memory/"
+  else
+    print_detail "Location: $SPEC_FOLDER_NAME/memory/"
+  fi
   print_detail "Trigger: Session ended ($REASON)"
   print_separator
 else

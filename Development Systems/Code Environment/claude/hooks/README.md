@@ -45,10 +45,12 @@ This directory contains hooks that automatically trigger during Claude Code oper
 4. Locates conversation transcript
 5. Transforms transcript to save-context JSON format
 6. Executes generate-context.js script
-7. Saves to most recent spec folder's memory/ directory
+7. Saves to most recent spec folder's memory/ directory (or Memory/ fallback if no specs exist)
 8. Logs trigger reason (keyword vs. context-window)
 
-**Output**: `specs/###-folder/memory/{date}_{time}__{folder}.md`
+**Output**:
+- **With spec folders**: `specs/###-folder/memory/{date}_{time}__{folder}.md`
+- **Without spec folders**: `Memory/{date}_{time}__session_summary.md` (fallback, no subfolder)
 
 **Context Window Calculation**:
 - 200k token context window ≈ 400 messages (500 tokens/message avg)
@@ -310,9 +312,18 @@ User: save conversation
 ```
 
 **Output Location**:
+
+With spec folders:
 ```
 specs/###-most-recent-folder/memory/
 ├── 09-11-25_07-52__folder-name.md
+└── metadata.json
+```
+
+Without spec folders (fallback):
+```
+Memory/
+├── 09-11-25_07-52__session_summary.md
 └── metadata.json
 ```
 
@@ -359,13 +370,14 @@ cat /tmp/test.json
 
 **No specs/ folder**:
 ```bash
-# Create one
-mkdir -p specs/###-topic-name
+# Auto-handled: Creates Memory/ folder as fallback
+# No action needed - works automatically
 ```
 
-**No numbered spec folder**:
+**No numbered spec folder in specs/**:
 ```bash
-# Format must be: ###-name (3 digits)
+# Auto-handled: Creates Memory/ folder as fallback
+# Or manually create spec folder:
 mkdir -p specs/001-my-feature
 ```
 

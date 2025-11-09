@@ -203,7 +203,7 @@ Each should have clear title, narrative explaining what/why, and affected files.
    - Calculate alignment score (0-100%) with spec folder name
    - Threshold: **70%** (strict alignment required)
 5. If alignment < 70%, prompt user to select target folder
-6. If none exist, error: "No spec folder found. Please create one first."
+6. **NEW**: If no spec folder exists, use fallback `Memory/` folder at project root
 
 **Context Alignment**:
 - **Automatic filtering**: Archive folders (`z_*`, `*archive*`, `old*`) excluded from consideration
@@ -238,6 +238,12 @@ Each should have clear title, narrative explaining what/why, and affected files.
 - Used by UserPromptSubmit hook for automatic context saving
 - Always uses most recent spec folder without user interaction
 
+**Edge Case** - No spec folder exists (non-dev contexts):
+- Automatically creates and uses `Memory/` folder at project root
+- Enables skill usage in any project, not just development contexts
+- Structure: `Memory/{date}_{time}__session_summary.md` (no subfolder)
+- Example: Personal notes, research projects, documentation work
+
 ---
 
 ## 6. 📖 RULES
@@ -261,10 +267,10 @@ Each should have clear title, narrative explaining what/why, and affected files.
 
 ### ESCALATE IF
 
-- No spec folder found and user declines creation
 - Cannot create conversation summary (unclear what happened)
 - Script execution fails with errors
 - File write permissions denied
+- Cannot create Memory fallback folder
 
 ---
 
@@ -335,6 +341,29 @@ Each should have clear title, narrative explaining what/why, and affected files.
 
 ---
 
+### Example 3: Non-Development Project (Memory Fallback)
+
+**Context**: Research project without spec folders
+
+**Invocation**: `Skill(skill: "save-context")`
+
+**Output**:
+```
+/Memory/
+├── 09-11-25_18-30__session_summary.md  # Complete session documentation
+└── metadata.json                        # Machine-readable stats
+```
+
+**Markdown File Contains**:
+- Research findings
+- Conversation flow
+- Key decisions and insights
+- Session metadata (1 hour, 0 decisions)
+
+**Use Case**: Personal knowledge management, documentation work, non-code conversations
+
+---
+
 ## 9. 🔧 TROUBLESHOOTING
 
 ### "Low alignment score - what does it mean?"
@@ -362,12 +391,29 @@ Conversation about "authentication improvements"
 
 ---
 
-### "No spec folder found"
+### "Where does it save without spec folders?"
 
-**Solution**:
-1. Run `ls specs/` to verify
-2. Create spec folder: `mkdir -p specs/###-topic`
-3. Re-invoke skill
+**Context**: Using save-context in non-development projects
+
+**Behavior**:
+- Automatically creates `Memory/` folder at project root
+- Saves directly to `Memory/{date}_{time}__session_summary.md`
+- No subfolder - files saved directly in Memory/
+- No prompts or errors - seamless fallback
+
+**Use Cases**:
+- Personal knowledge management
+- Research projects without specs
+- Documentation-only work
+- Non-code conversations
+
+**Example Structure**:
+```
+/my-project/
+└── Memory/
+    ├── 09-11-25_14-23__session_summary.md
+    └── metadata.json
+```
 
 ---
 
@@ -439,12 +485,14 @@ Conversation → Claude Analysis → JSON → Script → Markdown Files
 
 **Invocation**: `Skill(skill: "save-context")`
 
-**Output Location**: `specs/###-feature/memory/`
+**Output Location**:
+- **With spec folders**: `specs/###-feature/memory/`
+- **Without spec folders**: `Memory/` (fallback, no subfolder)
 
 **Files Created**:
 1. **Timestamped Markdown** - `{date}_{time}__{topic}.md`
    - Contains: Session summary, full dialogue, decisions, diagrams
-   - Example: `09-11-25_07-52__feature-name.md`
+   - Example: `09-11-25_07-52__feature-name.md` or `09-11-25_07-52__session_summary.md`
 2. **Metadata JSON** - `metadata.json`
    - Contains: Session stats (message/decision/diagram counts, timestamps)
 

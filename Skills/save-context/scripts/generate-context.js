@@ -544,7 +544,11 @@ async function main() {
     // Build filename: {date}_{time}__{folder-name}.md
     // Dutch format: DD-MM-YY_HH-MM (2-digit year, no seconds)
     // Example: 09-11-25_07-52__skill-refinement.md
-    const folderName = sessionData.SPEC_FOLDER.replace(/^\d+-/, '');
+    // Exception: Memory fallback uses "session_summary" instead of "Memory"
+    let folderName = sessionData.SPEC_FOLDER.replace(/^\d+-/, '');
+    if (folderName === 'Memory') {
+      folderName = 'session_summary';
+    }
     const contextFilename = `${sessionData.DATE}_${sessionData.TIME}__${folderName}.md`;
 
     const files = {
@@ -715,7 +719,10 @@ async function detectSpecFolder(collectedData = null) {
     specFolders = filterArchiveFolders(specFolders);
 
     if (specFolders.length === 0) {
-      throw new Error('No spec folder found. Please create one first.');
+      // No spec folders found - use fallback "Memory" folder
+      const memoryFolder = path.join(CONFIG.PROJECT_ROOT, 'Memory');
+      await fs.mkdir(memoryFolder, { recursive: true });
+      return memoryFolder;
     }
 
     // If no conversation data, use most recent (backward compatible)
@@ -774,12 +781,14 @@ async function detectSpecFolder(collectedData = null) {
     }
 
   } catch (error) {
-    // If error is from promptUser or our logic, re-throw
-    if (error.message.includes('retry attempts') || error.message.includes('No spec folder')) {
+    // If error is from promptUser, re-throw
+    if (error.message.includes('retry attempts')) {
       throw error;
     }
-    // specs directory doesn't exist
-    throw new Error('No spec folder found. Please create one first.');
+    // specs directory doesn't exist - use fallback "Memory" folder
+    const memoryFolder = path.join(CONFIG.PROJECT_ROOT, 'Memory');
+    await fs.mkdir(memoryFolder, { recursive: true });
+    return memoryFolder;
   }
 }
 
@@ -930,13 +939,19 @@ function promptUser(question) {
 }
 
 /**
- * Ensure context directory exists
- * Uses single context/ folder with timestamped markdown files
+ * Ensure memory directory exists
+ * Uses single memory/ folder with timestamped markdown files
+ * Exception: Memory fallback folder saves directly without subfolder
  */
 async function setupContextDirectory(specFolder) {
-  const contextDir = path.join(specFolder, 'context');
+  // Check if using Memory fallback folder
+  const isMemoryFallback = path.basename(specFolder) === 'Memory';
 
-  // Ensure context directory exists (create if needed)
+  // Memory fallback: save directly in Memory/ without subfolder
+  // Spec folders: save in memory/ subfolder
+  const contextDir = isMemoryFallback ? specFolder : path.join(specFolder, 'memory');
+
+  // Ensure directory exists (create if needed)
   // No prompts - files are timestamped so no conflicts
   await fs.mkdir(contextDir, { recursive: true });
 
