@@ -182,6 +182,11 @@ variant_triggers:
       - "what would work"
       - "best approach"
       - "ideas"
+      - "no specific context"
+      - "no requirements"
+      - "just mock"
+      - "exploratory"
+      - "concepts"
 
 variant_count_guidelines:
   simple: "2-3 variants"
@@ -205,8 +210,22 @@ logic:
   elif_complexity_7_plus_and_uncertainty:
     return: [true, "implicit"]
     
+  elif_user_request_lacks_specificity:
+    action: "ASK if they want single design or multiple variants"
+    note: "When user provides minimal context/requirements, ALWAYS offer variant option"
+    
   else:
     return: [false, null]
+
+critical_rule:
+  when_user_doesnt_specify_design_direction:
+    behavior: "ALWAYS ask: 'Would you like me to create a single design or generate 3-5 design variants to explore different approaches?'"
+    rationale: "Philosophy is 'Why design one when you can explore ten?' - give users choice"
+    applies_to:
+      - "Vague requests (no specific style, brand, or direction)"
+      - "Generic mocks without context"
+      - "Exploratory/concept work"
+      - "First-time design requests in a session"
 ```
 
 ---
