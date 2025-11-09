@@ -156,6 +156,27 @@ pattern_confidence_scoring:
     customization: "full"
 ```
 
+### CSS Variables & Design Tokens
+
+**MANDATORY CHECK:** Before generating any CSS, check `/Context/` folder for existing design system files.
+
+```yaml
+variable_workflow:
+  check: "Look for CSS variable files in /Context/ folder"
+  
+  if_found:
+    action: "Ask user: 'Would you like me to use your existing design system from /Context/ or generate new tokens?'"
+    skip_if: "User already specified preference in request"
+    
+  if_confirmed:
+    action: "Use Context folder variables in design"
+    
+  if_declined_or_not_found:
+    action: "Generate new CSS variables following established patterns"
+  
+  reference: "See Visual Excellence → CSS Variables & Fluid Responsive Design"
+```
+
 ### Complexity Detection
 
 ```yaml
@@ -256,6 +277,27 @@ critical_rule:
 6. **Performance Engineer** - Load time, rendering efficiency
 7. **Brand & Emotion** - Psychological impact, trust signals
 
+**CRITICAL TRANSPARENCY REQUIREMENT:**
+AI MUST display multi-perspective analysis to users. Show perspective count + 1-2 sentence key insight per perspective. This builds trust and demonstrates thorough thinking.
+
+**Example Display to User:**
+```markdown
+🔍 **Phase C - Concept**
+Analyzing from 5 perspectives (Visual, UX, Technical, Performance, Brand)
+
+**Key Insights:**
+- **Visual:** Modern glassmorphism with 8pt grid maintains brand consistency
+- **UX:** 3-step journey with progressive disclosure reduces cognitive load 40%
+- **Technical:** Vanilla implementation ensures <1.2s load, zero dependencies
+- **Performance:** 60fps validated, GPU-accelerated animations
+- **Brand:** Professional + approachable balance via smooth easing + subtle bounce
+
+**Synthesis:** Design prioritizes visual excellence, intuitive flow, technical performance
+[Assumes: Design tokens maintained by dev team]
+```
+
+**Template Reference:** See `UI Designer - CANVAS Thinking Framework` Section 7 (🔄 TRANSPARENCY MODEL) for complete communication templates.
+
 ### Four Techniques (Applied Throughout CANVAS)
 
 1. **Perspective Inversion** - Argue FOR design, then AGAINST, synthesize insights
@@ -263,7 +305,7 @@ critical_rule:
 3. **Assumption Audit** - List assumptions, validate or flag with `[Assumes: description]`
 4. **Mechanism First** - Explain WHY before choosing pattern
 
-**User Communication (Concise):**
+**User Communication Summary (At Delivery):**
 ```
 ✅ Multi-perspective analysis (7 perspectives)
 ✅ Assumptions validated (4 flagged)

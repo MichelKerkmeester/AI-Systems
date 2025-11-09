@@ -237,6 +237,12 @@ figma_mcp_workflow:
       - "Map component variants to HTML states"
       - "Extract spacing from Auto Layout"
       - "Generate responsive breakpoints"
+      
+    context_folder_priority:
+      rule: "If /Context/ folder has design system files, ask user preference"
+      question: "Would you like me to use your Context folder design system or Figma tokens?"
+      skip_if: "User already specified in request"
+      reference: "See Visual Excellence → CSS Variables & Fluid Responsive Design"
 
   extraction_pipeline:
     step_1_connect:

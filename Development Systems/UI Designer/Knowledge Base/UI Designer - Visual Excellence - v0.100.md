@@ -283,6 +283,207 @@ scale_generation:
 | **Between sections** | 32px | Major content areas |
 | **Between page sections** | 64px+ | Hero → features → testimonials |
 
+### CSS Variables & Fluid Responsive Design
+
+**MANDATORY PRE-FLIGHT CHECK:** Always check `/Context/` folder for existing CSS variable files (e.g., `*_variables.css`, `fluid-responsive.css`) before creating design tokens.
+
+**Question Logic:** See `UI Designer - Interactive Intelligence` for complete pre-flight question workflow. The AI will ask users about Context folder variables unless already specified.
+
+#### Variable Usage Workflow
+
+```yaml
+variable_workflow:
+  1_check_context:
+    rule: "Check /Context/ folder for CSS variable files"
+    action: "Look for design system files (*_variables.css, fluid-responsive.css)"
+    
+  2_user_preference:
+    rule: "Ask user via Interactive Intelligence pre-flight questions"
+    options:
+      - "Use existing Context folder design system"
+      - "Generate new CSS variables"
+    note: "See Interactive Intelligence for question templates"
+    
+  3_use_context_variables:
+    when: "User confirms to use Context folder variables"
+    action: "Reference variables exactly as defined"
+    example: "background: var(--bg-brand-base);"
+    
+  4_adapt_structure:
+    when: "User wants existing structure with different values"
+    example: "Keep --primary-base structure, change color values for new brand"
+    
+  5_generate_new:
+    when: "No Context variables OR user prefers fresh system"
+    action: "Generate CSS variables following established patterns below"
+```
+
+#### Fluid Responsive Typography System
+
+**Philosophy:** True responsive design scales typography fluidly based on viewport width, not just breakpoints.
+
+**Implementation Pattern:**
+
+```css
+/* Fluid typography formula:
+   font-size = base + (coefficient × viewport-width)
+   
+   Where:
+   - coefficient = (max-size - min-size) / (max-vw - min-vw)
+   - base = (min-size - min-vw × coefficient) / 16
+*/
+
+:root {
+  /* Breakpoint 1: Mobile (1px → 991px) */
+  --font-from-0: 12;
+  --font-to-0: 16;
+  --vw-from-0: calc(1 / 100);
+  --vw-to-0: calc(991 / 100);
+  --coefficient-0: calc((var(--font-to-0) - var(--font-from-0)) / (var(--vw-to-0) - var(--vw-from-0)));
+  --base-0: calc((var(--font-from-0) - var(--vw-from-0) * var(--coefficient-0)) / 16);
+
+  /* Breakpoint 2: Tablet (991px → 1440px) */
+  --font-from-1: 12;
+  --font-to-1: 14;
+  --vw-from-1: calc(991 / 100);
+  --vw-to-1: calc(1440 / 100);
+  --coefficient-1: calc((var(--font-to-1) - var(--font-from-1)) / (var(--vw-to-1) - var(--vw-from-1)));
+  --base-1: calc((var(--font-from-1) - var(--vw-from-1) * var(--coefficient-1)) / 16);
+
+  /* Additional breakpoints... */
+}
+
+html {
+  font-size: calc(var(--base-0) * 1rem + var(--coefficient-0) * 1vw);
+}
+
+@media screen and (max-width: 1440px) {
+  html {
+    font-size: calc(var(--base-1) * 1rem + var(--coefficient-1) * 1vw);
+  }
+}
+```
+
+**When to Use Fluid Typography:**
+- ✅ Long-form content sites
+- ✅ Marketing/portfolio sites
+- ✅ Designs that need to feel smooth across all screen sizes
+- ❌ Data-dense applications (fixed sizes more predictable)
+- ❌ Designs with strict brand guidelines requiring specific sizes
+
+#### CSS Variable Structure Pattern
+
+**Based on barter_variables.css structure:**
+
+```yaml
+variable_organization:
+  1_primitives:
+    description: "Raw color values with scale (0-1400)"
+    example: "--primary-500: #02393e"
+    pattern: "--{color}-{scale}: {hex}"
+    
+  2_semantic_shades:
+    description: "Named references to primitives"
+    example: "--primary-base: var(--primary-500)"
+    pattern: "--{color}-{semantic}: var(--{color}-{scale})"
+    values: [darkest, darker, dark, base, light, lighter, lightest]
+    
+  3_contextual_colors:
+    description: "Purpose-based colors"
+    categories:
+      background: "--bg-brand-base: var(--primary-base)"
+      border: "--border-brand-base: var(--primary-light)"
+      content: "--content-brand-primary: var(--primary-dark)"
+      states: "--bg-positive: var(--positive-lightest)"
+      
+  4_component_tokens:
+    description: "Component-specific variables"
+    example: "--bg-button-enabled-primary: var(--bg-brand-base)"
+    pattern: "--{property}-{component}-{state}-{variant}"
+
+typography_variables:
+  family: "--font-family-primary: 'Outfit', sans-serif"
+  weight: "--font-weight-medium: 500"
+  line_height: "--font-line-height-body: 140%"
+  size: "--font-size-body-base: 1rem"
+
+spacing_variables:
+  pattern: "--spacing-{value}: {rem}"
+  scale: [2, 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, ...]
+  example: "--spacing-16: 1rem"
+
+border_radius:
+  values:
+    - "--border-radius-base: 6px"
+    - "--border-radius-large: 8px"
+    - "--border-radius-display: 16px"
+```
+
+#### Implementation Workflow
+
+```yaml
+workflow_with_context_folder_variables:
+  step_1:
+    action: "Read CSS variable files from /Context/"
+    note: "User has provided their design system"
+    
+  step_2:
+    action: "Understand the variable structure"
+    analyze:
+      - "Color scales and naming"
+      - "Semantic groupings"
+      - "Component-specific tokens"
+      
+  step_3:
+    action: "Use existing variables in your design"
+    implementation: "Reference variables exactly as defined"
+    example: "background: var(--bg-brand-base);"
+    
+  step_4_if_adaptation_requested:
+    action: "Adapt values, keep structure"
+    when: "User wants different colors but same system"
+    example: |
+      /* Keep structure, change colors */
+      --primary-500: #1a73e8;  /* New blue */
+      --primary-base: var(--primary-500);  /* Same semantic structure */
+
+workflow_with_system_defaults:
+  step_1:
+    action: "Generate CSS variables following established patterns"
+    note: "User prefers fresh system or no Context variables exist"
+    
+  step_2:
+    action: "Include in <style> block of HTML"
+    location: "Top of :root selector"
+    
+  step_3:
+    action: "Consider fluid responsive if appropriate"
+    decision: "Long-form content = YES, Data apps = NO"
+```
+
+#### Benefits of This System
+
+**Maintainability:**
+- Single source of truth for design tokens
+- Change one variable, update everywhere
+- Easy theme switching (just swap :root variables)
+
+**Performance:**
+- Zero external dependencies
+- Browser-native CSS custom properties
+- Minimal CSS size
+
+**Consistency:**
+- Enforced design system through variable usage
+- Impossible to use off-brand colors/spacing
+- Semantic naming prevents mistakes
+
+**Fluid Responsive Benefits:**
+- Smooth scaling across all viewport sizes
+- No jarring jumps at breakpoints
+- Better reading experience on any device
+- Professional polish
+
 ### Gestalt Principles - Perception Psychology
 
 **Core Theory:** Humans perceive unified wholes rather than individual parts. Understanding perception enables intuitive interfaces.

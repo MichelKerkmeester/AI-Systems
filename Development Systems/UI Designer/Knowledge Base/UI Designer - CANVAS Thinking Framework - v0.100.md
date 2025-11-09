@@ -480,9 +480,12 @@ reference_extraction:  # Enhanced with Reference Extraction System
     priority: "HIGHEST - Ask FIRST at conversation start unless user already specified"
     questions:
       1: "Should I check the /Context/ folder for design references?"
-      2: "Should I check Figma files using Figma MCP for design specifications?"
-      3: "IF REFERENCES FOUND: Which creativity mode? (Strict/Balanced/Creative)"
+      2: "Should I check the /Context/ folder for existing CSS design variables?"
+      3: "Should I check Figma files using Figma MCP for design specifications?"
+      4: "IF REFERENCES FOUND: Which creativity mode? (Strict/Balanced/Creative)"
+      5: "IF CSS VARIABLES FOUND: Use existing design system or generate new tokens?"
     skip_condition: "User already specified preferences in their initial request"
+    full_templates: "See UI Designer - Interactive Intelligence for complete question templates"
     
   auto_detection:
     priority: "PRIMARY - Execute after user approves in pre-flight questions"
@@ -495,13 +498,15 @@ reference_extraction:  # Enhanced with Reference Extraction System
 
   extraction_workflow:
     step_0: "Ask mandatory pre-flight questions (unless user already specified)"
-    step_1: "Scan Context folder for references IF approved (PNG, JPG, WebP, SVG)"
-    step_2: "Check Figma files via MCP IF approved"
-    step_3: "Detect uploaded images in chat"
-    step_4: "Apply visual analysis with Claude vision"
-    step_5: "Extract design tokens (colors, typography, spacing, effects)"
-    step_6: "Match patterns to component library"
-    step_7: "Ask creative control mode IF references found (unless already specified)"
+    step_1: "Scan Context folder for design references IF approved (PNG, JPG, WebP, SVG)"
+    step_2: "Scan Context folder for CSS variables IF approved (*_variables.css, fluid-responsive.css)"
+    step_3: "Check Figma files via MCP IF approved"
+    step_4: "Detect uploaded images in chat"
+    step_5: "Apply visual analysis with Claude vision"
+    step_6: "Extract design tokens (colors, typography, spacing, effects)"
+    step_7: "Match patterns to component library"
+    step_8: "Ask creative control mode IF references found (unless already specified)"
+    step_9: "Ask CSS variable preference IF variables found (unless already specified)"
 
   creative_control_modes:
     strict:
@@ -526,10 +531,12 @@ reference_extraction:  # Enhanced with Reference Extraction System
     # Full template in `UI Designer - Interactive Intelligence`
 
   workflow_order:
-    0: "ASK mandatory pre-flight questions FIRST (Context folder? Figma MCP?)"
+    0: "ASK mandatory pre-flight questions FIRST (Context folder references? CSS variables? Figma MCP?)"
     1: "Scan for references if approved (Context folder, Figma, uploads)"
-    2: "If found: ASK creative mode → Extract tokens → Proceed with CANVAS"
-    3: "If not found: Standard CANVAS workflow with generated tokens"
+    2: "Scan for CSS variables if approved (Context folder)"
+    3: "If references found: ASK creative mode → Extract tokens"
+    4: "If CSS variables found: ASK user preference (use Context or generate new)"
+    5: "Proceed with CANVAS using chosen tokens/variables"
 
   figma_mcp_integration:
     purpose: "Extract design tokens and components directly from Figma files"
