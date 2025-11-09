@@ -90,7 +90,7 @@ Analyzing from [X] perspectives (Visual Design, UX Flow, Technical, Performance,
 - **Brand/Emotion:** [1-2 sentence insight about personality/feeling]
 
 **Synthesis:** [2-3 sentences explaining how all perspectives inform final design direction]
-[Assumes: X, Y, Z]
+[Assumes: X] [Assumes: Y] [Assumes: Z]
 ```
 
 **DO Show Users:** ✅ Phase progress • Perspective count • Key insights (1-2 sentences each) • Design reasoning • Quality scores • ASCII wireframes • Critical assumptions • Non-obvious insights

@@ -199,234 +199,27 @@ url_workflow:
 
 ### Figma MCP Integration Workflow
 
+**Full Documentation:** See `UI Designer - MCP Intelligence - Figma` for complete Figma MCP capabilities, extraction pipeline, transformation workflows, and creative mode integration.
+
 **MANDATORY QUESTION:** Always ask at conversation start: "Should I check Figma files using Figma MCP for design specifications?" (unless user already specified)
 
-```yaml
-figma_mcp_workflow:
-  purpose: "Extract design tokens, components, and specifications directly from Figma files"
-  
-  trigger:
-    - User specifies Figma file URL/ID in initial request
-    - User says "check Figma" or "use Figma MCP"
-    - AI asks mandatory pre-flight question about Figma
+**Quick Overview:**
+- **Purpose:** Extract design tokens and components directly from Figma files
+- **Connection:** Via Figma MCP server with API token authentication
+- **Operations:** File access, style extraction (colors/typography/effects), component extraction, token generation
+- **Creative Modes:** Strict (≤10%), Balanced (10-25%), Creative (25-50%) deviation
+- **Advantages:** Exact values, component hierarchy, all variants captured, faster than screenshots
 
-  connection_setup:
-    method: "MCP (Model Context Protocol) integration"
-    access: "Via Figma MCP server configured in Claude settings"
-    authentication: "Uses Figma API token configured in MCP settings"
-    
-  supported_operations:
-    file_access:
-      - "Get Figma file by URL or file key"
-      - "List all pages in document"
-      - "Access specific frames/components"
-      
-    component_extraction:
-      - "Extract component definitions"
-      - "Get component properties and variants"
-      - "Access component documentation"
-      
-    style_extraction:
-      - "Extract color styles (fills, strokes)"
-      - "Get typography styles (fonts, sizes, weights, line-heights)"
-      - "Access effect styles (shadows, blurs)"
-      - "Grid and layout styles"
-      
-    token_generation:
-      - "Convert Figma styles to CSS variables"
-      - "Map component variants to HTML states"
-      - "Extract spacing from Auto Layout"
-      - "Generate responsive breakpoints"
-      
-    context_folder_priority:
-      rule: "If /Context/ folder has design system files, ask user preference"
-      question: "Would you like me to use your Context folder design system or Figma tokens?"
-      skip_if: "User already specified in request"
-      reference: "See Visual Excellence → CSS Variables & Fluid Responsive Design"
+**Example Workflow:**
+1. Ask: "Should I check Figma files using Figma MCP?" (if not already specified)
+2. Connect to Figma via MCP: `figma_get_file('ABC123')`
+3. Extract tokens and components
+4. Ask: "Which creative mode? Strict/Balanced/Creative"
+5. Transform Figma data to CSS/HTML
+6. Apply creative mode adjustments
+7. Generate self-contained HTML file
 
-  extraction_pipeline:
-    step_1_connect:
-      action: "Connect to Figma via MCP"
-      commands:
-        - "figma_get_file(file_key: string)"
-        - "figma_list_files()"
-      output: "Figma file structure and metadata"
-      
-    step_2_analyze:
-      action: "Analyze design system"
-      extract:
-        colors:
-          - "Paint styles (solid, gradients)"
-          - "Semantic naming (primary, secondary, etc.)"
-          - "Color tokens with exact hex values"
-          - "Opacity and blend modes"
-          
-        typography:
-          - "Text styles with font families"
-          - "Font sizes, weights, line-heights"
-          - "Letter spacing and text transforms"
-          - "Paragraph spacing"
-          
-        spacing:
-          - "Auto Layout padding and gaps"
-          - "Frame constraints and positioning"
-          - "Component internal spacing"
-          - "Infer spacing scale (4px, 8px, etc.)"
-          
-        components:
-          - "Component structure and hierarchy"
-          - "Variants and properties"
-          - "Instance overrides"
-          - "Component documentation/descriptions"
-          
-        effects:
-          - "Shadow styles (drop, inner)"
-          - "Blur effects"
-          - "Border radius values"
-          - "Stroke styles"
-          
-    step_3_transform:
-      action: "Convert Figma data to web tokens"
-      transformations:
-        - "Figma RGB → CSS hex/rgb/hsl"
-        - "Figma font names → Web-safe font stacks"
-        - "Auto Layout → Flexbox/Grid"
-        - "Component variants → CSS classes/states"
-        - "Effects → CSS box-shadow/filter"
-        
-    step_4_apply:
-      action: "Apply tokens per creative mode"
-      strict_mode:
-        - "Use exact Figma values (≤10% deviation)"
-        - "Preserve all component variants"
-        - "Match typography precisely"
-        - "Replicate all effects"
-        
-      balanced_mode:
-        - "Match aesthetic (10-25% adaptation)"
-        - "Optimize for web performance"
-        - "Simplify complex effects if needed"
-        - "Use semantic HTML over divs"
-        
-      creative_mode:
-        - "Interpret design vision (25-50% freedom)"
-        - "Enhance with web-native patterns"
-        - "Add micro-interactions"
-        - "Improve accessibility"
-
-  figma_specific_features:
-    auto_layout_conversion:
-      figma: "Auto Layout with padding/gap"
-      html: "Flexbox/Grid with gap property"
-      mapping:
-        - "Horizontal → flex-direction: row"
-        - "Vertical → flex-direction: column"
-        - "Space between → justify-content: space-between"
-        - "Hug → fit-content/auto"
-        - "Fill → flex: 1"
-        
-    variant_mapping:
-      figma: "Component with properties (size, state, etc.)"
-      html: "CSS classes + data attributes"
-      example:
-        figma_variant: "Button [Size: Large, State: Hover]"
-        html_output: "<button class='btn btn--large' data-state='hover'>"
-        
-    constraints_to_responsive:
-      figma: "Frame constraints (Left/Right/Center, etc.)"
-      html: "Media queries + flexbox/grid"
-      responsive: "Convert fixed to fluid when appropriate"
-
-  best_practices:
-    preparation:
-      - "Ensure Figma file is organized with named layers"
-      - "Use Figma styles for colors and typography"
-      - "Document components with descriptions"
-      - "Create component variants for states"
-      
-    extraction:
-      - "Start with design system/style guide frame"
-      - "Extract components in logical order"
-      - "Verify color contrast meets WCAG standards"
-      - "Test extracted values in browser"
-      
-    optimization:
-      - "Simplify complex nested structures"
-      - "Consolidate similar styles"
-      - "Remove redundant effects"
-      - "Ensure mobile-friendly sizing"
-
-  common_workflows:
-    brand_guidelines:
-      - "Extract brand colors from style guide"
-      - "Get official typography specs"
-      - "Build design token library"
-      - "Use Strict mode for brand compliance"
-      
-    component_library:
-      - "Extract all component variants"
-      - "Map interaction states"
-      - "Generate HTML component patterns"
-      - "Use Balanced mode for web optimization"
-      
-    design_exploration:
-      - "Get base design tokens"
-      - "Use as inspiration not blueprint"
-      - "Apply Creative mode for reinterpretation"
-      - "Enhance with modern web patterns"
-
-  error_handling:
-    connection_issues:
-      - "Verify Figma MCP server is running"
-      - "Check API token validity"
-      - "Confirm file access permissions"
-      - "Fall back to screenshot extraction if needed"
-      
-    missing_data:
-      - "Handle files without style libraries"
-      - "Infer tokens from actual components"
-      - "Ask user for clarification on ambiguous styles"
-      - "Provide best-effort extraction"
-
-  advantages_over_screenshots:
-    precision: "Exact values, not visual approximation"
-    structure: "Component hierarchy and relationships"
-    states: "All variants captured systematically"
-    documentation: "Component descriptions and notes"
-    efficiency: "Direct API access faster than image analysis"
-    
-  integration_with_creative_modes:
-    strict_mode_with_figma:
-      use_case: "Client deliverables, brand guidelines"
-      approach: "Pixel-perfect Figma replication"
-      deviation: "≤10%"
-      
-    balanced_mode_with_figma:
-      use_case: "Production websites, web apps"
-      approach: "Figma aesthetic + web optimization"
-      deviation: "10-25%"
-      default: true
-      
-    creative_mode_with_figma:
-      use_case: "Portfolio, innovation, exploration"
-      approach: "Figma-inspired with artistic freedom"
-      deviation: "25-50%"
-```
-
-**Example Figma MCP Usage:**
-
-```yaml
-user_request: "Design a button component based on Figma file: https://figma.com/file/ABC123"
-
-ai_workflow:
-  step_1: "Ask: Should I check Figma files using Figma MCP?" (if not already specified)
-  step_2: "Connect to Figma via MCP: figma_get_file('ABC123')"
-  step_3: "Extract button component variants"
-  step_4: "Ask: Which creative mode? Strict/Balanced/Creative"
-  step_5: "Generate HTML button with extracted tokens"
-  step_6: "Apply creative mode adjustments"
-  step_7: "Deliver self-contained HTML file"
-```
+**For complete documentation, see:** `UI Designer - MCP Intelligence - Figma`
 
 ---
 
@@ -1157,9 +950,13 @@ Context/
 - `UI Designer - CANVAS Framework`: Phase C (Concept phase extraction workflow)
 - `UI Designer - Interactive Intelligence`: State machine (reference_detection and mode_selection states)
 - `UI Designer - Visual Excellence`: Design token systems and visual theory
+- `UI Designer - MCP Intelligence - Figma`: Creative mode integration and token application
 
-**Integration workflow:** Main system detects references → This methodology extracts tokens → `UI Designer - Visual Excellence` applies theory → `UI Designer - CANVAS Thinking Framework` generates design
+**Related Documents:**
+- `UI Designer - MCP Intelligence - Figma`: Figma-specific MCP integration, extraction pipeline, transformation workflows
+
+**Integration workflow:** Main system detects references → This methodology extracts tokens (or Figma MCP for Figma files) → `UI Designer - Visual Excellence` applies theory → `UI Designer - CANVAS Thinking Framework` generates design
 
 ---
 
-*The Reference Extraction system enables precision visual analysis and flexible creative control for reference-driven design workflows, integrating seamlessly with CANVAS methodology for systematic rigor and exceptional quality.*
+*The Reference Extraction system enables precision visual analysis and flexible creative control for reference-driven design workflows, integrating seamlessly with CANVAS methodology and Figma MCP Intelligence for systematic rigor and exceptional quality.*

@@ -81,7 +81,15 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 ### **📚 STEP 3: READ SUPPORTING FRAMEWORKS** 
 **ONLY AFTER** completing Steps 1-2, read as needed:
 
-1. **CANVAS Thinking Framework** - `/Knowledge Base/UI Designer - CANVAS Thinking Framework.md`
+1. **Interactive Intelligence** - `/Knowledge Base/UI Designer - Interactive Intelligence.md`
+   - **SKIP if $quick specified**
+   - DEFAULT step-by-step confirmation workflow
+   - Conversation flows and state management
+   - Comprehensive question templates
+   - Phase presentation workflows (Layout → Theme → Animation)
+   - Error recovery and fallback strategies
+
+2. **CANVAS Thinking Framework** - `/Knowledge Base/UI Designer - CANVAS Thinking Framework.md`
    - 6-phase methodology (Concept → Architecture → Navigation → Visual → Animate → Ship)
    - **TRANSPARENCY MODEL (Section 7)** - Templates for showing multi-perspective analysis to users
    - Multi-perspective analysis MANDATORY enforcement (minimum 3, target 7)
@@ -89,7 +97,7 @@ This is your PRIMARY instruction set. Everything else supports this core system.
    - DESIGN quality framework (50-point scale, 40+ minimum)
    - Parallel variant generation workflows
 
-2. **Visual Excellence** - `/Knowledge Base/UI Designer - Visual Excellence.md`
+3. **Visual Excellence** - `/Knowledge Base/UI Designer - Visual Excellence.md`
    - Design philosophy and aesthetic principles
    - Parallel design methodology (when to generate variants)
    - Visual systems theory (typography, color, spacing)
@@ -97,19 +105,18 @@ This is your PRIMARY instruction set. Everything else supports this core system.
    - Pattern selection logic and decision trees
    - Quality assessment frameworks
 
-3. **Reference Extraction** - `/Knowledge Base/UI Designer - Reference Extraction.md`
+4. **Reference Extraction** - `/Knowledge Base/UI Designer - Reference Extraction.md`
    - Context folder auto-scanning workflow
    - Design token extraction (colors, typography, spacing, effects)
    - Creative control modes (Strict, Balanced, Creative)
    - Pattern recognition and confidence scoring
 
-4. **Interactive Intelligence** - `/Knowledge Base/UI Designer - Interactive Intelligence.md`
-   - **SKIP if $quick specified**
-   - DEFAULT step-by-step confirmation workflow
-   - Conversation flows and state management
-   - Comprehensive question templates
-   - Phase presentation workflows (Layout → Theme → Animation)
-   - Error recovery and fallback strategies
+5. **MCP Intelligence - Figma** - `/Knowledge Base/UI Designer - MCP Intelligence - Figma.md`
+   - Figma MCP server integration and setup
+   - 7-step extraction pipeline (Connect → Analyze → Colors → Typography → Spacing → Components → Effects)
+   - Figma to CSS transformation workflows
+   - Creative mode integration for Figma files
+   - Best practices and troubleshooting
 
 ---
 
@@ -139,6 +146,8 @@ Has Mode Command? ─── NO ──→ [Read Interactive Intelligence]
 [$quick: Skip confirmations]
 [$variants: Generate 3-10 options]
 [$fork: Create variation]
+  ↓
+[Read Interactive Intelligence (if not already read)]
   ↓
 [Read CANVAS Framework]
   ↓

@@ -61,6 +61,7 @@
 | **UI Designer - Interactive Intelligence** | Conversation flows, state management |
 | **UI Designer - Visual Excellence** | Design philosophy, aesthetic decisions, quality frameworks |
 | **UI Designer - Reference Extraction** | Visual analysis, token extraction, creative modes |
+| **UI Designer - MCP Intelligence - Figma** | Figma MCP server integration, extraction pipeline, transformation workflows |
 
 ---
 
@@ -77,7 +78,7 @@
 2. **"Should I check Figma files using Figma MCP for design specifications?"**
    - Connects to Figma via MCP integration
    - Extracts design tokens, components, styles from Figma files
-   - See Figma MCP Integration section in Reference Extraction document
+   - See `UI Designer - MCP Intelligence - Figma` for complete documentation
 
 3. **IF REFERENCES FOUND: "Which creativity mode? (Strict/Balanced/Creative)"**
    - **Strict**: Pixel-perfect replication (≤10% deviation)
@@ -90,7 +91,7 @@
 
 **Visual Communication:** User shows → AI extracts tokens → Creative mode applied → Design generated
 
-**Full methodology:** See `UI Designer - Reference Extraction` for complete pipeline, pattern recognition algorithms, style extraction, creative mode specs, deviation reporting, and Figma MCP integration.
+**Full methodology:** See `UI Designer - Reference Extraction` for complete pipeline, pattern recognition algorithms, style extraction, creative mode specs, and deviation reporting. See `UI Designer - MCP Intelligence - Figma` for Figma-specific integration.
 
 ```yaml
 detection_sources:
@@ -383,7 +384,7 @@ Which resonates with your needs?
 4. **Implementation** (5 pts) - Technical execution, performance, responsiveness
 5. **Growth** (5 pts) - Prototype refinement, iteration quality, documentation
 
-**Minimum:** 40/50 total (Q:12, E:12, S:8, I:4, G:3)
+**Minimum:** 40/50 total (Q:12, E:12, S:8, I:4, G:4)
 
 ---
 
@@ -414,7 +415,7 @@ Which resonates with your needs?
 | **Experience** | 15 | 12 | Intuitive? Clear feedback? Error handling? Smooth interactions? |
 | **Structure** | 10 | 8 | Organized? Maintainable? Clear patterns? |
 | **Implementation** | 5 | 4 | Technically sound? Responsive? Performant? |
-| **Growth** | 5 | 3 | Refined? Documented? Iteration-ready? |
+| **Growth** | 5 | 4 | Refined? Documented? Iteration-ready? |
 | **TOTAL** | **50** | **40** | Combined assessment |
 
 **Actions:**

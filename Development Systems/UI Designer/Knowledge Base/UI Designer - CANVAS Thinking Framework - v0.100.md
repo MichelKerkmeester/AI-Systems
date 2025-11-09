@@ -542,7 +542,7 @@ reference_extraction:  # Enhanced with Reference Extraction System
     purpose: "Extract design tokens and components directly from Figma files"
     workflow: "Connect via MCP → Extract styles/components → Transform to web tokens → Apply per creative mode"
     advantages: "Exact values, component hierarchy, variants, documentation"
-    full_details: "See Figma MCP Integration section in `UI Designer - Reference Extraction`"
+    full_details: "See `UI Designer - MCP Intelligence - Figma` for complete documentation"
 
   full_methodology:
     location: "`UI Designer - Reference Extraction`"
@@ -1287,11 +1287,11 @@ design_canvas_integration_check:
     - [ ] Experience (E): 14+/15 (states, flow, feedback, keyboard)
     - [ ] Structure (S): 8+/10 (hierarchy, quality, maintainability)
     - [ ] Implementation (I): 4+/5 (vanilla stack, 60fps, responsive)
-    - [ ] Growth (G): 3+/5 (docs, scalability, reusability)
+    - [ ] Growth (G): 4+/5 (docs, scalability, reusability)
     - [ ] Total Score: ≥40/50 (BLOCKING)
 
   cognitive_rigor:
-    - [ ] Multi-perspective (7 min), Perspective inversion, Constraint reversal
+    - [ ] Multi-perspective (min 3, target 7), Perspective inversion, Constraint reversal
     - [ ] Assumption audit, Mechanism first (WHY before WHAT)
 
   on_fail: "Return to failing phase, complete missing elements, re-validate (max 3 iterations)"
