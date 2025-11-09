@@ -151,8 +151,8 @@ fi
 
 SPEC_FOLDER_NAME=$(basename "$SPEC_FOLDER")
 
-# Create context directory
-CONTEXT_DIR="$SPEC_FOLDER/context"
+# Create memory directory
+CONTEXT_DIR="$SPEC_FOLDER/memory"
 mkdir -p "$CONTEXT_DIR"
 
 # ───────────────────────────────────────────────────────────────
@@ -192,7 +192,7 @@ if [ ! -f "$SAVE_CONTEXT_SCRIPT" ]; then
 fi
 
 # Execute save-context script (silently)
-# Run in auto-save mode (bypasses alignment prompts, uses single context/ folder)
+# Run in auto-save mode (bypasses alignment prompts, uses single memory/ folder)
 AUTO_SAVE_MODE=true node "$SAVE_CONTEXT_SCRIPT" "$TEMP_JSON" >/dev/null 2>&1
 EXIT_CODE=$?
 
@@ -219,7 +219,7 @@ TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
     echo "Threshold: $CONTEXT_THRESHOLD messages"
   fi
   echo "Session: $SESSION_ID"
-  echo "Target: $SPEC_FOLDER_NAME/context/"
+  echo "Target: $SPEC_FOLDER_NAME/memory/"
   echo "Exit Code: $EXIT_CODE"
   if [ $EXIT_CODE -eq 0 ]; then
     echo "Status: ✅ Success"

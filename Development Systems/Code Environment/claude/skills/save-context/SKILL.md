@@ -33,7 +33,7 @@ Preserve comprehensive conversation context in human-readable markdown files. Cr
 **Key Characteristics**:
 - **Triggering**: Automatic via keywords or context threshold (no /clear needed)
 - **Granularity**: Full conversation flow with intelligent summaries
-- **Format**: Human-readable markdown files in `specs/###-feature/context/`
+- **Format**: Human-readable markdown files in `specs/###-feature/memory/`
 - **Detail Level**: Intelligent summaries with key code snippets
 - **Visual Docs**: Auto-generated flowcharts and decision trees
 - **Use Case**: Session documentation and team sharing
@@ -48,12 +48,12 @@ This skill is **standalone** - it does NOT use claude-mem MCP or external memory
 1. Analyze current conversation history
 2. Create structured JSON summary
 3. Run Node.js script to process and generate markdown
-4. Write to `specs/###-feature/context/` folder
+4. Write to `specs/###-feature/memory/` folder
 
 **Output Files**:
 ```
 /specs/###-feature-name/
-└── context/
+└── memory/
     ├── 09-11-25_07-52__feature-name.md  # Complete session documentation
     └── metadata.json                     # Session stats and metadata
 ```
@@ -223,8 +223,8 @@ Each should have clear title, narrative explaining what/why, and affected files.
   Select target folder (1-4): _
   ```
 
-**Behavior** - Single context folder with timestamped files:
-- Always uses single `context/` folder (no versioning)
+**Behavior** - Single memory folder with timestamped files:
+- Always uses single `memory/` folder (no versioning)
 - Creates timestamped markdown files: `{date}_{time}__{topic}.md`
 - Example: `09-11-25_07-52__skill-refinement.md`
 - No conflicts - each save creates a new timestamped file
@@ -244,8 +244,8 @@ Each should have clear title, narrative explaining what/why, and affected files.
 
 ### ALWAYS
 
-- Detect spec folder before creating context
-- Use single `context/` folder with timestamped files
+- Detect spec folder before creating memory documentation
+- Use single `memory/` folder with timestamped files
 - Include `metadata.json` with session stats
 - Preserve timestamps in conversation flow
 - Reference files instead of copying large code blocks
@@ -257,7 +257,7 @@ Each should have clear title, narrative explaining what/why, and affected files.
 - Include sensitive data (passwords, API keys)
 - Skip template validation before writing
 - Proceed if spec folder detection fails
-- Create versioned context folders (always use single context/)
+- Create versioned memory folders (always use single memory/)
 
 ### ESCALATE IF
 
@@ -272,7 +272,7 @@ Each should have clear title, narrative explaining what/why, and affected files.
 
 **Task complete when**:
 - ✅ Auto-detects current spec folder
-- ✅ Creates 2 files in `context/` folder (timestamped .md + metadata.json)
+- ✅ Creates 2 files in `memory/` folder (timestamped .md + metadata.json)
 - ✅ Generates readable, well-formatted comprehensive documentation
 - ✅ Includes accurate timestamps and metadata
 - ✅ Handles edge cases gracefully
@@ -296,7 +296,7 @@ Each should have clear title, narrative explaining what/why, and affected files.
 **Output**:
 ```
 /specs/015-auth-system/
-└── context/
+└── memory/
     ├── 09-11-25_14-23__auth-system.md  # Complete session documentation
     └── metadata.json                    # Machine-readable stats
 ```
@@ -319,7 +319,7 @@ Each should have clear title, narrative explaining what/why, and affected files.
 **Output**:
 ```
 /specs/023-fix-performance/
-└── context/
+└── memory/
     ├── 09-11-25_16-45__fix-performance.md  # Complete session documentation
     └── metadata.json                        # Machine-readable stats
 ```
@@ -439,7 +439,7 @@ Conversation → Claude Analysis → JSON → Script → Markdown Files
 
 **Invocation**: `Skill(skill: "save-context")`
 
-**Output Location**: `specs/###-feature/context/`
+**Output Location**: `specs/###-feature/memory/`
 
 **Files Created**:
 1. **Timestamped Markdown** - `{date}_{time}__{topic}.md`

@@ -378,7 +378,7 @@
       "fileTriggers": {
         "pathPatterns": [
           ".claude/skills/save-context/**",
-          "specs/**/context/**"
+          "specs/**/memory/**"
         ],
         "contentPatterns": [
           "save-context",

@@ -930,13 +930,13 @@ function promptUser(question) {
 }
 
 /**
- * Ensure context directory exists
- * Uses single context/ folder with timestamped markdown files
+ * Ensure memory directory exists
+ * Uses single memory/ folder with timestamped markdown files
  */
 async function setupContextDirectory(specFolder) {
-  const contextDir = path.join(specFolder, 'context');
+  const contextDir = path.join(specFolder, 'memory');
 
-  // Ensure context directory exists (create if needed)
+  // Ensure memory directory exists (create if needed)
   // No prompts - files are timestamped so no conflicts
   await fs.mkdir(contextDir, { recursive: true });
 

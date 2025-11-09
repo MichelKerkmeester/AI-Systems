@@ -45,10 +45,10 @@ This directory contains hooks that automatically trigger during Claude Code oper
 4. Locates conversation transcript
 5. Transforms transcript to save-context JSON format
 6. Executes generate-context.js script
-7. Saves to most recent spec folder's context/ directory
+7. Saves to most recent spec folder's memory/ directory
 8. Logs trigger reason (keyword vs. context-window)
 
-**Output**: `specs/###-folder/context/{date}_{time}__{folder}.md`
+**Output**: `specs/###-folder/memory/{date}_{time}__{folder}.md`
 
 **Context Window Calculation**:
 - 200k token context window ≈ 400 messages (500 tokens/message avg)
@@ -311,7 +311,7 @@ User: save conversation
 
 **Output Location**:
 ```
-specs/###-most-recent-folder/context/
+specs/###-most-recent-folder/memory/
 ├── 09-11-25_07-52__folder-name.md
 └── metadata.json
 ```
