@@ -1,14 +1,15 @@
 #!/bin/bash
 # enforce-markdown-naming.sh
 # PostToolUse hook to automatically enforce markdown filename conventions
-# Based on: knowledge/document_style_guide.md (lines 36-59)
+# Based on: knowledge/document_style_guide.md (lines 36-62)
 #
 # Detects and auto-corrects:
-# - ALL CAPS filenames (except README.md)
+# - ALL CAPS filenames (except README.md and SKILL.md)
 # - Hyphen-separated names
 # - camelCase/PascalCase names
 #
 # Enforces: lowercase snake_case only (e.g., document_name.md)
+# Exceptions: README.md, SKILL.md (in .claude/skills/*/ only)
 
 # Source output helpers for consistent formatting
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -60,9 +61,15 @@ to_snake_case() {
 # Function to check if filename violates naming rules
 is_violation() {
     local filename="$1"
+    local filepath="$2"
 
     # Exception: README.md is always allowed
     if [[ "$filename" == "README.md" ]]; then
+        return 1  # Not a violation
+    fi
+
+    # Exception: SKILL.md is allowed in .claude/skills/*/ directories
+    if [[ "$filename" == "SKILL.md" && "$filepath" =~ \.claude/skills/ ]]; then
         return 1  # Not a violation
     fi
 
@@ -117,7 +124,7 @@ main() {
     local dirname=$(dirname "$file_path")
 
     # Check if violation exists
-    if ! is_violation "$filename"; then
+    if ! is_violation "$filename" "$file_path"; then
         exit 0
     fi
 
@@ -145,11 +152,13 @@ main() {
 ⚠️  MARKDOWN NAMING AUTO-CORRECTED:
    Renamed: $file_path → $corrected_filename
    Reason: Violates document_style_guide.md naming conventions
-   Rule: Only README.md may use ALL CAPS; use lowercase snake_case
-   Reference: $STYLE_GUIDE:37-39
+   Rule: Only README.md and SKILL.md (in .claude/skills/) may use ALL CAPS
+   Enforced: lowercase snake_case for all other markdown files
+   Reference: $STYLE_GUIDE:37-42
 
    ✓ Future markdown files should follow: lowercase_snake_case.md
    ✗ Avoid: ALL_CAPS.md, My-File.md, MyFile.md, myFile.md
+   ✓ Exceptions: README.md, .claude/skills/*/SKILL.md
 
 EOF
         fi

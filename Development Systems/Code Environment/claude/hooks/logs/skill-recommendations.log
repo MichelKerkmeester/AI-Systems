@@ -464,8 +464,6 @@ Prompt: Read: /Users/michelkerkmeester/MEGA/Websites/anobel.com/specs/020-skill-
 🟡 HIGH PRIORITY (Strongly Recommended)
    • save-context
      Save conversation context when completing features or architectural discussions. Preserves full dialogue, decision rationale, visual flowcharts, and file changes for team sharing.
-   • workflow-spec-kit
-     Complete 15-step SpecKit workflow with parallel sub-agents and approval gates
 
 🔵 RELEVANT SKILLS (Consider)
    • document-style-guide
@@ -542,8 +540,6 @@ Prompt: Analyze: /Users/michelkerkmeester/MEGA/Websites/anobel.com/specs/018-ada
      Browser automation, debugging, performance analysis
    • save-context
      Save conversation context when completing features or architectural discussions. Preserves full dialogue, decision rationale, visual flowcharts, and file changes for team sharing.
-   • workflow-spec-kit
-     Complete 15-step SpecKit workflow with parallel sub-agents and approval gates
 
 🔵 RELEVANT SKILLS (Consider)
    • document-style-guide
@@ -645,8 +641,6 @@ Prompt: Save context with save context skill here: /Users/michelkerkmeester/MEGA
 🟡 HIGH PRIORITY (Strongly Recommended)
    • save-context
      Save conversation context when completing features or architectural discussions. Preserves full dialogue, decision rationale, visual flowcharts, and file changes for team sharing.
-   • workflow-spec-kit
-     Complete 15-step SpecKit workflow with parallel sub-agents and approval gates
 
 🔵 RELEVANT SKILLS (Consider)
    • markdown-flowchart
@@ -703,6 +697,29 @@ Prompt: it currently creates [Image #1] context v2. But it should always use the
 [2025-11-08 19:44:56] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Double check everything. Also update readme in save-context ultrathink...
+───────────────────────────────────────────────────────────────
+
+🔴 CRITICAL (Must Apply)
+   • code-standards
+     Naming conventions, file headers, commenting rules (knowledge/code_standards.md)
+   • conversation-documentation
+     Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
+
+🟡 HIGH PRIORITY (Strongly Recommended)
+   • save-context
+     Save conversation context when completing features or architectural discussions. Preserves full dialogue, decision rationale, visual flowcharts, and file changes for team sharing.
+
+🔵 RELEVANT SKILLS (Consider)
+   • document-style-guide
+     Documentation and markdown formatting standards (knowledge/document_style_guide.md)
+
+═══════════════════════════════════════════════════════════════
+
+
+═══════════════════════════════════════════════════════════════
+[2025-11-09 06:01:14] SKILL RECOMMENDATIONS
+───────────────────────────────────────────────────────────────
+Prompt: The save context skill contains output references that dont match reality. We only output 1 session ...
 ───────────────────────────────────────────────────────────────
 
 🔴 CRITICAL (Must Apply)

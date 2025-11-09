@@ -356,7 +356,6 @@
           "document session",
           "save chat",
           "export context",
-          "ultrathink",
           "save memory",
           "preserve memory",
           "conversation documentation",
@@ -373,8 +372,7 @@
           "(document|capture|record).*?(what we (discussed|talked about|did))",
           "(keep|store|save).*?(conversation|discussion|session).*?(history|record)",
           "(export|save).*?(expanded|full|complete).*?(context|conversation)",
-          "(want|need).*?(save|export|preserve).*?(context|conversation)",
-          "ultrathink"
+          "(want|need).*?(save|export|preserve).*?(context|conversation)"
         ]
       },
       "fileTriggers": {
@@ -416,34 +414,6 @@
           "Webflow\\.push",
           "__.*CdnInit"
         ]
-      }
-    },
-    "workflow-spec-kit": {
-      "type": "workflow",
-      "enforcement": "suggest",
-      "priority": "high",
-      "description": "Complete 15-step SpecKit workflow with parallel sub-agents and approval gates",
-      "promptTriggers": {
-        "keywords": [
-          "complete workflow",
-          "full workflow",
-          "end-to-end",
-          "speckit",
-          "orchestration",
-          "spec to implementation",
-          "parallel workflow",
-          "spec plan implement"
-        ],
-        "intentPatterns": [
-          "(run|execute|start).*?(complete|full|entire).*?(workflow|speckit)",
-          "(spec|specification).*?(to|through).*?(implementation|code)",
-          "speckit.*?(complete|workflow|orchestration)",
-          "(plan|implement|build).*?(feature|component).*?(spec|workflow)"
-        ]
-      },
-      "fileTriggers": {
-        "pathPatterns": ["specs/**/", "specs/**/spec.md", "specs/**/plan.md", "specs/**/implementation_plan.md"],
-        "contentPatterns": []
       }
     }
   },

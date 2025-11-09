@@ -2,64 +2,58 @@
 
 Automated workflows and quality checks for Claude Code interactions.
 
-**Version**: 1.0.1
-**Last Updated**: 2025-11-08
+**Version**: 1.2.0
+**Last Updated**: 2025-11-09
 
 ---
 
 ## Overview
 
 This directory contains hooks that automatically trigger during Claude Code operations to:
-- ✅ Auto-save conversation context
+- ✅ Auto-save conversation context (keywords + context threshold)
 - ✅ Suggest relevant skills
 - ✅ Block dangerous commands
 - ✅ Provide quality check reminders
 
 ## Installed Hooks
 
-### SessionEnd Hooks
-
-#### `auto-save-context.sh`
-**Trigger**: When session ends (clear, logout, exit)
-**Action**: Automatically saves conversation context
-
-**How it works**:
-1. Detects session end events
-2. Reads full conversation transcript (JSONL)
-3. Transforms to save-context JSON format
-4. Executes generate-context.js
-5. Saves to most recent spec folder's context/ directory
-
-**Output**: `specs/###-folder/context/{date}_{time}__{folder}.md`
-
-**Behavior**:
-- Silent operation (no user interaction)
-- Only runs if specs/ folder exists
-- Auto-detects most recent spec folder
-- Overwrites existing context automatically
-
----
-
 ### UserPromptSubmit Hooks
 
 #### `save-context-trigger.sh`
-**Trigger**: User types save-context keywords
+**Trigger**: User types save-context keywords OR when 25% context capacity remains (75% used)
 **Action**: Immediately saves conversation context
 
-**Keywords**:
-- "save context", "ultrathink"
-- "save conversation", "export conversation"
-- "document this", "record this"
-- "preserve context", "capture context"
+**Trigger Methods**:
+
+**1. Keyword Triggers**:
+- "save context", "save conversation"
+- "export conversation", "document this"
+- "record this", "preserve context"
+- "capture context"
 - [See full list in script]
 
-**How it works**:
-1. Detects trigger keywords in user prompt
-2. Locates conversation transcript
-3. Transforms and saves (same as SessionEnd hook)
-4. Notifies user of save location
+**2. Automatic Context Window Detection**:
+- Monitors transcript size on every user prompt
+- Automatically triggers when conversation reaches 200 messages (≈75% used, 25% remaining)
+- Prevents context loss by saving before hitting limits
+- Completely automatic - no user intervention required
 
-**Output**: Same as SessionEnd hook
+**How it works**:
+1. On every user prompt, checks for trigger keywords
+2. If no keyword, checks transcript message count
+3. If ≥200 messages, automatically triggers save
+4. Locates conversation transcript
+5. Transforms transcript to save-context JSON format
+6. Executes generate-context.js script
+7. Saves to most recent spec folder's context/ directory
+8. Logs trigger reason (keyword vs. context-window)
+
+**Output**: `specs/###-folder/context/{date}_{time}__{folder}.md`
+
+**Context Window Calculation**:
+- 200k token context window ≈ 400 messages (500 tokens/message avg)
+- 75% used (25% remaining) = 300 messages
+- Conservative setting: 200 messages to account for longer messages
 
 ---
 
@@ -159,10 +153,8 @@ QUALITY CHECK REMINDERS
 ```
 .claude/hooks/
 ├── README.md                              # This file
-├── SessionEnd/
-│   └── auto-save-context.sh               # Auto-save on session end
 ├── UserPromptSubmit/
-│   ├── save-context-trigger.sh            # Keyword-triggered save
+│   ├── save-context-trigger.sh            # Auto-save (keywords + context threshold)
 │   └── validate-skill-activation.sh       # Skill suggestions
 ├── PreToolUse/
 │   └── validate-bash.sh                   # Security validation
@@ -172,6 +164,7 @@ QUALITY CHECK REMINDERS
 │   ├── output-helpers.sh                  # Shared formatting functions
 │   └── transform-transcript.js            # JSONL → JSON transformer
 └── logs/
+    ├── auto-save-context.log              # Auto-save trigger logs
     └── skill-recommendations.log          # Skill suggestion history
 ```
 
@@ -281,17 +274,13 @@ Quality checks: ASYNC, FORM, INITIALIZATION
 ```json
 {
   "hooks": {
-    "SessionEnd": [{
-      "hooks": [{
-        "type": "command",
-        "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/SessionEnd/auto-save-context.sh",
-        "timeout": 120000
-      }]
-    }],
     "UserPromptSubmit": [{
       "hooks": [{
         "type": "command",
         "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/UserPromptSubmit/save-context-trigger.sh"
+      }, {
+        "type": "command",
+        "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/UserPromptSubmit/validate-skill-activation.sh"
       }]
     }]
   }
@@ -304,29 +293,44 @@ Quality checks: ASYNC, FORM, INITIALIZATION
 
 ### Auto-Save Context
 
-**Method 1: On Session End**
-```bash
-# Just run /clear or logout - automatic save!
-/clear
+**Method 1: Automatic Context Window Monitoring (25% Remaining)**
+```
+# Completely automatic - no action required!
+# Hook monitors conversation and auto-saves at 200 messages
+# Triggers when 25% capacity remains (75% used)
+# Prevents context loss in long conversations
 ```
 
-**Method 2: On Keyword**
+**Method 2: Keyword Trigger**
 ```
 User: save context
 # or
-User: ultrathink
+User: save conversation
+# or any other trigger keyword (see save-context-trigger.sh)
 ```
 
 **Output Location**:
 ```
 specs/###-most-recent-folder/context/
-├── 2025-11-08_13-45-30__folder-name.md
+├── 09-11-25_07-52__folder-name.md
 └── metadata.json
+```
+
+**Logs**:
+```
+.claude/hooks/logs/auto-save-context.log
+# Shows trigger reason: keyword vs. context-window
 ```
 
 ### Testing Hooks
 
-**Test SessionEnd**:
+**Test Keyword Detection**:
+```bash
+# Simulate user prompt
+echo '{"prompt": "save context"}' | bash .claude/hooks/UserPromptSubmit/save-context-trigger.sh
+```
+
+**Test Transcript Transformer**:
 ```bash
 # Create test transcript
 echo '{"type":"user","message":{"content":"test"},"timestamp":"2025-11-08T12:00:00Z"}' > /tmp/test.jsonl
@@ -336,12 +340,6 @@ node .claude/hooks/lib/transform-transcript.js /tmp/test.jsonl /tmp/test.json
 
 # Verify output
 cat /tmp/test.json
-```
-
-**Test Keyword Detection**:
-```bash
-# Simulate user prompt
-echo '{"prompt": "save context"}' | bash .claude/hooks/UserPromptSubmit/save-context-trigger.sh
 ```
 
 ---
@@ -428,7 +426,8 @@ User Action
      │
      ▼
 ┌────────────────────────────────────┐
-│  PreUserPromptSubmit Hooks         │
+│  UserPromptSubmit Hooks            │
+│  - save-context-trigger.sh         │
 │  - validate-skill-activation.sh    │
 │  - Can modify/block prompt         │
 └────────┬───────────────────────────┘
@@ -461,19 +460,28 @@ User Action
 ┌────────────────────────────────────┐
 │  Stop Hooks                        │
 │  - After Claude response           │
-└────────┬───────────────────────────┘
-         │
-         ▼
-┌────────────────────────────────────┐
-│  SessionEnd Hooks                  │
-│  - auto-save-context.sh            │
-│  - On /clear, logout, exit         │
 └────────────────────────────────────┘
 ```
 
 ---
 
 ## Version History
+
+### v1.2.0 (2025-11-09)
+- ✅ **REMOVED: SessionEnd hook and /clear trigger logic (doesn't work reliably)**
+- ✅ Auto-save now ONLY triggers via keywords or context window threshold
+- ✅ Simplified triggering mechanism to two reliable methods
+- ✅ Updated all documentation to remove SessionEnd references
+- ✅ Disabled auto-save-context.sh SessionEnd hook
+
+### v1.1.0 (2025-11-09)
+- ✅ **NEW: Automatic Context Window Detection**
+- ✅ Added automatic save trigger when 25% capacity remains (75% used, 200 messages)
+- ✅ Enhanced save-context-trigger.sh with dual-mode triggering (keyword + threshold)
+- ✅ Added detailed trigger reason logging (keyword vs. context-window)
+- ✅ Prevents context loss in long conversations without user intervention
+- ✅ Fixed unhandled promise rejection in generate-context.js entry point
+- ✅ Added TTY safety check to prevent readline spawn errors in non-interactive mode
 
 ### v1.0.1 (2025-11-08)
 - ✅ Added output-helpers.sh shared library for standardized formatting

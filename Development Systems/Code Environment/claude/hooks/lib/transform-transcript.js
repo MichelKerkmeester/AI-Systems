@@ -95,6 +95,17 @@ function extractUserPrompts(transcript) {
     .map(entry => {
       let content = entry.message.content || '';
 
+      // Handle content being an array (Claude Code format)
+      if (Array.isArray(content)) {
+        content = content
+          .filter(part => part.type === 'text')
+          .map(part => part.text)
+          .join('\n');
+      }
+
+      // Ensure content is a string
+      content = String(content || '');
+
       // Truncate if too long
       if (content.length > MAX_PROMPT_LENGTH) {
         content = content.substring(0, MAX_PROMPT_LENGTH) + '... [truncated]';

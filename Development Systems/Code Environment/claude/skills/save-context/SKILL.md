@@ -1,6 +1,6 @@
 ---
 name: save-context
-description: This skill saves expanded conversation context when completing features or architectural discussions. It preserves full dialogue, decision rationale, visual flowcharts, and file changes for team sharing. This skill should be used when wrapping up significant implementation or research sessions that need documentation beyond what claude-mem MCP captures.
+description: This skill saves expanded conversation context when completing features or architectural discussions. It preserves full dialogue, decision rationale, visual flowcharts, and file changes for team sharing. Auto-triggered by keywords (e.g., "save context", "save conversation") or when 25% context capacity remains (75% used).
 allowed-tools: Read, Write, Bash
 ---
 
@@ -8,11 +8,17 @@ allowed-tools: Read, Write, Bash
 
 Preserve comprehensive conversation context in human-readable markdown files. Creates structured documentation with session summaries, full dialogue flow, decisions, and auto-generated flowcharts.
 
+**Auto-Triggering**: Automatically saves when user types trigger keywords OR when conversation reaches 200 messages (≈75% used, 25% remaining).
+
 ---
 
 ## 1. 🎯 WHEN TO USE
 
-**This skill should be used when**:
+**Auto-Triggered By**:
+- **Keywords**: "save context", "save conversation", "document this", "preserve context", etc.
+- **Context Window**: Automatically when conversation reaches 200 messages (≈75% used, 25% remaining)
+
+**Manual Invocation** (when auto-trigger doesn't fire):
 - Completing a significant implementation or research session
 - Wrapping up a complex feature with multiple decisions
 - Documenting an architectural discussion
@@ -25,6 +31,7 @@ Preserve comprehensive conversation context in human-readable markdown files. Cr
 - Real-time progress tracking (use claude-mem instead)
 
 **Key Characteristics**:
+- **Triggering**: Automatic via keywords or context threshold (no /clear needed)
 - **Granularity**: Full conversation flow with intelligent summaries
 - **Format**: Human-readable markdown files in `specs/###-feature/context/`
 - **Detail Level**: Intelligent summaries with key code snippets
@@ -47,10 +54,20 @@ This skill is **standalone** - it does NOT use claude-mem MCP or external memory
 ```
 /specs/###-feature-name/
 └── context/
-    ├── session-summary.md    # Overview, decisions, diagrams
-    ├── conversation-flow.md  # Full timestamped dialogue
-    └── metadata.json         # Session metadata
+    ├── 09-11-25_07-52__feature-name.md  # Complete session documentation
+    └── metadata.json                     # Session stats and metadata
 ```
+
+**Primary Document**: `{date}_{time}__{topic}.md`
+- **Format**: Timestamped markdown file
+- **Naming**: DD-MM-YY_HH-MM__topic.md (Dutch date format, 2-digit year, no seconds)
+- **Topic**: Derived from spec folder name (without number prefix)
+- **Example**: `09-11-25_07-52__adaptive-page-loader.md`
+- **Contains**: Session summary, full dialogue, decisions, diagrams, and analysis
+
+**Metadata File**: `metadata.json`
+- **Purpose**: Machine-readable session statistics
+- **Contains**: Date, time, message count, decision count, diagram count, skill version
 
 **Visual Documentation**:
 - **Workflow Flowchart**: Visual representation of conversation phases
@@ -209,7 +226,7 @@ Each should have clear title, narrative explaining what/why, and affected files.
 **Behavior** - Single context folder with timestamped files:
 - Always uses single `context/` folder (no versioning)
 - Creates timestamped markdown files: `{date}_{time}__{topic}.md`
-- Example: `2025-11-08_18-37-02__skill-refinement.md`
+- Example: `09-11-25_07-52__skill-refinement.md`
 - No conflicts - each save creates a new timestamped file
 
 **Edge Case** - No conversation data:
@@ -218,7 +235,7 @@ Each should have clear title, narrative explaining what/why, and affected files.
 
 **Edge Case** - Auto-save mode (hooks):
 - Set `AUTO_SAVE_MODE=true` environment variable to bypass alignment prompts
-- Used by SessionEnd and UserPromptSubmit hooks for automatic context saving
+- Used by UserPromptSubmit hook for automatic context saving
 - Always uses most recent spec folder without user interaction
 
 ---
@@ -255,8 +272,8 @@ Each should have clear title, narrative explaining what/why, and affected files.
 
 **Task complete when**:
 - ✅ Auto-detects current spec folder
-- ✅ Creates `context/` subfolder with 3 files
-- ✅ Generates readable, well-formatted markdown
+- ✅ Creates 2 files in `context/` folder (timestamped .md + metadata.json)
+- ✅ Generates readable, well-formatted comprehensive documentation
 - ✅ Includes accurate timestamps and metadata
 - ✅ Handles edge cases gracefully
 - ✅ Follows document style guide standards
@@ -280,10 +297,16 @@ Each should have clear title, narrative explaining what/why, and affected files.
 ```
 /specs/015-auth-system/
 └── context/
-    ├── session-summary.md    # Overview, JWT decision, auth diagram
-    ├── conversation-flow.md  # 45-message dialogue
-    └── metadata.json         # 2.5 hours, 3 decisions
+    ├── 09-11-25_14-23__auth-system.md  # Complete session documentation
+    └── metadata.json                    # Machine-readable stats
 ```
+
+**Markdown File Contains**:
+- Overview and summary
+- JWT decision rationale
+- Authentication flow diagram
+- 45-message dialogue
+- Session metadata (2.5 hours, 3 decisions)
 
 **Use Case**: Team lead reviews why JWT was chosen
 
@@ -297,10 +320,16 @@ Each should have clear title, narrative explaining what/why, and affected files.
 ```
 /specs/023-fix-performance/
 └── context/
-    ├── session-summary.md    # Root cause, solution, query diagram
-    ├── conversation-flow.md  # Debugging steps
-    └── metadata.json         # 30 minutes, 2 decisions
+    ├── 09-11-25_16-45__fix-performance.md  # Complete session documentation
+    └── metadata.json                        # Machine-readable stats
 ```
+
+**Markdown File Contains**:
+- Root cause analysis
+- Solution implementation
+- Query optimization diagram
+- Debugging steps
+- Session metadata (30 minutes, 2 decisions)
 
 **Use Case**: Documentation for future similar bugs
 
@@ -374,7 +403,6 @@ Conversation → Claude Analysis → JSON → Script → Markdown Files
 ```
 
 **Pairs With**:
-- `workflow-spec-kit` - Can invoke after `/speckit.implement` completes
 - `git-commit` - Can enhance with commit SHAs in conversation flow
 - `markdown-flowchart` - Can contribute diagrams to output
 
@@ -383,11 +411,11 @@ Conversation → Claude Analysis → JSON → Script → Markdown Files
 ## 11. 📚 REFERENCES
 
 **Templates**:
-- `.claude/skills/save-context/templates/context.template.md`
+- `.claude/skills/save-context/templates/context_template.md`
 
 **Workflow Patterns**:
-- `.claude/skills/save-context/references/workflow-linear-pattern.md`
-- `.claude/skills/save-context/references/workflow-parallel-pattern.md`
+- `.claude/skills/save-context/references/workflow_linear_pattern.md`
+- `.claude/skills/save-context/references/workflow_parallel_pattern.md`
 
 **Script Functions**:
 - `loadCollectedData()` - Loads conversation JSON
@@ -414,9 +442,11 @@ Conversation → Claude Analysis → JSON → Script → Markdown Files
 **Output Location**: `specs/###-feature/context/`
 
 **Files Created**:
-- `session-summary.md` - Comprehensive overview
-- `conversation-flow.md` - Full dialogue
-- `metadata.json` - Session stats
+1. **Timestamped Markdown** - `{date}_{time}__{topic}.md`
+   - Contains: Session summary, full dialogue, decisions, diagrams
+   - Example: `09-11-25_07-52__feature-name.md`
+2. **Metadata JSON** - `metadata.json`
+   - Contains: Session stats (message/decision/diagram counts, timestamps)
 
 **Key Data Structure**:
 ```json

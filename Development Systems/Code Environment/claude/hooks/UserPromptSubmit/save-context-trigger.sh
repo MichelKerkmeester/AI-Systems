@@ -1,13 +1,15 @@
 #!/bin/bash
 
 # ───────────────────────────────────────────────────────────────
-# AUTO SAVE-CONTEXT ON KEYWORD TRIGGER
+# AUTO SAVE-CONTEXT TRIGGER
 # ───────────────────────────────────────────────────────────────
 # UserPromptSubmit hook that automatically saves conversation
-# context when user types trigger keywords
+# context via TWO triggering methods:
+#   1. Keyword detection (e.g., "save context", "save conversation")
+#   2. Context window threshold (75% used, 25% remaining = 200 messages)
 #
-# Version: 1.0.0
-# Last Updated: 2025-11-08
+# Version: 1.2.0
+# Last Updated: 2025-11-09
 # ───────────────────────────────────────────────────────────────
 
 # Source output helpers (completely silent on success)
@@ -49,7 +51,6 @@ TRIGGER_KEYWORDS=(
   "preserve context"
   "capture context"
   "export context"
-  "ultrathink"
   "save memory"
   "preserve memory"
   "document conversation"
@@ -66,14 +67,46 @@ TRIGGER_KEYWORDS=(
 # Check if any keyword matches
 TRIGGERED=false
 MATCHED_KEYWORD=""
+TRIGGER_REASON=""
 
 for keyword in "${TRIGGER_KEYWORDS[@]}"; do
   if echo "$PROMPT_LOWER" | grep -qE "\\b${keyword}\\b"; then
     TRIGGERED=true
     MATCHED_KEYWORD="$keyword"
+    TRIGGER_REASON="keyword"
     break
   fi
 done
+
+# ───────────────────────────────────────────────────────────────
+# CONTEXT WINDOW DETECTION (75% used, 25% remaining)
+# ───────────────────────────────────────────────────────────────
+# NOTE: This is the PRIMARY auto-save mechanism. SessionEnd hooks
+# are disabled as /clear triggers don't work reliably.
+# ───────────────────────────────────────────────────────────────
+
+if [ "$TRIGGERED" = false ] && [ -n "$SESSION_ID" ]; then
+  # Try to find transcript in standard location
+  PROJECT_SLUG=$(echo "$CWD" | sed 's|^/||' | sed 's|/|-|g')
+  TRANSCRIPT_DIR="$HOME/.claude/projects/$PROJECT_SLUG"
+  TRANSCRIPT_PATH=$(find "$TRANSCRIPT_DIR" -name "${SESSION_ID}.jsonl" 2>/dev/null | head -1)
+
+  if [ -f "$TRANSCRIPT_PATH" ]; then
+    # Count messages in transcript (each line is a message)
+    MESSAGE_COUNT=$(wc -l < "$TRANSCRIPT_PATH" 2>/dev/null | tr -d ' ')
+
+    # Context window thresholds
+    # Assuming 200k token context with ~500 tokens/message average
+    # 75% used (25% remaining) = ~300 messages, but being conservative with 200 messages
+    CONTEXT_THRESHOLD=200
+
+    if [ "$MESSAGE_COUNT" -ge "$CONTEXT_THRESHOLD" ]; then
+      TRIGGERED=true
+      TRIGGER_REASON="context-window"
+      MATCHED_KEYWORD="automatic (75% used, 25% remaining)"
+    fi
+  fi
+fi
 
 # If not triggered, allow prompt to proceed
 if [ "$TRIGGERED" = false ]; then
@@ -175,10 +208,16 @@ TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
 {
   echo ""
-  echo "═══════════════════════════════════════════════════════════════"
+  echo "───────────────────────────────────────────────────────────────"
   echo "[$TIMESTAMP] AUTO-SAVE TRIGGERED"
   echo "───────────────────────────────────────────────────────────────"
-  echo "Keyword: '$MATCHED_KEYWORD'"
+  echo "Trigger: $TRIGGER_REASON"
+  if [ "$TRIGGER_REASON" = "keyword" ]; then
+    echo "Keyword: '$MATCHED_KEYWORD'"
+  elif [ "$TRIGGER_REASON" = "context-window" ]; then
+    echo "Reason: Context window 75% used, 25% remaining ($MESSAGE_COUNT messages)"
+    echo "Threshold: $CONTEXT_THRESHOLD messages"
+  fi
   echo "Session: $SESSION_ID"
   echo "Target: $SPEC_FOLDER_NAME/context/"
   echo "Exit Code: $EXIT_CODE"
@@ -187,7 +226,7 @@ TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
   else
     echo "Status: ⚠️  Completed with warnings"
   fi
-  echo "═══════════════════════════════════════════════════════════════"
+  echo "───────────────────────────────────────────────────────────────"
   echo ""
 } >> "$LOG_FILE"
 

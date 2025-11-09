@@ -44,7 +44,9 @@ Based on `knowledge/document_style_guide.md` (lines 36-59):
 
 **Required Format**: `lowercase_snake_case.md`
 
-**Exception**: `README.md` (only allowed ALL CAPS filename)
+**Exceptions**:
+- `README.md` (documentation root files)
+- `SKILL.md` (Claude Code skill definition files in `.claude/skills/*/`)
 
 **Transformation Examples**:
 
@@ -57,6 +59,7 @@ Based on `knowledge/document_style_guide.md` (lines 36-59):
 | `myDocument.md` | `my_document.md` | camelCase |
 | `My-API_Guide.md` | `my_api_guide.md` | Mixed violations |
 | `README.md` | `README.md` | Preserved (exception) |
+| `SKILL.md` | `SKILL.md` | Preserved (exception in .claude/skills/) |
 
 ---
 
@@ -75,6 +78,12 @@ Created: specs/020-feature/README.md
 Result: No correction (valid filename)
 ```
 
+**Scenario 3: SKILL.md Exception**
+```
+Created: .claude/skills/my-skill/SKILL.md
+Result: No correction (valid filename in skills directory)
+```
+
 ---
 
 ## 5. 📖 RULES
@@ -82,7 +91,7 @@ Result: No correction (valid filename)
 ### ALWAYS
 
 - Monitor all Write, Edit, NotebookEdit operations on `.md` files
-- Preserve `README.md` as the only ALL CAPS exception
+- Preserve `README.md` and `SKILL.md` (in `.claude/skills/*/`) as ALL CAPS exceptions
 - Convert to lowercase snake_case format
 - Inject AI notification when corrections occur
 - Log all corrections with timestamps
@@ -92,7 +101,7 @@ Result: No correction (valid filename)
 
 - Rename non-markdown files
 - Block AI operations on rename failure
-- Modify `README.md` filenames
+- Modify `README.md` or `SKILL.md` filenames
 - Change file content (only filename)
 - Interrupt AI workflow
 
@@ -111,7 +120,7 @@ Result: No correction (valid filename)
 - ✅ All markdown files follow lowercase snake_case
 - ✅ Violations detected and corrected automatically
 - ✅ AI receives clear correction notifications
-- ✅ `README.md` exception honored consistently
+- ✅ `README.md` and `SKILL.md` exceptions honored consistently
 - ✅ No workflow interruptions occur
 
 ---
@@ -123,7 +132,6 @@ Result: No correction (valid filename)
 **Pairs With**:
 - `document_style_guide.md` - Source of naming rules
 - `save-context` skill - Documentation workflows
-- `workflow-spec-kit` - Specification generation
 - `git-commit` skill - Clean commit history
 
 **Outputs**:
@@ -135,7 +143,7 @@ Result: No correction (valid filename)
 
 ## 8. 🎯 QUICK REFERENCE
 
-**Valid**: `user_guide.md`, `README.md`
+**Valid**: `user_guide.md`, `README.md`, `SKILL.md` (in `.claude/skills/*/`)
 
 **Invalid**: `USER_GUIDE.md`, `user-guide.md`, `userGuide.md`, `UserGuide.md`
 
@@ -143,4 +151,4 @@ Result: No correction (valid filename)
 
 **Style Guide**: `knowledge/document_style_guide.md` (lines 36-59)
 
-**Core Rule**: Only `README.md` may use ALL CAPS; all other `.md` files must use lowercase snake_case.
+**Core Rule**: Only `README.md` and `SKILL.md` (in skills directories) may use ALL CAPS; all other `.md` files must use lowercase snake_case.

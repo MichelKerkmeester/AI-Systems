@@ -16,7 +16,8 @@ const readline = require('readline');
 // CONFIGURATION
 // ───────────────────────────────────────────────────────────────
 
-// Load configuration from config.json with fallback to defaults
+// Load configuration from config.jsonc with fallback to defaults
+// Documentation comments are placed below the JSON object in config.jsonc
 function loadConfig() {
   const defaultConfig = {
     maxResultPreview: 500,
@@ -24,18 +25,34 @@ function loadConfig() {
     maxToolOutputLines: 100,
     messageTimeWindow: 300000,
     contextPreviewHeadLines: 50,
-    contextPreviewTailLines: 20
+    contextPreviewTailLines: 20,
+    timezoneOffsetHours: 0
   };
 
-  const configPath = path.join(__dirname, '..', 'config.json');
+  const configPath = path.join(__dirname, '..', 'config.jsonc');
 
   try {
     if (fsSync.existsSync(configPath)) {
-      const userConfig = JSON.parse(fsSync.readFileSync(configPath, 'utf-8'));
+      const configContent = fsSync.readFileSync(configPath, 'utf-8');
+
+      // Extract only the JSON portion (everything before the first // comment line)
+      const lines = configContent.split('\n');
+      let jsonEndIndex = lines.length;
+
+      for (let i = 0; i < lines.length; i++) {
+        const trimmedLine = lines[i].trim();
+        if (trimmedLine.startsWith('//')) {
+          jsonEndIndex = i;
+          break;
+        }
+      }
+
+      const jsonContent = lines.slice(0, jsonEndIndex).join('\n');
+      const userConfig = JSON.parse(jsonContent);
       return { ...defaultConfig, ...userConfig };
     }
   } catch (error) {
-    console.warn(`⚠️  Failed to load config.json: ${error.message}`);
+    console.warn(`⚠️  Failed to load config.jsonc: ${error.message}`);
     console.warn('   Using default configuration values');
   }
 
@@ -45,13 +62,14 @@ function loadConfig() {
 const userConfig = loadConfig();
 
 const CONFIG = {
-  SKILL_VERSION: '1.1.0',
+  SKILL_VERSION: '1.2.0',
   MAX_RESULT_PREVIEW: userConfig.maxResultPreview,
   MAX_CONVERSATION_MESSAGES: userConfig.maxConversationMessages,
   MAX_TOOL_OUTPUT_LINES: userConfig.maxToolOutputLines,
   TRUNCATE_FIRST_LINES: userConfig.contextPreviewHeadLines,
   TRUNCATE_LAST_LINES: userConfig.contextPreviewTailLines,
   MESSAGE_TIME_WINDOW: userConfig.messageTimeWindow,
+  TIMEZONE_OFFSET_HOURS: userConfig.timezoneOffsetHours,
   TOOL_PREVIEW_LINES: 10, // lines to show in tool result preview
   TEMPLATE_DIR: path.join(__dirname, '..', 'templates'),
   PROJECT_ROOT: process.cwd(),
@@ -87,7 +105,7 @@ async function loadCollectedData() {
 /**
  * Format timestamp with multiple output formats
  * @param {Date|string} date - Date to format (defaults to current time)
- * @param {string} format - Output format: 'iso' | 'readable' | 'date' | 'time' | 'filename'
+ * @param {string} format - Output format: 'iso' | 'readable' | 'date' | 'time' | 'filename' | 'date-dutch' | 'time-short'
  * @returns {string} Formatted timestamp
  */
 function formatTimestamp(date = new Date(), format = 'iso') {
@@ -99,7 +117,11 @@ function formatTimestamp(date = new Date(), format = 'iso') {
     return formatTimestamp(new Date(), format);
   }
 
-  const isoString = d.toISOString();
+  // Apply timezone offset (convert hours to milliseconds)
+  const offsetMs = CONFIG.TIMEZONE_OFFSET_HOURS * 60 * 60 * 1000;
+  const adjustedDate = new Date(d.getTime() + offsetMs);
+
+  const isoString = adjustedDate.toISOString();
   const [datePart, timePart] = isoString.split('T');
   const timeWithoutMs = timePart.split('.')[0];
 
@@ -113,8 +135,21 @@ function formatTimestamp(date = new Date(), format = 'iso') {
     case 'date':
       return datePart; // 2025-11-08
 
+    case 'date-dutch': {
+      // Dutch format: DD-MM-YY
+      const [year, month, day] = datePart.split('-');
+      const shortYear = year.slice(-2); // Last 2 digits of year
+      return `${day}-${month}-${shortYear}`; // 09-11-25
+    }
+
     case 'time':
       return timeWithoutMs; // 14:30:00
+
+    case 'time-short': {
+      // Short time format: HH-MM (no seconds)
+      const [hours, minutes] = timeWithoutMs.split(':');
+      return `${hours}-${minutes}`; // 14-30
+    }
 
     case 'filename':
       return `${datePart}_${timeWithoutMs.replace(/:/g, '-')}`; // 2025-11-08_14-30-00
@@ -507,7 +542,8 @@ async function main() {
     console.log('📝 Step 8: Populating template...');
 
     // Build filename: {date}_{time}__{folder-name}.md
-    // Example: 2025-11-08_08-51-58__save-context-skill.md
+    // Dutch format: DD-MM-YY_HH-MM (2-digit year, no seconds)
+    // Example: 09-11-25_07-52__skill-refinement.md
     const folderName = sessionData.SPEC_FOLDER.replace(/^\d+-/, '');
     const contextFilename = `${sessionData.DATE}_${sessionData.TIME}__${folderName}.md`;
 
@@ -875,6 +911,11 @@ async function promptUserChoice(question, maxChoice, maxAttempts = 3) {
  * Prompt user for input in terminal
  */
 function promptUser(question) {
+  // Safety check: don't create readline interface if no TTY available
+  if (!process.stdout.isTTY || !process.stdin.isTTY) {
+    throw new Error('Cannot prompt user: No TTY available (running in non-interactive mode)');
+  }
+
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -910,8 +951,8 @@ async function collectSessionData(collectedData, specFolderName = null) {
   const now = new Date();
   // Use provided specFolderName (cached) or detect as fallback
   const folderName = specFolderName || path.basename(await detectSpecFolder());
-  const dateOnly = formatTimestamp(now, 'date');
-  const timeOnly = formatTimestamp(now, 'filename').split('_')[1];
+  const dateOnly = formatTimestamp(now, 'date-dutch');  // DD-MM-YY format
+  const timeOnly = formatTimestamp(now, 'time-short');  // HH-MM format
 
   // Fallback to simulation if no data
   if (!collectedData) {
@@ -2374,7 +2415,7 @@ function classifyDiagramPattern(asciiArt) {
 // ───────────────────────────────────────────────────────────────
 
 async function populateTemplate(templateName, data) {
-  const templatePath = path.join(CONFIG.TEMPLATE_DIR, `${templateName}.template.md`);
+  const templatePath = path.join(CONFIG.TEMPLATE_DIR, `${templateName}_template.md`);
   const template = await fs.readFile(templatePath, 'utf-8');
 
   return renderTemplate(template, data);
@@ -2496,7 +2537,11 @@ function renderTemplate(template, data, parentData = {}) {
 // ───────────────────────────────────────────────────────────────
 
 if (require.main === module) {
-  main();
+  main().catch((error) => {
+    console.error(`❌ Fatal error: ${error.message}`);
+    console.error(error.stack);
+    process.exit(1);
+  });
 }
 
 module.exports = { main, detectSpecFolder, collectSessionData };

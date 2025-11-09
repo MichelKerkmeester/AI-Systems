@@ -37,7 +37,9 @@ Content here...
 **Markdown files MUST follow these naming rules:**
 - **Use lowercase snake_case**: `document_name.md`, `api_reference.md`, `user_guide.md`
 - **Never use ALL CAPS**: ❌ `SUMMARY.md`, ❌ `CHANGELOG.md`, ❌ `LICENSE.md`
-- **Exception**: ✅ `README.md` is the ONLY allowed ALL CAPS filename
+- **Exceptions**:
+  - ✅ `README.md` (documentation root files)
+  - ✅ `SKILL.md` (Claude Code skill definition files in `.claude/skills/*/`)
 - **Use descriptive names**: `animation_libraries.md` instead of `anim.md`
 - **Separate words with underscores**: `document_style_guide.md` not `documentstyleguide.md`
 
@@ -45,17 +47,18 @@ Content here...
 ```
 ✅ CORRECT:
 - README.md (exception allowed)
+- .claude/skills/my-skill/SKILL.md (exception allowed)
 - document_style_guide.md
 - knowledge_base.md
 - save_context_skill.md
 - api_reference.md
 
 ❌ WRONG:
-- SUMMARY.md
-- CHANGELOG.md
-- DocumentStyleGuide.md
-- document-style-guide.md
-- documentStyleGuide.md
+- SUMMARY.md (use summary.md)
+- CHANGELOG.md (use changelog.md)
+- DocumentStyleGuide.md (use document_style_guide.md)
+- document-style-guide.md (use underscores, not hyphens)
+- documentStyleGuide.md (use snake_case, not camelCase)
 ```
 
 ---

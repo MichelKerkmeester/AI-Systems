@@ -499,37 +499,37 @@ This skill includes comprehensive reference examples in the `references/` direct
 
 ### Reference Examples Library
 
-**1. Simple Workflow** (`references/simple-workflow.md`)
+**1. Simple Workflow** (`references/simple_workflow.md`)
 - **Pattern**: Linear Sequential Flow
 - **Use Case**: User registration process
 - **Complexity**: Low
 - **Demonstrates**: Basic top-to-bottom flow with context annotations
 
-**2. Parallel Execution** (`references/parallel-execution.md`)
+**2. Parallel Execution** (`references/parallel_execution.md`)
 - **Pattern**: Parallel Execution with Synchronization
 - **Use Case**: CI/CD deployment pipeline with parallel tests
 - **Complexity**: Medium-High
 - **Demonstrates**: Concurrent tasks, sync points, approval gates
 
-**3. User Onboarding** (`references/user-onboarding.md`)
+**3. User Onboarding** (`references/user_onboarding.md`)
 - **Pattern**: Nested Sub-Process
 - **Use Case**: Complete app onboarding with embedded multi-step forms
 - **Complexity**: High
 - **Demonstrates**: Nested processes, celebration moments, progressive disclosure
 
-**4. Decision Tree Flow** (`references/decision-tree-flow.md`)
+**4. Decision Tree Flow** (`references/decision_tree_flow.md`)
 - **Pattern**: Complex Decision Branch
 - **Use Case**: E-commerce order processing system
 - **Complexity**: High
 - **Demonstrates**: Multiple decisions, error handling, retry logic, alternative paths
 
-**5. Approval Workflow with Loops** (`references/approval-workflow-loops.md`)
+**5. Approval Workflow with Loops** (`references/approval_workflow_loops.md`)
 - **Pattern**: Loop/Iteration + Approval Gates
 - **Use Case**: Marketing content approval with revision cycles
 - **Complexity**: High
 - **Demonstrates**: Multi-stage approval, loop-back mechanisms, escalation paths
 
-**6. System Architecture Swimlane** (`references/system-architecture-swimlane.md`)
+**6. System Architecture Swimlane** (`references/system_architecture_swimlane.md`)
 - **Pattern**: Swimlane Diagram
 - **Use Case**: Microservices authentication and data flow
 - **Complexity**: High
@@ -539,12 +539,12 @@ This skill includes comprehensive reference examples in the `references/` direct
 
 | Your Need | See Example | Key Features |
 |-----------|-------------|--------------|
-| Simple step-by-step | simple-workflow.md | Clear sequence, timing info |
-| Parallel tasks | parallel-execution.md | Sync points, concurrent execution |
-| Nested complexity | user-onboarding.md | Sub-processes, celebrations |
-| Multiple decisions | decision-tree-flow.md | Branching logic, error paths |
-| Review cycles | approval-workflow-loops.md | Loops, escalation, iterations |
-| System architecture | system-architecture-swimlane.md | Layers, components, data flow |
+| Simple step-by-step | simple_workflow.md | Clear sequence, timing info |
+| Parallel tasks | parallel_execution.md | Sync points, concurrent execution |
+| Nested complexity | user_onboarding.md | Sub-processes, celebrations |
+| Multiple decisions | decision_tree_flow.md | Branching logic, error paths |
+| Review cycles | approval_workflow_loops.md | Loops, escalation, iterations |
+| System architecture | system_architecture_swimlane.md | Layers, components, data flow |
 
 ### Inline Example: Simple Decision Flow
 
@@ -672,7 +672,7 @@ Every decision branch must show all possible outcomes. Don't leave paths unlabel
 
 **Error Handling**: Nest error handlers with retry logic inside decision branches
 
-**For detailed examples of these techniques**, see `references/system-architecture-swimlane.md` and `references/approval-workflow-loops.md` which demonstrate production implementations.
+**For detailed examples of these techniques**, see `references/system_architecture_swimlane.md` and `references/approval_workflow_loops.md` which demonstrate production implementations.
 
 ---
 
@@ -685,7 +685,6 @@ Every decision branch must show all possible outcomes. Don't leave paths unlabel
 - **Architecture reviews** - For system flow documentation
 
 ### Pairs With
-- **workflow-spec-kit** - Visualizing the 15-step workflow
 - **git-worktrees** - Documenting branch strategies
 - **Project documentation** - Process guides and READMEs
 
