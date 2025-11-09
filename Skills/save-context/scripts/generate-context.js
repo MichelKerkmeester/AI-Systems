@@ -16,7 +16,8 @@ const readline = require('readline');
 // CONFIGURATION
 // ───────────────────────────────────────────────────────────────
 
-// Load configuration from config.json with fallback to defaults
+// Load configuration from config.jsonc with fallback to defaults
+// Documentation comments are placed below the JSON object in config.jsonc
 function loadConfig() {
   const defaultConfig = {
     maxResultPreview: 500,
@@ -24,18 +25,34 @@ function loadConfig() {
     maxToolOutputLines: 100,
     messageTimeWindow: 300000,
     contextPreviewHeadLines: 50,
-    contextPreviewTailLines: 20
+    contextPreviewTailLines: 20,
+    timezoneOffsetHours: 0
   };
 
-  const configPath = path.join(__dirname, '..', 'config.json');
+  const configPath = path.join(__dirname, '..', 'config.jsonc');
 
   try {
     if (fsSync.existsSync(configPath)) {
-      const userConfig = JSON.parse(fsSync.readFileSync(configPath, 'utf-8'));
+      const configContent = fsSync.readFileSync(configPath, 'utf-8');
+
+      // Extract only the JSON portion (everything before the first // comment line)
+      const lines = configContent.split('\n');
+      let jsonEndIndex = lines.length;
+
+      for (let i = 0; i < lines.length; i++) {
+        const trimmedLine = lines[i].trim();
+        if (trimmedLine.startsWith('//')) {
+          jsonEndIndex = i;
+          break;
+        }
+      }
+
+      const jsonContent = lines.slice(0, jsonEndIndex).join('\n');
+      const userConfig = JSON.parse(jsonContent);
       return { ...defaultConfig, ...userConfig };
     }
   } catch (error) {
-    console.warn(`⚠️  Failed to load config.json: ${error.message}`);
+    console.warn(`⚠️  Failed to load config.jsonc: ${error.message}`);
     console.warn('   Using default configuration values');
   }
 
@@ -45,13 +62,14 @@ function loadConfig() {
 const userConfig = loadConfig();
 
 const CONFIG = {
-  SKILL_VERSION: '1.1.0',
+  SKILL_VERSION: '1.2.0',
   MAX_RESULT_PREVIEW: userConfig.maxResultPreview,
   MAX_CONVERSATION_MESSAGES: userConfig.maxConversationMessages,
   MAX_TOOL_OUTPUT_LINES: userConfig.maxToolOutputLines,
   TRUNCATE_FIRST_LINES: userConfig.contextPreviewHeadLines,
   TRUNCATE_LAST_LINES: userConfig.contextPreviewTailLines,
   MESSAGE_TIME_WINDOW: userConfig.messageTimeWindow,
+  TIMEZONE_OFFSET_HOURS: userConfig.timezoneOffsetHours,
   TOOL_PREVIEW_LINES: 10, // lines to show in tool result preview
   TEMPLATE_DIR: path.join(__dirname, '..', 'templates'),
   PROJECT_ROOT: process.cwd(),
@@ -87,7 +105,7 @@ async function loadCollectedData() {
 /**
  * Format timestamp with multiple output formats
  * @param {Date|string} date - Date to format (defaults to current time)
- * @param {string} format - Output format: 'iso' | 'readable' | 'date' | 'time' | 'filename'
+ * @param {string} format - Output format: 'iso' | 'readable' | 'date' | 'time' | 'filename' | 'date-dutch' | 'time-short'
  * @returns {string} Formatted timestamp
  */
 function formatTimestamp(date = new Date(), format = 'iso') {
@@ -99,7 +117,11 @@ function formatTimestamp(date = new Date(), format = 'iso') {
     return formatTimestamp(new Date(), format);
   }
 
-  const isoString = d.toISOString();
+  // Apply timezone offset (convert hours to milliseconds)
+  const offsetMs = CONFIG.TIMEZONE_OFFSET_HOURS * 60 * 60 * 1000;
+  const adjustedDate = new Date(d.getTime() + offsetMs);
+
+  const isoString = adjustedDate.toISOString();
   const [datePart, timePart] = isoString.split('T');
   const timeWithoutMs = timePart.split('.')[0];
 
@@ -113,8 +135,21 @@ function formatTimestamp(date = new Date(), format = 'iso') {
     case 'date':
       return datePart; // 2025-11-08
 
+    case 'date-dutch': {
+      // Dutch format: DD-MM-YY
+      const [year, month, day] = datePart.split('-');
+      const shortYear = year.slice(-2); // Last 2 digits of year
+      return `${day}-${month}-${shortYear}`; // 09-11-25
+    }
+
     case 'time':
       return timeWithoutMs; // 14:30:00
+
+    case 'time-short': {
+      // Short time format: HH-MM (no seconds)
+      const [hours, minutes] = timeWithoutMs.split(':');
+      return `${hours}-${minutes}`; // 14-30
+    }
 
     case 'filename':
       return `${datePart}_${timeWithoutMs.replace(/:/g, '-')}`; // 2025-11-08_14-30-00
@@ -432,9 +467,9 @@ async function main() {
     const collectedData = await loadCollectedData();
     console.log(`   ✓ Loaded data from ${collectedData ? 'data file' : 'simulation'}\n`);
 
-    // Step 2: Detect spec folder (cache result to avoid redundant I/O)
+    // Step 2: Detect spec folder with context alignment
     console.log('📁 Step 2: Detecting spec folder...');
-    const specFolder = await detectSpecFolder();
+    const specFolder = await detectSpecFolder(collectedData);
     const specFolderName = path.basename(specFolder);
     console.log(`   ✓ Using: ${specFolder}\n`);
 
@@ -507,7 +542,8 @@ async function main() {
     console.log('📝 Step 8: Populating template...');
 
     // Build filename: {date}_{time}__{folder-name}.md
-    // Example: 2025-11-08_08-51-58__save-context-skill.md
+    // Dutch format: DD-MM-YY_HH-MM (2-digit year, no seconds)
+    // Example: 09-11-25_07-52__skill-refinement.md
     const folderName = sessionData.SPEC_FOLDER.replace(/^\d+-/, '');
     const contextFilename = `${sessionData.DATE}_${sessionData.TIME}__${folderName}.md`;
 
@@ -654,7 +690,7 @@ async function main() {
 // SPEC FOLDER DETECTION
 // ───────────────────────────────────────────────────────────────
 
-async function detectSpecFolder() {
+async function detectSpecFolder(collectedData = null) {
   const cwd = process.cwd();
 
   // Check if we're in a spec folder
@@ -665,24 +701,206 @@ async function detectSpecFolder() {
     }
   }
 
-  // Find most recent spec folder
+  // Find spec folders
   const specsDir = path.join(CONFIG.PROJECT_ROOT, 'specs');
 
   try {
     const entries = await fs.readdir(specsDir);
-    const specFolders = entries
+    let specFolders = entries
       .filter(name => /^\d{3}-/.test(name))
       .sort()
       .reverse();
 
-    if (specFolders.length > 0) {
+    // Filter out archive folders
+    specFolders = filterArchiveFolders(specFolders);
+
+    if (specFolders.length === 0) {
+      throw new Error('No spec folder found. Please create one first.');
+    }
+
+    // If no conversation data, use most recent (backward compatible)
+    if (!collectedData || specFolders.length === 1) {
       return path.join(specsDir, specFolders[0]);
     }
+
+    // Skip alignment check in auto-save mode (hooks use this)
+    if (process.env.AUTO_SAVE_MODE === 'true') {
+      return path.join(specsDir, specFolders[0]);
+    }
+
+    // Context alignment check
+    const conversationTopics = extractConversationTopics(collectedData);
+    const mostRecent = specFolders[0];
+    const alignmentScore = calculateAlignmentScore(conversationTopics, mostRecent);
+
+    // If alignment is strong enough, auto-select most recent
+    if (alignmentScore >= ALIGNMENT_CONFIG.THRESHOLD) {
+      return path.join(specsDir, mostRecent);
+    }
+
+    // Low alignment - prompt user to choose
+    console.log(`\n   ⚠️  Conversation topic may not align with most recent spec folder`);
+    console.log(`   Most recent: ${mostRecent} (${alignmentScore}% match)\n`);
+
+    // Calculate scores for top alternatives
+    const alternatives = specFolders.slice(0, Math.min(5, specFolders.length)).map(folder => ({
+      folder,
+      score: calculateAlignmentScore(conversationTopics, folder)
+    }));
+
+    // Sort by score descending
+    alternatives.sort((a, b) => b.score - a.score);
+
+    // Display options
+    console.log('   Alternative spec folders:');
+    alternatives.forEach((alt, index) => {
+      console.log(`   ${index + 1}. ${alt.folder} (${alt.score}% match)`);
+    });
+    console.log(`   ${alternatives.length + 1}. Specify custom folder path\n`);
+
+    // Prompt user
+    const choice = await promptUserChoice(
+      `   Select target folder (1-${alternatives.length + 1}): `,
+      alternatives.length + 1
+    );
+
+    // Handle choice
+    if (choice <= alternatives.length) {
+      return path.join(specsDir, alternatives[choice - 1].folder);
+    } else {
+      // Custom folder path
+      const customPath = await promptUser('   Enter spec folder name: ');
+      return path.join(specsDir, customPath);
+    }
+
   } catch (error) {
+    // If error is from promptUser or our logic, re-throw
+    if (error.message.includes('retry attempts') || error.message.includes('No spec folder')) {
+      throw error;
+    }
     // specs directory doesn't exist
+    throw new Error('No spec folder found. Please create one first.');
+  }
+}
+
+// ───────────────────────────────────────────────────────────────
+// TOPIC EXTRACTION & ALIGNMENT
+// ───────────────────────────────────────────────────────────────
+
+/**
+ * Configuration for alignment checking
+ */
+const ALIGNMENT_CONFIG = {
+  THRESHOLD: 70, // Require 70% match before auto-selecting
+  ARCHIVE_PATTERNS: ['z_', 'archive', 'old', '.archived'],
+  STOPWORDS: ['the', 'this', 'that', 'with', 'for', 'and', 'from', 'fix', 'update', 'add', 'remove']
+};
+
+/**
+ * Extract conversation topics from collected data
+ * @param {Object} collectedData - Conversation data structure
+ * @returns {Array<string>} Array of topic keywords
+ */
+function extractConversationTopics(collectedData) {
+  const topics = new Set();
+
+  // Extract from recent_context.request (primary signal)
+  if (collectedData.recent_context?.[0]?.request) {
+    const request = collectedData.recent_context[0].request.toLowerCase();
+    const words = request.match(/\b[a-z]{3,}\b/gi) || [];
+    words.forEach(w => topics.add(w.toLowerCase()));
   }
 
-  throw new Error('No spec folder found. Please create one first.');
+  // Extract from observation titles (secondary signal)
+  if (collectedData.observations) {
+    for (const obs of collectedData.observations.slice(0, 3)) {
+      if (obs.title) {
+        const words = obs.title.match(/\b[a-z]{3,}\b/gi) || [];
+        words.forEach(w => topics.add(w.toLowerCase()));
+      }
+    }
+  }
+
+  // Filter stopwords and short words
+  return Array.from(topics).filter(t =>
+    !ALIGNMENT_CONFIG.STOPWORDS.includes(t) && t.length >= 3
+  );
+}
+
+/**
+ * Parse spec folder name to extract topic keywords
+ * @param {string} folderName - e.g., "015-auth-system"
+ * @returns {Array<string>} Topic keywords ["auth", "system"]
+ */
+function parseSpecFolderTopic(folderName) {
+  // Remove numeric prefix: "015-auth-system" → "auth-system"
+  const topic = folderName.replace(/^\d+-/, '');
+  // Split on hyphens and underscores: "auth-system" → ["auth", "system"]
+  return topic.split(/[-_]/).filter(w => w.length > 0);
+}
+
+/**
+ * Calculate alignment score between conversation and spec folder
+ * @param {Array<string>} conversationTopics - From extractConversationTopics()
+ * @param {string} specFolderName - e.g., "015-auth-system"
+ * @returns {number} Score 0-100 (percentage match)
+ */
+function calculateAlignmentScore(conversationTopics, specFolderName) {
+  const specTopics = parseSpecFolderTopic(specFolderName);
+
+  if (specTopics.length === 0) return 0;
+
+  // Count how many spec topics appear in conversation topics
+  let matches = 0;
+  for (const specTopic of specTopics) {
+    // Check for exact match or substring match
+    if (conversationTopics.some(ct =>
+      ct.includes(specTopic) || specTopic.includes(ct)
+    )) {
+      matches++;
+    }
+  }
+
+  // Calculate percentage
+  return Math.round((matches / specTopics.length) * 100);
+}
+
+/**
+ * Filter out archive folders from spec folder list
+ * @param {Array<string>} folders - List of folder names
+ * @returns {Array<string>} Filtered list without archives
+ */
+function filterArchiveFolders(folders) {
+  return folders.filter(folder => {
+    const lowerFolder = folder.toLowerCase();
+    return !ALIGNMENT_CONFIG.ARCHIVE_PATTERNS.some(pattern =>
+      lowerFolder.includes(pattern)
+    );
+  });
+}
+
+/**
+ * Prompt user with numbered choices and validate input
+ * @param {string} question - Prompt text
+ * @param {number} maxChoice - Maximum valid choice number
+ * @param {number} maxAttempts - Maximum retry attempts (default 3)
+ * @returns {Promise<number>} Selected choice number (1-indexed)
+ */
+async function promptUserChoice(question, maxChoice, maxAttempts = 3) {
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const answer = await promptUser(question);
+    const choice = parseInt(answer);
+
+    if (!isNaN(choice) && choice >= 1 && choice <= maxChoice) {
+      return choice;
+    }
+
+    if (attempt < maxAttempts) {
+      console.log(`   ❌ Invalid choice. Please enter a number between 1 and ${maxChoice}.\n`);
+    }
+  }
+
+  throw new Error('Maximum retry attempts exceeded. Please run the command again.');
 }
 
 // ───────────────────────────────────────────────────────────────
@@ -693,6 +911,11 @@ async function detectSpecFolder() {
  * Prompt user for input in terminal
  */
 function promptUser(question) {
+  // Safety check: don't create readline interface if no TTY available
+  if (!process.stdout.isTTY || !process.stdin.isTTY) {
+    throw new Error('Cannot prompt user: No TTY available (running in non-interactive mode)');
+  }
+
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -707,54 +930,16 @@ function promptUser(question) {
 }
 
 /**
- * Generate versioned directory path by appending _v2, _v3, etc.
+ * Ensure context directory exists
+ * Uses single context/ folder with timestamped markdown files
  */
-async function createVersionedPath(basePath) {
-  let version = 2;
-  let versionedPath = `${basePath}_v${version}`;
-
-  while (true) {
-    try {
-      await fs.access(versionedPath);
-      version++;
-      versionedPath = `${basePath}_v${version}`;
-    } catch {
-      // Path doesn't exist, we can use it
-      return versionedPath;
-    }
-  }
-}
-
 async function setupContextDirectory(specFolder) {
   const contextDir = path.join(specFolder, 'context');
 
-  // Check if context directory already exists
-  try {
-    await fs.access(contextDir);
-
-    // Directory exists - prompt user for action
-    console.log('   ⚠️  Context folder already exists');
-    const answer = await promptUser('   (O)verwrite, (V)ersion, or (A)bort? ');
-
-    const choice = answer.toLowerCase();
-
-    if (choice === 'v' || choice === 'version') {
-      const versionedDir = await createVersionedPath(contextDir);
-      console.log(`   ✓ Creating versioned directory: ${path.basename(versionedDir)}`);
-      await fs.mkdir(versionedDir, { recursive: true });
-      return versionedDir;
-    } else if (choice === 'a' || choice === 'abort') {
-      console.log('   ✗ Aborted by user');
-      process.exit(0);
-    } else {
-      // Default to overwrite (including 'o', 'overwrite', or any other input)
-      console.log('   ⚠️  Overwriting existing context folder...');
-    }
-  } catch {
-    // Directory doesn't exist, create it
-  }
-
+  // Ensure context directory exists (create if needed)
+  // No prompts - files are timestamped so no conflicts
   await fs.mkdir(contextDir, { recursive: true });
+
   return contextDir;
 }
 
@@ -766,8 +951,8 @@ async function collectSessionData(collectedData, specFolderName = null) {
   const now = new Date();
   // Use provided specFolderName (cached) or detect as fallback
   const folderName = specFolderName || path.basename(await detectSpecFolder());
-  const dateOnly = formatTimestamp(now, 'date');
-  const timeOnly = formatTimestamp(now, 'filename').split('_')[1];
+  const dateOnly = formatTimestamp(now, 'date-dutch');  // DD-MM-YY format
+  const timeOnly = formatTimestamp(now, 'time-short');  // HH-MM format
 
   // Fallback to simulation if no data
   if (!collectedData) {
@@ -2230,7 +2415,7 @@ function classifyDiagramPattern(asciiArt) {
 // ───────────────────────────────────────────────────────────────
 
 async function populateTemplate(templateName, data) {
-  const templatePath = path.join(CONFIG.TEMPLATE_DIR, `${templateName}.template.md`);
+  const templatePath = path.join(CONFIG.TEMPLATE_DIR, `${templateName}_template.md`);
   const template = await fs.readFile(templatePath, 'utf-8');
 
   return renderTemplate(template, data);
@@ -2352,7 +2537,11 @@ function renderTemplate(template, data, parentData = {}) {
 // ───────────────────────────────────────────────────────────────
 
 if (require.main === module) {
-  main();
+  main().catch((error) => {
+    console.error(`❌ Fatal error: ${error.message}`);
+    console.error(error.stack);
+    process.exit(1);
+  });
 }
 
 module.exports = { main, detectSpecFolder, collectSessionData };
