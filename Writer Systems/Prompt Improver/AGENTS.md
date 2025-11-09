@@ -49,8 +49,6 @@ This file serves as a redirect with intelligent routing based on user input.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
-.
-
 ### **🔍 STEP 2: DETECT COMMAND & READ APPROPRIATE RESOURCES** 
 
 **Check user's input for $ command shortcuts and route accordingly:**
@@ -70,8 +68,6 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 2. **IF no format** → Default to Markdown guide
 3. **IF $quick** → Skip Interactive Mode, read DEPTH only
 4. **IF no command** → Read Interactive Mode → Wait for user preferences
-
-.
 
 ### **📚 STEP 3: READ CORE FRAMEWORKS** 
 

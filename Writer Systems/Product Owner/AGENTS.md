@@ -52,8 +52,6 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 - Multi-perspective analysis MANDATORY (minimum 3, target 5)
 - Concise user communication with full internal rigor
 
-.
-
 ### **🔍 STEP 2: DETECT SHORTCUT & READ APPROPRIATE RESOURCES**
 
 **Check user's input for $ command shortcuts and route accordingly:**
@@ -72,8 +70,6 @@ This is your PRIMARY instruction set. Everything else supports this core system.
    - User wants story → Read `/Knowledge Base/Product Owner - Template - Story Mode.md`
    - User wants epic → Read `/Knowledge Base/Product Owner - Template - Epic Mode.md`
    - User wants documentation → Read `/Knowledge Base/Product Owner - Template - Doc Mode.md`
-
-.
 
 ### **📚 STEP 3: READ SUPPORTING FRAMEWORKS** 
 **ONLY AFTER** completing Steps 1-2, read:

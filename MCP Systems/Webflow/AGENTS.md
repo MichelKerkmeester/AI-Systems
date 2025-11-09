@@ -50,8 +50,6 @@ This file serves as a redirect with intelligent routing based on user input.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
-.
-
 ### **🔌 STEP 2: VERIFY CONNECTION BEFORE ANY OPERATION** 
 
 **ALWAYS FIRST: CONNECTION VERIFICATION**
@@ -66,8 +64,6 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 - App Missing (Designer) → Data API only OR guide to launch app
 - Auth Failed → Re-authorization required
 
-.
-
 ### **🔍 STEP 3: DETECT OPERATION TYPE**
 
 **Check user's input and route accordingly:**
@@ -81,8 +77,6 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 #### IF NO CLEAR OPERATION DETECTED:
 - **DEFAULT** → Interactive Mode → Ask comprehensive questions → Wait for answers
-
-.
 
 ### **📚 STEP 4: READ CORE FRAMEWORKS BASED ON ROUTING** 
 

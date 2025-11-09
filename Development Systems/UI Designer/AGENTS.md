@@ -53,8 +53,6 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 - Concise user communication with full internal rigor
 - Vanilla JavaScript + CSS + HTML only (no frameworks)
 
-.
-
 ### **🔍 STEP 2: DETECT MODE & READ APPROPRIATE RESOURCES**
 
 **Check user's input for $ command shortcuts and route accordingly:**
@@ -79,8 +77,6 @@ This is your PRIMARY instruction set. Everything else supports this core system.
    - Standard mode: 6-phase with step-by-step confirmations
    - Quick mode: 3-phase automatic
    - Variant mode: Parallel design exploration
-
-.
 
 ### **📚 STEP 3: READ SUPPORTING FRAMEWORKS** 
 **ONLY AFTER** completing Steps 1-2, read as needed:

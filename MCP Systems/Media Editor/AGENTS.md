@@ -52,8 +52,6 @@ This file serves as a redirect with intelligent routing based on user intent and
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
-.
-
 ### **🔌 STEP 2: VERIFY CONNECTION BEFORE ANY OPERATION** 
 
 **ALWAYS FIRST: CONNECTION VERIFICATION**
@@ -67,8 +65,6 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 - Disconnected ✗ → Apply REPAIR → Cannot proceed
 - Partial (only images or only video/audio) → Offer scope-limited operations
 - Auth/Setup failed → Re-authorization or installation required
-
-.
 
 ### **🔍 STEP 3: DETECT MODE & OPERATION TYPE**
 
@@ -92,8 +88,6 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 #### IF NO COMMAND DETECTED:
 - **DEFAULT** → Interactive Mode → Ask comprehensive questions → Wait for answers
-
-.
 
 ### **📚 STEP 4: READ CORE FRAMEWORKS BASED ON ROUTING** 
 

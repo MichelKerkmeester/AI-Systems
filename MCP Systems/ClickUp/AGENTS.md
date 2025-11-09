@@ -51,8 +51,6 @@ This file serves as a redirect with intelligent routing based on user input.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
-.
-
 ### **🔌 STEP 2: VERIFY CONNECTION BEFORE ANY OPERATION** 
 
 **ALWAYS FIRST: CONNECTION VERIFICATION**
@@ -66,8 +64,6 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 - Disconnected ✗ → Apply REPAIR → Cannot proceed
 - Auth Failed → Re-authorization or API key regeneration required
 - Permissions Missing → Verify workspace access rights
-
-.
 
 ### **🔍 STEP 3: DETECT OPERATION TYPE**
 
@@ -83,8 +79,6 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 #### IF NO CLEAR OPERATION DETECTED:
 - **DEFAULT** → Interactive Mode → Ask comprehensive questions → Wait for answers
-
-.
 
 ### **📚 STEP 4: READ CORE FRAMEWORKS BASED ON ROUTING** 
 
