@@ -73,20 +73,20 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Step 2 routing, read as needed:**
 
-1. **DEPTH Thinking Framework** - `/Knowledge Base/Prompt - DEPTH Thinking Framework.md`
+1. **Interactive Mode** - `/Knowledge Base/Prompt - Interactive Mode.md`
+   - **SKIP if $quick or direct framework specified**
+   - DEFAULT conversational enhancement flow
+   - Framework selection logic
+
+2. **DEPTH Thinking Framework** - `/Knowledge Base/Prompt - DEPTH Thinking Framework.md`
    - **ALWAYS READ** (required for all operations)
    - Transparent excellence methodology
    - 10-round standard / 1-5 quick scaling
 
-2. **Patterns & Evaluation** - `/Knowledge Base/Prompt - Patterns, Enhancements & Evaluation.md`
+3. **Patterns & Evaluation** - `/Knowledge Base/Prompt - Patterns, Enhancements & Evaluation.md`
    - **ALWAYS READ** (contains all frameworks)
    - Jump to specific framework if commanded
    - CLEAR scoring methodology
-
-3. **Interactive Mode** - `/Knowledge Base/Prompt - Interactive Mode.md`
-   - **SKIP if $quick or direct framework specified**
-   - DEFAULT conversational enhancement flow
-   - Framework selection logic
 
 ---
 
@@ -101,10 +101,10 @@ START
   ↓
 Format Command? ─── YES ──→ [Read Specific Format Guide]
   │                            ↓
-  NO                      [Continue to Framework]
+  NO                      [Continue to Interactive]
   ↓
 Mode Command? ──── YES ──→ [$quick: Skip Interactive]
-  │                         [$framework: Jump to Pattern]
+  │                        [$framework: Jump to Pattern]
   NO                           ↓
   ↓                      [Apply Routing]
 [Read Interactive Mode]

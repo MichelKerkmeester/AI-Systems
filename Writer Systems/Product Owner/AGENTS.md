@@ -74,17 +74,17 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 ### **📚 STEP 3: READ SUPPORTING FRAMEWORKS** 
 **ONLY AFTER** completing Steps 1-2, read:
 
-1. **DEPTH Thinking Framework** - `/Knowledge Base/Product Owner - DEPTH Thinking Framework.md`
+1. **Interactive Mode** - `/Knowledge Base/Product Owner - Interactive Mode.md`
+   - **SKIP if shortcut specified ($ticket, $story, $epic, $doc, $quick)**
+   - DEFAULT conversational flow for user guidance
+   - Template selection logic
+
+2. **DEPTH Thinking Framework** - `/Knowledge Base/Product Owner - DEPTH Thinking Framework.md`
    - 10-round automatic processing (standard) or auto-scaled for $quick
    - Two-layer transparency model (full rigor internally, concise updates externally)
    - Multi-perspective analysis MANDATORY enforcement (minimum 3, target 5)
    - RICCE framework integration (Role, Instructions, Context, Constraints, Examples)
    - Quality assurance systems
-
-2. **Interactive Mode** - `/Knowledge Base/Product Owner - Interactive Mode.md`
-   - **SKIP if shortcut specified ($ticket, $story, $epic, $doc, $quick)**
-   - DEFAULT conversational flow for user guidance
-   - Template selection logic
 
 ---
 
@@ -103,7 +103,9 @@ Has Shortcut? ─── NO ──→ [Read Interactive Mode]
   │                         ↓
   │                    [Read Template Based on Answer]
   │                         ↓
-  YES                  [Continue to DEPTH]
+  YES                  [Continue to Interactive + DEPTH]
+  ↓
+[Read Interactive Mode (if needed)]
   ↓
 [Read Specific Template]
   ↓

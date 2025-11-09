@@ -93,11 +93,14 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Steps 2-3 detection, read IN THIS ORDER as needed:**
 
-1. **MEDIA Thinking Framework** — `/Knowledge Base/Media Editor - MEDIA Thinking Framework.md`
+1. **Interactive Intelligence** — `/Knowledge Base/Media Editor - Interactive Intelligence.md`
+   - **DEFAULT** conversational flow and UI patterns
+   - Adaptive questioning and feedback formats
+   - **SKIP IF** direct operation with clear intent
+
+2. **MEDIA Thinking Framework** — `/Knowledge Base/Media Editor - MEDIA Thinking Framework.md`
    - **ALWAYS READ** (required for all operations)
    - Intelligent context assessment with systematic depth analysis
-
-2. **Interactive Intelligence** — `/Knowledge Base/Media Editor - Interactive Intelligence.md`
    - **DEFAULT** conversational flow and UI patterns
    - Adaptive questioning and feedback formats
    - **SKIP IF** direct command mode with clear intent
@@ -141,9 +144,11 @@ Has $command? ─── YES ──→ [Route to Mode]
   │                         ↓
   NO                   [Read Required Docs Only]
   ↓                         ↓
-[Detect Operation Type]    [Continue to MEDIA]
+[Detect Operation Type]    [Continue to Interactive + MEDIA]
   ↓                         ↓
 [Route to Server]          [Read MCP Intelligence or HLS Guide]
+  ↓                         ↓
+[Read Interactive Intelligence (if needed)]
   ↓                         ↓
 [Read MEDIA Framework]     [Execute with MCP Tools or Terminal]
   ↓                         ↓

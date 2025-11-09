@@ -82,16 +82,16 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Steps 2-3 detection, read IN THIS ORDER as needed:**
 
-1. **SYNC Thinking Framework** — `/Knowledge Base/Webflow - SYNC Thinking Framework.md`
+1. **Interactive Intelligence** — `/Knowledge Base/Webflow - Interactive Intelligence.md`
+   - **DEFAULT** conversational flow and UI patterns
+   - Adaptive questioning and feedback formats
+   - **SKIP IF** direct operation with clear intent
+
+2. **SYNC Thinking Framework** — `/Knowledge Base/Webflow - SYNC Thinking Framework.md`
    - **ALWAYS READ** for structured operations
    - 4-phase methodology (Survey → Yield → Navigate → Create)
    - Connection verification integrated
    - Native API enforcement
-
-2. **Interactive Intelligence** — `/Knowledge Base/Webflow - Interactive Intelligence.md`
-   - **DEFAULT** conversational flow and UI patterns
-   - Adaptive questioning and feedback formats
-   - **SKIP IF** direct operation with clear intent
 
 3. **MCP Knowledge** — `/Knowledge Base/Webflow - MCP Knowledge.md`
    - Designer API and Data API specifications
@@ -121,9 +121,9 @@ Connection OK? ─── NO ──→ [Apply REPAIR Protocol]
   ↓
 [Route to API]
   ↓
-[Read SYNC Framework]
+[Read Interactive Intelligence (if needed)]
   ↓
-[Read Interactive Intelligence]
+[Read SYNC Framework]
   ↓
 [Read MCP Knowledge]
   ↓
