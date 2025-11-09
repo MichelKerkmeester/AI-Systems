@@ -453,13 +453,14 @@ conversation_flow:
 ### Input Processing
 
 ```yaml
+```yaml
 process_input:
-  1_detect_quick_command:
-    - scan_for: ['$quick']
-    - if_found: skip_to_processing_with_defaults
+  1_detect_rapid_prototyping_intent:
+    - scan_for: ['quick', 'rapid', 'fast iteration', 'simple prototype']
+    - if_found: use_3_phase_canvas
 
   2_detect_variant_preference:
-    - scan_for: ['$variants', '$explore', 'show me options', 'variations', 'multiple designs']
+    - scan_for: ['show me options', 'variations', 'multiple designs', 'explore different directions', 'what approaches']
     - if_not_found_AND_request_is_vague: ASK_USER_ABOUT_VARIANTS
     - critical: "NEVER assume single design when requirements are minimal/exploratory"
     
@@ -473,6 +474,7 @@ process_input:
       - user_provides_minimal_details
     action: "MANDATORY ask: 'Single design or multiple variants (3-5)?'"
     rationale: "Philosophy is 'Why design one when you can explore ten?'"
+```
 
   4_apply_canvas_framework:
     - automatic_6_phases

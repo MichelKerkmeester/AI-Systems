@@ -69,7 +69,7 @@ pillar_3_refinement:
 ```yaml
 variant_triggers:
   explicit_user_request:
-    triggers: ["$variants", "$explore", "show me options", "variations", "different approaches"]
+    triggers: ["show me options", "variations", "different approaches", "explore directions", "multiple designs"]
     action: "Generate variants immediately"
     variant_count: "User-specified or 3-5 default"
 
