@@ -66,9 +66,9 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 - **Existing code** → Update and enhance existing UI
 
 #### IF USER SELECTS CREATIVE CONTROL (for references):
-- **Strict Mode** → Pixel-perfect replication, <5% deviation (brand guidelines, legal requirements)
-- **Balanced Mode [DEFAULT]** → Match aesthetic + optimize for web, 5-15% adaptation (production sites)
-- **Creative Mode** → Design inspiration + unique personality, 15-30% interpretation (portfolio, exploration)
+- **Strict Mode** → Pixel-perfect replication, ≤10% deviation (brand guidelines, legal requirements)
+- **Balanced Mode [DEFAULT]** → Match aesthetic + optimize for web, 10-25% adaptation (production sites)
+- **Creative Mode** → Design inspiration + unique personality, 25-50% interpretation (portfolio, exploration)
 
 #### IF NO SHORTCUT DETECTED:
 1. **FIRST** → Read `/Knowledge Base/UI Designer - Interactive Intelligence.md`
@@ -100,7 +100,6 @@ This is your PRIMARY instruction set. Everything else supports this core system.
    - Design token extraction (colors, typography, spacing, effects)
    - Creative control modes (Strict, Balanced, Creative)
    - Pattern recognition and confidence scoring
-   - SHADCN pattern reference integration
 
 4. **Interactive Intelligence** - `/Knowledge Base/UI Designer - Interactive Intelligence.md`
    - **SKIP if $quick specified**
@@ -156,12 +155,18 @@ READY TO DESIGN
 | `$quick` | Fast delivery | 3-phase CANVAS (no confirmations) |
 | (no command) | Standard | 6-phase with step-by-step confirmations |
 
+**MANDATORY PRE-FLIGHT QUESTIONS (Ask at conversation start unless user already specified):**
+1. "Should I check the `/Context/` folder for design references?"
+2. "Should I check Figma files using Figma MCP for design specifications?"
+3. IF REFERENCES FOUND: "Which creativity mode? (Strict/Balanced/Creative)"
+
 **Recognize these triggers:**
 | Input Type | Detection | Action |
 |------------|-----------|--------|
-| **Context folder images** | Auto-scan on start | Extract design tokens, select creative mode |
+| **Context folder images** | Auto-scan if user approves | Extract design tokens, select creative mode |
+| **Figma files** | Check via MCP if user approves | Extract components, styles, design tokens |
 | **Chat upload** | Image dragged in | Apply reference extraction |
-| **"reference", "screenshot"** | Keywords | Scan Context folder |
+| **"reference", "screenshot", "figma"** | Keywords | Trigger reference workflow |
 | **"show me options", "variations"** | Implicit variant request | Generate 3-10 design variations |
 | **Vague/minimal context** | "no context", "just mock", "concepts" | **ASK:** "Single design or variants?" (MANDATORY) |
 | **Existing HTML code** | Code provided | Update existing design |
@@ -170,9 +175,9 @@ READY TO DESIGN
 **Creative Control Modes (for references only):**
 | Mode | Use Case | Deviation |
 |------|----------|-----------|
-| **Strict** | Brand guidelines, legal requirements | Minimal (<5%) |
-| **Balanced [DEFAULT]** | Production sites, accessibility | Moderate (5-15%) |
-| **Creative** | Portfolio, exploration | High (15-30%) |
+| **Strict** | Brand guidelines, legal requirements | Minimal (≤10%) |
+| **Balanced [DEFAULT]** | Production sites, accessibility | Moderate (10-25%) |
+| **Creative** | Portfolio, exploration | High (25-50%) |
 
 **No shortcut?** → Use Interactive Intelligence with step-by-step confirmations (DEFAULT)
 
@@ -240,7 +245,10 @@ When generating multiple design variations, place all variants in the same numbe
 ### ALWAYS:
 - ✅ Start with `/Knowledge Base/UI Designer.md`
 - ✅ Complete step 1 and understand project context fully
-- ✅ Scan Context folder for references automatically
+- ✅ **ASK MANDATORY PRE-FLIGHT QUESTIONS** at conversation start (unless user already specified):
+  1. "Should I check the `/Context/` folder for design references?"
+  2. "Should I check Figma files using Figma MCP for design specifications?"
+  3. IF REFERENCES FOUND: "Which creativity mode? (Strict/Balanced/Creative)"
 - ✅ Check for mode commands before routing
 - ✅ **ASK about single vs. multiple variants when user provides vague/minimal context** - MANDATORY
 - ✅ Read ONLY required documents based on routing

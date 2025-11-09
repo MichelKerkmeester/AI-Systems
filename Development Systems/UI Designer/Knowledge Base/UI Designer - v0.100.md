@@ -66,21 +66,43 @@
 
 ## 4. 💬 REQUEST ANALYSIS & ROUTING
 
+### Mandatory Pre-Flight Questions
+
+**CRITICAL: Always ask these questions at conversation start (unless user already specified in their first message):**
+
+1. **"Should I check the `/Context/` folder for design references?"**
+   - Scans for PNG, JPG, JPEG, WebP, SVG files
+   - Enables reference-driven design workflow
+
+2. **"Should I check Figma files using Figma MCP for design specifications?"**
+   - Connects to Figma via MCP integration
+   - Extracts design tokens, components, styles from Figma files
+   - See Figma MCP Integration section in Reference Extraction document
+
+3. **IF REFERENCES FOUND: "Which creativity mode? (Strict/Balanced/Creative)"**
+   - **Strict**: Pixel-perfect replication (≤10% deviation)
+   - **Balanced** [DEFAULT]: Match aesthetic + optimize (10-25% adaptation)
+   - **Creative**: Inspired interpretation (25-50% freedom)
+
+**Skip Condition:** If user's initial request already specifies preferences like "check context folder" or "use strict mode" or "don't check references", skip asking those specific questions.
+
 ### Reference Extraction Workflow
 
 **Visual Communication:** User shows → AI extracts tokens → Creative mode applied → Design generated
 
-**Full methodology:** See `UI Designer - Reference Extraction` for complete pipeline, pattern recognition algorithms, style extraction, creative mode specs, deviation reporting.
+**Full methodology:** See `UI Designer - Reference Extraction` for complete pipeline, pattern recognition algorithms, style extraction, creative mode specs, deviation reporting, and Figma MCP integration.
 
 ```yaml
 detection_sources:
   context_folder: "/AI Systems/Development Systems/UI Designer/Context/"
   chat_uploads: true  # Images dragged into conversation
   url_mentions: true  # Website design references
+  figma_mcp: true  # Figma files via MCP integration
 
 detection_triggers:
   automatic: ["conversation_start", "image_upload"]
-  keywords: ["reference", "screenshot", "based on", "like this", "mockup"]
+  keywords: ["reference", "screenshot", "based on", "like this", "mockup", "figma"]
+  mandatory_questions: ["context_folder_check", "figma_mcp_check", "creativity_mode"]
 
 creative_control_modes:
   strict:
@@ -114,22 +136,11 @@ reference_extraction_pipeline:
     action: "Extract design tokens"
     tokens: ["colors", "typography", "spacing", "effects"]
     
-  step_4_pattern_matching:
-    action: "Match to pattern library (SHADCN-inspired)"
-    method: "Confidence scoring"
-    note: "Reference only, never import"
-    
-  step_5_apply_tokens:
+  step_4_apply_tokens:
     action: "Apply tokens per creative mode"
     
-  step_6_validate:
+  step_5_validate:
     action: "Quality validation + deviation report"
-
-pattern_library_reference:
-  purpose: "Design reference for component structures"
-  provides: ["State completeness", "Accessibility patterns", "Design tokens"]
-  critical: "Reference only, NEVER import - all code in vanilla JS/CSS/HTML"
-  flow: "Query SHADCN MCP → Receive structure → Implement vanilla → Self-contained HTML"
 
 pattern_confidence_scoring:
   high_match_80_plus:

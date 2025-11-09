@@ -475,22 +475,33 @@ perspective_analysis:  # MANDATORY - CANNOT BE SKIPPED
 
 reference_extraction:  # Enhanced with Reference Extraction System
   context_folder: "/AI Systems/Development Systems/UI Designer/Context/"
-
+  
+  mandatory_pre_flight_questions:
+    priority: "HIGHEST - Ask FIRST at conversation start unless user already specified"
+    questions:
+      1: "Should I check the /Context/ folder for design references?"
+      2: "Should I check Figma files using Figma MCP for design specifications?"
+      3: "IF REFERENCES FOUND: Which creativity mode? (Strict/Balanced/Creative)"
+    skip_condition: "User already specified preferences in their initial request"
+    
   auto_detection:
-    priority: "PRIMARY - Execute before other Phase C activities"
+    priority: "PRIMARY - Execute after user approves in pre-flight questions"
     trigger_points:
-      - conversation_start: "Scan Context folder FIRST, before user questions"
+      - conversation_start: "Ask pre-flight questions FIRST"
+      - user_approval: "Scan Context folder and/or Figma if user approves"
       - reference_keywords: [reference, screenshot, context, design file, figma, sketch,
                            adobe xd, inspiration, mockup, based on, like this, similar to]
       - image_upload: "Detect images dragged into chat"
 
   extraction_workflow:
-    step_1: "Scan Context folder for references (PNG, JPG, WebP, SVG)"
-    step_2: "Detect uploaded images in chat"
-    step_3: "Apply visual analysis with Claude vision"
-    step_4: "Extract design tokens (colors, typography, spacing, effects)"
-    step_5: "Match patterns to component library"
-    step_6: "Select creative control mode"
+    step_0: "Ask mandatory pre-flight questions (unless user already specified)"
+    step_1: "Scan Context folder for references IF approved (PNG, JPG, WebP, SVG)"
+    step_2: "Check Figma files via MCP IF approved"
+    step_3: "Detect uploaded images in chat"
+    step_4: "Apply visual analysis with Claude vision"
+    step_5: "Extract design tokens (colors, typography, spacing, effects)"
+    step_6: "Match patterns to component library"
+    step_7: "Ask creative control mode IF references found (unless already specified)"
 
   creative_control_modes:
     strict:
@@ -515,17 +526,22 @@ reference_extraction:  # Enhanced with Reference Extraction System
     # Full template in `UI Designer - Interactive Intelligence`
 
   workflow_order:
-    1: "Scan for references (Context folder + uploads)"
-    2: "If found: Present mode selection → Extract tokens → Proceed with CANVAS"
+    0: "ASK mandatory pre-flight questions FIRST (Context folder? Figma MCP?)"
+    1: "Scan for references if approved (Context folder, Figma, uploads)"
+    2: "If found: ASK creative mode → Extract tokens → Proceed with CANVAS"
     3: "If not found: Standard CANVAS workflow with generated tokens"
 
-  integration_with_shadcn:
-    workflow: "Extract tokens first → Query SHADCN for matches → Apply tokens to components"
+  figma_mcp_integration:
+    purpose: "Extract design tokens and components directly from Figma files"
+    workflow: "Connect via MCP → Extract styles/components → Transform to web tokens → Apply per creative mode"
+    advantages: "Exact values, component hierarchy, variants, documentation"
+    full_details: "See Figma MCP Integration section in `UI Designer - Reference Extraction`"
 
   full_methodology:
     location: "`UI Designer - Reference Extraction`"
     details: [
-      "Complete extraction pipeline (5 steps)",
+      "Complete extraction pipeline (7 steps with pre-flight questions)",
+      "Figma MCP integration workflows",
       "Pattern recognition confidence scoring",
       "Style token extraction (colors, typography, spacing, effects)",
       "Creative mode implementation (Strict/Balanced/Creative)",
@@ -533,19 +549,18 @@ reference_extraction:  # Enhanced with Reference Extraction System
     ]
 
   references_found:
-      approach: "hybrid_adaptive"
+      approach: "reference_driven"
       workflow: [
         "Analyze reference designs in detail",
-        "Query SHADCN MCP for potentially matching components",
-        "For each UI element: Compare reference to SHADCN library",
-        "Decision tree: SHADCN match → use + tweak | Partial → structure + customize | No match → custom vanilla",
-        "Ensure final output matches reference design fidelity while leveraging SHADCN speed"
+        "Extract design patterns and components from references",
+        "Implement custom vanilla HTML/CSS/JS based on reference specifications",
+        "Ensure final output matches reference design fidelity"
       ]
 
   user_communication:
-    references_detected: "✅ References detected: [list files/links]. Analyzing against SHADCN component library..."
-    no_references: "No references provided. Using SHADCN components as design foundation."
-    hybrid_strategy: "Hybrid approach: SHADCN components where applicable + custom code for unique elements"
+    references_detected: "✅ References detected: [list files/links]. Analyzing design patterns..."
+    no_references: "No references provided. Creating custom design solution."
+    implementation_strategy: "Custom vanilla implementation based on reference specifications"
 
 current_state_mapping:
   - User explicit requirements analysis
@@ -666,7 +681,7 @@ feedback_mechanisms:
 "🎨 **Phase V - Visual**
 Design tokens defined (24 tokens)
 Visual hierarchy established
-SHADCN components: [count] patterns integrated (or: Custom vanilla implementation)
+Custom vanilla implementation
 Mechanism-first validated: WHY before WHAT"
 ```
 
@@ -701,71 +716,71 @@ reference_token_application:  # NEW - Extracted Token Usage
     balanced: "Document optimizations (accessibility, performance)"
     creative: "Document creative enhancements and rationale"
 
-shadcn_component_integration:  # Component Selection & Application
-  description: "SHADCN MCP used as pattern reference library for vanilla JS implementation"
-  philosophy: "Query SHADCN for patterns → Extract structure/states/accessibility → Implement in vanilla HTML/CSS/JS"
+component_implementation:  # Component Development
+  description: "Custom vanilla component implementation based on design requirements"
+  philosophy: "Design structure → Implement accessibility → Apply design tokens → Self-contained vanilla HTML/CSS/JS"
   output: "Self-contained HTML with inline CSS/JS - no framework dependencies"
   when_to_apply: "After mechanism validated, before token creation"
 
-  component_query_process:
+  component_development_process:
     step_1: "Review UI elements identified in Phase A (Architecture)"
-    step_2: "Query SHADCN MCP for relevant component patterns"
-    step_3: "Match components to design needs based on Phase C strategy"
-    step_4: "Apply decision tree from reference detection results"
+    step_2: "Design component structure and states"
+    step_3: "Implement accessibility patterns (ARIA, keyboard navigation)"
+    step_4: "Apply design tokens and styling"
 
   decision_tree:
     no_references_scenario:
-      strategy: "SHADCN as primary foundation"
+      strategy: "Custom design foundation"
       process: [
-        "Query SHADCN for buttons, forms, cards, navigation, dialogs, etc.",
-        "Use SHADCN component patterns directly",
-        "Adapt SHADCN design tokens to project aesthetic",
-        "Convert SHADCN patterns to vanilla HTML/CSS/JS",
+        "Define required components (buttons, forms, cards, navigation, dialogs, etc.)",
+        "Design component structure and states",
+        "Implement accessibility patterns",
+        "Apply design tokens to create consistent visual language",
         "Maintain self-contained deliverable format"
       ]
-      example: "Button needs → Query SHADCN Button → Extract pattern → Implement in vanilla CSS"
+      example: "Button needs → Design states → Implement HTML/CSS with proper ARIA"
 
     references_scenario:
-      strategy: "Hybrid SHADCN + Custom"
+      strategy: "Reference-driven implementation"
       process: [
-        "Compare each reference element to SHADCN library",
-        "CLOSE MATCH: Use SHADCN + adjust colors/spacing/typography to match reference",
-        "PARTIAL MATCH: Use SHADCN structure + heavy customization for reference aesthetics",
-        "NO MATCH: Build custom vanilla code from scratch matching reference exactly",
-        "Document which SHADCN patterns used in file header"
+        "Analyze each reference element for patterns",
+        "SIMPLE PATTERN: Use standard HTML structure + apply reference styling",
+        "COMPLEX PATTERN: Design custom component structure + implement all states",
+        "UNIQUE PATTERN: Build custom vanilla code from scratch matching reference exactly",
+        "Document implementation approach in file header"
       ]
-      example: "Reference button → Query SHADCN Button → Partial match → Use SHADCN structure + custom gradient from reference"
+      example: "Reference button → Analyze states → Implement vanilla HTML/CSS with proper accessibility + custom gradient from reference"
 
   component_selection_criteria:
-    close_match:
-      definition: "SHADCN component matches 80%+ of reference design intent"
-      action: "Use SHADCN pattern with minor tweaks (colors, spacing, typography)"
-      benefit: "Faster implementation, proven patterns, minimal customization"
+    simple_pattern:
+      definition: "Standard web component with reference styling"
+      action: "Use semantic HTML with custom CSS matching reference"
+      benefit: "Fast implementation, accessibility built-in, straightforward customization"
 
-    partial_match:
-      definition: "SHADCN component matches 40-80% of reference design intent"
-      action: "Use SHADCN structure/interaction patterns + customize visual appearance heavily"
-      benefit: "Solid foundation for interactions, customize aesthetics to match reference"
+    complex_pattern:
+      definition: "Interactive component requiring multiple states and behaviors"
+      action: "Design component structure + implement all states (default, hover, focus, active, disabled)"
+      benefit: "Complete control over interactions, optimized for specific use case"
 
-    no_match:
-      definition: "SHADCN component matches <40% of reference design intent"
+    unique_pattern:
+      definition: "Novel interaction or visual pattern unique to reference design"
       action: "Build custom vanilla code from scratch, unique to reference design"
       benefit: "Perfect fidelity to reference, no compromise on design vision"
 
-  shadcn_to_vanilla_conversion:
-    process: "Extract pattern concepts from SHADCN, implement as vanilla HTML/CSS/JS"
+  vanilla_implementation:
+    process: "Design component structure → Implement accessibility → Apply design tokens → Self-contained vanilla HTML/CSS/JS"
     maintain: "Self-contained HTML file with inline styles and scripts"
-    document: "Add header comment listing SHADCN patterns leveraged"
+    document: "Add header comment describing implementation approach"
 
   output_documentation:
     file_header_format: |
       /*
-      SHADCN Components Used:
-      - Button pattern: Close match, adjusted colors
-      - Card layout: Partial match, customized shadows
-      - Form inputs: Custom implementation (no SHADCN match)
+      Implementation Approach:
+      - Button: Standard HTML with custom gradient styling
+      - Card layout: Custom flexbox layout with reference shadows
+      - Form inputs: Custom validation states and error messaging
 
-      Strategy: Hybrid (SHADCN foundation + custom refinements)
+      Strategy: Custom vanilla implementation
       References: [001]-mockup.png analyzed and matched
       */
 

@@ -145,9 +145,9 @@ extraction_pipeline:
       - Extract menu structures
 
   step_5_creative_application:
-    strict_mode: "Replicate with <5% deviation"
-    balanced_mode: "Match aesthetic with 5-15% optimization"
-    creative_mode: "Interpret with 15-30% creative freedom"
+    strict_mode: "Replicate with ≤10% deviation"
+    balanced_mode: "Match aesthetic with 10-25% optimization"
+    creative_mode: "Interpret with 25-50% creative freedom"
 ```
 
 ### Direct Upload Workflow
@@ -195,6 +195,231 @@ url_workflow:
     - Dynamic content may vary
     - Some styles computed at runtime
     - Authentication-gated content inaccessible
+```
+
+### Figma MCP Integration Workflow
+
+**MANDATORY QUESTION:** Always ask at conversation start: "Should I check Figma files using Figma MCP for design specifications?" (unless user already specified)
+
+```yaml
+figma_mcp_workflow:
+  purpose: "Extract design tokens, components, and specifications directly from Figma files"
+  
+  trigger:
+    - User specifies Figma file URL/ID in initial request
+    - User says "check Figma" or "use Figma MCP"
+    - AI asks mandatory pre-flight question about Figma
+
+  connection_setup:
+    method: "MCP (Model Context Protocol) integration"
+    access: "Via Figma MCP server configured in Claude settings"
+    authentication: "Uses Figma API token configured in MCP settings"
+    
+  supported_operations:
+    file_access:
+      - "Get Figma file by URL or file key"
+      - "List all pages in document"
+      - "Access specific frames/components"
+      
+    component_extraction:
+      - "Extract component definitions"
+      - "Get component properties and variants"
+      - "Access component documentation"
+      
+    style_extraction:
+      - "Extract color styles (fills, strokes)"
+      - "Get typography styles (fonts, sizes, weights, line-heights)"
+      - "Access effect styles (shadows, blurs)"
+      - "Grid and layout styles"
+      
+    token_generation:
+      - "Convert Figma styles to CSS variables"
+      - "Map component variants to HTML states"
+      - "Extract spacing from Auto Layout"
+      - "Generate responsive breakpoints"
+
+  extraction_pipeline:
+    step_1_connect:
+      action: "Connect to Figma via MCP"
+      commands:
+        - "figma_get_file(file_key: string)"
+        - "figma_list_files()"
+      output: "Figma file structure and metadata"
+      
+    step_2_analyze:
+      action: "Analyze design system"
+      extract:
+        colors:
+          - "Paint styles (solid, gradients)"
+          - "Semantic naming (primary, secondary, etc.)"
+          - "Color tokens with exact hex values"
+          - "Opacity and blend modes"
+          
+        typography:
+          - "Text styles with font families"
+          - "Font sizes, weights, line-heights"
+          - "Letter spacing and text transforms"
+          - "Paragraph spacing"
+          
+        spacing:
+          - "Auto Layout padding and gaps"
+          - "Frame constraints and positioning"
+          - "Component internal spacing"
+          - "Infer spacing scale (4px, 8px, etc.)"
+          
+        components:
+          - "Component structure and hierarchy"
+          - "Variants and properties"
+          - "Instance overrides"
+          - "Component documentation/descriptions"
+          
+        effects:
+          - "Shadow styles (drop, inner)"
+          - "Blur effects"
+          - "Border radius values"
+          - "Stroke styles"
+          
+    step_3_transform:
+      action: "Convert Figma data to web tokens"
+      transformations:
+        - "Figma RGB → CSS hex/rgb/hsl"
+        - "Figma font names → Web-safe font stacks"
+        - "Auto Layout → Flexbox/Grid"
+        - "Component variants → CSS classes/states"
+        - "Effects → CSS box-shadow/filter"
+        
+    step_4_apply:
+      action: "Apply tokens per creative mode"
+      strict_mode:
+        - "Use exact Figma values (≤10% deviation)"
+        - "Preserve all component variants"
+        - "Match typography precisely"
+        - "Replicate all effects"
+        
+      balanced_mode:
+        - "Match aesthetic (10-25% adaptation)"
+        - "Optimize for web performance"
+        - "Simplify complex effects if needed"
+        - "Use semantic HTML over divs"
+        
+      creative_mode:
+        - "Interpret design vision (25-50% freedom)"
+        - "Enhance with web-native patterns"
+        - "Add micro-interactions"
+        - "Improve accessibility"
+
+  figma_specific_features:
+    auto_layout_conversion:
+      figma: "Auto Layout with padding/gap"
+      html: "Flexbox/Grid with gap property"
+      mapping:
+        - "Horizontal → flex-direction: row"
+        - "Vertical → flex-direction: column"
+        - "Space between → justify-content: space-between"
+        - "Hug → fit-content/auto"
+        - "Fill → flex: 1"
+        
+    variant_mapping:
+      figma: "Component with properties (size, state, etc.)"
+      html: "CSS classes + data attributes"
+      example:
+        figma_variant: "Button [Size: Large, State: Hover]"
+        html_output: "<button class='btn btn--large' data-state='hover'>"
+        
+    constraints_to_responsive:
+      figma: "Frame constraints (Left/Right/Center, etc.)"
+      html: "Media queries + flexbox/grid"
+      responsive: "Convert fixed to fluid when appropriate"
+
+  best_practices:
+    preparation:
+      - "Ensure Figma file is organized with named layers"
+      - "Use Figma styles for colors and typography"
+      - "Document components with descriptions"
+      - "Create component variants for states"
+      
+    extraction:
+      - "Start with design system/style guide frame"
+      - "Extract components in logical order"
+      - "Verify color contrast meets WCAG standards"
+      - "Test extracted values in browser"
+      
+    optimization:
+      - "Simplify complex nested structures"
+      - "Consolidate similar styles"
+      - "Remove redundant effects"
+      - "Ensure mobile-friendly sizing"
+
+  common_workflows:
+    brand_guidelines:
+      - "Extract brand colors from style guide"
+      - "Get official typography specs"
+      - "Build design token library"
+      - "Use Strict mode for brand compliance"
+      
+    component_library:
+      - "Extract all component variants"
+      - "Map interaction states"
+      - "Generate HTML component patterns"
+      - "Use Balanced mode for web optimization"
+      
+    design_exploration:
+      - "Get base design tokens"
+      - "Use as inspiration not blueprint"
+      - "Apply Creative mode for reinterpretation"
+      - "Enhance with modern web patterns"
+
+  error_handling:
+    connection_issues:
+      - "Verify Figma MCP server is running"
+      - "Check API token validity"
+      - "Confirm file access permissions"
+      - "Fall back to screenshot extraction if needed"
+      
+    missing_data:
+      - "Handle files without style libraries"
+      - "Infer tokens from actual components"
+      - "Ask user for clarification on ambiguous styles"
+      - "Provide best-effort extraction"
+
+  advantages_over_screenshots:
+    precision: "Exact values, not visual approximation"
+    structure: "Component hierarchy and relationships"
+    states: "All variants captured systematically"
+    documentation: "Component descriptions and notes"
+    efficiency: "Direct API access faster than image analysis"
+    
+  integration_with_creative_modes:
+    strict_mode_with_figma:
+      use_case: "Client deliverables, brand guidelines"
+      approach: "Pixel-perfect Figma replication"
+      deviation: "≤10%"
+      
+    balanced_mode_with_figma:
+      use_case: "Production websites, web apps"
+      approach: "Figma aesthetic + web optimization"
+      deviation: "10-25%"
+      default: true
+      
+    creative_mode_with_figma:
+      use_case: "Portfolio, innovation, exploration"
+      approach: "Figma-inspired with artistic freedom"
+      deviation: "25-50%"
+```
+
+**Example Figma MCP Usage:**
+
+```yaml
+user_request: "Design a button component based on Figma file: https://figma.com/file/ABC123"
+
+ai_workflow:
+  step_1: "Ask: Should I check Figma files using Figma MCP?" (if not already specified)
+  step_2: "Connect to Figma via MCP: figma_get_file('ABC123')"
+  step_3: "Extract button component variants"
+  step_4: "Ask: Which creative mode? Strict/Balanced/Creative"
+  step_5: "Generate HTML button with extracted tokens"
+  step_6: "Apply creative mode adjustments"
+  step_7: "Deliver self-contained HTML file"
 ```
 
 ---
@@ -288,62 +513,6 @@ def extract_patterns(reference_image):
 | **High** | >80% | Use pattern directly | Standard button matches library |
 | **Medium** | 50-80% | Adapt with modifications | Card with unique layout |
 | **Low** | <50% | Build custom component | Novel interaction pattern |
-
-### SHADCN Pattern Reference with Extraction
-
-**CRITICAL:** SHADCN MCP is used as a **pattern reference only**. All implementations are vanilla HTML/CSS/JS with no framework dependencies.
-
-```yaml
-pattern_library_reference:
-  description: "SHADCN MCP provides structural patterns for vanilla JS implementation"
-  workflow: "Extract tokens → Query SHADCN MCP for patterns → Implement vanilla component with tokens"
-  output: "Self-contained HTML with inline CSS/JS - zero dependencies"
-
-  decision_tree:
-    extracted_pattern_matches_shadcn:
-      confidence_high: "Reference SHADCN pattern structure closely, implement in vanilla JS"
-      confidence_medium: "Use SHADCN structural guidance + extensive vanilla customization"
-      confidence_low: "Custom vanilla implementation from scratch with extracted tokens"
-
-  example_application:
-    reference_button:
-      extracted_tokens:
-        - border_radius: "8px"
-        - primary_color: "#3B82F6"
-        - padding: "16px 24px"
-        - font_weight: "600"
-
-      shadcn_pattern_query:
-        query: "Show me button component structure with all states"
-        component: "Button pattern"
-        confidence: "82% structural match"
-
-      shadcn_provides:
-        structure: "HTML button element with variant classes"
-        states: ["default", "hover", "focus", "active", "disabled"]
-        accessibility: "ARIA labels, keyboard navigation"
-
-      vanilla_implementation:
-        approach: "Reference SHADCN structure → Implement vanilla CSS with extracted tokens"
-        html: "<button class=\"btn btn-primary\">Label</button>"
-        css: |
-          .btn {
-            border-radius: 8px;           /* Extracted token */
-            padding: 16px 24px;           /* Extracted token */
-            font-weight: 600;             /* Extracted token */
-            transition: all 0.15s;        /* SHADCN pattern */
-          }
-          .btn-primary {
-            background: #3B82F6;          /* Extracted token */
-            color: white;
-          }
-          .btn:hover { opacity: 0.9; }    /* SHADCN pattern */
-          .btn:focus {                     /* SHADCN accessibility pattern */
-            outline: 2px solid currentColor;
-            outline-offset: 2px;
-          }
-        result: "Vanilla button with SHADCN structure + extracted design tokens"
-```
 
 ---
 
@@ -518,19 +687,19 @@ effects_extraction:
 
 I've detected references in [Context folder / chat upload]. How should I apply them?
 
-**Strict Mode (<5% deviation)**
+**Strict Mode (≤10% deviation)**
 - Pixel-perfect replication
 - Exact color and spacing matching
 - Minimal interpretation
 - Use when: Brand guidelines, client mockups, legal requirements
 
-**Balanced Mode (5-15% adaptation)** [DEFAULT]
+**Balanced Mode (10-25% adaptation)** [DEFAULT]
 - Match core aesthetic
 - Optimize for web standards
 - Enhance accessibility
 - Use when: Production sites, modern web apps
 
-**Creative Mode (15-30% interpretation)**
+**Creative Mode (25-50% interpretation)**
 - Design inspiration
 - Contemporary enhancements
 - Unique personality
@@ -543,7 +712,7 @@ Selection: _
 
 ```yaml
 strict_mode:
-  deviation_tolerance: "<5%"
+  deviation_tolerance: "≤10%"
 
   rules:
     colors:
@@ -581,7 +750,7 @@ strict_mode:
     """
     📊 Strict Mode Extraction Report
 
-    Deviation: 3.2%
+    Deviation: 7.8%
     - Colors: 0 changes (exact match)
     - Typography: Inter substituted for Helvetica (98% similarity)
     - Spacing: 2 values normalized (31px → 32px for rounding)
@@ -595,7 +764,7 @@ strict_mode:
 
 ```yaml
 balanced_mode:
-  deviation_tolerance: "5-15%"
+  deviation_tolerance: "10-25%"
 
   optimizations:
     accessibility:
@@ -640,7 +809,7 @@ balanced_mode:
     ✅ Interactions: Added hover states and transitions
     ✅ Responsive: Mobile-first breakpoints implemented
 
-    Overall deviation: 11% (within target range)
+    Overall deviation: 18% (within target range)
     """
 ```
 
@@ -648,7 +817,7 @@ balanced_mode:
 
 ```yaml
 creative_mode:
-  deviation_tolerance: "15-30%"
+  deviation_tolerance: "25-50%"
 
   creative_freedoms:
     colors:
@@ -710,20 +879,20 @@ creative_mode:
     - Animated gradient borders
     - 3D card hover transforms
 
-    Deviation: 24% (creative interpretation applied)
+    Deviation: 38% (creative interpretation applied)
     Design rationale: Modern, energetic, forward-thinking
     """
 ```
 
 ### Mode Comparison Matrix
 
-| Aspect | Strict | Balanced | Creative |
+| Aspect | Strict (≤10%) | Balanced (10-25%) | Creative (25-50%) |
 |--------|--------|----------|----------|
-| **Color Fidelity** | 100% exact | 90% with WCAG | 70% inspired |
+| **Color Fidelity** | 95%+ exact | 85% with WCAG | 60% inspired |
 | **Typography Match** | Exact or closest | Optimized alternative | Creative pairing |
-| **Spacing Precision** | Pixel-perfect | Grid-normalized | Rhythm-based |
-| **Layout Structure** | 100% match | Responsive-optimized | Modern interpretation |
-| **Effects** | Exactly replicated | Performance-optimized | Trend-enhanced |
+| **Spacing Precision** | Near pixel-perfect | Grid-normalized | Rhythm-based |
+| **Layout Structure** | 90%+ match | Responsive-optimized | Modern interpretation |
+| **Effects** | Closely replicated | Performance-optimized | Trend-enhanced |
 | **Interactions** | As visible | Best practices | Delightful |
 | **Accessibility** | Added only | Prioritized | Integrated |
 | **Performance** | Not modified | Optimized | Balanced with effects |
@@ -838,13 +1007,13 @@ extraction_validation:
 ```yaml
 mode_compliance:
   strict_mode_checks:
-    - Deviation calculation (<5%)
+    - Deviation calculation (≤10%)
     - Element-by-element comparison
     - Color hex verification
     - Spacing measurement validation
 
   balanced_mode_checks:
-    - Aesthetic similarity (85%+)
+    - Aesthetic similarity (75%+)
     - WCAG AA compliance
     - Grid normalization verification
     - Enhancement documentation
@@ -893,7 +1062,7 @@ extraction_commands:
   creative_mode:
     command: "$extract creative [image]"
     example: "$extract creative homepage.png"
-    description: "Creative interpretation with 15-30% deviation"
+    description: "Creative interpretation with 25-50% deviation"
 
   tokens_only:
     command: "$extract tokens"
