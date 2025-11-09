@@ -1,5 +1,5 @@
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 17:56:20] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: B...
@@ -11,10 +11,10 @@ Prompt: B...
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:05:35] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Yes ...
@@ -26,10 +26,10 @@ Prompt: Yes ...
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:16:29] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Test it...
@@ -41,10 +41,10 @@ Prompt: Test it...
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:17:09] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: The skill document doesnt adhere to the anthropic skill standards...
@@ -60,10 +60,10 @@ Prompt: The skill document doesnt adhere to the anthropic skill standards...
    • document-style-guide
      Documentation and markdown formatting standards (knowledge/document_style_guide.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:17:44] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: the skill doesnt adhere to the anthropic skill standards. It needs frontmattter, etc research online...
@@ -75,10 +75,10 @@ Prompt: the skill doesnt adhere to the anthropic skill standards. It needs front
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:20:40] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: ignore last comment. Where is the script for loader?...
@@ -90,10 +90,10 @@ Prompt: ignore last comment. Where is the script for loader?...
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:21:01] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: add allowed tools...
@@ -105,10 +105,10 @@ Prompt: add allowed tools...
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:21:54] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Align closer to this one, regarding styling and layout: /Users/michelkerkmeester/MEGA/Websites/anobe...
@@ -126,10 +126,10 @@ Prompt: Align closer to this one, regarding styling and layout: /Users/michelker
    • markdown-flowchart
      Create comprehensive ASCII flowcharts in markdown for visualizing workflows, user journeys, system architectures, and decision trees
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:24:49] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: But how does this work with the hero scripts?...
@@ -141,10 +141,10 @@ Prompt: But how does this work with the hero scripts?...
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:27:40] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Analyze this skill: /Users/michelkerkmeester/MEGA/Websites/anobel.com/.claude/skills/skill-creator |...
@@ -160,10 +160,10 @@ Prompt: Analyze this skill: /Users/michelkerkmeester/MEGA/Websites/anobel.com/.c
    • document-style-guide
      Documentation and markdown formatting standards (knowledge/document_style_guide.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:28:02] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: but you didnt update and hero scripts right?...
@@ -175,10 +175,10 @@ Prompt: but you didnt update and hero scripts right?...
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:31:50] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: check for unneeded bloat in the skill...
@@ -190,10 +190,10 @@ Prompt: check for unneeded bloat in the skill...
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:37:51] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Do same for save context skill document...
@@ -213,10 +213,10 @@ Prompt: Do same for save context skill document...
    • document-style-guide
      Documentation and markdown formatting standards (knowledge/document_style_guide.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:38:30] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Return styling with numbered section headers and emojis, etc. But okay to keep logic more concise li...
@@ -236,10 +236,10 @@ Prompt: Return styling with numbered section headers and emojis, etc. But okay t
    • document-style-guide
      Documentation and markdown formatting standards (knowledge/document_style_guide.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:38:52] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Add to global html the pre loader...
@@ -251,10 +251,10 @@ Prompt: Add to global html the pre loader...
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:40:07] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: dont add html lol. ...
@@ -266,10 +266,10 @@ Prompt: dont add html lol. ...
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:40:13] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: just the script and prefetch...
@@ -281,10 +281,10 @@ Prompt: just the script and prefetch...
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:40:39] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: preload the script...
@@ -296,10 +296,10 @@ Prompt: preload the script...
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:48:42] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Css is done in webflow. Btw I added it to staging but doesnt work, bug fix: https://a-nobel-en-zn.we...
@@ -321,10 +321,10 @@ Prompt: Css is done in webflow. Btw I added it to staging but doesnt work, bug f
    • debugging
      Debugging strategies and troubleshooting (knowledge/debugging.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:49:40] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Upgrade /Users/michelkerkmeester/MEGA/Websites/anobel.com/.claude/skills/skill-creator so that it al...
@@ -340,10 +340,10 @@ Prompt: Upgrade /Users/michelkerkmeester/MEGA/Websites/anobel.com/.claude/skills
    • document-style-guide
      Documentation and markdown formatting standards (knowledge/document_style_guide.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:52:49] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: No need for:         <p class="loader--label" data-loader="label">Loading</p> and  <div class="loade...
@@ -355,10 +355,10 @@ Prompt: No need for:         <p class="loader--label" data-loader="label">Loadin
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:53:11] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Do the scripts need updating? /Users/michelkerkmeester/MEGA/Websites/anobel.com/.claude/skills/skill...
@@ -374,10 +374,10 @@ Prompt: Do the scripts need updating? /Users/michelkerkmeester/MEGA/Websites/ano
    • chrome-devtools
      Browser automation, debugging, performance analysis
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:53:21] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: script doesnt need chanigngg?...
@@ -389,10 +389,10 @@ Prompt: script doesnt need chanigngg?...
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:56:29] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: its loading even when the page was already done. so its not adaptive at all. ultrathink  Also the co...
@@ -408,10 +408,10 @@ Prompt: its loading even when the page was already done. so its not adaptive at 
    • save-context
      Save conversation context when completing features or architectural discussions. Preserves full dialogue, decision rationale, visual flowcharts, and file changes for team sharing.
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:57:04] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Save context with parallel sub agent, use save context skill...
@@ -427,10 +427,10 @@ Prompt: Save context with parallel sub agent, use save context skill...
    • save-context
      Save conversation context when completing features or architectural discussions. Preserves full dialogue, decision rationale, visual flowcharts, and file changes for team sharing.
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 18:58:28] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: dont use chrome dev tools, i took it offline...
@@ -446,10 +446,10 @@ Prompt: dont use chrome dev tools, i took it offline...
    • chrome-devtools
      Browser automation, debugging, performance analysis
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 19:00:53] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Read: /Users/michelkerkmeester/MEGA/Websites/anobel.com/specs/020-skill-refinement/context/2025-11-0...
@@ -471,10 +471,10 @@ Prompt: Read: /Users/michelkerkmeester/MEGA/Websites/anobel.com/specs/020-skill-
    • markdown-flowchart
      Create comprehensive ASCII flowcharts in markdown for visualizing workflows, user journeys, system architectures, and decision trees
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 19:01:17] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: here is the file: /Users/michelkerkmeester/MEGA/Websites/anobel.com/src/javascript/hero/page_loader....
@@ -486,10 +486,10 @@ Prompt: here is the file: /Users/michelkerkmeester/MEGA/Websites/anobel.com/src/
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 19:06:20] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Use parallel sub-agent to save context to spec folder...
@@ -505,10 +505,10 @@ Prompt: Use parallel sub-agent to save context to spec folder...
    • save-context
      Save conversation context when completing features or architectural discussions. Preserves full dialogue, decision rationale, visual flowcharts, and file changes for team sharing.
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 19:07:19] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: The skill doesnt use double lines ever, adjust logic in skill and references: ╔════════════════════╗...
@@ -520,10 +520,10 @@ Prompt: The skill doesnt use double lines ever, adjust logic in skill and refere
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 19:12:08] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Analyze: /Users/michelkerkmeester/MEGA/Websites/anobel.com/specs/018-adaptive-page-loader/context/20...
@@ -547,10 +547,10 @@ Prompt: Analyze: /Users/michelkerkmeester/MEGA/Websites/anobel.com/specs/018-ada
    • markdown-flowchart
      Create comprehensive ASCII flowcharts in markdown for visualizing workflows, user journeys, system architectures, and decision trees
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 19:12:44] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Did you also update this one? /Users/michelkerkmeester/MEGA/Websites/anobel.com/.claude/skills/save-...
@@ -566,10 +566,10 @@ Prompt: Did you also update this one? /Users/michelkerkmeester/MEGA/Websites/ano
    • save-context
      Save conversation context when completing features or architectural discussions. Preserves full dialogue, decision rationale, visual flowcharts, and file changes for team sharing.
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 19:12:50] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Review the work...
@@ -581,10 +581,10 @@ Prompt: Review the work...
    • conversation-documentation
      Mandatory spec folder system for all implementation conversations (knowledge/conversation_documentation.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 19:19:09] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Update save context skill so that the AI will not just use latest spec folder but will check if cont...
@@ -600,10 +600,10 @@ Prompt: Update save context skill so that the AI will not just use latest spec f
    • save-context
      Save conversation context when completing features or architectural discussions. Preserves full dialogue, decision rationale, visual flowcharts, and file changes for team sharing.
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 19:29:45] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Fix all issues (ultrathink)...
@@ -623,10 +623,10 @@ Prompt: Fix all issues (ultrathink)...
    • debugging
      Debugging strategies and troubleshooting (knowledge/debugging.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 19:34:58] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Save context with save context skill here: /Users/michelkerkmeester/MEGA/Websites/anobel.com/specs/0...
@@ -646,10 +646,10 @@ Prompt: Save context with save context skill here: /Users/michelkerkmeester/MEGA
    • markdown-flowchart
      Create comprehensive ASCII flowcharts in markdown for visualizing workflows, user journeys, system architectures, and decision trees
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 19:35:22] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Double check everything. Also the hooks /Users/michelkerkmeester/MEGA/Websites/anobel.com/.claude/ho...
@@ -667,10 +667,10 @@ Prompt: Double check everything. Also the hooks /Users/michelkerkmeester/MEGA/We
    • save-context
      Save conversation context when completing features or architectural discussions. Preserves full dialogue, decision rationale, visual flowcharts, and file changes for team sharing.
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 19:38:17] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: it currently creates [Image #1] context v2. But it should always use the single folder and just add ...
@@ -690,10 +690,10 @@ Prompt: it currently creates [Image #1] context v2. But it should always use the
    • document-style-guide
      Documentation and markdown formatting standards (knowledge/document_style_guide.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-08 19:44:56] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: Double check everything. Also update readme in save-context ultrathink...
@@ -713,10 +713,10 @@ Prompt: Double check everything. Also update readme in save-context ultrathink..
    • document-style-guide
      Documentation and markdown formatting standards (knowledge/document_style_guide.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 [2025-11-09 06:01:14] SKILL RECOMMENDATIONS
 ───────────────────────────────────────────────────────────────
 Prompt: The save context skill contains output references that dont match reality. We only output 1 session ...
@@ -736,5 +736,5 @@ Prompt: The save context skill contains output references that dont match realit
    • document-style-guide
      Documentation and markdown formatting standards (knowledge/document_style_guide.md)
 
-═══════════════════════════════════════════════════════════════
+───────────────────────────────────────────────────────────────
 
