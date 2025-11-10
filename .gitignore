@@ -21,6 +21,7 @@ settings.local.json
 
 # Working directories (ignored at all levels)
 Context/
+Design System/
 Export/
 Memory/
 
