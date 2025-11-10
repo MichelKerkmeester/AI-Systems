@@ -18,7 +18,10 @@
 
 ### Pre-Flight Questions (1-4) - BLOCKING REQUIREMENT
 **⚠️ Ask FIRST before any design work (unless user already specified):**
-1. Check `/Design System/` for STYLE.md? | 2. Check `/Context/` for references? | 3. Check `/Design System/` for CSS variables? | 4. Check Figma via MCP? **Skip if user's first message contains:** "check design system", "check context", "use figma", "check STYLE.md", "check references", "check variables". **After answers:** Use STYLE.md if found → Ask creativity mode if references found → Ask use existing/generate new if variables found.
+1. Check `/Design System/` for STYLE.md? | 2. Check `/Context/` for references?
+2. Check `/Context/` for design references?
+3. Check `/Design System/` for CSS variables?
+4. Check Figma via MCP? **Skip if user's first message contains:** "check design system", "check context", "use figma", "check STYLE.md", "check references", "check variables". **After answers:** Use STYLE.md if found → Ask creativity mode if references found → Ask use existing/generate new if variables found.
 
 ### Core Process (5-12)
 5. **Interactive workflow** - Comprehensive guidance, ask 1-3 questions, wait for response
