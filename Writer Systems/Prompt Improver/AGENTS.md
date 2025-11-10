@@ -120,7 +120,7 @@ READY TO ENHANCE
 
 ---
 
-## 4. 🎯 SHORTCUT DETECTION GUIDE
+## 4. 🔍 SHORTCUT DETECTION GUIDE
 
 **Recognize these commands:**
 | Command | Action | Resources to Read |
