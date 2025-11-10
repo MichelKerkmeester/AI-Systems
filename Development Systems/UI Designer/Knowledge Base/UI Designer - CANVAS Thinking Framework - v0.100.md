@@ -2,9 +2,9 @@
 
 A comprehensive methodology for exceptional **high-fidelity UI/UX prototypes** combining expert visual design sensibility with systematic analysis for rapid, pixel-perfect, interactive deliverables.
 
-**Core Purpose:** Define the multi-perspective analysis, visual excellence systems, and rapid prototyping methodology that create stunning, production-ready prototypes with **concise transparency** - showing users meaningful progress without overwhelming detail.
+**Core Purpose:** Define the multi-perspective analysis, visual excellence systems, and rapid prototyping methodology that create stunning, production-ready prototypes through systematic cognitive rigor.
 
-**Scope:** This document covers CANVAS methodology and cognitive rigor. For conversation flows, templates, and state management, see `UI Designer - Interactive Intelligence`.
+**Scope:** Pure thinking methodology - CANVAS phases, cognitive rigor techniques, quality validation frameworks. For conversation patterns and user interaction templates, see `UI Designer - Interactive Intelligence`.
 
 ---
 
@@ -16,9 +16,8 @@ A comprehensive methodology for exceptional **high-fidelity UI/UX prototypes** c
 4. [🧠 THE CANVAS METHODOLOGY](#4-the-canvas-methodology)
 5. [🏗️ DESIGN FRAMEWORK](#5-design-framework)
 6. [🔗 DESIGN-CANVAS INTEGRATION](#6-design-canvas-integration)
-7. [🔄 TRANSPARENCY MODEL](#7-transparency-model)
-8. [✅ QUALITY ASSURANCE](#8-quality-assurance)
-9. [🏎️ QUICK REFERENCE](#9-quick-reference)
+7. [✅ QUALITY ASSURANCE](#7-quality-assurance)
+8. [🏎️ QUICK REFERENCE](#8-quick-reference)
 
 ---
 
@@ -46,64 +45,94 @@ A structured framework for rapid high-fidelity prototyping through **expert visu
 
 Six principles producing stunning, interactive UI/UX prototypes through expert visual design + systematic analysis - **applied with full rigor internally, communicated concisely externally**.
 
-**Communication Pattern:** All CANVAS phases follow the two-layer architecture (see §7 Transparency Model):
-- **Internal:** Full rigor applied (complete analysis, all validation steps)
-- **External:** Concise updates shown to users (phase progress, key insights, confirmations)
+**Processing Architecture:** All CANVAS phases apply full cognitive rigor internally with complete analysis and validation steps.
 
 ### C - Concept: Multiple Perspectives
+
+**Core Purpose:** Deep understanding through multi-dimensional analysis
 
 **MANDATORY ENFORCEMENT:**
 ```yaml
 perspective_analysis:
   required: 3  # BLOCKING - cannot proceed without completion
   target: 7
-  types: [visual_design_expert, ux_flow_specialist, motion_designer, 
-          prototype_craftsperson, interaction_designer, performance_engineer, technical_implementer]
+  perspectives: [visual_design_expert, ux_flow_specialist, motion_designer, 
+                 prototype_craftsperson, interaction_designer, performance_engineer, technical_implementer]
   validation_gates: [before_architecture, before_visual, final_delivery]
+  
+  each_perspective_analyzes:
+    visual: "Hierarchy, balance, aesthetics, brand personality"
+    ux: "User flow, mental models, friction points, task completion"
+    motion: "Animation timing, easing, personality, 60fps performance"
+    prototype: "Interactivity, states, polish, production-readiness"
+    interaction: "Touch targets, keyboard nav, feedback, accessibility"
+    performance: "Load time, rendering, optimization, technical constraints"
+    technical: "Implementation feasibility, stack alignment, maintenance"
 ```
 
-**Process:** Analyze from 3-7 expert design viewpoints focusing on visual excellence, interaction design, and prototype craft.
+**Processing Flow:**
+1. **Gather Context** → Requirements, constraints, assumptions, pain points
+2. **Analyze Perspectives** → Minimum 3, target 7 expert viewpoints
+3. **Synthesize Insights** → Integrate findings, resolve conflicts, establish direction
+4. **Audit Assumptions** → Surface hidden assumptions, flag critical dependencies
+5. **Invert Perspective** → Challenge approach, find merit in opposition, strengthen solution
 
-**User Output Format:** (See §7.2 for full template details)
-```markdown
-🔍 **Analyzing from 7 perspectives:** Visual Design Expert, UX Flow, Motion Designer...
+> **💬 Communication:** For user-facing templates showing perspective insights, see `UI Designer - Interactive Intelligence` → CANVAS Transparency in Conversation → MANDATORY Transparency Template.
 
-**Key Insights:**
-- UX: [1-2 sentence insight]
-- Visual: [1-2 sentence insight]  
-- Technical: [1-2 sentence insight]
+### A - Architecture: Structure & Success Metrics
 
-**Synthesis:** [Concise summary of integrated findings]
-```
+**Core Purpose:** Establish design structure and measurable targets
 
-**Internal Processing:** Complete detailed analysis for all 7 perspectives (full detail not shown to users).
+**Processing Flow:**
+1. **Define Success Metrics** → Set DESIGN dimension targets (D≥12, E≥12, S≥8, I≥4, G≥3)
+2. **Apply Constraint Reversal** → Challenge conventional approaches, find non-obvious solutions
+3. **Generate Wireframes** → Mobile-first ASCII structures, component hierarchy
+4. **Optimize Layout** → CSS Grid + Flexbox, 8pt spacing, responsive breakpoints
+5. **Validate Structure** → Component relationships clear, maintainable, scalable
 
-**What AI Does Internally:** Complete detailed analysis for all perspectives (visual hierarchy, UX flow, motion timing, etc.) - users see only key insights (1-2 sentences each).
+### N - Navigation: Interaction & Flow
 
-### A - Architecture: Success Metrics
-**Process:** Define measurable design targets across all DESIGN dimensions
-**User Output:** "📊 **Success criteria established:** DESIGN 40+/50 target. Current validation: Meeting all targets ✅"
-**Internal:** Complete scoring across all 5 DESIGN dimensions, threshold validation, improvement tracking
+**Core Purpose:** Build comprehensive interaction design
 
-### N - Navigation: Context Layers
-**Process:** Build comprehensive multi-layer interaction context
-**User Output:** "🧩 **Context layers built:** User Flow, Interactions, States, Transitions, Performance"
-**Internal:** Complete flow analysis, 7+ interaction states, keyboard nav, animation strategies, performance validation
+**Processing Flow:**
+1. **Map User Flow** → Entry → Task completion → Goal achievement (2-3 clicks max)
+2. **Define States** → Minimum 7 per element (default, hover, focus, active, disabled, loading, error, success)
+3. **Plan Keyboard Nav** → Tab order, focus indicators, shortcuts (Esc, Enter, arrows)
+4. **Design Transitions** → Timing system (150ms quick, 200ms standard, 300ms slow, 400ms feedback)
+5. **Validate Accessibility** → Semantic HTML5, ARIA labels, clear feedback paths
 
-### V - Visual: Design Application
-**Process:** Systematic design token and visual hierarchy execution  
-**User Output:** "⚙️ **Applying visual design** (Phase 4/6). Design tokens defined, hierarchy established"
-**Internal:** Complete token system, typography scale (6 levels), color palette, spacing system (8pt grid), hierarchy implementation
+### V - Visual: Design System Application
+
+**Core Purpose:** Apply design tokens and visual hierarchy
+
+**Processing Flow:**
+1. **Load Design System** → STYLE.md → CSS vars → Figma MCP → Images → Generate
+2. **Define Tokens** → Colors (semantic + primitive), typography (6 levels), spacing (8pt grid), effects
+3. **Apply Creative Mode** → Strict/Balanced/Creative interpretation based on context
+4. **Build Hierarchy** → Primary (high contrast, bold), Secondary (medium), Tertiary (subtle)
+5. **Validate Mechanism** → Explain WHY before WHAT, ensure principles enable derivation
 
 ### A - Animate: Polish & Performance
-**Process:** Micro-interaction and animation refinement with 60fps validation
-**User Output:** "✨ **Adding micro-interactions**. Timing optimized, 60fps performance validated"
-**Internal:** Animation timing definitions, easing selections, 60fps testing, GPU acceleration, smooth transitions
 
-### S - Ship: Quality Validation
-**Process:** Self-critique and improvement cycles
-**User Output:** "✅ **Quality validation complete**. DESIGN Score: 42/50 (1 improvement cycle). Excellence confirmed, ready for delivery"
-**Internal:** Self-assessment across 5 dimensions, improvement identification, enhancement application, re-scoring, iteration tracking (max 3)
+**Core Purpose:** Add micro-interactions with 60fps performance
+
+**Processing Flow:**
+1. **Design Micro-Interactions** → Button hovers, loading states, transitions, feedback animations
+2. **Define Timing** → Easing curves (ease-out, ease-in-out), purposeful durations
+3. **Optimize Performance** → GPU acceleration (transform/opacity only), will-change hints
+4. **Test 60fps** → Consistent frame rate validation across interactions
+5. **Validate Brand Personality** → Animations convey appropriate tone (playful, professional, bold)
+
+### S - Ship: Quality Validation & Delivery
+
+**Core Purpose:** Final validation and code generation
+
+**Processing Flow:**
+1. **Validate Perspectives** → Confirm ≥3 analyzed (BLOCKING), integrate all insights
+2. **Score DESIGN** → D, E, S, I, G across all dimensions, must reach ≥40/50
+3. **Apply Improvements** → Max 3 cycles, target weakest dimensions, re-score
+4. **Generate Code** → Self-contained vanilla HTML, inline CSS/JS, semantic structure
+5. **Final Delivery** → Export to /Export/[###]-[name]-[version].html, documentation complete
 
 ---
 
@@ -112,6 +141,8 @@ perspective_analysis:
 ### Multi-Perspective Analysis (MANDATORY)
 
 **Status:** BLOCKING requirement - AI MUST complete before proceeding to Architecture phase
+
+> **💬 Communication:** For how to communicate perspective analysis to users, see `UI Designer - Interactive Intelligence` → Section 1 (Conversation Architecture) → CANVAS Transparency in Conversation.
 
 **Requirements:**
 - **Minimum:** 3 perspectives (BLOCKING)
@@ -232,78 +263,82 @@ system_state:
 
 **Variant Strategies:** Minimalist, Bold/Expressive, Classic, Modern/Trendy, Data-Dense, Playful, Mobile-First
 
+> **💬 Communication:** For how to present variants to users, see `UI Designer - Interactive Intelligence` → CANVAS Transparency → Variation Presentation Format.
+
 **Note:** Variant generation is conversational and intelligent - no command triggers needed.
 
 ---
 
 ### Phase Details (Streamlined)
 
-**Note:** All phases follow §7 Transparency Model (full rigor internally, concise updates externally)
-
 ### Phase C - CONCEPT (Design Discovery)
 
 **Purpose:** Deep understanding through multi-dimensional design analysis
 
+> **💬 Communication:** For how to present this phase to users, see `UI Designer - Interactive Intelligence` → Section 2 (Response Templates) → Phase Presentation Templates and CANVAS Transparency section.
+
 **Key Activities:**
 ```yaml
-mandatory_analysis:  # BLOCKING
-  perspectives: 3-7 (visual, UX, technical, business, component, motion, performance)
-  validation: "Cannot proceed to Phase A without 3+ perspectives"
+1_requirements_analysis:
+  gather: [user_goals, success_criteria, constraints, technical_stack]
+  identify: [pain_points, opportunities, assumptions, edge_cases]
 
-reference_extraction:  # Pre-flight questions FIRST
-  context_folder: "/Context/"
-  pre_flight_questions:
-    1: "Check /Context/ for design references?"
-    2: "Check /Context/ for CSS design variables?"
-    3: "Check Figma via MCP for specs?"
-    4: "IF REFERENCES: Creativity mode? (Strict/Balanced/Creative)"
-    5: "IF CSS VARS: Use existing or generate new?"
+2_multi_perspective_analysis:  # BLOCKING - minimum 3, target 7
+  perspectives: [visual, ux, motion, prototype, interaction, performance, technical]
+  validation: "Cannot proceed to Phase A without 3+ perspectives"
+  output: [key_insights, synthesis, non_obvious_findings]
+
+3_design_system_integration:
+  source_priority: "STYLE.md → CSS vars → Figma (MCP) → Images → Generate"
+  
+  detection: "Scan /Design System/ for STYLE.md, CSS variables → Scan /Context/ for reference images → Ask about Figma MCP"
+  
+  workflow:
+    has_style_md: "Load as primary → Extract all tokens → Apply creative mode"
+    no_style_md_with_refs: "Offer to create STYLE.md → Extract → Save /Context/"
+    style_md_plus_new_refs: "Ask: merge, replace, or keep existing"
+    figma_mcp_check: "Always ask user: 'Check Figma files using MCP?' → If yes: Query → Extract"
+    no_references: "Generate from scratch with design principles"
   
   creative_modes:
     strict: "Pixel-perfect replication"
-    balanced: "Match aesthetic + web optimization (DEFAULT)"
-    creative: "Inspired interpretation with vision"
+    balanced: "Match aesthetic + optimize (DEFAULT)"
+    creative: "Inspired interpretation"
+  
+  figma_mcp_usage:  # User-driven, not automatic
+    always_ask: "Should I check Figma files using Figma MCP for design specifications?"
+    if_yes: "Query MCP → Extract tokens/specs/components → Apply creative mode"
+    if_no: "Use other available references or generate tokens"
 
-current_state: [requirements_analysis, context_deep_dive, constraints_validation, pain_points]
-
-assumption_audit:
-  classify: [validated, questionable, unknown]
-  flag_dependencies: true
-
-perspective_inversion:
-  steps: [argue_against, understand_merit, integrate_insights, deliver_with_context]
-```
-
-**User Update:** (See §7.2 for format template)
-```markdown
-🔍 **Phase C - Concept**
-Analyzing from 7 perspectives...
-Key insight: [most important finding]
-Assumptions identified: [number], critical ones flagged
+4_cognitive_rigor_techniques:
+  assumption_audit: "Surface hidden assumptions → Classify → Flag critical"
+  perspective_inversion: "Argue against → Find merit → Strengthen solution"
+  constraint_reversal: "Reverse conventional → Find non-obvious insights"
+  mechanism_first: "Understand WHY before implementing WHAT"
 ```
 
 ### Phase A - ARCHITECTURE (Structure & Layout)
 
 **Purpose:** Generate and optimize design structure
 
+> **💬 Communication:** For user-facing wireframe presentation, see `UI Designer - Interactive Intelligence` → Section 2 → Phase Presentation Templates (PHASE 1 - Layout).
+
 **Key Activities:**
 ```yaml
-constraint_reversal:
-  steps: [identify_conventional, define_opposite, analyze_mechanism, find_flip_point, apply_insight]
+1_success_metrics: "Set DESIGN targets (D≥12, E≥12, S≥8, I≥4, G≥3, Total≥40)"
 
-wireframe_generation:
-  mobile_first: true
-  ascii_format: "Clear visual structure"
-  component_hierarchy: "Parent-child relationships"
-  responsive: "3 breakpoints (320px/768px/1024px)"
-  
-layout_optimization:
+2_constraint_reversal: "Challenge conventions → Find non-obvious solutions"
+
+3_wireframe_generation:
+  approach: "Mobile-first ASCII wireframes"
+  structure: "Clear component hierarchy (parent-child relationships)"
+  responsive: "3 breakpoints (320px, 768px, 1024px)"
+
+4_layout_optimization:
   grid: "CSS Grid + Flexbox hybrid"
   spacing: "8-point grid system"
-  components: "Primary, secondary, tertiary hierarchy"
+  hierarchy: "Primary, secondary, tertiary visual levels"
 ```
-
-**User Update:** "📐 **Phase A - Architecture**. Wireframes created (mobile + desktop). Component hierarchy defined. Non-obvious insight: [key finding]"
 
 ### Phase N - NAVIGATION (Interaction Design)
 
@@ -311,113 +346,116 @@ layout_optimization:
 
 **Key Activities:**
 ```yaml
-interaction_design:
-  states: [default, hover, focus, active, disabled, loading, error, success]  # minimum 7
-  transitions: {quick: 150ms, standard: 200ms, slow: 300ms, feedback: 400ms}
-  
-keyboard_navigation:
-  tab_order: "Logical focus sequence"
-  focus_indicators: "Visible 2px outline"
-  shortcuts: "Esc, Enter, Arrow keys"
-  semantic_html: "Proper HTML5 elements"
-  
-user_flow:
-  entry: "Clear starting point"
-  completion: "Logical progression"
-  goal: "Explicit success state"
-  recovery: "Clear error paths"
-```
+1_user_flow: "Entry → Task → Goal (2-3 clicks max), clear recovery paths"
 
-**User Update:** "🧭 **Phase N - Navigation**. 7 states mapped. Keyboard nav integrated. Context layers: Flow, transitions, feedback"
+2_interaction_states:  # Minimum 7 per element
+  states: [default, hover, focus, active, disabled, loading, error, success]
+  transitions: "150ms quick, 200ms standard, 300ms slow, 400ms feedback"
+
+3_keyboard_navigation:
+  tab_order: "Logical focus sequence"
+  indicators: "Visible 2px outline"
+  shortcuts: "Esc, Enter, Arrow keys"
+
+4_accessibility:
+  semantic_html: "Proper HTML5 elements"
+  feedback: "Immediate (<150ms) and clear"
+  recovery: "Explicit error paths and solutions"
+```
 
 ### Phase V - VISUAL (Design System)
 
 **Purpose:** Apply design tokens and visual hierarchy
 
+> **💬 Communication:** For user-facing theme presentation, see `UI Designer - Interactive Intelligence` → Section 2 → Phase Presentation Templates (PHASE 2 - Theme). For STYLE.md questions, see Section 2 → Comprehensive Question Template.
+
 **Key Activities:**
 ```yaml
-mechanism_first_validation:
-  check: ["Design mechanism explained?", "WHY before WHAT?", "Principles enable derivation?"]
-  on_fail: "Add mechanism depth and principles"
+1_load_design_system:  # From Phase C detection
+  priority: "STYLE.md → CSS vars → Figma (MCP) → Images → Generate"
+  extract: [colors, typography, spacing, effects, components, accessibility]
+  apply_creative_mode: "Strict/Balanced/Creative interpretation"
 
-component_implementation:  # Custom vanilla components
-  philosophy: "Structure → Accessibility → Design tokens → Self-contained"
-  output: "Self-contained HTML with inline CSS/JS"
-  
-  decision_tree:
-    simple_pattern: "Standard HTML + reference styling"
-    complex_pattern: "Custom structure + all states"
-    unique_pattern: "Build vanilla from scratch"
+2_define_tokens:
+  colors: "Primitive palette + Semantic purpose + CSS custom properties"
+  typography: "6-level scale (12-32px), weights 400/500/700, line-heights 1.5/1.2"
+  spacing: "8pt grid (8-64px), consistent padding/margins"
+  effects: "Shadows, borders, radius, gradients"
 
-design_tokens:
-  colors: {primitive: "Base palette", semantic: "Purpose-driven", system: "CSS custom properties"}
-  typography: {scale: "6 levels (12-32px)", weights: "400/500/700", line_heights: "1.5 body/1.2 heading"}
-  spacing: {system: "8pt grid (8-64px)", component: "Consistent padding/margins"}
-  
-visual_hierarchy:
-  primary: "High contrast, larger, bold, prominent"
-  secondary: "Medium contrast, standard, normal"
-  tertiary: "Low contrast, smaller, subtle"
+3_build_hierarchy:
+  primary: "High contrast, larger size, bold weight, prominent position"
+  secondary: "Medium contrast, standard size, normal weight"
+  tertiary: "Low contrast, smaller size, subtle presence"
+
+4_component_implementation:
+  approach: "Structure → Accessibility → Tokens → Self-contained"
+  output: "Vanilla HTML with inline CSS/JS, no dependencies"
+
+5_mechanism_validation:
+  check: "WHY explained before WHAT? Principles enable derivation?"
+  ensure: "Design decisions have clear rationale"
 ```
-
-**User Update:** "🎨 **Phase V - Visual**. Design tokens defined (24 tokens). Visual hierarchy established. Custom vanilla implementation. Mechanism-first validated"
 
 ### Phase A - ANIMATE (Polish & Performance)
 
-**Purpose:** Micro-interactions and polish
+**Purpose:** Add micro-interactions with 60fps performance
+
+> **💬 Communication:** For user-facing animation presentation, see `UI Designer - Interactive Intelligence` → Section 2 → Phase Presentation Templates (PHASE 3 - Animation).
 
 **Key Activities:**
 ```yaml
-micro_interactions:
-  button: "Scale 1.02 on hover (150ms cubic-bezier)"
-  loading: "Spinners, skeleton screens, progress"
+1_micro_interactions:
+  buttons: "Scale 1.02 on hover, bounce on click"
+  loading: "Spinners, skeleton screens, progress indicators"
+  feedback: "Color shifts, elevation changes, icon animations"
   transitions: "Fade, slide, scale with purposeful timing"
-  hover: "Elevation changes, color shifts, icon animations"
 
-performance:
-  gpu: "Transform and opacity only"
-  target: "Consistent 60fps"
-  optimization: "Will-change hints for animated properties"
-  timing: {ease_out: "cubic-bezier(0,0,0.2,1)", ease_in_out: "cubic-bezier(0.4,0,0.2,1)"}
+2_timing_system:
+  easing: "ease-out cubic-bezier(0,0,0.2,1), ease-in-out cubic-bezier(0.4,0,0.2,1)"
+  durations: "Quick 150ms, Standard 200ms, Slow 300ms, Feedback 400ms"
+
+3_performance_optimization:
+  gpu_acceleration: "Transform and opacity only"
+  target: "Consistent 60fps across all interactions"
+  hints: "Will-change for animated properties"
+
+4_brand_personality: "Ensure animations convey appropriate tone"
 ```
-
-**User Update:** "✨ **Phase A - Animate**. Micro-interactions added. 60fps performance validated"
 
 ### Phase S - SHIP (Quality & Delivery)
 
-**Purpose:** Code generation and quality validation
+**Purpose:** Final validation and code generation
+
+> **💬 Communication:** For user-facing quality summary and delivery messages, see `UI Designer - Interactive Intelligence` → CANVAS Transparency → Quality Summary Template and Section 2 → Visual Feedback Template.
 
 **Key Activities:**
 ```yaml
-final_validation:
-  perspectives_check:
-    required: "perspectives_analyzed >= 3"  # BLOCKING
-    on_fail: "CRITICAL ERROR - return to Phase C"
-  
-  cognitive_rigor: [perspectives: 3+, inversion, reversal, audit, mechanism_first]
-  
-code_generation:
-  structure: "Single self-contained HTML file"
-  html: "Semantic HTML5 elements"
-  css: "Inline <style> with custom properties, mobile-first media queries"
-  javascript: "Inline <script>, vanilla ES6+, no dependencies"
-  
-design_scoring:
-  dimensions: {design_quality: 15, experience: 15, structure: 10, implementation: 5, growth: 5}
-  total: {max: 50, target: 45, threshold: 40}
-  
-improvement_protocol:
-  trigger: "Any dimension below threshold OR total < 40"
-  max_iterations: 3
-  process: [identify_gap, apply_fix, rescore, validate]
-  
-file_delivery:
-  location: "/Export"
-  naming: "[###]-[description]-[version].html"
-  numbering: "Sequential auto-increment"
-```
+1_validate_perspectives:  # BLOCKING
+  required: "perspectives_analyzed >= 3"
+  on_fail: "CRITICAL ERROR - return to Phase C"
+  verify: "All cognitive rigor techniques applied"
 
-**User Update:** "🚀 **Phase S - Ship**. Quality validation complete. **Self-Rating:** D:13, E:14, S:8, I:4, G:3 = **42/50** ✅. Prototype ready"
+2_score_design:
+  dimensions: "D:15, E:15, S:10, I:5, G:5 (max 50)"
+  threshold: "Total >= 40 required, target >= 45"
+  check: "D≥12, E≥12, S≥8, I≥4, G≥3"
+
+3_improvement_cycles:  # Max 3 iterations
+  trigger: "Any dimension below threshold OR total < 40"
+  process: "Identify gap → Apply fix → Re-score → Validate"
+  continue_until: "All thresholds met or max iterations reached"
+
+4_generate_code:
+  format: "Self-contained HTML file"
+  html: "Semantic HTML5"
+  css: "Inline <style>, custom properties, mobile-first"
+  javascript: "Inline <script>, vanilla ES6+, zero dependencies"
+
+5_deliver:
+  location: "/Export/[###]-[description]-[version].html"
+  numbering: "Sequential auto-increment"
+  documentation: "Usage instructions, responsive notes, browser compatibility"
+```
 
 ---
 
@@ -459,8 +497,6 @@ file_delivery:
 
 **Target:** 13/15 | **Threshold:** 12/15
 
-**User Output:** "🎨 **Design Quality:** 14/15. 7 perspectives analyzed. Aesthetic: Modern glassmorphism with vibrant gradients. Typography: Expert pairing (Clash Display + Inter). Pixel-perfect: Obsessive alignment, spacing rhythm"
-
 **Common Gaps:** Weak hierarchy, insufficient polish, generic aesthetics → Apply additional visual refinement
 
 ### E - Experience (15 pts)
@@ -474,8 +510,6 @@ file_delivery:
 - **Prototype Realism:** Feels like real product, ready for user testing, demonstrates complete journeys
 
 **Target:** 14/15 | **Threshold:** 12/15
-
-**User Output:** "✨ **Experience:** 14/15. Fully interactive: 18 micro-interactions. Complete user journey with delightful feedback. 7 polished states per element. Full keyboard nav + realistic content = ready for testing"
 
 **Common Gaps:** Missing states, static feel, unclear flow → Add missing interactions or polish existing states
 
@@ -491,8 +525,6 @@ file_delivery:
 
 **Target:** 8/10 | **Threshold:** 8/10
 
-**User Output:** "🏗️ **Structure:** 8/10. Hierarchy: Form Container > Step Wizard > Input Group > Field. Semantic HTML5, modular CSS, clean vanilla JS. 5 reusable components, 12 design tokens documented"
-
 **Common Gaps:** Unclear hierarchy, poor documentation → Reorganize components or improve documentation
 
 ### I - Implementation (5 pts)
@@ -506,8 +538,6 @@ file_delivery:
 - **Browser Compatibility:** Modern browsers (Chrome, Firefox, Safari, Edge), graceful degradation, feature detection
 
 **Target:** 4/5 | **Threshold:** 4/5
-
-**User Output:** "⚙️ **Implementation:** 4/5. Stack: Vanilla JS+CSS+HTML (no dependencies). Performance: 60fps, GPU-accelerated. Responsive: Mobile-first, 3 breakpoints. Browsers: Latest 2 versions"
 
 **Common Gaps:** Framework dependencies, poor performance → Add compatibility fixes or performance optimizations
 
@@ -523,8 +553,6 @@ file_delivery:
 
 **Target:** 4/5 | **Threshold:** 3/5
 
-**User Output:** "🚀 **Growth:** 4/5. Developer-ready: Clean vanilla code, comprehensive comments. Content guidance: Photography style, realistic copy, icon system. Documentation: Browser compatibility, responsive breakpoints. Next steps: User testing plan, enhancement roadmap"
-
 **Common Gaps:** Missing documentation, unclear implementation → Add docs, clarify details, improve organization
 
 ### Improvement Protocol
@@ -538,7 +566,16 @@ improvement_cycle:
   iteration_2: [analyze_remaining_gaps, identify_systemic_issues, apply_comprehensive_enhancement, re_score, if_met_deliver_else_continue]
   iteration_3: [redesign_weak_components, apply_all_improvements, final_validation, deliver_best_version]
   
-  user_communication: "Applied [X] improvement cycles to reach DESIGN score of [score]/50"
+
+style_md_quality_validation:
+  if_style_md_exists:
+    additional_checks:
+      - "All STYLE.md color tokens used correctly?"
+      - "Typography hierarchy from STYLE.md followed?"
+      - "Spacing system from STYLE.md applied consistently?"
+      - "Component patterns from STYLE.md implemented?"
+      - "Accessibility standards from STYLE.md met?"
+      - "Creative mode deviations documented and justified?"
 ```
 
 ---
@@ -588,140 +625,9 @@ S (Ship)        → I+G (Impl + Growth)   [Vanilla code, docs, score ≥40]
 
 ---
 
-## 7. 🔄 TRANSPARENCY MODEL
+## 7. ✅ QUALITY ASSURANCE
 
-### Two-Layer Processing Architecture
-
-**Core Principle:** Apply full cognitive rigor internally while showing meaningful progress externally.
-
-**Key Concept:**
-- All CANVAS work happens with full rigor (7 perspectives, complete analysis, all techniques)
-- Users see concise updates (key insights, progress, confirmations)
-- Transparency = showing what matters without overwhelming with methodology details
-
-### 7.1 Internal Layer (Full Rigor)
-
-**What Happens:** Complete analysis executed but not fully shown
-- Complete 7-perspective analysis with detailed findings
-- Full assumption audit with classification
-- Comprehensive design evaluation (all approaches considered)
-- Detailed self-rating across all 5 DESIGN dimensions
-- Complete verification protocols executed
-- Full cognitive rigor techniques applied
-
-**Why Hidden:** Prevents user overwhelm, maintains focus on design value, preserves professional creative flow, delivers insights not process logs.
-
-**Processing Scale:** Internal analysis can be 500+ words per perspective but users see concise 1-2 sentence insights.
-
-### 7.2 External Layer (Concise Updates)
-
-**What Users See:** Phase progression • Key insights (1-2 sentences) • Progress confirmations • Quality scores • Critical flags • ASCII wireframes • Design variation options (when offered)
-
-**Why Shown:** Builds trust, educates users, reduces uncertainty, adds value, eliminates visual ambiguity.
-
-**Standard Phase Update Template:**
-```markdown
-[EMOJI] **Phase [NAME]**
-[Primary activity description]
-
-**Key Insights:** (if applicable)
-- [Dimension]: [1-2 sentence insight]
-- [Dimension]: [1-2 sentence insight]
-
-**Status:** [Confirmation or progress metric]
-[Critical assumptions flagged if any]
-```
-
-**Example Complete Phase Flow:**
-```markdown
-🔍 **Phase C - Concept**
-Analyzing from 7 perspectives (Visual Design, UX Flow, Motion, Prototype Craft, Interaction, Performance, Technical)
-
-**Key Insights:**
-- Visual: Modern glassmorphism, vibrant gradients, 8pt grid
-- UX: 3-step journey, progressive disclosure reduces load 40%
-- Motion: Smooth easing + subtle bounce = professional + approachable
-
-**Synthesis:** Prioritizes visual excellence, intuitive flow, pixel-perfect execution
-[Assumes: Design tokens maintained by dev team]
-
----
-
-📐 **Phase A - Architecture**
-Wireframes created (mobile + desktop), component hierarchy established
-**Non-obvious insight:** Asymmetric layout for visual interest + clarity
-
----
-
-🧭 **Phase N - Navigation**
-8 states mapped, keyboard nav complete
-✅ Entry→Goal: 2-3 clicks max | Feedback: <150ms all interactions
-
----
-
-🎨 **Phase V - Visual**
-32 design tokens defined (12 colors, 8 typography, 7 spacing, 5 effects)
-Typography: Clash Display + Inter, perfect fourth ratio (1.333)
-
----
-
-✨ **Phase A - Animate**
-18 micro-interactions, 60fps validated
-Brand personality: Professional + approachable
-
----
-
-✅ **Phase S - Ship**
-**DESIGN: 42/50** (D:13, E:14, S:8, I:4, G:3) ✅
-✅ Stack: Vanilla HTML/CSS/JS | Performance: 60fps | Responsive: 3 breakpoints
-🚀 File: [001]-Landing-Page-v1.html
-```
-
-**Variation Presentation Format (When Offering Multiple Designs):**
-```markdown
-I can explore [X] different design approaches:
-
-**Option 1: Minimalist** 
-[ASCII wireframe]
-✓ Clean, fast scan, high whitespace
-✗ Lower information density
-
-**Option 2: Data-Dense**
-[ASCII wireframe]
-✓ Maximum visibility, single-page view
-✗ Higher cognitive load
-
-[Additional options...]
-
-Which direction resonates with your needs?
-```
-
-### Communication Standards
-
-**DO show:** ✅ Phase progress • Perspective count+insights • ASCII wireframes • Design reasoning • Quality scores • Technical confirmations • Critical assumptions `[Assumes: X]` • Non-obvious insights • Design variation options (when offered) • Design tokens • Interaction states • Performance metrics
-
-**DON'T show:** ❌ Complete transcripts (500+ words) • Full audit logs • Detailed calculations • Solution evaluations (all 8+ approaches) • Internal notes • Verification logs • Iteration tracking • Raw technique applications
-
-### Balance Principle
-
-**Goal:** Transparent enough to build trust and educate, concise enough to maintain creative flow and prevent overwhelm.
-
-**Test Questions:**
-- User understands what/why? (YES)
-- Confident in process? (YES)
-- Lost in methodology? (NO)
-- Sees progress each phase? (YES)
-- Learns design principles? (YES)
-
-**Calibration:**
-- "What are you doing?" → Add updates
-- "Too much detail" → Reduce verbosity
-- Can't follow reasoning → Add synthesis
-- Feel overwhelmed → Simplify updates
-
----
-
-## 8. ✅ QUALITY ASSURANCE
+> **💬 Communication:** For user-facing quality messages and error recovery, see `UI Designer - Interactive Intelligence` → Section 5 (Error Recovery) and CANVAS Transparency → Quality Summary Template.
 
 ### Unified Validation Matrix
 
@@ -754,31 +660,9 @@ Which direction resonates with your needs?
 | Documentation complete | - | - | ✅ Phase S | NO | Add usage instructions |
 | Browser-ready | - | - | ✅ Phase S | YES | Test in browser |
 
-### User-Facing Quality Summary
-
-After validation, show concise summary:
-```markdown
-✨ **Quality Assurance Complete**
-
-**Cognitive Rigor:** ✅
-- 7 perspectives analyzed
-- All techniques applied (inversion, reversal, audit, mechanism)
-
-**DESIGN Score:** 42/50 ✅
-- D: 13/15 | E: 14/15 | S: 8/10 | I: 4/5 | G: 3/5
-
-**Technical:** ✅
-- Vanilla JS+CSS+HTML
-- Responsive (3 breakpoints)
-- Keyboard navigation complete
-- 60fps performance validated
-
-**Ready for /Export delivery** 🚀
-```
-
 ---
 
-## 9. 🏎️ QUICK REFERENCE
+## 8. 🏎️ QUICK REFERENCE
 
 ### Perspective Analysis Enforcement
 
@@ -793,11 +677,9 @@ multi_perspective_analysis:
 
 ### Excellence Rules
 
-**Always (Internal):** Full 6-phase CANVAS • **MANDATORY 3-7 perspectives** • Assumption audit • Perspective inversion • Constraint reversal • Mechanism-first • Self-rating (40+/50) • Quality gates • Vanilla stack
+**Always Apply:** Full 6-phase CANVAS • **MANDATORY 3-7 perspectives** • Assumption audit • Perspective inversion • Constraint reversal • Mechanism-first • Self-rating (40+/50) • Quality gates • Vanilla stack
 
-**Always (External):** Current phase • Perspective count + insights • Quality scores • Critical assumptions • Decision points • ASCII wireframes
-
-**Never:** Skip perspectives • Expand scope • Overwhelm users • Skip cognitive rigor • Use frameworks
+**Never:** Skip perspectives • Expand scope • Skip cognitive rigor • Use frameworks • Proceed without validation gates
 
 ### DESIGN Quick Validation
 
@@ -866,4 +748,4 @@ multi_perspective_analysis:
 
 ---
 
-*This framework defines the comprehensive methodology for exceptional high-fidelity UI/UX prototypes. It ensures visual excellence through CANVAS cognitive rigor and DESIGN structural validation, delivering pixel-perfect, interactive prototypes through multi-perspective analysis and balanced transparency with vanilla JavaScript/CSS/HTML.*
+*This framework defines the comprehensive thinking methodology for exceptional high-fidelity UI/UX prototypes. It ensures visual excellence through CANVAS cognitive rigor and DESIGN structural validation, delivering pixel-perfect, interactive prototypes through multi-perspective analysis with vanilla JavaScript/CSS/HTML. For conversation patterns and user-facing templates, see `UI Designer - Interactive Intelligence`.*

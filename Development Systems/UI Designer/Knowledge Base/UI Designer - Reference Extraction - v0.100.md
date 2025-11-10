@@ -1,437 +1,287 @@
 # UI Designer - Reference Extraction
 
-Transforms visual references into production-ready prototypes through intelligent pattern extraction, style token generation, and creative control modes.
+Extract design tokens from visual references and apply through creative control modes.
 
-**Core Purpose:** Enable reference-driven design workflows that extract precise design tokens from visual sources (screenshots, mockups, URLs) and apply them through flexible creative modes while maintaining the systematic rigor of the CANVAS methodology.
+**Core Purpose:** Transform screenshots/mockups into design systems via intelligent token extraction, STYLE.md generation, and flexible creative modes.
+
+**Scope:** Reference extraction workflows - token detection, STYLE.md generation, creative control modes, Figma integration. For conversation patterns, see `UI Designer - Interactive Intelligence`. For thinking methodology, see `UI Designer - CANVAS Thinking Framework`.
 
 ---
 
 ## 📋 TABLE OF CONTENTS
 
-1. [🎯 REFERENCE EXTRACTION OVERVIEW](#1-reference-extraction-overview)
+1. [🎯 OVERVIEW](#1-overview)
 2. [📸 EXTRACTION WORKFLOWS](#2-extraction-workflows)
-3. [🔍 PATTERN RECOGNITION METHODOLOGY](#3-pattern-recognition-methodology)
-4. [🎨 STYLE TOKEN EXTRACTION](#4-style-token-extraction)
-5. [🎛️ CREATIVE CONTROL SYSTEM](#5-creative-control-system)
-6. [🔗 CANVAS INTEGRATION](#6-canvas-integration)
-7. [✅ QUALITY ASSURANCE](#7-quality-assurance)
-8. [🏎️ QUICK REFERENCE](#8-quick-reference)
+3. [🎨 TOKEN EXTRACTION](#3-token-extraction)
+4. [🎛️ CREATIVE CONTROL MODES](#5-creative-control-modes)
+5. [🔗 CANVAS INTEGRATION](#6-canvas-integration)
+6. [✅ QUALITY ASSURANCE](#7-quality-assurance)
+7. [🏎️ QUICK REFERENCE](#8-quick-reference)
 
 ---
 
-## 1. 🎯 REFERENCE EXTRACTION OVERVIEW
+## 1. 🎯 OVERVIEW
 
-### The Reference-Driven Philosophy
+### Reference-Driven Workflow
 
-**Visual Communication Over Verbal Description**
+**Process:** User shows → Tokens extracted → STYLE.md created → Creative mode applied → Design generated
 
-Traditional approach: User describes → AI interprets → Template selected → Design adapted
+**Why This Works:**
+- **Precision** - Exact hex values, spacing, typography from visual sources
+- **Speed** - Show design vs 500-word description
+- **Consistency** - Build design systems from real examples
+- **Documentation** - Auto-generate STYLE.md for project continuity
+- **Flexibility** - Control adherence through creative modes (10-50% deviation)
 
-Reference-driven approach: User shows → AI analyzes → Tokens extracted → Creative mode applied → Design generated
+### Reference Sources
 
-### Why Reference Extraction Excels
-
-- **Precision**: Extract exact hex values, spacing, typography from visual sources
-- **Speed**: "Show this design" faster than describing in 500 words
-- **Consistency**: Build cohesive design systems from real examples
-- **Learning**: Each extraction enhances pattern recognition capabilities
-- **Flexibility**: Control adherence through creative modes (Strict/Balanced/Creative)
-
-### Supported Reference Types
-
-| Source | Location | Speed | Fidelity | Best For |
-|--------|----------|-------|----------|----------|
-| **Context Folder** | `/Context/` | ⚡⚡⚡ | 🎯🎯🎯 | Project references, batch processing |
-| **Direct Upload** | Chat drag & drop | ⚡⚡⚡ | 🎯🎯🎯 | Quick iterations, single references |
-| **URL Screenshots** | Web pages | ⚡⚡ | 🎯🎯 | Live site analysis, competitor research |
-| **Local Files** | User paths | ⚡⚡ | 🎯🎯🎯 | Design files, mockups |
+| Source | Location | Best For |
+|--------|----------|----------|
+| **Context Folder** | `/Context/` | Project references, batch processing |
+| **Chat Upload** | Drag & drop | Quick iterations, single references |
+| **Figma MCP** | Via integration | Direct design file access |
+| **URL Screenshots** | Web pages | Live site analysis |
 
 ---
 
 ## 2. 📸 EXTRACTION WORKFLOWS
 
-### Primary Workflow: Context Folder Scanning
-
-**Location**: `/AI Systems/Development Systems/UI Designer/Context/`
+### 5-Step Extraction Pipeline
 
 ```yaml
-context_folder_workflow:
-  auto_detection:
-    trigger:
-      - Conversation start
-      - User mentions "reference" or "screenshot"
-      - CANVAS Phase C initiation
+step_1_detection:
+  - Scan /Context/ folder or detect uploaded images
+  - Support: PNG, JPG, JPEG, WebP, SVG
+  - Auto-categorize by dimensions (desktop/mobile/tablet)
 
-  scan_process:
-    - Check Context folder for image files
-    - Support: PNG, JPG, JPEG, WebP, SVG
-    - Auto-categorize: desktop, mobile, tablet (by dimensions)
+step_2_visual_analysis:
+  - Identify UI elements (buttons, forms, cards, navigation)
+  - Map layout structure (grid systems, flexbox patterns)
+  - Analyze visual hierarchy
 
-  batch_extraction:
-    - Process all references simultaneously
-    - Build unified design token system
-    - Handle conflicts through user clarification
+step_3_token_extraction:
+  colors: Extract hex values → Build semantic palette → Calculate contrast ratios
+  typography: Identify fonts → Measure sizes/line-heights → Calculate scale ratio
+  spacing: Measure padding/margins → Detect grid system → Build spacing scale
+  effects: Extract shadows → Identify borders → Detect gradients
 
+step_4_pattern_inference:
+  - Identify interaction states (hover, active, focus, disabled)
+  - Map navigation flow
+  - Extract component patterns
+
+step_5_style_md_generation:
+  trigger: "References detected + no STYLE.md exists"
+  action: "Offer to create STYLE.md from tokens"
+  workflow:
+    1. Extract all tokens (colors, typography, spacing, effects)
+    2. Generate STYLE.md using template
+    3. Populate with design tokens + accessibility notes
+    4. Save to /Design System/STYLE.md
+    5. Use as primary system for current design
+```
+
+### STYLE.md Auto-Generation
+
+```yaml
+style_md_workflow:
+  when: "References detected + no STYLE.md exists"
+  
+  token_aggregation:
+    sources: [images, figma_mcp, css_variables]
+    priority: "Figma > CSS variables > Visual references"
+    conflicts: "Ask user which to use"
+  
+  populate_style_md:
+    colors: Hex values + semantic mappings + WCAG validation
+    typography: Font families + type scale + line-heights
+    spacing: Grid system (4px/8px) + spacing scale
+    effects: Shadows + border radius + animation timings
+    components: Button variants + form patterns + navigation
+    layout: Breakpoints + grid systems + container widths
+    accessibility: Contrast ratios + WCAG compliance + focus indicators
+  
+  save_location: "/Design System/STYLE.md"
+  
+  update_existing:
+    trigger: "STYLE.md exists + new references"
+    ask: "Update STYLE.md with new tokens or keep existing?"
+    options: [merge, replace, keep]
+```
+
+### Source-Specific Workflows
+
+```yaml
+context_folder:
+  location: "/Context/"
+  trigger: Conversation start OR user mentions "reference"
+  batch: Process all images simultaneously
   organization:
-    recommended_structure:
-      Context/
-        ├── homepage-desktop.png
-        ├── homepage-mobile.png
-        ├── components/
-        │   ├── nav-bar.png
-        │   ├── buttons-all-states.png
-        │   └── form-examples.png
-        └── style-guide.png
-```
+    Context/
+      ├── homepage-desktop.png
+      ├── homepage-mobile.png
+      └── components/*.png
 
-### Extraction Process Pipeline
+chat_upload:
+  trigger: User drags image into chat
+  advantage: Zero file management, immediate processing
+  best_for: Quick iterations, single references
 
-```yaml
-extraction_pipeline:
-  step_1_detection:
-    actions:
-      - Scan Context folder or detect uploaded images
-      - Identify image dimensions and type
-      - Confirm extraction mode with user
-    output: Reference inventory
-
-  step_2_visual_analysis:
-    actions:
-      - Claude vision: Comprehensive UI element identification
-      - Component classification (buttons, forms, cards, navigation)
-      - Layout structure mapping (grid systems, flexbox patterns)
-      - Visual hierarchy analysis (primary, secondary, tertiary)
-    output: Component inventory
-
-  step_3_style_extraction:
-    colors:
-      - Extract all hex values with precision
-      - Build semantic palette (primary, secondary, accent, neutral)
-      - Identify color relationships and harmony
-      - Calculate contrast ratios
-
-    typography:
-      - Identify font characteristics (serif/sans-serif, weight)
-      - Measure font sizes and line-heights
-      - Calculate typographic scale ratio
-      - Map to available web fonts
-
-    spacing:
-      - Measure padding and margin values
-      - Detect underlying grid system (4px, 8px, custom)
-      - Extract component-specific spacing
-      - Build consistent spacing scale
-
-    effects:
-      - Extract shadows (offset, blur, spread, color)
-      - Identify borders (width, style, radius)
-      - Detect gradients (type, angle, stops)
-      - Measure opacity and blur effects
-
-  step_4_interaction_inference:
-    states:
-      - Identify hover, active, focus, disabled patterns
-      - Extract state change properties
-      - Infer transition timings
-
-    feedback:
-      - Map loading states
-      - Identify error patterns
-      - Extract success indicators
-
-    navigation:
-      - Understand user flow from screen relationships
-      - Identify navigation patterns
-      - Extract menu structures
-
-  step_5_creative_application:
-    strict_mode: "Replicate with ≤10% deviation"
-    balanced_mode: "Match aesthetic with 10-25% optimization"
-    creative_mode: "Interpret with 25-50% creative freedom"
-```
-
-### Direct Upload Workflow
-
-```yaml
-direct_upload_workflow:
-  trigger: "User drags image into chat or uses upload button"
-
-  advantages:
-    - Zero file management required
-    - Immediate processing
-    - Natural conversation flow
-
-  process:
-    - Receive image through chat interface
-    - Apply full extraction pipeline
-    - Generate tokens and patterns
-    - Apply selected creative mode
-
-  best_practices:
-    - Use for quick iterations
-    - Ideal for single reference analysis
-    - Faster than Context folder for one-off extractions
-```
-
-### URL Screenshot Workflow
-
-```yaml
-url_workflow:
-  trigger: "User provides website URL for design extraction"
-
-  process:
-    - Use WebFetch to retrieve page
-    - Analyze page structure and styles
-    - Extract comprehensive design system
-    - Handle responsive variations
-
-  enhanced_extraction:
-    - Live interaction patterns
-    - Actual CSS values
-    - Font stack detection
-    - Media query breakpoints
-
-  limitations:
-    - Dynamic content may vary
+figma_mcp:
+  trigger: User approves Figma check
+  advantage: Direct API access, live design files
+  extraction: Components + styles + design tokens
+  
+url_screenshots:
+  trigger: User provides website URL
+  extraction: Live CSS values + font stacks + media queries
+  limitation: Dynamic content may vary
     - Some styles computed at runtime
     - Authentication-gated content inaccessible
 ```
 
 ### Figma MCP Integration Workflow
 
-**Full Documentation:** See `UI Designer - MCP Intelligence - Figma` for complete Figma MCP capabilities, extraction pipeline, transformation workflows, and creative mode integration.
+**MANDATORY PRE-FLIGHT:** Always ask at conversation start: "Should I check Figma files using Figma MCP for design specifications?" (unless user already specified)
 
-**MANDATORY QUESTION:** Always ask at conversation start: "Should I check Figma files using Figma MCP for design specifications?" (unless user already specified)
+#### Quick Setup (3 Steps)
+1. Generate Figma API token: `Figma Settings → Account → Personal Access Tokens`
+2. Add to MCP config: `FIGMA_API_TOKEN=your_token` in Claude Desktop MCP settings
+3. Test connection: Use `figma_list_files` tool
 
-**Quick Overview:**
-- **Purpose:** Extract design tokens and components directly from Figma files
-- **Connection:** Via Figma MCP server with API token authentication
-- **Operations:** File access, style extraction (colors/typography/effects), component extraction, token generation
-- **Creative Modes:** Strict (≤10%), Balanced (10-25%), Creative (25-50%) deviation
-- **Advantages:** Exact values, component hierarchy, all variants captured, faster than screenshots
+#### Connection Status
+| Status | Message | Action |
+|--------|---------|--------|
+| ✅ Connected | "Figma MCP Connected" | Proceed with extraction |
+| ❌ Disconnected | "Not Connected" | Check MCP settings, restart Claude Desktop |
+| ⚠️ Auth Failed | "Authentication Issue" | Regenerate API token |
+| ⚠️ Access Denied | "Permission Issue" | Verify file sharing permissions |
 
-**Example Workflow:**
-1. Ask: "Should I check Figma files using Figma MCP?" (if not already specified)
-2. Connect to Figma via MCP: `figma_get_file('ABC123')`
-3. Extract tokens and components
-4. Ask: "Which creative mode? Strict/Balanced/Creative"
-5. Transform Figma data to CSS/HTML
-6. Apply creative mode adjustments
-7. Generate self-contained HTML file
+#### 7-Step Extraction Process
 
-**For complete documentation, see:** `UI Designer - MCP Intelligence - Figma`
+```yaml
+figma_extraction_flow:
+  step_1_preflight: "Ask user: 'Check Figma files using MCP?'"
+  
+  step_2_connect: 
+    tools: [figma_list_files, figma_get_file]
+    input: "Figma URL or file key"
+    output: "File structure + metadata"
+  
+  step_3_creative_mode:
+    ask: "Apply as: Strict/Balanced/Creative?"
+    default: "Balanced"
+  
+  step_4_extract_styles:
+    colors: "Paint styles → Hex values + semantic mapping"
+    typography: "Text styles → Font families, sizes, weights, line-heights"
+    effects: "Shadow/blur styles → CSS box-shadow, filter values"
+    spacing: "Auto Layout → Padding, gap, margins (8px grid)"
+  
+  step_5_extract_components:
+    structure: "Component definitions, variants, properties"
+    states: "Map variant properties to CSS classes"
+    docs: "Component descriptions and usage notes"
+  
+  step_6_transform_to_web:
+    colors: "RGB(0-255) → #HEX or rgba()"
+    fonts: "Figma fonts → Web font stacks with fallbacks"
+    layout: "Auto Layout → Flexbox/Grid + gap properties"
+    variants: "Component variants → CSS classes + data attributes"
+    constraints: "Hug → fit-content, Fill → flex:1, Fixed → fluid"
+  
+  step_7_apply_creative_mode:
+    strict: "Use exact values, ≤10% deviation"
+    balanced: "Match aesthetic + optimize for web, 10-25% deviation"
+    creative: "Inspired interpretation + modern enhancements, 25-50% deviation"
+```
+
+#### Figma → Web Transformation Matrix
+
+| Figma Property | CSS Output | Example |
+|----------------|------------|---------|
+| **RGB Color** | `#HEX` or `rgba()` | `rgb(59,130,246)` → `#3B82F6` |
+| **Text Style** | Font stack | `Inter` → `'Inter', system-ui, sans-serif` |
+| **Auto Layout (H)** | `flex-direction: row` + `gap` | Horizontal layouts |
+| **Auto Layout (V)** | `flex-direction: column` + `gap` | Vertical layouts |
+| **Hug Contents** | `width: fit-content` | Dynamic sizing |
+| **Fill Container** | `flex: 1` or `width: 100%` | Responsive width |
+| **Drop Shadow** | `box-shadow` | `0 4px 6px rgba(0,0,0,0.1)` |
+| **Layer Blur** | `filter: blur()` | Glassmorphism effects |
+| **Variants** | CSS classes + data attributes | `[Size: Large]` → `.btn--large` |
+
+#### What You CAN Extract ✅
+
+- **Styles:** Colors (exact hex), typography (fonts, sizes, weights), effects (shadows, borders)
+- **Components:** Structure, variants, all states, documentation
+- **Layout:** Auto Layout values, constraints, spacing systems
+- **Tokens:** Generate CSS variables, semantic mappings, spacing scales
+
+#### What You CANNOT Do ❌
+
+- **Modify:** Cannot edit Figma files, create components, or publish styles (read-only)
+- **Access:** Private files need token permissions, team-restricted content needs access
+- **Fonts:** Custom/unavailable fonts require alternatives or user-provided font files
+- **Plugins:** Plugin-generated content not accessible via API
+
+#### Creative Mode Application
+
+**Strict Mode (≤10% deviation):**
+- Pixel-perfect Figma replication
+- Exact values for colors, spacing, typography
+- Use for: Brand guidelines, legal compliance, client deliverables
+
+**Balanced Mode (10-25% deviation) [DEFAULT]:**
+- Core aesthetic preserved + web optimization
+- WCAG AA enhancements, 8px grid normalization
+- Use for: Production sites, web apps
+
+**Creative Mode (25-50% deviation):**
+- Design inspiration + contemporary enhancements
+- Modern effects (glassmorphism, gradients, 3D)
+- Use for: Portfolio, exploration, innovation
+
+#### Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| Connection failed | Check API token in MCP settings, restart Claude Desktop |
+| File not found | Verify Figma URL/key, check sharing permissions |
+| Missing styles | Ensure styles are published in Figma library |
+| Font substitution needed | Accept Google Font alternative or specify preference |
+| Slow extraction | Large files take longer; extract specific pages/frames instead |
 
 ---
 
-## 3. 🔍 PATTERN RECOGNITION METHODOLOGY
+## 3. 🎨 TOKEN EXTRACTION
 
-### Component Classification System
-
-```yaml
-ui_components:
-  buttons:
-    variants: [solid, outlined, ghost, text, icon, floating_action]
-    states: [default, hover, active, focus, disabled, loading]
-    sizes: [xs, sm, md, lg, xl]
-
-  forms:
-    inputs: [text, email, password, number, date, select, textarea]
-    layouts: [stacked_labels, inline_labels, floating_labels, no_labels]
-    validation: [error, success, warning, info]
-
-  cards:
-    types: [basic, elevated, outlined, interactive, media]
-    layouts: [vertical, horizontal, overlay]
-
-  navigation:
-    patterns: [top_bar, sidebar, tabs, breadcrumbs, pagination, stepper]
-    mobile: [hamburger, bottom_nav, drawer]
-
-  feedback:
-    types: [toast, snackbar, alert, modal, inline]
-    variants: [success, error, warning, info, neutral]
-
-  layout:
-    structures: [hero, grid, masonry, split, asymmetric]
-    containers: [full_width, contained, fluid]
-    sections: [header, main, sidebar, footer]
-```
-
-### Pattern Matching Algorithm
-
-```python
-def extract_patterns(reference_image):
-    """
-    Intelligent pattern extraction with confidence scoring
-    """
-    # Phase 1: Element Detection
-    elements = claude_vision.detect_all_elements(reference_image)
-
-    # Phase 2: Classification
-    classified_components = []
-    for element in elements:
-        component_type = classify_component(element)
-        confidence = calculate_confidence(element, component_type)
-
-        classified_components.append({
-            'element': element,
-            'type': component_type,
-            'confidence': confidence,
-            'properties': extract_properties(element)
-        })
-
-    # Phase 3: Pattern Library Matching
-    matches = []
-    for component in classified_components:
-        if component['confidence'] > 0.8:
-            # High confidence: use pattern directly
-            pattern = get_pattern_from_library(component['type'])
-            strategy = 'direct_use'
-        elif component['confidence'] > 0.5:
-            # Medium confidence: adapt pattern
-            pattern = adapt_pattern(component)
-            strategy = 'adaptation'
-        else:
-            # Low confidence: custom build
-            pattern = create_custom_pattern(component)
-            strategy = 'custom'
-
-        matches.append({
-            'pattern': pattern,
-            'strategy': strategy,
-            'confidence': component['confidence']
-        })
-
-    return matches
-```
-
-### Confidence Scoring Matrix
-
-| Confidence | Range | Strategy | Example |
-|------------|-------|----------|---------|
-| **High** | >80% | Use pattern directly | Standard button matches library |
-| **Medium** | 50-80% | Adapt with modifications | Card with unique layout |
-| **Low** | <50% | Build custom component | Novel interaction pattern |
-
----
-
-## 4. 🎨 STYLE TOKEN EXTRACTION
-
-### Color Extraction System
+### Token Categories
 
 ```yaml
-color_extraction:
-  process:
-    detect_all_colors:
-      - Scan entire reference image
-      - Identify unique color values
-      - Group similar shades
+colors:
+  extract: All hex values from reference
+  build: Primitive tokens (gray-50 to gray-900, color-500 scales)
+  semantic: primary, secondary, success, error, text, background, surface
+  validate: WCAG AA (4.5:1 min) + WCAG AAA (7:1 critical text)
 
-    extract_hex_values:
-      - Convert to precise hex codes
-      - Handle RGB/RGBA conversions
-      - Preserve opacity values
+typography:
+  identify: Character shapes → Google Fonts database → Closest alternatives
+  measure: Font sizes + line-heights + weights
+  calculate: Scale ratio (usually 1.125 - 1.333)
+  output: Type scale (xs: 0.75rem → 4xl: 2.25rem)
+  fallback: Exact match → Similar Google Font → System font
 
-    build_color_system:
-      primitive_tokens:
-        neutrals:
-          - gray-50: "#F9FAFB"
-          - gray-100: "#F3F4F6"
-          - gray-900: "#111827"
+spacing:
+  detect: Grid system (4px, 8px, 12px, or 16px base)
+  measure: All padding/margin values
+  build: Spacing scale (0: 0 → 20: 5rem)
+  apply: Consistent throughout design
 
-        colors:
-          - blue-500: "#3B82F6"
-          - green-500: "#10B981"
-          - red-500: "#EF4444"
-
-      semantic_tokens:
-        - primary: "var(--blue-500)"
-        - secondary: "var(--gray-600)"
-        - success: "var(--green-500)"
-        - error: "var(--red-500)"
-        - text-primary: "var(--gray-900)"
-        - text-secondary: "var(--gray-600)"
-        - background: "var(--white)"
-        - surface: "var(--gray-50)"
-
-    validation:
-      - WCAG AA contrast (4.5:1 minimum)
-      - WCAG AAA contrast (7:1 for critical text)
-      - Color blind safe combinations
-```
-
-### Typography Extraction
-
-```yaml
-typography_extraction:
-  font_identification:
-    process:
-      - Analyze character shapes and proportions
-      - Match against Google Fonts database
-      - Identify closest available alternatives
-
-    fallback_strategy:
-      - Primary: Exact match if identifiable
-      - Secondary: Visually similar Google Font
-      - Tertiary: System font with similar characteristics
-
-  measurement:
-    font_sizes:
-      - Extract all unique sizes
-      - Identify base size (usually body text)
-      - Calculate scale ratio
-
-    line_heights:
-      - Measure for each font size
-      - Calculate relative values
-      - Identify rhythm pattern
-
-    font_weights:
-      - Detect all weight variations
-      - Map to standard values (400, 500, 600, 700)
-
-  output:
-    type_scale:
-      - xs: "0.75rem"    # 12px
-      - sm: "0.875rem"   # 14px
-      - base: "1rem"     # 16px
-      - lg: "1.125rem"   # 18px
-      - xl: "1.25rem"    # 20px
-      - 2xl: "1.5rem"    # 24px
-      - 3xl: "1.875rem"  # 30px
-      - 4xl: "2.25rem"   # 36px
-
-    font_families:
-      heading: "'Inter', system-ui, sans-serif"
-      body: "'Inter', system-ui, sans-serif"
-      mono: "'JetBrains Mono', monospace"
-```
-
-### Spacing Extraction
-
-```yaml
-spacing_extraction:
-  grid_detection:
-    common_bases: [4, 8, 12, 16]
-    process:
-      - Measure all spacing values
-      - Find greatest common divisor
-      - Identify base unit
-
-  spacing_scale:
-    generation:
-      - 0: "0"
-      - 1: "0.25rem"   # 4px
-      - 2: "0.5rem"    # 8px
-      - 3: "0.75rem"   # 12px
-      - 4: "1rem"      # 16px
-      - 5: "1.25rem"   # 20px
-      - 6: "1.5rem"    # 24px
-      - 8: "2rem"      # 32px
-      - 10: "2.5rem"   # 40px
-      - 12: "3rem"     # 48px
-      - 16: "4rem"     # 64px
-      - 20: "5rem"     # 80px
+effects:
+  shadows: offset + blur + spread + color
+  borders: width + style + radius
+  gradients: type + angle + stops
+  other: opacity + blur effects
 
   component_spacing:
     padding:
@@ -477,463 +327,113 @@ effects_extraction:
 
 ---
 
-## 5. 🎛️ CREATIVE CONTROL SYSTEM
+## 5. 🎛️ CREATIVE CONTROL MODES
 
-### Mode Selection Interface
+**Strict Mode (≤10% deviation)** - Pixel-perfect replication
+- Exact colors, spacing, typography | No substitutions | Preserve all relationships
+- Use: Brand guidelines, client mockups, legal requirements
 
+**Balanced Mode (10-25% adaptation)** [DEFAULT] - Web-optimized
+- WCAG AA accessibility | 8px grid normalization | Modern CSS features | Responsive behavior
+- Use: Production sites, modern web apps
+
+**Creative Mode (25-50% interpretation)** - Design inspiration
+- Explore palettes, pairings, modern effects | Innovative layouts | Advanced interactions
+- Use: Portfolio, exploration, innovation
+
+### Mode Selection Prompt
 ```markdown
-🎯 **Creative Control Mode Selection**
-
-I've detected references in [Context folder / chat upload]. How should I apply them?
-
-**Strict Mode (≤10% deviation)**
-- Pixel-perfect replication
-- Exact color and spacing matching
-- Minimal interpretation
-- Use when: Brand guidelines, client mockups, legal requirements
-
-**Balanced Mode (10-25% adaptation)** [DEFAULT]
-- Match core aesthetic
-- Optimize for web standards
-- Enhance accessibility
-- Use when: Production sites, modern web apps
-
-**Creative Mode (25-50% interpretation)**
-- Design inspiration
-- Contemporary enhancements
-- Unique personality
-- Use when: Portfolio pieces, exploration, innovation
-
-Selection: _
+🎯 References detected in [Context / upload]. Apply as:
+[Strict] [Balanced] [Creative]
 ```
 
-### Strict Mode Implementation
-
-```yaml
-strict_mode:
-  deviation_tolerance: "≤10%"
-
-  rules:
-    colors:
-      - Extract exact hex values
-      - No substitutions without permission
-      - Preserve all color relationships
-
-    typography:
-      - Match fonts exactly or document closest alternative
-      - Preserve all size relationships
-      - Maintain exact line-heights
-
-    spacing:
-      - Replicate to the pixel
-      - No grid normalization
-      - Preserve all inconsistencies
-
-    layout:
-      - Exact structural replication
-      - Preserve quirks and exceptions
-      - No responsive improvements unless requested
-
-  allowed_changes:
-    - Semantic HTML improvements
-    - Accessibility attributes
-    - Performance optimizations (with same visual result)
-    - Responsive behavior (if not defined in reference)
-
-  validation:
-    - Side-by-side comparison
-    - Deviation percentage calculation
-    - User approval required
-
-  output_format:
-    """
-    📊 Strict Mode Extraction Report
-
-    Deviation: 7.8%
-    - Colors: 0 changes (exact match)
-    - Typography: Inter substituted for Helvetica (98% similarity)
-    - Spacing: 2 values normalized (31px → 32px for rounding)
-    - Layout: 100% structural match
-
-    [Approve] [Request changes] [Switch mode]
-    """
-```
-
-### Balanced Mode Implementation
-
-```yaml
-balanced_mode:
-  deviation_tolerance: "10-25%"
-
-  optimizations:
-    accessibility:
-      - Enhance color contrast to WCAG AA
-      - Add keyboard navigation
-      - Include ARIA labels
-      - Ensure focus indicators
-
-    performance:
-      - Optimize animations (GPU acceleration)
-      - Efficient CSS (avoid reflows)
-      - Lazy loading for images
-      - Modern CSS features (Grid, custom properties)
-
-    consistency:
-      - Normalize to 8px grid
-      - Standardize component patterns
-      - Unify interaction behaviors
-      - Apply design tokens
-
-  encouraged_enhancements:
-    - Micro-interactions
-    - Loading states
-    - Error handling
-    - Responsive improvements
-    - Dark mode preparation
-
-  validation:
-    - Aesthetic similarity check
-    - Enhancement documentation
-    - WCAG compliance verification
-
-  output_format:
-    """
-    🎨 Balanced Mode Enhancements
-
-    Core aesthetic preserved with optimizations:
-
-    ✅ Accessibility: 3 contrast improvements (WCAG AA)
-    ✅ Grid: Normalized to 8px system
-    ✅ Typography: Inter font family (better web rendering)
-    ✅ Interactions: Added hover states and transitions
-    ✅ Responsive: Mobile-first breakpoints implemented
-
-    Overall deviation: 18% (within target range)
-    """
-```
-
-### Creative Mode Implementation
-
-```yaml
-creative_mode:
-  deviation_tolerance: "25-50%"
-
-  creative_freedoms:
-    colors:
-      - Evolve palette while maintaining harmony
-      - Add gradient overlays
-      - Introduce accent colors
-      - Apply modern color trends
-
-    typography:
-      - Explore font pairings
-      - Add display fonts for impact
-      - Implement fluid typography
-      - Create typographic rhythm
-
-    effects:
-      - Glassmorphism
-      - Neumorphism (if appropriate)
-      - Advanced animations
-      - Parallax effects
-      - 3D transforms
-
-    layout:
-      - Modern patterns (Bento box, asymmetric grids)
-      - Creative navigation solutions
-      - Innovative component designs
-      - Experimental interactions
-
-  constraints:
-    must_preserve:
-      - Core design intent
-      - Target audience appropriateness
-      - Functional requirements
-      - Brand personality (if defined)
-
-  validation:
-    - Design rationale documentation
-    - Before/after comparison
-    - Creative decisions explained
-
-  output_format:
-    """
-    ✨ Creative Mode Interpretation
-
-    Inspired by reference with creative enhancements:
-
-    🎨 Color Evolution:
-    - Base palette maintained
-    - Added vibrant gradient accents
-    - Introduced glassmorphism for depth
-
-    📝 Typography:
-    - Display font: "Clash Display" for headlines
-    - Body: Inter (matching reference weight)
-    - Added fluid scaling (clamp functions)
-
-    ✨ Modern Enhancements:
-    - Smooth micro-interactions
-    - Parallax scroll effects
-    - Animated gradient borders
-    - 3D card hover transforms
-
-    Deviation: 38% (creative interpretation applied)
-    Design rationale: Modern, energetic, forward-thinking
-    """
-```
-
-### Mode Comparison Matrix
-
-| Aspect | Strict (≤10%) | Balanced (10-25%) | Creative (25-50%) |
+### Mode Comparison
+| Aspect | Strict | Balanced | Creative |
 |--------|--------|----------|----------|
-| **Color Fidelity** | 95%+ exact | 85% with WCAG | 60% inspired |
-| **Typography Match** | Exact or closest | Optimized alternative | Creative pairing |
-| **Spacing Precision** | Near pixel-perfect | Grid-normalized | Rhythm-based |
-| **Layout Structure** | 90%+ match | Responsive-optimized | Modern interpretation |
-| **Effects** | Closely replicated | Performance-optimized | Trend-enhanced |
-| **Interactions** | As visible | Best practices | Delightful |
-| **Accessibility** | Added only | Prioritized | Integrated |
-| **Performance** | Not modified | Optimized | Balanced with effects |
+| Color | 95%+ exact | 85% + WCAG | 60% inspired |
+| Typography | Exact/closest | Optimized web font | Creative pairing |
+| Spacing | Pixel-perfect | Grid-normalized | Rhythm-based |
+| Layout | 90%+ match | Responsive-optimized | Modern interpretation |
+| Effects | Replicated | Performance-optimized | Trend-enhanced |
 
 ---
 
 ## 6. 🔗 CANVAS INTEGRATION
 
-### Phase C (Concept) Enhancement
+**Reference Detection** (Phase C - Concept)
+- Auto-scan: `/Context/` folder + chat uploads + mentioned URLs
+- Prompt: "Found [X] references. Extract design system? [Yes/Select/Skip]"
+- If yes: Extract tokens → Apply multi-perspective analysis → Use as design foundation
 
-```yaml
-enhanced_concept_phase:
-  reference_detection:
-    automatic:
-      - Scan Context folder on conversation start
-      - Detect image uploads in chat
-      - Identify design URLs mentioned
+**Token Application** (Phase V - Visual)
+- Priority: 1. Extracted tokens → 2. Brand guidelines → 3. Generated tokens
+- Process: Apply colors → typography → spacing → effects → Validate against reference
 
-    prompt: |
-      "🎯 Reference Detection
-
-      Found [3] references in Context folder:
-      - homepage-desktop.png (1920x1080)
-      - mobile-nav.png (375x667)
-      - style-guide.png (1200x800)
-
-      Extract design system? [Yes] [Select specific] [Skip]"
-
-  extraction_integration:
-    - If references exist: Extract tokens first
-    - Apply multi-perspective analysis to extracted patterns
-    - Use extracted tokens as design foundation
-    - Creative mode influences perspective weights
-```
-
-### Phase V (Visual) Token Application
-
-```yaml
-visual_phase_with_extraction:
-  token_source_priority:
-    1: Extracted tokens (if references provided)
-    2: Brand guidelines (if available)
-    3: Generated tokens (standard CANVAS flow)
-
-  extracted_token_application:
-    process:
-      - Apply extracted color system
-      - Implement extracted typography
-      - Use extracted spacing scale
-      - Apply extracted effects
-
-    validation:
-      - Compare output to reference
-      - Verify creative mode compliance
-      - Check DESIGN quality score
-```
-
-### Multi-Perspective Analysis with References
-
-```yaml
-perspective_enhancement:
-  Visual_Design_Expert:
-    focus: "Aesthetic fidelity to reference"
-    weight_by_mode:
-      strict: 40%
-      balanced: 25%
-      creative: 15%
-
-  UX_Flow:
-    focus: "User journey optimization"
-    weight_by_mode:
-      strict: 20%
-      balanced: 30%
-      creative: 25%
-
-  Innovation_Lens:
-    focus: "Modern enhancements"
-    weight_by_mode:
-      strict: 5%
-      balanced: 20%
-      creative: 35%
-```
+**Multi-Perspective Weights by Mode**
+| Perspective | Strict | Balanced | Creative |
+|-------------|--------|----------|----------|
+| Visual Design Expert | 40% | 25% | 15% |
+| UX Flow | 20% | 30% | 25% |
+| Innovation Lens | 5% | 20% | 35% |
 
 ---
 
 ## 7. ✅ QUALITY ASSURANCE
 
-### Extraction Validation
+**Accuracy Targets**
+- Colors: 99% hex accuracy (color picker verification)
+- Typography: 95% visual similarity (side-by-side comparison)
+- Spacing: 98% measurement precision (overlay verification)
+- Layout: 100% structural accuracy (wireframe overlay)
 
-```yaml
-extraction_validation:
-  accuracy_metrics:
-    colors:
-      target: "99% hex accuracy"
-      method: "Direct comparison with color picker"
+**Mode Compliance Checks**
+- **Strict:** ≤10% deviation, hex verification, spacing validation
+- **Balanced:** 75%+ aesthetic similarity, WCAG AA, grid normalization
+- **Creative:** Design rationale clarity, core intent preservation
 
-    typography:
-      target: "95% visual similarity"
-      method: "Side-by-side rendering comparison"
-
-    spacing:
-      target: "98% measurement precision"
-      method: "Overlay measurement verification"
-
-    layout:
-      target: "100% structural accuracy"
-      method: "Wireframe overlay comparison"
-```
-
-### Mode Compliance Verification
-
-```yaml
-mode_compliance:
-  strict_mode_checks:
-    - Deviation calculation (≤10%)
-    - Element-by-element comparison
-    - Color hex verification
-    - Spacing measurement validation
-
-  balanced_mode_checks:
-    - Aesthetic similarity (75%+)
-    - WCAG AA compliance
-    - Grid normalization verification
-    - Enhancement documentation
-
-  creative_mode_checks:
-    - Design rationale clarity
-    - Core intent preservation
-    - Innovation appropriateness
-    - User satisfaction
-```
-
-### Quality Gates
-
-```yaml
-quality_gates:
-  pre_delivery:
-    - DESIGN score ≥ 40/50
-    - Mode compliance verified
-    - Responsive tested (3 breakpoints minimum)
-    - Accessibility validated (WCAG AA)
-    - Performance checked (60fps animations)
-
-  user_approval:
-    - Comparison screenshots provided
-    - Deviation report generated
-    - Enhancement list documented
-    - Rationale explained
-```
+**Quality Gates**
+- DESIGN score ≥ 40/50 | Mode compliance verified | 3 breakpoints responsive
+- WCAG AA validated | 60fps animations | Comparison screenshots + deviation report
 
 ---
 
 ## 8. 🏎️ QUICK REFERENCE
 
-### Command Shortcuts
+**Extraction Commands**
+- `$extract strict` - Pixel-perfect replication (≤10%)
+- `$extract` - Balanced mode with web optimization [DEFAULT]
+- `$extract creative [image]` - Creative interpretation (25-50%)
+- `$extract tokens` - Tokens only (no prototype generation)
+- `$extract [url]` - Extract from live website
+- `$extract batch` - Process all Context folder references
+- `$extract --focus "colors typography"` - Extract specific elements only
 
-```yaml
-extraction_commands:
-  strict_mode:
-    command: "$extract strict"
-    description: "Pixel-perfect replication from Context folder"
+**Best Practices**
+- **Before:** High-res images (1920px+) | Multiple states | Clear naming | Organized folders
+- **During:** Confirm mode | Review tokens | Validate patterns | Check WCAG
+- **After:** Compare output | Verify compliance | Document deviations | Get approval
 
-  balanced_default:
-    command: "$extract"
-    description: "Default extraction with web optimization"
-
-  creative_mode:
-    command: "$extract creative [image]"
-    example: "$extract creative homepage.png"
-    description: "Creative interpretation with 25-50% deviation"
-
-  tokens_only:
-    command: "$extract tokens"
-    description: "Extract design tokens without generating prototype"
-
-  url_extraction:
-    command: "$extract [url]"
-    example: "$extract https://example.com"
-    description: "Extract from live website"
-
-  batch_processing:
-    command: "$extract batch"
-    description: "Process all references in Context folder"
-
-  focused_extraction:
-    command: "$extract --focus [elements]"
-    example: "$extract --focus 'colors typography'"
-    description: "Extract specific design elements only"
-```
-
-### Best Practices Checklist
-
-**Before Extraction:**
-- [ ] High-resolution images (1920px+ width)
-- [ ] Multiple states included (hover, active, error)
-- [ ] Clear file naming convention
-- [ ] Context folder organized by component/page
-
-**During Extraction:**
-- [ ] Confirm creative mode selection
-- [ ] Review extracted tokens
-- [ ] Validate pattern matching
-- [ ] Check accessibility compliance
-
-**After Extraction:**
-- [ ] Compare output to reference
-- [ ] Verify mode compliance
-- [ ] Document any deviations
-- [ ] Get user approval
-
-### Troubleshooting Guide
-
+**Troubleshooting**
 | Issue | Solution |
 |-------|----------|
-| **Colors don't match** | Use PNG instead of JPG, verify no compression |
-| **Font not identified** | Provide font name or accept closest match |
-| **Layout differs** | Check reference resolution, specify exact structure needs |
-| **Spacing inconsistent** | Verify grid system detection, manual override if needed |
-| **Missing subtle details** | Zoom and re-extract specific areas |
-| **Extraction too slow** | Reduce image resolution to 1920px width |
-| **Conflicting references** | Specify primary reference or merge strategy |
+| Colors mismatch | Use PNG not JPG, verify no compression |
+| Font not found | Provide name or accept closest match |
+| Layout differs | Check resolution, specify structure needs |
+| Spacing inconsistent | Verify grid detection, manual override |
+| Missing details | Zoom and re-extract specific areas |
+| Slow extraction | Reduce to 1920px width |
 
-### File Organization Template
-
+**Folder Organization**
 ```
 Context/
 ├── project-name/
-│   ├── desktop/
-│   │   ├── homepage.png
-│   │   ├── about.png
-│   │   └── contact.png
-│   ├── mobile/
-│   │   ├── homepage-mobile.png
-│   │   └── nav-mobile.png
-│   ├── components/
-│   │   ├── buttons-all-states.png
-│   │   ├── forms.png
-│   │   └── cards.png
+│   ├── desktop/ (homepage.png, about.png, contact.png)
+│   ├── mobile/ (homepage-mobile.png, nav-mobile.png)
+│   ├── components/ (buttons-all-states.png, forms.png, cards.png)
 │   └── style-guide.png
-└── README.md (optional notes)
+└── README.md (optional)
 ```
 
 ---
 
-*The Reference Extraction system enables precision visual analysis and flexible creative control for reference-driven design workflows, integrating seamlessly with CANVAS methodology and Figma MCP Intelligence for systematic rigor and exceptional quality.*
+*Reference Extraction enables precision visual analysis with flexible creative control, integrating with CANVAS methodology for systematic rigor and exceptional quality.*

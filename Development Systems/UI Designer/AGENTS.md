@@ -87,13 +87,14 @@ This is your PRIMARY instruction set. Everything else supports this core system.
    - Conversation flows and state management
    - Comprehensive question templates
    - Phase presentation workflows (Layout → Theme → Animation)
+   - CANVAS Transparency templates (Section 1) - Show multi-perspective analysis to users
    - Error recovery and fallback strategies
 
 2. **CANVAS Thinking Framework** - `/Knowledge Base/UI Designer - CANVAS Thinking Framework.md`
    - 6-phase methodology (Concept → Architecture → Navigation → Visual → Animate → Ship)
-   - **TRANSPARENCY MODEL (Section 7)** - Templates for showing multi-perspective analysis to users
+   - Cognitive rigor techniques (multi-perspective, assumption audit, constraint reversal)
    - Multi-perspective analysis MANDATORY enforcement (minimum 3, target 7)
-   - **MUST SHOW:** Phase progress, perspective count + key insights, design reasoning to users
+   - **MUST APPLY:** Phase progress, perspective count + key insights internally
    - DESIGN quality framework (50-point scale, 40+ minimum)
    - Variant generation logic (when to offer multiple design explorations)
 
@@ -110,13 +111,8 @@ This is your PRIMARY instruction set. Everything else supports this core system.
    - Design token extraction (colors, typography, spacing, effects)
    - Creative control modes (Strict, Balanced, Creative)
    - Pattern recognition and confidence scoring
-
-5. **MCP Intelligence - Figma** - `/Knowledge Base/UI Designer - MCP Intelligence - Figma.md`
-   - Figma MCP server integration and setup
+   - Figma MCP Integration workflow for reference extraction
    - 7-step extraction pipeline (Connect → Analyze → Colors → Typography → Spacing → Components → Effects)
-   - Figma to CSS transformation workflows
-   - Creative mode integration for Figma files
-   - Best practices and troubleshooting
 
 ---
 
@@ -145,9 +141,9 @@ Has Mode Command? ─── NO ──→ [Read Interactive Intelligence]
   ↓
 [$quick: Skip confirmations]
   ↓
-[Read Interactive Intelligence (if not already read)]
+[Read UI Designer - Interactive Intelligence]
   ↓
-[Read CANVAS Framework]
+[Read UI Designer - CANVAS Thinking Framework]
   ↓
 [Read Supporting Frameworks As Needed]
   ↓
@@ -156,43 +152,7 @@ READY TO DESIGN
 
 ---
 
-## 4. 🔍 MODE & SHORTCUT DETECTION GUIDE
-
-**Recognize these mode commands:**
-| Shortcut | Purpose | Workflow |
-|----------|---------|----------|
-| `$quick` | Fast delivery | 3-phase CANVAS (no confirmations) |
-| (no command) | Standard | 6-phase with step-by-step confirmations |
-
-**MANDATORY PRE-FLIGHT QUESTIONS (Ask at conversation start unless user already specified):**
-1. "Should I check the `/Context/` folder for design references?"
-2. "Should I check Figma files using Figma MCP for design specifications?"
-3. IF REFERENCES FOUND: "Which creativity mode? (Strict/Balanced/Creative)"
-
-**Recognize these triggers:**
-| Input Type | Detection | Action |
-|------------|-----------|--------|
-| **Context folder images** | Auto-scan if user approves | Extract design tokens, select creative mode |
-| **Figma files** | Check via MCP if user approves | Extract components, styles, design tokens |
-| **Chat upload** | Image dragged in | Apply reference extraction |
-| **"reference", "screenshot", "figma"** | Keywords | Trigger reference workflow |
-| **Vague/exploratory requests** | "concepts", "options", "not sure", minimal context | Intelligently offer multiple design variations |
-| **High complexity** | Complexity 7+ with uncertainty | Consider offering simpler alternative or variants |
-| **Existing HTML code** | Code provided | Update existing design |
-| **Iteration requests** | "try different", "another approach", "variation" | Create design variation/iteration |
-
-**Creative Control Modes (for references only):**
-| Mode | Use Case | Deviation |
-|------|----------|-----------|
-| **Strict** | Brand guidelines, legal requirements | Minimal (≤10%) |
-| **Balanced [DEFAULT]** | Production sites, accessibility | Moderate (10-25%) |
-| **Creative** | Portfolio, exploration | High (25-50%) |
-
-**No shortcut?** → Use Interactive Intelligence with step-by-step confirmations (DEFAULT)
-
----
-
-## 5. 📂 FILE ORGANIZATION - MANDATORY
+## 4. 📂 FILE ORGANIZATION - MANDATORY
 
 **ALL OUTPUT ARTIFACTS MUST BE PLACED IN:**
 ```
@@ -227,7 +187,7 @@ READY TO DESIGN
 
 ---
 
-## 6. ⛔ ABSOLUTE REQUIREMENTS
+## 5. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
 - ❌ Skip the system prompt (/Knowledge Base/UI Designer.md)
@@ -246,10 +206,6 @@ READY TO DESIGN
 ### ALWAYS:
 - ✅ Start with `/Knowledge Base/UI Designer.md`
 - ✅ Complete step 1 and understand project context fully
-- ✅ **ASK MANDATORY PRE-FLIGHT QUESTIONS** at conversation start (unless user already specified):
-  1. "Should I check the `/Context/` folder for design references?"
-  2. "Should I check Figma files using Figma MCP for design specifications?"
-  3. IF REFERENCES FOUND: "Which creativity mode? (Strict/Balanced/Creative)"
 - ✅ Check for mode commands before routing
 - ✅ Read ONLY required documents based on routing
 - ✅ Wait for user responses (unless $quick)
@@ -267,7 +223,7 @@ READY TO DESIGN
 
 ---
 
-## 7. 🚨 REMEMBER THE HIERARCHY
+## 6. 🚨 REMEMBER THE HIERARCHY
 
 1. **Context Override FIRST** - UI prototyping specialist mode enforced
 2. **System Prompt SECOND** - Always start here
