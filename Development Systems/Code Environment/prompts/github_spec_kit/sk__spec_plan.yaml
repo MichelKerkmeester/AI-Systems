@@ -224,7 +224,7 @@ workflow:
     required_documents:
     - AGENTS.md
     - .specify/memory/constitution.md
-    - knowledge/*.md
+    - .claude/knowledge/*.md
     verification: MUST REVIEW
     validation: principles_established
 

@@ -1,8 +1,20 @@
 # Webflow CDN-Safe Initialization Pattern - Quick Reference
 
-The mandatory CDN-safe initialization pattern for all JavaScript components in Webflow projects. 
+The mandatory CDN-safe initialization pattern for all JavaScript components in Webflow projects.
 
 This pattern ensures proper loading from CDN, prevents double initialization, respects Webflow's asynchronous architecture, and handles DOM readiness with appropriate delays.
+
+#### 📋 TABLE OF CONTENTS
+
+1. [✅ THE ONLY CORRECT PATTERN](#1--the-only-correct-pattern)
+2. [❌ COMMON MISTAKES TO AVOID](#2--common-mistakes-to-avoid)
+3. [🎯 WHY THIS PATTERN?](#3--why-this-pattern)
+4. [📋 PATTERN CHECKLIST](#4--pattern-checklist)
+5. [🔍 HOW IT WORKS](#5--how-it-works)
+6. [📁 IMPLEMENTATION EXAMPLES](#6--implementation-examples)
+7. [📊 ALL 34 FILES USING THIS PATTERN](#7--all-34-files-using-this-pattern)
+8. [🚨 ENFORCEMENT](#8--enforcement)
+9. [🧪 QUICK VERIFICATION TEST](#9--quick-verification-test)
 
 ---
 
@@ -361,7 +373,6 @@ if (window.Webflow && window.Webflow.push) {
 
 ### References
 
-- [specs/006-cloudflare-r2-cdn-setup/](../specs/006-cloudflare-r2-cdn-setup/) - Full CDN implementation spec
 - [AGENTS.md](../AGENTS.md) - Required reading for all agents
 - [code_standards.md](./code_standards.md) - Section 3.5: Initialization
 - [animation_strategy.md](./animation_strategy.md) - Motion.dev integration

@@ -2,15 +2,27 @@
 
 Focused, practical debugging for Webflow projects using platform-specific checks and browser automation tools.
 
-Concise Webflow debugging playbook. Use these checks first, then apply browser automation workflows (console, network, performance, snapshots) for evidence-based diagnosis. See also: [../z_prompts/code_debugger.yaml](../z_prompts/code_debugger.yaml).
+Concise Webflow debugging playbook. Use these checks first, then apply browser automation workflows (console, network, performance, snapshots) for evidence-based diagnosis.
+
+#### 📋 TABLE OF CONTENTS
+
+1. [🚨 CLAUDE USERS: USE CHROME DEVTOOLS SKILL](#1--claude-users-use-chrome-devtools-skill)
+2. [📖 FOR OTHER AI ASSISTANTS (GPT/CODEX)](#2--for-other-ai-assistants-gptcodex)
+3. [🔍 WEBFLOW-SPECIFIC CHECKS](#3--webflow-specific-checks)
+4. [🧰 BROWSER AUTOMATION APPROACH](#4--browser-automation-approach)
+5. [🔧 COMMON DEBUGGING WORKFLOWS](#5--common-debugging-workflows)
+6. [🐛 COMMON WEBFLOW ROOT CAUSES → CHECKS](#6--common-webflow-root-causes--checks)
+7. [🧪 MINIMAL HELPERS (OPTIONAL)](#7--minimal-helpers-optional)
+8. [🔗 REFERENCES](#8--references)
+9. [🧭 DECISION TREE: WHICH TOOL TO USE?](#9--decision-tree-which-tool-to-use)
 
 ---
 
-## 1. 🚨 FOR CLAUDE USERS: USE THE CHROME DEVTOOLS SKILL
+## 1. 🚨 CLAUDE USERS: USE CHROME DEVTOOLS SKILL
 
 **Claude has access to the comprehensive Chrome DevTools skill with 16 automation scripts for debugging and performance analysis.**
 
-**Skill Location:** `.claude/skills/chrome-devtools/`
+**Skill Location:** `.claude/skills/mcp-chrome-devtools/`
 
 **To use the skill in your conversation:**
 ```
@@ -51,7 +63,7 @@ Use the Chrome DevTools skill to debug https://example.com
 - `navigate.js` - Navigate to URLs
 - `evaluate.js` - Execute JavaScript in page context
 
-**For complete documentation:** See `.claude/skills/chrome-devtools/SKILL.md`
+**For complete documentation:** See `.claude/skills/mcp-chrome-devtools/SKILL.md`
 
 **Example workflow:**
 ```
@@ -96,7 +108,7 @@ If you have MCP access, use these tools directly in the conversation:
 Run Puppeteer scripts directly from the command line:
 
 ```bash
-cd .claude/skills/chrome-devtools/scripts
+cd .claude/skills/mcp-chrome-devtools/scripts
 
 # Navigate and check console
 node navigate.js --url https://example.com --close false
@@ -117,7 +129,7 @@ node emulate-cpu.js --rate 4 --close false
 node navigate.js --url https://example.com
 ```
 
-**See documentation:** `.claude/skills/chrome-devtools/scripts/README.md`
+**See documentation:** `.claude/skills/mcp-chrome-devtools/scripts/README.md`
 
 ### **Option 3: Static Analysis (Fallback)**
 
@@ -130,7 +142,7 @@ If browser automation is unavailable, use static code analysis:
 
 ---
 
-## 3. 🔍 WEBFLOW-SPECIFIC CHECKS (90-SECOND SWEEP)
+## 3. 🔍 WEBFLOW-SPECIFIC CHECKS
 
 - Webflow loaded: `!!window.Webflow`
 - Interactions queued: `Array.isArray(window.Webflow?.push)`
@@ -154,7 +166,7 @@ Helper (optional):
 
 ---
 
-## 4. 🧰 BROWSER AUTOMATION APPROACH SELECTION
+## 4. 🧰 BROWSER AUTOMATION APPROACH
 
 Choose the right tool for your environment:
 
@@ -365,15 +377,14 @@ mcp__chrome-devtools__performance_start_trace({ reload: true, autoStop: true })
 ## 8. 🔗 REFERENCES
 
 ### **For Claude Users:**
-- **Chrome DevTools Skill:** `.claude/skills/chrome-devtools/SKILL.md`
-- **Scripts Documentation:** `.claude/skills/chrome-devtools/scripts/README.md`
-- **Puppeteer Reference:** `.claude/skills/chrome-devtools/references/puppeteer-reference.md`
-- **CDP Domains Reference:** `.claude/skills/chrome-devtools/references/cdp-domains.md`
-- **Performance Guide:** `.claude/skills/chrome-devtools/references/performance-guide.md`
+- **Chrome DevTools Skill:** `.claude/skills/mcp-chrome-devtools/SKILL.md`
+- **Scripts Documentation:** `.claude/skills/mcp-chrome-devtools/scripts/README.md`
+- **Puppeteer Reference:** `.claude/skills/mcp-chrome-devtools/references/puppeteer-reference.md`
+- **CDP Domains Reference:** `.claude/skills/mcp-chrome-devtools/references/cdp-domains.md`
+- **Performance Guide:** `.claude/skills/mcp-chrome-devtools/references/performance-guide.md`
 
 ### **For All Users:**
 - **MCP tools:** Available `mcp__chrome-devtools__*` functions (use in conversation)
-- **Debug prompt:** `../z_prompts/code_debugger.yaml`
 - **Webflow constraints:** `./webflow_platform_constraints.md`
 - **Code standards:** `./code_standards.md`
 

@@ -1,0 +1,57 @@
+
+───────────────────────────────────────────────────────────────
+[2025-11-10 15:28:33] SKILL RECOMMENDATIONS
+───────────────────────────────────────────────────────────────
+Prompt: commit changes to git repository...
+───────────────────────────────────────────────────────────────
+
+🔴 CRITICAL (Must Apply)
+   • code-standards
+     Naming conventions, file headers, commenting rules (.claude/knowledge/code_standards.md)
+   • conversation-documentation
+     Mandatory spec folder system for all implementation conversations (.claude/knowledge/conversation_documentation.md)
+
+🟡 HIGH PRIORITY (Strongly Recommended)
+   • git-commit
+     Professional commit workflow - analyze changes, filter artifacts, write Conventional Commits messages
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-10 15:39:36] SKILL RECOMMENDATIONS
+───────────────────────────────────────────────────────────────
+Prompt: Update hook readme or skill readme if needed...
+───────────────────────────────────────────────────────────────
+
+🔴 CRITICAL (Must Apply)
+   • code-standards
+     Naming conventions, file headers, commenting rules (.claude/knowledge/code_standards.md)
+   • conversation-documentation
+     Mandatory spec folder system for all implementation conversations (.claude/knowledge/conversation_documentation.md)
+
+🔵 RELEVANT SKILLS (Consider)
+   • document-style-guide
+     Documentation and markdown formatting standards (.claude/knowledge/document_style_guide.md)
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-10 15:43:37] SKILL RECOMMENDATIONS
+───────────────────────────────────────────────────────────────
+Prompt: Update hook readme or skill readme if needed...
+───────────────────────────────────────────────────────────────
+
+🔴 CRITICAL (Must Apply)
+   • code-standards
+     Naming conventions, file headers, commenting rules (.claude/knowledge/code_standards.md)
+   • conversation-documentation
+     Mandatory spec folder system for all implementation conversations (.claude/knowledge/conversation_documentation.md)
+
+🔵 RELEVANT SKILLS (Consider)
+   • document-style-guide
+     Documentation and markdown formatting standards (.claude/knowledge/document_style_guide.md)
+
+───────────────────────────────────────────────────────────────
+

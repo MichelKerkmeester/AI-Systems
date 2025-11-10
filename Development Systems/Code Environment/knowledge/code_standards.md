@@ -1,8 +1,16 @@
 # Code Standards & Naming Conventions
 
-Defines the mandatory code conventions for JavaScript, CSS, and inline documentation. 
+Defines the mandatory code conventions for JavaScript, CSS, and inline documentation.
 
 Keep naming predictable across languages and layers, keep comments focused on intent and platform constraints, and enforce minimal headers without metadata or ticket references.
+
+#### 📋 TABLE OF CONTENTS
+
+1. [🧾 NAMING REFERENCE](#1--naming-reference)
+2. [🗂️ FILE & SECTION HEADERS](#2-️-file--section-headers)
+3. [💬 COMMENTING RULES](#3--commenting-rules)
+4. [🔖 SPECIAL MARKERS](#4--special-markers)
+5. [✅ ENFORCEMENT & TOOLING](#5--enforcement--tooling)
 
 ---
 
@@ -399,8 +407,8 @@ Avoid generic TODO comments without context or ownership.
 
 ### Tool Support
 - **ESLint** enforces snake_case and header constraints.
-- **Stylelint** validates CSS naming patterns---
+- **Stylelint** validates CSS naming patterns.
 
 ---
 
-**Rembember**:  Keep naming predictable across languages and layers, keep comments focused on intent and platform constraints
+**Remember**: Keep naming predictable across languages and layers, keep comments focused on intent and platform constraints

@@ -311,7 +311,7 @@ workflow:
     required_documents:
       - AGENTS.md
       - .specify/memory/constitution.md
-      - knowledge/*.md
+      - .claude/knowledge/*.md
     verification: MUST REVIEW
     validation: principles_established
     approval_gate:
@@ -483,7 +483,7 @@ workflow:
   step_11_development:
     approach: manual_implementation_with_checkpoints
     requirements:
-      - follow: knowledge/code_standards.md
+      - follow: .claude/knowledge/code_standards.md
       - update: task_checklist_progressively
       - test: before_commit
     checkpoints:

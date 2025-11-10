@@ -4,6 +4,18 @@ Defines the mandatory specification folder system for all conversations involvin
 
 Every implementation conversation requires documentation in `/specs/[###-short-name]/` before code changes begin. This ensures context preservation, debugging capability, smooth handoffs, and searchable project history. Documentation level scales with complexity: minimal README for trivial changes to full SpecKit for complex features.
 
+#### 📋 TABLE OF CONTENTS
+
+1. [🎯 PURPOSE & BENEFITS](#1--purpose--benefits)
+2. [📊 DECISION FRAMEWORK](#2--decision-framework)
+3. [📁 LEVEL SPECIFICATIONS](#3--level-specifications)
+4. [🛠️ IMPLEMENTATION GUIDE](#4-️-implementation-guide)
+5. [📋 TEMPLATES & STRUCTURE](#5--templates--structure)
+6. [🎭 REAL EXAMPLES](#6--real-examples)
+7. [🚦 AUTOMATION & WORKFLOW](#7--automation--workflow)
+8. [⚡ QUICK REFERENCE](#8--quick-reference)
+9. [🔍 TROUBLESHOOTING](#9--troubleshooting)
+
 ---
 
 ## 1. 🎯 PURPOSE & BENEFITS

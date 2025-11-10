@@ -193,8 +193,8 @@ workflow:
   step_2_pre_work_review:
     required_documents:
       - AGENTS.md
-      - knowledge/code_standards.md
-      - knowledge/debugging.md
+      - .claude/knowledge/code_standards.md
+      - .claude/knowledge/debugging.md
 
     verification: MUST REVIEW
     validation: principles_established

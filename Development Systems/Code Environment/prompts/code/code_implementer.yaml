@@ -247,7 +247,7 @@ standards:
 output:
   documentation:
     location: "[TARGET_DOCUMENT]/implementation.md"  # Same folder as target documents
-    follows: "knowledge/document_style_guide.md"
+    follows: ".claude/knowledge/document_style_guide.md"
     creation: "Automatically created at completion"
     structure: |
       # Implementation - [Feature Name]

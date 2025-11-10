@@ -2,6 +2,14 @@
 
 Webflow's non-negotiable platform constraints and production settings that every developer must respect. These limits are enforced by the platform and cannot be overridden.
 
+#### 📋 TABLE OF CONTENTS
+
+1. [⚙️ PRODUCTION SETTINGS](#1-️-production-settings)
+2. [🔒 PLATFORM LIMITS](#2--platform-limits)
+3. [📚 COLLECTION LIST PATTERNS & SOLUTIONS](#3--collection-list-patterns--solutions)
+4. [🧩 DEVELOPMENT IMPLICATIONS](#4--development-implications)
+5. [✅ TESTING CHECKLIST](#5--testing-checklist)
+
 ---
 
 ## 1. ⚙️ PRODUCTION SETTINGS

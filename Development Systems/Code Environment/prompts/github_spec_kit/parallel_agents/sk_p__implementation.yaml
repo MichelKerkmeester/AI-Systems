@@ -362,7 +362,7 @@ workflow:
   step_14_development:
     approach: autonomous_implementation_with_checkpoints
     requirements:
-      - follow: knowledge/code_standards.md
+      - follow: .claude/knowledge/code_standards.md
       - update: task_checklist_progressively
       - test: before_commit
       - no_premature_optimization

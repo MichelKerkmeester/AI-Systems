@@ -9,6 +9,7 @@
 - **Use explicit uncertainty:** prefix claims with "I'M UNCERTAIN ABOUT THIS:" and output "UNKNOWN" when unverifiable
 - Solve only the stated problem; **avoid over-engineering** and premature optimization
 - **Verify with checks** (simplicity, performance, maintainability, scope) before coding
+- After JavaScript changes, run `python3 .claude/skills/code-cdn-versioning/scripts/update_html_versions.py` to update HTML version parameters
 
 ---
 
@@ -69,7 +70,7 @@ Example: `I'M UNCERTAIN ABOUT THIS: The endpoint may require auth scope "read:fo
 ## 2. 📝 MANDATORY: CONVERSATION DOCUMENTATION
 
 Every conversation with code/file changes MUST have a spec folder, this applies to ALL conversations (SpecKit AND regular chat queries).
-**Full details**: [knowledge/conversation_documentation.md](./knowledge/conversation_documentation.md)
+**Full details**: [.claude/knowledge/conversation_documentation.md](./.claude/knowledge/conversation_documentation.md)
 
 #### Levels Overview
 | Level | LOC | Core Files | Optional Files | Use When |
@@ -168,7 +169,7 @@ Compute as weighted sum of factor scores (0–1), round to whole percent.
 ```
 Request Received → [Parse carefully: What is ACTUALLY requested?]
                     ↓
-         Gather Context → [Read relevant files, check knowledge/code_standards.md]
+         Gather Context → [Read relevant files, check .claude/knowledge/code_standards.md]
                     ↓
   Identify Approach → [What's the SIMPLEST solution that works?]
                     ↓
@@ -225,7 +226,7 @@ CURRENT STATE:
 CONTEXT GATHERING:
 □ What files are mentioned or implied?
 □ What existing patterns should be followed?
-□ What documentation is relevant? (Check knowledge/code_standards.md; see Knowledge base below)
+□ What documentation is relevant? (Check .claude/knowledge/code_standards.md; see Knowledge base below)
 □ What dependencies or side effects exist?
 □ Which tools verify this? (Read for files, rg for patterns, Glob for file discovery, Task+Explore for exploration)
 
@@ -233,7 +234,7 @@ SOLUTION REQUIREMENTS:
 □ What is the MINIMUM needed to satisfy this request?
 □ What would be over-engineering for this case?
 □ What existing code can be reused or extended?
-□ What approach is most maintainable per knowledge/code_standards.md?
+□ What approach is most maintainable per .claude/knowledge/code_standards.md?
 ```
 
 
@@ -252,7 +253,7 @@ SOLUTION REQUIREMENTS:
 
 3. **Effectiveness Over Elegance**
    - Performant + Maintainable + Concise + Clear
-   - Follow knowledge/code_standards.md patterns
+   - Follow .claude/knowledge/code_standards.md patterns
    - Obviously correct code > clever tricks
    - Scope discipline: Solve ONLY stated problem, no gold-plating
 
@@ -273,7 +274,7 @@ PERFORMANCE CHECK:
 □ Am I caching what should be cached?
 □ Does this scale appropriately for the use case?
 
-MAINTAINABILITY CHECK (per knowledge/code_standards.md — see Knowledge base):
+MAINTAINABILITY CHECK (per .claude/knowledge/code_standards.md — see Knowledge base):
 □ Does this follow established project patterns?
 □ Will the next developer understand this easily?
 □ Is the code self-documenting?
@@ -362,7 +363,7 @@ Request: "Add loading spinner to form submission"
 
 → Gather Context: Glob "**/*form*.ts" → Found src/components/ContactForm.ts
 → Read ContactForm.ts → No existing loading state
-→ Read knowledge/code_standards.md → "Reuse existing components" [illustrative]
+→ Read .claude/knowledge/code_standards.md → "Reuse existing components" [illustrative]
 → rg "LoadingSpinner" → Found shared/LoadingSpinner.ts (existing component)
 → Reasoning: Import existing component (follows reuse pattern)
 → Validate: Simple (no new abstraction), maintainable (centralized component)
@@ -382,13 +383,13 @@ Request: "Add loading spinner to form submission"
 #### Knowledge Base
 **Required Reading** - These documents define our non-negotiable standards:
 
-1. [knowledge/conversation_documentation.md](./knowledge/conversation_documentation.md)
-2. [knowledge/code_standards.md](./knowledge/code_standards.md)
-3. [knowledge/initialization_pattern.md](./knowledge/initialization_pattern.md)
-4. [knowledge/webflow_platform_constraints.md](./knowledge/webflow_platform_constraints.md)
-5. [knowledge/animation_strategy.md](./knowledge/animation_strategy.md)
-6. [knowledge/debugging.md](./knowledge/debugging.md)
-7. [knowledge/document_style_guide.md](./knowledge/document_style_guide.md)
+1. [.claude/knowledge/conversation_documentation.md](./.claude/knowledge/conversation_documentation.md)
+2. [.claude/knowledge/code_standards.md](./.claude/knowledge/code_standards.md)
+3. [.claude/knowledge/initialization_pattern.md](./.claude/knowledge/initialization_pattern.md)
+4. [.claude/knowledge/webflow_platform_constraints.md](./.claude/knowledge/webflow_platform_constraints.md)
+5. [.claude/knowledge/animation_strategy.md](./.claude/knowledge/animation_strategy.md)
+6. [.claude/knowledge/debugging.md](./.claude/knowledge/debugging.md)
+7. [.claude/knowledge/document_style_guide.md](./.claude/knowledge/document_style_guide.md)
 
 #### Core Principles & Decision Mantras
 **Documentation (Mandatory):**
@@ -417,7 +418,7 @@ Request: "Add loading spinner to form submission"
 - Got explicit user approval?
 
 **Quality Standards:**
-- knowledge/code_standards.md is law
+- .claude/knowledge/code_standards.md is law
 - Consistency > Personal preference
 - Maintainability > Brevity
 - Truth/Safety > Engagement
@@ -438,3 +439,16 @@ Request: "Add loading spinner to form submission"
    - Performance analysis
    - Live debugging web applications
    - Screenshot capture and element inspection
+
+#### CDN Versioning Workflow
+**Required after JavaScript modifications**
+
+After modifying JavaScript files, update HTML version parameters to ensure browsers download fresh files instead of serving cached versions.
+
+**Workflow:**
+1. Modify JavaScript file(s)
+2. Run version updater: `python3 .claude/skills/code-cdn-versioning/scripts/update_html_versions.py`
+
+**Why:** Query parameter (`?v=1.0.2`) forces browsers to treat URLs as new, bypassing cache. Without version updates, users may not receive JavaScript changes for weeks.
+
+**Documentation:** `.claude/skills/code-cdn-versioning/SKILL.md`

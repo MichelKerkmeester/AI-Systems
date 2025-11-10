@@ -1,8 +1,16 @@
 # Animation Strategy & Standards
 
-Defines our animation strategy across the project: CSS is the default for simple interactions; Motion.dev is the only JavaScript animation library we use for sequences that CSS cannot express ergonomically. 
+Defines our animation strategy across the project: CSS is the default for simple interactions; Motion.dev is the only JavaScript animation library we use for sequences that CSS cannot express ergonomically.
 
 This keeps payloads small, performance high, and behavior predictable.
+
+#### 📋 TABLE OF CONTENTS
+
+1. [🧭 DECISION FRAMEWORK](#1--decision-framework)
+2. [🧰 CSS-FIRST PLAYBOOK](#2--css-first-playbook)
+3. [⚙️ MOTION.DEV INTEGRATION](#3-️-motiondev-integration)
+4. [🚦 PERFORMANCE & ACCESSIBILITY](#4--performance--accessibility)
+5. [🧪 TESTING & DEBUGGING](#5--testing--debugging)
 
 ---
 
@@ -47,7 +55,7 @@ Need animation?
 We load Motion.dev once, as an ES module, and expose it globally for components:
 
 ```html
-<!-- src/1_html/global.html -->
+<!-- src/0_html/global.html -->
 <script type="module">
   const lib = await import('https://cdn.jsdelivr.net/npm/motion@12.15.0/+esm');
   window.Motion = lib; // { animate, inView, scroll, stagger, ... }
@@ -105,9 +113,9 @@ We load Motion.dev once, as an ES module, and expose it globally for components:
 
 ### In‑repo examples (authoritative patterns)
 
-- `/src/hero/hero_general.js` — inView‑based, multi‑phase sequence with easing maps; loader fadeout; will‑change cleanup
-- `/src/hero/hero_blog_article.js` — content‑first then overlay; short durations and expoOut
-- `/src/navigation/language_selector.js` — dropdown open/close measured height with animate()
+- `/src/2_javascript/hero/hero_general.js` — inView‑based, multi‑phase sequence with easing maps; loader fadeout; will‑change cleanup
+- `/src/2_javascript/hero/hero_blog_article.js` — content‑first then overlay; short durations and expoOut
+- `/src/2_javascript/navigation/language_selector.js` — dropdown open/close measured height with animate()
 
 ---
 
