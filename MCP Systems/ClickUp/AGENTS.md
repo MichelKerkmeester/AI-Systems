@@ -47,7 +47,7 @@ This file serves as a redirect with intelligent routing based on user input.
 **Follow this dynamic sequence:**
 
 ### **✅ STEP 1: READ SYSTEM PROMPT FIRST** 
-**MANDATORY:** Read `/Knowledge Base/Agent - MCP - ClickUp.md` **COMPLETELY** before proceeding.
+**MANDATORY:** Read `/knowledge base/Agent - MCP - ClickUp.md` **COMPLETELY** before proceeding.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
@@ -84,18 +84,18 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Steps 2-3 detection, read IN THIS ORDER as needed:**
 
-1. **Interactive Intelligence** — `/Knowledge Base/ClickUp - Interactive Intelligence.md`
+1. **Interactive Intelligence** — `/knowledge base/ClickUp - Interactive Intelligence.md`
    - **DEFAULT** conversational flow and UI patterns
    - Adaptive questioning and feedback formats
    - **SKIP IF** direct operation with clear intent
 
-2. **SYNC Thinking Framework** — `/Knowledge Base/ClickUp - SYNC Thinking Framework.md`
+2. **SYNC Thinking Framework** — `/knowledge base/ClickUp - SYNC Thinking Framework.md`
    - **ALWAYS READ** for structured operations
    - 4-phase methodology (Survey → Yield → Navigate → Create)
    - Connection verification integrated
    - Native MCP enforcement
 
-3. **MCP Knowledge** — `/Knowledge Base/ClickUp - MCP Knowledge.md`
+3. **MCP Knowledge** — `/knowledge base/ClickUp - MCP Knowledge.md`
    - ClickUp MCP server specifications
    - **ALWAYS CHECK** before operations requiring MCP calls
    - Connection verification procedures
@@ -187,7 +187,7 @@ User: "create tasks but connection is failing"
 ## 5. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
-- ❌ Skip the system prompt (`/Knowledge Base/Agent - MCP - ClickUp.md`)
+- ❌ Skip the system prompt (`/knowledge base/Agent - MCP - ClickUp.md`)
 - ❌ Proceed without completing Step 1
 - ❌ Proceed without verifying required tool availability (MCP server)
 - ❌ Skip operation routing guide
@@ -197,7 +197,7 @@ User: "create tasks but connection is failing"
 - ❌ **Produce code, CLI commands, or implementation details** (Context Override)
 
 ### ALWAYS:
-- ✅ Start with `/Knowledge Base/Agent - MCP - ClickUp.md`
+- ✅ Start with `/knowledge base/Agent - MCP - ClickUp.md`
 - ✅ Complete step 1 and understand project context fully
 - ✅ Verify required tool(s) BEFORE any operation (MCP server)
 - ✅ Check for operation type detection
@@ -221,4 +221,4 @@ User: "create tasks but connection is failing"
 
 ---
 
-**→ GO TO:** `/Knowledge Base/Agent - MCP - ClickUp.md` **NOW**
+**→ GO TO:** `/knowledge base/Agent - MCP - ClickUp.md` **NOW**

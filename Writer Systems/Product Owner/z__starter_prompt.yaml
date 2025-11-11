@@ -29,9 +29,9 @@ user_inputs:
     When requirements are met, the active state moves to the item below it, and the previous one goes to finished.
 
   analysis_scope: |
-    /Users/michelkerkmeester/MEGA/AI Systems/Writer Systems/Product Owner/Context/Stories/Story - Barter deals.md
-    /Users/michelkerkmeester/MEGA/AI Systems/Writer Systems/Product Owner/Context/Stories/Story - Companies.md
-    /Users/michelkerkmeester/MEGA/AI Systems/Writer Systems/Product Owner/Context/App Screens
+    /Users/michelkerkmeester/MEGA/AI Systems/Writer Systems/Product Owner/context/Stories/Story - Barter deals.md
+    /Users/michelkerkmeester/MEGA/AI Systems/Writer Systems/Product Owner/context/Stories/Story - Companies.md
+    /Users/michelkerkmeester/MEGA/AI Systems/Writer Systems/Product Owner/context/App Screens
   
 # ───────────────────────────────────────────────────────────────
 # RESOURCES
@@ -150,11 +150,11 @@ workflow:
 
   step_6_execute:
     input: "[REQUEST]"
-    action: Process request strictly per AGENTS.md + Knowledge Base guidelines
+    action: Process request strictly per AGENTS.md + knowledge base guidelines
     conflict_resolution: Follow AGENTS.md and explain adjustment
     validation: request_completed
     output_handling:
-      - if_export_folder_exists: "Deliver to ./Export/ with [###] - filename format"
+      - if_export_folder_exists: "Deliver to ./export/ with [###] - filename format"
       - if_folder_missing: "Notify user and request folder creation if relevant"
       - sequential_numbering: "Check existing files, use next number (001, 002, etc.)"
 
@@ -164,12 +164,12 @@ workflow:
 output:
   required_elements:
     - compliance_confirmation: "AGENTS.md path and summary"
-    - routing_confirmation: "Knowledge Base documents read (based on AGENTS.md routing)"
+    - routing_confirmation: "knowledge base documents read (based on AGENTS.md routing)"
     - context_understanding: "Parsed [CONTEXT] with assumptions"
-    - execution_approach: "How [REQUEST] will be handled per AGENTS.md + Knowledge Base"
+    - execution_approach: "How [REQUEST] will be handled per AGENTS.md + knowledge base"
     - next_actions: "Immediate next steps or results"
 
   delivery_location:
-    primary: ./Export/
+    primary: ./export/
     filename_format: "[###] - [description].[extension]"
     note: "Use sequential numbering starting from 001. Check folder availability before creating output."

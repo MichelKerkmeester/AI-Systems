@@ -47,7 +47,7 @@ This file serves as a redirect with intelligent routing based on user input.
 **Follow this dynamic sequence:**
 
 ### **✅ STEP 1: READ SYSTEM PROMPT FIRST** 
-**MANDATORY:** Read `/Knowledge Base/Agent - MCP - Notion.md` **COMPLETELY** before proceeding.
+**MANDATORY:** Read `/knowledge base/Agent - MCP - Notion.md` **COMPLETELY** before proceeding.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
@@ -83,18 +83,18 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Steps 2-3 detection, read IN THIS ORDER as needed:**
 
-1. **Interactive Intelligence** — `/Knowledge Base/Notion - Interactive Intelligence.md`
+1. **Interactive Intelligence** — `/knowledge base/Notion - Interactive Intelligence.md`
    - **DEFAULT** conversational flow and UI patterns
    - Adaptive questioning and feedback formats
    - **SKIP IF** direct operation with clear intent
 
-2. **SYNC Thinking Framework** — `/Knowledge Base/Notion - SYNC Thinking Framework.md`
+2. **SYNC Thinking Framework** — `/knowledge base/Notion - SYNC Thinking Framework.md`
    - **ALWAYS READ** for structured operations
    - 4-phase methodology (Survey → Yield → Navigate → Create)
    - Connection verification integrated
    - Native MCP enforcement
 
-3. **MCP Knowledge** — `/Knowledge Base/Notion - MCP Knowledge.md`
+3. **MCP Knowledge** — `/knowledge base/Notion - MCP Knowledge.md`
    - Notion MCP server specifications
    - **ALWAYS CHECK** before operations requiring MCP calls
    - Connection verification procedures
@@ -179,7 +179,7 @@ User: "create database but connection is failing"
 ## 5. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
-- ❌ Skip the system prompt (`/Knowledge Base/Agent - MCP - Notion.md`)
+- ❌ Skip the system prompt (`/knowledge base/Agent - MCP - Notion.md`)
 - ❌ Proceed without completing Step 1
 - ❌ Proceed without verifying required tool availability (MCP server)
 - ❌ Skip operation routing guide
@@ -189,7 +189,7 @@ User: "create database but connection is failing"
 - ❌ **Produce code, CLI commands, or implementation details** (Context Override)
 
 ### ALWAYS:
-- ✅ Start with `/Knowledge Base/Agent - MCP - Notion.md`
+- ✅ Start with `/knowledge base/Agent - MCP - Notion.md`
 - ✅ Complete step 1 and understand project context fully
 - ✅ Verify required tool(s) BEFORE any operation (MCP server)
 - ✅ Check for mode & operation type
@@ -211,6 +211,6 @@ User: "create database but connection is failing"
 7. **Interactive Intelligence** - Default flow when conversational
 8. **MCP Knowledge** - Tool capabilities and parameters
 9. **Native Tools ONLY** - Use only available MCP capabilities
-10. **Output to /Export** - Every artifact goes here
+10. **Output to /export** - Every artifact goes here
 
-**→ GO TO:** `/Knowledge Base/Agent - MCP - Notion.md` **NOW**
+**→ GO TO:** `/knowledge base/Agent - MCP - Notion.md` **NOW**

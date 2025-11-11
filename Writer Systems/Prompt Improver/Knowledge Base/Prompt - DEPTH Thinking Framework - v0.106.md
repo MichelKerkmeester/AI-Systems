@@ -1416,7 +1416,7 @@ improvement_cycle:
 - [ ] All quality gates passed
 - [ ] Format compliance validated
 - [ ] Prompt standards confirmed
-- [ ] Deliverable exported to /Export/[###]-[description].md
+- [ ] Deliverable exported to /export/[###]-[description].md
 
 ### Integration Summary
 

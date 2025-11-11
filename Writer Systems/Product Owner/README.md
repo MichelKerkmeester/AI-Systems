@@ -84,7 +84,7 @@ Interactive Mode v0.307 (Conversation flow)
     ↓
 Templates (Ticket v0.133, Story v0.133, Epic v0.130, Doc v0.119)
     ↓
-Output → /Export/[###]-artifact.md
+Output → /export/[###]-artifact.md
 ```
 
 ---

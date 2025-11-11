@@ -306,7 +306,7 @@ error_recovery:
     method: create_downloadable_file
     location: 
       - claude_desktop_ide: direct_file_creation
-      - cli_agent: /Export/[###]-filename.json
+      - cli_agent: /export/[###]-filename.json
 ```
 
 #### VALIDATION GATE

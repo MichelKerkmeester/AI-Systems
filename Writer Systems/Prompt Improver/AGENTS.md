@@ -45,7 +45,7 @@ This file serves as a redirect with intelligent routing based on user input.
 **Follow this dynamic sequence:**
 
 ### **✅ STEP 1: READ SYSTEM PROMPT FIRST** 
-**MANDATORY:** Read `/Knowledge Base/Writer - Prompt Improver.md` **COMPLETELY** before proceeding.
+**MANDATORY:** Read `/knowledge base/Writer - Prompt Improver.md` **COMPLETELY** before proceeding.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 
@@ -54,9 +54,9 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 **Check user's input for $ command shortcuts and route accordingly:**
 
 #### IF USER USES SHORTCUTS:
-- **`$json`** → Read `/Knowledge Base/Prompt - Format Guide - JSON.md`
-- **`$yaml`** → Read `/Knowledge Base/Prompt - Format Guide - YAML.md`
-- **`$markdown` or default** → Read `/Knowledge Base/Prompt - Format Guide - Markdown.md`
+- **`$json`** → Read `/knowledge base/Prompt - Format Guide - JSON.md`
+- **`$yaml`** → Read `/knowledge base/Prompt - Format Guide - YAML.md`
+- **`$markdown` or default** → Read `/knowledge base/Prompt - Format Guide - Markdown.md`
 
 #### IF USER SPECIFIES MODE:
 - **`$quick`** → Skip Interactive Mode, apply 1-5 round DEPTH scaling
@@ -73,17 +73,17 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 
 **Based on Step 2 routing, read as needed:**
 
-1. **Interactive Mode** - `/Knowledge Base/Prompt - Interactive Mode.md`
+1. **Interactive Mode** - `/knowledge base/Prompt - Interactive Mode.md`
    - **SKIP if $quick or direct framework specified**
    - DEFAULT conversational enhancement flow
    - Framework selection logic
 
-2. **DEPTH Thinking Framework** - `/Knowledge Base/Prompt - DEPTH Thinking Framework.md`
+2. **DEPTH Thinking Framework** - `/knowledge base/Prompt - DEPTH Thinking Framework.md`
    - **ALWAYS READ** (required for all operations)
    - Transparent excellence methodology
    - 10-round standard / 1-5 quick scaling
 
-3. **Patterns & Evaluation** - `/Knowledge Base/Prompt - Patterns, Enhancements & Evaluation.md`
+3. **Patterns & Evaluation** - `/knowledge base/Prompt - Patterns, Enhancements & Evaluation.md`
    - **ALWAYS READ** (contains all frameworks)
    - Jump to specific framework if commanded
    - CLEAR scoring methodology
@@ -166,14 +166,14 @@ User: "improve my prompt"
 
 **ALL OUTPUT ARTIFACTS MUST BE PLACED IN:**
 ```
-/Export/
+/export/
 ```
 
 **File naming convention based on format:**
 ```
-/Export/[###] - enhanced-[description].md
-/Export/[###] - prompt-[use-case].json
-/Export/[###] - template-[framework].yaml
+/export/[###] - enhanced-[description].md
+/export/[###] - prompt-[use-case].json
+/export/[###] - template-[framework].yaml
 ```
 
 **Numbering Rules:**
@@ -183,17 +183,17 @@ User: "improve my prompt"
 - Include space-dash-space " - " separator after number
 
 **Examples:**
-- `/Export/001 - enhanced-api-documentation.md`
-- `/Export/002 - prompt-data-analysis.json`
-- `/Export/003 - template-content-creation.yaml`
-- `/Export/004 - enhanced-costar-framework.md`
+- `/export/001 - enhanced-api-documentation.md`
+- `/export/002 - prompt-data-analysis.json`
+- `/export/003 - template-content-creation.yaml`
+- `/export/004 - enhanced-costar-framework.md`
 
 ---
 
 ## 6. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
-- ❌ Skip the system prompt (/Knowledge Base/Writer - Prompt Improver.md)
+- ❌ Skip the system prompt (/knowledge base/Writer - Prompt Improver.md)
 - ❌ Proceed without completing Step 1
 - ❌ Skip command / shortcut detection
 - ❌ Read ALL documents unnecessarily (only what's needed)
@@ -204,7 +204,7 @@ User: "improve my prompt"
 - ❌ **Produce code, CLI commands, or implementation details** (Context Override)
 
 ### ALWAYS:
-- ✅ Start with `/Knowledge Base/Writer - Prompt Improver.md`
+- ✅ Start with `/knowledge base/Writer - Prompt Improver.md`
 - ✅ Complete step 1 and understand project context fully
 - ✅ Check for mode/tone commands before routing
 - ✅ Read ONLY required documents based on routing
@@ -227,4 +227,4 @@ User: "improve my prompt"
 7. **Artifact Standards** - Always for formatting
 8. **Output to /export** - Every artifact goes here
 
-**→ GO TO:** `/Knowledge Base/Writer - Prompt Improver.md` **NOW**
+**→ GO TO:** `/knowledge base/Writer - Prompt Improver.md` **NOW**

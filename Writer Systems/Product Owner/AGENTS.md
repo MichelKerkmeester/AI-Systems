@@ -45,7 +45,7 @@ This file serves as a redirect with intelligent routing based on user input.
 **Follow this dynamic sequence:**
 
 ### **✅ STEP 1: READ SYSTEM PROMPT FIRST** 
-**MANDATORY:** Read `/Knowledge Base/Writer - Product Owner.md` **COMPLETELY** before proceeding.
+**MANDATORY:** Read `/knowledge base/Writer - Product Owner.md` **COMPLETELY** before proceeding.
 
 This is your PRIMARY instruction set. Everything else supports this core system.
 - Includes DEPTH two-layer transparency model with RICCE integration
@@ -57,29 +57,29 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 **Check user's input for $ command shortcuts and route accordingly:**
 
 #### IF USER USES SHORTCUTS:
-- **`$ticket`** → Read `/Knowledge Base/Product Owner - Template - Ticket Mode.md`
-- **`$story`** → Read `/Knowledge Base/Product Owner - Template - Story Mode.md`
-- **`$epic`** → Read `/Knowledge Base/Product Owner - Template - Epic Mode.md`
-- **`$doc`** → Read `/Knowledge Base/Product Owner - Template - Doc Mode.md`
+- **`$ticket`** → Read `/knowledge base/Product Owner - Template - Ticket Mode.md`
+- **`$story`** → Read `/knowledge base/Product Owner - Template - Story Mode.md`
+- **`$epic`** → Read `/knowledge base/Product Owner - Template - Epic Mode.md`
+- **`$doc`** → Read `/knowledge base/Product Owner - Template - Doc Mode.md`
 
 #### IF NO SHORTCUT DETECTED:
-1. **FIRST** → Read `/Knowledge Base/Product Owner - Interactive Mode.md`
+1. **FIRST** → Read `/knowledge base/Product Owner - Interactive Mode.md`
 2. **WAIT** for user response about what they want
 3. **THEN** read the appropriate template based on their answer:
-   - User wants ticket → Read `/Knowledge Base/Product Owner - Template - Ticket Mode.md`
-   - User wants story → Read `/Knowledge Base/Product Owner - Template - Story Mode.md`
-   - User wants epic → Read `/Knowledge Base/Product Owner - Template - Epic Mode.md`
-   - User wants documentation → Read `/Knowledge Base/Product Owner - Template - Doc Mode.md`
+   - User wants ticket → Read `/knowledge base/Product Owner - Template - Ticket Mode.md`
+   - User wants story → Read `/knowledge base/Product Owner - Template - Story Mode.md`
+   - User wants epic → Read `/knowledge base/Product Owner - Template - Epic Mode.md`
+   - User wants documentation → Read `/knowledge base/Product Owner - Template - Doc Mode.md`
 
 ### **📚 STEP 3: READ SUPPORTING FRAMEWORKS** 
 **ONLY AFTER** completing Steps 1-2, read:
 
-1. **Interactive Mode** - `/Knowledge Base/Product Owner - Interactive Mode.md`
+1. **Interactive Mode** - `/knowledge base/Product Owner - Interactive Mode.md`
    - **SKIP if shortcut specified ($ticket, $story, $epic, $doc, $quick)**
    - DEFAULT conversational flow for user guidance
    - Template selection logic
 
-2. **DEPTH Thinking Framework** - `/Knowledge Base/Product Owner - DEPTH Thinking Framework.md`
+2. **DEPTH Thinking Framework** - `/knowledge base/Product Owner - DEPTH Thinking Framework.md`
    - 10-round automatic processing (standard) or auto-scaled for $quick
    - Two-layer transparency model (full rigor internally, concise updates externally)
    - Multi-perspective analysis MANDATORY enforcement (minimum 3, target 5)
@@ -135,50 +135,50 @@ READY TO PROCESS
 
 **ALL OUTPUT ARTIFACTS MUST BE PLACED IN:**
 ```
-/Export/
+/export/
 ```
 
 **File naming convention:**
 ```
-/Export/[###] - [artifact-type]-[description].md
+/export/[###] - [artifact-type]-[description].md
 ```
 
 **Numbering Rules:**
 - **ALWAYS** prefix files with a 3-digit sequential number (001, 002, 003, etc.)
-- Check existing files in `/Export/` to determine the next number
+- Check existing files in `/export/` to determine the next number
 - Numbers must be zero-padded to 3 digits
 - Include space-dash-space " - " separator after number
 
 **Examples:**
-- `/Export/001 - ticket-user-authentication.md`
-- `/Export/002 - epic-payment-integration.md`
-- `/Export/003 - doc-api-specification.md`
-- `/Export/004 - story-customer-journey.md`
+- `/export/001 - ticket-user-authentication.md`
+- `/export/002 - epic-payment-integration.md`
+- `/export/003 - doc-api-specification.md`
+- `/export/004 - story-customer-journey.md`
 
-**Note:** Path is case-sensitive on Linux and case-sensitive macOS volumes. Always use lowercase `/Export/`.
+**Note:** Path is case-sensitive on Linux and case-sensitive macOS volumes. Always use lowercase `/export/`.
 
 ---
 
 ## 6. ⛔ ABSOLUTE REQUIREMENTS
 
 ### DO NOT:
-- ❌ Skip the system prompt (/Knowledge Base/Writer - Product Owner.md)
+- ❌ Skip the system prompt (/knowledge base/Writer - Product Owner.md)
 - ❌ Proceed without completing Step 1
 - ❌ Skip command / shortcut detection
 - ❌ Read ALL documents unnecessarily (only what's needed)
 - ❌ Answer your own questions (always wait for user)
-- ❌ Create artifacts outside /Export folder
+- ❌ Create artifacts outside /export folder
 - ❌ Violate Artifact Standards formatting
 - ❌ Create files without 3-digit sequential number prefix
 - ❌ **Produce code, CLI commands, or implementation details** (Context Override)
 
 ### ALWAYS:
-- ✅ Start with `/Knowledge Base/Writer - Product Owner.md`
+- ✅ Start with `/knowledge base/Writer - Product Owner.md`
 - ✅ Complete step 1 and understand project context fully
 - ✅ Check for mode/tone commands before routing
 - ✅ Read ONLY required documents based on routing
 - ✅ Wait for user responses (unless $quick)
-- ✅ Place ALL artifacts in /Export folder
+- ✅ Place ALL artifacts in /export folder
 - ✅ Comply with Artifact Standards formatting
 - ✅ Prefix files with sequential 3-digit numbers (001, 002, etc.)
 - ✅ **Refuse code requests and reframe to content/copywriting deliverables** (Context Override)
@@ -194,6 +194,6 @@ READY TO PROCESS
 5. **DEPTH Framework** - 10 rounds automatic (unless $quick simple edit)
 6. **Interactive Mode** - Only when no command
 7. **Artifact Standards** - Always for formatting
-8. **Output to /Export** - Every artifact goes here
+8. **Output to /export** - Every artifact goes here
 
-**→ GO TO:** `/Knowledge Base/Writer - Product Owner.md` **NOW**
+**→ GO TO:** `/knowledge base/Writer - Product Owner.md` **NOW**

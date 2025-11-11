@@ -99,7 +99,7 @@ Patterns & Evaluation v0.102 (7 frameworks + CLEAR scoring)
     ↓
 Format Guides v0.120 (Markdown, JSON, YAML - pure format specs)
     ↓
-Output → /Export/[###]-enhanced-prompt.[md|json|yaml]
+Output → /export/[###]-enhanced-prompt.[md|json|yaml]
 ```
 
 ---

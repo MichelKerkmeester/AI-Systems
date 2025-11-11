@@ -38,7 +38,7 @@ user_inputs:
     - "Deliver enhanced files ready for implementation"
   
   target_files: |
-    /Users/michelkerkmeester/MEGA/AI Systems/MCP Systems/ClickUp & Notion/Knowledge Base/ClickUp & Notion - SYNC Thinking Framework - v0.101.md
+    /Users/michelkerkmeester/MEGA/AI Systems/MCP Systems/ClickUp & Notion/knowledge base/ClickUp & Notion - SYNC Thinking Framework - v0.101.md
 
   already_improved_reference_files: |
     [ALREADY_IMPROVED_REFERENCE_FILES] (Optional)
@@ -64,7 +64,7 @@ user_inputs:
     Leave empty or omit if no already-improved reference files are available.
   
   analysis_scope:
-    folder_to_analyze: /Users/michelkerkmeester/MEGA/AI Systems/MCP Systems/ClickUp & Notion/Context/Thinking
+    folder_to_analyze: /Users/michelkerkmeester/MEGA/AI Systems/MCP Systems/ClickUp & Notion/context/Thinking
     extract_principles:
       - "[Framework or pattern to extract]"
       - "[Another framework or pattern]"
