@@ -37,7 +37,7 @@ Extract design tokens from visual references and apply through creative control 
 
 | Source | Location | Best For |
 |--------|----------|----------|
-| **Context Folder** | `/Context/` | Project references, batch processing |
+| **Context Folder** | `/context/` | Project references, batch processing |
 | **Chat Upload** | Drag & drop | Quick iterations, single references |
 | **Figma MCP** | Via integration | Direct design file access |
 | **URL Screenshots** | Web pages | Live site analysis |
@@ -50,7 +50,7 @@ Extract design tokens from visual references and apply through creative control 
 
 ```yaml
 step_1_detection:
-  - Scan /Context/ folder or detect uploaded images
+  - Scan /context/ folder or detect uploaded images
   - Support: PNG, JPG, JPEG, WebP, SVG
   - Auto-categorize by dimensions (desktop/mobile/tablet)
 
@@ -77,7 +77,7 @@ step_5_style_md_generation:
     1. Extract all tokens (colors, typography, spacing, effects)
     2. Generate STYLE.md using template
     3. Populate with design tokens + accessibility notes
-    4. Save to /Design System/STYLE.md
+    4. Save to /design system/STYLE.md
     5. Use as primary system for current design
 ```
 
@@ -101,7 +101,7 @@ style_md_workflow:
     layout: Breakpoints + grid systems + container widths
     accessibility: Contrast ratios + WCAG compliance + focus indicators
   
-  save_location: "/Design System/STYLE.md"
+  save_location: "/design system/STYLE.md"
   
   update_existing:
     trigger: "STYLE.md exists + new references"
@@ -113,7 +113,7 @@ style_md_workflow:
 
 ```yaml
 context_folder:
-  location: "/Context/"
+  location: "/context/"
   trigger: Conversation start OR user mentions "reference"
   batch: Process all images simultaneously
   organization:
@@ -263,6 +263,10 @@ colors:
   build: Primitive tokens (gray-50 to gray-900, color-500 scales)
   semantic: primary, secondary, success, error, text, background, surface
   validate: WCAG AA (4.5:1 min) + WCAG AAA (7:1 critical text)
+  shadcn_mapping:
+    - Map extracted colors to shadcn CSS variables (--primary, --secondary, etc.)
+    - Extend Tailwind config with brand-specific color scales
+    - Generate HSL values for shadcn's color system
 
 typography:
   identify: Character shapes → Google Fonts database → Closest alternatives
@@ -270,29 +274,41 @@ typography:
   calculate: Scale ratio (usually 1.125 - 1.333)
   output: Type scale (xs: 0.75rem → 4xl: 2.25rem)
   fallback: Exact match → Similar Google Font → System font
+  shadcn_mapping:
+    - Apply fonts via Tailwind config fontFamily extension
+    - Use Tailwind typography classes (text-sm, text-base, text-lg, etc.)
+    - Define custom classes for brand-specific typography
 
 spacing:
   detect: Grid system (4px, 8px, 12px, or 16px base)
   measure: All padding/margin values
   build: Spacing scale (0: 0 → 20: 5rem)
   apply: Consistent throughout design
+  shadcn_mapping:
+    - Map to Tailwind spacing classes (p-4, m-6, space-y-4, etc.)
+    - Use shadcn component padding patterns (Button, Card, Dialog)
+    - Extend Tailwind config for custom spacing values if needed
 
 effects:
   shadows: offset + blur + spread + color
   borders: width + style + radius
   gradients: type + angle + stops
   other: opacity + blur effects
+  shadcn_mapping:
+    - Apply via Tailwind shadow utilities (shadow-sm, shadow-md, etc.)
+    - Extend with custom shadow definitions in Tailwind config
+    - Use shadcn's border radius system (rounded-lg, rounded-md, etc.)
 
-  component_spacing:
-    padding:
-      - button: "py-2 px-4"
-      - card: "p-6"
-      - section: "py-12 px-4"
+component_spacing:
+  padding:
+    - button: "py-2 px-4" (shadcn Button default)
+    - card: "p-6" (shadcn Card default)
+    - section: "py-12 px-4"
 
-    margin:
-      - stack: "space-y-4"
-      - inline: "space-x-2"
-      - section: "my-16"
+  margin:
+    - stack: "space-y-4" (Tailwind utility)
+    - inline: "space-x-2" (Tailwind utility)
+    - section: "my-16"
 ```
 
 ### Effects Extraction
@@ -361,13 +377,47 @@ effects_extraction:
 ## 6. 🔗 CANVAS INTEGRATION
 
 **Reference Detection** (Phase C - Concept)
-- Auto-scan: `/Context/` folder + chat uploads + mentioned URLs
+- Auto-scan: `/context/` folder + chat uploads + mentioned URLs
 - Prompt: "Found [X] references. Extract design system? [Yes/Select/Skip]"
-- If yes: Extract tokens → Apply multi-perspective analysis → Use as design foundation
+- If yes: Extract tokens → Map to shadcn/ui components → Apply multi-perspective analysis → Use as design foundation
+
+**shadcn/ui Component Selection** (Phase A - Architecture)
+- Analyze reference UI patterns
+- Map patterns to shadcn/ui base components (Button, Card, Dialog, Form, etc.)
+- Document which components to use and how to customize them
+- Plan component composition strategy
 
 **Token Application** (Phase V - Visual)
-- Priority: 1. Extracted tokens → 2. Brand guidelines → 3. Generated tokens
-- Process: Apply colors → typography → spacing → effects → Validate against reference
+- Priority: 1. Extracted tokens → 2. shadcn/ui defaults → 3. Brand guidelines → 4. Generated tokens
+- Process: 
+  1. Map extracted colors to shadcn CSS variables
+  2. Apply typography via Tailwind config + classes
+  3. Customize shadcn components with Tailwind utilities
+  4. Apply spacing using Tailwind's spacing system
+  5. Add effects (shadows, borders) via Tailwind extensions
+  6. Validate against reference
+
+**shadcn Component Customization Workflow:**
+```tsx
+// 1. Start with shadcn base component
+import { Button } from '@/components/ui/button'
+
+// 2. Apply extracted tokens via Tailwind
+<Button className="bg-brand-500 hover:bg-brand-600 font-heading">
+
+// 3. Create brand-specific variants
+const buttonVariants = cva(
+  "base-styles",
+  {
+    variants: {
+      brand: {
+        primary: "bg-brand-500 text-white",
+        secondary: "bg-brand-100 text-brand-900"
+      }
+    }
+  }
+)
+```
 
 **Multi-Perspective Weights by Mode**
 | Perspective | Strict | Balanced | Creative |
@@ -375,6 +425,7 @@ effects_extraction:
 | Visual Design Expert | 40% | 25% | 15% |
 | UX Flow | 20% | 30% | 25% |
 | Innovation Lens | 5% | 20% | 35% |
+| Component Architecture | 15% | 15% | 15% |
 
 ---
 
@@ -400,13 +451,14 @@ effects_extraction:
 ## 8. 🏎️ QUICK REFERENCE
 
 **Extraction Commands**
-- `$extract strict` - Pixel-perfect replication (≤10%)
-- `$extract` - Balanced mode with web optimization [DEFAULT]
-- `$extract creative [image]` - Creative interpretation (25-50%)
-- `$extract tokens` - Tokens only (no prototype generation)
-- `$extract [url]` - Extract from live website
-- `$extract batch` - Process all Context folder references
-- `$extract --focus "colors typography"` - Extract specific elements only
+- `$extract strict` - Pixel-perfect replication with shadcn components (≤10%)
+- `$extract` - Balanced mode: shadcn base + web optimization [DEFAULT]
+- `$extract creative [image]` - Creative interpretation using shadcn foundation (25-50%)
+- `$extract tokens` - Tokens only mapped to Tailwind config (no component generation)
+- `$extract [url]` - Extract from live website, map to shadcn components
+- `$extract batch` - Process all Context folder references with shadcn mapping
+- `$extract --focus "colors typography"` - Extract specific elements, apply to Tailwind config
+- `$extract --components` - Map UI patterns to shadcn component recommendations
 
 **Best Practices**
 - **Before:** High-res images (1920px+) | Multiple states | Clear naming | Organized folders
@@ -436,4 +488,94 @@ Context/
 
 ---
 
-*Reference Extraction enables precision visual analysis with flexible creative control, integrating with CANVAS methodology for systematic rigor and exceptional quality.*
+## 9. 🎨 SHADCN/UI REFERENCE EXTRACTION INTEGRATION
+
+**Enhanced Workflow: References + shadcn/ui**
+
+```yaml
+reference_to_shadcn_pipeline:
+  step_1_extract_tokens:
+    action: "Extract colors, typography, spacing, effects from references"
+    output: "Design token set"
+  
+  step_2_map_components:
+    action: "Identify UI patterns in references"
+    map_to: "shadcn/ui components (Button, Card, Form, etc.)"
+    output: "Component selection list with customization notes"
+  
+  step_3_apply_to_tailwind:
+    action: "Extend Tailwind config with extracted tokens"
+    config:
+      colors: "Brand color scales mapped to Tailwind palette"
+      fonts: "Custom font families added to fontFamily"
+      spacing: "Custom spacing values if needed"
+      shadows: "Brand-specific shadow definitions"
+  
+  step_4_customize_shadcn:
+    action: "Apply tokens to shadcn base components"
+    methods:
+      - "Tailwind utility classes (className prop)"
+      - "CSS variable overrides (--primary, --secondary, etc.)"
+      - "Component variant extensions (CVA)"
+  
+  step_5_generate_components:
+    action: "Output .tsx files with shadcn imports + customization"
+    structure:
+      - "Component file with TypeScript types"
+      - "Demo/usage example file"
+      - "Updated Tailwind config if needed"
+```
+
+**Component Pattern Mapping Examples:**
+
+| Reference Pattern | shadcn Component | Customization Strategy |
+|-------------------|------------------|------------------------|
+| Primary CTA button | `Button` | `className="bg-brand-500 hover:bg-brand-600"` |
+| Content card | `Card` | `className="p-6 rounded-brand shadow-brand"` |
+| Modal dialog | `Dialog` | Customize `DialogContent` with brand colors |
+| Form inputs | `Input`, `Select` | Apply focus rings with brand colors |
+| Navigation menu | `NavigationMenu` | Style with brand typography + spacing |
+| Data table | `Table` | Apply zebra striping, brand borders |
+| Toast notifications | `Toast` | Semantic colors mapped to brand palette |
+
+**Creative Mode Application with shadcn:**
+
+- **Strict Mode:** 
+  - Use exact extracted tokens, minimal deviation from shadcn defaults
+  - Override CSS variables to match reference exactly
+  - Custom Tailwind classes only when shadcn can't achieve exact match
+
+- **Balanced Mode [DEFAULT]:**
+  - Blend shadcn patterns with extracted aesthetic
+  - Use shadcn component structure, apply brand tokens via Tailwind
+  - Enhance accessibility while preserving visual style
+
+- **Creative Mode:**
+  - shadcn as foundation, interpret freely
+  - Explore modern component patterns beyond reference
+  - Extend with Tailwind animations, effects, gradients
+
+**Example Implementation:**
+
+```tsx
+// Extracted from reference: Primary color #02393e, rounded corners 12px
+// shadcn Button customized with extracted tokens
+
+import { Button } from '@/components/ui/button'
+
+// In tailwind.config.js:
+// colors: { brand: { 500: '#02393e' } }
+// borderRadius: { brand: '12px' }
+
+export function BrandButton() {
+  return (
+    <Button className="bg-brand-500 hover:bg-brand-600 rounded-brand">
+      Click Me
+    </Button>
+  )
+}
+```
+
+---
+
+*Reference Extraction enables precision visual analysis with flexible creative control, integrating with CANVAS methodology and shadcn/ui component architecture for systematic rigor and exceptional quality.*

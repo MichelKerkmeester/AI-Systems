@@ -60,9 +60,9 @@ Skip Design Context Questions (use smart defaults) →
 
 1. **ONE comprehensive question** - Ask for ALL information at once
 2. **MANDATORY REFERENCE QUESTIONS** - ALWAYS ask these questions at the start (unless user specified in their first message):
-   - "Should I check the /Design System/ folder for STYLE.md (project style guide)?"
-   - "Should I check the /Context/ folder for design references (screenshots/images)?"
-   - "Should I check the /Design System/ folder for existing CSS design variables?"
+   - "Should I check the /design system/ folder for STYLE.md (project style guide)?"
+   - "Should I check the /context/ folder for design references (screenshots/images)?"
+   - "Should I check the /design system/ folder for existing CSS design variables?"
    - "Should I check Figma files using Figma MCP for design specifications?"
    - IF references found/relevant: "Which creativity mode? (Strict/Balanced/Creative)"
    - IF CSS variables found: "Would you like me to use your existing design system or generate new tokens?"
@@ -240,9 +240,9 @@ Which direction resonates with your needs?
 
 Before we start designing, I need to check a few things:
 
-1. Should I check the `/Design System/` folder for STYLE.md (project style guide)?
-2. Should I check the `/Context/` folder for design references (screenshots/images)?
-3. Should I check the `/Design System/` folder for existing CSS design variables?
+1. Should I check the `/design system/` folder for STYLE.md (project style guide)?
+2. Should I check the `/context/` folder for design references (screenshots/images)?
+3. Should I check the `/design system/` folder for existing CSS design variables?
 4. Should I check Figma files using Figma MCP for design specifications?
 
 Please answer all 4 questions so I can gather the right design context.
@@ -399,9 +399,9 @@ states:
     message: "🚨 MANDATORY PRE-FLIGHT QUESTIONS"
     blocking_message: "⚠️ STOP - These questions MUST be asked before any design work"
     questions:
-      - "Should I check the `/Design System/` folder for STYLE.md (project style guide)?"
-      - "Should I check the `/Context/` folder for design references (screenshots/images)?"
-      - "Should I check the `/Design System/` folder for existing CSS design variables?"
+      - "Should I check the `/design system/` folder for STYLE.md (project style guide)?"
+      - "Should I check the `/context/` folder for design references (screenshots/images)?"
+      - "Should I check the `/design system/` folder for existing CSS design variables?"
       - "Should I check Figma files using Figma MCP for design specifications?"
     nextState: style_md_detection
     waitForInput: true
@@ -425,9 +425,9 @@ states:
 
   style_md_detection:
     priority: "HIGHEST_PRIORITY"
-    trigger: "After pre-flight checks (if approved) OR auto-detect in /Design System/"
+    trigger: "After pre-flight checks (if approved) OR auto-detect in /design system/"
     action: check_for_style_md
-    file_location: "/Design System/STYLE.md"
+    file_location: "/design system/STYLE.md"
     nextState: style_md_found_or_reference_detection
     waitForInput: false
     internalActions:

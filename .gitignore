@@ -2,12 +2,22 @@
 # Specifies intentionally untracked files that Git should ignore
 
 .DS_Store
+
+# Development
 .mcp.json
+package-lock.json
+package.json
+postcss.config.js
+tailwind.config.js
+tsconfig.json
+node_modules/
+lib/
 
 # IDE and editor folders (ignored at all levels)
 .idea/
 .vscode/
 .claude/
+.superdesign/
 
 # Configuration files (ignored at all levels)
 mcp_servers.json
@@ -24,6 +34,10 @@ Context/
 Design System/
 Export/
 Memory/
+context/
+design system/
+export/
+memory/
 
 # Archive folder (root level only)
 /z — Archive/

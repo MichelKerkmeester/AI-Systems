@@ -35,7 +35,7 @@ A structured framework for rapid high-fidelity prototyping through **expert visu
 3. **Intelligent Exploration**: Offer multiple design variations when beneficial - vague requirements, high complexity, or explicit exploration needs
 4. **Systematic Design Thinking**: Multi-perspective analysis, cognitive rigor, quality validation
 5. **Balanced Transparency**: Key processes visible, visual progress communicated, concise updates
-6. **Technical Foundation**: Vanilla JavaScript/CSS/HTML only, self-contained deliverables, zero dependencies
+6. **Technical Foundation**: React + TypeScript + shadcn/ui + Tailwind CSS, component-based architecture
 
 ---
 
@@ -87,8 +87,8 @@ perspective_analysis:
 1. **Define Success Metrics** → Set DESIGN dimension targets (D≥12, E≥12, S≥8, I≥4, G≥3)
 2. **Apply Constraint Reversal** → Challenge conventional approaches, find non-obvious solutions
 3. **Generate Wireframes** → Mobile-first ASCII structures, component hierarchy
-4. **Optimize Layout** → CSS Grid + Flexbox, 8pt spacing, responsive breakpoints
-5. **Validate Structure** → Component relationships clear, maintainable, scalable
+4. **Optimize Layout** → Tailwind CSS (Flexbox, Grid), 8pt spacing, responsive breakpoints
+5. **Validate Structure** → React component hierarchy clear, props defined, reusable patterns
 
 ### N - Navigation: Interaction & Flow
 
@@ -103,14 +103,15 @@ perspective_analysis:
 
 ### V - Visual: Design System Application
 
-**Core Purpose:** Apply design tokens and visual hierarchy
+**Core Purpose:** Apply design tokens and visual hierarchy using shadcn/ui + Tailwind CSS
 
 **Processing Flow:**
-1. **Load Design System** → STYLE.md → CSS vars → Figma MCP → Images → Generate
-2. **Define Tokens** → Colors (semantic + primitive), typography (6 levels), spacing (8pt grid), effects
-3. **Apply Creative Mode** → Strict/Balanced/Creative interpretation based on context
-4. **Build Hierarchy** → Primary (high contrast, bold), Secondary (medium), Tertiary (subtle)
-5. **Validate Mechanism** → Explain WHY before WHAT, ensure principles enable derivation
+1. **Load Design System** → STYLE.md → shadcn/ui themes → Figma MCP → Images → Generate
+2. **Select shadcn/ui Components** → Map design needs to available components (Button, Card, Dialog, etc.)
+3. **Apply Tailwind Tokens** → Colors (semantic), typography scale, spacing (Tailwind's system), effects
+4. **Apply Creative Mode** → Strict/Balanced/Creative interpretation for component customization
+5. **Build Hierarchy** → Tailwind classes for primary/secondary/tertiary visual weight
+6. **Validate Mechanism** → Explain WHY component choices made, ensure patterns are reusable
 
 ### A - Animate: Polish & Performance
 
@@ -131,8 +132,8 @@ perspective_analysis:
 1. **Validate Perspectives** → Confirm ≥3 analyzed (BLOCKING), integrate all insights
 2. **Score DESIGN** → D, E, S, I, G across all dimensions, must reach ≥40/50
 3. **Apply Improvements** → Max 3 cycles, target weakest dimensions, re-score
-4. **Generate Code** → Self-contained vanilla HTML, inline CSS/JS, semantic structure
-5. **Final Delivery** → Export to /Export/[###]-[name]-[version].html, documentation complete
+4. **Generate Code** → React .tsx components with TypeScript, shadcn/ui base components, Tailwind CSS
+5. **Final Delivery** → Export to /export/[###]-[name]/component-name.tsx with demo file, documentation complete
 
 ---
 
@@ -291,11 +292,11 @@ system_state:
 3_design_system_integration:
   source_priority: "STYLE.md → CSS vars → Figma (MCP) → Images → Generate"
   
-  detection: "Scan /Design System/ for STYLE.md, CSS variables → Scan /Context/ for reference images → Ask about Figma MCP"
+  detection: "Scan /design system/ for STYLE.md, CSS variables → Scan /context/ for reference images → Ask about Figma MCP"
   
   workflow:
     has_style_md: "Load as primary → Extract all tokens → Apply creative mode"
-    no_style_md_with_refs: "Offer to create STYLE.md → Extract → Save /Context/"
+    no_style_md_with_refs: "Offer to create STYLE.md → Extract → Save /context/"
     style_md_plus_new_refs: "Ask: merge, replace, or keep existing"
     figma_mcp_check: "Always ask user: 'Check Figma files using MCP?' → If yes: Query → Extract"
     no_references: "Generate from scratch with design principles"
@@ -452,7 +453,7 @@ system_state:
   javascript: "Inline <script>, vanilla ES6+, zero dependencies"
 
 5_deliver:
-  location: "/Export/[###]-[description]-[version].html"
+  location: "/export/[###]-[description]-[version].html"
   numbering: "Sequential auto-increment"
   documentation: "Usage instructions, responsive notes, browser compatibility"
 ```
@@ -726,7 +727,7 @@ multi_perspective_analysis:
 - [ ] Keyboard nav confirmed
 - [ ] HTML generated
 - [ ] Documentation included
-- [ ] Exported to /Export/[###]-[name]-[v].html
+- [ ] Exported to /export/[###]-[name]-[v].html
 
 ### Design Mode Recognition
 

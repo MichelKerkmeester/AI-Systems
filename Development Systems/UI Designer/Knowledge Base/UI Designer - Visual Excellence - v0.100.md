@@ -135,7 +135,7 @@ Design philosophy, aesthetic decision logic, and quality frameworks for exceptio
 
 ### CSS Variables & Design System
 
-**Pre-Flight:** Check `/Design System/` folder for STYLE.md or CSS variables before generating tokens (see Interactive Intelligence for question workflow)
+**Pre-Flight:** Check `/design system/` folder for STYLE.md or CSS variables before generating tokens (see Interactive Intelligence for question workflow)
 
 **Priority:** STYLE.md → CSS vars → Figma (MCP) → Images → Generate new (see CANVAS Phase C)
 
@@ -333,7 +333,109 @@ html { font-size: calc(var(--base-0) * 1rem + var(--coefficient-0) * 1vw); }
 
 ---
 
+## 9. 🎨 SHADCN/UI INTEGRATION
+
+**Component Mapping Strategy:**
+
+| Design Need | shadcn/ui Component | Customization Approach |
+|-------------|---------------------|------------------------|
+| Buttons | Button, ToggleGroup | Variant prop + Tailwind classes for brand colors |
+| Forms | Input, Select, Checkbox, RadioGroup, Textarea, Form | Tailwind for spacing, colors, focus states |
+| Cards/Containers | Card, Separator | Tailwind for shadows, borders, backgrounds |
+| Modals/Overlays | Dialog, Sheet, AlertDialog, Popover | Tailwind for backdrop, positioning |
+| Navigation | NavigationMenu, Tabs, Breadcrumb | Tailwind for active states, spacing |
+| Feedback | Alert, Toast, Badge, Progress | Tailwind for semantic colors (success/error/warning) |
+| Data Display | Table, DataTable, Accordion, Collapsible | Tailwind for row styling, zebra stripes |
+| Typography | Text primitives with Tailwind | Use Tailwind's typography scale classes |
+
+**shadcn/ui Design System Alignment:**
+
+1. **Colors** - Use shadcn's CSS variable system:
+   ```css
+   --primary: 221.2 83.2% 53.3%;
+   --secondary: 210 40% 96.1%;
+   --accent: 210 40% 96.1%;
+   --destructive: 0 84.2% 60.2%;
+   ```
+   Customize via Tailwind config or inline CSS variables
+
+2. **Typography** - Leverage Tailwind's built-in scale:
+   ```tsx
+   <h1 className="text-4xl font-bold">
+   <p className="text-base leading-7">
+   ```
+
+3. **Spacing** - Use Tailwind's spacing scale (aligns with 8px grid):
+   ```tsx
+   <div className="p-6 space-y-4">  // 24px padding, 16px gap
+   ```
+
+4. **Component Variants** - Extend shadcn components:
+   ```tsx
+   <Button variant="default" size="lg" className="bg-brand-500">
+   ```
+
+**Reference Extraction + shadcn/ui Workflow:**
+
+1. **Extract design tokens** from references (colors, typography, spacing)
+2. **Map to shadcn/ui components** - identify which base components fit the design
+3. **Apply customization**:
+   - Strict mode: Override shadcn defaults with exact extracted tokens
+   - Balanced mode: Blend shadcn patterns with extracted aesthetic
+   - Creative mode: Use shadcn as foundation, interpret freely
+4. **Extend with Tailwind** - Add extracted colors/fonts via Tailwind config
+5. **Generate components** - Output .tsx files with shadcn imports + customization
+
+**Example Token Mapping:**
+
+```typescript
+// Extracted from reference
+const extractedTokens = {
+  primary: '#02393e',
+  fontHeading: 'Clash Display',
+  fontBody: 'Inter',
+  spacing: 8, // 8px grid
+  borderRadius: 12
+}
+
+// Map to Tailwind config extension
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          500: '#02393e', // extracted primary
+        }
+      },
+      fontFamily: {
+        heading: ['Clash Display', ...],
+        body: ['Inter', ...],
+      },
+      borderRadius: {
+        brand: '12px',
+      }
+    }
+  }
+}
+
+// Use in shadcn component
+<Button className="bg-brand-500 font-heading rounded-brand">
+```
+
+**Quality Checklist for shadcn Components:**
+
+- [ ] Started with appropriate shadcn/ui base component
+- [ ] Applied Tailwind customization for brand alignment
+- [ ] Proper TypeScript types for all props
+- [ ] Accessibility attributes preserved from shadcn base
+- [ ] Responsive classes applied (sm:, md:, lg:)
+- [ ] Hover/focus states defined with Tailwind
+- [ ] Component can be imported and reused
+- [ ] Demo/usage example provided
+
+---
+
 **Three Pillars:** Hierarchy (guide eye) | Harmony (cohesion) | Refinement (obsess details)
 
-**Technical:** Vanilla JS/CSS/HTML only | Self-contained HTML files | No frameworks/build tools 
-- All theory translates to vanilla JavaScript, CSS, and HTML - self-contained, framework-free, browser-ready implementations.
+**Technical:** React + TypeScript + shadcn/ui + Tailwind CSS | Component-based architecture | Modern framework patterns
+- All theory translates to React components with shadcn/ui base components, customized with Tailwind CSS for brand-specific implementations.
