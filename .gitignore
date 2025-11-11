@@ -23,17 +23,7 @@ lib/
 mcp_servers.json
 settings.local.json
 
-# Exception: Allow these config files in Development folder and subfolders
-!Development/mcp_servers.json
-!Development/settings.local.json
-!Development/**/mcp_servers.json
-!Development/**/settings.local.json
-
 # Working directories (ignored at all levels)
-Context/
-Design System/
-Export/
-Memory/
 context/
 design system/
 export/
