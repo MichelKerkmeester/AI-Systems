@@ -18,6 +18,7 @@ lib/
 .vscode/
 .claude/
 .superdesign/
+.roo/
 
 # Configuration files (ignored at all levels)
 mcp_servers.json
