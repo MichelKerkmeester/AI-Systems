@@ -24,9 +24,8 @@
 1. [.claude/knowledge/conversation_documentation.md](./.claude/knowledge/conversation_documentation.md) - Documentation requirements
 2. [.claude/knowledge/code_standards.md](./.claude/knowledge/code_standards.md) - Code quality standards
 3. [.claude/knowledge/initialization_pattern.md](./.claude/knowledge/initialization_pattern.md) - Initialization patterns
-4. [.claude/knowledge/animation_strategy.md](./.claude/knowledge/animation_strategy.md) - Animation standards
-5. [.claude/knowledge/webflow_platform_constraints.md](./.claude/knowledge/webflow_platform_constraints.md) - Webflow-specific constraints
-6. [.claude/knowledge/document_style_guide.md](./.claude/knowledge/document_style_guide.md) - Document formatting
+4. [.claude/knowledge/document_style_guide.md](./.claude/knowledge/document_style_guide.md) - Document formatting
+5. [.claude/knowledge/semantic_search_mcp.md](./.claude/knowledge/semantic_search_mcp.md) - Semantic search usage for CLI AI agents
 
 **Compliance checkpoint:**
 - Before **proposing solutions**: Verify approach aligns with code_standards.md
@@ -34,6 +33,7 @@
 - Before **initialization code**: Follow initialization_pattern.md structure
 - Before **animation implementation**: Follow animation_strategy.md patterns
 - Before **Webflow integration**: Review webflow_platform_constraints.md limitations
+- Before **searching codebase**: Use semantic_search_mcp.md tools for intent-based code discovery
 - **If conflict exists**: Knowledge base standards override general practices
 
 **Violation handling:** If proposed solution contradicts knowledge base standards, STOP and ask for clarification or revise approach.
@@ -190,7 +190,7 @@ Compute as weighted sum of factor scores (0–1), round to whole percent.
 ```
 Request Received → [Parse carefully: What is ACTUALLY requested?]
                     ↓
-         Gather Context → [Read relevant files, check .claude/knowledge/code_standards.md]
+         Gather Context → [Use semantic search for intent-based discovery, read files, check knowledge base]
                     ↓
   Identify Approach → [What's the SIMPLEST solution that works?]
                     ↓
@@ -249,7 +249,8 @@ CONTEXT GATHERING:
 □ What existing patterns should be followed?
 □ What documentation is relevant? (Check .claude/knowledge/code_standards.md; see Knowledge base below)
 □ What dependencies or side effects exist?
-□ Which tools verify this? (Read for files, rg for patterns, Glob for file discovery, Task+Explore for exploration)
+□ Which tools verify this? (semantic search for intent-based discovery, view for files, rg for patterns, Glob for file discovery)
+  ⚠️ Note: Semantic search only available for CLI AI agents (Claude Code AI, GitHub Copilot CLI)
 
 SOLUTION REQUIREMENTS:
 □ What is the MINIMUM needed to satisfy this request?
@@ -382,10 +383,10 @@ Review response for:
 **Example reasoning trace:**
 Request: "Add loading spinner to form submission"
 
-→ Gather Context: Glob "**/*form*.ts" → Found src/components/ContactForm.ts
+→ Gather Context: search_codebase("form submission handling") → Found src/components/ContactForm.ts
 → Read ContactForm.ts → No existing loading state
 → Read .claude/knowledge/code_standards.md → "Reuse existing components" [illustrative]
-→ rg "LoadingSpinner" → Found shared/LoadingSpinner.ts (existing component)
+→ search_codebase("loading spinner component") → Found shared/LoadingSpinner.ts (existing component)
 → Reasoning: Import existing component (follows reuse pattern)
 → Validate: Simple (no new abstraction), maintainable (centralized component)
 → Execute: Import LoadingSpinner, show on submit, hide on response
@@ -435,14 +436,23 @@ Request: "Add loading spinner to form submission"
 #### Tool Selection
 **Decision Framework: When to Use Which Approach**
 
-1. **Native Tools (Read/Grep/Glob/Bash)**
+1. **Semantic Search MCP (Intent-Based Code Discovery)**
+   - Finding code by what it does, not what it's called
+   - Exploring unfamiliar codebase areas
+   - Understanding feature implementations
+   - Locating patterns across multiple files
+   - **When to use:** "Find code that handles X" or "Where do we implement Y?"
+   - **See:** [.claude/knowledge/semantic_search_mcp.md](./.claude/knowledge/semantic_search_mcp.md)
+   - **⚠️ Note:** Only available for CLI AI agents (Claude Code AI, GitHub Copilot CLI) - not IDE integrations
+
+2. **Native Tools (Read/Grep/Glob/Bash)**
    - File exploration and discovery
    - Text-based searches
    - Simple file operations
    - Quick content checks
-   - Default choice for most tasks
+   - **When to use:** Known file paths, exact symbol searches, literal text matching
 
-2. **Chrome DevTools MCP**
+3. **Chrome DevTools MCP**
    - Browser automation and testing
    - Performance analysis
    - Live debugging web applications
