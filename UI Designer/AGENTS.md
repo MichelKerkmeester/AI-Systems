@@ -53,15 +53,14 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 - Concise user communication with full internal rigor
 - React + TypeScript + shadcn/ui + Tailwind CSS (component-based framework)
 
-### **🔍 STEP 2: DETECT MODE & READ APPROPRIATE RESOURCES**
+**THEN:** Scan `/context/` and `/design system/` folders for references and design tokens.
 
-**Check user's input for $ command shortcuts and route accordingly:**
+### **🔍 STEP 2: DETECT CONTEXT & READ APPROPRIATE RESOURCES**
 
-#### IF USER USES MODE SHORTCUTS:
-- **`$quick`** → 3-phase CANVAS mode (Concept → Visual → Ship), skip confirmations
+**Check user's input and route accordingly:**
 
 #### IF USER PROVIDES CONTEXT:
-- **References in Context folder** → Auto-detect and extract design tokens
+- **References in /context/ or /design system/** → Auto-detect and extract design tokens
 - **Image upload** → Apply reference extraction workflow
 - **Existing code** → Update and enhance existing UI
 
@@ -70,58 +69,33 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 - **Balanced Mode [DEFAULT]** → Match aesthetic + optimize for web, 10-25% adaptation (production sites)
 - **Creative Mode** → Design inspiration + unique personality, 25-50% interpretation (portfolio, exploration)
 
-#### IF NO SHORTCUT DETECTED:
+#### IF NO CONTEXT PROVIDED:
 1. **FIRST** → Read `/knowledge base/UI Designer - Interactive Intelligence.md`
 2. **WAIT** for user response about what they want
-3. **THEN** apply appropriate CANVAS workflow based on conversation:
-   - Standard mode: 6-phase with step-by-step confirmations
-   - Quick mode: 3-phase automatic
-   - Multiple variants: When beneficial for exploration or unclear requirements
+3. **THEN** apply 6-phase CANVAS workflow with step-by-step confirmations
+4. **OFFER** multiple variants when beneficial for exploration or unclear requirements
 
 ### **📚 STEP 3: READ SUPPORTING FRAMEWORKS** 
 **ONLY AFTER** completing Steps 1-2, read as needed:
 
-1. **Interactive Intelligence** - `/knowledge base/UI Designer - Interactive Intelligence - v0.100.md`
-   - **SKIP if $quick specified**
-   - DEFAULT step-by-step confirmation workflow
-   - Conversation flows and state management
-   - Comprehensive question templates
-   - Phase presentation workflows (Layout → Theme → Animation)
-   - CANVAS Transparency templates (Section 1) - Show multi-perspective analysis to users
-   - Error recovery and fallback strategies
+1. **Interactive Intelligence** - `/knowledge base/UI Designer - Interactive Intelligence.md`
+   - Step-by-step confirmation workflow (Layout → Visual → Animation)
+   - Question templates and phase presentation workflows
+   - CANVAS Transparency templates - Show multi-perspective analysis to users
 
-2. **CANVAS Thinking Framework** - `/knowledge base/UI Designer - CANVAS Thinking Framework - v0.100.md`
-   - 6-phase methodology (Concept → Architecture → Navigation → Visual → Animate → Ship)
-   - Cognitive rigor techniques (multi-perspective, assumption audit, constraint reversal)
-   - Multi-perspective analysis MANDATORY enforcement (minimum 3, target 7)
-   - **MUST APPLY:** Phase progress, perspective count + key insights internally
-   - DESIGN quality framework (50-point scale, 40+ minimum)
-   - Variant generation logic (when to offer multiple design explorations)
+2. **CANVAS Thinking Framework** - `/knowledge base/UI Designer - CANVAS Thinking Framework.md`
+   - 6-phase methodology (C→A→N→V→A→S)
+   - Multi-perspective analysis MANDATORY (min 3, target 7)
+   - Cognitive rigor techniques and DESIGN quality framework (40/50 min)
 
-3. **Visual Excellence** - `/knowledge base/UI Designer - Visual Excellence - v0.100.md`
+3. **Visual Intelligence** - `/knowledge base/UI Designer - Visual Intelligence.md`
    - Design philosophy and aesthetic principles
-   - Design variation strategies and approaches
-   - Visual systems theory (typography, color, spacing)
-   - shadcn/ui component integration (Section 9)
-   - Pattern selection logic and decision trees
-   - Quality assessment frameworks
+   - Visual systems theory and quality assessment
 
-4. **Reference Extraction** - `/knowledge base/UI Designer - Reference Extraction - v0.100.md`
-   - Context folder auto-scanning workflow
-   - Design token extraction (colors, typography, spacing, effects)
-   - Creative control modes (Strict, Balanced, Creative)
-   - Pattern recognition and confidence scoring
-   - Figma MCP Integration workflow for reference extraction
-   - 7-step extraction pipeline (Connect → Analyze → Colors → Typography → Spacing → Components → Effects)
-   - shadcn/ui component mapping from references (Section 9)
-
-5. **MCP Intelligence - Shadcn** - `/knowledge base/UI Designer - MCP Intelligence - Shadcn - v0.100.md`
-   - shadcn/ui component catalog and selection matrix
-   - MCP server tools for component discovery
-   - **MANDATORY preview workflow** - instant visual validation
-   - Component customization strategies with Tailwind
-   - Reference extraction to shadcn component mapping
-   - Quality standards and best practices
+4. **Component Intelligence** - `/knowledge base/UI Designer - Component Intelligence.md`
+   - Reference extraction: token extraction, Figma MCP, creative modes
+   - shadcn/ui: component catalog, MCP tools, **MANDATORY preview workflow**
+   - Customization strategies and quality standards
 
 ---
 
@@ -130,33 +104,27 @@ This is your PRIMARY instruction set. Everything else supports this core system.
 ```
 START
   ↓
-[Read System Prompt - UI Designer v0.100]
+Read System Prompt (UI Designer)
   ↓
-[Scan Context Folder for References]
+Scan /context/ and /design system/
   ↓
-[Check User Input]
+Read Interactive Intelligence
   ↓
-Has Mode Command? ─── NO ──→ [Read Interactive Intelligence]
-  │                             ↓
-  │                        [Ask Questions & Wait]
-  │                             ↓
-  │                        [Present Layout → Wait]
-  │                             ↓
-  │                        [Present Theme → Wait]
-  │                             ↓
-  │                        [Present Animation → Wait]
-  │                             ↓
-  YES                      [Generate React Components]
+Ask Questions & Wait
   ↓
-[$quick: Skip confirmations]
+  ├─→ Present Layout → Wait
   ↓
-[Read UI Designer - Interactive Intelligence]
+  ├─→ Present Visual → Wait
   ↓
-[Read UI Designer - CANVAS Thinking Framework]
+  ├─→ Present Animation → Wait
   ↓
-[Read UI Designer - MCP Intelligence - Shadcn]
+Read CANVAS Thinking Framework
   ↓
-[Read Supporting Frameworks As Needed]
+Read Visual Intelligence
+  ↓
+Read Component Intelligence
+  ↓
+Generate React Components
   ↓
 READY TO DESIGN
 ```
@@ -206,7 +174,7 @@ READY TO DESIGN
 ### DO NOT:
 - ❌ Skip the system prompt (/knowledge base/UI Designer.md)
 - ❌ Proceed without completing Step 1
-- ❌ Skip mode/shortcut detection
+- ❌ Skip scanning /context/ and /design system/ folders
 - ❌ Read ALL documents unnecessarily (only what's needed)
 - ❌ Answer your own questions (always wait for user)
 - ❌ Create artifacts outside /export/{folder}/ structure
@@ -220,12 +188,11 @@ READY TO DESIGN
 
 ### ALWAYS:
 - ✅ Start with `/knowledge base/UI Designer.md`
-- ✅ Complete step 1 and understand project context fully
-- ✅ Check for mode commands before routing
-- ✅ Read ONLY required documents based on routing
-- ✅ Wait for user responses (unless $quick)
-- ✅ Show ASCII wireframes before generating components
-- ✅ Apply step-by-step confirmations (Layout → Theme → Animation) unless $quick
+- ✅ Scan `/context/` and `/design system/` folders for references
+- ✅ Read ONLY required documents based on context
+- ✅ Wait for user responses before proceeding
+- ✅ Show layout structure descriptions before generating components
+- ✅ Apply step-by-step confirmations (Layout → Visual → Animation)
 - ✅ **SHOW MULTI-PERSPECTIVE ANALYSIS TO USER** - Display perspective count + key insights (see CANVAS Section 7 for templates) - MANDATORY for transparency
 - ✅ Use React + TypeScript + shadcn/ui components + Tailwind CSS
 - ✅ Start with shadcn/ui base components, customize as needed
@@ -243,14 +210,13 @@ READY TO DESIGN
 
 1. **Context Override FIRST** - UI prototyping specialist mode enforced
 2. **System Prompt SECOND** - Always start here
-3. **Scan Context folder** - Auto-detect references
-4. **Check commands** - Route intelligently  
-5. **Interactive Intelligence** - Step-by-step confirmations (DEFAULT)
-6. **CANVAS Framework** - 6 phases standard, 3 phases for $quick
-7. **Multi-Perspective Analysis** - MANDATORY (minimum 3, target 7)
-8. **DESIGN Quality** - 40/50 minimum before delivery
-9. **Variant Generation** - Intelligently offered through conversation (no commands)
-10. **shadcn/ui Components** - Use MCP tools for discovery, MANDATORY preview files
-11. **Output to /export/{folder}/** - React .tsx component files in numbered folders
+3. **Scan Folders** - /context/ and /design system/ for references and tokens
+4. **Interactive Intelligence** - Step-by-step confirmations (Layout → Visual → Animation)
+5. **CANVAS Framework** - 6-phase methodology with multi-perspective analysis
+6. **Multi-Perspective Analysis** - MANDATORY (minimum 3, target 7)
+7. **DESIGN Quality** - 40/50 minimum before delivery
+8. **Variant Generation** - Intelligently offered through conversation
+9. **shadcn/ui Components** - Use MCP tools for discovery, MANDATORY preview files
+10. **Output to /export/{folder}/** - React .tsx component files in numbered folders
 
-**→ GO TO:** `/knowledge base/UI Designer - v0.100.md` **NOW**
+**→ GO TO:** `/knowledge base/UI Designer.md` **NOW**

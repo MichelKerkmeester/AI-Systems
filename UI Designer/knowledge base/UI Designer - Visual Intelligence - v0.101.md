@@ -1,10 +1,10 @@
-# UI Designer - Visual Excellence
+# UI Designer - Visual Intelligence
 
 Design philosophy, aesthetic decision logic, and quality frameworks for exceptional visual design.
 
 **Core Purpose:** Provide theoretical foundations, decision-making frameworks, and systematic quality assessment for all design decisions through expert visual sensibility.
 
-**Scope:** Pure design theory - visual systems, aesthetic principles, pattern selection, quality frameworks. For conversation patterns and user interaction, see `UI Designer - Interactive Intelligence`. For thinking methodology and cognitive rigor, see `UI Designer - CANVAS Thinking Framework`.
+**Scope:** Pure design theory - visual systems, aesthetic principles, pattern selection, quality frameworks. For conversation patterns, see `UI Designer - Interactive Intelligence`. For thinking methodology, see `UI Designer - CANVAS Thinking Framework`.
 
 ---
 
@@ -256,6 +256,270 @@ html { font-size: calc(var(--base-0) * 1rem + var(--coefficient-0) * 1vw); }
 
 ---
 
+## 5.5 🎬 ANIMATION MICRO-SYNTAX
+
+**Compact Notation for Efficient Communication** (from SuperDesign):
+
+**Format:** `element: duration easing [transforms] modifiers`
+
+**Core Syntax Examples:**
+```
+button: 200ms ease-out [S1→1.05, Y0→-2] hover
+card: 300ms ease-out [Y+20→0, α0→1] +100ms
+loader: 1000ms linear [R0→360°] ∞
+typing: 1400ms ease-in-out [Y±8, α0.4→1] ∞ stagger+200ms
+sidebar: 350ms ease-out [X-280→0, α0→1]
+modal: 300ms ease-out [α0→1, S0.95→1]
+shake: 400ms [X±5] ×3
+```
+
+**Legend:**
+- **Transforms:** S=Scale, Y=TranslateY, X=TranslateX, R=Rotate, α=Opacity
+- **Modifiers:** ∞=Infinite loop, +Xms=Delay, ×N=Repeat count, stagger=Sequential delay
+- **States:** hover, focus, active, disabled, loading, error, success
+- **Directions:** →=to, ±=oscillate, ↗=increase, ↔=alternate
+
+**Pre-Built Pattern Library:**
+
+```yaml
+# Core UI Interactions
+btnHover: 200ms [S1→1.05, shadow↗]
+btnPress: 150ms [S1→0.95→1, R±2°]
+btnDisabled: 300ms [α1→0.5]
+linkHover: 150ms [α1→0.8, X0→2]
+
+# Message & Content Flow
+msgIn: 400ms ease-out [Y+20→0, X+10→0, S0.9→1]
+msgOut: 300ms ease-in [Y0→-20, α1→0]
+fadeIn: 300ms [α0→1]
+fadeOut: 200ms [α1→0]
+slideUp: 400ms ease-out [Y+40→0, α0→1]
+slideDown: 300ms ease-in [Y0→+40, α1→0]
+
+# Loading States
+spinner: 1000ms ∞ linear [R360°]
+pulse: 1500ms ∞ [α0.5→1→0.5]
+skeleton: 2000ms ∞ [bg: muted↔accent]
+dots: 1400ms ∞ [Y±8] stagger+200ms
+bars: 1200ms ∞ [S1→1.5→1] stagger+100ms
+
+# Overlays & Modals
+overlayIn: 300ms [α0→1, blur0→4px]
+overlayOut: 200ms [α1→0, blur4→0]
+modalIn: 300ms ease-out [α0→1, S0.95→1, Y+20→0]
+modalOut: 200ms ease-in [α1→0, S1→0.95, Y0→+20]
+drawerIn: 350ms ease-out [X-280→0, α0→1]
+drawerOut: 250ms ease-in [X0→-280, α1→0]
+
+# Micro Interactions
+cardHover: 200ms [Y0→-2, shadow↗]
+cardPress: 150ms [S1→0.98]
+itemSelect: 200ms [bg→accent, S1→1.02]
+ripple: 400ms [S0→2, α1→0]
+bounce: 600ms [S0→1.2→1, R360°]
+shake: 400ms [X±5] ×3
+wiggle: 500ms [R±3°] ×2
+
+# Navigation & Panels
+navSlide: 300ms ease-out [X-100%→0]
+tabSwitch: 200ms [α0→1]
+accordionOpen: 300ms ease-out [height:0→auto, α0→1]
+accordionClose: 200ms ease-in [height:auto→0, α1→0]
+
+# Feedback & Status
+success: 600ms bounce [S0→1.2→1, R360°]
+error: 400ms [X±5] shake
+warning: 500ms [α0.3→1] pulse ×2
+notification: 300ms ease-out [Y-20→0, α0→1] +delay
+toast: 300ms ease-out [X+100%→0, α0→1]
+```
+
+**Timing Guidelines:**
+- **Quick (100-150ms):** Hover states, toggle switches, small UI changes
+- **Standard (200-300ms):** Most transitions, button clicks, content reveals
+- **Slow (400-600ms):** Page transitions, complex animations, feedback
+- **Very Slow (800ms+):** Loading indicators, celebration animations
+
+**Easing Patterns:**
+```yaml
+ease-out: "Decelerating (most transitions, content in)" # cubic-bezier(0, 0, 0.2, 1)
+ease-in: "Accelerating (content out, dismissals)" # cubic-bezier(0.4, 0, 1, 1)
+ease-in-out: "Smooth (loops, oscillations)" # cubic-bezier(0.4, 0, 0.2, 1)
+linear: "Constant speed (spinners, progress)" # cubic-bezier(0, 0, 1, 1)
+bounce: "Spring effect (success, playful)" # Custom cubic-bezier
+```
+
+**Usage in Design:**
+```markdown
+# Phase A - Animation Design
+
+## Core Interactions
+- Button hover: 200ms [S1→1.05, shadow↗]
+- Button press: 150ms [S1→0.95→1]
+- Card entrance: 400ms ease-out [Y+20→0, α0→1] stagger+100ms
+
+## Loading States
+- Primary loader: 1000ms ∞ linear [R360°]
+- Skeleton: 2000ms ∞ [bg: muted↔accent]
+
+## Page Transitions
+- Content in: 400ms ease-out [Y+40→0, α0→1]
+- Modal: 300ms ease-out [α0→1, S0.95→1]
+```
+
+---
+
+## 5.6 🎨 PRE-BUILT THEME LIBRARY
+
+**Complete Theme Systems** (from SuperDesign):
+
+### Neo-Brutalism Style
+```css
+:root {
+  /* Colors */
+  --background: oklch(1.0000 0 0);
+  --foreground: oklch(0 0 0);
+  --primary: oklch(0.6489 0.2370 26.9728);
+  --primary-foreground: oklch(1.0000 0 0);
+  --secondary: oklch(0.9680 0.2110 109.7692);
+  --secondary-foreground: oklch(0 0 0);
+  --accent: oklch(0.5635 0.2408 260.8178);
+  --destructive: oklch(0 0 0);
+  --border: oklch(0 0 0);
+  
+  /* Typography */
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  
+  /* Effects */
+  --radius: 0px;
+  --shadow: 4px 4px 0px 0px hsl(0 0% 0% / 1.00);
+  --shadow-md: 4px 4px 0px 0px hsl(0 0% 0% / 1.00), 4px 2px 4px -1px hsl(0 0% 0% / 1.00);
+  --spacing: 0.25rem; /* 4px base */
+}
+```
+
+**Character:** Bold, vintage web, high contrast, flat colors, harsh shadows, no gradients
+**Best For:** Creative portfolios, art projects, playful brands, vintage aesthetics
+
+### Modern Dark Mode
+```css
+:root {
+  /* Colors */
+  --background: oklch(0.1450 0 0);
+  --foreground: oklch(0.9850 0 0);
+  --primary: oklch(0.9850 0 0);
+  --primary-foreground: oklch(0.2050 0 0);
+  --secondary: oklch(0.9700 0 0);
+  --muted: oklch(0.2820 0 0);
+  --accent: oklch(0.8100 0.1000 252);
+  --destructive: oklch(0.5770 0.2450 27.3250);
+  --border: oklch(0.2820 0 0);
+  
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Effects */
+  --radius: 0.625rem; /* 10px */
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+  --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
+  --spacing: 0.25rem; /* 4px base */
+}
+```
+
+**Character:** Professional, tech-forward, subtle shadows, refined, modern
+**Best For:** SaaS products, developer tools, tech companies, dashboards
+
+### Minimalist Light
+```css
+:root {
+  /* Colors */
+  --background: oklch(0.9850 0 0);
+  --foreground: oklch(0.1450 0 0);
+  --primary: oklch(0.2050 0 0);
+  --primary-foreground: oklch(0.9850 0 0);
+  --secondary: oklch(0.9700 0 0);
+  --secondary-foreground: oklch(0.1450 0 0);
+  --muted: oklch(0.9550 0 0);
+  --accent: oklch(0.9700 0 0);
+  --border: oklch(0.9220 0 0);
+  
+  /* Typography */
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Merriweather', serif;
+  
+  /* Effects */
+  --radius: 0.5rem; /* 8px */
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.05), 0 2px 4px -1px hsl(0 0% 0% / 0.05);
+  --spacing: 0.5rem; /* 8px base */
+}
+```
+
+**Character:** Clean, spacious, subtle, content-focused, neutral
+**Best For:** Editorial, content platforms, minimalist brands, clean interfaces
+
+### Vibrant/Playful
+```css
+:root {
+  /* Colors */
+  --background: oklch(0.9900 0.0200 109.7692);
+  --foreground: oklch(0.1450 0 0);
+  --primary: oklch(0.6489 0.2370 26.9728);
+  --primary-foreground: oklch(1.0000 0 0);
+  --secondary: oklch(0.9680 0.2110 109.7692);
+  --accent: oklch(0.5635 0.2408 260.8178);
+  --destructive: oklch(0.5770 0.2450 27.3250);
+  --border: oklch(0.9220 0 0);
+  
+  /* Typography */
+  --font-sans: 'Poppins', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  
+  /* Effects */
+  --radius: 1rem; /* 16px - rounded */
+  --shadow: 0 4px 6px -1px hsl(0 0% 0% / 0.10);
+  --shadow-md: 0 10px 15px -3px hsl(0 0% 0% / 0.10), 0 4px 6px -2px hsl(0 0% 0% / 0.05);
+  --spacing: 0.5rem; /* 8px base */
+}
+```
+
+**Character:** Energetic, friendly, colorful, rounded, approachable
+**Best For:** Consumer apps, creative tools, entertainment, youth brands
+
+### Professional/Corporate
+```css
+:root {
+  /* Colors */
+  --background: oklch(0.9850 0 0);
+  --foreground: oklch(0.1450 0 0);
+  --primary: oklch(0.4500 0.1900 260); /* Corporate blue */
+  --primary-foreground: oklch(0.9850 0 0);
+  --secondary: oklch(0.5500 0.1000 240);
+  --muted: oklch(0.9550 0 0);
+  --accent: oklch(0.7000 0.1500 50); /* Gold accent */
+  --border: oklch(0.8500 0 0);
+  
+  /* Typography */
+  --font-sans: 'Roboto', sans-serif;
+  --font-serif: 'Merriweather', serif;
+  
+  /* Effects */
+  --radius: 0.375rem; /* 6px - subtle */
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.12), 0 1px 2px 0px hsl(0 0% 0% / 0.08);
+  --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.12), 0 2px 4px -1px hsl(0 0% 0% / 0.08);
+  --spacing: 0.5rem; /* 8px base */
+}
+```
+
+**Character:** Trustworthy, conservative, professional, subtle, traditional
+**Best For:** Enterprise software, financial services, legal, healthcare
+
+**Usage:** Copy theme CSS → Customize colors/fonts → Apply to design system → Reference throughout CANVAS phases
+
+---
+
 ## 6. 🎯 DECISION TREES
 
 **Style Selection:**
@@ -437,5 +701,4 @@ tailwind.config = {
 
 **Three Pillars:** Hierarchy (guide eye) | Harmony (cohesion) | Refinement (obsess details)
 
-**Technical:** React + TypeScript + shadcn/ui + Tailwind CSS | Component-based architecture | Modern framework patterns
-- All theory translates to React components with shadcn/ui base components, customized with Tailwind CSS for brand-specific implementations.
+**Technical Implementation:** All visual theory translates to React components with shadcn/ui base components, customized with Tailwind CSS utility classes for brand-specific implementations. For complete methodology, see `UI Designer - CANVAS Thinking Framework`.

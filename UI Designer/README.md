@@ -1,4 +1,4 @@
-# UI Designer - User Guide v0.100
+# UI Designer - User Guide v0.101
 
 Transforms requests into **pixel-perfect, interactive UI prototypes** with **transparent CANVAS processing** and intelligent variant exploration.
 
@@ -7,7 +7,7 @@ Transforms requests into **pixel-perfect, interactive UI prototypes** with **tra
 1. [✨ KEY FEATURES](#1-key-features)
 2. [🌳 SYSTEM ARCHITECTURE](#2-system-architecture)
 3. [🚀 QUICK SETUP](#3-quick-setup)
-4. [🎛️ OPERATING MODES](#4-operating-modes)
+4. [💬 INTERACTIVE INTELLIGENCE](#4-interactive-intelligence)
 5. [🧠 CANVAS THINKING FRAMEWORK](#5-canvas-thinking-framework)
 6. [🏗️ DESIGN FRAMEWORK](#6-design-framework)
 
@@ -22,13 +22,14 @@ Transforms requests into **pixel-perfect, interactive UI prototypes** with **tra
 - **🔬 Enhanced Cognitive Rigor**: 6 techniques with systematic enforcement
 - **📊 Two-Layer Model**: Full rigor internally, concise updates externally
 - **🎯 DESIGN Framework**: 50-point quality assessment (Quality, Experience, Structure, Implementation, Growth)
-- **🚀 Multiple Workflows**: Interactive step-by-step (default), Quick mode, Reference-driven, Variant exploration
+- **🚀 Multiple Workflows**: Interactive step-by-step (default), Reference-driven, Variant exploration
 - **⚡ Intelligent Variants**: 3-10 design explorations when beneficial
 - **💬 Comprehensive Questions**: All info gathered at once
 - **🎯 Auto-Complexity**: Smart detection and scaling
 - **✅ Quality Gates**: DESIGN minimum 40/50 across all dimensions
 - **🎨 Reference Extraction**: Context folder scanning, Figma MCP integration, STYLE.md generation
-- **🛠️ Vanilla Stack**: Plain JavaScript + CSS + HTML only (no frameworks, no build tools)
+- **🛠️ Component Stack**: React + TypeScript + shadcn/ui + Tailwind CSS (component-based framework)
+- **📦 Preview Required**: MANDATORY preview/demo file for instant visual validation
 
 ---
 
@@ -38,17 +39,17 @@ Transforms requests into **pixel-perfect, interactive UI prototypes** with **tra
 ```
 AGENTS.md → Entry point with routing logic
     ↓
-UI Designer (System prompt - 25 core rules)
+UI Designer (System prompt - 29 core rules)
     ↓
 CANVAS Framework (Methodology with cognitive rigor)
     ↓
 Interactive Intelligence (Conversation flow)
     ↓
-Visual Excellence (Design philosophy & quality)
+Visual Intelligence (Design philosophy & quality)
     ↓
-Reference Extraction (Pattern recognition & tokens)
+Component Intelligence (shadcn/ui + reference extraction)
     ↓
-Output → /export/[###]-prototype.html
+Output → /export/[###]-component.tsx + preview
 ```
 
 ---
@@ -61,19 +62,19 @@ Output → /export/[###]-prototype.html
 
 ### Step 2: Add System Instructions
 1. Edit project details → Custom instructions
-3. Copy and paste: `UI Designer.md` 
+3. Copy and paste: `UI Designer - v0.101.md` 
 4. Save the project
 
 ### Step 3: Upload Supporting Documents
 Add these documents to your project:
 
 **Core Framework:**
-- `UI Designer - CANVAS Thinking Framework.md` (6-phase methodology, cognitive rigor, quality validation)
-- `UI Designer - Interactive Intelligence.md` (conversation patterns, state management, response templates)
+- `UI Designer - CANVAS Thinking Framework - v0.101.md` (6-phase methodology, cognitive rigor, quality validation)
+- `UI Designer - Interactive Intelligence - v0.101.md` (conversation patterns, state management, response templates)
 
-**Design Philosophy:**
-- `UI Designer - Visual Excellence.md` (design philosophy, aesthetic decisions, DESIGN quality framework)
-- `UI Designer - Reference Extraction.md` (pattern recognition, style tokens, creative modes, Figma integration)
+**Design & Components:**
+- `UI Designer - Visual Intelligence - v0.101.md` (design philosophy, aesthetic decisions, DESIGN quality framework)
+- `UI Designer - Component Intelligence - v0.101.md` (shadcn/ui integration, reference extraction, MCP tools, preview strategies)
 
 **Key Advantages:**
 - Complete CANVAS methodology with transparent processing
@@ -81,21 +82,22 @@ Add these documents to your project:
 - Reference-driven workflows with STYLE.md generation
 - Step-by-step confirmation ensuring user control
 - Expert visual design with systematic cognitive rigor
+- Component-based architecture with shadcn/ui + Tailwind CSS
+- Mandatory preview files for instant visual validation
 
 ### Step 4: Start Designing
 ```
 design a landing page              # Interactive step-by-step workflow (DEFAULT)
-$quick dashboard                   # Immediate creation (3-phase CANVAS)
 show me 5 login page variants     # Parallel variant exploration
 create pricing section             # Step-by-step with confirmations
 ```
 
 ---
 
-<a id="4-operating-modes"></a>
-## 4. 🎛️ OPERATING MODES
+<a id="4-interactive-intelligence"></a>
+## 4. 💬 INTERACTIVE INTELLIGENCE
 
-### 🎨 Interactive Mode (Default)
+### 🎨 Interactive Workflow (Default)
 
 **Purpose:** Step-by-step design creation with user approval at each phase
 
@@ -142,37 +144,8 @@ step_5_animation_confirmation:
   waits: User approval before proceeding
 
 step_6_generation:
-  delivers: Self-contained HTML with inline CSS/JS
+  delivers: React component (.tsx) + preview/demo file
   validates: DESIGN score ≥40/50
-```
-
----
-
-### ⚡ Quick Mode
-
-**Purpose:** Rapid prototyping without confirmations
-
-**Format Features:**
-- **No questions** - Uses request as-is with smart assumptions
-- **3-phase CANVAS** - Concept → Visual → Ship (Architecture, Navigation, Animate collapsed)
-- **Auto-complexity detection** - Scales based on request keywords
-- **Summary transparency** - Key decisions shown at completion
-- **Immediate delivery** - Single HTML file ready to use
-
-**Key Feature:** Speed over exploration, single high-quality output
-
-**Complexity Detection:**
-| Level | Indicators | Sections | Processing | Use Case |
-|-------|-----------|----------|------------|----------|
-| **Simple** | button, card, form field | 2-3 components | 1-2 min | UI components, single elements |
-| **Standard** | page, section, layout | 4-6 sections | 3-5 min | Landing pages, dashboards |
-| **Complex** | platform, system, multi-page | 7+ sections | 7-10 min | Complete applications, flows |
-
-**Usage:**
-```
-$quick login form         # Simple: 2 min delivery
-$quick dashboard          # Standard: 4 min delivery
-$quick booking platform   # Complex: 8 min delivery
 ```
 
 ---
@@ -187,12 +160,10 @@ $quick booking platform   # Complex: 8 min delivery
 A structured 6-phase methodology ensuring exceptional prototypes through **concise transparent excellence** - full rigor applied internally, meaningful updates shown to users.
 
 **Processing Depth:**
-| Mode | Phases | User Visibility | Application |
-|------|--------|-----------------|-------------|
-| **Standard** | 6 phases | Step-by-step confirmations | Real-time transparency with approvals |
-| **Quick** | 3 phases | Summary at completion | Speed-optimized |
+- **6 phases** with step-by-step confirmations
+- Real-time transparency with user approvals at key decision points
 
-### CANVAS Phases (v0.100 with DESIGN Integration)
+### CANVAS Phases (v0.101 with DESIGN Integration)
 
 | Phase | Purpose | Internal Processing | User Sees |
 |-------|---------|---------------------|-----------|
@@ -214,7 +185,7 @@ Performance Engineering, Brand/Emotion, Accessibility, Business Value)
 **Key Insights:**
 - **Visual:** Clean hierarchy with clear focal points, modern sans-serif typography
 - **UX:** Frictionless 3-step flow, progressive disclosure reduces cognitive load
-- **Technical:** Grid-based layout, flexbox components, vanilla JS for interactions
+- **Technical:** React components with TypeScript, shadcn/ui + Tailwind CSS, Flexbox/Grid layouts
 - **Performance:** <100KB total, 60fps animations, lazy-load images
 - **Brand:** Professional yet approachable, trustworthy color palette
 - **Accessibility:** WCAG 2.1 AA compliant, keyboard navigation, ARIA labels
@@ -260,7 +231,7 @@ Ready to generate prototype? (Type 'yes' to continue)
 - Implementation (Technical Quality): 5/5
 - Growth (Scalability): 4/5
 
-📦 Generated: [001]-landing-page.html (87KB)
+📦 Generated: [001]-landing-page.tsx + preview.tsx
 ```
 
 ### Cognitive Rigor (Applied Automatically)
@@ -278,7 +249,7 @@ Six mandatory frameworks applied internally (users see key insights only):
 
 **Validation Gates:** Three-phase enforcement (pre-design, during design, post-design) ensures consistent excellence
 
-**Full details:** `UI Designer - CANVAS Thinking Framework - v0.100.md`
+**Full details:** `UI Designer - CANVAS Thinking Framework - v0.101.md`
 
 ---
 
@@ -304,18 +275,18 @@ Six mandatory frameworks applied internally (users see key insights only):
 - ✅ Mobile experience optimized (3/3)
 
 **S**tructure - Code Organization (10 points)
-- ✅ HTML semantic and well-structured (2/2)
-- ✅ CSS organized and maintainable (2/2)
-- ✅ JavaScript clean and documented (2/2)
-- ✅ File self-contained and portable (2/2)
-- ✅ Performance optimized (<100KB) (2/2)
+- ✅ React components well-structured with proper props (2/2)
+- ✅ TypeScript types defined and consistent (2/2)
+- ✅ shadcn/ui components properly integrated (2/2)
+- ✅ Tailwind CSS classes organized and semantic (2/2)
+- ✅ Component architecture clean and reusable (2/2)
 
 **I**mplementation - Technical Quality (5 points)
-- ✅ Vanilla stack (no frameworks) (1/1)
-- ✅ Browser compatibility (modern browsers) (1/1)
-- ✅ No build tools required (1/1)
-- ✅ Inline CSS/JS (portable) (1/1)
-- ✅ 60fps animations validated (1/1)
+- ✅ React + TypeScript stack properly implemented (1/1)
+- ✅ shadcn/ui components accessible and customizable (1/1)
+- ✅ Tailwind CSS utilities optimally used (1/1)
+- ✅ Preview/demo file included for validation (1/1)
+- ✅ 60fps animations with smooth interactions (1/1)
 
 **G**rowth - Scalability (5 points)
 - ✅ Design system expandable (1/1)
@@ -360,10 +331,10 @@ Six mandatory frameworks applied internally (users see key insights only):
 - Mobile: Responsive breakpoints, touch-optimized (2/3)
 
 **S**tructure: 9/10
-- Clean semantic HTML5, maintainable CSS, documented JS (9/10)
+- Clean React components, proper TypeScript types, organized Tailwind classes (9/10)
 
 **I**mplementation: 5/5
-- Vanilla JS/CSS/HTML, 87KB total, 60fps animations (5/5)
+- React + TypeScript + shadcn/ui, preview included, 60fps animations (5/5)
 
 **G**rowth: 4/5
 - Expandable design system, reusable components, documented patterns (4/5)
@@ -372,4 +343,4 @@ Six mandatory frameworks applied internally (users see key insights only):
 [Assumes: Desktop-first users] [Assumes: Modern browser support (2020+)]
 ```
 
-**Full details:** `UI Designer - Visual Excellence - v0.100.md` (Section 7)
+**Full details:** `UI Designer - Visual Intelligence - v0.101.md` (Section 7)

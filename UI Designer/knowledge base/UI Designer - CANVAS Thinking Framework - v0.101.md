@@ -35,7 +35,7 @@ A structured framework for rapid high-fidelity prototyping through **expert visu
 3. **Intelligent Exploration**: Offer multiple design variations when beneficial - vague requirements, high complexity, or explicit exploration needs
 4. **Systematic Design Thinking**: Multi-perspective analysis, cognitive rigor, quality validation
 5. **Balanced Transparency**: Key processes visible, visual progress communicated, concise updates
-6. **Technical Foundation**: React + TypeScript + shadcn/ui + Tailwind CSS, component-based architecture
+6. **Technical Foundation**: React + TypeScript + shadcn/ui + Tailwind CSS - component-based architecture with accessible, customizable base components
 
 ---
 
@@ -86,9 +86,10 @@ perspective_analysis:
 **Processing Flow:**
 1. **Define Success Metrics** → Set DESIGN dimension targets (D≥12, E≥12, S≥8, I≥4, G≥3)
 2. **Apply Constraint Reversal** → Challenge conventional approaches, find non-obvious solutions
-3. **Generate Wireframes** → Mobile-first ASCII structures, component hierarchy
-4. **Optimize Layout** → Tailwind CSS (Flexbox, Grid), 8pt spacing, responsive breakpoints
+3. **Generate Wireframes** → Mobile-first structures, component hierarchy, responsive breakpoints
+4. **Optimize Layout** → Tailwind CSS (Flexbox, Grid), 8pt spacing, semantic HTML
 5. **Validate Structure** → React component hierarchy clear, props defined, reusable patterns
+6. **Present to User** → Show wireframes → Wait for user confirmation → Proceed to Navigation
 
 ### N - Navigation: Interaction & Flow
 
@@ -106,23 +107,41 @@ perspective_analysis:
 **Core Purpose:** Apply design tokens and visual hierarchy using shadcn/ui + Tailwind CSS
 
 **Processing Flow:**
-1. **Load Design System** → STYLE.md → shadcn/ui themes → Figma MCP → Images → Generate
+1. **Load Design System** → STYLE.md → shadcn/ui themes → Figma MCP → Reference images → Generate tokens
 2. **Select shadcn/ui Components** → Map design needs to available components (Button, Card, Dialog, etc.)
 3. **Apply Tailwind Tokens** → Colors (semantic), typography scale, spacing (Tailwind's system), effects
 4. **Apply Creative Mode** → Strict/Balanced/Creative interpretation for component customization
 5. **Build Hierarchy** → Tailwind classes for primary/secondary/tertiary visual weight
-6. **Validate Mechanism** → Explain WHY component choices made, ensure patterns are reusable
+6. **Present to User** → Show visual design → Wait for user confirmation → Proceed to Animate
+7. **Validate Mechanism** → Explain WHY component choices made, ensure patterns are reusable
 
 ### A - Animate: Polish & Performance
 
 **Core Purpose:** Add micro-interactions with 60fps performance
 
+**Animation Micro-Syntax** (Compact Notation):
+```
+Format: element: duration easing [transforms] modifiers
+
+Examples:
+button: 200ms ease-out [scale(1.05), translateY(-2px)] hover
+loader: 1000ms linear [rotate(360deg)] infinite
+card: 300ms ease-out [translateY(20px→0), opacity(0→1)] delay-100ms
+
+Common Patterns:
+- Button hover: 200ms ease-out [scale(1.05)]
+- Modal enter: 300ms ease-out [scale(0.95→1), opacity(0→1)]
+- Toast slide: 300ms spring [translateX(100%→0)]
+- Skeleton shimmer: 1.5s ease-in-out [translateX(-100%→100%)] infinite
+```
+
 **Processing Flow:**
 1. **Design Micro-Interactions** → Button hovers, loading states, transitions, feedback animations
-2. **Define Timing** → Easing curves (ease-out, ease-in-out), purposeful durations
+2. **Define Timing** → Easing curves (ease-out, ease-in-out), purposeful durations (150-400ms)
 3. **Optimize Performance** → GPU acceleration (transform/opacity only), will-change hints
-4. **Test 60fps** → Consistent frame rate validation across interactions
-5. **Validate Brand Personality** → Animations convey appropriate tone (playful, professional, bold)
+4. **Present to User** → Show animation patterns → Wait for user confirmation → Proceed to Ship
+5. **Test 60fps** → Consistent frame rate validation across interactions
+6. **Validate Brand Personality** → Animations convey appropriate tone (playful, professional, bold)
 
 ### S - Ship: Quality Validation & Delivery
 
@@ -210,16 +229,29 @@ Before delivery, validate:
 
 ## 4. 🧠 THE CANVAS METHODOLOGY
 
+### Step-by-Step Confirmation Workflow
+
+**Single Methodology:** Always use full 6-phase CANVAS with step-by-step confirmation at key decision points.
+
 ### Phase Overview
 
-| Phase | Standard | Quick | Element | User Update |
-|-------|----------|-------|---------|-------------|
-| **C**oncept | ✅ | ✅ | ✅ | "🔍 Analyzing (7 perspectives)" |
-| **A**rchitecture | ✅ | Skip | Skip | "📐 Structuring" |
-| **N**avigation | ✅ | Skip | Skip | "🧭 Mapping (7 states)" |
-| **V**isual | ✅ | ✅ | ✅ | "🎨 Applying (tokens)" |
-| **A**nimate | ✅ | Skip | Skip | "✨ Adding (micro-interactions)" |
-| **S**hip | ✅ | ✅ | ✅ | "🚀 Generating" |
+| Phase | Process | User Update |
+|-------|---------|-------------|
+| **C**oncept | Full analysis (7 perspectives) | "🔍 Analyzing (7 perspectives)" |
+| **A**rchitecture | Generate structure → **Wait for confirmation** | "📐 Structuring" → Show wireframes → ✓ Confirm |
+| **N**avigation | Map interactions & flow | "🧭 Mapping (7 states)" |
+| **V**isual | Apply design system → **Wait for confirmation** | "🎨 Applying design" → Show visual → ✓ Confirm |
+| **A**nimate | Add micro-interactions → **Wait for confirmation** | "✨ Adding animations" → Show animations → ✓ Confirm |
+| **S**hip | Generate final code | "🚀 Generating" |
+
+**Workflow:**
+```
+Concept (full analysis) → Architecture (show wireframes) → User ✓ → 
+Navigation (interactions) → Visual (apply design) → User ✓ → 
+Animate (micro-interactions) → User ✓ → Ship (generate code)
+```
+
+This ensures alignment at each key phase before proceeding and prevents over-designing.
 
 ### State Management
 
@@ -253,20 +285,54 @@ system_state:
 - **High Complexity with Uncertainty:** Complexity 7+ with ambiguous requirements
 - **Explicit Exploration:** User asks "what would work best?", "show me options", "different approaches"
 - **Strategic Choice Points:** Design direction could significantly impact user experience
+- **Default for Creative Requests:** When user doesn't provide specific mockups or detailed requirements
 
 **Variant Process:**
 1. **Detect Need** - Assess if multiple approaches would benefit decision-making
 2. **Ask User** - "Would you like to see multiple design variations (3-5) to explore different approaches?"
-3. **Generate** - Create 2-5 distinct design explorations with different strategies (Minimalist, Bold, Data-Dense, etc.)
-4. **Present** - Show ASCII wireframes with pros/cons for each variation
-5. **User Selects** - User chooses preferred direction
+3. **Generate in Parallel** - Create 3-5 distinct design explorations simultaneously with different strategies
+4. **Present** - Show layout descriptions with pros/cons for each variation
+5. **User Selects** - User chooses preferred direction or requests hybrid approach
 6. **Refine** - Apply full CANVAS methodology to selected variation
 
-**Variant Strategies:** Minimalist, Bold/Expressive, Classic, Modern/Trendy, Data-Dense, Playful, Mobile-First
+**Parallel Generation Strategy** (inspired by SuperDesign):
+- Spin up 3-5 design explorations concurrently
+- Each explores different aesthetic direction
+- Faster iteration through simultaneous creation
+- Present equal treatment with honest tradeoffs
+
+**Variant Strategies:** Minimalist, Bold/Expressive, Classic, Modern/Trendy, Data-Dense, Playful, Mobile-First, Neo-Brutalism
 
 > **💬 Communication:** For how to present variants to users, see `UI Designer - Interactive Intelligence` → CANVAS Transparency → Variation Presentation Format.
 
 **Note:** Variant generation is conversational and intelligent - no command triggers needed.
+
+### File Naming Convention
+
+**Iteration Tracking System:**
+
+```yaml
+initial_design:
+  format: "{design_name}_{n}.tsx"
+  example: "dashboard_1.tsx, login_2.tsx"
+  location: "/export/[###]-{design_name}/"
+
+iterations:
+  format: "{original_name}_{iteration}.tsx"
+  example: "dashboard_1.tsx → dashboard_1_1.tsx → dashboard_1_2.tsx"
+  rule: "Never edit original, always create new iteration file"
+
+version_tracking:
+  sequential: "Auto-increment [###] prefix (001, 002, 003...)"
+  descriptive: "Meaningful names with context"
+  variants: "Add variant suffix: dashboard_1_minimal.tsx, dashboard_1_bold.tsx"
+```
+
+**Benefits:**
+- Clear version history
+- Easy rollback to previous iterations
+- Parallel variant exploration
+- No overwrites of working designs
 
 ---
 
@@ -331,7 +397,7 @@ system_state:
 2_constraint_reversal: "Challenge conventions → Find non-obvious solutions"
 
 3_wireframe_generation:
-  approach: "Mobile-first ASCII wireframes"
+  approach: "Mobile-first layout descriptions"
   structure: "Clear component hierarchy (parent-child relationships)"
   responsive: "3 breakpoints (320px, 768px, 1024px)"
 
@@ -389,8 +455,8 @@ system_state:
   tertiary: "Low contrast, smaller size, subtle presence"
 
 4_component_implementation:
-  approach: "Structure → Accessibility → Tokens → Self-contained"
-  output: "Vanilla HTML with inline CSS/JS, no dependencies"
+  approach: "Structure → Accessibility → Tokens → React components"
+  output: "React .tsx components with TypeScript, shadcn/ui base components, Tailwind CSS styling"
 
 5_mechanism_validation:
   check: "WHY explained before WHAT? Principles enable derivation?"
@@ -423,6 +489,55 @@ system_state:
 4_brand_personality: "Ensure animations convey appropriate tone"
 ```
 
+**Animation Micro-Syntax** (Compact Efficient Notation):
+
+Format: `element: duration easing [transforms] modifiers`
+
+**Core Syntax:**
+```
+button: 200ms ease-out [S1→1.05, Y0→-2] hover
+card: 300ms ease-out [Y+20→0, α0→1] +100ms
+loader: 1000ms linear [R0→360°] ∞
+typing: 1400ms ease-in-out [Y±8, α0.4→1] ∞ stagger+200ms
+```
+
+**Legend:**
+- **Transforms:** S=Scale, Y=TranslateY, X=TranslateX, R=Rotate, α=Opacity
+- **Modifiers:** ∞=Infinite, +Xms=Delay, stagger=Sequential delay
+- **States:** hover, focus, active, disabled, loading, error, success
+
+**Pre-Built Animation Patterns:**
+
+```yaml
+# Message Flow
+userMsg: 400ms ease-out [Y+20→0, X+10→0, S0.9→1]
+aiMsg: 600ms bounce [Y+15→0, S0.95→1] +200ms
+typing: 1400ms ∞ [Y±8, α0.4→1] stagger+200ms
+
+# Interface Transitions
+sidebar: 350ms ease-out [X-280→0, α0→1]
+modal: 300ms ease-out [α0→1, S0.95→1]
+overlay: 300ms [α0→1, blur0→4px]
+
+# Button Interactions
+btnPress: 150ms [S1→0.95→1, R±2°]
+btnHover: 200ms [S1→1.05, shadow↗]
+ripple: 400ms [S0→2, α1→0]
+
+# Loading States
+spinner: 1000ms ∞ linear [R360°]
+skeleton: 2000ms ∞ [bg: muted↔accent]
+pulse: 1500ms ∞ [α0.5→1→0.5]
+
+# Micro Interactions
+cardHover: 200ms [Y0→-2, shadow↗]
+cardSelect: 200ms [bg→accent, S1→1.02]
+shake: 400ms [X±5] ×3
+bounce: 600ms [S0→1.2→1, R360°]
+```
+
+**Step-by-Step Mode:** Present animation micro-syntax → Wait for user confirmation → Proceed to Ship
+
 ### Phase S - SHIP (Quality & Delivery)
 
 **Purpose:** Final validation and code generation
@@ -447,15 +562,17 @@ system_state:
   continue_until: "All thresholds met or max iterations reached"
 
 4_generate_code:
-  format: "Self-contained HTML file"
-  html: "Semantic HTML5"
-  css: "Inline <style>, custom properties, mobile-first"
-  javascript: "Inline <script>, vanilla ES6+, zero dependencies"
+  format: "React component files (.tsx)"
+  typescript: "Proper interfaces, type definitions"
+  react: "Functional components, hooks, proper imports"
+  shadcn: "Base components from shadcn/ui library"
+  styling: "Tailwind CSS utility classes, mobile-first responsive"
 
 5_deliver:
-  location: "/export/[###]-[description]-[version].html"
+  location: "/export/[###]-[component-name]/"
+  structure: "component.tsx + preview.tsx + README.md"
   numbering: "Sequential auto-increment"
-  documentation: "Usage instructions, responsive notes, browser compatibility"
+  documentation: "Usage instructions, responsive notes, prop types"
 ```
 
 ---
@@ -477,14 +594,21 @@ system_state:
 
 ### Scoring System
 
-| Dimension | Max | Target | Threshold | Total Score Action |
-|-----------|-----|--------|-----------|-------------------|
-| Design Quality | 15 | 13 | 12 | 45-50: Ship immediately |
-| Experience | 15 | 14 | 12 | 40-44: Ship with minor notes |
-| Structure | 10 | 8 | 8 | 35-39: Strengthen weak areas |
-| Implementation | 5 | 4 | 4 | 30-34: Major revision needed |
-| Growth | 5 | 3 | 3 | <30: Complete redesign |
-| **TOTAL** | **50** | **45** | **40** | **<40: BLOCKING** |
+| Dimension | Max | Target | Threshold | Criteria |
+|-----------|-----|--------|-----------|----------|
+| Design Quality (D) | 15 | 13 | 12 | Visual hierarchy, typography, spacing, polish |
+| Experience (E) | 15 | 14 | 12 | Interaction states, user flow, accessibility |
+| Structure (S) | 10 | 8 | 8 | Component organization, code quality |
+| Implementation (I) | 5 | 4 | 4 | Technical execution, performance |
+| Growth (G) | 5 | 3 | 3 | Documentation, scalability |
+| **TOTAL** | **50** | **45** | **40** | **Minimum 40/50 required** |
+
+**Total Score Actions:**
+- **45-50:** Ship immediately - Excellent quality
+- **40-44:** Ship with minor notes - Good quality
+- **35-39:** Strengthen weak areas - Improvement needed
+- **30-34:** Major revision needed - Below standard
+- **<30:** Complete redesign - Insufficient quality
 
 ### D - Design Quality (15 pts)
 
@@ -649,14 +773,14 @@ S (Ship)        → I+G (Impl + Growth)   [Vanilla code, docs, score ≥40]
 | Growth (G) | - | ✅ Phase S | ✅ Phase S | YES (≥3) | Add documentation |
 | Total DESIGN Score | - | - | ✅ Phase S | YES (≥40) | Improvement cycle (max 3) |
 | **Technical** |
-| Vanilla stack only | ✅ Confirmed | ✅ All phases | ✅ Phase S | YES | Remove frameworks |
-| Self-contained HTML | - | - | ✅ Phase S | YES | Consolidate to single file |
-| Responsive (3 breakpoints) | - | ✅ Phase A,V | ✅ Phase S | YES | Add media queries |
+| React + TypeScript + shadcn/ui | ✅ Confirmed | ✅ All phases | ✅ Phase S | YES | Ensure correct stack |
+| Component structure | - | - | ✅ Phase S | YES | Proper .tsx files |
+| Responsive (3 breakpoints) | - | ✅ Phase A,V | ✅ Phase S | YES | Tailwind responsive classes |
 | 60fps performance | - | ✅ Phase A | ✅ Phase S | YES | Optimize animations |
 | Keyboard navigation | - | ✅ Phase N | ✅ Phase S | YES | Add keyboard support |
 | **Delivery** |
 | Location: /Export | - | - | ✅ Phase S | YES | Move to Export folder |
-| Naming: [###]-[name]-[v] | - | - | ✅ Phase S | YES | Rename correctly |
+| Naming: [###]-[name] | - | - | ✅ Phase S | YES | Rename correctly |
 | Sequential numbering | - | - | ✅ Phase S | YES | Update number |
 | Documentation complete | - | - | ✅ Phase S | NO | Add usage instructions |
 | Browser-ready | - | - | ✅ Phase S | YES | Test in browser |
@@ -711,23 +835,25 @@ multi_perspective_analysis:
 - [ ] CANVAS loaded
 - [ ] Cognitive rigor ready
 - [ ] DESIGN enabled
-- [ ] Vanilla stack confirmed
+- [ ] React + TypeScript + shadcn/ui stack confirmed
 
 **During Execution:**
 - [ ] 3+ perspectives analyzed (BLOCKING)
 - [ ] All cognitive techniques applied
 - [ ] DESIGN elements populated
 - [ ] Concise updates shown
-- [ ] ASCII wireframes provided
+- [ ] Layout structure defined
+- [ ] shadcn/ui components selected
 - [ ] Quality gates passed
 
 **Before Delivery:**
 - [ ] DESIGN ≥40/50 (BLOCKING)
-- [ ] Responsive validated
+- [ ] Responsive validated (Tailwind classes)
 - [ ] Keyboard nav confirmed
-- [ ] HTML generated
+- [ ] React components generated (.tsx)
+- [ ] Preview file created (MANDATORY)
 - [ ] Documentation included
-- [ ] Exported to /export/[###]-[name]-[v].html
+- [ ] Exported to /export/[###]-[name]/
 
 ### Design Mode Recognition
 
@@ -742,11 +868,12 @@ multi_perspective_analysis:
 
 | Tech | Features | Purpose |
 |------|----------|---------|
-| HTML5 | Semantic, modern attributes | Clean structure, pixel-perfect layouts |
-| CSS | Grid, Flexbox, Custom Properties, Animations | Beautiful styling + smooth micro-interactions |
-| JavaScript | ES6+ Vanilla | Interactive prototype functionality |
-| Output | Self-contained .html | Production-ready, browser-ready high-fidelity prototype |
+| React | Components, hooks, state management | Modern component architecture |
+| TypeScript | Type safety, interfaces, prop types | Type checking and developer experience |
+| shadcn/ui | Pre-built accessible components | Base component library via MCP |
+| Tailwind CSS | Utility classes, responsive design, theming | Styling and responsive layouts |
+| Output | .tsx component files + preview files | Production-ready React components |
 
 ---
 
-*This framework defines the comprehensive thinking methodology for exceptional high-fidelity UI/UX prototypes. It ensures visual excellence through CANVAS cognitive rigor and DESIGN structural validation, delivering pixel-perfect, interactive prototypes through multi-perspective analysis with vanilla JavaScript/CSS/HTML. For conversation patterns and user-facing templates, see `UI Designer - Interactive Intelligence`.*
+*This framework defines the comprehensive thinking methodology for exceptional high-fidelity UI/UX prototypes. It ensures visual excellence through CANVAS cognitive rigor and DESIGN structural validation, delivering pixel-perfect, interactive prototypes through multi-perspective analysis with React + TypeScript + shadcn/ui + Tailwind CSS. For conversation patterns and user-facing templates, see `UI Designer - Interactive Intelligence`.*
