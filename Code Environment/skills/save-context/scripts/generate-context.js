@@ -544,9 +544,9 @@ async function main() {
     // Build filename: {date}_{time}__{folder-name}.md
     // Dutch format: DD-MM-YY_HH-MM (2-digit year, no seconds)
     // Example: 09-11-25_07-52__skill-refinement.md
-    // Exception: Memory fallback uses "session_summary" instead of "Memory"
+    // Exception: memory fallback uses "session_summary" instead of "memory"
     let folderName = sessionData.SPEC_FOLDER.replace(/^\d+-/, '');
-    if (folderName === 'Memory') {
+    if (folderName === 'memory') {
       folderName = 'session_summary';
     }
     const contextFilename = `${sessionData.DATE}_${sessionData.TIME}__${folderName}.md`;
@@ -719,8 +719,8 @@ async function detectSpecFolder(collectedData = null) {
     specFolders = filterArchiveFolders(specFolders);
 
     if (specFolders.length === 0) {
-      // No spec folders found - use fallback "Memory" folder
-      const memoryFolder = path.join(CONFIG.PROJECT_ROOT, 'Memory');
+      // No spec folders found - use fallback "memory" folder
+      const memoryFolder = path.join(CONFIG.PROJECT_ROOT, 'memory');
       await fs.mkdir(memoryFolder, { recursive: true });
       return memoryFolder;
     }
@@ -785,8 +785,8 @@ async function detectSpecFolder(collectedData = null) {
     if (error.message.includes('retry attempts')) {
       throw error;
     }
-    // specs directory doesn't exist - use fallback "Memory" folder
-    const memoryFolder = path.join(CONFIG.PROJECT_ROOT, 'Memory');
+    // specs directory doesn't exist - use fallback "memory" folder
+    const memoryFolder = path.join(CONFIG.PROJECT_ROOT, 'memory');
     await fs.mkdir(memoryFolder, { recursive: true });
     return memoryFolder;
   }
@@ -941,13 +941,13 @@ function promptUser(question) {
 /**
  * Ensure memory directory exists
  * Uses single memory/ folder with timestamped markdown files
- * Exception: Memory fallback folder saves directly without subfolder
+ * Exception: memory fallback folder saves directly without subfolder
  */
 async function setupContextDirectory(specFolder) {
-  // Check if using Memory fallback folder
-  const isMemoryFallback = path.basename(specFolder) === 'Memory';
+  // Check if using memory fallback folder
+  const isMemoryFallback = path.basename(specFolder) === 'memory';
 
-  // Memory fallback: save directly in Memory/ without subfolder
+  // memory fallback: save directly in memory/ without subfolder
   // Spec folders: save in memory/ subfolder
   const contextDir = isMemoryFallback ? specFolder : path.join(specFolder, 'memory');
 

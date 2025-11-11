@@ -31,7 +31,6 @@ This directory contains hooks that automatically trigger during Claude Code oper
 | **UserPromptSubmit** | ✅ WORKING | Triggers before user prompts are processed |
 | **PreToolUse** | ✅ WORKING | Triggers before Bash tool execution |
 | **PostToolUse** | ✅ WORKING | Triggers after Write/Edit/NotebookEdit operations |
-| **SessionEnd** | ❌ DEPRECATED | Removed (unreliable /clear detection) |
 
 ### Active Features
 - ✅ Auto-save conversation context (keywords + context threshold)
@@ -73,12 +72,12 @@ This directory contains hooks that automatically trigger during Claude Code oper
 4. Locates conversation transcript
 5. Transforms transcript to save-context JSON format
 6. Executes generate-context.js script
-7. Saves to most recent spec folder's memory/ directory (or Memory/ fallback if no specs exist)
+7. Saves to most recent spec folder's memory/ directory (or memory/ fallback if no specs exist)
 8. Logs trigger reason (keyword vs. context-window)
 
 **Output**:
 - **With spec folders**: `specs/###-folder/memory/{date}_{time}__{folder}.md`
-- **Without spec folders**: `Memory/{date}_{time}__session_summary.md` (fallback, no subfolder)
+- **Without spec folders**: `memory/{date}_{time}__session_summary.md` (fallback, no subfolder)
 
 **Context Window Calculation**:
 - 200k token context window ≈ 400 messages (500 tokens/message avg)
@@ -453,7 +452,7 @@ specs/###-most-recent-folder/memory/
 
 Without spec folders (fallback):
 ```
-Memory/
+memory/
 ├── 09-11-25_07-52__session_summary.md
 └── metadata.json
 ```
@@ -501,13 +500,13 @@ cat /tmp/test.json
 
 **No specs/ folder**:
 ```bash
-# Auto-handled: Creates Memory/ folder as fallback
+# Auto-handled: Creates memory/ folder as fallback
 # No action needed - works automatically
 ```
 
 **No numbered spec folder in specs/**:
 ```bash
-# Auto-handled: Creates Memory/ folder as fallback
+# Auto-handled: Creates memory/ folder as fallback
 # Or manually create spec folder:
 mkdir -p specs/001-my-feature
 ```
@@ -627,11 +626,9 @@ User Action
 - ✅ Added enforce-markdown-strict.sh to hook structure
 
 ### v1.2.0 (2025-11-09)
-- ✅ **REMOVED: SessionEnd hook and /clear trigger logic (doesn't work reliably)**
 - ✅ Auto-save now ONLY triggers via keywords or context window threshold
 - ✅ Simplified triggering mechanism to two reliable methods
-- ✅ Updated all documentation to remove SessionEnd references
-- ✅ Disabled auto-save-context.sh SessionEnd hook
+- ✅ Updated all documentation for clarity
 
 ### v1.1.0 (2025-11-09)
 - ✅ **NEW: Automatic Context Window Detection**
@@ -652,7 +649,6 @@ User Action
 
 ### v1.0.0 (2025-11-08)
 - ✅ Created new hook directory structure
-- ✅ Implemented SessionEnd auto-save hook
 - ✅ Implemented UserPromptSubmit keyword trigger
 - ✅ Created transcript transformer utility
 - ✅ Moved existing hooks to correct locations

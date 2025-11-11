@@ -81,8 +81,8 @@ done
 # ───────────────────────────────────────────────────────────────
 # CONTEXT WINDOW DETECTION (75% used, 25% remaining)
 # ───────────────────────────────────────────────────────────────
-# NOTE: This is the PRIMARY auto-save mechanism. SessionEnd hooks
-# are disabled as /clear triggers don't work reliably.
+# NOTE: This is the PRIMARY auto-save mechanism for long
+# conversations, triggered automatically at 200 messages.
 # ───────────────────────────────────────────────────────────────
 
 if [ "$TRIGGERED" = false ] && [ -n "$SESSION_ID" ]; then
@@ -147,17 +147,17 @@ if [ -d "$CWD/specs" ]; then
     # Create memory directory inside spec folder
     CONTEXT_DIR="$SPEC_FOLDER/memory"
   else
-    # No spec folders found - use fallback "Memory" folder
-    SPEC_FOLDER="$CWD/Memory"
-    SPEC_FOLDER_NAME="Memory"
-    # Memory fallback: save directly in Memory/ without subfolder
+    # No spec folders found - use fallback "memory" folder
+    SPEC_FOLDER="$CWD/memory"
+    SPEC_FOLDER_NAME="memory"
+    # memory fallback: save directly in memory/ without subfolder
     CONTEXT_DIR="$SPEC_FOLDER"
   fi
 else
-  # No specs directory - use fallback "Memory" folder
-  SPEC_FOLDER="$CWD/Memory"
-  SPEC_FOLDER_NAME="Memory"
-  # Memory fallback: save directly in Memory/ without subfolder
+  # No specs directory - use fallback "memory" folder
+  SPEC_FOLDER="$CWD/memory"
+  SPEC_FOLDER_NAME="memory"
+  # memory fallback: save directly in memory/ without subfolder
   CONTEXT_DIR="$SPEC_FOLDER"
 fi
 
@@ -203,7 +203,7 @@ fi
 # Execute save-context script (silently)
 # Run in auto-save mode (bypasses alignment prompts)
 # Spec folders: saves to memory/ subfolder
-# Memory fallback: saves directly to Memory/ folder
+# memory fallback: saves directly to memory/ folder
 AUTO_SAVE_MODE=true node "$SAVE_CONTEXT_SCRIPT" "$TEMP_JSON" >/dev/null 2>&1
 EXIT_CODE=$?
 
@@ -230,8 +230,8 @@ TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
     echo "Threshold: $CONTEXT_THRESHOLD messages"
   fi
   echo "Session: $SESSION_ID"
-  if [ "$SPEC_FOLDER_NAME" = "Memory" ]; then
-    echo "Target: Memory/"
+  if [ "$SPEC_FOLDER_NAME" = "memory" ]; then
+    echo "Target: memory/"
   else
     echo "Target: $SPEC_FOLDER_NAME/memory/"
   fi
