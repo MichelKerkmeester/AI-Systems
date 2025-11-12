@@ -11,7 +11,7 @@ operating_mode:
   workflow_execution: autonomous
   approvals: none
   tracking: progressive_task_checklists
-  validation: continuous
+  validation: final_verification
 
 debug_philosophy:
   principle: "Fix the root cause, not the symptom"
@@ -131,9 +131,8 @@ workflow:
       - Console logs for errors
       - Network tab for API issues
       - Performance profiler if needed
-    validation: Can reliably reproduce issue
 
-  step_1_5_workspace_setup:
+  step_2_workspace_setup:
     condition: use_worktree == true
     action: Create isolated worktree via git-worktrees skill
     strategy: main_temp  # Always main_temp for code workflows
@@ -148,12 +147,11 @@ workflow:
     outputs:
       worktree_path: absolute_path
       git_branch: temp/debug-{timestamp}
-    validation: worktree_ready_or_skipped
     note: |
       If use_worktree=true: Create worktree for isolated debug work
       If use_worktree=false: Skip, work in current directory (e.g., quick_fix mode)
 
-  step_2_diagnose:
+  step_3_diagnose:
     purpose: Find the root cause
     investigation:
       - Generate hypotheses
@@ -173,9 +171,8 @@ workflow:
       - Network requests/responses
       - DOM snapshots
       - Performance traces
-    validation: Root cause identified with evidence
 
-  step_3_fix:
+  step_4_fix:
     purpose: Implement the solution
     approach:
       - Design minimal fix
@@ -188,9 +185,8 @@ workflow:
       - Test after each change
       - Document complex logic
       - Add preventive measures
-    validation: Fix resolves issue
 
-  step_4_verify:
+  step_5_verify:
     purpose: Ensure fix works completely
     testing:
       - Original issue resolved
@@ -203,9 +199,8 @@ workflow:
       - Error handling robust
       - Code quality maintained
       - Documentation updated
-    validation: All tests pass
 
-  step_5_save_context:
+  step_6_save_context:
     action: Save debugging conversation context
     invocation: Skill(skill: "save-context")
     description: |
@@ -218,12 +213,11 @@ workflow:
       - context_file: "debug-session-[DD-MM-YY_HH-MM].md"
       - workflow_flowchart: auto_generated
       - debugging_decisions: documented
-    validation: context_saved_successfully
     note: |
       Context saved for future reference and knowledge sharing.
       Captures full debugging journey including challenges and solutions.
 
-  step_6_integration_and_cleanup:
+  step_7_integration_and_cleanup:
     condition: use_worktree == true
     action: Integrate debug fix and cleanup worktree
     strategy: main_temp  # Always main_temp for code workflows
@@ -238,7 +232,6 @@ workflow:
       - merge_temp_branch_fast_forward_only
       - delete_temp_branch
       - remove_worktree
-    validation: integrated_and_cleaned_or_skipped
     note: |
       If use_worktree=true: Integrate fix to main and cleanup
       If use_worktree=false: Skip (already working on main, e.g., quick_fix mode)

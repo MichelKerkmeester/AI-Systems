@@ -6,7 +6,7 @@ purpose: Spec-driven planning with parallel specialist analyses; preserve manual
 action: Run SpecKit planning with parallel analyst fan-out → mandatory review → synthesis to single consolidated artifacts
 
 operating_mode:
-  workflow: sequential_with_parallel_blocks
+  workflow: sequential
   workflow_compliance: MANDATORY
   workflow_execution: manual_with_approvals
   approvals: after_each_step
@@ -242,7 +242,7 @@ workflow:
       prompt: "Requirements analyzed. Branch strategy: {branch_strategy}. Workspace will be created at .worktrees/{spec-id}. Proceed to workspace setup?"
       confirmation_needed: true
 
-  step_1_5_workspace_setup:
+  step_2_workspace_setup:
     action: Create isolated worktree via git-worktrees skill
     reference: worktree_setup section above defines complete setup process
     validation: worktree_ready_and_verified
@@ -256,7 +256,7 @@ workflow:
       prompt: "Workspace created at {worktree_path} on branch {git_branch}. Baseline tests: {baseline_tests}. Proceed to pre-work review?"
       confirmation_needed: true
 
-  step_2_pre_work_review:
+  step_3_pre_work_review:
     required_documents:
       - AGENTS.md
       - .specify/memory/constitution.md
@@ -264,7 +264,7 @@ workflow:
     verification: MUST REVIEW
     validation: principles_established
 
-  step_3_specification:
+  step_4_specification:
     command: /specify [feature-description]
     outputs:
       - feature_branch: created
@@ -272,7 +272,7 @@ workflow:
       - location: specs/[NNN-feature]/spec.md
     validation: spec_complete_and_testable
 
-  step_4_clarification:
+  step_5_clarification:
     command: /clarify
     outputs:
       - resolved_ambiguities
@@ -284,14 +284,14 @@ workflow:
       prompt: "Requirements clarified. Proceed to quality checklist?"
       confirmation_needed: true
 
-  step_5_quality_checklist:
+  step_6_quality_checklist:
     command: /speckit.checklist
     outputs:
       - quality_checklist: generated
     validation: checklist_generated
 
-# New parallel planning block (fan-out/fan-in) before step_7_planning
-  step_6_parallel_planning:
+# New parallel planning block (fan-out/fan-in) before step_8_planning
+  step_7_parallel_planning:
     description: Parallel specialist analyses with bounded concurrency
     analyze_inputs:
       summarize:
@@ -357,7 +357,7 @@ workflow:
     main_agent_finalization:
       by: MAIN_AGENT
       action: QA review and finalization of planning artifacts will occur next
-      defer_to_step: step_7_planning
+      defer_to_step: step_8_planning
       checks:
         - confirm_alignment_with_request_and_context
         - validate_completeness_and_consistency
@@ -367,7 +367,7 @@ workflow:
         - main_agent_review_notes
         - final_signoff: true
 
-  step_7_planning:
+  step_8_planning:
     command: /plan [context]
     outputs:
       - plan.md: technical_approach
@@ -400,7 +400,7 @@ workflow:
           - recommended_next_steps
       completion_message: Planning phase complete. Technical plan and approach have been documented.
 
-  step_8_save_context:
+  step_9_save_context:
     action: Save planning conversation context via parallel sub-agent
     description: |
       Preserve comprehensive planning conversation including:
@@ -423,7 +423,7 @@ workflow:
       Context saved alongside spec.md and plan.md for complete planning record.
       Captures full planning journey and decision rationale.
 
-  step_9_integration_and_cleanup:
+  step_10_integration_and_cleanup:
     name: Integration & Cleanup
     description: Integrate planning docs and cleanup based on strategy
 
@@ -464,8 +464,8 @@ workflow:
 # WORKFLOW TERMINATION
 # ─────────────────────────────────────────────────────────────────
 termination:
-  after_step: 8
-  message: "Planning phase completed successfully. Workflow terminated after step 8 (integration)."
+  after_step: 9
+  message: "Planning phase completed successfully. Workflow terminated after step 9 (integration)."
   next_steps:
     - Review planning documentation
     - Approve technical approach

@@ -1,14 +1,13 @@
-## DO NOT MODIFY THIS FILE UNLESS INSTRUCTED
+##### DO NOT CHANGE THIS FILE UNLESS INSTRUCTED 😠
 
----
-
-## ⚡ TL:DR 👀
-- **All implementation work requires a spec folder** - even non-SpecKit conversations
+## ⚡ TL:DR
+- **All file modifications require a spec folder** - code, documentation, configuration, templates, etc. (even non-SpecKit conversations)
+- **NEVER include API keys, secrets, or sensitive data in `.claude/knowledge/` files** - use environment variables instead
 - **Clarify** if confidence < 80% or ambiguity exists; **propose options**
 - **Prefer simplicity**, reuse existing patterns, and cite evidence with sources
 - **Use explicit uncertainty:** prefix claims with "I'M UNCERTAIN ABOUT THIS:" and output "UNKNOWN" when unverifiable
 - Solve only the stated problem; **avoid over-engineering** and premature optimization
-- **Verify with checks** (simplicity, performance, maintainability, scope) before coding
+- **Verify with checks** (simplicity, performance, maintainability, scope) before making changes
 - **After JavaScript changes**, run `python3 .claude/skills/code-cdn-versioning/scripts/update_html_versions.py` to update HTML version parameters
 
 ---
@@ -18,7 +17,7 @@
 **🚨 MANDATORY RULES — Read These First:**
 
 #### ⚡ Knowledge Base Compliance
-**MANDATORY:** Read and align with ALL knowledge base standards before ANY implementation work.
+**MANDATORY:** Read and align with ALL knowledge base standards before ANY file modifications.
 
 **Non-negotiable standards documents:**
 1. [.claude/knowledge/conversation_documentation.md](./.claude/knowledge/conversation_documentation.md) - Documentation requirements
@@ -84,19 +83,37 @@ Example: `I'M UNCERTAIN ABOUT THIS: The endpoint may require auth scope "read:fo
 | Over-Engineering | Solve ONLY stated problem, YAGNI principle | Complex state management vs simple variable |
 | Clever Over Clear | Obvious code > clever tricks | One-liner regex vs readable string operations |
 
----
+#### ⚡ Privacy & Security
+NEVER include sensitive information in knowledge base files. If you encounter secrets in knowledge files **STOP immediately and alert the user to remove them.**
+
+**FORBIDDEN in `.claude/knowledge/` files:**
+- ❌ API keys, tokens, secrets, passwords
+- ❌ Private URLs, endpoints, or server addresses
+- ❌ Database credentials or connection strings
+- ❌ Personal information (emails, names, addresses)
+- ❌ Internal company information
+- ❌ Authentication tokens or session IDs
+- ❌ Any credentials or secrets of any kind
 
 ---
 
 ## 2. 📝 MANDATORY: CONVERSATION DOCUMENTATION
 
-Every conversation with code/file changes MUST have a spec folder, this applies to ALL conversations (SpecKit AND regular chat queries).
+Every conversation that modifies files (code, documentation, configuration, templates, knowledge base, etc.) MUST have a spec folder. This applies to ALL conversations (SpecKit AND regular chat queries).
 **Full details**: [.claude/knowledge/conversation_documentation.md](./.claude/knowledge/conversation_documentation.md)
+
+**What requires a spec folder:**
+- ✅ Code files (JS, TS, Python, CSS, HTML, etc.)
+- ✅ Documentation files (Markdown, README, etc.)
+- ✅ Configuration files (JSON, YAML, TOML, etc.)
+- ✅ Knowledge base files (`.claude/knowledge/*.md`)
+- ✅ Template files (`.specify/templates/*.md`)
+- ✅ Build/tooling files (package.json, etc.)
 
 #### Levels Overview
 | Level | LOC | Core Files | Optional Files | Use When |
 |-------|-----|------------|----------------|----------|
-| **0** | <10 | README.md | - | Trivial fix (typo, comment) |
+| **0** | <10 | README.md | - | Trivial fix (typo, comment, single file) |
 | **1** | <100 | spec.md | checklist.md | Simple, isolated change |
 | **2** | <500 | spec.md + plan.md | tasks.md, checklist.md, retrospective.md | Moderate feature |
 | **3** | ≥500 | Full SpecKit | spike-*.md, decision-record-*.md | Complex feature |
@@ -184,7 +201,7 @@ Compute as weighted sum of factor scores (0–1), round to whole percent.
 
 ## 4. 🧠 REQUEST ANALYSIS & SOLUTION FRAMEWORK
 
-**Before ANY action or code changes, work through these phases:**
+**Before ANY action or file changes, work through these phases:**
 
 ### Solution Flow Overview
 ```
@@ -310,7 +327,7 @@ SCOPE CHECK:
 ```
 
 
-#### Phase 6: Pre-Coding Verification
+#### Phase 6: Pre-Change Verification
 **Reality Check - Can I verify this works?**
 
 Critical questions:
@@ -337,7 +354,7 @@ Sense → Interpret → Verify → Reflect → Publish
 - Publish: answer + uncertainty + citations
 ```
 
-**Pre-Code Checklist - Before writing ANY code, verify:**
+**Pre-Change Checklist - Before making ANY file changes, verify:**
 
 ```markdown
 □ I have parsed the request correctly (not assuming or extrapolating)
@@ -355,8 +372,8 @@ Sense → Interpret → Verify → Reflect → Publish
 □ I have explained my approach and received explicit user approval
 ```
 
-**If ANY unchecked → STOP and analyze further**  
-**If no spec folder → STOP and create documentation first**  
+**If ANY unchecked → STOP and analyze further**
+**If no spec folder → STOP and create documentation first**
 **If no user approval → STOP and present plan for review**
 
 
@@ -402,9 +419,10 @@ Request: "Add loading spinner to form submission"
 
 #### Core Principles & Decision Mantras
 **Documentation (Mandatory):**
-- Every code change needs spec folder (Section 2)
-- Determine level first, implement second
-- No spec folder = No implementation
+- Every file change needs spec folder (Section 2)
+- Applies to code, docs, config, templates, knowledge base files
+- Determine level first, make changes second
+- No spec folder = No file modifications
 
 **Request Analysis:**
 - Read request twice, implement once
@@ -443,7 +461,7 @@ Request: "Add loading spinner to form submission"
    - Locating patterns across multiple files
    - **When to use:** "Find code that handles X" or "Where do we implement Y?"
    - **See:** [.claude/knowledge/semantic_search_mcp.md](./.claude/knowledge/semantic_search_mcp.md)
-   - **⚠️ Note:** Only available for CLI AI agents (Claude Code AI, GitHub Copilot CLI) - not IDE integrations
+   - **⚠️ Note:** Only available for CLI AI agents
 
 2. **Native Tools (Read/Grep/Glob/Bash)**
    - File exploration and discovery
@@ -468,5 +486,3 @@ After modifying JavaScript files, update HTML version parameters to ensure brows
 2. Run version updater: `python3 .claude/skills/code-cdn-versioning/scripts/update_html_versions.py`
 
 **Why:** Query parameter (`?v=1.0.2`) forces browsers to treat URLs as new, bypassing cache. Without version updates, users may not receive JavaScript changes for weeks.
-
-**Documentation:** `.claude/skills/code-cdn-versioning/SKILL.md`

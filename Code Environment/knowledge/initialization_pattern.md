@@ -14,7 +14,6 @@ This pattern ensures proper loading from CDN, prevents double initialization, re
 6. [📁 IMPLEMENTATION EXAMPLES](#6--implementation-examples)
 7. [📊 ALL 34 FILES USING THIS PATTERN](#7--all-34-files-using-this-pattern)
 8. [🚨 ENFORCEMENT](#8--enforcement)
-9. [🧪 QUICK VERIFICATION TEST](#9--quick-verification-test)
 
 ---
 
@@ -376,23 +375,6 @@ if (window.Webflow && window.Webflow.push) {
 - [AGENTS.md](../AGENTS.md) - Required reading for all agents
 - [code_standards.md](./code_standards.md) - Section 3.5: Initialization
 - [animation_strategy.md](./animation_strategy.md) - Motion.dev integration
-
----
-
-## 9. 🧪 QUICK VERIFICATION TEST
-
-Add this to your page to verify the pattern is working:
-
-```javascript
-console.log('Initialization check:', {
-  'Webflow.push available': !!(window.Webflow && window.Webflow.push),
-  'DOM state': document.readyState,
-  'Guard flags': Object.keys(window).filter(k => k.endsWith('CdnInit')),
-  'Expected flow': window.Webflow?.push ? 'Webflow.push → start → guard → delay → init' :
-                   document.readyState === 'loading' ? 'DOMContentLoaded → guard → delay → init' :
-                   'Immediate → guard → delay → init'
-});
-```
 
 ---
 

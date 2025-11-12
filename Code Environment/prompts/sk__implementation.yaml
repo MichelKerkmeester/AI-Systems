@@ -11,7 +11,7 @@ operating_mode:
   workflow_execution: autonomous
   approvals: none
   tracking: progressive_task_checklists
-  validation: checkpoint_verification
+  validation: final_verification
 
 # ─────────────────────────────────────────────────────────────────
 # USER INPUTS
@@ -130,7 +130,7 @@ field_handling:
 # WORKTREE SETUP
 # ─────────────────────────────────────────────────────────────────
 worktree_setup:
-  trigger: after_step_7_review_or_at_start
+  trigger: after_step_10_review_or_at_start
   invoke: git_worktrees_skill
   description: |
     Handle worktree for implementation using git-worktrees skill.
@@ -180,7 +180,7 @@ worktree_setup:
 # WORKFLOW
 # ─────────────────────────────────────────────────────────────────
 workflow:
-  step_7_review_plan_and_spec:
+  step_10_review_plan_and_spec:
     input_source: USER_INPUTS_SECTION_ABOVE
     git_branch: "[GIT_BRANCH] → auto-create if empty"
     spec_folder: "[SPEC_FOLDER] → auto-create if empty"
@@ -216,7 +216,7 @@ workflow:
       - implementation_strategy_refinement
     validation: planning_artifacts_understood
 
-  step_8_workspace_verification_or_setup:
+  step_11_workspace_verification_or_setup:
     action: Verify existing worktree or create new one via git-worktrees skill
     reference: worktree_setup section above defines complete setup/verification process
     scenarios:
@@ -233,7 +233,7 @@ workflow:
       - git_branch_active
       - worktree_status_confirmed
 
-  step_9_task_breakdown:
+  step_12_task_breakdown:
     command: /tasks
     outputs:
     - tasks/checklist.md
@@ -249,7 +249,7 @@ workflow:
       - priority_ordering
     validation: tasks_actionable
 
-  step_10_analysis:
+  step_13_analysis:
     command: /analyze
     outputs:
     - consistency_report
@@ -273,13 +273,13 @@ workflow:
       - integration_points
       - risk_assessment
 
-  step_11_quality_checklist:
+  step_14_quality_checklist:
     command: /speckit.checklist
     outputs:
     - quality_checklist: generated
     validation: checklist_generated
 
-  step_12_implementation_check:
+  step_15_implementation_check:
     command: /implement [task-id]
     checks:
       prerequisites: verified
@@ -300,7 +300,7 @@ workflow:
       - blocker_identification
       - readiness_confirmation
 
-  step_13_development:
+  step_16_development:
     approach: autonomous_implementation_with_checkpoints
     requirements:
     - follow: .claude/knowledge/code_standards.md
@@ -331,7 +331,7 @@ workflow:
       - optimization_opportunities
       - test_coverage_gaps
 
-  step_14_completion:
+  step_17_completion:
     summary_document:
       location: "[SPEC_FOLDER]/implementation-summary.md"
       required_sections:
@@ -356,7 +356,7 @@ workflow:
       - technical_debt_noted
       - future_improvements
 
-  step_15_save_context:
+  step_18_save_context:
     action: Save conversation context for implementation documentation
     invocation: Skill(skill: "save-context")
     description: |
@@ -374,7 +374,7 @@ workflow:
       Context saved alongside implementation-summary.md for complete record.
       Captures full implementation journey including challenges and solutions.
 
-  step_16_integration_and_cleanup:
+  step_19_integration_and_cleanup:
     name: Integration & Cleanup
     description: Integrate implementation and cleanup based on strategy
 
@@ -435,8 +435,8 @@ prerequisites:
   user_request: "[REQUEST]"
 
 termination:
-  after_step: 9
-  message: "Implementation phase completed successfully. Workflow terminated after step 9 as requested."
+  after_step: 12
+  message: "Implementation phase completed successfully. Workflow terminated after step 12 as requested."
   next_steps:
   - Review implementation-summary.md
   - Verify all changes in staging environment

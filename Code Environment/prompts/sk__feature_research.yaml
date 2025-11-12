@@ -10,8 +10,8 @@ operating_mode:
   workflow_compliance: MANDATORY
   workflow_execution: autonomous
   approvals: none
-  tracking: progressive_research_stages
-  validation: comprehensive_coverage
+  tracking: progressive_task_checklists
+  validation: final_verification
 
 # ───────────────────────────────────────────────────────────────────
 # USER INPUTS

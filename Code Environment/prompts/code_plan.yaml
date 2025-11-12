@@ -1,20 +1,17 @@
 # ─────────────────────────────────────────────────────────────────
 # FRAMEWORK
 # ─────────────────────────────────────────────────────────────────
-role: Strategic planning coordinator using Claude Plan mode with 5 autonomous sub-agents
-purpose: Deploy native Plan mode sub-agents → Review outputs → Create single consolidated markdown plan
-action:
-  - Deploy 5 planning agents in parallel → gather native plan outputs
-  - Review all outputs → identify overlaps and conflicts
-  - Synthesize into single consolidated plan → write to target document
+role: Strategic planning coordinator and architect
+purpose: Analyze project comprehensively and create consolidated planning document
+action: Analyze from multiple planning perspectives → Create single consolidated plan → Write to target document
 
 operating_mode:
-  workflow: sequential_with_parallel_blocks
+  workflow: sequential
   workflow_compliance: MANDATORY
   workflow_execution: autonomous
   approvals: none
   tracking: progressive_task_checklists
-  validation: checkpoint_verification
+  validation: final_verification
 
 # ─────────────────────────────────────────────────────────────────
 # USER INPUTS
@@ -53,9 +50,9 @@ user_inputs:
     [COMPLEXITY]
     
     Planning depth and detail level:
-    - quick: Light planning with 3 agents (Scope, Breakdown, Timeline)
-    - standard: Comprehensive planning with 5 agents (default)
-    - deep: Exhaustive planning with 6 agents plus 30% timeline buffer
+    - quick: Light planning (Scope, Breakdown, Timeline)
+    - standard: Comprehensive planning (default)
+    - deep: Exhaustive planning with extended analysis plus 30% timeline buffer
   
   request: |
     [REQUEST]
@@ -86,18 +83,15 @@ field_handling:
   
   complexity_policy:
     quick:
-      agents: 3
-      agents_used: [Scope, Breakdown, Timeline]
+      planning_aspects: [Scope, Breakdown, Timeline]
       phases: 1_to_3
       review_depth: light
     standard:
-      agents: 5
-      agents_used: [Scope, Breakdown, Resource, Timeline, Quality]
+      planning_aspects: [Scope, Breakdown, Resource, Timeline, Quality]
       phases: 3_to_7
       review_depth: comprehensive
     deep:
-      agents: 6
-      agents_used: [Scope, Breakdown, Resource, Timeline, Quality, Compliance]
+      planning_aspects: [Scope, Breakdown, Resource, Timeline, Quality, Compliance]
       phases: 7_plus
       review_depth: exhaustive
       timeline_adjustment: plus_30_percent
@@ -108,32 +102,31 @@ field_handling:
     auto_folder: "./plans/[YYYY-MM]/[project-slug]/"
 
 # ─────────────────────────────────────────────────────────────────
-# SUB-AGENTS
+# PLANNING AREAS
 # ─────────────────────────────────────────────────────────────────
-sub_agents:
-  - id: scope
-    name: Scope Analyst
-    role: Define project boundaries and success criteria using native Plan mode
-    focus: objectives_boundaries_success_criteria_constraints
-  - id: breakdown
-    name: Task Decomposer
-    role: Decompose project into phases and tasks using native Plan mode
-    focus: phases_tasks_dependencies_milestones
-  - id: resource
-    name: Resource Analyst
-    role: Identify requirements and dependencies using native Plan mode
-    focus: tools_skills_external_deps_blockers
-  - id: timeline
-    name: Timeline Estimator
-    role: Estimate durations and sequencing using native Plan mode
-    focus: durations_sequencing_critical_path_buffer
-  - id: quality
-    name: Quality Validator
-    role: Validate completeness and identify risks using native Plan mode
-    focus: completeness_feasibility_risks_gaps
+planning_areas:
+  scope:
+    focus: Define project boundaries and success criteria
+    aspects: objectives_boundaries_success_criteria_constraints
+  
+  breakdown:
+    focus: Decompose project into phases and tasks
+    aspects: phases_tasks_dependencies_milestones
+  
+  resource:
+    focus: Identify requirements and dependencies
+    aspects: tools_skills_external_deps_blockers
+  
+  timeline:
+    focus: Estimate durations and sequencing
+    aspects: durations_sequencing_critical_path_buffer
+  
+  quality:
+    focus: Validate completeness and identify risks
+    aspects: completeness_feasibility_risks_gaps
 
 # ─────────────────────────────────────────────────────────────────
-# WORKFLOW (PARALLEL OUTPUT QA BY MAIN AGENT)
+# WORKFLOW
 # ─────────────────────────────────────────────────────────────────
 workflow:
   step_1_initialization:
@@ -149,10 +142,10 @@ workflow:
       - complexity_valid
     outputs:
       - normalized_inputs
-      - agent_configuration
+      - planning_configuration
       - plan_filename: "[TARGET_DOCUMENT]/plan-[slug]-[YYYYMMDD-HHMMSS].md"
 
-  step_1_5_workspace_setup:
+  step_2_workspace_setup:
     condition: use_worktree == true
     action: Create isolated worktree via git-worktrees skill
     strategy: main_temp  # Always main_temp for code workflows
@@ -166,74 +159,59 @@ workflow:
     outputs:
       worktree_path: absolute_path
       git_branch: temp/plan-{timestamp}
-    validation: worktree_ready_or_skipped
     note: |
       If use_worktree=true: Create worktree for isolated planning work
       If use_worktree=false: Skip, work in current directory
 
-  step_2_parallel_planning_deployment:
-    description: Deploy 5 planning agents in parallel for comprehensive analysis
-    parallel_work:
-      execution: parallel
-      concurrency: 5
-      mode: native_plan_mode_per_agent
-      shared_context:
-        - "[CONTEXT]"
-        - "[REQUEST]"
-        - "[TARGET_DOCUMENT]"
-
-      agents:
-        - agent: scope
-          instructions: Use native Plan mode to define complete project scope
-          focus_area: objectives_boundaries_success_criteria_constraints
-          expected_output:
-            type: markdown
-            sections: [objectives, boundaries, success_criteria, constraints]
-
-        - agent: breakdown
-          instructions: Use native Plan mode to decompose project structure
-          focus_area: phases_tasks_dependencies_milestones
-          expected_output:
-            type: markdown
-            sections: [phases, tasks_per_phase, dependencies, milestones]
-
-        - agent: resource
-          instructions: Use native Plan mode to identify all requirements
-          focus_area: tools_skills_external_deps_blockers
-          expected_output:
-            type: markdown
-            sections: [required_tools, required_skills, external_dependencies, blockers]
-
-        - agent: timeline
-          instructions: Use native Plan mode to create realistic timeline
-          focus_area: durations_sequencing_critical_path_buffer
-          complexity_scaling:
-            quick: minimal_estimates
-            standard: balanced_estimates
-            deep: detailed_ranges
-          expected_output:
-            type: markdown
-            sections: [duration_estimates, task_sequencing, critical_path, buffer_allocation]
-
-        - agent: quality
-          instructions: Use native Plan mode to validate and identify risks
-          focus_area: completeness_feasibility_risks_gaps
-          expected_output:
-            type: markdown
-            sections: [completeness_check, feasibility_assessment, risk_matrix, identified_gaps]
-
+  step_3_comprehensive_planning:
+    description: Plan from all critical perspectives
+    purpose: Create complete project plan covering all aspects
+    
+    planning_approach:
+      - Scope analysis: Define objectives, boundaries, success criteria, constraints
+      - Task breakdown: Decompose into phases, tasks, dependencies, milestones
+      - Resource planning: Identify tools, skills, external dependencies, blockers
+      - Timeline estimation: Create duration estimates, sequencing, critical path, buffers
+      - Quality validation: Assess completeness, feasibility, risks, gaps
+    
+    context:
+      - "[CONTEXT]"
+      - "[REQUEST]"
+      - "[TARGET_DOCUMENT]"
+    
     outputs:
-      - 5_complete_native_plan_outputs
-      - ready_for_review
+      scope_plan:
+        type: markdown
+        sections: [objectives, boundaries, success_criteria, constraints]
+      
+      breakdown_plan:
+        type: markdown
+        sections: [phases, tasks_per_phase, dependencies, milestones]
+      
+      resource_plan:
+        type: markdown
+        sections: [required_tools, required_skills, external_dependencies, blockers]
+      
+      timeline_plan:
+        type: markdown
+        sections: [duration_estimates, task_sequencing, critical_path, buffer_allocation]
+        complexity_scaling:
+          quick: minimal_estimates
+          standard: balanced_estimates
+          deep: detailed_ranges
+      
+      quality_assessment:
+        type: markdown
+        sections: [completeness_check, feasibility_assessment, risk_matrix, identified_gaps]
 
-  step_3_review_and_analysis:
-    input: all_5_agent_native_plan_outputs
-    action: Comprehensive review and analysis of all sub-agent planning
-    reviewer_role: Meta-planner synthesizing multiple perspectives
+  step_4_synthesis_and_integration:
+    input: comprehensive_planning_from_step_2
+    action: Synthesize all planning perspectives into cohesive plan
+    purpose: Create integrated project roadmap
 
-    review_focus:
+    synthesis_focus:
       - identify_overlaps_and_complementary_elements
-      - resolve_conflicts_between_agent_plans
+      - resolve_conflicts_between_planning_aspects
       - validate_internal_consistency
       - assess_overall_completeness
       - flag_risks_gaps_or_concerns
@@ -241,18 +219,17 @@ workflow:
       - note_contradictions_or_tensions
       - evaluate_feasibility_holistically
 
-    review_deliverable: comprehensive_review_notes_and_insights
-    output: synthesis_guidance
+    output: integrated_planning_guidance
 
-  step_4_synthesis_and_finalization:
-    input: agent_outputs_plus_review_notes
-    action: Create single consolidated markdown plan from all inputs
+  step_5_finalization:
+    input: integrated_plan_from_step_4
+    action: Create single consolidated markdown plan document
     
     process:
-      - aggregate_all_5_agent_native_plans
-      - apply_review_insights_and_resolutions
+      - aggregate_all_planning_outputs
+      - apply_synthesis_insights
       - integrate_complementary_elements
-      - resolve_conflicts_per_review_guidance
+      - resolve_conflicts_per_guidance
       - apply_priority_tags: P0_critical_to_P3_nice_to_have
       - structure_into_unified_markdown
       - validate_against_checklist
@@ -260,8 +237,8 @@ workflow:
       - display_summary
     
     validation_checklist:
-      - all_5_agents_completed_native_planning
-      - review_step_completed
+      - all_planning_aspects_complete
+      - synthesis_step_completed
       - min_3_phases_unless_trivial
       - all_tasks_have_owner_effort_success_criteria
       - dependencies_acyclic
@@ -273,12 +250,12 @@ workflow:
       - single_file_output_confirmed
     
     output_markdown_sections:
-      - executive_summary: from_scope_agent_reviewed
-      - scope_and_boundaries: from_scope_agent_reviewed
-      - phase_breakdown: from_breakdown_agent_reviewed
-      - resource_requirements: from_resource_agent_reviewed
-      - timeline_overview: from_timeline_agent_reviewed
-      - risk_matrix: from_quality_agent_reviewed
+      - executive_summary: from_scope_planning
+      - scope_and_boundaries: from_scope_planning
+      - phase_breakdown: from_breakdown_planning
+      - resource_requirements: from_resource_planning
+      - timeline_overview: from_timeline_planning
+      - risk_matrix: from_quality_assessment
       - next_actions: synthesized_from_all
       - plan_metadata: synthesis_info
     
@@ -291,37 +268,24 @@ workflow:
         - synthesis_notes: integration_highlights
         - next_steps: immediate_actions
 
-  step_5_save_context:
-    action: Save planning conversation context via parallel sub-agent
+  step_6_save_context:
+    action: Save planning conversation context
+    invocation: Skill(skill: "save-context")
     description: |
       Preserve comprehensive planning conversation including:
-      - All 5 agent planning outputs
-      - Review and synthesis decisions
+      - All planning outputs from step 2
+      - Synthesis and integration decisions
       - Conflict resolutions and trade-offs
       - Final plan structure and rationale
-    parallel_work:
-      execution: parallel
-      concurrency: 1
-      mode: context_preservation
-      agents:
-        - agent: context_saver
-          instructions: Use save-context skill to preserve planning session
-          invocation: Skill(skill: "save-context")
-          focus_area: planning_decisions_and_agent_outputs
-          expected_output:
-            type: markdown
-            file: "planning-session-[DD-MM-YY_HH-MM].md"
-            includes: [workflow_flowchart, agent_outputs, synthesis_notes]
     outputs:
-      - context_file: saved
+      - context_file: "planning-session-[DD-MM-YY_HH-MM].md"
       - workflow_flowchart: auto_generated
       - planning_decisions: documented
-    validation: context_saved_successfully
     note: |
       Context saved alongside plan for complete record.
-      Captures all agent outputs and synthesis process.
+      Captures all planning outputs and synthesis process.
 
-  step_6_integration_and_cleanup:
+  step_7_integration_and_cleanup:
     condition: use_worktree == true
     action: Integrate plan and cleanup worktree
     strategy: main_temp  # Always main_temp for code workflows
@@ -336,7 +300,6 @@ workflow:
       - merge_temp_branch_fast_forward_only
       - delete_temp_branch
       - remove_worktree
-    validation: integrated_and_cleaned_or_skipped
     note: |
       If use_worktree=true: Integrate plan to main and cleanup
       If use_worktree=false: Skip (already working on main)

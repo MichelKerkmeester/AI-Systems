@@ -10,12 +10,12 @@ operating_mode:
   workflow_compliance: MANDATORY
   workflow_execution: autonomous
   approvals: none
-  tracking: progressive_optimization_log
-  validation: continuous
+  tracking: progressive_task_checklists
+  validation: final_verification
 
 optimization_philosophy:
   principle: "Features first, performance second"
-  approach: "Incremental improvements with continuous validation"
+  approach: "Incremental improvements with autonomous execution"
   mandate: "Never break functionality for speed"
 
 # ─────────────────────────────────────────────────────────────────
@@ -131,9 +131,8 @@ workflow:
       - Issues from [ISSUES] field
       - Performance bottlenecks
       - Request requirements from [REQUEST]
-    validation: Baseline captured and documented
 
-  step_1_5_workspace_setup:
+  step_2_workspace_setup:
     condition: use_worktree == true
     action: Create isolated worktree via git-worktrees skill
     strategy: main_temp  # Always main_temp for code workflows
@@ -147,12 +146,11 @@ workflow:
     outputs:
       worktree_path: absolute_path
       git_branch: temp/perf-{timestamp}
-    validation: worktree_ready_or_skipped
     note: |
       If use_worktree=true: Create worktree for isolated optimization work
       If use_worktree=false: Skip, work in current directory
 
-  step_2_analyze:
+  step_3_analyze:
     purpose: Identify optimization opportunities
     analysis:
       - Profile critical paths
@@ -173,9 +171,8 @@ workflow:
       low_impact:
         - Micro-optimizations
         - Code cleanup
-    validation: Bottlenecks identified with evidence
 
-  step_3_optimize:
+  step_4_optimize:
     purpose: Apply improvements incrementally
     approach:
       - One optimization at a time
@@ -203,9 +200,8 @@ workflow:
         - Service workers
         - API caching
         - CDN usage
-    validation: Each optimization verified
 
-  step_4_verify:
+  step_5_verify:
     purpose: Ensure improvements without regression
     checks:
       performance:
@@ -222,9 +218,8 @@ workflow:
         - Cross-browser testing
         - Mobile performance
         - Network conditions
-    validation: All checks pass
 
-  step_5_save_context:
+  step_6_save_context:
     action: Save performance optimization conversation context
     invocation: Skill(skill: "save-context")
     description: |
@@ -237,12 +232,11 @@ workflow:
       - context_file: "performance-optimization-[DD-MM-YY_HH-MM].md"
       - workflow_flowchart: auto_generated
       - optimization_decisions: documented
-    validation: context_saved_successfully
     note: |
       Context saved for future performance work and knowledge sharing.
       Captures full optimization journey including metrics and trade-offs.
 
-  step_6_integration_and_cleanup:
+  step_7_integration_and_cleanup:
     condition: use_worktree == true
     action: Integrate optimizations and cleanup worktree
     strategy: main_temp  # Always main_temp for code workflows
@@ -257,7 +251,6 @@ workflow:
       - merge_temp_branch_fast_forward_only
       - delete_temp_branch
       - remove_worktree
-    validation: integrated_and_cleaned_or_skipped
     note: |
       If use_worktree=true: Integrate changes to main and cleanup
       If use_worktree=false: Skip (already working on main)

@@ -6,12 +6,12 @@ purpose: Spec-driven implementation with parallel preparation (core, integration
 action: Run preparatory parallel block → review → synthesis into implementation_plan.md → proceed autonomously
 
 operating_mode:
-  workflow: sequential_with_parallel_blocks
+  workflow: sequential
   workflow_compliance: MANDATORY
   workflow_execution: autonomous
   approvals: none
   tracking: progressive_task_checklists
-  validation: checkpoint_verification
+  validation: final_verification
 
 # ─────────────────────────────────────────────────────────────────
 # USER INPUTS
@@ -131,7 +131,7 @@ field_handling:
 # WORKTREE SETUP
 # ─────────────────────────────────────────────────────────────────
 worktree_setup:
-  trigger: after_step_8_review
+  trigger: after_step_11_review
   invoke: git_worktrees_skill
   description: |
     Verify or create isolated worktree for implementation using git-worktrees skill.
@@ -165,7 +165,7 @@ worktree_setup:
   validation: worktree_ready_and_verified
 
   note: |
-    Implementation phase (steps 8-15) may inherit worktree from planning phase (steps 1-7).
+    Implementation phase (steps 11-21) may inherit worktree from planning phase (steps 1-10).
     If worktree exists: verify it's clean and on correct branch, then reuse.
     If worktree doesn't exist: create new isolated workspace.
     All subsequent implementation steps execute within this worktree context.
@@ -208,9 +208,9 @@ sub_agents:
 # WORKFLOW (PARALLEL OUTPUT QA BY MAIN AGENT)
 # ─────────────────────────────────────────────────────────────────
 workflow:
-  step_8_review_plan_and_spec:
+  step_11_review_plan_and_spec:
     note: |
-      This workflow is a continuation of the planning phase (steps 1-7).
+      This workflow is a continuation of the planning phase (steps 1-10).
       Branch strategy should have been set during planning.
       Worktree may already exist from planning and will be verified/reused.
       If starting independently, branch_strategy must be provided.
@@ -231,7 +231,7 @@ workflow:
       - planning_artifacts_understood
     validation: planning_artifacts_understood_and_branch_confirmed
 
-  step_9_workspace_verification:
+  step_12_workspace_verification:
     action: Verify or create isolated worktree via git-worktrees skill
     reference: worktree_setup section above defines complete setup process with inheritance handling
     inheritance_check:
@@ -246,7 +246,7 @@ workflow:
       - worktree_reused_from_planning
     note: "All parallel sub-agents and implementation steps will execute within this worktree context"
 
-  step_10_task_breakdown:
+  step_13_task_breakdown:
     command: /tasks
     outputs:
       - tasks/checklist.md
@@ -254,7 +254,7 @@ workflow:
       - tracking_structure: established
     validation: tasks_actionable
 
-  step_11_analysis:
+  step_14_analysis:
     command: /analyze
     outputs:
       - consistency_report
@@ -263,13 +263,13 @@ workflow:
       - gap_analysis
     validation: consistency_verified
 
-  step_12_quality_checklist:
+  step_15_quality_checklist:
     command: /speckit.checklist
     outputs:
       - quality_checklist: generated
     validation: checklist_generated
 
-  step_13_parallel_implementation_preparation:
+  step_16_parallel_implementation_preparation:
     description: Parallel preparation for core, integrations, tests, and docs
     analyze_inputs:
       summarize:
@@ -342,7 +342,7 @@ workflow:
         - main_agent_review_notes
         - final_signoff: true
 
-  step_14_implementation_check:
+  step_17_implementation_check:
     command: /implement [task-id]
     checks:
       prerequisites: verified
@@ -363,7 +363,7 @@ workflow:
         - blocker_identification
         - readiness_confirmation
 
-  step_15_development:
+  step_18_development:
     approach: autonomous_implementation_with_checkpoints
     requirements:
       - follow: .claude/knowledge/code_standards.md
@@ -394,7 +394,7 @@ workflow:
         - optimization_opportunities
         - test_coverage_gaps
 
-  step_16_completion:
+  step_19_completion:
     summary_document:
       location: "[SPEC_FOLDER]/implementation-summary.md"
       required_sections:
@@ -419,7 +419,7 @@ workflow:
         - technical_debt_noted
         - future_improvements
 
-  step_17_save_context:
+  step_20_save_context:
     action: Save implementation conversation context via parallel sub-agent
     description: |
       Preserve comprehensive implementation conversation including:
@@ -451,11 +451,11 @@ prerequisites:
     - "[SPEC_FOLDER]/plan.md"
     - "[SPEC_FOLDER]/planning-summary.md"
   verification: MUST EXIST BEFORE PROCEEDING
-  note: This workflow assumes steps 1-7 completed via speckit_plan_and_spec.yaml
+  note: This workflow assumes steps 1-10 completed via speckit_plan_and_spec.yaml
   user_context: "[CONTEXT]"
   user_request: "[REQUEST]"
 
-step_18_integration_and_cleanup:
+step_21_integration_and_cleanup:
   name: Integration & Cleanup
   description: Integrate implementation and cleanup based on strategy
 
@@ -531,8 +531,8 @@ step_18_integration_and_cleanup:
   validation: integration_complete_per_strategy
 
   termination:
-    after_step: 18
-    message: "Implementation phase completed successfully. Workflow terminated after step 18 (integration and cleanup)."
+    after_step: 21
+    message: "Implementation phase completed successfully. Workflow terminated after step 21 (integration and cleanup)."
 
 # ─────────────────────────────────────────────────────────────────
 # ADAPTIVE RULES & ERROR HANDLING

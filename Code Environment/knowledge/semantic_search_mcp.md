@@ -1,22 +1,19 @@
-# Semantic Search MCP - Usage Guide for Anobel.com
+# Semantic Search MCP - Usage Guide
 
 The anobel.com project uses semantic code search capabilities through two integrated tools that enable AI-powered codebase exploration using natural language queries instead of keyword searches.
 
-**⚠️ IMPORTANT:** 
+**⚠️ IMPORTANT:**
 - This MCP is for **CLI AI Agents** (not IDE integrations) that support MCP.
-- It works with **Claude Code AI** and **GitHub Copilot CLI**. 
+- It works with **any CLI AI agent** including Claude Code AI, GitHub Copilot CLI, Opencode, Kilo CLI, and others.
 
 #### 📋 TABLE OF CONTENTS
 
 1. [⚠️ SCOPE: CLI AI AGENTS ONLY](#1-️-scope-cli-ai-agents-only)
 2. [🏗️ ARCHITECTURE](#2-️-architecture)
-3. [⚙️ CONFIGURATION](#3-️-configuration)
-4. [🔍 AVAILABLE MCP TOOLS](#4--available-mcp-tools)
-5. [✅ USAGE GUIDELINES FOR AI](#5--usage-guidelines-for-ai)
-6. [🎯 ANOBEL.COM SPECIFIC CONTEXT](#6--anobelcom-specific-context)
-7. [🛠️ TECHNICAL DETAILS](#7-️-technical-details)
-8. [🔧 MAINTENANCE](#8--maintenance)
-9. [📚 REFERENCES](#9--references)
+3. [🔍 AVAILABLE MCP TOOLS](#4--available-mcp-tools)
+4. [✅ USAGE GUIDELINES FOR AI](#5--usage-guidelines-for-ai)
+5. [🎯 ANOBEL.COM SPECIFIC CONTEXT](#6--anobelcom-specific-context)
+6. [📚 REFERENCES](#9--references)
 
 ---
 
@@ -37,10 +34,12 @@ The anobel.com project uses semantic code search capabilities through two integr
 
 ### Supported CLI AI Agents
 
-**✅ Works with:**
+**✅ Works with any CLI AI agent that supports MCP:**
 - **Claude Code AI** - AI assistant in VS Code/Cursor
 - **GitHub Copilot CLI** - `gh copilot` command-line tool
-- Any other CLI AI agent that supports MCP protocol
+- **Opencode** - Open-source AI coding assistant
+- **Kilo CLI** - Command-line AI assistant
+- **Any other CLI AI agent** that supports the Model Context Protocol (MCP)
 
 **❌ Does NOT work with:**
 - **GitHub Copilot in IDE** - Autocomplete while typing in VS Code/IDEs
@@ -55,11 +54,11 @@ The anobel.com project uses semantic code search capabilities through two integr
 - ❌ GitHub Copilot Chat (in IDE) to use semantic search
 
 **Do expect:**
-- ✅ Claude Code AI to find code by intent
-- ✅ GitHub Copilot CLI (`gh copilot`) to use semantic search
+- ✅ Any CLI AI agent to find code by intent
 - ✅ Better AI answers to "where is..." questions
 - ✅ AI understanding of code relationships
 - ✅ Faster AI exploration of codebase
+- ✅ Works with Claude Code AI, GitHub Copilot CLI, Opencode, Kilo CLI, and others
 
 ### System Separation
 
@@ -73,7 +72,7 @@ The anobel.com project uses semantic code search capabilities through two integr
 │         │                    │         │                   │
 │         ▼                    │         ▼                   │
 │  CLI AI Agents               │  IDE Integrations           │
-│  (Claude Code, gh copilot)   │  (GitHub Copilot IDE)       │
+│  (Any MCP-compatible agent)  │  (GitHub Copilot IDE)       │
 │  Uses Semantic Search MCP ✅ │  No MCP Support ❌          │
 │         │                    │         │                   │
 │         ▼                    │         ▼                   │
@@ -94,7 +93,7 @@ The anobel.com project uses semantic code search capabilities through two integr
 ### Purpose and Scope
 
 **This MCP is for CLI AI agents:**
-- ✅ **Used by:** CLI AI agents (Claude Code AI, GitHub Copilot CLI)
+- ✅ **Used by:** Any CLI AI agent that supports MCP (Claude Code AI, GitHub Copilot CLI, Opencode, Kilo CLI, etc.)
 - ✅ **Purpose:** Enable AI to search codebase semantically
 - ✅ **Benefit:** AI finds code by intent, not keywords
 - ❌ **NOT for:** IDE integrations (autocomplete/suggestions)
@@ -111,8 +110,8 @@ The anobel.com project uses semantic code search capabilities through two integr
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                  CLI AI Agents                              │
-│  - Claude Code AI (VS Code/Cursor)                          │
-│  - GitHub Copilot CLI (gh copilot)                          │
+│  - Any MCP-compatible CLI AI agent                          │
+│  - Claude Code AI, GitHub Copilot CLI, Opencode, Kilo, etc. │
 │  "Find code that handles video playback initialization"    │
 └────────────────────┬────────────────────────────────────────┘
                      │
@@ -150,51 +149,7 @@ The anobel.com project uses semantic code search capabilities through two integr
 
 ---
 
-## 3. ⚙️ CONFIGURATION
-
-### Indexer Configuration
-**File:** `/tmp/codebase-index-cli/.env`
-
-```bash
-# Voyage AI Embeddings
-EMBED_PROVIDER=openai-compatible
-EMBED_BASE_URL=https://api.voyageai.com/v1
-EMBED_API_KEY=pa-27hXA2OsP7F8QKDCsdHQTQni2av_hnKE_2oL2PdK1B6
-EMBED_MODEL=voyage-code-3
-EMBED_DIMENSION=1024
-EMBED_MAX_TOKENS=32000
-
-# SQLite Storage
-SQLITE_DB_PATH=.codebase/vectors.db
-SQLITE_SEARCH_MIN_SCORE=0.4
-SQLITE_SEARCH_MAX_RESULTS=50
-```
-
-### MCP Server Configuration
-**File:** `.mcp.json` (lines 32-52)
-
-```json
-{
-  "semantic-search": {
-    "command": "~/.local/share/mcp-servers/semantic-search/venv/bin/python",
-    "args": ["~/.local/share/mcp-servers/semantic-search/src/server_sqlite.py"],
-    "env": {
-      "MCP_CODEBASE_EMBEDDER_PROVIDER": "openai-compatible",
-      "MCP_CODEBASE_EMBEDDER_BASE_URL": "https://api.voyageai.com/v1",
-      "MCP_CODEBASE_EMBEDDER_MODEL_ID": "voyage-code-3",
-      "MCP_CODEBASE_EMBEDDER_DIMENSION": "1024",
-      "MCP_CODEBASE_JUDGE_PROVIDER": "openai-compatible",
-      "MCP_CODEBASE_JUDGE_MODEL_ID": "voyage-3"
-    }
-  }
-}
-```
-
-**Important:** `openai-compatible` is the API format, not the provider. The actual provider is Voyage AI (determined by `BASE_URL`).
-
----
-
-## 4. 🔍 AVAILABLE MCP TOOLS
+## 3. 🔍 AVAILABLE MCP TOOLS
 
 ### 1. `search_codebase`
 **Purpose:** Search the current project (anobel.com) semantically
@@ -238,9 +193,9 @@ SQLITE_SEARCH_MAX_RESULTS=50
 
 ---
 
-## 5. ✅ USAGE GUIDELINES FOR AI
+## 4. ✅ USAGE GUIDELINES
 
-**Reminder:** These guidelines are for CLI AI agents (Claude Code AI, GitHub Copilot CLI). This tool is not available to IDE integrations or directly to developers.
+**Reminder:** These guidelines are for any CLI AI agent that supports MCP (Claude Code AI, GitHub Copilot CLI, Opencode, Kilo CLI, etc.). This tool is not available to IDE integrations or directly to developers.
 
 ### ✅ DO: Use Semantic Search When
 
@@ -308,141 +263,7 @@ SQLITE_SEARCH_MAX_RESULTS=50
 
 ---
 
-## 6. 🎯 ANOBEL.COM SPECIFIC CONTEXT
-
-### Project Structure
-The anobel.com project is a Webflow-hosted website with custom JavaScript:
-
-- **249 files indexed** (496 code blocks)
-- **Primary languages:** JavaScript, HTML, CSS
-- **Key features:** Video playback, animations, forms, navigation
-- **Framework:** Webflow + custom JS (GSAP, Plyr, etc.)
-
-### Common Search Scenarios
-
-#### 1. Video Player Code
-```
-Query: "Find code that initializes video players"
-Expected: Plyr initialization, video event handlers
-```
-
-#### 2. Animation Code
-```
-Query: "Show me GSAP animation configurations"
-Expected: GSAP timeline setups, scroll triggers
-```
-
-#### 3. Form Handling
-```
-Query: "Find form validation and submission code"
-Expected: Form event listeners, validation logic
-```
-
-#### 4. Page Transitions
-```
-Query: "How do we handle page load animations?"
-Expected: Page loader, transition effects
-```
-
-#### 5. Navigation
-```
-Query: "Find navigation dropdown and menu logic"
-Expected: Menu interactions, dropdown handlers
-```
-
-### Integration with Existing Knowledge
-
-Semantic search complements existing knowledge files:
-
-1. **code_standards.md** - Use search to find examples of standards in practice
-2. **animation_strategy.md** - Search for animation implementations
-3. **initialization_pattern.md** - Find initialization code patterns
-4. **webflow_platform_constraints.md** - Search for Webflow-specific code
-
----
-
-## 7. 🛠️ TECHNICAL DETAILS
-
-### Embedding Model: voyage-code-3
-- **Dimensions:** 1024
-- **Max context:** 32,000 tokens
-- **Specialization:** Code understanding
-- **Cost:** $0.18/M tokens (200M free tier)
-
-### Judge Model: voyage-3
-- **Purpose:** Rerank and filter search results
-- **Temperature:** 0 (deterministic)
-- **Max tokens:** 1024
-
-### Storage: SQLite + sqlite-vec
-- **Database:** `.codebase/vectors.db` (6.3 MB)
-- **Extension:** sqlite-vec 0.1.6
-- **Min score:** 0.4 (configurable)
-- **Max results:** 50 (configurable)
-
-### Real-time Indexing
-- **Watcher:** Monitors file changes
-- **Debounce:** 500ms
-- **Auto-reindex:** Files are re-indexed on save
-- **Process:** Running in Terminal 58
-
----
-
-## 8. 🔧 MAINTENANCE
-
-### Checking Index Status
-```bash
-# View database size
-ls -lh .codebase/vectors.db
-
-# Check watcher status
-ps aux | grep codesql
-
-# View watcher logs
-tail -f .codebase/watcher.log  # if logging enabled
-```
-
-### Reindexing
-```bash
-# Stop watcher
-kill $(cat .codebase/watcher.pid)
-
-# Restart indexer
-codesql -start .
-```
-
-### Troubleshooting
-
-**Issue:** Search returns no results
-- Check if `.codebase/vectors.db` exists
-- Verify watcher is running
-- Ensure models match between indexer and MCP server
-
-**Issue:** Search returns irrelevant results
-- Rephrase query to be more specific
-- Check if files are actually indexed
-- Verify judge model is configured
-
-**Issue:** MCP server not loading
-- Check `.mcp.json` configuration
-- Verify Python dependencies installed
-- Check `.claude/settings.local.json` permissions
-
-### Cost Tracking
-
-**Current usage:**
-- Initial indexing: ~6-9M tokens
-- Remaining free tier: ~191-194M tokens
-- Estimated searches before cost: ~400,000 queries
-
-**Monitoring:**
-- Check Voyage AI dashboard: https://dashboard.voyageai.com/
-- View usage in billing section
-- Free tier resets monthly
-
----
-
-## 9. 📚 REFERENCES
+## 5. 📚 REFERENCES
 
 ### External Resources
 
@@ -470,5 +291,6 @@ search_commits("Find commits related to contact form")
 3. Analyze and make changes
 ```
 
-**Remember:** Semantic search is for understanding, not navigation. Use it to find what you don't know exists!
+---
 
+**Remember:** Semantic search is for understanding, not navigation. Use it to find what you don't know exists!

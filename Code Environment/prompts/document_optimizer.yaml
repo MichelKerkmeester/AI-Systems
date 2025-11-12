@@ -10,8 +10,8 @@ operating_mode:
   workflow_compliance: MANDATORY
   workflow_execution: autonomous
   approvals: none
-  tracking: progressive_optimization_log
-  validation: checkpoint_verification
+  tracking: progressive_task_checklists
+  validation: final_verification
 
 scope:
   applies_to: entire_documentation_files_specified_by_arg
@@ -157,8 +157,6 @@ workflow:
       - initial_assessment_summary
       - optimization_plan
 
-    validation: files_loaded_successfully
-
   step_2_read_documents:
     action: Read all target documentation files
     context_integration: "Consider [CONTEXT] throughout analysis"
@@ -220,7 +218,6 @@ workflow:
       - strengthen_vague_instructions
       - remove_redundant_content
       - apply_conciseness_strategies
-    validation: verify_all_quality_standards
     output: optimized_document
 
   step_5_report_changes:
@@ -264,17 +261,13 @@ workflow:
       - context_file: "optimization-session-[DD-MM-YY_HH-MM].md"
       - workflow_flowchart: auto_generated
       - optimization_decisions: documented
-    validation: context_saved_successfully
     note: |
       Context saved alongside optimization-summary.md for complete record.
       Captures full optimization journey including analysis and improvements.
 
   step_8_branch_integration:
-    name: Branch Integration Approval
-    approval_gate:
-      type: USER_APPROVAL_REQUIRED
-      prompt: "All checks passed. Would you like me to push this branch to main now to keep main up to date and minimize conflicts?"
-      confirmation_needed: true
+    name: Branch Integration
+    action: Integrate optimized documentation to main branch
     integration_policy:
       merge_strategy: rebase_then_fast_forward
       safety_checks:

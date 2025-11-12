@@ -207,7 +207,7 @@ workflow:
       prompt: "Requirements analyzed. Branch strategy: {branch_strategy}. Workspace will be created at .worktrees/{spec-id}. Proceed to workspace setup?"
       confirmation_needed: true
 
-  step_1_5_workspace_setup:
+  step_12_workspace_setup:
     action: Create isolated worktree via git-worktrees skill
     reference: worktree_setup section above defines complete setup process
     validation: worktree_ready_and_verified
@@ -220,7 +220,7 @@ workflow:
       prompt: "Workspace created at {worktree_path} on branch {git_branch}. Proceed to pre-work review?"
       confirmation_needed: true
 
-  step_2_pre_work_review:
+  step_3_pre_work_review:
     required_documents:
     - AGENTS.md
     - .specify/memory/constitution.md
@@ -228,7 +228,7 @@ workflow:
     verification: MUST REVIEW
     validation: principles_established
 
-  step_3_specification:
+  step_4_specification:
     command: /specify [feature-description]
     outputs:
     - feature_branch: created
@@ -239,7 +239,7 @@ workflow:
       when: analyzing_existing_features
       approach: Navigate → Snapshot → Analyze → Document
 
-  step_4_clarification:
+  step_5_clarification:
     command: /clarify
     outputs:
     - resolved_ambiguities
@@ -255,13 +255,13 @@ workflow:
       prompt: "Requirements clarified. Proceed to quality checklist?"
       confirmation_needed: true
 
-  step_5_quality_checklist:
+  step_6_quality_checklist:
     command: /speckit.checklist
     outputs:
     - quality_checklist: generated
     validation: checklist_generated
 
-  step_6_planning:
+  step_7_planning:
     command: /plan [context]
     outputs:
     - plan.md: technical_approach
@@ -294,7 +294,7 @@ workflow:
         - recommended_next_steps
       completion_message: Planning phase complete. Technical plan and approach have been documented.
 
-  step_7_save_context:
+  step_8_save_context:
     action: Save conversation context for planning documentation
     invocation: Skill(skill: "save-context")
     description: |
@@ -312,7 +312,7 @@ workflow:
       Context saved alongside spec.md and plan.md for complete planning record.
       Captures full planning journey and decision rationale.
 
-  step_8_integration_and_cleanup:
+  step_9_integration_and_cleanup:
     name: Integration & Cleanup
     description: Integrate planning docs and cleanup based on strategy
 

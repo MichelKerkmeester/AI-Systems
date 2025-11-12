@@ -1,22 +1,17 @@
 # ─────────────────────────────────────────────────────────────────
 # FRAMEWORK
 # ─────────────────────────────────────────────────────────────────
-role: Document improvement coordinator using parallel sub-agent analysis
-purpose: Deploy specialized analysis agents → Review outputs → Create consolidated improvement plan
-action:
-  - Deploy 5 analysis agents in parallel → gather improvement insights
-  - Review all outputs → identify priority changes and conflicts
-  - Synthesize into single improvement plan → deliver to user
+role: Document improvement planner and analyst
+purpose: Analyze document comprehensively and create consolidated improvement plan
+action: Analyze document from multiple perspectives → Create prioritized improvement plan
 
 operating_mode:
-  workflow: sequential_with_parallel_blocks
+  workflow: sequential
   workflow_compliance: MANDATORY
-  workflow_execution: autonomous
-  approvals: none
-  tracking: enhancement_analysis_log
-  validation: preservation_verification
-  output_format: markdown_plan
-  change_philosophy: enhance_not_overhaul
+  workflow_execution: manual_with_approvals
+  approvals: after_each_step
+  tracking: progressive_task_checklists
+  validation: checkpoint_verification
 
 scope:
   applies_to: any_document_or_prompt_needing_improvement
@@ -79,9 +74,9 @@ user_inputs:
     [COMPLEXITY]
     
     Analysis depth level:
-    - quick: Surface-level review (3 agents)
-    - standard: Comprehensive analysis (5 agents, default)
-    - deep: Exhaustive review with multiple passes (5 agents + iterations)
+    - quick: Surface-level review
+    - standard: Comprehensive analysis (default)
+    - deep: Exhaustive review with multiple passes
   
   change_intensity: |
     [CHANGE_INTENSITY]
@@ -115,18 +110,15 @@ field_handling:
 
   complexity_policy:
     quick:
-      agents: 3
-      agents_used: [Structure, Clarity, Completeness]
+      analysis_aspects: [Structure, Clarity, Completeness]
       analysis_depth: surface_level
       review_depth: light
     standard:
-      agents: 5
-      agents_used: [Structure, Clarity, Completeness, Consistency, Style]
+      analysis_aspects: [Structure, Clarity, Completeness, Consistency, Style]
       analysis_depth: comprehensive
       review_depth: thorough
     deep:
-      agents: 5
-      agents_used: [Structure, Clarity, Completeness, Consistency, Style]
+      analysis_aspects: [Structure, Clarity, Completeness, Consistency, Style]
       analysis_depth: exhaustive_with_iterations
       review_depth: exhaustive
       additional_passes: 2
@@ -149,33 +141,28 @@ field_handling:
     - extract_style_fingerprint_from_document
 
 # ─────────────────────────────────────────────────────────────────
-# SUB-AGENTS
+# ANALYSIS AREAS
 # ─────────────────────────────────────────────────────────────────
-sub_agents:
-  - id: structure
-    name: Structure Analyst
-    role: Analyze document organization, flow, and hierarchy
-    focus: sections_navigation_logical_progression_information_architecture
+analysis_areas:
+  structure:
+    focus: Document organization, flow, and hierarchy
+    aspects: sections_navigation_logical_progression_information_architecture
 
-  - id: clarity
-    name: Clarity Expert
-    role: Identify ambiguous language and unclear instructions
-    focus: vagueness_undefined_terms_confusing_phrasing_instruction_quality
+  clarity:
+    focus: Ambiguous language and unclear instructions
+    aspects: vagueness_undefined_terms_confusing_phrasing_instruction_quality
 
-  - id: completeness
-    name: Completeness Auditor
-    role: Find gaps and missing essential information
-    focus: missing_examples_edge_cases_error_handling_documentation_gaps
+  completeness:
+    focus: Gaps and missing essential information
+    aspects: missing_examples_edge_cases_error_handling_documentation_gaps
 
-  - id: consistency
-    name: Consistency Checker
-    role: Detect formatting and terminology inconsistencies
-    focus: style_violations_contradictions_pattern_breaks_terminology_drift
+  consistency:
+    focus: Formatting and terminology inconsistencies
+    aspects: style_violations_contradictions_pattern_breaks_terminology_drift
 
-  - id: style
-    name: Style Validator
-    role: Ensure changes preserve original style fingerprint
-    focus: tone_formatting_conventions_voice_preservation_scores
+  style:
+    focus: Preserve original style fingerprint
+    aspects: tone_formatting_conventions_voice_preservation_scores
 
 # ─────────────────────────────────────────────────────────────────
 # WORKFLOW 
@@ -214,87 +201,80 @@ workflow:
       - initial_assessment
 
     validation: inputs_loaded_and_parsed_successfully
+    approval_gate:
+      type: USER_APPROVAL_REQUIRED
+      prompt: "Document loaded and analyzed. Type: {target_type}. Style fingerprint extracted. Proceed to comprehensive analysis?"
+      confirmation_needed: true
 
-  step_2_parallel_analysis_deployment:
-    description: Deploy 5 document analysis agents in parallel
-    parallel_work:
-      execution: parallel
-      concurrency: 5
-      mode: independent_analysis_per_agent
-      shared_context:
-        - "[CONTEXT]"
-        - "[TARGET_DOCUMENT]"
-        - "[CHANGE_INTENSITY]"
-        - "style_fingerprint_from_step_1"
-
-      agents:
-        - agent: structure
-          instructions: Analyze document organization and information flow
-          focus_area: sections_hierarchy_navigation_logical_progression
-          expected_output:
-            type: markdown
-            sections: [structure_assessment, flow_issues, reorganization_suggestions]
-
-        - agent: clarity
-          instructions: Identify all ambiguity and unclear language
-          focus_area: vagueness_undefined_terms_confusing_instructions
-          expected_output:
-            type: markdown
-            sections: [clarity_issues, ambiguous_sections, clarification_suggestions]
-
-        - agent: completeness
-          instructions: Find gaps and missing essential information
-          focus_area: missing_examples_edge_cases_error_handling_gaps
-          expected_output:
-            type: markdown
-            sections: [completeness_gaps, missing_elements, addition_suggestions]
-
-        - agent: consistency
-          instructions: Detect inconsistencies and contradictions
-          focus_area: formatting_terminology_style_pattern_violations
-          expected_output:
-            type: markdown
-            sections: [inconsistencies_found, conflicts_detected, harmonization_suggestions]
-
-        - agent: style
-          instructions: Validate style preservation and calculate scores
-          focus_area: tone_voice_formatting_conventions_preservation
-          expected_output:
-            type: markdown
-            sections: [style_analysis, preservation_scores, style_recommendations]
-
+  step_2_comprehensive_analysis:
+    description: Analyze document from all critical perspectives
+    purpose: Identify improvement opportunities across all aspects
+    
+    analysis_approach:
+      - Analyze structure: organization, flow, hierarchy, navigation, logical progression
+      - Analyze clarity: ambiguous language, undefined terms, confusing phrasing
+      - Analyze completeness: missing examples, edge cases, error handling, documentation gaps
+      - Analyze consistency: formatting inconsistencies, contradictions, pattern breaks, terminology drift
+      - Analyze style: preserve tone, formatting conventions, voice
+    
+    context:
+      - "[CONTEXT]"
+      - "[TARGET_DOCUMENT]"
+      - "[CHANGE_INTENSITY]"
+      - "style_fingerprint_from_step_1"
+    
     outputs:
-      - 5_complete_agent_analysis_reports
-      - ready_for_review
+      structure_analysis:
+        type: markdown
+        sections: [structure_assessment, flow_issues, reorganization_suggestions]
+      
+      clarity_analysis:
+        type: markdown
+        sections: [clarity_issues, ambiguous_sections, clarification_suggestions]
+      
+      completeness_analysis:
+        type: markdown
+        sections: [completeness_gaps, missing_elements, addition_suggestions]
+      
+      consistency_analysis:
+        type: markdown
+        sections: [inconsistencies_found, conflicts_detected, harmonization_suggestions]
+      
+      style_analysis:
+        type: markdown
+        sections: [style_assessment, preservation_scores, style_recommendations]
+    
+    validation: all_analyses_complete
+    approval_gate:
+      type: USER_APPROVAL_REQUIRED
+      prompt: "Comprehensive analysis complete across 5 areas (structure, clarity, completeness, consistency, style). Review analyses and proceed to synthesis?"
+      confirmation_needed: true
 
-  step_3_review_and_synthesis:
-    input: all_5_agent_analysis_reports
-    action: Review all agent outputs and synthesize insights
-    reviewer_role: Meta-analyzer consolidating multiple perspectives
+  step_3_synthesis_and_prioritization:
+    input: comprehensive_analysis_from_step_2
+    action: Synthesize insights and prioritize improvements
+    purpose: Create cohesive improvement strategy
 
-    review_focus:
-      - identify_common_themes_across_agents
+    synthesis_focus:
+      - identify_common_themes_across_analyses
       - resolve_conflicts_between_suggestions
       - prioritize_changes_by_impact
       - validate_preservation_requirements
       - assess_cumulative_effect
       - identify_interdependencies
       - flag_high_risk_changes
-      - synthesize_improvement_strategy
-
-    conflict_resolution:
-      when_agents_disagree:
-        - prioritize_style_validator_for_preservation
-        - prioritize_clarity_expert_for_ambiguity
-        - prioritize_structure_analyst_for_organization
-        - document_conflicts_in_report
+      - create_improvement_strategy
 
     priority_assignment:
-      P0_critical: issues_identified_by_3_plus_agents
-      P1_important: issues_identified_by_2_agents
-      P2_nice_to_have: issues_identified_by_1_agent
+      P0_critical: high_impact_issues_with_clear_evidence
+      P1_important: moderate_impact_improvements
+      P2_nice_to_have: low_impact_enhancements
 
     output: consolidated_analysis_with_priorities
+    approval_gate:
+      type: USER_APPROVAL_REQUIRED
+      prompt: "Synthesis complete. Priorities assigned: P0 (critical), P1 (important), P2 (nice-to-have). Proceed to draft improvement plan?"
+      confirmation_needed: true
 
   step_4_draft_improvement_plan:
     input: consolidated_analysis_from_step_3
@@ -309,27 +289,29 @@ workflow:
         - assess_risk_level
         - define_implementation_order
 
-    change_format:
+      change_format:
       priority: "P0 (critical), P1 (important), or P2 (nice-to-have)"
       title: "Brief description of the change"
       location: "Section, line number, or heading where change applies"
-      rationale: "Why this change improves document, citing agent analyses"
+      rationale: "Why this change improves document, citing specific analysis"
       before: "Exact current text"
       after: "Proposed new text"
-      impact: "What improves (per agent assessments)"
-      risk: "Low, Medium, High - based on style validator"
-      preservation_score: "Calculated by style agent"
-      consensus: "Which agents recommended this change"
-
-    synthesis_approach:
-      - aggregate_all_agent_suggestions
-      - apply_conflict_resolution_from_step_3
+      impact: "What improves (per analysis)"
+      risk: "Low, Medium, High - based on style preservation"
+      preservation_score: "Calculated from style analysis"
+      supporting_evidence: "Which analyses support this change"    synthesis_approach:
+      - aggregate_all_suggestions
+      - apply_prioritization_from_step_3
       - group_related_changes
       - order_by_priority_and_dependency
       - validate_cumulative_effect
       - ensure_style_preservation
 
     output: complete_improvement_plan_with_all_changes
+    approval_gate:
+      type: USER_APPROVAL_REQUIRED
+      prompt: "Improvement plan drafted with detailed before/after comparisons. Review plan and proceed to preservation validation?"
+      confirmation_needed: true
 
   step_5_preservation_validation:
     input: complete_improvement_plan
@@ -354,10 +336,14 @@ workflow:
 
     final_scoring:
       overall_preservation_score: weighted_average_of_all_changes
-      confidence_level: based_on_agent_consensus
+      confidence_level: based_on_analysis_consistency
       risk_assessment: cumulative_risk_evaluation
 
     output: validated_improvement_plan
+    approval_gate:
+      type: USER_APPROVAL_REQUIRED
+      prompt: "Preservation validation complete. Overall preservation score: {score}. Confidence: {confidence}. Risk: {risk}. Proceed to final report?"
+      confirmation_needed: true
 
   step_6_compose_final_report:
     input: validated_improvement_plan
@@ -373,17 +359,17 @@ workflow:
         overall_preservation_score: "[Calculated Score]"
 
       executive_summary:
-        overview: "Analysis conducted by 5 specialized agents"
+        overview: "Comprehensive document analysis"
         total_suggestions: "Count by priority (P0/P1/P2)"
         key_improvements: "Top 3-5 most impactful changes"
-        agent_consensus: "Areas of strong agreement"
+        analysis_quality: "Confidence level in recommendations"
 
-      agent_analyses:
-        structure_analyst: summary_of_findings
-        clarity_expert: summary_of_findings
-        completeness_auditor: summary_of_findings
-        consistency_checker: summary_of_findings
-        style_validator: summary_and_scores
+      analysis_summaries:
+        structure: summary_of_findings
+        clarity: summary_of_findings
+        completeness: summary_of_findings
+        consistency: summary_of_findings
+        style: summary_and_scores
 
       prioritized_changes:
         P0_critical: detailed_changes_with_diffs
@@ -398,39 +384,35 @@ workflow:
       metrics_and_validation:
         preservation_scores: by_category
         coverage: percentage_of_issues_addressed
-        confidence: based_on_agent_agreement
+        confidence: based_on_analysis_quality
 
     output: final_enhancement_plan_markdown
+    approval_gate:
+      type: USER_APPROVAL_REQUIRED
+      prompt: "Final enhancement plan composed with all sections complete. Review report and proceed to save context?"
+      confirmation_needed: true
 
   step_7_save_context:
-    action: Save document analysis conversation context via parallel sub-agent
+    action: Save document analysis conversation context
+    invocation: Skill(skill: "save-context")
     description: |
       Preserve comprehensive analysis conversation including:
-      - All 5 agent analysis outputs
-      - Review and synthesis decisions
+      - All analysis outputs from step 2
+      - Synthesis and prioritization decisions
       - Priority assignments and rationale
       - Enhancement plan structure and recommendations
-    parallel_work:
-      execution: parallel
-      concurrency: 1
-      mode: context_preservation
-      agents:
-        - agent: context_saver
-          instructions: Use save-context skill to preserve analysis session
-          invocation: Skill(skill: "save-context")
-          focus_area: document_analysis_and_improvement_decisions
-          expected_output:
-            type: markdown
-            file: "document-analysis-[DD-MM-YY_HH-MM].md"
-            includes: [workflow_flowchart, agent_analyses, enhancement_plan]
     outputs:
-      - context_file: saved
+      - context_file: "document-analysis-[DD-MM-YY_HH-MM].md"
       - workflow_flowchart: auto_generated
       - analysis_decisions: documented
     validation: context_saved_successfully
+    approval_gate:
+      type: USER_APPROVAL_REQUIRED
+      prompt: "Context saved successfully. Proceed to deliver final enhancement plan?"
+      confirmation_needed: true
     note: |
       Context saved alongside enhancement plan for complete record.
-      Captures all agent analyses and synthesis process.
+      Captures all analyses and synthesis process.
 
   step_8_output:
     action: Deliver enhancement plan to user
@@ -445,7 +427,7 @@ workflow:
       - next_steps_for_implementation
 
     completion_message: |
-      Enhancement plan complete. Document analyzed by 5 specialized agents.
+      Enhancement plan complete. Document analyzed comprehensively.
       All suggestions preserve original style and intent.
       Ready for implementation review.
 

@@ -11,11 +11,11 @@ operating_mode:
   workflow_execution: autonomous
   approvals: none
   tracking: progressive_task_checklists
-  validation: checkpoint_verification
+  validation: final_verification
 
 implementation_philosophy:
   principle: "Ship working code that solves real problems"
-  approach: "Build incrementally, test continuously, refactor as needed"
+  approach: "Build incrementally with autonomous execution, refactor as needed"
   mindset: "Pragmatic implementation over perfect architecture"
 
 # ─────────────────────────────────────────────────────────────────
@@ -110,7 +110,7 @@ workflow:
       - Technical approach
       - Success metrics
 
-  step_1_5_workspace_setup:
+  step_2_workspace_setup:
     condition: use_worktree == true
     action: Create isolated worktree via git-worktrees skill
     strategy: main_temp  # Always main_temp for code workflows
@@ -124,12 +124,11 @@ workflow:
     outputs:
       worktree_path: absolute_path
       git_branch: temp/feature-{timestamp}
-    validation: worktree_ready_or_skipped
     note: |
       If use_worktree=true: Create worktree for isolated feature work
       If use_worktree=false: Skip, work in current directory
 
-  step_2_build:
+  step_3_build:
     purpose: Implement the feature
     approach:
       iterative:
@@ -157,7 +156,7 @@ workflow:
       - Tests (if applicable)
       - Documentation (inline)
 
-  step_3_polish:
+  step_4_polish:
     purpose: Refine and complete
     activities:
       - Code cleanup
@@ -165,19 +164,13 @@ workflow:
       - Error handling
       - Edge cases
       - Create implementation.md in target document
-    validation:
-      - Feature complete
-      - Tests passing
-      - No regressions
-      - Performance acceptable
-      - Documentation created
     outputs:
       - Production-ready code
       - Final testing complete
       - implementation.md document
       - Ready for review
 
-  step_4_save_context:
+  step_5_save_context:
     action: Save implementation conversation context
     invocation: Skill(skill: "save-context")
     description: |
@@ -190,12 +183,11 @@ workflow:
       - context_file: "implementation-session-[DD-MM-YY_HH-MM].md"
       - workflow_flowchart: auto_generated
       - implementation_decisions: documented
-    validation: context_saved_successfully
     note: |
       Context saved alongside implementation.md for complete record.
       Captures full implementation journey including challenges and solutions.
 
-  step_5_integration_and_cleanup:
+  step_6_integration_and_cleanup:
     condition: use_worktree == true
     action: Integrate feature and cleanup worktree
     strategy: main_temp  # Always main_temp for code workflows
@@ -210,7 +202,6 @@ workflow:
       - merge_temp_branch_fast_forward_only
       - delete_temp_branch
       - remove_worktree
-    validation: integrated_and_cleaned_or_skipped
     note: |
       If use_worktree=true: Integrate feature to main and cleanup
       If use_worktree=false: Skip (already working on main)
@@ -222,17 +213,14 @@ incremental:
   milestone_1:
     goal: Basic functionality
     deliverable: Core feature working
-    validation: Happy path works
 
   milestone_2:
     goal: Complete functionality
     deliverable: All features implemented
-    validation: All paths work
 
   milestone_3:
     goal: Production ready
     deliverable: Polished and tested
-    validation: Ready to ship
 
 # ─────────────────────────────────────────────────────────────────
 # QUALITY STANDARDS
