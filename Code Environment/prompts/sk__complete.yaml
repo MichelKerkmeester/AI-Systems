@@ -240,13 +240,16 @@ workflow:
       - feature_branch: created
       - spec.md: acceptance_criteria
       - location: specs/[NNN-feature]/spec.md
+    optional_documents:
+      - spike-[name].md: "Time-boxed research/experimentation BEFORE implementation (copy from .specify/templates/spike-template.md)"
+      - decision-record-[name].md: "Architecture Decision Records for significant technical choices (copy from .specify/templates/decision-record-template.md)"
     validation: spec_complete
     chrome_devtools:
       when: analyzing_existing_features
       approach: Navigate → Snapshot → Analyze → Document
     approval_gate:
       type: USER_APPROVAL_REQUIRED
-      prompt: "Specification created. Review spec.md and approve to proceed to clarification?"
+      prompt: "Specification created. Review spec.md (and any optional spike/decision-record docs if needed) and approve to proceed to clarification?"
       confirmation_needed: true
   
   step_4_clarification:
@@ -281,6 +284,9 @@ workflow:
       - plan.md: technical_approach
       - dependencies: identified
       - upstream_docs: reviewed
+    optional_documents:
+      - tasks.md: "Implementation task breakdown AFTER plan.md, BEFORE coding (copy from .specify/templates/tasks-template.md)"
+      - checklist.md: "Validation & QA checklists when systematic validation needed (copy from .specify/templates/checklist-template.md)"
     validation: approach_defined
     chrome_devtools:
       when: analyzing_current_implementation
@@ -291,19 +297,19 @@ workflow:
         - capture_performance_metrics
     approval_gate:
       type: USER_APPROVAL_REQUIRED
-      prompt: "Technical plan created. Review plan.md and approve to proceed to task breakdown?"
+      prompt: "Technical plan created. Review plan.md (and consider if tasks.md or checklist.md needed) and approve to proceed to task breakdown?"
       confirmation_needed: true
   
   step_7_task_breakdown:
     command: /tasks
     outputs:
       - tasks/checklist.md
-      - task_duration: 15_to_60_minutes
-      - tracking_structure: established
-    validation: tasks_actionable
+    optional_documents:
+      - checklist.md: "Validation & QA checklists if not already created (copy from .specify/templates/checklist-template.md)"
+    validation: tasks_documented
     approval_gate:
       type: USER_APPROVAL_REQUIRED
-      prompt: "Tasks broken down. Review checklist.md and approve to proceed to analysis?"
+      prompt: "Tasks broken down. Review checklist.md (add validation checklists if needed) and approve to proceed to analysis?"
       confirmation_needed: true
   
   step_8_analysis:
@@ -475,6 +481,9 @@ workflow:
         ✓ Temp branch temp/{spec-id} deleted
         ✓ Worktree .worktrees/{spec-id} removed
         ✓ Main branch updated with your changes
+        
+        Optional post-completion documentation:
+          - retrospective.md: Capture learnings AFTER feature complete (copy from .specify/templates/retrospective-template.md)
 
     # ─────────────────────────────────────────────────────────────
     # FEATURE_BRANCH STRATEGY (EXCEPTION - 20% of work)
@@ -519,6 +528,9 @@ workflow:
           2. Request code review
           3. Merge PR after approval
           4. Manual cleanup: git worktree remove .worktrees/{spec-id}
+        
+        Optional post-completion documentation:
+          - retrospective.md: Capture learnings AFTER feature complete (copy from .specify/templates/retrospective-template.md)
 
     validation: integration_complete_per_strategy
 

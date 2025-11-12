@@ -270,6 +270,9 @@ workflow:
       - feature_branch: created
       - spec.md: acceptance_criteria
       - location: specs/[NNN-feature]/spec.md
+    optional_documents:
+      - spike-[name].md: "Time-boxed research/experimentation BEFORE implementation (copy from .specify/templates/spike-template.md)"
+      - decision-record-[name].md: "Architecture Decision Records for significant technical choices (copy from .specify/templates/decision-record-template.md)"
     validation: spec_complete_and_testable
 
   step_5_clarification:
@@ -348,6 +351,9 @@ workflow:
       output_files:
         - "[SPEC_FOLDER]/plan.md"
         - "[SPEC_FOLDER]/planning-summary.md"
+      optional_documents:
+        - tasks.md: "Implementation task breakdown AFTER plan.md, BEFORE coding (copy from .specify/templates/tasks-template.md)"
+        - checklist.md: "Validation & QA checklists when systematic validation needed (copy from .specify/templates/checklist-template.md)"
       validation_checklist:
         - all_parallel_tasks_present
         - risks_have_mitigations

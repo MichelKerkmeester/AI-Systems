@@ -346,6 +346,9 @@ workflow:
       code_blocks: syntax_highlighted
       diagrams: ascii_art
       cross_references: linked
+    optional_documents:
+      - spike-[name].md: "If research requires time-boxed experimentation (copy from .specify/templates/spike-template.md)"
+      - decision-record-[name].md: "If research leads to significant technical decisions (copy from .specify/templates/decision-record-template.md)"
     required_sections:
       investigation_report:
         - request_summary

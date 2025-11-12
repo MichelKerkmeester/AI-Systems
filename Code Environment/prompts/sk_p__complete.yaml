@@ -329,13 +329,16 @@ workflow:
       - feature_branch: created
       - spec.md: acceptance_criteria
       - location: specs/[NNN-feature]/spec.md
+    optional_documents:
+      - spike-[name].md: "Time-boxed research/experimentation BEFORE implementation (copy from .specify/templates/spike-template.md)"
+      - decision-record-[name].md: "Architecture Decision Records for significant technical choices (copy from .specify/templates/decision-record-template.md)"
     validation: spec_complete
     chrome_devtools:
       when: analyzing_existing_features
       approach: Navigate → Snapshot → Analyze → Document
     approval_gate:
       type: USER_APPROVAL_REQUIRED
-      prompt: "Specification created. Review spec.md and approve to proceed to clarification?"
+      prompt: "Specification created. Review spec.md (and any optional spike/decision-record docs if needed) and approve to proceed to clarification?"
       confirmation_needed: true
 
   step_4_clarification:
@@ -383,6 +386,9 @@ workflow:
       output_files:
         - "[SPEC_FOLDER]/plan.md"
         - "[SPEC_FOLDER]/planning-summary.md"
+    optional_documents:
+      - tasks.md: "Implementation task breakdown AFTER plan.md, BEFORE coding (copy from .specify/templates/tasks-template.md)"
+      - checklist.md: "Validation & QA checklists when systematic validation needed (copy from .specify/templates/checklist-template.md)"
     main_agent_finalization:
       by: MAIN_AGENT
       action: QA review and finalization of planning artifacts
@@ -396,7 +402,7 @@ workflow:
         - final_signoff: true
     approval_gate:
       type: USER_APPROVAL_REQUIRED
-      prompt: "Planning artifacts synthesized. Approve to proceed to task breakdown?"
+      prompt: "Planning artifacts synthesized. Consider if tasks.md or checklist.md needed. Approve to proceed to task breakdown?"
       confirmation_needed: true
 
   step_7_task_breakdown:
@@ -631,6 +637,9 @@ workflow:
         ✓ Temp branch temp/{spec-id} deleted
         ✓ Worktree .worktrees/{spec-id} removed
         ✓ Main branch updated with your changes
+        
+        Optional post-completion documentation:
+          - retrospective.md: Capture learnings AFTER feature complete (copy from .specify/templates/retrospective-template.md)
 
     # ─────────────────────────────────────────────────────────────
     # FEATURE_BRANCH STRATEGY (EXCEPTION - 20% of work)
@@ -675,6 +684,9 @@ workflow:
           2. Request code review
           3. Merge PR after approval
           4. Manual cleanup: git worktree remove .worktrees/{spec-id}
+        
+        Optional post-completion documentation:
+          - retrospective.md: Capture learnings AFTER feature complete (copy from .specify/templates/retrospective-template.md)
 
     validation: integration_complete_per_strategy
 

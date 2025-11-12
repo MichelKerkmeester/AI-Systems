@@ -225,6 +225,11 @@ workflow:
       - "[SPEC_FOLDER]/spec.md"
       - "[SPEC_FOLDER]/plan.md"
       - "[SPEC_FOLDER]/planning-summary.md"
+    optional_documents:
+      - spike-[name].md: "Research findings if technical investigation was performed"
+      - decision-record-[name].md: "Architecture decisions if significant choices were made"
+      - tasks.md: "Task breakdown if created during planning"
+      - checklist.md: "Validation checklists if systematic validation needed"
     outputs:
       - branch_strategy_confirmed
       - worktree_existence_checked
@@ -252,6 +257,8 @@ workflow:
       - tasks/checklist.md
       - task_duration: 15_to_60_minutes
       - tracking_structure: established
+    optional_documents:
+      - checklist.md: "Validation & QA checklists if not already created (copy from .specify/templates/checklist-template.md)"
     validation: tasks_actionable
 
   step_14_analysis:
@@ -533,6 +540,8 @@ step_21_integration_and_cleanup:
   termination:
     after_step: 21
     message: "Implementation phase completed successfully. Workflow terminated after step 21 (integration and cleanup)."
+    optional_post_completion:
+      - retrospective.md: "Capture learnings AFTER feature complete (copy from .specify/templates/retrospective-template.md)"
 
 # ─────────────────────────────────────────────────────────────────
 # ADAPTIVE RULES & ERROR HANDLING
