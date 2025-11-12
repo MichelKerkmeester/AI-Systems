@@ -205,7 +205,25 @@ workflow:
       - Documentation updated
     validation: All tests pass
 
-  step_5_integration_and_cleanup:
+  step_5_save_context:
+    action: Save debugging conversation context
+    invocation: Skill(skill: "save-context")
+    description: |
+      Preserve comprehensive debugging conversation including:
+      - Issue reproduction steps and evidence
+      - Root cause analysis and diagnosis
+      - Fix implementation and rationale
+      - Testing and verification results
+    outputs:
+      - context_file: "debug-session-[DD-MM-YY_HH-MM].md"
+      - workflow_flowchart: auto_generated
+      - debugging_decisions: documented
+    validation: context_saved_successfully
+    note: |
+      Context saved for future reference and knowledge sharing.
+      Captures full debugging journey including challenges and solutions.
+
+  step_6_integration_and_cleanup:
     condition: use_worktree == true
     action: Integrate debug fix and cleanup worktree
     strategy: main_temp  # Always main_temp for code workflows

@@ -1,15 +1,12 @@
 # ─────────────────────────────────────────────────────────────────
 # FRAMEWORK
 # ─────────────────────────────────────────────────────────────────
-role: Expert Developer using GitHub SpecKit with manual gates and parallel sub-agents
-purpose: Full spec-to-implementation flow with parallel blocks per stage and preserved approval gates
-action: 
-  - Stage A (planning/spec) parallel → review → synthesis → approval; 
-  - Stage B (implementation prep) parallel → review → synthesis → approval; 
-  - Stage C (quality) parallel → review → synthesis → final approval
+role: Expert Developer using GitHub SpecKit with manual gates
+purpose: Spec-driven development with mandatory compliance and approvals
+action: Run full SpecKit from spec to implementation with validation and user approvals at key checkpoints
 
 operating_mode:
-  workflow: sequential_with_parallel_blocks
+  workflow: sequential
   workflow_compliance: MANDATORY
   workflow_execution: manual_with_approvals
   approvals: after_each_step
@@ -151,92 +148,11 @@ worktree_setup:
 
   note: |
     All subsequent workflow steps execute within this worktree context.
-    All sub-agents in parallel stages run within the same worktree.
     Dependencies auto-installed (npm/cargo/pip/go).
     Environment verified clean before proceeding.
 
 # ─────────────────────────────────────────────────────────────────
-# SUB-AGENTS BY STAGE
-# ─────────────────────────────────────────────────────────────────
-sub_agents:
-  stage_A_planning_spec:
-    - id: requirements
-      name: Requirements Analyst
-      role: requirements_and_success_metrics
-      focus: requirements_constraints_success_metrics_dependencies
-    - id: architecture
-      name: Solution Architect
-      role: components_interfaces_data_flow
-      focus: components_interfaces_data_flow_architecture_patterns
-    - id: risk
-      name: Risk/Compliance Analyst
-      role: risks_edge_cases_non_functionals
-      focus: risks_edge_cases_security_privacy_performance
-    - id: estimation
-      name: Estimation/Scope Analyst
-      role: milestones_sequencing_effort_ranges
-      focus: milestones_sequencing_effort_ranges_timelines
-    - id: reviewerA
-      name: Lead Reviewer (A)
-      role: reconcile_and_validate
-      focus: reconciliation_validation_conflict_resolution
-    - id: synthesizerA
-      name: Lead Synthesizer (A)
-      role: plan_and_summary
-      focus: plan_creation_summary_generation_integration
-  stage_B_implementation_prep:
-    - id: core
-      name: Core Implementer
-      role: modules_data_structures_algorithms
-      focus: modules_data_structures_algorithms_business_logic
-    - id: adapters
-      name: Integrations/Adapters Engineer
-      role: integrations_api_config
-      focus: integrations_api_surfaces_configuration_protocols
-    - id: tests
-      name: Test Engineer
-      role: plan_cases_fixtures_coverage
-      focus: test_planning_cases_fixtures_coverage_strategies
-    - id: docs
-      name: Docs Engineer
-      role: usage_examples_migration
-      focus: usage_examples_migration_guides_api_docs
-    - id: reviewerB
-      name: Integration Reviewer (B)
-      role: coherence_api_testability
-      focus: coherence_api_consistency_testability_quality
-    - id: synthesizerB
-      name: Lead Synthesizer (B)
-      role: implementation_plan
-      focus: implementation_plan_synthesis_coordination
-  stage_C_quality_review:
-    - id: completeness
-      name: Completeness Reviewer
-      role: coverage_non_functionals
-      focus: coverage_gaps_missing_requirements_non_functionals
-    - id: feasibility
-      name: Feasibility Reviewer
-      role: technical_viability_perf_scale
-      focus: technical_viability_performance_scalability_constraints
-    - id: security
-      name: Security/Privacy Reviewer
-      role: threats_data_compliance
-      focus: vulnerabilities_auth_encryption_input_validation
-    - id: consistency
-      name: Consistency/Traceability Reviewer
-      role: contradictions_terminology_refs
-      focus: contradictions_terminology_references_traceability
-    - id: reviewerC
-      name: Lead Reviewer (C)
-      role: severity_resolution
-      focus: severity_assessment_resolution_prioritization
-    - id: synthesizerC
-      name: Lead Synthesizer (C)
-      role: quality_report
-      focus: quality_report_generation_findings_consolidation
-
-# ─────────────────────────────────────────────────────────────────
-# WORKFLOW (PARALLEL OUTPUT QA BY MAIN AGENT)
+# WORKFLOW
 # ─────────────────────────────────────────────────────────────────
 workflow:
   step_1_request_analysis:
@@ -301,7 +217,6 @@ workflow:
       - worktree_path_resolved
       - git_branch_active
       - baseline_tests_status
-    note: "All parallel sub-agents will execute within this worktree context"
     approval_gate:
       type: USER_APPROVAL_REQUIRED
       prompt: "Workspace created at {worktree_path} on branch {git_branch}. Baseline tests: {baseline_tests}. Proceed to pre-work review?"
@@ -318,7 +233,7 @@ workflow:
       type: USER_APPROVAL_REQUIRED
       prompt: "Pre-work documentation reviewed. Proceed to specification?"
       confirmation_needed: true
-
+  
   step_3_specification:
     command: /specify [feature-description]
     outputs:
@@ -333,7 +248,7 @@ workflow:
       type: USER_APPROVAL_REQUIRED
       prompt: "Specification created. Review spec.md and approve to proceed to clarification?"
       confirmation_needed: true
-
+  
   step_4_clarification:
     command: /clarify
     outputs:
@@ -349,7 +264,7 @@ workflow:
       type: USER_APPROVAL_REQUIRED
       prompt: "Requirements clarified. Proceed to quality checklist?"
       confirmation_needed: true
-
+  
   step_5_quality_checklist:
     command: /speckit.checklist
     outputs:
@@ -357,44 +272,28 @@ workflow:
     validation: checklist_generated
     approval_gate:
       type: USER_APPROVAL_REQUIRED
-      prompt: "Quality checklist complete. Proceed to planning parallel block?"
+      prompt: "Quality checklist complete. Proceed to planning?"
       confirmation_needed: true
-
-  # Stage A: Planning/Spec parallel block
-  step_6_parallel_planning:
-    description: Parallel specialist analyses for planning/spec
-    parallel_work:
-      execution: parallel
-      concurrency: 3
-      tasks:
-        - { agent: requirements, instructions: "Requirements dossier with success metrics and dependencies" }
-        - { agent: architecture, instructions: "Architecture with components, interfaces, data flow, alternatives" }
-        - { agent: risk, instructions: "Risks, severities, mitigations, edge cases, non-functionals" }
-        - { agent: estimation, instructions: "Phases, milestones, sequencing, effort ranges, assumptions" }
-    review:
-      by: reviewerA
-      outputs: [synthesis_guidance, review_notes]
-    synthesis:
-      by: synthesizerA
-      output_files:
-        - "[SPEC_FOLDER]/plan.md"
-        - "[SPEC_FOLDER]/planning-summary.md"
-    main_agent_finalization:
-      by: MAIN_AGENT
-      action: QA review and finalization of planning artifacts
-      checks:
-        - confirm_alignment_with_request_and_context
-        - validate_completeness_and_consistency
-        - ensure_output_format_and_sections_present
-        - resolve_remaining_open_questions_or_note_them
-      outputs:
-        - main_agent_review_notes
-        - final_signoff: true
+  
+  step_6_planning:
+    command: /plan [context]
+    outputs:
+      - plan.md: technical_approach
+      - dependencies: identified
+      - upstream_docs: reviewed
+    validation: approach_defined
+    chrome_devtools:
+      when: analyzing_current_implementation
+      actions:
+        - inspect_network_requests
+        - analyze_dom_structure
+        - review_console_errors
+        - capture_performance_metrics
     approval_gate:
       type: USER_APPROVAL_REQUIRED
-      prompt: "Planning artifacts synthesized. Approve to proceed to task breakdown?"
+      prompt: "Technical plan created. Review plan.md and approve to proceed to task breakdown?"
       confirmation_needed: true
-
+  
   step_7_task_breakdown:
     command: /tasks
     outputs:
@@ -406,7 +305,7 @@ workflow:
       type: USER_APPROVAL_REQUIRED
       prompt: "Tasks broken down. Review checklist.md and approve to proceed to analysis?"
       confirmation_needed: true
-
+  
   step_8_analysis:
     command: /analyze
     outputs:
@@ -424,44 +323,10 @@ workflow:
         - performance_baseline
     approval_gate:
       type: USER_APPROVAL_REQUIRED
-      prompt: "Analysis complete. Review consistency report and approve to proceed to implementation parallel prep?"
+      prompt: "Analysis complete. Review consistency report and approve to proceed to implementation check?"
       confirmation_needed: true
-
-  # Stage B: Implementation preparation parallel block
-  step_9_parallel_implementation_prep:
-    description: Parallel prep for core, integrations, tests, docs
-    parallel_work:
-      execution: parallel
-      concurrency: 3
-      tasks:
-        - { agent: core, instructions: "Modules, data structures, algorithmic approach" }
-        - { agent: adapters, instructions: "Integrations, API contracts, configuration, error handling" }
-        - { agent: tests, instructions: "Test plan, key cases, fixtures, coverage targets" }
-        - { agent: docs, instructions: "Usage docs, examples, migration" }
-    review:
-      by: reviewerB
-      outputs: [synthesis_guidance, review_notes]
-    synthesis:
-      by: synthesizerB
-      output_files:
-        - "[SPEC_FOLDER]/implementation_plan.md"
-    main_agent_finalization:
-      by: MAIN_AGENT
-      action: QA review and finalization of implementation plan
-      checks:
-        - confirm_alignment_with_request_and_context
-        - validate_completeness_and_consistency
-        - ensure_output_format_and_sections_present
-        - resolve_remaining_open_questions_or_note_them
-      outputs:
-        - main_agent_review_notes
-        - final_signoff: true
-    approval_gate:
-      type: USER_APPROVAL_REQUIRED
-      prompt: "Implementation plan synthesized. Approve to proceed to implementation check?"
-      confirmation_needed: true
-
-  step_10_implementation_check:
+  
+  step_9_implementation_check:
     command: /implement [task-id]
     checks:
       prerequisites: verified
@@ -479,21 +344,21 @@ workflow:
       prompt: "Implementation prerequisites verified. APPROVE TO BEGIN CODE IMPLEMENTATION?"
       confirmation_needed: true
       warning: "This will begin actual code changes"
-
-  step_11_development:
+  
+  step_10_development:
     approach: manual_implementation_with_checkpoints
     requirements:
       - follow: .claude/knowledge/code_standards.md
       - update: task_checklist_progressively
       - test: before_commit
     checkpoints:
-      major_changes:
+      major_changes: 
         action: log_progress
         approval: USER_APPROVAL_REQUIRED
-      issues_found:
+      issues_found: 
         action: document_resolution
         approval: USER_APPROVAL_REQUIRED
-      architecture_change:
+      architecture_change: 
         action: note_deviation
         approval: USER_APPROVAL_REQUIRED
     chrome_devtools:
@@ -506,44 +371,10 @@ workflow:
         - measure_performance_impact
     approval_gate:
       type: USER_APPROVAL_REQUIRED
-      prompt: "Development complete. Proceed to quality parallel review before completion?"
+      prompt: "Development complete. Approve to proceed to completion summary?"
       confirmation_needed: true
 
-  # Stage C: Quality/Review parallel block
-  step_12_parallel_quality_review:
-    description: Parallel reviewers for final quality validation
-    parallel_work:
-      execution: parallel
-      concurrency: 3
-      tasks:
-        - { agent: completeness, instructions: "Coverage and non-functionals validation" }
-        - { agent: feasibility, instructions: "Technical viability, performance, scalability" }
-        - { agent: security, instructions: "Security/privacy assessment and mitigations" }
-        - { agent: consistency, instructions: "Contradictions, terminology, references" }
-    review:
-      by: reviewerC
-      outputs: [synthesis_guidance, prioritized_issue_list]
-    synthesis:
-      by: synthesizerC
-      output_files:
-        - "[SPEC_FOLDER]/quality_report.md"
-    main_agent_finalization:
-      by: MAIN_AGENT
-      action: QA review and finalization of quality report
-      checks:
-        - confirm_alignment_with_request_and_context
-        - validate_completeness_and_consistency
-        - ensure_output_format_and_sections_present
-        - resolve_remaining_open_questions_or_note_them
-      outputs:
-        - main_agent_review_notes
-        - final_signoff: true
-    approval_gate:
-      type: USER_APPROVAL_REQUIRED
-      prompt: "Quality review complete. Approve to proceed to completion summary?"
-      confirmation_needed: true
-
-  step_13_completion:
+  step_11_completion:
     summary_document:
       location: specs/[NNN-feature]/implementation-summary.md
       required_sections:
@@ -564,7 +395,25 @@ workflow:
       prompt: "Implementation summary complete. Approve to finalize workflow?"
       confirmation_needed: true
 
-  step_14_integration_and_cleanup:
+  step_12_save_context:
+    action: Save conversation context for documentation and team sharing
+    invocation: Skill(skill: "save-context")
+    description: |
+      Preserve comprehensive conversation context including:
+      - Session metadata and timeline
+      - Full dialogue flow with decisions
+      - Auto-generated workflow flowcharts
+      - File changes and implementation details
+    outputs:
+      - context_file: specs/[NNN-feature]/memory/[DD-MM-YY_HH-MM]__session.md
+      - workflow_flowchart: auto_generated
+      - decision_documentation: preserved
+    validation: context_saved_successfully
+    note: |
+      Context saved to memory/ subfolder within spec folder.
+      Auto-triggered by skill when conversation reaches threshold or keywords detected.
+
+  step_13_integration_and_cleanup:
     name: Integration & Cleanup
     description: Integrate work and cleanup based on strategy
 
@@ -674,40 +523,15 @@ workflow:
     validation: integration_complete_per_strategy
 
 # ─────────────────────────────────────────────────────────────────
-# ADAPTIVE RULES & ERROR HANDLING
-# ─────────────────────────────────────────────────────────────────
-adaptive_rules:
-  high_complexity:
-    concurrency: 2
-    review_depth: exhaustive
-  high_uncertainty:
-    insert: discovery_microstep_before_parallel_blocks
-    estimates: use_ranges
-  parallel_not_supported:
-    concurrency: 1
-    note: "If parallel sub-agents unsupported, run tasks one-by-one; keep review and synthesis."
-
-error_handling:
-  retry_policy:
-    targeted: true
-    max_retries: 2
-  fallback:
-    on_repeated_failure: rerun_failed_tasks_sequentially
-    proceed_with_partial: true
-    annotate_in_review: true
-
-# ─────────────────────────────────────────────────────────────────
 # RULES
 # ─────────────────────────────────────────────────────────────────
 rules:
   ALWAYS:
     - follow_workflow_sequence
-    - preserve_original_approval_gates
     - document_all_changes
     - validate_before_completion
     - use_devtools_for_staging_analysis
-    - evidence_before_decisions
-    - enforce_review_before_synthesis
+    - await_user_approval_at_gates
   NEVER:
     - skip_workflow_steps
     - ignore_blockers

@@ -251,7 +251,25 @@ workflow:
       - redundancy_eliminated: true
       - summary_created: true
 
-  step_7_branch_integration:
+  step_7_save_context:
+    action: Save optimization conversation context
+    invocation: Skill(skill: "save-context")
+    description: |
+      Preserve comprehensive optimization conversation including:
+      - Document analysis and vagueness identification
+      - Optimization decisions and rationale
+      - Changes made and quality improvements
+      - Metrics and validation results
+    outputs:
+      - context_file: "optimization-session-[DD-MM-YY_HH-MM].md"
+      - workflow_flowchart: auto_generated
+      - optimization_decisions: documented
+    validation: context_saved_successfully
+    note: |
+      Context saved alongside optimization-summary.md for complete record.
+      Captures full optimization journey including analysis and improvements.
+
+  step_8_branch_integration:
     name: Branch Integration Approval
     approval_gate:
       type: USER_APPROVAL_REQUIRED

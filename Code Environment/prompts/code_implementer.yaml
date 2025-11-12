@@ -177,7 +177,25 @@ workflow:
       - implementation.md document
       - Ready for review
 
-  step_4_integration_and_cleanup:
+  step_4_save_context:
+    action: Save implementation conversation context
+    invocation: Skill(skill: "save-context")
+    description: |
+      Preserve comprehensive implementation conversation including:
+      - Requirements understanding and approach
+      - Development decisions and rationale
+      - Code changes and architecture decisions
+      - Testing and validation results
+    outputs:
+      - context_file: "implementation-session-[DD-MM-YY_HH-MM].md"
+      - workflow_flowchart: auto_generated
+      - implementation_decisions: documented
+    validation: context_saved_successfully
+    note: |
+      Context saved alongside implementation.md for complete record.
+      Captures full implementation journey including challenges and solutions.
+
+  step_5_integration_and_cleanup:
     condition: use_worktree == true
     action: Integrate feature and cleanup worktree
     strategy: main_temp  # Always main_temp for code workflows

@@ -216,7 +216,7 @@ workflow:
       - implementation_strategy_refinement
     validation: planning_artifacts_understood
 
-  step_7_5_workspace_verification_or_setup:
+  step_8_workspace_verification_or_setup:
     action: Verify existing worktree or create new one via git-worktrees skill
     reference: worktree_setup section above defines complete setup/verification process
     scenarios:
@@ -233,7 +233,7 @@ workflow:
       - git_branch_active
       - worktree_status_confirmed
 
-  step_8_task_breakdown:
+  step_9_task_breakdown:
     command: /tasks
     outputs:
     - tasks/checklist.md
@@ -249,7 +249,7 @@ workflow:
       - priority_ordering
     validation: tasks_actionable
 
-  step_9_analysis:
+  step_10_analysis:
     command: /analyze
     outputs:
     - consistency_report
@@ -273,13 +273,13 @@ workflow:
       - integration_points
       - risk_assessment
 
-  step_10_quality_checklist:
+  step_11_quality_checklist:
     command: /speckit.checklist
     outputs:
     - quality_checklist: generated
     validation: checklist_generated
 
-  step_5_implementation_check:
+  step_12_implementation_check:
     command: /implement [task-id]
     checks:
       prerequisites: verified
@@ -300,7 +300,7 @@ workflow:
       - blocker_identification
       - readiness_confirmation
 
-  step_11_development:
+  step_13_development:
     approach: autonomous_implementation_with_checkpoints
     requirements:
     - follow: .claude/knowledge/code_standards.md
@@ -331,7 +331,7 @@ workflow:
       - optimization_opportunities
       - test_coverage_gaps
 
-  step_12_completion:
+  step_14_completion:
     summary_document:
       location: "[SPEC_FOLDER]/implementation-summary.md"
       required_sections:
@@ -356,7 +356,25 @@ workflow:
       - technical_debt_noted
       - future_improvements
 
-  step_13_integration_and_cleanup:
+  step_15_save_context:
+    action: Save conversation context for implementation documentation
+    invocation: Skill(skill: "save-context")
+    description: |
+      Preserve comprehensive implementation conversation including:
+      - Development decisions and rationale
+      - Debugging insights and solutions
+      - Code changes and architecture decisions
+      - Testing and validation results
+    outputs:
+      - context_file: "[SPEC_FOLDER]/memory/[DD-MM-YY_HH-MM]__implementation_session.md"
+      - workflow_flowchart: auto_generated
+      - implementation_decisions: documented
+    validation: context_saved_successfully
+    note: |
+      Context saved alongside implementation-summary.md for complete record.
+      Captures full implementation journey including challenges and solutions.
+
+  step_16_integration_and_cleanup:
     name: Integration & Cleanup
     description: Integrate implementation and cleanup based on strategy
 

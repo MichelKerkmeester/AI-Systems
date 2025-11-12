@@ -402,7 +402,37 @@ workflow:
 
     output: final_enhancement_plan_markdown
 
-  step_7_output:
+  step_7_save_context:
+    action: Save document analysis conversation context via parallel sub-agent
+    description: |
+      Preserve comprehensive analysis conversation including:
+      - All 5 agent analysis outputs
+      - Review and synthesis decisions
+      - Priority assignments and rationale
+      - Enhancement plan structure and recommendations
+    parallel_work:
+      execution: parallel
+      concurrency: 1
+      mode: context_preservation
+      agents:
+        - agent: context_saver
+          instructions: Use save-context skill to preserve analysis session
+          invocation: Skill(skill: "save-context")
+          focus_area: document_analysis_and_improvement_decisions
+          expected_output:
+            type: markdown
+            file: "document-analysis-[DD-MM-YY_HH-MM].md"
+            includes: [workflow_flowchart, agent_analyses, enhancement_plan]
+    outputs:
+      - context_file: saved
+      - workflow_flowchart: auto_generated
+      - analysis_decisions: documented
+    validation: context_saved_successfully
+    note: |
+      Context saved alongside enhancement plan for complete record.
+      Captures all agent analyses and synthesis process.
+
+  step_8_output:
     action: Deliver enhancement plan to user
     format: markdown_document
     location: console_output_or_file_if_specified

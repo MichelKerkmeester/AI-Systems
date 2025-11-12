@@ -191,6 +191,10 @@ sub_agents:
     name: Docs Engineer
     role: Draft usage notes, examples, migration/upgrade notes
     focus: usage_guides_examples_migration_api_documentation
+  - id: context_saver
+    name: Context Documentation Agent
+    role: Conversation preservation
+    focus: session_documentation_decision_capture_flowchart_generation_implementation_journey
   - id: reviewer
     name: Integration Reviewer
     role: Validate coherence, API consistency, testability, identify gaps
@@ -227,7 +231,7 @@ workflow:
       - planning_artifacts_understood
     validation: planning_artifacts_understood_and_branch_confirmed
 
-  step_8_5_workspace_verification:
+  step_9_workspace_verification:
     action: Verify or create isolated worktree via git-worktrees skill
     reference: worktree_setup section above defines complete setup process with inheritance handling
     inheritance_check:
@@ -242,7 +246,7 @@ workflow:
       - worktree_reused_from_planning
     note: "All parallel sub-agents and implementation steps will execute within this worktree context"
 
-  step_9_task_breakdown:
+  step_10_task_breakdown:
     command: /tasks
     outputs:
       - tasks/checklist.md
@@ -250,7 +254,7 @@ workflow:
       - tracking_structure: established
     validation: tasks_actionable
 
-  step_10_analysis:
+  step_11_analysis:
     command: /analyze
     outputs:
       - consistency_report
@@ -259,13 +263,13 @@ workflow:
       - gap_analysis
     validation: consistency_verified
 
-  step_11_quality_checklist:
+  step_12_quality_checklist:
     command: /speckit.checklist
     outputs:
       - quality_checklist: generated
     validation: checklist_generated
 
-  step_12_parallel_implementation_preparation:
+  step_13_parallel_implementation_preparation:
     description: Parallel preparation for core, integrations, tests, and docs
     analyze_inputs:
       summarize:
@@ -338,7 +342,7 @@ workflow:
         - main_agent_review_notes
         - final_signoff: true
 
-  step_13_implementation_check:
+  step_14_implementation_check:
     command: /implement [task-id]
     checks:
       prerequisites: verified
@@ -359,7 +363,7 @@ workflow:
         - blocker_identification
         - readiness_confirmation
 
-  step_14_development:
+  step_15_development:
     approach: autonomous_implementation_with_checkpoints
     requirements:
       - follow: .claude/knowledge/code_standards.md
@@ -390,7 +394,7 @@ workflow:
         - optimization_opportunities
         - test_coverage_gaps
 
-  step_15_completion:
+  step_16_completion:
     summary_document:
       location: "[SPEC_FOLDER]/implementation-summary.md"
       required_sections:
@@ -415,6 +419,29 @@ workflow:
         - technical_debt_noted
         - future_improvements
 
+  step_17_save_context:
+    action: Save implementation conversation context via parallel sub-agent
+    description: |
+      Preserve comprehensive implementation conversation including:
+      - Development decisions and rationale
+      - Debugging insights and solutions
+      - Code changes and architecture decisions
+      - Testing and validation results
+    parallel_work:
+      execution: parallel
+      concurrency: 1
+      tasks:
+        - agent: context_saver
+          instructions: "Save conversation context with Skill(skill: 'save-context')"
+    outputs:
+      - context_file: "[SPEC_FOLDER]/memory/[DD-MM-YY_HH-MM]__implementation_session.md"
+      - workflow_flowchart: auto_generated
+      - implementation_decisions: documented
+    validation: context_saved_successfully
+    note: |
+      Context saved alongside implementation-summary.md for complete record.
+      Captures full implementation journey including challenges and solutions.
+
 # ─────────────────────────────────────────────────────────────────
 # WORKFLOW CONTINUATION
 # ─────────────────────────────────────────────────────────────────
@@ -428,94 +455,84 @@ prerequisites:
   user_context: "[CONTEXT]"
   user_request: "[REQUEST]"
 
-  step_16_integration_and_cleanup:
-    name: Integration & Cleanup
-    description: Integrate implementation and cleanup based on strategy
+step_18_integration_and_cleanup:
+  name: Integration & Cleanup
+  description: Integrate implementation and cleanup based on strategy
 
-    # ─────────────────────────────────────────────────────────────
-    # MAIN_TEMP STRATEGY (DEFAULT - 80% of work)
-    # ─────────────────────────────────────────────────────────────
-    condition_main_temp:
-      when: branch_strategy == main_temp
-      philosophy: "Temp branches are immediately merged and deleted. Worktree is ephemeral."
+  # ─────────────────────────────────────────────────────────────
+  # MAIN_TEMP STRATEGY (DEFAULT - 80% of work)
+  # ─────────────────────────────────────────────────────────────
+  condition_main_temp:
+    when: branch_strategy == main_temp
+    philosophy: "Temp branches are immediately merged and deleted. Worktree is ephemeral."
 
-      approval_gate:
-        type: USER_APPROVAL_REQUIRED
-        prompt: "Implementation complete. Ready to integrate to main and cleanup? This will: (1) Merge temp/{spec-id} to main, (2) Delete temp branch, (3) Remove worktree."
-        confirmation_needed: true
+    integration_steps:
+      - action: verify_worktree_clean
+        command: "git status"
+        validation: no_uncommitted_changes
+      - action: return_to_main_repo
+        command: "cd ../.."
+      - action: checkout_main_and_update
+        command: "git checkout main && git pull --ff-only"
+        validation: main_up_to_date
+      - action: merge_temp_branch
+        command: "git merge --ff-only temp/{spec-id}"
+        validation: fast_forward_successful
+        on_failure: |
+          If merge fails: offer to rebase
+      - action: delete_temp_branch
+        command: "git branch -d temp/{spec-id}"
+      - action: remove_worktree
+        command: "git worktree remove .worktrees/{spec-id}"
+      - action: verify_integration
+        command: "git log --oneline -5"
 
-      integration_steps:
-        - action: verify_worktree_clean
-          command: "git status"
-          validation: no_uncommitted_changes
-        - action: return_to_main_repo
-          command: "cd ../.."
-        - action: checkout_main_and_update
-          command: "git checkout main && git pull --ff-only"
-          validation: main_up_to_date
-        - action: merge_temp_branch
-          command: "git merge --ff-only temp/{spec-id}"
-          validation: fast_forward_successful
-          on_failure: |
-            If merge fails: offer to rebase
-        - action: delete_temp_branch
-          command: "git branch -d temp/{spec-id}"
-        - action: remove_worktree
-          command: "git worktree remove .worktrees/{spec-id}"
-        - action: verify_integration
-          command: "git log --oneline -5"
+    success_criteria:
+      - changes_integrated_to_main: true
+      - temp_branch_deleted: true
+      - worktree_removed: true
 
-      success_criteria:
-        - changes_integrated_to_main: true
-        - temp_branch_deleted: true
-        - worktree_removed: true
+    final_message: |
+      ✓ Implementation integrated to main
+      ✓ Temp branch deleted
+      ✓ Worktree removed
+      ✓ Review implementation-summary.md for details
 
-      final_message: |
-        ✓ Implementation integrated to main
-        ✓ Temp branch deleted
-        ✓ Worktree removed
-        ✓ Review implementation-summary.md for details
+  # ─────────────────────────────────────────────────────────────
+  # FEATURE_BRANCH STRATEGY (EXCEPTION - 20% of work)
+  # ─────────────────────────────────────────────────────────────
+  condition_feature_branch:
+    when: branch_strategy == feature_branch
+    philosophy: "Long-running branches remain for PR workflow. Worktree preserved."
 
-    # ─────────────────────────────────────────────────────────────
-    # FEATURE_BRANCH STRATEGY (EXCEPTION - 20% of work)
-    # ─────────────────────────────────────────────────────────────
-    condition_feature_branch:
-      when: branch_strategy == feature_branch
-      philosophy: "Long-running branches remain for PR workflow. Worktree preserved."
+    push_steps:
+      - action: verify_worktree_clean
+        command: "cd .worktrees/{spec-id} && git status"
+      - action: push_feature_branch
+        command: "git push -u origin feature-{spec-id}"
+      - action: preserve_worktree
 
-      approval_gate:
-        type: USER_APPROVAL_REQUIRED
-        prompt: "Ready to push feature branch for PR? Worktree will be preserved for continued work."
-        confirmation_needed: true
+    manual_steps:
+      - "Create PR via GitHub/GitLab when ready"
+      - "Merge PR after code review"
+      - "Manual cleanup: git worktree remove .worktrees/{spec-id}"
 
-      push_steps:
-        - action: verify_worktree_clean
-          command: "cd .worktrees/{spec-id} && git status"
-        - action: push_feature_branch
-          command: "git push -u origin feature-{spec-id}"
-        - action: preserve_worktree
+    success_criteria:
+      - feature_branch_pushed: true
+      - worktree_preserved: true
 
-      manual_steps:
-        - "Create PR via GitHub/GitLab when ready"
-        - "Merge PR after code review"
-        - "Manual cleanup: git worktree remove .worktrees/{spec-id}"
+    final_message: |
+      ✓ Feature branch pushed
+      ✓ Branch: feature-{spec-id}
+      ✓ Worktree preserved at .worktrees/{spec-id}
+      ✓ Ready for PR creation and code review
+      ✓ Review implementation-summary.md for details
 
-      success_criteria:
-        - feature_branch_pushed: true
-        - worktree_preserved: true
+  validation: integration_complete_per_strategy
 
-      final_message: |
-        ✓ Feature branch pushed
-        ✓ Branch: feature-{spec-id}
-        ✓ Worktree preserved at .worktrees/{spec-id}
-        ✓ Ready for PR creation and code review
-        ✓ Review implementation-summary.md for details
-
-    validation: integration_complete_per_strategy
-
-termination:
-  after_step: 16
-  message: "Implementation phase completed successfully. Workflow terminated after step 16 (integration and cleanup)."
+  termination:
+    after_step: 18
+    message: "Implementation phase completed successfully. Workflow terminated after step 18 (integration and cleanup)."
 
 # ─────────────────────────────────────────────────────────────────
 # ADAPTIVE RULES & ERROR HANDLING

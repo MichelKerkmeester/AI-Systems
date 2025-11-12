@@ -1,12 +1,12 @@
 # ─────────────────────────────────────────────────────────────────
 # FRAMEWORK
 # ─────────────────────────────────────────────────────────────────
-role: Expert Developer using GitHub SpecKit for planning and spec
-purpose: Spec-driven planning with compliance through step 4
-action: Run SpecKit from spec to planning with validation
+role: Expert Developer using GitHub SpecKit for planning and spec with parallel sub-agents
+purpose: Spec-driven planning with parallel specialist analyses; preserve manual approval gates
+action: Run SpecKit planning with parallel analyst fan-out → mandatory review → synthesis to single consolidated artifacts
 
 operating_mode:
-  workflow: sequential
+  workflow: sequential_with_parallel_blocks
   workflow_compliance: MANDATORY
   workflow_execution: manual_with_approvals
   approvals: after_each_step
@@ -91,7 +91,7 @@ field_handling:
       - main_temp: "Temporary worktree with short-lived branch (default). Work is isolated in .worktrees/{spec-id} on temp/{spec-id} branch, then merged back to main immediately after validation. Use for: 80% of work - normal features, bug fixes, improvements."
       - feature_branch: "Long-running feature branch in worktree for PR review. Work stays in .worktrees/{spec-id} on feature-{spec-id} branch for team review before integration. Use for: 20% of work - complex features requiring multi-day development and code review."
     default: main_temp
-    note: "This decision controls workspace isolation strategy during planning. main_branch option removed (use main_temp for quick integration)."
+    note: "This decision controls workspace isolation strategy and final integration gates. main_branch option removed (use main_temp for quick integration)."
 
   spec_id:
     derive_from: "spec_folder path using pattern specs/{NNN} or specs/{NNN-name}"
@@ -124,11 +124,11 @@ worktree_setup:
   trigger: after_step_1_input_gathering
   invoke: git_worktrees_skill
   description: |
-    Create isolated worktree for planning using git-worktrees skill.
+    Create isolated worktree for development using git-worktrees skill.
     Worktree location: .worktrees/{spec-id}
     Branch depends on strategy:
       - main_temp: temp/{spec-id} (short-lived, merges back immediately)
-      - feature_branch: feature-{spec-id} (long-running, preserved for continued implementation)
+      - feature_branch: feature-{spec-id} (long-running, preserved for PR)
 
   strategy: branch_strategy  # Derived from user input in step 1
 
@@ -146,11 +146,46 @@ worktree_setup:
   validation: worktree_ready_and_verified
 
   note: |
-    All subsequent planning steps execute within this worktree context.
-    Planning documents created in isolated workspace.
+    All subsequent workflow steps execute within this worktree context.
+    All sub-agents in parallel stages run within the same worktree.
+    Dependencies auto-installed (npm/cargo/pip/go).
+    Environment verified clean before proceeding.
 
 # ─────────────────────────────────────────────────────────────────
-# WORKFLOW
+# SUB-AGENTS (PARALLEL ANALYSTS)
+# ─────────────────────────────────────────────────────────────────
+sub_agents:
+  - id: requirements
+    name: Requirements Analyst
+    role: Extract requirements, constraints, dependencies, and success metrics from inputs and context
+    focus: functional_nonfunctional_constraints_acceptance_criteria
+  - id: architecture
+    name: Solution Architect
+    role: Propose architecture, components, interfaces, and data flows with trade-offs
+    focus: system_design_components_interfaces_data_flows
+  - id: risk
+    name: Risk/Compliance Analyst
+    role: Identify risks, edge cases, non-functionals (security, privacy, performance, accessibility)
+    focus: security_privacy_performance_edge_cases_compliance
+  - id: estimation
+    name: Estimation/Scope Analyst
+    role: Propose milestones, sequencing, ranges for effort and complexity
+    focus: effort_duration_complexity_milestones_sequencing
+  - id: context_saver
+    name: Context Documentation Agent
+    role: Conversation preservation
+    focus: session_documentation_decision_capture_flowchart_generation_planning_journey
+  - id: reviewer
+    name: Lead Reviewer
+    role: Reconcile parallel outputs, resolve conflicts, validate completeness
+    focus: reconciliation_conflicts_gaps_validation
+  - id: synthesizer
+    name: Lead Synthesizer
+    role: Produce plan.md and planning-summary.md per SpecKit expectations
+    focus: artifact_generation_integration_formatting_compliance
+
+# ─────────────────────────────────────────────────────────────────
+# WORKFLOW (PARALLEL OUTPUT QA BY MAIN AGENT)
 # ─────────────────────────────────────────────────────────────────
 workflow:
   step_1_request_analysis:
@@ -163,18 +198,18 @@ workflow:
         Option A: main_temp (⭐ RECOMMENDED - default)
           - Temporary worktree with short-lived branch
           - Work isolated in .worktrees/{NNN} on temp/{NNN} branch
-          - Planning docs isolated, then merged back to main immediately
+          - Tested in isolation, then merged back to main immediately
           - Branch and worktree deleted after successful integration
           - Use for: 80% of work - normal features, bug fixes, improvements
 
         Option B: feature_branch
           - Long-running feature branch in worktree for PR review
           - Work isolated in .worktrees/{NNN} on feature-{NNN} branch
-          - Planning docs preserved for continued implementation
-          - Worktree remains active for implementation phase
+          - Branch preserved for team review before integration
+          - Worktree remains active for continued development
           - Use for: 20% of work - complex features requiring multi-day development
 
-        This decision will be inherited by implementation workflow.
+        This decision is required before proceeding and controls workspace isolation and final integration gates.
 
         Note: main_branch option removed. Use main_temp for quick integration with isolation benefits.
       options:
@@ -196,11 +231,11 @@ workflow:
       2. Analyze user inputs and confirm understanding
       3. Prepare for worktree setup (next step will create isolated workspace)
     outputs:
-    - branch_strategy_chosen
-    - git_branch_resolved
-    - requirement_summary
-    - approach_overview
-    - complexity_assessment
+      - branch_strategy_chosen
+      - git_branch_resolved
+      - requirement_summary
+      - approach_overview
+      - complexity_assessment
     validation: understanding_confirmed_and_branch_strategy_set
     approval_gate:
       type: USER_APPROVAL_REQUIRED
@@ -215,41 +250,35 @@ workflow:
       - worktree_path_resolved
       - git_branch_active
       - baseline_tests_status
+    note: "All parallel sub-agents will execute within this worktree context"
     approval_gate:
       type: USER_APPROVAL_REQUIRED
-      prompt: "Workspace created at {worktree_path} on branch {git_branch}. Proceed to pre-work review?"
+      prompt: "Workspace created at {worktree_path} on branch {git_branch}. Baseline tests: {baseline_tests}. Proceed to pre-work review?"
       confirmation_needed: true
 
   step_2_pre_work_review:
     required_documents:
-    - AGENTS.md
-    - .specify/memory/constitution.md
-    - .claude/knowledge/*.md
+      - AGENTS.md
+      - .specify/memory/constitution.md
+      - .claude/knowledge/*.md
     verification: MUST REVIEW
     validation: principles_established
 
   step_3_specification:
     command: /specify [feature-description]
     outputs:
-    - feature_branch: created
-    - spec.md: acceptance_criteria
-    - location: specs/[NNN-feature]/spec.md
+      - feature_branch: created
+      - spec.md: acceptance_criteria
+      - location: specs/[NNN-feature]/spec.md
     validation: spec_complete_and_testable
-    chrome_devtools:
-      when: analyzing_existing_features
-      approach: Navigate → Snapshot → Analyze → Document
 
   step_4_clarification:
     command: /clarify
     outputs:
-    - resolved_ambiguities
-    - clarified_requirements
-    - updated_spec
+      - resolved_ambiguities
+      - clarified_requirements
+      - updated_spec
     validation: requirements_clear
-    chrome_devtools:
-      when: "[STAGING LINK] provided"
-      approach: Navigate → Inspect → Analyze → Clarify
-      capture: current_behavior_screenshots
     approval_gate:
       type: USER_APPROVAL_REQUIRED
       prompt: "Requirements clarified. Proceed to quality checklist?"
@@ -258,43 +287,143 @@ workflow:
   step_5_quality_checklist:
     command: /speckit.checklist
     outputs:
-    - quality_checklist: generated
+      - quality_checklist: generated
     validation: checklist_generated
 
-  step_6_planning:
+# New parallel planning block (fan-out/fan-in) before step_7_planning
+  step_6_parallel_planning:
+    description: Parallel specialist analyses with bounded concurrency
+    analyze_inputs:
+      summarize:
+        - goals
+        - constraints
+        - unknowns
+      shard_plan:
+        - requirements
+        - architecture
+        - risk
+        - estimation
+    parallel_work:
+      execution: parallel
+      concurrency: 3
+      shared_context:
+        - "[SPEC_FOLDER]/spec.md"
+        - "quality_checklist"
+        - "request_summary"
+        - "context"
+      tasks:
+        - agent: requirements
+          instructions: Produce a requirements dossier with explicit success metrics and dependencies
+          expected_output:
+            type: markdown
+            sections: [objectives, acceptance_criteria_map, dependencies, constraints, success_metrics]
+        - agent: architecture
+          instructions: Propose a clear architecture with components, interfaces, data flow, and alternatives
+          expected_output:
+            type: markdown
+            sections: [components, interfaces, data_flow, patterns, alternatives, tradeoffs]
+        - agent: risk
+          instructions: Identify risks, edge cases, and non-functional requirements with severities and mitigations
+          expected_output:
+            type: markdown
+            sections: [risks, severities, mitigations, edge_cases, security_privacy, performance_accessibility]
+        - agent: estimation
+          instructions: Propose phases, milestones, sequencing, and effort ranges; include assumptions
+          expected_output:
+            type: markdown
+            sections: [phases, milestones, dependencies, sequencing, effort_ranges, assumptions]
+    review:
+      by: reviewer
+      focus:
+        - resolve_conflicts
+        - validate_completeness
+        - ensure_consistency
+        - identify_open_questions
+      outputs:
+        - synthesis_guidance
+        - review_notes
+    synthesis:
+      by: synthesizer
+      action: Create plan.md and planning-summary.md from parallel outputs + review guidance
+      output_files:
+        - "[SPEC_FOLDER]/plan.md"
+        - "[SPEC_FOLDER]/planning-summary.md"
+      validation_checklist:
+        - all_parallel_tasks_present
+        - risks_have_mitigations
+        - dependencies_acyclic
+        - success_metrics_measurable
+        - phases_have_owners_and_effort
+    main_agent_finalization:
+      by: MAIN_AGENT
+      action: QA review and finalization of planning artifacts will occur next
+      defer_to_step: step_7_planning
+      checks:
+        - confirm_alignment_with_request_and_context
+        - validate_completeness_and_consistency
+        - ensure_output_format_and_sections_present
+        - resolve_remaining_open_questions_or_note_them
+      outputs:
+        - main_agent_review_notes
+        - final_signoff: true
+
+  step_7_planning:
     command: /plan [context]
     outputs:
-    - plan.md: technical_approach
-    - dependencies: identified
-    - upstream_docs: reviewed
+      - plan.md: technical_approach
+      - dependencies: identified
+      - upstream_docs: reviewed
     validation: approach_defined
     chrome_devtools:
       when: analyzing_current_implementation
       actions:
-      - inspect_network_requests
-      - analyze_dom_structure
-      - review_console_errors
-      - capture_performance_metrics
+        - inspect_network_requests
+        - analyze_dom_structure
+        - review_console_errors
+        - capture_performance_metrics
     deep_analysis:
       focus: comprehensive_planning
       approach: deep_analysis
       outputs:
-      - detailed_technical_approach
-      - implementation_strategy
-      - risk_assessment
-      - dependency_mapping
+        - detailed_technical_approach
+        - implementation_strategy
+        - risk_assessment
+        - dependency_mapping
     final_output:
       summary_document:
         location: specs/[NNN-feature]/planning-summary.md
         required_sections:
-        - feature_overview
-        - technical_approach
-        - dependencies_identified
-        - risks_and_mitigation
-        - recommended_next_steps
+          - feature_overview
+          - technical_approach
+          - dependencies_identified
+          - risks_and_mitigation
+          - recommended_next_steps
       completion_message: Planning phase complete. Technical plan and approach have been documented.
 
-  step_7_integration_and_cleanup:
+  step_8_save_context:
+    action: Save planning conversation context via parallel sub-agent
+    description: |
+      Preserve comprehensive planning conversation including:
+      - Requirements analysis and clarifications
+      - Technical approach decisions
+      - Architecture discussions and alternatives
+      - Risk assessment and mitigation strategies
+    parallel_work:
+      execution: parallel
+      concurrency: 1
+      tasks:
+        - agent: context_saver
+          instructions: "Save conversation context with Skill(skill: 'save-context')"
+    outputs:
+      - context_file: "specs/[NNN-feature]/memory/[DD-MM-YY_HH-MM]__planning_session.md"
+      - workflow_flowchart: auto_generated
+      - planning_decisions: documented
+    validation: context_saved_successfully
+    note: |
+      Context saved alongside spec.md and plan.md for complete planning record.
+      Captures full planning journey and decision rationale.
+
+  step_9_integration_and_cleanup:
     name: Integration & Cleanup
     description: Integrate planning docs and cleanup based on strategy
 
@@ -335,13 +464,37 @@ workflow:
 # WORKFLOW TERMINATION
 # ─────────────────────────────────────────────────────────────────
 termination:
-  after_step: 7
-  message: "Planning phase completed successfully. Workflow terminated after step 6 as requested."
+  after_step: 8
+  message: "Planning phase completed successfully. Workflow terminated after step 8 (integration)."
   next_steps:
-  - Review planning documentation
-  - Approve technical approach
-  - Use workflow_automated.yaml for full implementation
-  - Or use workflow.yaml for manual implementation with gates
+    - Review planning documentation
+    - Approve technical approach
+    - Use full workflow for implementation
+    - Or continue with implementation workflow using existing worktree/branch
+
+# ─────────────────────────────────────────────────────────────────
+# ADAPTIVE RULES & ERROR HANDLING
+# ─────────────────────────────────────────────────────────────────
+adaptive_rules:
+  high_complexity:
+    reviewers: add_security_privacy_reviewer_if_needed
+    review_depth: exhaustive
+    concurrency: 2
+  high_uncertainty:
+    insert: discovery_clarification_microstep_before_parallel_work
+    estimates: use_ranges
+  parallel_not_supported:
+    concurrency: 1
+    note: "If parallel sub-agents unsupported, run tasks one-by-one; keep review and synthesis."
+
+error_handling:
+  retry_policy:
+    targeted: true
+    max_retries: 2
+  fallback:
+    on_repeated_failure: rerun_failed_tasks_sequentially
+    proceed_with_partial: true
+    annotate_in_review: true
 
 # ─────────────────────────────────────────────────────────────────
 # RULES
@@ -349,11 +502,12 @@ termination:
 rules:
   ALWAYS:
     - follow_workflow_sequence
+    - preserve_original_approval_gates
     - document_all_changes
     - validate_before_completion
     - use_devtools_for_staging_analysis
-    - await_user_approval_at_gates
     - evidence_before_decisions
+    - enforce_review_before_synthesis
   NEVER:
     - skip_workflow_steps
     - ignore_blockers

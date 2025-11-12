@@ -291,7 +291,37 @@ workflow:
         - synthesis_notes: integration_highlights
         - next_steps: immediate_actions
 
-  step_5_integration_and_cleanup:
+  step_5_save_context:
+    action: Save planning conversation context via parallel sub-agent
+    description: |
+      Preserve comprehensive planning conversation including:
+      - All 5 agent planning outputs
+      - Review and synthesis decisions
+      - Conflict resolutions and trade-offs
+      - Final plan structure and rationale
+    parallel_work:
+      execution: parallel
+      concurrency: 1
+      mode: context_preservation
+      agents:
+        - agent: context_saver
+          instructions: Use save-context skill to preserve planning session
+          invocation: Skill(skill: "save-context")
+          focus_area: planning_decisions_and_agent_outputs
+          expected_output:
+            type: markdown
+            file: "planning-session-[DD-MM-YY_HH-MM].md"
+            includes: [workflow_flowchart, agent_outputs, synthesis_notes]
+    outputs:
+      - context_file: saved
+      - workflow_flowchart: auto_generated
+      - planning_decisions: documented
+    validation: context_saved_successfully
+    note: |
+      Context saved alongside plan for complete record.
+      Captures all agent outputs and synthesis process.
+
+  step_6_integration_and_cleanup:
     condition: use_worktree == true
     action: Integrate plan and cleanup worktree
     strategy: main_temp  # Always main_temp for code workflows
@@ -411,4 +441,4 @@ rules:
     - create_multiple_output_files
     - constrain_agent_native_planning
     - create_circular_dependencies
-    - omit_risk_assessment2
+    - omit_risk_assessment

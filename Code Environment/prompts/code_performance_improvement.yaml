@@ -224,7 +224,25 @@ workflow:
         - Network conditions
     validation: All checks pass
 
-  step_5_integration_and_cleanup:
+  step_5_save_context:
+    action: Save performance optimization conversation context
+    invocation: Skill(skill: "save-context")
+    description: |
+      Preserve comprehensive optimization conversation including:
+      - Baseline measurements and profiling data
+      - Bottleneck identification and analysis
+      - Optimization strategies and implementation
+      - Before/after metrics and verification results
+    outputs:
+      - context_file: "performance-optimization-[DD-MM-YY_HH-MM].md"
+      - workflow_flowchart: auto_generated
+      - optimization_decisions: documented
+    validation: context_saved_successfully
+    note: |
+      Context saved for future performance work and knowledge sharing.
+      Captures full optimization journey including metrics and trade-offs.
+
+  step_6_integration_and_cleanup:
     condition: use_worktree == true
     action: Integrate optimizations and cleanup worktree
     strategy: main_temp  # Always main_temp for code workflows
