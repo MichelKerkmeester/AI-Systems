@@ -184,6 +184,28 @@ for skill in "${MATCHED_SKILLS[@]}"; do
   esac
 done
 
+# ───────────────────────────────────────────────────────────────
+# DISPLAY CRITICAL SKILLS TO USER
+# ───────────────────────────────────────────────────────────────
+
+# Display CRITICAL priority skills to user (others logged only)
+if [ ${#CRITICAL_SKILLS[@]} -gt 0 ]; then
+  echo "" >&2
+  echo "🔴 CRITICAL SKILLS APPLY:" >&2
+  for item in "${CRITICAL_SKILLS[@]}"; do
+    skill_name=$(echo "$item" | cut -d'|' -f1)
+    desc=$(echo "$item" | cut -d'|' -f2)
+    # Truncate description to 70 chars for brevity
+    desc_short="${desc:0:70}"
+    echo "   • $skill_name - $desc_short" >&2
+  done
+  echo "" >&2
+fi
+
+# ───────────────────────────────────────────────────────────────
+# LOG ALL MATCHED SKILLS TO FILE
+# ───────────────────────────────────────────────────────────────
+
 # Only log if there are skills to recommend
 # Log to file instead of stderr to keep interface clean
 
