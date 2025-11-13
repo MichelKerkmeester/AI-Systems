@@ -4,12 +4,12 @@
       "type": "knowledge",
       "enforcement": "suggest",
       "priority": "high",
-      "description": "Animation implementation with Motion.dev (.claude/knowledge/animation_strategy.md)",
+      "description": "Animation implementation with anime.js (.claude/knowledge/animation_strategy.md)",
       "promptTriggers": {
         "keywords": [
           "animation",
-          "motion",
-          "motion.dev",
+          "anime",
+          "anime.js",
           "animate",
           "transition",
           "sequence",
@@ -508,12 +508,181 @@
           "__.*CdnInit"
         ]
       }
+    },
+    "code-condition-based-waiting": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Replaces arbitrary setTimeout with condition polling to wait for actual DOM ready, images/videos loaded, animations complete, or external scripts available",
+      "promptTriggers": {
+        "keywords": [
+          "setTimeout",
+          "timing",
+          "race condition",
+          "wait for",
+          "polling",
+          "delay",
+          "async",
+          "dom ready",
+          "element not found",
+          "library not loaded"
+        ],
+        "intentPatterns": [
+          "(wait|waiting).*?(element|dom|ready|loaded)",
+          "(timing|race).*?(issue|condition|problem)",
+          "setTimeout.*?(why|arbitrary)",
+          "(element|library|script).*?(not|n't).*?(found|loaded|defined)",
+          "(fix|solve|handle).*?(timing|race|async)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": ["src/**/*.js"],
+        "contentPatterns": [
+          "setTimeout\\(",
+          "waitForElement",
+          "waitForLibrary",
+          "DOMContentLoaded",
+          "readyState"
+        ]
+      }
+    },
+    "code-defense-in-depth": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Multi-layer validation at every point data passes through (input, processing, output) to make JavaScript errors structurally impossible",
+      "promptTriggers": {
+        "keywords": [
+          "validation",
+          "sanitize",
+          "input validation",
+          "null check",
+          "type check",
+          "xss",
+          "security",
+          "error handling",
+          "defensive",
+          "guard clause"
+        ],
+        "intentPatterns": [
+          "(validate|check|verify).*?(input|data|parameter)",
+          "(null|undefined).*?(check|guard|validation)",
+          "(sanitize|escape|clean).*?(input|data|html)",
+          "(prevent|fix|handle).*?(null|undefined|error)",
+          "(defense|defensive|robust).*?(code|validation)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": ["src/**/*.js"],
+        "contentPatterns": [
+          "if \\(!.*\\)",
+          "typeof.*!==",
+          "instanceof",
+          "\\?\\.",
+          "\\?\\?"
+        ]
+      }
+    },
+    "code-root-cause-tracing": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Systematically traces bugs backward through call stack and event chain using browser DevTools to identify source of invalid data or incorrect behavior",
+      "promptTriggers": {
+        "keywords": [
+          "trace",
+          "root cause",
+          "debug",
+          "call stack",
+          "devtools",
+          "breakpoint",
+          "console.trace",
+          "stack trace",
+          "why",
+          "source of error"
+        ],
+        "intentPatterns": [
+          "(trace|find|identify).*?(root cause|source|origin)",
+          "(why|how).*?(error|bug|issue|problem)",
+          "(debug|investigate|analyze).*?(error|bug|behavior)",
+          "(call stack|stack trace).*?(show|inspect|check)",
+          "(devtools|debugger|breakpoint)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": ["src/**/*.js"],
+        "contentPatterns": [
+          "console\\.trace",
+          "debugger;",
+          "console\\.error"
+        ]
+      }
+    },
+    "code-systematic-debugging": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Four-phase debugging framework (root cause investigation, pattern analysis, hypothesis testing, implementation) that ensures understanding before attempting fixes",
+      "promptTriggers": {
+        "keywords": [
+          "debug",
+          "debugging",
+          "bug",
+          "error",
+          "issue",
+          "problem",
+          "broken",
+          "not working",
+          "failing",
+          "investigate"
+        ],
+        "intentPatterns": [
+          "(debug|fix|solve|investigate).*?(bug|error|issue|problem)",
+          "(not working|broken|failing|doesn't work)",
+          "(console|browser).*?(error|warning)",
+          "(layout|animation|video|form).*?(bug|issue|problem)",
+          "(systematic|methodical).*?(debug|approach)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": ["src/**/*.js", "src/**/*.css"],
+        "contentPatterns": []
+      }
+    },
+    "code-verification-before-completion": {
+      "type": "workflow",
+      "enforcement": "strict",
+      "priority": "critical",
+      "description": "Requires running verification in actual browsers across viewports and confirming animations/interactions before making any success claims - evidence before assertions always",
+      "promptTriggers": {
+        "keywords": [
+          "complete",
+          "done",
+          "fixed",
+          "working",
+          "ready",
+          "verify",
+          "test",
+          "check browser",
+          "browser test",
+          "viewport test"
+        ],
+        "intentPatterns": [
+          "(is|it's|looks).*?(complete|done|fixed|working|ready)",
+          "(verify|test|check).*?(browser|viewport|mobile|desktop)",
+          "(before|need to).*?(claim|say|report).*?(complete|done|fixed)",
+          "(evidence|proof).*?(browser|test|verification)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": ["src/**/*.js", "src/**/*.css", "src/**/*.html"],
+        "contentPatterns": []
+      }
     }
   },
   "riskPatterns": {
     "animation": {
       "patterns": [
-        "Motion\\.",
         "animate\\(",
         "timeline\\(",
         "gsap",

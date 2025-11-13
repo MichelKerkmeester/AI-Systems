@@ -10,6 +10,9 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"
 source "$SCRIPT_DIR/../lib/output-helpers.sh" || exit 0
 
+# Performance timing START
+START_TIME=$(date +%s%N)
+
 # Check dependencies (silent on success)
 check_dependency "jq" "brew install jq (macOS) or apt install jq (Linux)" || exit 0
 
@@ -173,6 +176,12 @@ if [ ${#TRIGGERED_REMINDERS[@]} -gt 0 ]; then
     echo ""
   } >> "$LOG_FILE"
 fi
+
+# Performance timing END
+END_TIME=$(date +%s%N)
+DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
+HOOKS_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] validate-post-response.sh ${DURATION}ms" >> "$HOOKS_DIR/logs/performance.log"
 
 # Always allow silently (non-blocking)
 exit 0

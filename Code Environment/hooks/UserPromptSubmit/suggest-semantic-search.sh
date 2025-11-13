@@ -10,6 +10,9 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"
 source "$SCRIPT_DIR/../lib/output-helpers.sh" || exit 0
 
+# Performance timing START
+START_TIME=$(date +%s%N)
+
 # Read JSON input from stdin
 INPUT=$(cat)
 
@@ -82,6 +85,11 @@ if [ "$SHOULD_SUGGEST" = true ]; then
   echo "⚠️  Note: Only available for CLI AI agents (not IDE integrations)"
   echo ""
 fi
+
+# Performance timing END
+END_TIME=$(date +%s%N)
+DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] suggest-semantic-search.sh ${DURATION}ms" >> "$HOOKS_DIR/logs/performance.log"
 
 # Always allow the prompt to proceed
 exit 0

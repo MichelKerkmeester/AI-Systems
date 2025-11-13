@@ -29,10 +29,12 @@ This directory contains hooks that automatically trigger during Claude Code oper
 ### Active Features
 - ✅ Auto-save conversation context (keywords + context threshold)
 - ✅ Suggest relevant skills based on prompt content
+- ✅ Semantic search MCP tool reminders for code exploration
 - ✅ Block dangerous Bash commands (security + performance)
 - ✅ Auto-fix markdown filenames to lowercase snake_case
 - ✅ Quality check reminders for edited code files
 - ✅ Security risk pattern detection (eval, innerHTML, etc.)
+- ✅ Performance monitoring (all hooks log execution timing)
 
 ---
 
@@ -99,6 +101,7 @@ User Action
 - `save-context` skill → Uses generate-context.js
 - `lib/transform-transcript.js` → Transforms JSONL to JSON format
 - Saves to: `specs/###-folder/memory/` (or `memory/` fallback)
+- Logs performance to: `.claude/hooks/logs/performance.log`
 
 **Output Examples**:
 ```
@@ -307,7 +310,7 @@ The configuration file `.claude/configs/skill-rules.json` is the **central conne
 2. `validate-post-response.sh` → Reads `.riskPatterns{}` definitions
 
 **Defines**:
-- 12 skills with keywords, patterns, priorities, file triggers
+- 19 skills with keywords, patterns, priorities, file triggers
 - 7 risk pattern categories with detection patterns and reminders
 
 ### Shared Library: `output-helpers.sh`
@@ -324,6 +327,7 @@ All hooks write to `.claude/hooks/logs/`:
 - `validate-skill-activation.sh` → `skill-recommendations.log`
 - `enforce-markdown-post.sh` → `markdown-enforcement.log`
 - `validate-post-response.sh` → `quality-checks.log`
+- All 7 hooks → `performance.log` (execution timing)
 
 ---
 
@@ -380,6 +384,12 @@ All hooks write to `.claude/hooks/logs/` for debugging and audit trail:
 **Hook**: validate-post-response.sh
 **Contains**: Files edited, risk categories detected, quality reminders
 
+### `performance.log`
+**Hooks**: All 7 hooks
+**Contains**: Execution timing for each hook invocation
+**Format**: `[YYYY-MM-DD HH:MM:SS] hook_name Xms`
+**Purpose**: Performance monitoring and optimization
+
 ### Usage Examples
 
 ```bash
@@ -392,9 +402,25 @@ grep "SECURITY CHECK" .claude/hooks/logs/quality-checks.log
 
 # View all auto-save triggers
 cat .claude/hooks/logs/auto-save-context.log
+
+# Check hook performance
+tail -20 .claude/hooks/logs/performance.log
+grep "validate-bash" .claude/hooks/logs/performance.log
 ```
 
-**Maintenance**: Log files grow over time. Safe to delete (regenerate automatically). Not tracked in git.
+### Maintenance Scripts
+
+**Automated log rotation**:
+```bash
+bash .claude/hooks/scripts/rotate-logs.sh
+```
+- Rotates logs exceeding 10,000 lines
+- Keeps last 1,000 lines, archives remainder
+- Archives to: `.claude/hooks/logs/archive/` (gzip compressed)
+
+**Recommended**: Run weekly or when logs exceed threshold
+
+**Maintenance**: Log files grow over time. Use rotation script regularly. Archives are compressed and timestamped. Not tracked in git.
 
 ---
 
@@ -437,8 +463,10 @@ cat .claude/hooks/logs/auto-save-context.log
 - `validate-skill-activation.sh` → Reads `skills{}` for prompt matching
 - `validate-post-response.sh` → Reads `riskPatterns{}` for code pattern detection
 
-**Current Skills** (12 total):
-- animation-strategy, code-cdn-versioning, mcp-chrome-devtools
+**Current Skills** (19 total):
+- animation-strategy, code-cdn-versioning, code-condition-based-waiting
+- code-defense-in-depth, code-root-cause-tracing, code-systematic-debugging
+- code-verification-before-completion, mcp-chrome-devtools
 - code-standards ⭐ (alwaysActive), conversation-documentation ⭐ (alwaysActive)
 - debugging, document-style-guide, git-commit, git-worktrees
 - initialization-pattern, markdown-flowchart, markdown-enforcer, save-context, webflow-platform-constraints
@@ -446,3 +474,21 @@ cat .claude/hooks/logs/auto-save-context.log
 **Current Risk Patterns** (7 categories):
 - animation, asyncOperations, commitOperations, formHandling
 - initialization, securityRisks, specFolderRequired
+
+### `.claude/configs/skill-rules.schema.json`
+
+**Purpose**: JSON Schema (Draft 7) for validating skill-rules.json structure
+
+**Validates**:
+- Skill types: `knowledge|workflow|tool`
+- Enforcement modes: `strict|suggest`
+- Priority levels: `critical|high|medium|low`
+- Required fields and structure
+- Pattern syntax
+
+**Validation Script**:
+```bash
+bash .claude/hooks/scripts/validate-config.sh
+```
+
+**Recommended**: Run before editing skill-rules.json to prevent configuration errors

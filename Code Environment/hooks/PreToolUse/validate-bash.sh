@@ -10,6 +10,9 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"
 source "$SCRIPT_DIR/../lib/output-helpers.sh" || exit 0
 
+# Performance timing START
+START_TIME=$(date +%s%N)
+
 # Read JSON input from stdin
 INPUT=$(cat)
 
@@ -142,6 +145,12 @@ for pattern in "${FORBIDDEN_PATTERNS[@]}"; do
     exit 2  # Exit code 2 = blocking error
   fi
 done
+
+# Performance timing END
+END_TIME=$(date +%s%N)
+DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
+HOOKS_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] validate-bash.sh ${DURATION}ms" >> "$HOOKS_DIR/logs/performance.log"
 
 # Command is clean, allow it
 exit 0

@@ -192,8 +192,17 @@ EOF
     fi
 }
 
+# Performance timing START
+START_TIME=$(date +%s%N)
+
 # Execute main function
 main
+
+# Performance timing END
+END_TIME=$(date +%s%N)
+DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
+HOOKS_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] enforce-markdown-post.sh ${DURATION}ms" >> "$HOOKS_DIR/logs/performance.log"
 
 # Always exit 0 (never block)
 exit 0

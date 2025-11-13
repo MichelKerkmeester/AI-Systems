@@ -10,6 +10,9 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"
 source "$SCRIPT_DIR/../lib/output-helpers.sh" || exit 0
 
+# Performance timing START
+START_TIME=$(date +%s%N)
+
 # Check dependencies (silent on success)
 check_dependency "jq" "brew install jq (macOS) or apt install jq (Linux)" || exit 0
 
@@ -330,6 +333,11 @@ TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
   echo "$SEPARATOR"
   echo ""
 } >> "$LOG_FILE"
+
+# Performance timing END
+END_TIME=$(date +%s%N)
+DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] validate-skill-activation.sh ${DURATION}ms" >> "$HOOKS_DIR/logs/performance.log"
 
 # Allow the request to proceed silently (exit 0)
 exit 0
