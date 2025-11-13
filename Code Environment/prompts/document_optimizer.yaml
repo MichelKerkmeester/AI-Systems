@@ -13,30 +13,17 @@ operating_mode:
   tracking: progressive_task_checklists
   validation: final_verification
 
+optimization_philosophy:
+  principle: "Clarity first, brevity second"
+  approach: "Systematic refinement without losing meaning"
+  mandate: "Eliminate ambiguity, reduce redundancy, maintain completeness"
+
 scope:
   applies_to: entire_documentation_files_specified_by_arg
   targets:
     - instructions
     - accompanying_examples
     - redundant_content
-
-objectives:
-  priority_order:
-    1_eliminate_vagueness:
-      description: Strengthen instructions with explicit criteria and measurable steps
-      priority: highest
-    2_increase_conciseness:
-      description: Remove redundancy while preserving all necessary information
-      priority: medium
-    3_preserve_clarity_and_meaning:
-      description: Never trade clarity or semantic accuracy for brevity
-      priority: highest
-
-constraints:
-  CRITICAL:
-    - only_update_if_new_version_retains_same_meaning_and_clarity
-    - reject_any_change_that_reduces_clarity_or_alters_meaning
-    - never_sacrifice_correctness_for_conciseness
 
 # ─────────────────────────────────────────────────────────────────
 # USER INPUTS
@@ -47,6 +34,12 @@ user_inputs:
     
     Git branch name for the work. Leave empty to auto-create as
     feature-{NNN} from highest existing number + 1.
+  
+  spec_folder: |
+    [SPEC_FOLDER]
+    
+    Spec folder path (e.g., specs/001 or specs/001-feature-name).
+    Leave empty to auto-create next available spec number.
   
   environment: |
     [STAGING LINK]
@@ -111,8 +104,13 @@ request_handling:
 # FIELD HANDLING
 # ─────────────────────────────────────────────────────────────────
 field_handling:
+  spec_id:
+    derive_from: "spec_folder path using pattern specs/{NNN} or specs/{NNN-name}"
+    fallback: "Extract numeric portion or use timestamp if extraction fails"
+
   defaults:
     git_branch_empty: "Auto-create feature-{NNN} from highest +001"
+    spec_folder_empty: "Auto-create specs/{NNN} from highest +001"
     environment_empty: "Skip browser testing steps"
     scope_empty: "Use scope_policy.default"
     target_document_empty: "Use current directory or infer from [REQUEST]"
@@ -131,6 +129,7 @@ workflow:
   step_1_initialization:
     input_source: USER_INPUTS_SECTION_ABOVE
     git_branch: "[GIT_BRANCH] → use or create if empty"
+    spec_folder: "[SPEC_FOLDER] → auto-create if empty"
     target_document: "[TARGET_DOCUMENT] → document or folder to optimize"
     context: "[CONTEXT] → infer if empty"
     issues: "[ISSUES] → identify during analysis"
@@ -152,6 +151,16 @@ workflow:
       - Obvious optimization opportunities
       - Estimated optimization scope
 
+    deep_analysis:
+      focus: comprehensive_document_assessment
+      approach: systematic_evaluation
+      outputs:
+        - file_inventory
+        - complexity_metrics
+        - optimization_opportunities
+        - scope_boundaries
+        - processing_strategy
+
     outputs:
       - file_list
       - initial_assessment_summary
@@ -161,7 +170,15 @@ workflow:
     action: Read all target documentation files
     context_integration: "Consider [CONTEXT] throughout analysis"
     input: file_list_from_step_1
-    output: document_contents
+    deep_analysis:
+      focus: document_content_loading
+      approach: systematic_file_processing
+      outputs:
+        - document_contents
+        - document_metadata
+        - initial_structure_map
+        - content_relationships
+    validation: documents_loaded_successfully
 
   step_3_analyze_sections:
     action: Analyze each document section and apply analysis methodology
@@ -210,7 +227,16 @@ workflow:
           - define_success_criteria
         retention: keep_all_examples_until_instruction_is_strengthened
         next_pass: re_evaluate_examples_after_strengthening
-    output: analysis_report
+    deep_analysis:
+      focus: vagueness_and_clarity_evaluation
+      approach: systematic_section_analysis
+      outputs:
+        - vagueness_inventory
+        - clarity_assessment
+        - example_necessity_map
+        - strengthening_opportunities
+        - optimization_candidates
+    validation: analysis_complete
 
   step_4_optimize:
     action: Apply optimizations directly
@@ -218,19 +244,34 @@ workflow:
       - strengthen_vague_instructions
       - remove_redundant_content
       - apply_conciseness_strategies
-    output: optimized_document
+    deep_analysis:
+      focus: optimization_implementation
+      approach: systematic_improvement
+      outputs:
+        - optimized_content
+        - strengthened_instructions
+        - removed_redundancies
+        - preserved_essential_content
+        - optimization_metrics
+    validation: optimizations_applied
 
   step_5_report_changes:
     action: Generate comprehensive change summary
     format: optimization_summary_template
-    outputs:
-      - change_report
-      - metrics_summary
-      - improvement_highlights
+    deep_analysis:
+      focus: change_documentation
+      approach: comprehensive_reporting
+      outputs:
+        - change_report
+        - metrics_summary
+        - improvement_highlights
+        - before_after_comparison
+        - optimization_effectiveness
+    validation: report_generated
 
   step_6_completion:
     summary_document:
-      location: "[TARGET_DOCUMENT]/optimization-summary.md"
+      location: "[SPEC_FOLDER]/optimization-summary.md"
       required_sections:
         - files_optimized
         - changes_made
@@ -241,12 +282,21 @@ workflow:
           - redundancy_removed
         - quality_improvements
         - idempotent_status
+    deep_analysis:
+      focus: completion_verification
+      approach: comprehensive_validation
+      outputs:
+        - final_summary_document
+        - quality_verification_results
+        - idempotency_confirmation
+        - optimization_completion_status
     final_checklist:
       - all_files_optimized: true
       - meaning_preserved: true
       - clarity_maintained_or_improved: true
       - redundancy_eliminated: true
       - summary_created: true
+    validation: workflow_completed
 
   step_7_save_context:
     action: Save optimization conversation context
@@ -258,11 +308,12 @@ workflow:
       - Changes made and quality improvements
       - Metrics and validation results
     outputs:
-      - context_file: "optimization-session-[DD-MM-YY_HH-MM].md"
+      - context_file: "[SPEC_FOLDER]/memory/[DD-MM-YY_HH-MM]__optimization_session.md"
       - workflow_flowchart: auto_generated
       - optimization_decisions: documented
+    validation: context_saved_successfully
     note: |
-      Context saved alongside optimization-summary.md for complete record.
+      Context saved to memory/ subfolder within spec folder.
       Captures full optimization journey including analysis and improvements.
 
   step_8_branch_integration:
@@ -285,6 +336,30 @@ workflow:
         - push origin main
         - after successful integration, offer to delete the feature branch locally and on origin (explicit confirmation required)
       tagging: optional; only on user request
+    deep_analysis:
+      focus: integration_execution
+      approach: safe_merge_strategy
+      outputs:
+        - integration_status
+        - branch_state
+        - conflict_resolution_log
+        - final_branch_status
+    validation: integration_complete
+
+# ─────────────────────────────────────────────────────────────────
+# WORKFLOW TERMINATION
+# ─────────────────────────────────────────────────────────────────
+termination:
+  after_step: 8
+  message: "Documentation optimization completed successfully. Workflow terminated after step 8 (branch integration)."
+  next_steps:
+    - Review [SPEC_FOLDER]/optimization-summary.md for details
+    - Verify optimized documents maintain clarity and meaning
+    - Use optimized documents for improved workflow execution
+  
+  spec_folder_output:
+    - "[SPEC_FOLDER]/optimization-summary.md - Complete optimization report"
+    - "[SPEC_FOLDER]/memory/[timestamp]__optimization_session.md - Session context"
 
 
 # ─────────────────────────────────────────────────────────────────

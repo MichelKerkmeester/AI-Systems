@@ -13,6 +13,11 @@ operating_mode:
   tracking: progressive_task_checklists
   validation: checkpoint_verification
 
+development_philosophy:
+  principle: "Quality first, velocity second"
+  approach: "Complete lifecycle with validated checkpoints"
+  mandate: "Plan thoroughly, implement carefully, verify continuously"
+
 # ─────────────────────────────────────────────────────────────────
 # USER INPUTS
 # ─────────────────────────────────────────────────────────────────
@@ -127,13 +132,17 @@ workflow:
       - .claude/knowledge/*.md
     verification: MUST REVIEW
     validation: principles_established
+    constitution_check:
+      command: /speckit.constitution
+      when: constitution_missing_or_needs_update
+      note: "Initialize or update project constitution if needed"
     approval_gate:
       type: USER_APPROVAL_REQUIRED
       prompt: "Pre-work documentation reviewed. Proceed to specification?"
       confirmation_needed: true
   
   step_3_specification:
-    command: /specify [feature-description]
+    command: /speckit.specify [feature-description]
     outputs:
       - feature_branch: created
       - spec.md: acceptance_criteria
@@ -151,7 +160,7 @@ workflow:
       confirmation_needed: true
   
   step_4_clarification:
-    command: /clarify
+    command: /speckit.clarify
     outputs:
       - resolved_ambiguities
       - clarified_requirements
@@ -161,6 +170,10 @@ workflow:
       when: staging_url_provided
       approach: Navigate → Inspect → Analyze → Clarify
       capture: current_behavior_screenshots
+    spike_option:
+      command: /speckit.spike [research-question]
+      when: technical_uncertainty_requires_investigation
+      note: "Use for time-boxed research before committing to approach"
     approval_gate:
       type: USER_APPROVAL_REQUIRED
       prompt: "Requirements clarified. Proceed to quality checklist?"
@@ -177,7 +190,7 @@ workflow:
       confirmation_needed: true
   
   step_6_planning:
-    command: /plan [context]
+    command: /speckit.plan [context]
     outputs:
       - plan.md: technical_approach
       - dependencies: identified
@@ -185,6 +198,10 @@ workflow:
     optional_documents:
       - tasks.md: "Implementation task breakdown AFTER plan.md, BEFORE coding (copy from .specify/templates/tasks-template.md)"
       - checklist.md: "Validation & QA checklists when systematic validation needed (copy from .specify/templates/checklist-template.md)"
+    decision_records:
+      command: /speckit.decision [decision-context]
+      when: significant_technical_decision_needs_documentation
+      note: "Document architecture decisions with full context and alternatives"
     validation: approach_defined
     chrome_devtools:
       when: analyzing_current_implementation
@@ -199,7 +216,7 @@ workflow:
       confirmation_needed: true
   
   step_7_task_breakdown:
-    command: /tasks
+    command: /speckit.tasks
     outputs:
       - tasks/checklist.md
     optional_documents:
@@ -211,7 +228,7 @@ workflow:
       confirmation_needed: true
   
   step_8_analysis:
-    command: /analyze
+    command: /speckit.analyze
     outputs:
       - consistency_report
       - coverage_verification
@@ -231,7 +248,7 @@ workflow:
       confirmation_needed: true
   
   step_9_implementation_check:
-    command: /implement [task-id]
+    command: /speckit.implement [task-id]
     checks:
       prerequisites: verified
       blockers: none

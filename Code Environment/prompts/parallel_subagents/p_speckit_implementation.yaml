@@ -13,6 +13,11 @@ operating_mode:
   tracking: progressive_task_checklists
   validation: final_verification
 
+implementation_philosophy:
+  principle: "Correctness first, elegance second"
+  approach: "Parallel preparation with systematic execution"
+  mandate: "Build incrementally, test thoroughly, deliver confidently"
+
 # ─────────────────────────────────────────────────────────────────
 # USER INPUTS
 # ─────────────────────────────────────────────────────────────────
@@ -103,34 +108,18 @@ field_handling:
 # SUB-AGENTS (PARALLEL PREP)
 # ─────────────────────────────────────────────────────────────────
 sub_agents:
-  - id: core
-    name: Core Implementer
-    role: Draft core logic plan, modules, data structures, key algorithms
-    focus: business_logic_data_structures_algorithms_core_modules
-  - id: adapters
-    name: Integrations/Adapters Engineer
-    role: Identify external integrations, API surfaces, configuration, error handling
-    focus: external_integrations_apis_configuration_error_handling
-  - id: tests
-    name: Test Engineer
-    role: Create test plan (unit/integration), fixtures, coverage targets
-    focus: unit_integration_fixtures_coverage_test_strategies
-  - id: docs
-    name: Docs Engineer
-    role: Draft usage notes, examples, migration/upgrade notes
-    focus: usage_guides_examples_migration_api_documentation
-  - id: context_saver
-    name: Context Documentation Agent
-    role: Conversation preservation
-    focus: session_documentation_decision_capture_flowchart_generation_implementation_journey
-  - id: reviewer
-    name: Integration Reviewer
-    role: Validate coherence, API consistency, testability, identify gaps
-    focus: coherence_consistency_testability_gap_identification
-  - id: synthesizer
-    name: Lead Synthesizer
-    role: Produce implementation_plan.md to guide development
-    focus: implementation_strategy_task_ordering_dependency_mapping
+  - id: core_adapters
+    name: Core & Integration Engineer
+    role: Draft core logic plan, modules, data structures, algorithms, external integrations, API surfaces, configuration, error handling
+    focus: business_logic_data_structures_algorithms_core_modules_external_integrations_apis_configuration_error_handling
+  - id: tests_docs
+    name: Test & Documentation Engineer
+    role: Create test plan (unit/integration), fixtures, coverage targets, usage notes, examples, migration notes
+    focus: unit_integration_fixtures_coverage_test_strategies_usage_guides_examples_migration_api_documentation
+  - id: synthesis_review
+    name: Integration Reviewer & Synthesizer
+    role: Validate coherence, API consistency, testability, identify gaps, produce implementation_plan.md
+    focus: coherence_consistency_testability_gap_identification_implementation_strategy_task_ordering_dependency_mapping_session_documentation_decision_capture
 
 # ─────────────────────────────────────────────────────────────────
 # WORKFLOW (PARALLEL OUTPUT QA BY MAIN AGENT)
@@ -164,7 +153,7 @@ workflow:
     validation: planning_artifacts_understood
 
   step_12_task_breakdown:
-    command: /tasks
+    command: /speckit.tasks
     outputs:
       - tasks/checklist.md
       - task_duration: 15_to_60_minutes
@@ -174,7 +163,7 @@ workflow:
     validation: tasks_actionable
 
   step_13_analysis:
-    command: /analyze
+    command: /speckit.analyze
     outputs:
       - consistency_report
       - coverage_verification
@@ -262,7 +251,7 @@ workflow:
         - final_signoff: true
 
   step_16_implementation_check:
-    command: /implement [task-id]
+    command: /speckit.implement [task-id]
     checks:
       prerequisites: verified
       blockers: none
@@ -374,9 +363,17 @@ prerequisites:
   user_context: "[CONTEXT]"
   user_request: "[REQUEST]"
 
+  step_20_retrospective:
+    command: /speckit.retrospective
+    when: feature_complete
+    note: "Capture lessons learned and process improvements"
+    outputs:
+      - retrospective_document: "specs/[NNN-feature]/retrospective.md"
+    validation: learnings_documented
+
 termination:
-  after_step: 19
-  message: "Implementation phase completed successfully. Workflow terminated after step 19 (save context)."
+  after_step: 20
+  message: "Implementation phase completed successfully. Workflow terminated after step 20 (retrospective)."
   optional_post_completion:
     - retrospective.md: "Capture learnings AFTER feature complete (copy from .specify/templates/retrospective-template.md)"
 

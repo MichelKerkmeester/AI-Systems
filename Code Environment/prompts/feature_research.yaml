@@ -13,6 +13,11 @@ operating_mode:
   tracking: progressive_task_checklists
   validation: final_verification
 
+research_philosophy:
+  principle: "Evidence first, conclusions second"
+  approach: "Comprehensive discovery with cited sources"
+  mandate: "Gather facts, assess credibility, document findings"
+
 # ───────────────────────────────────────────────────────────────────
 # USER INPUTS
 # ───────────────────────────────────────────────────────────────────
@@ -390,6 +395,10 @@ workflow:
     note: |
       Context saved alongside research.md for complete documentation.
       Captures full research journey and decision-making process.
+
+termination:
+  after_step: 9
+  message: "Feature research completed successfully. Workflow terminated after step 9 (save context)."
 
 # ─────────────────────────────────────────────────────────────────
 # QUALITY STANDARDS

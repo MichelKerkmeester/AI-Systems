@@ -13,6 +13,11 @@ operating_mode:
   tracking: progressive_task_checklists
   validation: final_verification
 
+research_philosophy:
+  principle: "Evidence first, conclusions second"
+  approach: "Parallel discovery with comprehensive synthesis"
+  mandate: "Gather facts, assess credibility, integrate findings"
+
 # ─────────────────────────────────────────────────────────────────
 # USER INPUTS
 # ─────────────────────────────────────────────────────────────────
@@ -97,34 +102,18 @@ field_handling:
 # SUB-AGENTS (PARALLEL RESEARCHERS)
 # ─────────────────────────────────────────────────────────────────
 sub_agents:
-  - id: web
-    name: Web/Ecosystem Researcher
-    role: Libraries, repos, issues, community patterns
-    focus: libraries_frameworks_repos_issues_community_patterns
-  - id: docs
-    name: Academic/Docs Researcher
-    role: Standards, RFCs, official docs, papers
-    focus: standards_rfcs_official_docs_academic_papers
-  - id: market
-    name: Competitive/Market Analyst
-    role: Vendors, alternatives, benchmarks
-    focus: vendors_competitors_alternatives_benchmarks_trends
-  - id: feasibility
-    name: Feasibility/Cost Analyst
-    role: Complexity, ops costs, risks
-    focus: technical_complexity_operational_costs_risks_tradeoffs
-  - id: context_saver
-    name: Context Documentation Agent
-    role: Conversation preservation
-    focus: session_documentation_decision_capture_flowchart_generation_research_journey
-  - id: reviewer
-    name: Lead Reviewer
-    role: Dedupe, rank, resolve contradictions
-    focus: deduplication_ranking_contradiction_resolution_synthesis
-  - id: synthesizer
-    name: Lead Synthesizer
-    role: Produce research.md per required sections
-    focus: markdown_generation_section_organization_findings_integration
+  - id: ecosystem_technical
+    name: Ecosystem & Technical Researcher
+    role: Libraries, repos, issues, community patterns, standards, RFCs, official docs, academic papers
+    focus: libraries_frameworks_repos_issues_community_patterns_standards_rfcs_official_docs_academic_papers
+  - id: market_feasibility
+    name: Market & Feasibility Analyst
+    role: Vendors, alternatives, benchmarks, complexity, ops costs, risks, tradeoffs
+    focus: vendors_competitors_alternatives_benchmarks_trends_technical_complexity_operational_costs_risks_tradeoffs
+  - id: synthesis_review
+    name: Lead Reviewer & Synthesizer
+    role: Dedupe, rank, resolve contradictions, produce research.md per required sections
+    focus: deduplication_ranking_contradiction_resolution_synthesis_markdown_generation_section_organization_findings_integration_session_documentation_decision_capture
 
 # ─────────────────────────────────────────────────────────────────
 # WORKFLOW (PARALLEL OUTPUT QA BY MAIN AGENT)

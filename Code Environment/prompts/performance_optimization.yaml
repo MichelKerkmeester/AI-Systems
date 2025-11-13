@@ -1,0 +1,757 @@
+# ───────────────────────────────────────────────────────────────────
+# FRAMEWORK
+# ───────────────────────────────────────────────────────────────────
+role: Performance Engineer conducting optimization research for SpecKit specs
+purpose: Technical performance analysis and optimization documentation
+action: Produce research.md via the performance optimization workflow
+
+operating_mode:
+  workflow: sequential
+  workflow_compliance: MANDATORY
+  workflow_execution: autonomous
+  approvals: none
+  tracking: progressive_task_checklists
+  validation: final_verification
+
+optimization_philosophy:
+  principle: "Features first, performance second"
+  approach: "Incremental improvements with comprehensive documentation"
+  mandate: "Never break functionality for speed"
+
+# ───────────────────────────────────────────────────────────────────
+# USER INPUTS
+# ───────────────────────────────────────────────────────────────────
+user_inputs:
+  git_branch: |
+    [GIT_BRANCH]
+    
+    Git branch name for the work. Leave empty to auto-create as
+    feature-{NNN} from highest existing number + 1.
+  
+  spec_folder: |
+    [SPEC_FOLDER]
+    
+    Spec folder path (e.g., specs/001 or specs/001-feature-name).
+    Leave empty to auto-create next available spec number.
+  
+  environment: |
+    [STAGING LINK]
+    
+    Staging or production URL for browser-based profiling. Leave empty to
+    skip browser performance analysis (will use other profiling methods).
+  
+  scope: |
+    [FILES]
+    
+    Files or folders to optimize. Can be:
+    - Single file path
+    - Multiple paths (one per line)
+    - Glob patterns (e.g., src/**/*.js)
+    - Leave empty to analyze all performance-critical files
+  
+  target_document: |
+    [TARGET_DOCUMENT]
+    
+    Application or component to optimize. Examples:
+    - Specific component path
+    - Feature folder
+    - Entire application
+    Leave empty to optimize current application or infer from REQUEST.
+  
+  context: |
+    [CONTEXT]
+    
+    Provide background information and constraints. Examples:
+    - Current performance metrics
+    - Target performance goals
+    - Technical stack and dependencies
+    - Known constraints or limitations
+    - Business requirements
+    Leave empty to infer from performance issues and metrics.
+  
+  issues: |
+    [ISSUES]
+    
+    List known performance issues. Examples:
+    - Slow load times
+    - Laggy interactions
+    - High memory usage
+    - Excessive network requests
+    - Poor Core Web Vitals scores
+    - Frame rate drops
+    - User-reported performance issues
+    Leave empty to identify during baseline measurement.
+  
+  request: |
+    [REQUEST]
+    
+    Describe the performance improvement goals. Be specific about:
+    - What aspects to optimize (load time, runtime, memory, etc.)
+    - Target metrics or benchmarks
+    - Priority areas
+    - Success criteria
+    Leave empty for general performance optimization.
+
+# ─────────────────────────────────────────────────────────────────
+# FIELD HANDLING
+# ─────────────────────────────────────────────────────────────────
+field_handling:
+  spec_id:
+    derive_from: "spec_folder path using pattern specs/{NNN} or specs/{NNN-name}"
+    fallback: "Extract numeric portion or use timestamp if extraction fails"
+
+  defaults:
+    git_branch_empty: "Auto-create feature-{NNN} from highest +001"
+    spec_folder_empty: "Auto-create specs/{NNN} from highest +001"
+    environment_empty: "Skip browser-based profiling"
+    scope_empty: "All performance-critical files"
+    target_document_empty: "Optimize current application or infer from [REQUEST]"
+    context_empty: "Infer from performance issues and metrics"
+    issues_empty: "Identify during baseline measurement"
+    request_empty: "General performance optimization"
+
+  scope_policy:
+    default: "src/**"
+    rule: "Limit file operations to scope when provided"
+
+# ─────────────────────────────────────────────────────────────────
+# WORKFLOW
+# ─────────────────────────────────────────────────────────────────
+workflow:
+  step_1_request_analysis:
+    input_source: USER_INPUTS_SECTION_ABOVE
+    git_branch: "[GIT_BRANCH] → auto-create if empty"
+    spec_folder: "[SPEC_FOLDER] → auto-create if empty"
+    environment: "[STAGING LINK] → skip DevTools if empty"
+    scope: "[FILES] → default scope if empty"
+    target_document: "[TARGET_DOCUMENT] → infer from REQUEST if empty"
+    context: "[CONTEXT] → infer from performance issues if empty"
+    issues: "[ISSUES] → identify during baseline if empty"
+    request: "[REQUEST] → REQUIRED"
+    action: Analyze inputs; define optimization scope for the spec folder
+    spec_folder_setup:
+      - verify_or_create_spec_folder
+      - check_for_existing_artifacts
+      - establish_optimization_scope
+    deep_analysis:
+      focus: comprehensive_performance_scoping
+      approach: thorough_investigation
+      outputs:
+        - performance_summary
+        - optimization_objectives
+        - complexity_assessment
+        - key_metrics_to_measure
+        - bottleneck_hypotheses
+        - investigation_priorities
+        - technical_depth_required
+        - output_structure_planning
+    validation: scope_defined
+
+  step_2_pre_work_review:
+    required_documents:
+      - AGENTS.md
+      - .claude/knowledge/code_standards.md
+      - .claude/knowledge/animation_strategy.md
+    verification: MUST_REVIEW
+    validation: principles_established
+
+  step_3_baseline_measurement:
+    input_source: USER_INPUTS_FROM_STEP_1
+    purpose: Measure current performance and establish baseline
+    actions:
+      - Review target document plan/spec for requirements
+      - Profile current implementation
+      - Document existing behavior
+    metrics:
+      - Load time
+      - Runtime performance
+      - Memory usage
+      - Network requests
+      - Core Web Vitals (FCP, LCP, TTI, CLS, FID)
+      - FPS for animations (target: 60 FPS)
+      - Bundle sizes
+    tools:
+      - Chrome DevTools Performance
+      - Network analysis
+      - Memory profiler
+      - Lighthouse
+      - Performance Observer API
+    chrome_devtools:
+      when: environment_provided
+      actions:
+        - Start recording before action
+        - Perform user actions
+        - Stop and analyze
+        - Identify bottlenecks
+        - Export traces for comparison
+    deep_analysis:
+      focus: baseline_performance_analysis
+      approach: systematic_measurement
+      outputs:
+        - current_metrics_report
+        - performance_bottlenecks
+        - request_requirements_from_REQUEST
+        - issues_from_ISSUES_field
+        - user_experience_assessment
+        - critical_path_analysis
+        - resource_loading_waterfall
+    validation: baseline_documented
+
+  step_4_codebase_investigation:
+    action: Investigate existing code and performance patterns
+    research_areas:
+      - existing_implementations
+      - performance_patterns
+      - optimization_opportunities
+      - code_inefficiencies
+      - dependencies_impact
+      - asset_optimization
+    tools:
+      - grep_patterns
+      - file_exploration
+      - bundle_analysis
+      - dependency_analysis
+    deep_analysis:
+      focus: codebase_performance_analysis
+      approach: systematic_code_investigation
+      outputs:
+        - current_state_analysis
+        - existing_optimization_patterns
+        - technical_constraints
+        - pattern_identification
+        - architectural_constraints
+        - reusable_components
+        - optimization_opportunities
+    validation: codebase_understood
+
+  step_5_bottleneck_analysis:
+    purpose: Identify and prioritize optimization opportunities
+    analysis:
+      - Profile critical paths
+      - Identify bottlenecks
+      - Find memory leaks
+      - Analyze bundle sizes
+      - Review network waterfall
+      - Evaluate rendering performance
+    prioritization:
+      high_impact:
+        - Critical rendering path
+        - Main thread blocking
+        - Memory leaks
+        - Large assets
+        - Render-blocking resources
+      medium_impact:
+        - Code splitting opportunities
+        - Caching improvements
+        - Image optimization
+        - Lazy loading
+      low_impact:
+        - Micro-optimizations
+        - Code cleanup
+        - Minor refactoring
+    chrome_devtools:
+      when: analyzing_performance
+      actions:
+        - Performance profiling
+        - Network waterfall analysis
+        - Memory heap snapshots
+        - Coverage analysis
+    deep_analysis:
+      focus: bottleneck_identification
+      approach: rigorous_profiling
+      outputs:
+        - bottleneck_catalog
+        - impact_assessment
+        - optimization_priority_matrix
+        - quick_wins_identification
+        - high_impact_opportunities
+        - performance_risk_areas
+    validation: bottlenecks_prioritized
+
+  step_6_external_research:
+    action: Research optimization best practices and techniques
+    sources:
+      - official_documentation
+      - performance_guides
+      - industry_standards
+      - optimization_case_studies
+      - browser_performance_apis
+    chrome_devtools:
+      when: analyzing_optimization_examples
+      actions:
+        - inspect_optimized_implementations
+        - analyze_performance_patterns
+        - measure_technique_impact
+        - capture_performance_metrics
+    deep_analysis:
+      focus: optimization_techniques_research
+      approach: comprehensive_research
+      outputs:
+        - best_practices_summary
+        - optimization_techniques_catalog
+        - browser_api_specifications
+        - performance_patterns
+        - technique_effectiveness_analysis
+        - implementation_strategies
+        - tool_recommendations
+    validation: external_research_complete
+
+  step_7_technical_analysis:
+    action: Perform deep technical feasibility assessment
+    analysis_areas:
+      - architecture_implications
+      - performance_tradeoffs
+      - compatibility_requirements
+      - accessibility_preservation
+      - browser_compatibility
+      - mobile_performance
+    deep_analysis:
+      focus: optimization_feasibility_analysis
+      approach: rigorous_evaluation
+      outputs:
+        - technical_specifications
+        - constraints_and_limitations
+        - risk_assessment
+        - compatibility_matrix
+        - architecture_assessment
+        - performance_projections
+        - tradeoff_analysis
+        - compatibility_verification
+        - risk_mitigation_strategies
+    validation: technical_analysis_complete
+
+  step_8_quality_checklist:
+    command: /speckit.checklist
+    outputs:
+      - quality_checklist: generated
+    validation: checklist_generated
+
+  step_9_optimization_strategy:
+    purpose: Design comprehensive optimization strategy
+    deliverables:
+      - optimization_roadmap
+      - incremental_approach
+      - technique_selection
+      - implementation_patterns
+      - testing_strategy
+    strategies:
+      code:
+        - Lazy loading
+        - Code splitting
+        - Tree shaking
+        - Debouncing/throttling
+        - Memoization
+      assets:
+        - Image optimization
+        - Font optimization
+        - CSS optimization
+        - Compression
+        - CDN usage
+      runtime:
+        - Virtual scrolling
+        - Web workers
+        - Request batching
+        - RequestAnimationFrame
+        - Passive event listeners
+      caching:
+        - Browser caching
+        - Service workers
+        - API caching
+        - Resource hints
+    chrome_devtools:
+      when: prototyping_optimizations
+      actions:
+        - test_optimization_techniques
+        - validate_approaches
+        - measure_performance_impact
+        - verify_functionality_preservation
+    deep_analysis:
+      focus: optimization_strategy_design
+      approach: comprehensive_design
+      outputs:
+        - optimization_architecture
+        - implementation_patterns
+        - code_examples
+        - configuration_requirements
+        - incremental_rollout_plan
+        - integration_blueprint
+        - implementation_roadmap
+        - edge_case_handling
+    validation: strategy_designed
+
+  step_10_research_compilation:
+    action: Compile comprehensive performance optimization documentation for spec folder
+    deep_analysis:
+      focus: comprehensive_research_document
+      approach: exhaustive_documentation
+      required_sections:
+        - changelog_and_updates
+        - investigation_report
+        - executive_overview
+        - baseline_performance_analysis
+        - bottleneck_analysis
+        - optimization_strategy
+        - technical_specifications
+        - implementation_guide
+        - code_examples_and_patterns
+        - testing_and_verification
+        - performance_monitoring
+        - preservation_requirements
+        - rollback_strategy
+        - performance_budgets
+        - troubleshooting_guide
+        - acknowledgements
+      outputs:
+        - structured_research_synthesis
+        - optimization_roadmap
+        - technical_decision_log
+        - reference_documentation
+    document_structure:
+      format: markdown
+      location: "[SPEC_FOLDER]/research.md"
+      table_of_contents: required
+      code_blocks: syntax_highlighted
+      diagrams: ascii_art
+      cross_references: linked
+    optional_documents:
+      - spike-[name].md: "If optimization requires time-boxed experimentation (copy from .specify/templates/spike-template.md)"
+      - decision-record-[name].md: "If optimization leads to significant technical decisions (copy from .specify/templates/decision-record-template.md)"
+    required_sections:
+      investigation_report:
+        - request_summary
+        - current_performance
+        - baseline_metrics
+        - bottleneck_findings
+        - optimization_recommendations
+      overview:
+        - executive_summary
+        - performance_architecture_diagram
+        - quick_reference_guide
+        - research_sources
+      baseline_analysis:
+        - current_metrics
+        - performance_bottlenecks
+        - critical_path_analysis
+        - user_impact_assessment
+      optimization_strategy:
+        - prioritized_improvements
+        - technique_selection
+        - incremental_approach
+        - implementation_patterns
+      technical_specifications:
+        - optimization_techniques
+        - browser_apis
+        - performance_monitoring
+        - measurement_methodology
+      constraints_limitations:
+        - platform_limitations
+        - browser_compatibility
+        - performance_boundaries
+        - tradeoff_analysis
+      implementation_guide:
+        - code_optimization_patterns
+        - asset_optimization
+        - caching_strategies
+        - configuration_options
+      code_examples:
+        - optimization_patterns
+        - before_after_comparisons
+        - performance_helpers
+        - monitoring_setup
+      testing_verification:
+        - performance_testing
+        - regression_testing
+        - feature_preservation
+        - verification_checklist
+      performance_monitoring:
+        - metrics_collection
+        - monitoring_setup
+        - alerting_thresholds
+        - diagnostic_tools
+      preservation_requirements:
+        - feature_preservation
+        - animation_quality (60 FPS)
+        - functionality_verification
+        - rollback_procedures
+      troubleshooting:
+        - common_issues
+        - performance_regressions
+        - debugging_approaches
+        - solutions
+    validation: documentation_complete
+    final_output:
+      location: "[SPEC_FOLDER]/research.md"
+      summary_message: |
+        Performance optimization research complete.
+        Comprehensive performance analysis has been documented in [SPEC_FOLDER]/research.md
+        This document serves as the authoritative reference for optimization implementation.
+
+        Spec folder structure:
+        - [SPEC_FOLDER]/research.md - Complete optimization research
+        - [SPEC_FOLDER]/checklist.md - Quality verification checklist
+
+        Next steps:
+        - Review optimization strategy in the spec folder
+        - Validate technical approach
+        - Proceed to implementation with incremental testing
+        - Use research as reference during optimization work
+
+  step_11_save_context:
+    action: Save performance optimization conversation context
+    invocation: Skill(skill: "save-context")
+    description: |
+      Preserve comprehensive optimization conversation including:
+      - Baseline measurements and profiling data
+      - Bottleneck identification and analysis
+      - Optimization strategies and implementation
+      - Performance testing and verification
+    outputs:
+      - context_file: "[SPEC_FOLDER]/memory/[DD-MM-YY_HH-MM]__optimization_session.md"
+      - workflow_flowchart: auto_generated
+      - optimization_decisions: documented
+    validation: context_saved_successfully
+    note: |
+      Context saved alongside research.md for complete documentation.
+      Captures full optimization journey including metrics and trade-offs.
+
+termination:
+  after_step: 11
+  message: "Performance optimization research completed successfully. Workflow terminated after step 11 (save context)."
+
+# ─────────────────────────────────────────────────────────────────
+# PRESERVATION REQUIREMENTS
+# ─────────────────────────────────────────────────────────────────
+preservation:
+  mandatory:
+    features:
+      - All functionality intact
+      - Business logic unchanged
+      - User workflows preserved
+      - Data integrity maintained
+
+    animations:
+      - 60 FPS maintained
+      - Smooth transitions
+      - No visual glitches
+      - Timing preserved
+
+    compatibility:
+      - Browser support maintained
+      - Mobile functionality
+      - Accessibility preserved
+      - API contracts unchanged
+
+  testing:
+    after_each_change:
+      - Feature still works
+      - No visual regression
+      - Animation performance
+      - Error handling intact
+
+    before_commit:
+      - Full feature test
+      - Cross-browser check
+      - Performance improved
+      - No memory leaks
+
+# ─────────────────────────────────────────────────────────────────
+# DEVTOOLS INTEGRATION
+# ─────────────────────────────────────────────────────────────────
+devtools:
+  performance_profiling:
+    - Start recording before action
+    - Perform user actions
+    - Stop and analyze
+    - Identify bottlenecks
+    - Export traces for comparison
+
+  network_analysis:
+    - Waterfall visualization
+    - Request timing
+    - Bundle sizes
+    - Cache behavior
+    - CDN performance
+
+  memory_profiling:
+    - Heap snapshots
+    - Allocation timeline
+    - Memory leaks detection
+    - GC analysis
+
+  metrics_collection:
+    - First Contentful Paint
+    - Largest Contentful Paint
+    - Time to Interactive
+    - Cumulative Layout Shift
+    - First Input Delay
+    - Total Blocking Time
+
+# ─────────────────────────────────────────────────────────────────
+# QUALITY STANDARDS
+# ─────────────────────────────────────────────────────────────────
+quality_standards:
+  documentation:
+    - production_ready_examples
+    - defensive_programming_patterns
+    - error_handling_strategies
+    - memory_leak_prevention
+    - performance_monitoring_setup
+  code_examples:
+    - working_snippets
+    - proper_error_handling
+    - performance_optimized
+    - accessibility_compliant
+    - browser_compatible
+  analysis_depth:
+    - edge_cases_covered
+    - failure_modes_documented
+    - recovery_strategies_defined
+    - monitoring_approaches_specified
+
+# ─────────────────────────────────────────────────────────────────
+# RESEARCH DOCUMENTS
+# ─────────────────────────────────────────────────────────────────
+documents:
+  primary_deliverable:
+    type: research_document
+    format: markdown
+    location: "[SPEC_FOLDER]/research.md"
+    versioning: semantic
+    review_required: true
+  supplementary_materials:
+    location: "[SPEC_FOLDER]/"
+    optional_files:
+      - performance_benchmarks.md
+      - optimization_test_cases.md
+      - compatibility_matrix.md
+      - monitoring_dashboard.md
+      - rollback_procedures.md
+
+# ─────────────────────────────────────────────────────────────────
+# SPEC FOLDER INTEGRATION
+# ─────────────────────────────────────────────────────────────────
+spec_folder_structure:
+  note: |
+    This workflow generates research.md within a spec folder structure.
+    It does NOT follow the full GitHub SpecKit workflow (no /specify, /plan, etc).
+    It creates comprehensive optimization research to support implementation planning.
+
+  workflow_relationship:
+    - This is a standalone optimization research workflow
+    - Outputs to spec folders for consistency
+    - Can be used before or during SpecKit workflows
+    - Provides optimization foundation for specifications
+
+  expected_output:
+    - "[SPEC_FOLDER]/research.md - Primary optimization documentation"
+    - "[SPEC_FOLDER]/checklist.md - Quality verification checklist"
+    - "Optional supplementary files in spec folder as needed"
+
+# ─────────────────────────────────────────────────────────────────
+# SUCCESS CRITERIA
+# ─────────────────────────────────────────────────────────────────
+success:
+  performance:
+    - Measurable improvement potential identified
+    - Metrics documented
+    - Bottlenecks analyzed
+    - Optimization strategy defined
+
+  preservation:
+    - 100% feature parity maintained
+    - Animations smooth (60 FPS)
+    - Logic intact
+    - No regressions
+
+  quality:
+    - Code maintainable
+    - Changes documented
+    - Rollback strategy defined
+    - Testing approach specified
+
+# ─────────────────────────────────────────────────────────────────
+# OUTPUT FORMAT
+# ─────────────────────────────────────────────────────────────────
+output:
+  optimization_report: |
+    ## Performance Optimization Research Report
+
+    ### Baseline Metrics
+    - Load Time: XXXms (Current)
+    - FCP: XXXms (Current)
+    - LCP: XXXms (Current)
+    - Memory: XXXMB (Current)
+    - Target Goals: [Based on REQUEST]
+
+    ### Identified Bottlenecks
+    1. [Bottleneck 1]
+       - Impact: High/Medium/Low
+       - Evidence: [Profiling data]
+       - Recommendation: [Optimization approach]
+
+    2. [Bottleneck 2]
+       - Impact: High/Medium/Low
+       - Evidence: [Profiling data]
+       - Recommendation: [Optimization approach]
+
+    ### Proposed Optimizations
+    1. [Optimization 1]
+       - Technique: [Description]
+       - Expected Impact: [Projected metrics]
+       - Implementation Complexity: Low/Medium/High
+       - Preservation Check: [Features to verify]
+
+    2. [Optimization 2]
+       - Technique: [Description]
+       - Expected Impact: [Projected metrics]
+       - Implementation Complexity: Low/Medium/High
+       - Preservation Check: [Features to verify]
+
+    ### Feature Preservation Checklist
+    - [ ] All features identified and documented
+    - [ ] Animation requirements specified (60 FPS)
+    - [ ] Visual regression prevention strategy
+    - [ ] Business logic preservation plan
+    - [ ] Rollback procedures defined
+
+    ### Implementation Strategy
+    - Approach: Incremental optimization
+    - Testing: After each change
+    - Monitoring: Performance metrics tracking
+    - Risk Mitigation: Rollback plan available
+
+# ─────────────────────────────────────────────────────────────────
+# RULES
+# ─────────────────────────────────────────────────────────────────
+rules:
+  ALWAYS:
+    - follow_research_methodology
+    - measure_before_optimizing
+    - document_all_findings
+    - validate_technical_feasibility
+    - use_devtools_for_live_analysis
+    - generate_comprehensive_documentation
+    - self_validate_and_proceed
+    - do_not_prompt_for_user_approval
+    - limit_context_to_active_scope
+    - preserve_all_features
+    - test_after_each_change
+    - keep_animations_smooth
+    - document_improvements
+
+  NEVER:
+    - skip_investigation_steps
+    - break_features_for_speed
+    - optimize_without_measuring
+    - skip_regression_testing
+    - ignore_edge_cases
+    - remove_functionality
+    - proceed_to_implementation_without_research
+    - invent_new_patterns_when_existing_work
+
+  ROLLBACK_IF:
+    - Any feature breaks
+    - Animation drops below 60 FPS
+    - Visual regression occurs
+    - Business logic affected
+    - User experience degraded

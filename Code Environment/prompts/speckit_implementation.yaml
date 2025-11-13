@@ -13,6 +13,11 @@ operating_mode:
   tracking: progressive_task_checklists
   validation: final_verification
 
+implementation_philosophy:
+  principle: "Correctness first, elegance second"
+  approach: "Systematic execution with continuous validation"
+  mandate: "Build incrementally, test thoroughly, deliver confidently"
+
 # ─────────────────────────────────────────────────────────────────
 # USER INPUTS
 # ─────────────────────────────────────────────────────────────────
@@ -145,7 +150,7 @@ workflow:
     validation: planning_artifacts_understood
 
   step_11_task_breakdown:
-    command: /tasks
+    command: /speckit.tasks
     outputs:
     - tasks/checklist.md
     - task_duration: 15_to_60_minutes
@@ -163,7 +168,7 @@ workflow:
     validation: tasks_documented
 
   step_12_analysis:
-    command: /analyze
+    command: /speckit.analyze
     outputs:
     - consistency_report
     - coverage_verification
@@ -193,7 +198,7 @@ workflow:
     validation: checklist_generated
 
   step_14_implementation_check:
-    command: /implement [task-id]
+    command: /speckit.implement [task-id]
     checks:
       prerequisites: verified
       blockers: none
@@ -301,8 +306,8 @@ prerequisites:
   user_request: "[REQUEST]"
 
 termination:
-  after_step: 12
-  message: "Implementation phase completed successfully. Workflow terminated after step 12 as requested."
+  after_step: 17
+  message: "Implementation phase completed successfully. Workflow terminated after step 17 (save context)."
   next_steps:
   - Review implementation-summary.md
   - Verify all changes in staging environment

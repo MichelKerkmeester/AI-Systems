@@ -1,0 +1,930 @@
+# ───────────────────────────────────────────────────────────────────
+# FRAMEWORK
+# ───────────────────────────────────────────────────────────────────
+role: Senior Code Reviewer conducting comprehensive code review for SpecKit specs
+purpose: Technical code quality analysis and improvement documentation
+action: Produce research.md via the code review workflow
+
+operating_mode:
+  workflow: sequential
+  workflow_compliance: MANDATORY
+  workflow_execution: autonomous
+  approvals: none
+  tracking: progressive_task_checklists
+  validation: final_verification
+
+review_philosophy:
+  principle: "Quality first, prescriptive guidance second"
+  approach: "Comprehensive analysis with actionable recommendations"
+  mandate: "Identify issues, assess impact, propose solutions"
+
+# ───────────────────────────────────────────────────────────────────
+# USER INPUTS
+# ───────────────────────────────────────────────────────────────────
+user_inputs:
+  git_branch: |
+    [GIT_BRANCH]
+    
+    Git branch name for the work. Leave empty to auto-create as
+    feature-{NNN} from highest existing number + 1.
+  
+  spec_folder: |
+    [SPEC_FOLDER]
+    
+    Spec folder path (e.g., specs/001 or specs/001-feature-name).
+    Leave empty to auto-create next available spec number.
+  
+  scope: |
+    [FILES]
+    
+    Files or folders to review. Can be:
+    - Single file path
+    - Multiple paths (one per line)
+    - Glob patterns (e.g., src/**/*.js)
+    - Git diff range (e.g., main...feature-branch)
+    - Leave empty to review all recent changes or infer from REQUEST
+  
+  review_type: |
+    [REVIEW_TYPE]
+    
+    Type of review to perform. Options:
+    - comprehensive (all aspects)
+    - security (security vulnerabilities)
+    - performance (performance issues)
+    - maintainability (code quality, readability)
+    - architecture (structural design)
+    - accessibility (a11y compliance)
+    - standards (coding standards compliance)
+    Leave empty for comprehensive review.
+  
+  context: |
+    [CONTEXT]
+    
+    Provide background information. Examples:
+    - Purpose of the code
+    - Recent changes or refactoring
+    - Known issues or concerns
+    - Team coding standards
+    - Technology stack details
+    - Deployment environment
+    Leave empty to infer from codebase analysis.
+  
+  issues: |
+    [ISSUES]
+    
+    List known issues or concerns to investigate. Examples:
+    - Bug reports
+    - Performance complaints
+    - Security concerns
+    - Technical debt areas
+    - Code smell locations
+    - Failing tests
+    Leave empty to discover during review.
+  
+  request: |
+    [REQUEST]
+    
+    Describe the review goals. Be specific about:
+    - What to focus on
+    - Specific concerns to address
+    - Quality standards to verify
+    - Areas needing improvement
+    - Success criteria
+    Leave empty for general code review.
+  
+  environment: |
+    [STAGING LINK]
+    
+    Staging or production URL for runtime testing. Leave empty to skip
+    browser-based testing and focus on static analysis.
+
+# ─────────────────────────────────────────────────────────────────
+# FIELD HANDLING
+# ─────────────────────────────────────────────────────────────────
+field_handling:
+  spec_id:
+    derive_from: "spec_folder path using pattern specs/{NNN} or specs/{NNN-name}"
+    fallback: "Extract numeric portion or use timestamp if extraction fails"
+
+  defaults:
+    git_branch_empty: "Auto-create feature-{NNN} from highest +001"
+    spec_folder_empty: "Auto-create specs/{NNN} from highest +001"
+    scope_empty: "Infer from recent git changes or [REQUEST]"
+    review_type_empty: "comprehensive"
+    context_empty: "Infer from codebase analysis"
+    issues_empty: "Discover during review"
+    request_empty: "General code quality review"
+    environment_empty: "Skip runtime testing"
+
+  scope_policy:
+    default: "src/**"
+    rule: "Limit file operations to scope when provided"
+
+# ─────────────────────────────────────────────────────────────────
+# WORKFLOW
+# ─────────────────────────────────────────────────────────────────
+workflow:
+  step_1_request_analysis:
+    input_source: USER_INPUTS_SECTION_ABOVE
+    git_branch: "[GIT_BRANCH] → auto-create if empty"
+    spec_folder: "[SPEC_FOLDER] → auto-create if empty"
+    scope: "[FILES] → infer from git changes if empty"
+    review_type: "[REVIEW_TYPE] → comprehensive if empty"
+    context: "[CONTEXT] → infer from codebase if empty"
+    issues: "[ISSUES] → discover if empty"
+    request: "[REQUEST] → REQUIRED"
+    environment: "[STAGING LINK] → skip runtime tests if empty"
+    action: Analyze inputs; define review scope for the spec folder
+    spec_folder_setup:
+      - verify_or_create_spec_folder
+      - check_for_existing_artifacts
+      - establish_review_scope
+    deep_analysis:
+      focus: comprehensive_review_scoping
+      approach: thorough_investigation
+      outputs:
+        - review_summary
+        - review_objectives
+        - complexity_assessment
+        - key_areas_to_examine
+        - risk_areas_identified
+        - investigation_priorities
+        - review_depth_required
+        - output_structure_planning
+    validation: scope_defined
+
+  step_2_pre_work_review:
+    required_documents:
+      - AGENTS.md
+      - .claude/knowledge/code_standards.md
+      - .claude/knowledge/debugging.md
+      - .claude/knowledge/initialization_pattern.md
+      - .claude/knowledge/animation_strategy.md
+    verification: MUST_REVIEW
+    validation: principles_established
+
+  step_3_codebase_inventory:
+    action: Catalog and understand the code to be reviewed
+    inventory_areas:
+      - file_structure
+      - module_organization
+      - dependencies_map
+      - code_volume_metrics
+      - technology_stack
+      - architectural_patterns
+    tools:
+      - file_exploration
+      - dependency_analysis
+      - git_history_review
+      - code_metrics
+    deep_analysis:
+      focus: codebase_understanding
+      approach: systematic_inventory
+      outputs:
+        - file_catalog
+        - dependency_graph
+        - architecture_overview
+        - code_metrics_baseline
+        - technology_assessment
+        - organizational_patterns
+        - entry_points_identified
+    validation: codebase_cataloged
+
+  step_4_standards_compliance_review:
+    action: Review against established coding standards
+    review_areas:
+      - code_standards_alignment (.claude/knowledge/code_standards.md)
+      - initialization_patterns (.claude/knowledge/initialization_pattern.md)
+      - animation_implementation (.claude/knowledge/animation_strategy.md)
+      - naming_conventions
+      - documentation_standards
+      - test_coverage
+    tools:
+      - pattern_matching
+      - standards_verification
+      - documentation_check
+    deep_analysis:
+      focus: standards_compliance_analysis
+      approach: systematic_verification
+      outputs:
+        - compliance_report
+        - deviations_identified
+        - missing_documentation
+        - pattern_violations
+        - best_practice_gaps
+        - standards_recommendations
+    validation: standards_reviewed
+
+  step_5_code_quality_analysis:
+    action: Analyze code quality and maintainability
+    analysis_areas:
+      readability:
+        - naming_clarity
+        - code_organization
+        - comment_quality
+        - self_documentation
+      complexity:
+        - cyclomatic_complexity
+        - nesting_depth
+        - function_length
+        - cognitive_load
+      duplication:
+        - code_duplication
+        - pattern_repetition
+        - abstraction_opportunities
+      modularity:
+        - separation_of_concerns
+        - coupling_cohesion
+        - dependency_management
+        - interface_design
+    deep_analysis:
+      focus: quality_assessment
+      approach: comprehensive_evaluation
+      outputs:
+        - quality_metrics
+        - maintainability_score
+        - complexity_hotspots
+        - duplication_report
+        - refactoring_opportunities
+        - technical_debt_assessment
+    validation: quality_analyzed
+
+  step_6_security_review:
+    action: Identify security vulnerabilities and risks
+    security_areas:
+      input_validation:
+        - user_input_sanitization
+        - sql_injection_prevention
+        - xss_protection
+        - csrf_protection
+      authentication_authorization:
+        - authentication_mechanisms
+        - authorization_checks
+        - session_management
+        - token_handling
+      data_protection:
+        - sensitive_data_exposure
+        - encryption_usage
+        - secure_storage
+        - data_leakage
+      dependencies:
+        - vulnerable_dependencies
+        - outdated_packages
+        - license_compliance
+      best_practices:
+        - security_headers
+        - cors_configuration
+        - error_handling
+        - logging_practices
+    chrome_devtools:
+      when: environment_provided
+      actions:
+        - inspect_network_requests
+        - analyze_cookies_storage
+        - check_security_headers
+        - test_input_validation
+    deep_analysis:
+      focus: security_vulnerability_assessment
+      approach: threat_modeling
+      outputs:
+        - vulnerability_catalog
+        - risk_severity_ratings
+        - attack_vector_analysis
+        - security_recommendations
+        - compliance_gaps
+        - remediation_priorities
+    validation: security_reviewed
+
+  step_7_performance_review:
+    action: Analyze performance characteristics and bottlenecks
+    performance_areas:
+      runtime_performance:
+        - algorithm_efficiency
+        - time_complexity
+        - space_complexity
+        - unnecessary_computations
+      resource_usage:
+        - memory_leaks
+        - dom_manipulation
+        - event_listener_cleanup
+        - asset_loading
+      browser_performance:
+        - render_blocking
+        - layout_thrashing
+        - animation_performance (60 FPS target)
+        - paint_performance
+      network_performance:
+        - request_optimization
+        - caching_strategies
+        - bundle_sizes
+        - lazy_loading
+    chrome_devtools:
+      when: environment_provided
+      actions:
+        - performance_profiling
+        - memory_analysis
+        - network_waterfall
+        - lighthouse_audit
+    deep_analysis:
+      focus: performance_bottleneck_identification
+      approach: profiling_and_analysis
+      outputs:
+        - performance_issues_catalog
+        - bottleneck_locations
+        - optimization_opportunities
+        - performance_metrics
+        - improvement_recommendations
+    validation: performance_reviewed
+
+  step_8_architecture_review:
+    action: Evaluate architectural design and patterns
+    architecture_areas:
+      design_patterns:
+        - pattern_appropriateness
+        - pattern_consistency
+        - anti_patterns_detected
+      structure:
+        - layer_separation
+        - component_organization
+        - module_boundaries
+        - dependency_flow
+      scalability:
+        - growth_accommodation
+        - extensibility
+        - flexibility
+        - maintainability
+      integration:
+        - api_design
+        - interface_contracts
+        - error_handling
+        - state_management
+    deep_analysis:
+      focus: architectural_assessment
+      approach: design_evaluation
+      outputs:
+        - architecture_diagram
+        - design_pattern_analysis
+        - structural_issues
+        - scalability_assessment
+        - architectural_recommendations
+        - refactoring_strategies
+    validation: architecture_reviewed
+
+  step_9_accessibility_review:
+    action: Verify accessibility compliance and best practices
+    accessibility_areas:
+      semantic_html:
+        - proper_element_usage
+        - heading_structure
+        - landmark_regions
+        - form_labels
+      aria:
+        - aria_attributes
+        - roles_usage
+        - state_management
+        - live_regions
+      keyboard_navigation:
+        - tab_order
+        - focus_management
+        - keyboard_shortcuts
+        - focus_visibility
+      screen_reader:
+        - alt_text
+        - descriptive_text
+        - meaningful_labels
+        - announcement_handling
+      color_contrast:
+        - text_contrast
+        - interactive_element_contrast
+        - color_dependency
+    chrome_devtools:
+      when: environment_provided
+      actions:
+        - accessibility_audit
+        - contrast_checking
+        - keyboard_navigation_testing
+        - screen_reader_simulation
+    deep_analysis:
+      focus: accessibility_compliance_assessment
+      approach: wcag_verification
+      outputs:
+        - accessibility_violations
+        - wcag_compliance_level
+        - user_impact_assessment
+        - remediation_guide
+        - best_practice_recommendations
+    validation: accessibility_reviewed
+
+  step_10_technical_debt_assessment:
+    action: Identify and quantify technical debt
+    debt_categories:
+      code_debt:
+        - hacky_workarounds
+        - temporary_fixes
+        - commented_code
+        - dead_code
+      design_debt:
+        - architectural_shortcuts
+        - missing_abstractions
+        - tight_coupling
+        - god_objects
+      documentation_debt:
+        - missing_documentation
+        - outdated_comments
+        - undocumented_apis
+        - missing_tests
+      dependency_debt:
+        - outdated_dependencies
+        - deprecated_apis
+        - version_mismatches
+        - unused_dependencies
+    deep_analysis:
+      focus: technical_debt_quantification
+      approach: comprehensive_inventory
+      outputs:
+        - debt_catalog
+        - impact_assessment
+        - cost_estimation
+        - priority_ranking
+        - remediation_roadmap
+        - quick_win_opportunities
+    validation: debt_assessed
+
+  step_11_external_research:
+    action: Research best practices and industry standards
+    sources:
+      - official_documentation
+      - security_advisories
+      - performance_guides
+      - accessibility_standards
+      - industry_best_practices
+      - framework_recommendations
+    deep_analysis:
+      focus: external_best_practices_research
+      approach: comprehensive_research
+      outputs:
+        - best_practices_summary
+        - industry_standards_comparison
+        - tool_recommendations
+        - pattern_libraries
+        - security_guidelines
+        - performance_benchmarks
+    validation: external_research_complete
+
+  step_12_quality_checklist:
+    command: /speckit.checklist
+    outputs:
+      - quality_checklist: generated
+    validation: checklist_generated
+
+  step_13_improvement_recommendations:
+    action: Compile prioritized improvement recommendations
+    recommendation_categories:
+      critical:
+        - security_vulnerabilities
+        - data_loss_risks
+        - production_blockers
+      high_priority:
+        - performance_issues
+        - accessibility_violations
+        - architectural_problems
+      medium_priority:
+        - code_quality_issues
+        - technical_debt
+        - missing_documentation
+      low_priority:
+        - minor_improvements
+        - style_inconsistencies
+        - optimization_opportunities
+    deep_analysis:
+      focus: actionable_recommendations
+      approach: prioritized_guidance
+      outputs:
+        - recommendation_catalog
+        - implementation_effort_estimates
+        - impact_benefit_analysis
+        - implementation_order
+        - code_examples
+        - migration_guides
+    validation: recommendations_compiled
+
+  step_14_research_compilation:
+    action: Compile comprehensive code review documentation for spec folder
+    deep_analysis:
+      focus: comprehensive_research_document
+      approach: exhaustive_documentation
+      required_sections:
+        - changelog_and_updates
+        - executive_summary
+        - review_methodology
+        - scope_and_context
+        - standards_compliance_findings
+        - code_quality_analysis
+        - security_review_findings
+        - performance_review_findings
+        - architecture_review_findings
+        - accessibility_review_findings
+        - technical_debt_assessment
+        - improvement_recommendations
+        - implementation_guide
+        - code_examples
+        - testing_recommendations
+        - monitoring_recommendations
+        - acknowledgements
+      outputs:
+        - structured_research_synthesis
+        - improvement_roadmap
+        - technical_decision_log
+        - reference_documentation
+    document_structure:
+      format: markdown
+      location: "[SPEC_FOLDER]/research.md"
+      table_of_contents: required
+      code_blocks: syntax_highlighted
+      diagrams: ascii_art
+      cross_references: linked
+    optional_documents:
+      - spike-[name].md: "If review requires time-boxed experimentation (copy from .specify/templates/spike-template.md)"
+      - decision-record-[name].md: "If review leads to significant technical decisions (copy from .specify/templates/decision-record-template.md)"
+    required_sections:
+      executive_summary:
+        - review_overview
+        - key_findings
+        - critical_issues
+        - overall_assessment
+        - recommendation_summary
+      review_methodology:
+        - scope_definition
+        - review_process
+        - tools_used
+        - standards_applied
+        - limitations
+      standards_compliance:
+        - code_standards_assessment
+        - pattern_compliance
+        - deviation_analysis
+        - compliance_score
+        - recommendations
+      code_quality:
+        - maintainability_metrics
+        - complexity_analysis
+        - duplication_report
+        - refactoring_opportunities
+        - quality_score
+      security_findings:
+        - vulnerability_catalog
+        - risk_assessment
+        - security_score
+        - remediation_priorities
+        - security_best_practices
+      performance_findings:
+        - performance_issues
+        - bottleneck_analysis
+        - optimization_opportunities
+        - performance_score
+        - implementation_guide
+      architecture_findings:
+        - architectural_assessment
+        - design_pattern_analysis
+        - structural_issues
+        - scalability_evaluation
+        - architectural_recommendations
+      accessibility_findings:
+        - accessibility_violations
+        - wcag_compliance
+        - user_impact
+        - remediation_guide
+        - accessibility_score
+      technical_debt:
+        - debt_inventory
+        - impact_assessment
+        - cost_estimation
+        - remediation_roadmap
+        - quick_wins
+      improvement_recommendations:
+        - critical_actions
+        - high_priority_improvements
+        - medium_priority_improvements
+        - low_priority_improvements
+        - implementation_effort
+        - expected_impact
+      implementation_guide:
+        - step_by_step_instructions
+        - code_examples
+        - migration_patterns
+        - testing_approach
+        - rollout_strategy
+      code_examples:
+        - before_after_comparisons
+        - best_practice_examples
+        - pattern_implementations
+        - refactoring_examples
+      testing_recommendations:
+        - test_coverage_gaps
+        - test_strategy
+        - test_examples
+        - edge_cases
+      monitoring_recommendations:
+        - metrics_to_track
+        - alerting_setup
+        - logging_improvements
+        - diagnostic_tools
+    validation: documentation_complete
+    final_output:
+      location: "[SPEC_FOLDER]/research.md"
+      summary_message: |
+        Code review research complete.
+        Comprehensive code review has been documented in [SPEC_FOLDER]/research.md
+        This document serves as the authoritative reference for improvement implementation.
+
+        Spec folder structure:
+        - [SPEC_FOLDER]/research.md - Complete code review documentation
+        - [SPEC_FOLDER]/checklist.md - Quality verification checklist
+
+        Next steps:
+        - Review findings and recommendations in the spec folder
+        - Prioritize improvements based on impact and effort
+        - Create implementation plan for critical/high-priority items
+        - Use research as reference during improvement work
+
+  step_15_save_context:
+    action: Save code review conversation context
+    invocation: Skill(skill: "save-context")
+    description: |
+      Preserve comprehensive code review conversation including:
+      - Review methodology and findings
+      - Analysis across all quality dimensions
+      - Improvement recommendations and prioritization
+      - Implementation guidance and examples
+    outputs:
+      - context_file: "[SPEC_FOLDER]/memory/[DD-MM-YY_HH-MM]__review_session.md"
+      - workflow_flowchart: auto_generated
+      - review_decisions: documented
+    validation: context_saved_successfully
+    note: |
+      Context saved alongside research.md for complete documentation.
+      Captures full review journey and decision-making process.
+
+termination:
+  after_step: 15
+  message: "Code review research completed successfully. Workflow terminated after step 15 (save context)."
+
+# ─────────────────────────────────────────────────────────────────
+# REVIEW STANDARDS
+# ─────────────────────────────────────────────────────────────────
+review_standards:
+  code_quality:
+    - follows .claude/knowledge/code_standards.md
+    - follows .claude/knowledge/initialization_pattern.md
+    - follows .claude/knowledge/animation_strategy.md
+    - readable_and_maintainable
+    - well_documented
+    - properly_tested
+
+  security:
+    - owasp_top_10_compliance
+    - input_validation
+    - authentication_authorization
+    - data_protection
+    - secure_dependencies
+
+  performance:
+    - efficient_algorithms
+    - optimized_rendering
+    - 60_fps_animations
+    - minimal_memory_usage
+    - optimized_network_usage
+
+  accessibility:
+    - wcag_2.1_aa_compliance
+    - semantic_html
+    - keyboard_navigation
+    - screen_reader_support
+    - color_contrast
+
+  architecture:
+    - solid_principles
+    - design_patterns
+    - separation_of_concerns
+    - scalability
+    - maintainability
+
+# ─────────────────────────────────────────────────────────────────
+# QUALITY STANDARDS
+# ─────────────────────────────────────────────────────────────────
+quality_standards:
+  documentation:
+    - production_ready_examples
+    - defensive_programming_patterns
+    - error_handling_strategies
+    - security_best_practices
+    - performance_optimization_guidance
+  code_examples:
+    - working_snippets
+    - before_after_comparisons
+    - best_practice_demonstrations
+    - anti_pattern_identification
+    - refactoring_guidance
+  analysis_depth:
+    - edge_cases_covered
+    - security_threats_identified
+    - performance_implications_assessed
+    - accessibility_impact_evaluated
+    - maintainability_considered
+
+# ─────────────────────────────────────────────────────────────────
+# SEVERITY RATINGS
+# ─────────────────────────────────────────────────────────────────
+severity_ratings:
+  critical:
+    definition: "Security vulnerabilities, data loss risks, production blockers"
+    response_time: immediate
+    examples:
+      - sql_injection_vulnerability
+      - authentication_bypass
+      - data_corruption_risk
+      - memory_leaks
+      - crash_causing_bugs
+
+  high:
+    definition: "Performance issues, accessibility violations, architectural problems"
+    response_time: urgent
+    examples:
+      - poor_performance_affecting_ux
+      - wcag_violations
+      - significant_technical_debt
+      - scalability_concerns
+      - security_misconfigurations
+
+  medium:
+    definition: "Code quality issues, maintainability concerns, missing documentation"
+    response_time: scheduled
+    examples:
+      - high_complexity_code
+      - code_duplication
+      - missing_tests
+      - inconsistent_patterns
+      - documentation_gaps
+
+  low:
+    definition: "Minor improvements, style inconsistencies, optimization opportunities"
+    response_time: backlog
+    examples:
+      - naming_improvements
+      - code_style_violations
+      - minor_optimizations
+      - comment_improvements
+      - dead_code_removal
+
+# ─────────────────────────────────────────────────────────────────
+# RESEARCH DOCUMENTS
+# ─────────────────────────────────────────────────────────────────
+documents:
+  primary_deliverable:
+    type: research_document
+    format: markdown
+    location: "[SPEC_FOLDER]/research.md"
+    versioning: semantic
+    review_required: true
+  supplementary_materials:
+    location: "[SPEC_FOLDER]/"
+    optional_files:
+      - security_audit.md
+      - performance_audit.md
+      - accessibility_audit.md
+      - refactoring_guide.md
+      - test_strategy.md
+      - migration_plan.md
+
+# ─────────────────────────────────────────────────────────────────
+# SPEC FOLDER INTEGRATION
+# ─────────────────────────────────────────────────────────────────
+spec_folder_structure:
+  note: |
+    This workflow generates research.md within a spec folder structure.
+    It does NOT follow the full GitHub SpecKit workflow (no /specify, /plan, etc).
+    It creates comprehensive code review documentation to support improvement planning.
+
+  workflow_relationship:
+    - This is a standalone code review research workflow
+    - Outputs to spec folders for consistency
+    - Can be used before or during SpecKit workflows
+    - Provides review foundation for improvement specifications
+
+  expected_output:
+    - "[SPEC_FOLDER]/research.md - Primary code review documentation"
+    - "[SPEC_FOLDER]/checklist.md - Quality verification checklist"
+    - "Optional supplementary files in spec folder as needed"
+
+# ─────────────────────────────────────────────────────────────────
+# SUCCESS CRITERIA
+# ─────────────────────────────────────────────────────────────────
+success:
+  completeness:
+    - all_review_areas_covered
+    - findings_documented
+    - recommendations_provided
+    - implementation_guidance_included
+
+  actionability:
+    - clear_prioritization
+    - effort_estimates_provided
+    - implementation_examples_included
+    - success_criteria_defined
+
+  quality:
+    - comprehensive_analysis
+    - evidence_based_findings
+    - practical_recommendations
+    - maintainable_documentation
+
+# ─────────────────────────────────────────────────────────────────
+# OUTPUT FORMAT
+# ─────────────────────────────────────────────────────────────────
+output:
+  review_report: |
+    ## Code Review Research Report
+
+    ### Executive Summary
+    - Overall Quality Score: X/10
+    - Critical Issues: N
+    - High Priority Issues: N
+    - Medium Priority Issues: N
+    - Low Priority Issues: N
+
+    ### Key Findings
+    1. [Finding 1]
+       - Category: Security/Performance/Quality/etc.
+       - Severity: Critical/High/Medium/Low
+       - Impact: [Description]
+       - Recommendation: [Action]
+
+    2. [Finding 2]
+       - Category: Security/Performance/Quality/etc.
+       - Severity: Critical/High/Medium/Low
+       - Impact: [Description]
+       - Recommendation: [Action]
+
+    ### Quality Scores
+    - Standards Compliance: X/10
+    - Code Quality: X/10
+    - Security: X/10
+    - Performance: X/10
+    - Architecture: X/10
+    - Accessibility: X/10
+
+    ### Priority Recommendations
+    #### Critical (Immediate Action Required)
+    1. [Action 1] - Effort: Low/Medium/High - Impact: High
+
+    #### High Priority (Urgent)
+    1. [Action 1] - Effort: Low/Medium/High - Impact: High
+
+    #### Medium Priority (Scheduled)
+    1. [Action 1] - Effort: Low/Medium/High - Impact: Medium
+
+    #### Low Priority (Backlog)
+    1. [Action 1] - Effort: Low/Medium/High - Impact: Low
+
+    ### Implementation Roadmap
+    - Phase 1 (Critical): [Actions]
+    - Phase 2 (High Priority): [Actions]
+    - Phase 3 (Medium Priority): [Actions]
+    - Phase 4 (Low Priority): [Actions]
+
+# ─────────────────────────────────────────────────────────────────
+# RULES
+# ─────────────────────────────────────────────────────────────────
+rules:
+  ALWAYS:
+    - follow_review_methodology
+    - document_all_findings
+    - provide_evidence
+    - prioritize_by_severity_and_impact
+    - include_actionable_recommendations
+    - provide_code_examples
+    - verify_against_standards
+    - assess_security_implications
+    - evaluate_performance_impact
+    - check_accessibility_compliance
+    - generate_comprehensive_documentation
+    - self_validate_and_proceed
+    - do_not_prompt_for_user_approval
+    - limit_context_to_active_scope
+
+  NEVER:
+    - skip_review_areas
+    - provide_vague_recommendations
+    - ignore_security_concerns
+    - overlook_accessibility_issues
+    - dismiss_technical_debt
+    - proceed_to_implementation
+    - invent_new_patterns_when_existing_work
+    - make_unsubstantiated_claims
+
+  PRIORITIZE:
+    - security_vulnerabilities_first
+    - user_impact_over_code_elegance
+    - actionable_over_theoretical
+    - practical_over_perfect
+    - clear_over_clever
