@@ -2,6 +2,16 @@
 description: Generate research spike documentation for time-boxed technical exploration.
 ---
 
+## Command Purpose: Time-Boxed Research & Proof-of-Concept
+
+**WHAT IT DOES**: Creates structured documentation for time-boxed research spikes—experimental investigations to answer technical questions, validate approaches, or reduce uncertainty before committing to a full implementation plan.
+
+**WHY IT EXISTS**: Some technical questions can't be answered through documentation alone—they require hands-on experimentation. Spikes provide a controlled, time-limited way to explore unknowns and make informed decisions based on evidence.
+
+**WHEN TO USE**: When facing significant technical uncertainty that blocks planning or decision-making: evaluating new libraries, testing performance approaches, validating feasibility, or exploring multiple solution paths before choosing one.
+
+**KEY PRINCIPLE**: Time-boxing and focus. Spikes have strict time limits (typically 1-2 days) and clear success criteria. The goal is to answer specific questions and make decisions—not to build production-ready code or explore endlessly.
+
 ## User Input
 
 ```text
@@ -24,7 +34,7 @@ Given that research question/topic, do this:
    - Identify any specific technologies/approaches mentioned
 
 2. **Setup**:
-   - Run `.specify/scripts/bash/check-prerequisites.sh --json` from repo root
+   - Run `.specify/scripts/check-prerequisites.sh --json` from repo root
    - Parse JSON for FEATURE_DIR and AVAILABLE_DOCS
    - Generate short spike name from research question (2-4 words, kebab-case)
    - Assign spike number: Find highest SPIKE-### in FEATURE_DIR/spikes/, increment by 1 (default: SPIKE-001)
@@ -32,7 +42,7 @@ Given that research question/topic, do this:
    - Create spike file: `FEATURE_DIR/spikes/spike-[###]-[short-name].md`
 
 3. **Load Template**:
-   - Load `.specify/templates/spike-template.md` as structure reference
+   - Load `.specify/templates/spike_template.md` as structure reference
 
 4. **Generate Spike Document** using template structure:
 
@@ -171,7 +181,7 @@ Given that research question/topic, do this:
 
 ## Template Compliance
 
-All generated spike documents MUST include every section from spike-template.md:
+All generated spike documents MUST include every section from spike_template.md:
 - § 1: Metadata
 - § 2: Research Question
 - § 3: Hypothesis

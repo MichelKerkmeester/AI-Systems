@@ -2,6 +2,16 @@
 description: Generate an actionable, dependency-ordered tasks.md for the feature based on available design artifacts.
 ---
 
+## Command Purpose: Implementation Task Breakdown
+
+**WHAT IT DOES**: Breaks down the technical plan into granular, executable tasks organized by user story, with clear dependencies and parallel execution paths. Each task is small enough to complete in one focused session.
+
+**WHY IT EXISTS**: Transforms high-level design into concrete action items that can be tracked, assigned, and executed. Provides the roadmap from plan to working code.
+
+**WHEN TO USE**: After plan.md is complete with all design artifacts (data models, contracts, technical approach). This is the final preparation step before actual implementation begins.
+
+**KEY PRINCIPLE**: Task independence and testability. Each task should be independently verifiable, properly scoped (30min-4hrs), and organized so related tasks can be executed in parallel when dependencies allow.
+
 ## User Input
 
 ```text
@@ -12,7 +22,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-1. **Setup**: Run `.specify/scripts/bash/check-prerequisites.sh --json` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
+1. **Setup**: Run `.specify/scripts/check-prerequisites.sh --json` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
 2. **Load design documents**: Read from FEATURE_DIR:
    - **Required**: plan.md (tech stack, libraries, structure), spec.md (user stories with priorities)
@@ -30,10 +40,10 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Create parallel execution examples per user story
    - Validate task completeness (each user story has all needed tasks, independently testable)
 
-4. **Generate tasks.md**: Load `.specify/templates/tasks-template.md` and preserve its EXACT structure:
+4. **Generate tasks.md**: Load `.specify/templates/tasks_template.md` and preserve its EXACT structure:
 
    **Template Preservation**:
-   - Preserve EXACT structure from tasks-template.md including:
+   - Preserve EXACT structure from tasks_template.md including:
      -  Section headers with UPPERCASE names
      -  HTML comment blocks (keep guidance comments as-is)
      -  Metadata structure and fields

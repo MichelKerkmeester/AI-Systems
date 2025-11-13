@@ -2,6 +2,16 @@
 description: Execute the implementation plan by processing and executing all tasks defined in tasks.md
 ---
 
+## Command Purpose: Guided Implementation Execution
+
+**WHAT IT DOES**: Systematically executes all tasks from tasks.md in dependency order, writing actual code, creating files, and building the feature. Validates checklist completion before starting and tracks progress throughout.
+
+**WHY IT EXISTS**: Transforms planning documents into working software. Provides structured, step-by-step execution that follows the planned approach and ensures all requirements are implemented.
+
+**WHEN TO USE**: After tasks.md is complete, all checklists pass (or user approves proceeding), and analysis shows no critical issues. This is where plans become reality.
+
+**KEY PRINCIPLE**: Plan adherence and quality. Follow the planned approach, implement each task completely before moving to the next, validate work incrementally, and maintain code quality standards throughout execution.
+
 ## User Input
 
 ```text
@@ -12,7 +22,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-1. Run `.specify/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
+1. Run `.specify/scripts/check-prerequisites.sh --json --require-tasks --include-tasks` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
 2. **Check checklists status** (if FEATURE_DIR/checklists/ exists):
    - Scan all checklist files in the checklists/ directory

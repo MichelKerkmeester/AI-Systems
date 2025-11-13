@@ -2,6 +2,16 @@
 description: Perform a non-destructive cross-artifact consistency and quality analysis across spec.md, plan.md, and tasks.md after task generation.
 ---
 
+## Command Purpose: Pre-Implementation Quality Assurance
+
+**WHAT IT DOES**: Performs a comprehensive, read-only analysis across all feature artifacts (spec.md, plan.md, tasks.md) to identify inconsistencies, gaps, duplications, and constitution violations before implementation begins.
+
+**WHY IT EXISTS**: Catches planning errors, missing requirements, and inconsistencies when they're cheap to fix—before any code is written. Acts as a final safety check that all artifacts align with each other and project principles.
+
+**WHEN TO USE**: After `/speckit.tasks` completes, before `/speckit.implement` begins. This is the quality gate that prevents flawed plans from becoming flawed implementations.
+
+**KEY PRINCIPLE**: Non-destructive analysis. This command NEVER modifies files—it only reports issues and suggests remediation. Any fixes require explicit user approval and separate editing commands.
+
 ## User Input
 
 ```text
@@ -24,7 +34,7 @@ Identify inconsistencies, duplications, ambiguities, and underspecified items ac
 
 ### 1. Initialize Analysis Context
 
-Run `.specify/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks` once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS. Derive absolute paths:
+Run `.specify/scripts/check-prerequisites.sh --json --require-tasks --include-tasks` once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS. Derive absolute paths:
 
 - SPEC = FEATURE_DIR/spec.md
 - PLAN = FEATURE_DIR/plan.md

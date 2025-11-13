@@ -2,6 +2,16 @@
 description: Execute the implementation planning workflow using the plan template to generate design artifacts.
 ---
 
+## Command Purpose: Technical Design & Architecture Planning
+
+**WHAT IT DOES**: Transforms technology-agnostic requirements (from spec.md) into concrete technical plans including architecture, tech stack decisions, data models, API contracts, and implementation approach.
+
+**WHY IT EXISTS**: Bridges the gap between WHAT (requirements) and HOW (implementation). Creates the technical blueprint that guides task breakdown and actual coding.
+
+**WHEN TO USE**: After spec.md is complete and clarified. This is where engineers translate business requirements into technical solutions, making all major architectural and technology decisions.
+
+**KEY PRINCIPLE**: Design before build. All significant technical decisions (libraries, patterns, data structures, API contracts) are documented and validated against project constitution before any code is written.
+
 ## User Input
 
 ```text
@@ -12,12 +22,12 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-1. **Setup**: Run `.specify/scripts/bash/setup-plan.sh --json` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
+1. **Setup**: Run `.specify/scripts/setup-plan.sh --json` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load context**: Read FEATURE_SPEC and `.specify/memory/constitution.md`. Load IMPL_PLAN template from `.specify/templates/plan-template.md`.
+2. **Load context**: Read FEATURE_SPEC and `.specify/memory/constitution.md`. Load IMPL_PLAN template from `.specify/templates/plan_template.md`.
 
    **Template Preservation**:
-   - Preserve EXACT structure from plan-template.md including:
+   - Preserve EXACT structure from plan_template.md including:
      -  Section headers with UPPERCASE names
      -  HTML comment blocks (keep guidance comments as-is)
      -  Metadata structure and all fields
@@ -50,7 +60,7 @@ You **MUST** consider the user input before proceeding (if not empty).
      -  Dependencies (§8)
      -  Communication & Review (§9)
      -  Phases 2-4 outlines (§4)
-   - Template compliance: All plan-template.md sections present
+   - Template compliance: All plan_template.md sections present
    - Next step: Run `/speckit.tasks` to generate implementation task breakdown
 
 ## Phases
@@ -135,14 +145,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - List approval gates
    - Add review schedule
 
-8. **Agent context update**:
-   - Run `.specify/scripts/bash/update-agent-context.sh opencode`
-   - These scripts detect which AI agent is in use
-   - Update the appropriate agent-specific context file
-   - Add only new technology from current plan
-   - Preserve manual additions between markers
-
-**Output**: data-model.md, /contracts/*, quickstart.md, Testing Strategy, Success Metrics, Risk Matrix, Dependencies, Communication sections in plan.md, agent-specific file
+**Output**: data-model.md, /contracts/*, quickstart.md, Testing Strategy, Success Metrics, Risk Matrix, Dependencies, Communication sections in plan.md
 
 ### Phase 2-4: Implementation Phases Outline
 

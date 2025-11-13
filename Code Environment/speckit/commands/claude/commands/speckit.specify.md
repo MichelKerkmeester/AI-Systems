@@ -2,6 +2,16 @@
 description: Create or update the feature specification from a natural language feature description.
 ---
 
+## Command Purpose: Feature Requirements Definition
+
+**WHAT IT DOES**: Transforms a natural language feature description into a structured, comprehensive specification document (spec.md) that defines requirements, user stories, success criteria, and scope WITHOUT implementation details.
+
+**WHY IT EXISTS**: Creates a shared understanding of WHAT needs to be built before deciding HOW to build it. The spec serves as a contract between stakeholders and engineers, ensuring everyone agrees on the problem and desired outcomes.
+
+**WHEN TO USE**: First step in any new feature development after an idea or request is identified. Run this before any planning or technical design.
+
+**KEY PRINCIPLE**: Technology-agnostic requirements. The spec should be understandable by non-technical stakeholders and remain valid even if implementation technology changes.
+
 ## User Input
 
 ```text
@@ -45,10 +55,10 @@ Given that feature description, do this:
       - Find the highest number N
       - Use N+1 for the new branch number
    
-   d. Run the script `.specify/scripts/bash/create-new-feature.sh --json "$ARGUMENTS"` with the calculated number and short-name:
+   d. Run the script `.specify/scripts/create-new-feature.sh --json "$ARGUMENTS"` with the calculated number and short-name:
       - Pass `--number N+1` and `--short-name "your-short-name"` along with the feature description
-      - Bash example: `.specify/scripts/bash/create-new-feature.sh --json "$ARGUMENTS" --json --number 5 --short-name "user-auth" "Add user authentication"`
-      - PowerShell example: `.specify/scripts/bash/create-new-feature.sh --json "$ARGUMENTS" -Json -Number 5 -ShortName "user-auth" "Add user authentication"`
+      - Bash example: `.specify/scripts/create-new-feature.sh --json "$ARGUMENTS" --json --number 5 --short-name "user-auth" "Add user authentication"`
+      - PowerShell example: `.specify/scripts/create-new-feature.sh --json "$ARGUMENTS" -Json -Number 5 -ShortName "user-auth" "Add user authentication"`
    
    **IMPORTANT**:
    - Check all three sources (remote branches, local branches, specs directories) to find the highest number
@@ -63,20 +73,20 @@ Given that feature description, do this:
 
    Analyze the feature description to determine appropriate documentation level:
 
-   **Level 0 (Trivial)** - Use `concise-readme-template.md`:
+   **Level 0 (Trivial)** - Use `concise_readme_template.md`:
    - Single file modification
    - < 10 lines of code
    - No architecture impact
    - Examples: typo fix, constant update, simple CSS tweak
 
-   **Level 1 (Simple)** - Use `concise-spec-template.md`:
+   **Level 1 (Simple)** - Use `concise_spec_template.md`:
    - Simple, isolated feature
    - < 100 lines of code
    - Single component/module
    - No complex dependencies
    - Examples: add contact form, new UI component, simple API endpoint
 
-   **Level 2 (Complex)** - Use `spec-template.md`:
+   **Level 2 (Complex)** - Use `spec_template.md`:
    - Complex feature requiring coordination
    - ≥ 100 lines of code
    - Multiple components/systems
@@ -132,7 +142,7 @@ Given that feature description, do this:
 5. **Generate Specification from Template** - Load the selected template file and use it as the EXACT structure for output:
 
    **Template Loading**:
-   - Load `.specify/templates/spec-template.md` (Level 2) OR `.specify/templates/concise-spec-template.md` (Level 1) OR `.specify/templates/concise-readme-template.md` (Level 0)
+   - Load `.specify/templates/spec_template.md` (Level 2) OR `.specify/templates/concise_spec_template.md` (Level 1) OR `.specify/templates/concise_readme_template.md` (Level 0)
    - Preserve EXACT structure including:
      -  Section headers with UPPERCASE names
      -  HTML comment blocks (keep guidance comments as-is)
@@ -146,7 +156,7 @@ Given that feature description, do this:
    - Fill in specific values from feature description in $ARGUMENTS
    - Generate concrete examples based on feature context
 
-   **For Level 2 (spec-template.md), MUST include these mandatory sections**:
+   **For Level 2 (spec_template.md), MUST include these mandatory sections**:
 
    a. **Traceability Mapping** (§4, after Functional Requirements):
       ```markdown
@@ -202,11 +212,11 @@ Given that feature description, do this:
       - Justify any complexity increases
       - Document simpler alternatives considered
 
-   **For Level 1 (concise-spec-template.md), include**:
+   **For Level 1 (concise_spec_template.md), include**:
    - All sections from template (Metadata, Objective, What Changed, Why, Testing, Dependencies, Success Criteria)
    - Escalation guidance (when to upgrade to Level 2)
 
-   **For Level 0 (concise-readme-template.md), include**:
+   **For Level 0 (concise_readme_template.md), include**:
    - Minimal sections (Metadata, Change Description, Files Modified, Reason, Testing, Notes)
    - Escalation guidance (when to upgrade to Level 1)
 
@@ -329,7 +339,7 @@ Given that feature description, do this:
     Template Selection:
    - Level: 2 (Complex Feature)
    - Reasoning: Multiple components (auth, API, database), >100 LOC estimated
-   - Template: .specify/templates/spec-template.md
+   - Template: .specify/templates/spec_template.md
 
     Artifacts Created:
    - Branch: 029-user-authentication

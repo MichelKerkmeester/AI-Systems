@@ -2,6 +2,16 @@
 description: Generate post-implementation retrospective for completed features.
 ---
 
+## Command Purpose: Post-Implementation Learning Capture
+
+**WHAT IT DOES**: Creates structured retrospective documentation that captures what went well, what could be improved, lessons learned, and whether success criteria were met after feature implementation completes.
+
+**WHY IT EXISTS**: Continuous improvement through reflection. Each feature provides learning opportunities—about processes, estimates, technical approaches, and team dynamics—that can improve future work.
+
+**WHEN TO USE**: After feature implementation completes (all tasks done) or at major milestones. Retrospectives work best when done while experiences are fresh but after enough distance to reflect objectively.
+
+**KEY PRINCIPLE**: Blameless learning. Focus on systems, processes, and approaches—not individuals. The goal is to identify patterns and improvements that benefit future features, not to assign fault for past challenges.
+
 ## User Input
 
 ```text
@@ -17,7 +27,7 @@ The text the user typed after `/speckit.retrospective` in the triggering message
 Given the feature context, do this:
 
 1. **Setup & Validation**:
-   - Run `.specify/scripts/bash/check-prerequisites.sh --json` from repo root
+   - Run `.specify/scripts/check-prerequisites.sh --json` from repo root
    - Parse JSON for FEATURE_DIR and AVAILABLE_DOCS
    - **Verify feature is complete**:
      - spec.md must exist
@@ -41,7 +51,7 @@ Given the feature context, do this:
    - Check for existing retrospective.md to avoid overwriting
 
 3. **Load Template**:
-   - Load `.specify/templates/retrospective-template.md` as structure reference
+   - Load `.specify/templates/retrospective_template.md` as structure reference
 
 4. **Interactive Retrospective Gathering**:
 
@@ -243,7 +253,7 @@ Given the feature context, do this:
 
 ## Template Compliance
 
-All generated retrospective documents MUST include every section from retrospective-template.md:
+All generated retrospective documents MUST include every section from retrospective_template.md:
 - § 1: Metadata
 - § 2: Summary
 - § 3: What Went Well

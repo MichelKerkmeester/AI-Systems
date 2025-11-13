@@ -2,6 +2,16 @@
 description: Generate Architecture Decision Record (ADR) for technical decisions.
 ---
 
+## Command Purpose: Architecture Decision Documentation
+
+**WHAT IT DOES**: Creates structured Architecture Decision Records (ADRs) that document significant technical decisions, alternatives considered, trade-offs evaluated, and rationale for the chosen approach.
+
+**WHY IT EXISTS**: Preserves institutional knowledge about WHY decisions were made. Six months from now, when someone asks "why did we choose X over Y?", the ADR provides the complete context and reasoning.
+
+**WHEN TO USE**: When making any significant technical decision that has long-term implications: library choices, architectural patterns, data storage approaches, API designs, or other decisions that would be costly to reverse later.
+
+**KEY PRINCIPLE**: Decision transparency and reversibility. Document not just what was chosen, but what alternatives existed, what criteria mattered, and what trade-offs were accepted—so future teams can revisit decisions with full context if circumstances change.
+
 ## User Input
 
 ```text
@@ -24,7 +34,7 @@ Given that decision context/problem, do this:
    - Identify stakeholders if mentioned
 
 2. **Setup**:
-   - Run `.specify/scripts/bash/check-prerequisites.sh --json` from repo root
+   - Run `.specify/scripts/check-prerequisites.sh --json` from repo root
    - Parse JSON for FEATURE_DIR and AVAILABLE_DOCS
    - Generate short decision name from problem statement (2-4 words, kebab-case)
    - Assign ADR number: Find highest ADR-### in FEATURE_DIR/decisions/, increment by 1 (default: ADR-001)
@@ -32,7 +42,7 @@ Given that decision context/problem, do this:
    - Create ADR file: `FEATURE_DIR/decisions/adr-[###]-[short-name].md`
 
 3. **Load Template**:
-   - Load `.specify/templates/decision-record-template.md` as structure reference
+   - Load `.specify/templates/decision_record_template.md` as structure reference
 
 4. **Interactive Decision Capture**:
 
@@ -210,7 +220,7 @@ Given that decision context/problem, do this:
 
 ## Template Compliance
 
-All generated ADR documents MUST include every section from decision-record-template.md:
+All generated ADR documents MUST include every section from decision_record_template.md:
 - § 1: Metadata
 - § 2: Context
 - § 3: Decision

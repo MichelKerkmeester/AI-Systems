@@ -2,6 +2,16 @@
 description: Create or update the project constitution from interactive or provided principle inputs, ensuring all dependent templates stay in sync
 ---
 
+## Command Purpose: Project Principles & Governance Definition
+
+**WHAT IT DOES**: Creates or updates the project constitution—a living document that defines non-negotiable technical principles, architectural rules, quality standards, and governance processes that all features must follow.
+
+**WHY IT EXISTS**: Establishes consistent decision-making criteria across all features. The constitution serves as the "legal framework" that guides technical choices and resolves design debates objectively.
+
+**WHEN TO USE**: At project initialization to establish core principles, or when major architectural decisions need to be codified as enduring rules. Constitution changes should be rare and deliberate—principles are meant to be stable.
+
+**KEY PRINCIPLE**: Constitutional authority. Principles in the constitution are non-negotiable within their scope. Features must comply or the constitution must be formally amended—never silently ignored or reinterpreted.
+
 ## User Input
 
 ```text
@@ -37,10 +47,9 @@ Follow this execution flow:
    - Ensure Governance section lists amendment procedure, versioning policy, and compliance review expectations.
 
 4. Consistency propagation checklist (convert prior checklist into active validations):
-   - Read `.specify/templates/plan-template.md` and ensure any "Constitution Check" or rules align with updated principles.
-   - Read `.specify/templates/spec-template.md` for scope/requirements alignment—update if constitution adds/removes mandatory sections or constraints.
-   - Read `.specify/templates/tasks-template.md` and ensure task categorization reflects new or removed principle-driven task types (e.g., observability, versioning, testing discipline).
-   - Read each command file in `.specify/templates/commands/*.md` (including this one) to verify no outdated references (agent-specific names like CLAUDE only) remain when generic guidance is required.
+   - Read `.specify/templates/plan_template.md` and ensure any "Constitution Check" or rules align with updated principles.
+   - Read `.specify/templates/spec_template.md` for scope/requirements alignment—update if constitution adds/removes mandatory sections or constraints.
+   - Read `.specify/templates/tasks_template.md` and ensure task categorization reflects new or removed principle-driven task types (e.g., observability, versioning, testing discipline).
    - Read any runtime guidance docs (e.g., `README.md`, `docs/quickstart.md`, or agent-specific guidance files if present). Update references to principles changed.
 
 5. Produce a Sync Impact Report (prepend as an HTML comment at top of the constitution file after update):

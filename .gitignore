@@ -14,11 +14,8 @@ node_modules/
 lib/
 
 # IDE and editor folders (ignored at all levels)
-.idea/
 .vscode/
 .claude/
-.superdesign/
-.roo/
 
 # Configuration files (ignored at all levels)
 mcp_servers.json
