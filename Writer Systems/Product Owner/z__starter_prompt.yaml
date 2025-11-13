@@ -15,30 +15,62 @@ operating_mode:
 # USER INPUTS
 # ───────────────────────────────────────────────────────────────
 user_inputs:
+  agents_location: |
+    /Users/michelkerkmeester/MEGA/Development/AI Systems/Writer Systems/Product Owner
+
   context: |
-    Ticket regarding an update to the Create Company/Barter deals logic of Phase 1 Epic.
+    This story is part of Phase 1 of the Feed v3 partner app migration from 
+    Locations to Companies. Multiple Phase 1 stories have already been documented
+    (Companies, Home, Barter deals, DS - List, DS - Side Panel) that establish
+    the format, structure, and documentation patterns to follow.
+    
+    The project involves converting existing partner locations to companies with
+    a comprehensive onboarding flow designed to guide partners through the migration.
+    The flow accommodates two distinct scenarios based on partner account structure
+    (single vs. multiple locations).
 
   request: |
-    Create a ticket with this change:
-    Steps / Breadcrumbs of Create Barter deal or Company:
-    - Active = Dark Label + 100% Opacity Form
-    - To-Do = Light Label with 50% opacity and 50% opacity Form
-    - Finished = Light label (with check) and with 100% opacity and 100% opacity form
+    Create a user story document for the Partner App Onboarding Flow feature that
+    guides existing partners through the location-to-company conversion process.
     
-    A step doesn't go into the finished state untill all requirements are met.
-    When requirements are met, the active state moves to the item below it, and the previous one goes to finished.
+    The story must follow the established Phase 1 documentation format, including:
+    - ⌘ About section with feature overview and success criteria
+    - ⌥ Designs & References with Figma links
+    - ❖ Requirements section detailing all features and flows
+    
+    Document both user scenarios (single location vs. multiple locations), the
+    presentation landing page with auto-play accordion, and all subsequent flows
+    including company profile creation, review/merge process, and action-required
+    states.
 
   analysis_scope: |
-    /Users/michelkerkmeester/MEGA/AI Systems/Writer Systems/Product Owner/context/Stories/Story - Barter deals.md
-    /Users/michelkerkmeester/MEGA/AI Systems/Writer Systems/Product Owner/context/Stories/Story - Companies.md
-    /Users/michelkerkmeester/MEGA/AI Systems/Writer Systems/Product Owner/context/App Screens
-  
+    reference_materials:
+      - "context/Stories/"
+      - "context/Stories/Story - Companies.md"
+      - "context/Stories/Story - Home.md"
+      - "context/Stories/Story - Barter deals.md"
+      - "context/Stories/Story - DS - List.md"
+      - "context/Stories/Story - DS - Side Panel.md"
+      - Screenshots attached in chat
+    
+    extract_principles:
+      - "Story structure format (sections, headers, formatting conventions)"
+      - "Figma reference linking patterns"
+      - "Requirements organization (Global, Flows, Component Changes)"
+      - "Success criteria definition style"
+      - "Related stories cross-referencing approach"
+      - "Markdown formatting standards (dividers, bullet styles, emphasis)"
+
+      
 # ───────────────────────────────────────────────────────────────
 # RESOURCES
 # ───────────────────────────────────────────────────────────────
 agents_md_locations:
-  search::
-    - ./AGENTS.md
+  search_priority:
+    - "[AGENTS_LOCATION]/AGENTS.md (if specified)"
+    - "./AGENTS.md"
+    - "../AGENTS.md"
+    - "../../AGENTS.md"
 
   redirect_signals:
     - "CLAUDE.md: STOP - READ AGENTS.md INSTEAD"
@@ -49,9 +81,15 @@ agents_md_locations:
 # ───────────────────────────────────────────────────────────────
 field_handling:
   defaults:
+    agents_location_empty: "Search using default search order starting from current directory"
     context_empty: "Infer from REQUEST and AGENTS.md routing analysis"
     request_empty: "Error: REQUEST required - describe the task or goal"
     analysis_scope_empty: "Proceed with AGENTS.md and routed Knowledge Base documents only"
+    
+  agents_location_handling:
+    present: "Prioritize specified path, resolve relative to workspace root"
+    empty: "Use default search order"
+    not_found: "Log warning, fallback to default search order, report to user"
     
   context_inference:
     from_request:
@@ -103,9 +141,12 @@ rules:
 # ───────────────────────────────────────────────────────────────
 workflow:
   step_1_locate:
-    action: Search for AGENTS.md using search_order
+    action: Search for AGENTS.md using search priority order
+    priority:
+      - if_agents_location_specified: "Check [AGENTS_LOCATION]/AGENTS.md first"
+      - fallback: "Use default search order"
     validation: agents_md_found
-    failure_mode: "Output: 'AGENTS.md not found—please provide path or link.' STOP."
+    failure_mode: "Output: 'AGENTS.md not found at specified location or search paths—please provide correct path.' STOP."
 
   step_2_read_and_route:
     action: Read AGENTS.md end-to-end (it contains intelligent routing logic)
@@ -131,6 +172,7 @@ workflow:
   step_4_acknowledge:
     action: Confirm compliance in first response
     format: "AGENTS.md read and applied: [path]. Summary: [1-3 line summary]. Knowledge Base routing: [documents read]"
+    note: "Include specified location if [AGENTS_LOCATION] was provided"
     validation: compliance_confirmed
 
   step_5_parse_context:
