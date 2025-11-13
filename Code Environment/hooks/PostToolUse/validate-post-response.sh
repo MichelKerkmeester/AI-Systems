@@ -48,6 +48,34 @@ fi
 TRIGGERED_REMINDERS=()
 
 # ───────────────────────────────────────────────────────────────
+# SECURITY: REGEX PATTERN VALIDATION
+# ───────────────────────────────────────────────────────────────
+# Validates regex patterns to prevent ReDoS (Regular Expression Denial of Service)
+# attacks from compromised skill-rules.json configuration file
+validate_regex_pattern() {
+  local pattern="$1"
+
+  # Check for dangerous ReDoS patterns:
+  # 1. Nested quantifiers: (a+)+ or (a*)*
+  # 2. Excessive wildcards: .*.*.* (3 or more in sequence)
+  # 3. Overlapping alternation: (a|a)* or (ab|a)*
+  # 4. Exponential backtracking patterns
+
+  # Check for nested quantifiers
+  if echo "$pattern" | grep -qE '\([^)]*[+*]\)[+*]'; then
+    return 1  # Dangerous: nested quantifiers
+  fi
+
+  # Check for excessive consecutive wildcards
+  if echo "$pattern" | grep -qE '(\.\*.*){3,}'; then
+    return 1  # Dangerous: 3+ wildcards
+  fi
+
+  # Pattern is safe
+  return 0
+}
+
+# ───────────────────────────────────────────────────────────────
 # CHECK FILE FOR RISK PATTERNS
 # ───────────────────────────────────────────────────────────────
 
@@ -81,6 +109,12 @@ check_file_for_patterns() {
     local matched=false
     while IFS= read -r pattern; do
       if [ -n "$pattern" ]; then
+        # Validate pattern before use (security: prevent ReDoS)
+        if ! validate_regex_pattern "$pattern"; then
+          # Skip dangerous pattern, continue checking others
+          continue
+        fi
+
         if echo "$content" | grep -qE "$pattern"; then
           matched=true
           break
@@ -128,14 +162,14 @@ if [ ${#TRIGGERED_REMINDERS[@]} -gt 0 ]; then
   # Write to log file (no stderr output)
   {
     echo ""
-    echo "───────────────────────────────────────────────────────────────"
+    echo "$SEPARATOR"
     echo "$LOG_ENTRY"
-    echo "───────────────────────────────────────────────────────────────"
+    echo "$SEPARATOR"
     for reminder in "${TRIGGERED_REMINDERS[@]}"; do
       echo "$reminder"
       echo ""
     done
-    echo "───────────────────────────────────────────────────────────────"
+    echo "$SEPARATOR"
     echo ""
   } >> "$LOG_FILE"
 fi

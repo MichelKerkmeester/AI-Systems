@@ -30,6 +30,15 @@ PROMPT=$(echo "$INPUT" | jq -r '.prompt // empty' 2>/dev/null)
 SESSION_ID=$(echo "$INPUT" | jq -r '.session_id // empty' 2>/dev/null)
 CWD=$(echo "$INPUT" | jq -r '.cwd // empty' 2>/dev/null)
 
+# ───────────────────────────────────────────────────────────────
+# SECURITY: Sanitize SESSION_ID to prevent shell injection
+# ───────────────────────────────────────────────────────────────
+# SESSION_ID is used in find commands later. Sanitize to allow only
+# alphanumeric characters, dash, and underscore (safe for shell)
+if [ -n "$SESSION_ID" ]; then
+  SESSION_ID=$(echo "$SESSION_ID" | tr -cd 'a-zA-Z0-9_-')
+fi
+
 # If no prompt found, allow it silently
 if [ -z "$PROMPT" ]; then
   exit 0
@@ -113,24 +122,42 @@ if [ "$TRIGGERED" = false ]; then
   exit 0
 fi
 
+# Display trigger notification immediately (before validation that might fail)
+if [ "$TRIGGER_REASON" = "keyword" ]; then
+  echo "💾 Auto-saving context (keyword: '$MATCHED_KEYWORD' detected)..."
+else
+  echo "💾 Auto-saving context (75% capacity: $MESSAGE_COUNT messages ≈ 150k tokens)..."
+fi
+
 # ───────────────────────────────────────────────────────────────
 # FIND TRANSCRIPT AND VALIDATE ENVIRONMENT
 # ───────────────────────────────────────────────────────────────
 
 # Construct transcript path from session ID
 if [ -z "$SESSION_ID" ]; then
-  exit 0  # Silently exit
+  echo "   ⚠️  Cannot save: Session ID not available"
+  exit 0
+fi
+
+# Validate CWD path (security: prevent path traversal)
+SAFE_CWD=$(realpath "$CWD" 2>/dev/null || echo "$CWD")
+if [ ! -d "$SAFE_CWD" ]; then
+  echo "   ⚠️  Cannot save: Invalid working directory"
+  exit 0
 fi
 
 # Try to find transcript in standard location
-PROJECT_SLUG=$(echo "$CWD" | sed 's|^/||' | sed 's|/|-|g')
+# Convert path to Claude project slug format: add leading dash, replace / and . with -
+# Security: Only allow alphanumeric, dash, underscore in slug
+PROJECT_SLUG=$(echo "$SAFE_CWD" | sed 's|^/|-|' | sed 's|/|-|g' | sed 's|\.|-|g' | sed 's|[^a-zA-Z0-9_-]||g')
 TRANSCRIPT_DIR="$HOME/.claude/projects/$PROJECT_SLUG"
 
 # Find most recent transcript (in case of reconnection)
 TRANSCRIPT_PATH=$(find "$TRANSCRIPT_DIR" -name "${SESSION_ID}.jsonl" 2>/dev/null | head -1)
 
 if [ -z "$TRANSCRIPT_PATH" ] || [ ! -f "$TRANSCRIPT_PATH" ]; then
-  exit 0  # Silently exit
+  echo "   ⚠️  Cannot save: Transcript file not found"
+  exit 0
 fi
 
 # ───────────────────────────────────────────────────────────────
@@ -176,14 +203,16 @@ HOOK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TRANSFORMER="$HOOK_DIR/../lib/transform-transcript.js"
 
 if [ ! -f "$TRANSFORMER" ]; then
-  exit 0  # Silently exit
+  echo "   ⚠️  Cannot save: Transform script not found"
+  exit 0
 fi
 
 # Transform transcript (silently)
 node "$TRANSFORMER" "$TRANSCRIPT_PATH" "$TEMP_JSON" >/dev/null 2>&1
 
 if [ ! -f "$TEMP_JSON" ]; then
-  exit 0  # Silently exit
+  echo "   ⚠️  Cannot save: Transform failed"
+  exit 0
 fi
 
 # Change to project directory
@@ -196,8 +225,9 @@ cd "$CWD" || {
 SAVE_CONTEXT_SCRIPT="$CWD/.claude/skills/save-context/scripts/generate-context.js"
 
 if [ ! -f "$SAVE_CONTEXT_SCRIPT" ]; then
+  echo "   ⚠️  Cannot save: save-context skill not found"
   rm -f "$TEMP_JSON"
-  exit 0  # Silently exit
+  exit 0
 fi
 
 # Execute save-context script (silently)
@@ -214,15 +244,13 @@ rm -f "$TEMP_JSON"
 # DISPLAY CONFIRMATION TO USER
 # ───────────────────────────────────────────────────────────────
 
-# Display brief confirmation message to user
+# Display completion status to user
 if [ $EXIT_CODE -eq 0 ]; then
-  if [ "$TRIGGER_REASON" = "keyword" ]; then
-    echo "💾 Context auto-saved (keyword: '$MATCHED_KEYWORD')" >&2
-  else
-    echo "💾 Context auto-saved (context capacity: 75% used, $MESSAGE_COUNT messages)" >&2
-  fi
+  # Show relative path from CWD for clarity
+  REL_PATH=$(echo "$CONTEXT_DIR" | sed "s|^$CWD/||")
+  echo "   ✅ Context saved to: $REL_PATH/"
 else
-  echo "⚠️  Context auto-save failed (exit code: $EXIT_CODE)" >&2
+  echo "   ⚠️  Save failed (exit code: $EXIT_CODE)"
 fi
 
 # ───────────────────────────────────────────────────────────────

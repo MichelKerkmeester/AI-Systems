@@ -48,7 +48,7 @@ The skill modifies HTML files to append or update version query parameters (`?v=
 To automatically increment the patch version:
 
 ```bash
-cd /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com
+cd /Users/USERNAME/projects/your-project
 python3 .claude/skills/code-cdn-versioning/scripts/update_html_versions.py
 ```
 

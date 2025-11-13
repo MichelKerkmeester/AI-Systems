@@ -1,0 +1,591 @@
+{
+  "skills": {
+    "animation-strategy": {
+      "type": "knowledge",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Animation implementation with Motion.dev (.claude/knowledge/animation_strategy.md)",
+      "promptTriggers": {
+        "keywords": [
+          "animation",
+          "motion",
+          "motion.dev",
+          "animate",
+          "transition",
+          "sequence",
+          "timeline",
+          "css animation"
+        ],
+        "intentPatterns": [
+          "(add|create|implement).*?(animation|motion|transition)",
+          "(animate|move|fade|slide).*?(element|component)",
+          "(sequence|timeline|orchestrate).*?(animation|motion)",
+          "(css|motion).*?(animation)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": ["src/**/*.js", ".claude/knowledge/animation_strategy.md"],
+        "contentPatterns": [
+          "Motion\\.",
+          "animate\\(",
+          "timeline\\(",
+          "from 'motion'",
+          "import.*?motion",
+          "anime\\.",
+          "import.*anime"
+        ]
+      }
+    },
+    "code-cdn-versioning": {
+      "type": "workflow",
+      "enforcement": "strict",
+      "priority": "critical",
+      "description": "CDN cache-busting by updating HTML version parameters after JavaScript changes (.claude/skills/code-cdn-versioning/)",
+      "promptTriggers": {
+        "keywords": [
+          "update html versions",
+          "cdn version",
+          "version html",
+          "cache bust",
+          "increment version",
+          "cdn versioning",
+          "version query",
+          "version parameter"
+        ],
+        "intentPatterns": [
+          "(update|increment|change).*?(html|version|cdn)",
+          "(modified|changed|updated).*?(javascript|js|page_loader)",
+          "(deploy|upload).*?(javascript|js).*?(r2|cdn)",
+          "(cache|browser).*?(bust|refresh|invalidate)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "src/**/*.js",
+          "src/0_html/**/*.html",
+          ".claude/skills/code-cdn-versioning/**"
+        ],
+        "contentPatterns": [
+          "\\?v=[0-9]",
+          "page_loader\\.js",
+          "hero_.*\\.js",
+          "anime_js_.*\\.js"
+        ]
+      }
+    },
+    "mcp-chrome-devtools": {
+      "type": "tool",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Browser automation, debugging, performance analysis",
+      "promptTriggers": {
+        "keywords": [
+          "browser",
+          "screenshot",
+          "puppeteer",
+          "automation",
+          "performance",
+          "network traffic",
+          "web scraping",
+          "debugging",
+          "chrome",
+          "devtools"
+        ],
+        "intentPatterns": [
+          "(take|capture|get).*?(screenshot|image|visual)",
+          "(test|check|verify).*?(browser|page|site)",
+          "(automate|script).*?(browser|web|form)",
+          "(measure|analyze|check).*?(performance|speed|load)",
+          "(monitor|track|capture).*?(network|requests|traffic)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [".claude/skills/mcp-chrome-devtools/**"],
+        "contentPatterns": ["puppeteer", "browser\\.", "page\\."]
+      }
+    },
+    "code-standards": {
+      "type": "knowledge",
+      "enforcement": "strict",
+      "priority": "critical",
+      "description": "Naming conventions, file headers, commenting rules (.claude/knowledge/code_standards.md)",
+      "promptTriggers": {
+        "keywords": [
+          "naming",
+          "convention",
+          "standard",
+          "format",
+          "style",
+          "header",
+          "comment",
+          "snake_case",
+          "kebab-case",
+          "PascalCase"
+        ],
+        "intentPatterns": [
+          "(create|add|write).*?(file|component|function|class)",
+          "(name|call).*?(variable|function|class)",
+          "(add|write).*?(comment|documentation|header)",
+          "(what|how).*?(naming|convention|standard)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": ["src/**/*.js", "src/**/*.css", ".claude/knowledge/code_standards.md"],
+        "contentPatterns": []
+      },
+      "alwaysActive": true
+    },
+    "conversation-documentation": {
+      "type": "knowledge",
+      "enforcement": "strict",
+      "priority": "critical",
+      "description": "Mandatory spec folder system for all implementation conversations (.claude/knowledge/conversation_documentation.md)",
+      "promptTriggers": {
+        "keywords": [
+          "spec",
+          "specification",
+          "spec folder",
+          "implementation",
+          "code changes",
+          "create folder",
+          "plan.md",
+          "spec.md",
+          "documentation level",
+          "level 0",
+          "level 1",
+          "level 2",
+          "level 3",
+          "readme",
+          "speckit"
+        ],
+        "intentPatterns": [
+          "(create|implement|add|build|write).*?(feature|component|function|change)",
+          "(make|perform|do).*?(code change|file change|implementation)",
+          "(need|require|must).*?(spec|documentation|spec folder)",
+          "(what|which).*?(level|documentation level)",
+          "(before|need to).*?(implement|code|write)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "specs/**/",
+          "specs/**/*.md",
+          ".specify/templates/**",
+          ".claude/knowledge/conversation_documentation.md"
+        ],
+        "contentPatterns": []
+      },
+      "alwaysActive": true
+    },
+    "debugging": {
+      "type": "knowledge",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Debugging strategies and troubleshooting (.claude/knowledge/debugging.md)",
+      "promptTriggers": {
+        "keywords": [
+          "debug",
+          "debugging",
+          "troubleshoot",
+          "error",
+          "bug",
+          "console",
+          "console.log",
+          "breakpoint"
+        ],
+        "intentPatterns": [
+          "(debug|troubleshoot|fix).*?(error|bug|issue|problem)",
+          "(why|what|how).*?(not working|broken|failing)",
+          "(console|log|trace).*?(error|output)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [".claude/knowledge/debugging.md"],
+        "contentPatterns": ["console\\.log", "debugger", "try.*catch"]
+      }
+    },
+    "document-style-guide": {
+      "type": "knowledge",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Documentation and markdown formatting standards (.claude/knowledge/document_style_guide.md)",
+      "promptTriggers": {
+        "keywords": [
+          "documentation",
+          "markdown",
+          "readme",
+          "docs",
+          "document",
+          "formatting",
+          "style guide"
+        ],
+        "intentPatterns": [
+          "(create|write|update).*?(documentation|readme|docs|markdown)",
+          "(format|structure).*?(document|markdown)",
+          "(how to|what).*?(document|write docs)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": ["**/*.md", ".claude/knowledge/document_style_guide.md"],
+        "contentPatterns": []
+      }
+    },
+    "git-commit": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Professional commit workflow - analyze changes, filter artifacts, write Conventional Commits messages",
+      "promptTriggers": {
+        "keywords": [
+        "commit",
+        "git commit",
+        "commit message",
+        "conventional commits",
+        "staging",
+        "staged",
+        "unstaged",
+        "git add",
+        "commit strategy",
+        "atomic commit",
+        "commit format",
+        "commit type"
+      ],
+        "intentPatterns": [
+          "(ready to|need to|want to|should).*?(commit|check in)",
+          "(write|create|make).*?(commit message|commit)",
+          "(commit|stage|add).*?(changes|files)",
+          "(what|how).*?(commit|commit message|staging)",
+          "(analyze|review|check).*?(changes|staged|unstaged)",
+          "(conventional|atomic).*?(commit)",
+          "(split|separate).*?(commit)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [".git/**", ".claude/skills/git-commit/**"],
+        "contentPatterns": ["git commit", "git add", "git status"]
+      }
+    },
+    "git-worktrees": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Isolated workspace management with temporary branches",
+      "promptTriggers": {
+        "keywords": [
+          "worktree",
+          "workspace",
+          "isolation",
+          "hotfix",
+          "urgent fix",
+          "parallel work",
+          "context switch",
+          "branch isolation"
+        ],
+        "intentPatterns": [
+          "(create|add|setup|make).*?(worktree|workspace|isolated)",
+          "(urgent|hotfix|emergency).*?(fix|patch|change)",
+          "(work on|switch to|handle).*?(multiple|parallel|different)",
+          "(review|test).*?(locally|isolation|separate)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [".worktrees/**"],
+        "contentPatterns": []
+      }
+    },
+    "initialization-pattern": {
+      "type": "knowledge",
+      "enforcement": "strict",
+      "priority": "critical",
+      "description": "CDN-safe initialization pattern (.claude/knowledge/initialization_pattern.md)",
+      "promptTriggers": {
+        "keywords": [
+          "initialization",
+          "init",
+          "setup",
+          "bootstrap",
+          "start component",
+          "double init",
+          "INIT_FLAG",
+          "DOMContentLoaded"
+        ],
+        "intentPatterns": [
+          "(create|add|new).*?(component|module|script)",
+          "(initialize|init|setup).*?(component|script)",
+          "(prevent|fix).*?(double|multiple).*?(init|initialization)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": ["src/**/*.js", "src_cdn_versions/**/*.js", ".claude/knowledge/initialization_pattern.md"],
+        "contentPatterns": [
+          "INIT_FLAG",
+          "function init_",
+          "const start =",
+          "DOMContentLoaded"
+        ]
+      }
+    },
+    "markdown-flowchart": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Create comprehensive ASCII flowcharts in markdown for visualizing workflows, user journeys, system architectures, and decision trees",
+      "promptTriggers": {
+        "keywords": [
+          "flowchart",
+          "flow chart",
+          "workflow diagram",
+          "process diagram",
+          "process map",
+          "decision tree",
+          "user journey",
+          "system flow",
+          "process visualization",
+          "ascii diagram",
+          "workflow visualization",
+          "process flow",
+          "data flow"
+        ],
+        "intentPatterns": [
+          "(create|make|generate|draw).*?(flowchart|flow chart|diagram|process map)",
+          "(visualize|map|show|diagram).*?(workflow|process|flow|journey)",
+          "(document|explain).*?(process|workflow|flow).*?(visual|diagram)",
+          "(need|want).*?(flowchart|diagram|visualization)",
+          "how.*?(visualize|show|map).*?(process|workflow)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "**/*.md",
+          "specs/**",
+          ".claude/knowledge/**",
+          "docs/**",
+          "README.md"
+        ],
+        "contentPatterns": [
+          "┌─────",
+          "╭─────",
+          "╱───",
+          "───────────────",
+          "PARALLEL EXECUTION",
+          "APPROVAL GATE"
+        ]
+      }
+    },
+    "markdown-enforcer": {
+      "type": "workflow",
+      "enforcement": "strict",
+      "priority": "critical",
+      "description": "Unified markdown enforcement for filenames, structure, and content with automated safe fixes and critical violation blocking",
+      "promptTriggers": {
+        "keywords": [
+          "validate document",
+          "document validation",
+          "style validation",
+          "check document",
+          "document structure",
+          "style guide compliance",
+          "validate style",
+          "check style",
+          "document compliance",
+          "style checker",
+          "validation report",
+          "fix document",
+          "fix style",
+          "auto fix",
+          "apply fixes",
+          "correct document",
+          "fix violations",
+          "style fixer",
+          "document fixer",
+          "auto correct",
+          "fix formatting",
+          "filename convention",
+          "snake_case",
+          "markdown naming"
+        ],
+        "intentPatterns": [
+          "(validate|check|verify).*?(document|style|structure|format|filename)",
+          "(compliance|conform).*?(style guide|standards|requirements|naming)",
+          "(before|need to).*?(commit|push).*?(documentation|markdown)",
+          "(fix|correct|apply).*?(style|document|violations|filename)",
+          "(auto|automatically).*?(fix|correct|apply|enforce)",
+          "(clean up|cleanup).*?(document|style|formatting|filename)",
+          "what.*?(wrong|issue).*?(document|markdown|filename)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          "**/*.md",
+          ".claude/skills/**/SKILL.md",
+          ".claude/commands/**/*.md",
+          ".claude/knowledge/**/*.md",
+          "specs/**/*.md",
+          ".claude/skills/markdown-enforcer/**"
+        ],
+        "contentPatterns": []
+      }
+    },
+    "save-context": {
+      "type": "workflow",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Save conversation context when completing features or architectural discussions. Preserves full dialogue, decision rationale, visual flowcharts, and file changes for team sharing.",
+      "promptTriggers": {
+        "keywords": [
+          "save context",
+          "save conversation",
+          "save session",
+          "export conversation",
+          "preserve context",
+          "document conversation",
+          "capture context",
+          "conversation history",
+          "session history",
+          "context export",
+          "conversation export",
+          "save discussion",
+          "preserve dialogue",
+          "document session",
+          "save chat",
+          "export context",
+          "save memory",
+          "preserve memory",
+          "conversation documentation",
+          "session documentation",
+          "document this",
+          "record this",
+          "write this down",
+          "store this",
+          "backup conversation"
+        ],
+        "intentPatterns": [
+          "(save|export|preserve|capture|document).*?(context|conversation|session|discussion|dialogue|chat)",
+          "(save|export|preserve).*?(this|the|current).*?(context|conversation|session)",
+          "(document|capture|record).*?(what we (discussed|talked about|did))",
+          "(keep|store|save).*?(conversation|discussion|session).*?(history|record)",
+          "(export|save).*?(expanded|full|complete).*?(context|conversation)",
+          "(want|need).*?(save|export|preserve).*?(context|conversation)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": [
+          ".claude/skills/save-context/**",
+          "specs/**/memory/**"
+        ],
+        "contentPatterns": [
+          "save-context",
+          "generate-context.js",
+          "conversation-flow.md",
+          "decisions.md"
+        ]
+      }
+    },
+    "webflow-platform-constraints": {
+      "type": "knowledge",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Webflow platform constraints and CDN-safe patterns (.claude/knowledge/webflow_platform_constraints.md)",
+      "promptTriggers": {
+        "keywords": [
+          "webflow",
+          "cdn",
+          "script loading",
+          "cdn-safe",
+          "webflow.push",
+          "platform constraint"
+        ],
+        "intentPatterns": [
+          "(fix|prevent|handle).*?(double|multiple).*?(init|initialization)",
+          "(webflow|cdn).*?(safe|pattern|constraint)",
+          "(script|component).*?(loading|initialization|setup)"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": ["src/**/*.js", "src_cdn_versions/**/*.js", ".claude/knowledge/webflow_platform_constraints.md"],
+        "contentPatterns": [
+          "Webflow\\.push",
+          "__.*CdnInit"
+        ]
+      }
+    }
+  },
+  "riskPatterns": {
+    "animation": {
+      "patterns": [
+        "Motion\\.",
+        "animate\\(",
+        "timeline\\(",
+        "gsap",
+        "transition",
+        "anime\\.",
+        "animeInstance\\."
+      ],
+      "reminder": "✅ ANIMATION CHECK:\n- CSS used for simple interactions?\n- anime.js for complex sequences?\n- Performance optimized (transform/opacity)?\n- Mobile timing adjusted?\n- 60fps target maintained?"
+    },
+    "asyncOperations": {
+      "patterns": [
+        "async ",
+        "await ",
+        "fetch\\(",
+        "\\.then\\(",
+        "Promise"
+      ],
+      "reminder": "✅ ASYNC CHECK:\n- Error handling with try-catch?\n- Loading states managed?\n- Timeout handling present?\n- Network failure scenarios covered?"
+    },
+    "commitOperations": {
+      "patterns": [
+        "git commit",
+        "git add",
+        "git status",
+        "staged",
+        "unstaged",
+        "commit message"
+      ],
+      "reminder": "✅ COMMIT CHECK:\n- Internal artifacts excluded (task lists, debug notes, coverage)?\n- Non-conventional files skipped (test files in wrong location)?\n- Following Conventional Commits format (type(scope): description)?\n- Commit message under 50 chars, imperative mood?\n- Changes atomic (one logical unit)?\n- Using 'git add <files>' not 'git add .'?"
+    },
+    "formHandling": {
+      "patterns": [
+        "form\\.",
+        "submit",
+        "validation",
+        "preventDefault"
+      ],
+      "reminder": "✅ FORM CHECK:\n- Validation implemented?\n- Error handling present?\n- Success/failure states handled?\n- Accessibility attributes added?"
+    },
+    "initialization": {
+      "patterns": [
+        "INIT_FLAG",
+        "window\\[INIT_FLAG\\]",
+        "DOMContentLoaded",
+        "document\\.readyState"
+      ],
+      "reminder": "✅ INITIALIZATION CHECK:\n- Using CDN-safe pattern with unique INIT_FLAG?\n- Guard against double initialization?\n- Proper delay (INIT_DELAY_MS) configured?\n- Webflow.push integration present?"
+    },
+    "specFolderRequired": {
+      "patterns": [
+        "function ",
+        "class ",
+        "const ",
+        "let ",
+        "var ",
+        "export ",
+        "import "
+      ],
+      "reminder": "✅ SPEC FOLDER CHECK:\n- Does this change involve code modifications?\n- Have you created /specs/###-short-name/ folder?\n- Determined documentation level (0/1/2/3)?\n- Filled appropriate template (README.md/spec.md/plan.md)?\n- Got user approval before implementing?\n- See .claude/knowledge/conversation_documentation.md for full requirements"
+    },
+    "securityRisks": {
+      "patterns": [
+        "eval\\(",
+        "innerHTML",
+        "outerHTML",
+        "document\\.write",
+        "dangerouslySetInnerHTML",
+        "execScript",
+        "setTimeout.*\\(",
+        "setInterval.*\\("
+      ],
+      "reminder": "⚠️  SECURITY CHECK:\n- eval() usage detected - consider safer alternatives?\n- innerHTML/outerHTML manipulation - sanitize user input?\n- document.write() - can cause security issues?\n- setTimeout/setInterval with string - use function instead?\n- XSS prevention implemented?\n- Input validation present?\n- Using trusted sources only?"
+    }
+  }
+}

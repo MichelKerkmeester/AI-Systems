@@ -2,13 +2,14 @@
 
 ## ⚡ TL:DR
 - **All file modifications require a spec folder** - code, documentation, configuration, templates, etc. (even non-SpecKit conversations)
-- **NEVER include API keys, secrets, or sensitive data in `.claude/knowledge/` files** - use environment variables instead
+- **CLI AI agents MUST use semantic search MCP** for code exploration/discovery - it's intent-based, not keyword matching (use grep/read for literal text)
 - **Clarify** if confidence < 80% or ambiguity exists; **propose options**
-- **Prefer simplicity**, reuse existing patterns, and cite evidence with sources
 - **Use explicit uncertainty:** prefix claims with "I'M UNCERTAIN ABOUT THIS:" and output "UNKNOWN" when unverifiable
+- **Prefer simplicity**, reuse existing patterns, and cite evidence with sources
 - Solve only the stated problem; **avoid over-engineering** and premature optimization
 - **Verify with checks** (simplicity, performance, maintainability, scope) before making changes
 - **After JavaScript changes**, run `python3 .claude/skills/code-cdn-versioning/scripts/update_html_versions.py` to update HTML version parameters
+- **NEVER include API keys, secrets, or sensitive data in `.claude/knowledge/` files** - use environment variables instead
 
 ---
 
@@ -454,14 +455,17 @@ Request: "Add loading spinner to form submission"
 #### Tool Selection
 **Decision Framework: When to Use Which Approach**
 
-1. **Semantic Search MCP (Intent-Based Code Discovery)**
+1. **Semantic Search MCP (Intent-Based Code Discovery) - MANDATORY FOR CLI AI AGENTS**
+   - **REQUIRED when:** Finding code by what it does, exploring unfamiliar areas, locating implementations
    - Finding code by what it does, not what it's called
    - Exploring unfamiliar codebase areas
    - Understanding feature implementations
    - Locating patterns across multiple files
-   - **When to use:** "Find code that handles X" or "Where do we implement Y?"
+   - **Usage triggers:** "Find code that handles X", "Where do we implement Y?", "Show me how X works"
+   - **Priority:** Use FIRST before grep/read when exploring code functionality
    - **See:** [.claude/knowledge/semantic_search_mcp.md](./.claude/knowledge/semantic_search_mcp.md)
-   - **⚠️ Note:** Only available for CLI AI agents
+   - **Availability:** Only CLI AI agents (Claude Code AI, GitHub Copilot CLI, etc.) - NOT IDE integrations
+   - **Enforcement:** If you have semantic search access, you MUST use it for code discovery tasks
 
 2. **Native Tools (Read/Grep/Glob/Bash)**
    - File exploration and discovery

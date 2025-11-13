@@ -77,7 +77,7 @@ python3 --version  # Should be 3.6+
    ```
 2. Check files exist:
    ```bash
-   ls -la /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/0_html/
+   ls -la /Users/USERNAME/projects/your-project/src/0_html/
    ```
 
 ### Problem: No Changes Made

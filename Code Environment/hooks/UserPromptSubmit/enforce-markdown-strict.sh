@@ -34,7 +34,10 @@ fi
 # Configuration
 LOG_DIR="$(dirname "$(dirname "$SCRIPT_DIR")")/logs"
 LOG_FILE="$LOG_DIR/markdown-enforcement.log"
-STYLE_GUIDE="/Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/knowledge/document_style_guide.md"
+
+# Get git repository root (portable across all environments)
+GIT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+STYLE_GUIDE="$GIT_ROOT/.claude/knowledge/document_style_guide.md"
 
 # Ensure log directory exists
 mkdir -p "$LOG_DIR"
@@ -185,11 +188,14 @@ check_knowledge_critical() {
 
 # Main enforcement logic
 main() {
+    # Get git repository root (or use CWD as fallback)
+    local git_root=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+
     # Get recently modified markdown files
-    local modified_files=$(git -C /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com status --short 2>/dev/null | grep "\.md$" | awk '{print $2}' | head -10)
+    local modified_files=$(git -C "$git_root" status --short 2>/dev/null | grep "\.md$" | awk '{print $2}' | head -10)
 
     # Also check staged files
-    local staged_files=$(git -C /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com diff --name-only --cached 2>/dev/null | grep "\.md$" | head -10)
+    local staged_files=$(git -C "$git_root" diff --name-only --cached 2>/dev/null | grep "\.md$" | head -10)
 
     # Combine and deduplicate
     local all_files=$(echo -e "$modified_files\n$staged_files" | sort -u | grep -v "^$")
@@ -205,7 +211,8 @@ main() {
     while IFS= read -r file; do
         [[ -z "$file" ]] && continue
 
-        local full_path="/Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/$file"
+        # Construct full path using git root (portable)
+        local full_path="$GIT_ROOT/$file"
 
         # Skip if file doesn't exist
         [[ ! -f "$full_path" ]] && continue

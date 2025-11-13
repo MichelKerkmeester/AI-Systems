@@ -112,7 +112,7 @@ Follow these steps in order. Skip only when there's a clear reason a step doesn'
 **Always run the init script**:
 
 ```bash
-python /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/skills/create-skill/scripts/init_skill.py {{SKILL_NAME}} --path {{TARGET_PATH}}
+python /Users/USERNAME/projects/your-project/.claude/skills/create-skill/scripts/init_skill.py {{SKILL_NAME}} --path {{TARGET_PATH}}
 ```
 
 **Where**:
@@ -197,7 +197,7 @@ Replace TODO placeholders by answering these questions:
 **Always run the package script**:
 
 ```bash
-python /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/skills/create-skill/scripts/package_skill.py {{SKILL_PATH}} {{OUTPUT_DIR}}
+python /Users/USERNAME/projects/your-project/.claude/skills/create-skill/scripts/package_skill.py {{SKILL_PATH}} {{OUTPUT_DIR}}
 ```
 
 **Where**:

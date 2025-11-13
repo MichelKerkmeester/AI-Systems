@@ -9182,3 +9182,2255 @@
 
 ───────────────────────────────────────────────────────────────
 
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:54:33] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:54:38] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:54:43] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:54:49] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:54:55] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:55:01] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:55:07] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:55:12] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:55:17] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:55:24] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/save-context-trigger.sh
+───────────────────────────────────────────────────────────────
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:55:30] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:55:36] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:55:41] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:55:47] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:55:52] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:55:57] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:56:02] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:56:13] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:56:24] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 12:56:30] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/src/2_javascript/anime_js/anime_js_tab_autoplay.js
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:02:08] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/save-context-trigger.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:02:18] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/save-context-trigger.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:03:46] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/save-context-trigger.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:03:46] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/save-context-trigger.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:03:47] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/save-context-trigger.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:03:47] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/save-context-trigger.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:03:47] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/save-context-trigger.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:05:20] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/save-context-trigger.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:07:43] File: /tmp/save-context-038-hooks.json
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:17:52] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/lib/output-helpers.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:17:59] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/lib/output-helpers.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:18:11] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/lib/output-helpers.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:18:12] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/lib/output-helpers.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:18:12] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/lib/output-helpers.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:18:37] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/configs/skill-rules.json
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ COMMIT CHECK:
+- Internal artifacts excluded (task lists, debug notes, coverage)?
+- Non-conventional files skipped (test files in wrong location)?
+- Following Conventional Commits format (type(scope): description)?
+- Commit message under 50 chars, imperative mood?
+- Changes atomic (one logical unit)?
+- Using 'git add <files>' not 'git add .'?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:18:37] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/configs/skill-rules.json
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- Motion.dev for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ COMMIT CHECK:
+- Internal artifacts excluded (task lists, debug notes, coverage)?
+- Non-conventional files skipped (test files in wrong location)?
+- Following Conventional Commits format (type(scope): description)?
+- Commit message under 50 chars, imperative mood?
+- Changes atomic (one logical unit)?
+- Using 'git add <files>' not 'git add .'?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:18:55] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/configs/skill-rules.json
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- anime.js for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+- 60fps target maintained?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ COMMIT CHECK:
+- Internal artifacts excluded (task lists, debug notes, coverage)?
+- Non-conventional files skipped (test files in wrong location)?
+- Following Conventional Commits format (type(scope): description)?
+- Commit message under 50 chars, imperative mood?
+- Changes atomic (one logical unit)?
+- Using 'git add <files>' not 'git add .'?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:19:19] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/save-context-trigger.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:19:19] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/save-context-trigger.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:19:36] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/save-context-trigger.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:20:14] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/enforce-markdown-strict.sh
+───────────────────────────────────────────────────────────────
+✅ COMMIT CHECK:
+- Internal artifacts excluded (task lists, debug notes, coverage)?
+- Non-conventional files skipped (test files in wrong location)?
+- Following Conventional Commits format (type(scope): description)?
+- Commit message under 50 chars, imperative mood?
+- Changes atomic (one logical unit)?
+- Using 'git add <files>' not 'git add .'?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:21:34] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/specs/039-hook-system-debug/research.md
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- anime.js for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+- 60fps target maintained?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:24:10] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/specs/039-hook-system-debug/test-plan.md
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- anime.js for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+- 60fps target maintained?
+
+✅ ASYNC CHECK:
+- Error handling with try-catch?
+- Loading states managed?
+- Timeout handling present?
+- Network failure scenarios covered?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:39:33] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/specs/039-hook-system-debug/test_execution_report.md
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- anime.js for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+- 60fps target maintained?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 13:45:11] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/specs/039-hook-system-debug/test_execution_report.md
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- anime.js for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+- 60fps target maintained?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 14:38:10] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/specs/039-hook-system-debug/ultrathink_test_report.md
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- anime.js for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+- 60fps target maintained?
+
+✅ COMMIT CHECK:
+- Internal artifacts excluded (task lists, debug notes, coverage)?
+- Non-conventional files skipped (test files in wrong location)?
+- Following Conventional Commits format (type(scope): description)?
+- Commit message under 50 chars, imperative mood?
+- Changes atomic (one logical unit)?
+- Using 'git add <files>' not 'git add .'?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 14:58:51] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/lib/output-helpers.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 16:00:06] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/PreToolUse/validate-bash.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 16:02:14] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/specs/039-hook-system-debug/heredoc_false_positive_fix.md
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 16:38:17] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/PreToolUse/validate-bash.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 16:56:39] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/README.md
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- anime.js for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+- 60fps target maintained?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 16:56:52] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/README.md
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- anime.js for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+- 60fps target maintained?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:01:23] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/specs/040-hook-security-fixes/spec.md
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:01:44] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/enforce-markdown-strict.sh
+───────────────────────────────────────────────────────────────
+✅ COMMIT CHECK:
+- Internal artifacts excluded (task lists, debug notes, coverage)?
+- Non-conventional files skipped (test files in wrong location)?
+- Following Conventional Commits format (type(scope): description)?
+- Commit message under 50 chars, imperative mood?
+- Changes atomic (one logical unit)?
+- Using 'git add <files>' not 'git add .'?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:02:08] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/save-context-trigger.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:02:21] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/lib/output-helpers.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:04:19] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/specs/040-hook-security-fixes/test_security_fixes.sh
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:04:53] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/UserPromptSubmit/enforce-markdown-strict.sh
+───────────────────────────────────────────────────────────────
+✅ COMMIT CHECK:
+- Internal artifacts excluded (task lists, debug notes, coverage)?
+- Non-conventional files skipped (test files in wrong location)?
+- Following Conventional Commits format (type(scope): description)?
+- Commit message under 50 chars, imperative mood?
+- Changes atomic (one logical unit)?
+- Using 'git add <files>' not 'git add .'?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:05:56] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/specs/040-hook-security-fixes/implementation_summary.md
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:10:37] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/specs/041-hook-readme-alignment/README.md
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:24:50] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/README.md
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- anime.js for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+- 60fps target maintained?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:25:14] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/README.md
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- anime.js for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+- 60fps target maintained?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:25:27] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/README.md
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- anime.js for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+- 60fps target maintained?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:25:42] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/README.md
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- anime.js for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+- 60fps target maintained?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:25:58] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/README.md
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- anime.js for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+- 60fps target maintained?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:26:10] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/README.md
+───────────────────────────────────────────────────────────────
+✅ ANIMATION CHECK:
+- CSS used for simple interactions?
+- anime.js for complex sequences?
+- Performance optimized (transform/opacity)?
+- Mobile timing adjusted?
+- 60fps target maintained?
+
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+✅ INITIALIZATION CHECK:
+- Using CDN-safe pattern with unique INIT_FLAG?
+- Guard against double initialization?
+- Proper delay (INIT_DELAY_MS) configured?
+- Webflow.push integration present?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:26:35] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/README.md
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:26:59] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/README.md
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:27:15] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/README.md
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:27:32] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/README.md
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:28:03] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/hooks/README.md
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+⚠️  SECURITY CHECK:
+- eval() usage detected - consider safer alternatives?
+- innerHTML/outerHTML manipulation - sanitize user input?
+- document.write() - can cause security issues?
+- setTimeout/setInterval with string - use function instead?
+- XSS prevention implemented?
+- Input validation present?
+- Using trusted sources only?
+
+✅ SPEC FOLDER CHECK:
+- Does this change involve code modifications?
+- Have you created /specs/###-short-name/ folder?
+- Determined documentation level (0/1/2/3)?
+- Filled appropriate template (README.md/spec.md/plan.md)?
+- Got user approval before implementing?
+- See .claude/knowledge/conversation_documentation.md for full requirements
+
+───────────────────────────────────────────────────────────────
+
+
+───────────────────────────────────────────────────────────────
+[2025-11-13 17:28:19] File: /Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/specs/041-hook-readme-alignment/README.md
+───────────────────────────────────────────────────────────────
+✅ FORM CHECK:
+- Validation implemented?
+- Error handling present?
+- Success/failure states handled?
+- Accessibility attributes added?
+
+───────────────────────────────────────────────────────────────
+

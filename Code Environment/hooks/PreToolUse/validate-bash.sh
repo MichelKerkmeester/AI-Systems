@@ -78,9 +78,30 @@ FORBIDDEN_PATTERNS=(
   "mkfs\."
 )
 
+# ───────────────────────────────────────────────────────────────
+# HEREDOC CONTENT EXCLUSION
+# ───────────────────────────────────────────────────────────────
+# Strip heredoc content from validation to prevent false positives.
+# Heredocs are used for writing content (cat > file << 'EOF'), and their
+# content should NOT be validated against file patterns.
+#
+# Examples that should NOT be blocked:
+#   cat > report.txt << 'EOF'
+#   This report discusses logging systems...  ← Contains ".log" but OK
+#   EOF
+#
+# Only validate the command structure (before <<), not the content.
+COMMAND_TO_CHECK="$COMMAND"
+if echo "$COMMAND" | grep -q '<<'; then
+  # Extract only the command portion before heredoc marker
+  # Use head -1 to get first line only, then strip from << onwards
+  # This removes both the heredoc marker AND all subsequent content lines
+  COMMAND_TO_CHECK=$(echo "$COMMAND" | head -1 | sed 's/<<.*//')
+fi
+
 # Check if command contains any forbidden patterns
 for pattern in "${FORBIDDEN_PATTERNS[@]}"; do
-  if echo "$COMMAND" | grep -qE "$pattern"; then
+  if echo "$COMMAND_TO_CHECK" | grep -qE "$pattern"; then
     # Determine the category and provide helpful message
     case "$pattern" in
       "node_modules"|"build/"|"dist/"|"venv/"|"__pycache__")

@@ -11,7 +11,7 @@ import sys
 from datetime import datetime
 
 # Configuration
-PROJECT_ROOT = "/Users/michelkerkmeester/MEGA/Development/Websites/anobel.com"
+PROJECT_ROOT = "/Users/USERNAME/projects/your-project"
 HTML_DIR = os.path.join(PROJECT_ROOT, "src/0_html")
 R2_CDN_PATTERN = "https://pub-85443b585f1e4411ab5cc976c4fb08ca.r2.dev"
 

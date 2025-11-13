@@ -21,7 +21,10 @@ fi
 # Configuration
 LOG_DIR="$(dirname "$(dirname "$SCRIPT_DIR")")/logs"
 LOG_FILE="$LOG_DIR/markdown-enforcement.log"
-STYLE_GUIDE="/Users/michelkerkmeester/MEGA/Development/Websites/anobel.com/.claude/knowledge/document_style_guide.md"
+
+# Get git repository root (portable across all environments)
+GIT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+STYLE_GUIDE="$GIT_ROOT/.claude/knowledge/document_style_guide.md"
 
 # Ensure log directory exists
 mkdir -p "$LOG_DIR"
@@ -145,10 +148,15 @@ main() {
 
         if [[ "$filename_lower" == "$corrected_lower" ]]; then
             # Case-only change - use two-step rename for case-insensitive filesystems
+            # Security: Add rollback on failure to reduce race condition window
             local temp_path="${file_path}.tmp_rename_$$"
-            mv "$file_path" "$temp_path" 2>/dev/null
-            if [[ $? -eq 0 ]]; then
-                mv "$temp_path" "$corrected_path" 2>/dev/null
+
+            if mv "$file_path" "$temp_path" 2>/dev/null; then
+                # First move succeeded, attempt second move
+                if ! mv "$temp_path" "$corrected_path" 2>/dev/null; then
+                    # Second move failed - rollback to original name
+                    mv "$temp_path" "$file_path" 2>/dev/null
+                fi
             fi
         else
             # Different name - direct rename

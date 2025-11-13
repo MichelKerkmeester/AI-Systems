@@ -7,9 +7,10 @@ Automated workflows and quality checks for Claude Code interactions. Hooks trigg
 1. [📖 OVERVIEW](#1--overview)
 2. [🔄 HOOK LIFECYCLE](#2--hook-lifecycle)
 3. [🎯 INSTALLED HOOKS](#3--installed-hooks)
-4. [📚 SHARED LIBRARIES](#4--shared-libraries)
-5. [📊 LOGS DIRECTORY](#5--logs-directory)
-6. [⚙️ CONFIGURATION](#6-️-configuration)
+4. [🔗 HOW HOOKS CONNECT](#4--how-hooks-connect)
+5. [📚 SHARED LIBRARIES](#5--shared-libraries)
+6. [📊 LOGS DIRECTORY](#6--logs-directory)
+7. [⚙️ CONFIGURATION](#7-️-configuration)
 
 ---
 
@@ -88,361 +89,360 @@ User Action
 ### UserPromptSubmit Hooks
 
 #### `save-context-trigger.sh`
-**Trigger**: User types save-context keywords OR when 25% context capacity remains (75% used)
-**Action**: Immediately saves conversation context and displays confirmation
+**What it does**: Auto-saves conversations to preserve context and decisions
 
-**Trigger Methods**:
+**Triggers**:
+- Keywords: "save context", "save conversation", "export conversation", "document this", "preserve context"
+- Automatic: At 200 messages (≈75% capacity, 25% remaining)
 
-**1. Keyword Triggers**:
-- "save context", "save conversation"
-- "export conversation", "document this"
-- "record this", "preserve context"
-- "capture context"
-- [See full list in script]
+**Connects to**:
+- `save-context` skill → Uses generate-context.js
+- `lib/transform-transcript.js` → Transforms JSONL to JSON format
+- Saves to: `specs/###-folder/memory/` (or `memory/` fallback)
 
-**2. Automatic Context Window Detection**:
-- Monitors transcript size on every user prompt
-- Automatically triggers when conversation reaches 200 messages (≈75% used, 25% remaining)
-- Prevents context loss by saving before hitting limits
-- Completely automatic - no user intervention required
-
-**How it works**:
-1. On every user prompt, checks for trigger keywords
-2. If no keyword, checks transcript message count
-3. If ≥200 messages, automatically triggers save
-4. Locates conversation transcript
-5. Transforms transcript to save-context JSON format
-6. Executes generate-context.js script
-7. Saves to most recent spec folder's memory/ directory (or memory/ fallback if no specs exist)
-8. Logs trigger reason (keyword vs. context-window)
-
-**Output**:
-- **With spec folders**: `specs/###-folder/memory/{date}_{time}__{folder}.md`
-- **Without spec folders**: `memory/{date}_{time}__session_summary.md` (fallback, no subfolder)
-
-**Context Window Calculation**:
-- 200k token context window ≈ 400 messages (500 tokens/message avg)
-- 75% used (25% remaining) = 300 messages
-- Conservative setting: 200 messages to account for longer messages
-
-**User Feedback**:
+**Output Examples**:
 ```
 💾 Context auto-saved (keyword: 'save context')
-💾 Context auto-saved (context capacity: 75% used, 205 messages)
-⚠️  Context auto-save failed (exit code: 1)
+💾 Context auto-saved (75% capacity: 205 messages)
 ```
 
 #### `validate-skill-activation.sh`
-**Trigger**: Before every user prompt
-**Action**: Suggests relevant skills based on prompt content
+**What it does**: Matches your prompts to relevant skills and displays suggestions
 
-**How it works**:
-1. Analyzes user prompt for keywords and patterns
-2. Matches against skill-rules.json definitions
-3. Suggests applicable skills by priority:
-   - ⚠️ CRITICAL: Must apply (alwaysActive=true)
-   - 🚨 HIGH PRIORITY: Strongly recommended
-   - 🤔 RELEVANT: Consider using
+**Triggers**: Before every user prompt
 
-**Configuration**: `.claude/configs/skill-rules.json`
+**Connects to**:
+- `.claude/configs/skill-rules.json` → Reads skill definitions, keywords, patterns
+- Matches keywords: "animation", "commit", "debug", "documentation", etc.
+- Matches patterns: "create feature", "fix bug", "implement X"
 
-**Display Behavior**: CRITICAL priority skills display to user, HIGH/MEDIUM priority skills logged only
+**Priority Levels**:
+- 🔴 CRITICAL: Must apply (shown to user) - e.g., code-standards, conversation-documentation
+- 🟡 HIGH: Strongly recommended (logged only) - e.g., git-commit, save-context
+- 🔵 MEDIUM: Consider using (logged only) - e.g., debugging, document-style-guide
 
-**Example Output** (when CRITICAL skills match):
+**Output Example**:
 ```
 🔴 CRITICAL SKILLS APPLY:
-   • code-standards - Naming conventions, file headers, commenting rule
-   • conversation-documentation - Mandatory spec folder system for all i
+   • code-standards - Naming conventions, file headers, commenting rules
+   • conversation-documentation - Mandatory spec folder system
 ```
 
-**Note**: HIGH and MEDIUM priority skills (like git-commit, save-context) are logged to `.claude/hooks/logs/skill-recommendations.log` but not displayed to reduce noise
+**Logs to**: `.claude/hooks/logs/skill-recommendations.log` (all matches)
 
 #### `suggest-semantic-search.sh`
-**Status**: ✅ REGISTERED AND ACTIVE (as of 2025-11-13)
-**Trigger**: Before user prompts containing code exploration keywords
-**Action**: Reminds AI to consider semantic search MCP tools
+**What it does**: Reminds AI to use semantic search MCP tools for code exploration
 
-**Trigger Keywords**:
-- "find code/implementation/function/component"
-- "where is/implement/handle/defined"
-- "locate code/function"
-- "search codebase"
-- "explore/analyze/understand code"
-- "show implementation"
-- "which file/component"
+**Triggers**:
+- Keywords: "find code", "where is implementation", "locate function", "search codebase"
+- Patterns: "explore code", "analyze implementation", "show how X works"
 
-**How it works**:
-1. Analyzes user prompt for code exploration patterns
-2. If matched, displays semantic search reminder
-3. References `.claude/knowledge/semantic_search_mcp.md`
-4. Notes CLI AI agent requirement (not IDE integrations)
+**Connects to**:
+- `.claude/knowledge/semantic_search_mcp.md` → Usage guidelines
+- MCP semantic search tools → Intent-based code discovery
 
-**Example Output**:
+**Output Example**:
 ```
 💡 SEMANTIC SEARCH REMINDER:
-
-This request involves code exploration/analysis. Consider using semantic search
-MCP tools for intent-based code discovery:
-
   • semantic_search - Find code by what it does, not what it's called
-  • Helpful for: locating implementations, understanding features, finding patterns
-
-📖 See: .claude/knowledge/semantic_search_mcp.md for usage guidelines
-
-⚠️  Note: Only available for CLI AI agents (not IDE integrations)
+  • Helpful for: locating implementations, understanding features
+  📖 See: .claude/knowledge/semantic_search_mcp.md
+  ⚠️  Note: CLI AI agents only (not IDE integrations)
 ```
 
-#### Display vs Log Behavior Summary
+#### `enforce-markdown-strict.sh`
+**What it does**: Validates markdown files and blocks execution on critical violations
 
-**UserPromptSubmit Hooks Output Strategy:**
+**Triggers**: Before user prompts, checks recently modified .md files
 
-| Hook | Display to User | Log to File | Rationale |
-|------|----------------|-------------|-----------|
-| **validate-skill-activation** | ✅ CRITICAL priority only | All matched skills | Reduce noise while highlighting critical requirements |
-| **save-context-trigger** | ✅ Confirmation message | Full execution details | User deserves feedback for background actions |
-| **suggest-semantic-search** | ✅ Always (when triggered) | N/A | Educational reminder, brief and helpful |
-| **enforce-markdown-strict** | ✅ Blocking errors only | All violations | Only displays when blocking execution |
+**Validates**:
+- SKILL.md files: Requires YAML frontmatter, H1 subtitle format, required sections
+- Command files: Requires frontmatter (description, argument-hint)
+- Knowledge files: H1 subtitle format, no frontmatter allowed
 
-**Rationale**: This strategy balances value vs noise. CRITICAL information displays to prevent violations, while HIGH/MEDIUM skills are logged for debugging without cluttering the interface.
+**Connects to**:
+- `.claude/knowledge/document_style_guide.md` → Markdown standards
+- Git status → Finds modified .md files
+
+**Behavior**:
+- ✅ Safe fixes: Auto-applied (separators, caps, spacing) - not by this hook
+- 🚫 Critical violations: BLOCKS execution (missing frontmatter, wrong structure)
+
+**Output Example** (when blocking):
+```
+🚫 MARKDOWN ENFORCEMENT BLOCKED:
+  File: .claude/skills/my-skill/SKILL.md
+  CRITICAL: Missing YAML frontmatter
+  Action Required: Add frontmatter before continuing
+```
 
 ### PreToolUse Hooks
 
 #### `validate-bash.sh`
-**Trigger**: Before executing Bash commands
-**Action**: Blocks dangerous/wasteful commands
+**What it does**: Prevents dangerous bash commands and wasteful file operations
 
-**Blocked Patterns**:
+**Triggers**: Before executing any Bash command
 
-**Security**:
-- Destructive commands (`rm -rf /`, `chmod 777`)
-- Privilege escalation (`sudo`)
-- Malware vectors (`curl ... | sh`)
-- Sensitive files (`.ssh/`, `.env`, `.pem`)
-- Credentials (`password`, `api_key`, `secret`)
+**Blocks**:
+- Dangerous commands: `rm -rf /`, `sudo`, `chmod 777`, `curl ... | sh`
+- Large directories: `node_modules`, `build/`, `dist/`, `venv/`
+- Sensitive files: `.ssh/`, `.env`, `.pem`, credentials
 
-**Performance**:
-- Large directories (`node_modules`, `build/`)
-- Binary files (`.pyc`, `.csv`)
-- Git objects (`.git/objects`)
+**Allows (Whitelisted)**:
+- `.claude/logs/`, `.claude/hooks/logs/`, `.claude/configs/`
 
-**Whitelisted**:
-- `.claude/logs/` (skill logs)
-- `.claude/hooks/logs/` (hook execution logs)
-- `.claude/configs/` (configuration files)
-
-**Example Output**:
+**Output Example**:
 ```
 ERROR: Access to 'node_modules' is blocked by security policy
+Alternative: Use targeted file reads or grep/glob patterns
 ```
 
 ### PostToolUse Hooks
 
-> ✅ **STATUS**: PostToolUse hooks are **FULLY WORKING** (verified 2025-11-10).
-> Tested and confirmed to execute after Write, Edit, and NotebookEdit operations.
-
 #### `enforce-markdown-post.sh`
-**Trigger**: After Write, Edit, NotebookEdit operations on .md files
-**Action**: Auto-corrects markdown filenames to lowercase snake_case
-**Exit**: Always 0 (non-blocking - fixes applied automatically)
+**What it does**: Auto-renames markdown files to lowercase snake_case
 
-**Enforcement Rules**:
-- Converts ALL_CAPS.md → all_caps.md
-- Converts My-File.md → my_file.md
-- Converts myFile.md → my_file.md
-- **Exceptions**: README.md, SKILL.md (in .claude/skills/ only)
+**Triggers**: After Write, Edit, NotebookEdit operations on .md files
 
-**Technical Details**:
-- Uses two-step rename process for case-insensitive filesystems (macOS/Windows)
-- Verifies actual filename case using `ls` to handle APFS/NTFS
-- Logs all corrections to `.claude/hooks/logs/markdown-enforcement.log`
+**Converts**:
+- `TEST_FILE.md` → `test_file.md`
+- `My-File.md` → `my_file.md`
+- `myFile.md` → `my_file.md`
 
-**Example Output**:
+**Exceptions**: `README.md`, `.claude/skills/*/SKILL.md`
+
+**Connects to**:
+- `.claude/knowledge/document_style_guide.md` → Naming standards
+
+**Output Example**:
 ```
 ✓ MARKDOWN FILENAME AUTO-CORRECTED:
    Renamed: TEST_FILE.md → test_file.md
-   Reason: Violates document_style_guide.md naming conventions
-   Rule: Only README.md and SKILL.md may use ALL CAPS
-   Enforced: lowercase snake_case for all other markdown files
+   Enforced: lowercase snake_case
 ```
+
+**Logs to**: `.claude/hooks/logs/markdown-enforcement.log`
 
 #### `validate-post-response.sh`
-**Trigger**: After file edit operations (Edit, Write)
-**Action**: Detects risk patterns and logs quality check reminders
-**Exit**: Always 0 (non-blocking - informational only)
+**What it does**: Detects code patterns and logs quality check reminders
 
-**Risk Pattern Categories**:
-- **Animation**: CSS used? Motion.dev for complex? Performance optimized?
-- **Async Operations**: Error handling? Loading states? Timeouts?
-- **Security Risks**: eval() usage? innerHTML manipulation? XSS prevention?
-- **Commit Operations**: Conventional Commits? Atomic changes?
-- **Form Handling**: Validation? Error states? Accessibility?
-- **Initialization**: CDN-safe pattern? INIT_FLAG guard?
-- **Spec Folder**: Created documentation? Got approval?
+**Triggers**: After file edit operations (Edit, Write)
 
-**Configuration**: `.claude/configs/skill-rules.json` (riskPatterns)
+**Detects Patterns**:
+- Animation code → Reminds about performance, mobile timing
+- Async operations → Reminds about error handling, timeouts
+- Form handling → Reminds about validation, accessibility
+- Initialization → Reminds about CDN-safe patterns
+- Security risks → Reminds about XSS, input validation
+- Code changes → Reminds about spec folder requirement
 
-**Example Output** (logged to `.claude/hooks/logs/quality-checks.log`):
-```
-───────────────────────────────────────
-[2025-11-10 15:00:00] File: src/code.js
-───────────────────────────────────────
-⚠️  SECURITY CHECK:
-- eval() usage detected - consider safer alternatives?
-- innerHTML/outerHTML manipulation - sanitize user input?
-- XSS prevention implemented?
-- Input validation present?
+**Connects to**:
+- `.claude/configs/skill-rules.json` → Reads `riskPatterns` definitions
 
-✅ ASYNC CHECK:
-- Error handling with try-catch?
-- Loading states managed?
-- Timeout handling present?
-───────────────────────────────────────
-```
+**Behavior**: Non-blocking, silently logs reminders only
+
+**Logs to**: `.claude/hooks/logs/quality-checks.log`
 
 ---
 
-## 4. 📚 SHARED LIBRARIES
+## 4. 🔗 HOW HOOKS CONNECT
+
+### Connection Flow
+
+```
+User Prompt
+    ↓
+┌─────────────────────────────────────────────────────────────┐
+│ UserPromptSubmit Hooks (4)                                  │
+├─────────────────────────────────────────────────────────────┤
+│ 1. save-context-trigger    → transform-transcript.js       │
+│                             → save-context skill            │
+│                             → specs/###/memory/ OR memory/  │
+│                                                              │
+│ 2. validate-skill-activation → skill-rules.json (skills)   │
+│                              → Displays CRITICAL priority   │
+│                              → Logs HIGH/MEDIUM priority    │
+│                                                              │
+│ 3. suggest-semantic-search  → semantic_search_mcp.md       │
+│                             → MCP tools reminder            │
+│                                                              │
+│ 4. enforce-markdown-strict  → document_style_guide.md      │
+│                             → Git status (modified .md)     │
+│                             → BLOCKS if critical violations │
+└─────────────────────────────────────────────────────────────┘
+    ↓
+Claude Processes Prompt
+    ↓
+┌─────────────────────────────────────────────────────────────┐
+│ PreToolUse Hooks (1)                                        │
+├─────────────────────────────────────────────────────────────┤
+│ 1. validate-bash            → Validates command patterns    │
+│                             → BLOCKS dangerous commands     │
+│                             → Whitelists .claude/ paths     │
+└─────────────────────────────────────────────────────────────┘
+    ↓
+Tool Executes (Bash, Write, Edit, etc.)
+    ↓
+┌─────────────────────────────────────────────────────────────┐
+│ PostToolUse Hooks (2)                                       │
+├─────────────────────────────────────────────────────────────┤
+│ 1. enforce-markdown-post    → Auto-renames .md files       │
+│                             → lowercase_snake_case.md       │
+│                             → Logs corrections              │
+│                                                              │
+│ 2. validate-post-response   → skill-rules.json (patterns)  │
+│                             → Detects risk patterns         │
+│                             → Logs quality reminders        │
+└─────────────────────────────────────────────────────────────┘
+    ↓
+Result Returned to User
+```
+
+### Central Hub: `skill-rules.json`
+
+The configuration file `.claude/configs/skill-rules.json` is the **central connection point**:
+
+**Used by 2 hooks**:
+1. `validate-skill-activation.sh` → Reads `.skills{}` definitions
+2. `validate-post-response.sh` → Reads `.riskPatterns{}` definitions
+
+**Defines**:
+- 12 skills with keywords, patterns, priorities, file triggers
+- 7 risk pattern categories with detection patterns and reminders
+
+### Shared Library: `output-helpers.sh`
+
+**Used by all hooks** for consistent formatting:
+- Functions: `print_message()`, `print_section()`, `print_bullet()`
+- Emoji standards: ℹ️ INFO, ✅ SUCCESS, ⚠️ WARN, ❌ ERROR
+- Priority indicators: 🔴 CRITICAL, 🟡 HIGH, 🔵 MEDIUM
+
+### Log Files Connection
+
+All hooks write to `.claude/hooks/logs/`:
+- `save-context-trigger.sh` → `auto-save-context.log`
+- `validate-skill-activation.sh` → `skill-recommendations.log`
+- `enforce-markdown-post.sh` → `markdown-enforcement.log`
+- `validate-post-response.sh` → `quality-checks.log`
+
+---
+
+## 5. 📚 SHARED LIBRARIES
 
 ### `lib/output-helpers.sh`
 **Purpose**: Standardized visual output formatting for all hooks
 
 **Provides**:
 - Consistent color-coded messages (INFO, SUCCESS, WARN, ERROR)
+- Emoji indicators: ℹ️ ✅ ⚠️ ❌ | 🔴 🟡 🔵
 - Visual separators and section headers
-- Emoji indicators for severity and process states
-- Terminal capability detection (colors disabled on non-TTY)
-- Silent dependency checking and JSON validation
-
-**Usage in Hooks**:
-```bash
-#!/bin/bash
-source "$(dirname "$0")/../lib/output-helpers.sh"
-
-print_section "MY HOOK NAME"
-print_message "SUCCESS" "Operation completed"
-print_bullet "First item"
-print_bullet "Second item"
-```
+- Dependency checking and JSON validation
 
 **Key Functions**:
-- `print_message <level> <title> [message]` - Print status message
-- `print_section <title>` - Print boxed section header
-- `print_separator` - Print horizontal line
-- `print_bullet <text>` - Print bullet point
-- `check_dependency <cmd> [hint]` - Silently check if command exists
-- `validate_json <path>` - Silently validate JSON file
+- `print_message()` - Status messages with color/emoji
+- `print_section()` - Boxed section headers
+- `print_bullet()` - Bullet points
+- `check_dependency()` - Silently verify commands
+- `validate_json()` - Validate JSON files
+
+**Used by**: All 7 hooks
 
 ### `lib/transform-transcript.js`
 **Purpose**: Convert Claude Code transcript (JSONL) to save-context format (JSON)
 
-**Usage**:
-```bash
-node lib/transform-transcript.js input.jsonl output.json
-```
+**Used by**: `save-context-trigger.sh` hook
 
 **Transforms**:
 - Extracts user prompts and assistant responses
 - Filters system messages and tool calls
 - Structures conversation flow for documentation
-- Prepares data for generate-context.js processing
+- Prepares data for `save-context` skill's generate-context.js
 
 ---
 
-## 5. 📊 LOGS DIRECTORY
+## 6. 📊 LOGS DIRECTORY
 
-### `logs/skill-recommendations.log`
-**Purpose**: Historical record of skill suggestions
-**Hook**: validate-skill-activation.sh (UserPromptSubmit)
+All hooks write to `.claude/hooks/logs/` for debugging and audit trail:
 
-**Contains**:
-- Timestamp of each hook execution
-- Detected trigger keywords and patterns
-- Recommended skills for each prompt
-- Priority levels (CRITICAL, HIGH, MEDIUM)
+### `auto-save-context.log`
+**Hook**: save-context-trigger.sh
+**Contains**: Trigger method (keyword vs. threshold), session ID, target folder, status
 
-**Usage**:
+### `skill-recommendations.log`
+**Hook**: validate-skill-activation.sh
+**Contains**: Timestamp, detected keywords/patterns, recommended skills, priority levels
+
+### `markdown-enforcement.log`
+**Hook**: enforce-markdown-post.sh
+**Contains**: Original/corrected filenames, timestamp, reason for correction
+
+### `quality-checks.log`
+**Hook**: validate-post-response.sh
+**Contains**: Files edited, risk categories detected, quality reminders
+
+### Usage Examples
+
 ```bash
+# View recent entries
 tail -n 50 .claude/hooks/logs/skill-recommendations.log
+
+# Search for specific patterns
 grep "git-commit" .claude/hooks/logs/skill-recommendations.log
-```
-
-### `logs/quality-checks.log`
-**Purpose**: Risk pattern detection and quality reminders
-**Hook**: validate-post-response.sh (PostToolUse)
-
-**Contains**:
-- Files edited with risk patterns
-- Risk categories detected (async, security, animation, etc.)
-- Quality check reminders for each pattern
-
-**Usage**:
-```bash
-tail -n 50 .claude/hooks/logs/quality-checks.log
 grep "SECURITY CHECK" .claude/hooks/logs/quality-checks.log
+
+# View all auto-save triggers
+cat .claude/hooks/logs/auto-save-context.log
 ```
 
-### `logs/markdown-enforcement.log`
-**Purpose**: Filename auto-fix history
-**Hook**: enforce-markdown-post.sh (PostToolUse)
-
-**Contains**:
-- Original and corrected filenames
-- Timestamp of each rename operation
-- Reason for correction
-
-**Usage**:
-```bash
-tail -n 50 .claude/hooks/logs/markdown-enforcement.log
-```
-
-### `logs/auto-save-context.log`
-**Purpose**: Auto-save trigger history
-**Hook**: save-context-trigger.sh (UserPromptSubmit)
-
-**Contains**:
-- Trigger method (keyword vs. context-window threshold)
-- Session ID and target folder
-- Success/failure status
-
-**Usage**:
-```bash
-tail -n 50 .claude/hooks/logs/auto-save-context.log
-```
-
-**Maintenance**:
-- All log files grow over time with session history
-- Can be safely deleted to reset (regenerate automatically)
-- Not tracked in git (.gitignore recommended)
+**Maintenance**: Log files grow over time. Safe to delete (regenerate automatically). Not tracked in git.
 
 ---
 
-## 6. ⚙️ CONFIGURATION
+## 7. ⚙️ CONFIGURATION
 
-### Main Config File
-`.claude/configs/skill-rules.json`
+### `.claude/configs/skill-rules.json`
 
-**Contains**:
-- Skill definitions (type, priority, description)
-- Trigger keywords and intent patterns
-- File path patterns for auto-detection
-- Risk patterns for quality checks
+**Central hub** connecting hooks to skills and patterns.
 
-### Settings File
-`.claude/settings.local.json`
-
-**Hook Registration** (add to file):
+**Structure**:
 ```json
 {
-  "hooks": {
-    "UserPromptSubmit": [{
-      "hooks": [{
-        "type": "command",
-        "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/UserPromptSubmit/save-context-trigger.sh"
-      }, {
-        "type": "command",
-        "command": "bash $CLAUDE_PROJECT_DIR/.claude/hooks/UserPromptSubmit/validate-skill-activation.sh"
-      }]
-    }]
+  "skills": {
+    "skill-name": {
+      "type": "knowledge|workflow|tool",
+      "enforcement": "strict|suggest",
+      "priority": "critical|high|medium",
+      "description": "Brief description",
+      "promptTriggers": {
+        "keywords": ["word1", "word2"],
+        "intentPatterns": ["regex1", "regex2"]
+      },
+      "fileTriggers": {
+        "pathPatterns": ["src/**/*.js"],
+        "contentPatterns": ["pattern1"]
+      },
+      "alwaysActive": true|false
+    }
+  },
+  "riskPatterns": {
+    "category-name": {
+      "patterns": ["regex1", "regex2"],
+      "reminder": "Quality check reminder text"
+    }
   }
 }
 ```
+
+**Used by**:
+- `validate-skill-activation.sh` → Reads `skills{}` for prompt matching
+- `validate-post-response.sh` → Reads `riskPatterns{}` for code pattern detection
+
+**Current Skills** (12 total):
+- animation-strategy, code-cdn-versioning, mcp-chrome-devtools
+- code-standards ⭐ (alwaysActive), conversation-documentation ⭐ (alwaysActive)
+- debugging, document-style-guide, git-commit, git-worktrees
+- initialization-pattern, markdown-flowchart, markdown-enforcer, save-context, webflow-platform-constraints
+
+**Current Risk Patterns** (7 categories):
+- animation, asyncOperations, commitOperations, formHandling
+- initialization, securityRisks, specFolderRequired

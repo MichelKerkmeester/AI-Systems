@@ -305,7 +305,7 @@ Use `--refined` flag when:
 ### With MCP Server
 These commands integrate with the semantic-search MCP server:
 - Configuration: `.mcp.json`
-- Server location: `/Users/michelkerkmeester/MEGA/MCP Servers/semantic-search/`
+- Server location: `/Users/USERNAME/mcp-servers/semantic-search/`
 - Embedding provider: OpenAI-compatible (voyage-code-3)
 
 ### With Git

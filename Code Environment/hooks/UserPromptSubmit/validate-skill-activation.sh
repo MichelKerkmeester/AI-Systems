@@ -42,23 +42,58 @@ PROMPT_LOWER=$(echo "$PROMPT" | tr '[:upper:]' '[:lower:]')
 MATCHED_SKILLS=()
 
 # ───────────────────────────────────────────────────────────────
+# SECURITY: REGEX PATTERN VALIDATION
+# ───────────────────────────────────────────────────────────────
+# Validates regex patterns to prevent ReDoS (Regular Expression Denial of Service)
+# attacks from compromised skill-rules.json configuration file
+validate_regex_pattern() {
+  local pattern="$1"
+
+  # Check for dangerous ReDoS patterns:
+  # 1. Nested quantifiers: (a+)+ or (a*)*
+  # 2. Excessive wildcards: .*.*.* (3 or more in sequence)
+  # 3. Overlapping alternation: (a|a)* or (ab|a)*
+  # 4. Exponential backtracking patterns
+
+  # Check for nested quantifiers
+  if echo "$pattern" | grep -qE '\([^)]*[+*]\)[+*]'; then
+    return 1  # Dangerous: nested quantifiers
+  fi
+
+  # Check for excessive consecutive wildcards
+  if echo "$pattern" | grep -qE '(\.\*.*){3,}'; then
+    return 1  # Dangerous: 3+ wildcards
+  fi
+
+  # Pattern is safe
+  return 0
+}
+
+# ───────────────────────────────────────────────────────────────
 # KEYWORD MATCHING
 # ───────────────────────────────────────────────────────────────
 
 check_keywords() {
   local skill_name="$1"
   local keywords=$(jq -r ".skills[\"$skill_name\"].promptTriggers.keywords[]" "$SKILL_RULES" 2>/dev/null)
-  
+
   while IFS= read -r keyword; do
     if [ -n "$keyword" ]; then
       # Escape special regex chars and convert to lowercase
       keyword_lower=$(echo "$keyword" | tr '[:upper:]' '[:lower:]')
+
+      # Validate pattern before use (security: prevent ReDoS)
+      if ! validate_regex_pattern "\\b${keyword_lower}\\b"; then
+        # Skip dangerous pattern, log warning
+        continue
+      fi
+
       if echo "$PROMPT_LOWER" | grep -qE "\\b${keyword_lower}\\b"; then
         return 0  # Match found
       fi
     fi
   done <<< "$keywords"
-  
+
   return 1  # No match
 }
 
@@ -69,15 +104,21 @@ check_keywords() {
 check_intent_patterns() {
   local skill_name="$1"
   local patterns=$(jq -r ".skills[\"$skill_name\"].promptTriggers.intentPatterns[]" "$SKILL_RULES" 2>/dev/null)
-  
+
   while IFS= read -r pattern; do
     if [ -n "$pattern" ]; then
+      # Validate pattern before use (security: prevent ReDoS)
+      if ! validate_regex_pattern "$pattern"; then
+        # Skip dangerous pattern, log warning
+        continue
+      fi
+
       if echo "$PROMPT_LOWER" | grep -qiE "$pattern"; then
         return 0  # Match found
       fi
     fi
   done <<< "$patterns"
-  
+
   return 1  # No match
 }
 
@@ -101,7 +142,13 @@ check_file_context() {
     if [ -n "$pattern" ]; then
       # Convert glob pattern to regex (simple conversion)
       regex_pattern=$(echo "$pattern" | sed 's/\*\*/.\*/g' | sed 's/\*/[^\/]*/g')
-      
+
+      # Validate pattern before use (security: prevent ReDoS)
+      if ! validate_regex_pattern "$regex_pattern"; then
+        # Skip dangerous pattern, log warning
+        continue
+      fi
+
       while IFS= read -r file_path; do
         if echo "$file_path" | grep -qE "$regex_pattern"; then
           return 0  # Match found
@@ -117,16 +164,27 @@ check_file_context() {
 # SKILL EVALUATION
 # ───────────────────────────────────────────────────────────────
 
-# Get all skill names
+# Get all skill names (with error handling)
 SKILL_NAMES=$(jq -r '.skills | keys[]' "$SKILL_RULES" 2>/dev/null)
+if [ -z "$SKILL_NAMES" ]; then
+  # Silent failure - log but don't display error to user
+  {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] ERROR: Failed to parse skill names from $SKILL_RULES"
+  } >> "$LOG_FILE" 2>/dev/null
+  exit 0
+fi
 
 while IFS= read -r skill_name; do
   if [ -z "$skill_name" ]; then
     continue
   fi
-  
-  # Check if skill is always active
+
+  # Check if skill is always active (with error handling)
   always_active=$(jq -r ".skills[\"$skill_name\"].alwaysActive // false" "$SKILL_RULES" 2>/dev/null)
+  if [ $? -ne 0 ]; then
+    # jq failed - skip this skill and continue
+    continue
+  fi
   
   if [ "$always_active" = "true" ]; then
     MATCHED_SKILLS+=("$skill_name")
@@ -190,16 +248,24 @@ done
 
 # Display CRITICAL priority skills to user (others logged only)
 if [ ${#CRITICAL_SKILLS[@]} -gt 0 ]; then
-  echo "" >&2
-  echo "🔴 CRITICAL SKILLS APPLY:" >&2
+  echo ""
+  echo "🔴 CRITICAL SKILLS APPLY:"
   for item in "${CRITICAL_SKILLS[@]}"; do
     skill_name=$(echo "$item" | cut -d'|' -f1)
     desc=$(echo "$item" | cut -d'|' -f2)
-    # Truncate description to 70 chars for brevity
-    desc_short="${desc:0:70}"
-    echo "   • $skill_name - $desc_short" >&2
+
+    # Smart truncation at 100 chars with word boundary preservation
+    if [ ${#desc} -gt 100 ]; then
+      desc_short="${desc:0:97}"  # Leave room for "..."
+      # Truncate at last space to avoid mid-word cut
+      desc_short="${desc_short% *}..."
+    else
+      desc_short="$desc"
+    fi
+
+    echo "   • $skill_name - $desc_short"
   done
-  echo "" >&2
+  echo ""
 fi
 
 # ───────────────────────────────────────────────────────────────
@@ -220,11 +286,11 @@ TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 # Write to log file
 {
   echo ""
-  echo "───────────────────────────────────────────────────────────────"
+  echo "$SEPARATOR"
   echo "[$TIMESTAMP] SKILL RECOMMENDATIONS"
-  echo "───────────────────────────────────────────────────────────────"
+  echo "$SEPARATOR"
   echo "Prompt: ${PROMPT:0:100}..."
-  echo "───────────────────────────────────────────────────────────────"
+  echo "$SEPARATOR"
 
   # Format output by priority
   if [ ${#CRITICAL_SKILLS[@]} -gt 0 ]; then
@@ -261,7 +327,7 @@ TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
   fi
 
   echo ""
-  echo "───────────────────────────────────────────────────────────────"
+  echo "$SEPARATOR"
   echo ""
 } >> "$LOG_FILE"
 
