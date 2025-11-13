@@ -117,7 +117,7 @@ if (window.Webflow && window.Webflow.push) {
 
 ### Core Requirements
 1. **Guard Flag** - Prevents double initialization when Webflow re-triggers scripts
-2. **Delayed Execution** - Ensures DOM and dependencies (Motion.dev, etc.) are fully ready
+2. **Delayed Execution** - Ensures DOM and dependencies (Anime.js, etc.) are fully ready
 3. **Webflow.push Support** - Integrates with Webflow's native queueing system
 4. **Fallback Logic** - Works even when Webflow.push unavailable
 5. **Once-Only Listener** - `{ once: true }` prevents memory leaks
@@ -128,7 +128,7 @@ CDN-loaded scripts can be executed multiple times by Webflow's page transitions.
 ### Why Delays?
 The 50ms delay (default) ensures:
 - DOM is fully parsed and stable
-- External dependencies (Motion.dev, HLS.js) are loaded
+- External dependencies (Anime.js, HLS.js) are loaded
 - Webflow's own initialization is complete
 - Race conditions are avoided
 
@@ -362,7 +362,7 @@ if (window.Webflow && window.Webflow.push) {
 - ❌ No protection against double initialization
 - ❌ No delays for dependency readiness
 - ❌ Caused issues with CDN delivery
-- ❌ Race conditions with Motion.dev and other libs
+- ❌ Race conditions with Anime.js and other libs
 
 **Current pattern (CDN-safe):**
 - ✅ Guard flags prevent double-init
@@ -374,7 +374,7 @@ if (window.Webflow && window.Webflow.push) {
 
 - [AGENTS.md](../AGENTS.md) - Required reading for all agents
 - [code_standards.md](./code_standards.md) - Section 3.5: Initialization
-- [animation_strategy.md](./animation_strategy.md) - Motion.dev integration
+- [animation_strategy.md](./animation_strategy.md) - Anime.js integration
 
 ---
 

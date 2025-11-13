@@ -144,7 +144,7 @@ function load_botpoison_sdk() {}
 // Read cookie value with fallback to manual parsing when js-cookie library unavailable
 function read_cookie(name) {}
 
-// Show modal with entrance animation using Motion.dev
+// Show modal with entrance animation using Anime.js
 // Make container visible before animating to avoid layout jumps
 async function show_modal() {}
 
@@ -209,7 +209,7 @@ Explain recovery strategies and graceful degradation:
 modal.style.opacity = '1';
 modal.style.transform = 'scale(1) translateY(0)';
 
-// Animate when Motion.dev is available, otherwise set end states
+// Animate when Anime.js is available, otherwise set end states
 if (window.Motion?.animate) {
   // animation code
 } else {
@@ -369,7 +369,7 @@ Reference external systems and constraints:
 // MIYAGI: requires Miyagi.ready() initialization
 // BOTPOISON: Challenge may take several seconds
 // FORMSPARK: API rate limit is 100 requests/hour
-// MOTION: Animation requires Motion.dev library
+// MOTION: Animation requires Anime.js library
 // LENIS: Smooth scroll integration point
 ```
 
