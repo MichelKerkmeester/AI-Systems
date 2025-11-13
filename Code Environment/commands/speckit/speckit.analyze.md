@@ -2,164 +2,135 @@
 description: Perform a non-destructive cross-artifact consistency and quality analysis across spec.md, plan.md, and tasks.md after task generation.
 ---
 
-# Cross-Artifact Analysis
-
-Perform read-only consistency and quality analysis across spec, plan, and tasks with constitution alignment checking and structured reporting.
-
----
-
-## 1. 📋 INPUTS
-
-### User Arguments
+## User Input
 
 ```text
 $ARGUMENTS
 ```
 
-**MUST consider user input before proceeding** (if not empty).
+You **MUST** consider the user input before proceeding (if not empty).
 
-### Context
+## Goal
 
-**Goal**: Identify inconsistencies, duplications, ambiguities before implementation
+Identify inconsistencies, duplications, ambiguities, and underspecified items across the three core artifacts (`spec.md`, `plan.md`, `tasks.md`) before implementation. This command MUST run only after `/speckit.tasks` has successfully produced a complete `tasks.md`.
 
-**Timing**: Run ONLY after \`/speckit.tasks\` produces complete tasks.md
+## Operating Constraints
 
-**Mode**: STRICTLY READ-ONLY (no file modifications)
+**STRICTLY READ-ONLY**: Do **not** modify any files. Output a structured analysis report. Offer an optional remediation plan (user must explicitly approve before any follow-up editing commands would be invoked manually).
 
----
+**Constitution Authority**: The project constitution (`.specify/memory/constitution.md`) is **non-negotiable** within this analysis scope. Constitution conflicts are automatically CRITICAL and require adjustment of the spec, plan, or tasks—not dilution, reinterpretation, or silent ignoring of the principle. If a principle itself needs to change, that must occur in a separate, explicit constitution update outside `/speckit.analyze`.
 
-## 2. 🚀 WORKFLOW
+## Execution Steps
 
-### Step 1: Initialize Analysis Context
+### 1. Initialize Analysis Context
 
-**Purpose**: Verify all required artifacts exist
+Run `.specify/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks` once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS. Derive absolute paths:
 
-**Actions**:
-1. Run \`.specify/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks\`
-2. Parse JSON for FEATURE_DIR and AVAILABLE_DOCS
-3. Derive absolute paths:
-   - SPEC = FEATURE_DIR/spec.md
-   - PLAN = FEATURE_DIR/plan.md
-   - TASKS = FEATURE_DIR/tasks.md
-4. Abort if any required file missing
+- SPEC = FEATURE_DIR/spec.md
+- PLAN = FEATURE_DIR/plan.md
+- TASKS = FEATURE_DIR/tasks.md
 
-**Note**: For single quotes: \`'I'\\''m Groot'\` or \`"I'm Groot"\`
+Abort with an error message if any required file is missing (instruct the user to run missing prerequisite command).
+For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-**Validation**: \`context_initialized\`
+### 2. Load Artifacts (Progressive Disclosure)
 
-### Step 2: Load Artifacts
+Load only the minimal necessary context from each artifact:
 
-**Purpose**: Load minimal necessary context (Progressive Disclosure)
+**From spec.md:**
 
-**From spec.md**:
 - Overview/Context
 - Functional Requirements
 - Non-Functional Requirements
 - User Stories
 - Edge Cases (if present)
 
-**From plan.md**:
+**From plan.md:**
+
 - Architecture/stack choices
 - Data Model references
 - Phases
 - Technical constraints
 
-**From tasks.md**:
+**From tasks.md:**
+
 - Task IDs
 - Descriptions
 - Phase grouping
 - Parallel markers [P]
 - Referenced file paths
 
-**From constitution**:
-- Load \`.specify/memory/constitution.md\` for principle validation
+**From constitution:**
 
-**Validation**: \`artifacts_loaded\`
+- Load `.specify/memory/constitution.md` for principle validation
 
-### Step 3: Build Semantic Models
+### 3. Build Semantic Models
 
-**Purpose**: Create internal representations for analysis
+Create internal representations (do not include raw artifacts in output):
 
-**Models**:
+- **Requirements inventory**: Each functional + non-functional requirement with a stable key (derive slug based on imperative phrase; e.g., "User can upload file" -> `user-can-upload-file`)
+- **User story/action inventory**: Discrete user actions with acceptance criteria
+- **Task coverage mapping**: Map each task to one or more requirements or stories (inference by keyword / explicit reference patterns like IDs or key phrases)
+- **Constitution rule set**: Extract principle names and MUST/SHOULD normative statements
 
-**Requirements inventory**:
-- Each functional + non-functional requirement
-- Stable key (slug from imperative phrase)
-- Example: "User can upload file" → \`user-can-upload-file\`
+### 4. Detection Passes (Token-Efficient Analysis)
 
-**User story/action inventory**:
-- Discrete user actions
-- Acceptance criteria
+Focus on high-signal findings. Limit to 50 findings total; aggregate remainder in overflow summary.
 
-**Task coverage mapping**:
-- Map each task to requirements/stories
-- Infer by keyword/explicit references
+#### A. Duplication Detection
 
-**Constitution rule set**:
-- Extract principle names
-- Extract MUST/SHOULD normative statements
+- Identify near-duplicate requirements
+- Mark lower-quality phrasing for consolidation
 
-**Validation**: \`models_built\`
+#### B. Ambiguity Detection
 
-### Step 4: Detection Passes
+- Flag vague adjectives (fast, scalable, secure, intuitive, robust) lacking measurable criteria
+- Flag unresolved placeholders (TODO, TKTK, ???, `<placeholder>`, etc.)
 
-**Purpose**: Identify issues (limit to 50 findings, aggregate overflow)
+#### C. Underspecification
 
-**A. Duplication Detection**:
-- Near-duplicate requirements
-- Mark lower-quality phrasing
+- Requirements with verbs but missing object or measurable outcome
+- User stories missing acceptance criteria alignment
+- Tasks referencing files or components not defined in spec/plan
 
-**B. Ambiguity Detection**:
-- Vague adjectives (fast, scalable, secure, intuitive, robust) lacking metrics
-- Unresolved placeholders (TODO, TKTK, ???, \`<placeholder>\`)
+#### D. Constitution Alignment
 
-**C. Underspecification**:
-- Requirements with verbs but missing object/outcome
-- User stories missing acceptance criteria
-- Tasks referencing undefined files/components
+- Any requirement or plan element conflicting with a MUST principle
+- Missing mandated sections or quality gates from constitution
 
-**D. Constitution Alignment**:
-- Requirements/plan conflicting with MUST principles
-- Missing mandated sections/quality gates
+#### E. Coverage Gaps
 
-**E. Coverage Gaps**:
-- Requirements with zero tasks
+- Requirements with zero associated tasks
 - Tasks with no mapped requirement/story
-- Non-functional requirements not reflected in tasks
+- Non-functional requirements not reflected in tasks (e.g., performance, security)
 
-**F. Inconsistency**:
-- Terminology drift (same concept, different names)
-- Data entities in plan but absent in spec
-- Task ordering contradictions
-- Conflicting requirements (e.g., Next.js vs Vue)
+#### F. Inconsistency
 
-**Validation**: \`issues_detected\`
+- Terminology drift (same concept named differently across files)
+- Data entities referenced in plan but absent in spec (or vice versa)
+- Task ordering contradictions (e.g., integration tasks before foundational setup tasks without dependency note)
+- Conflicting requirements (e.g., one requires Next.js while other specifies Vue)
 
-### Step 5: Severity Assignment
+### 5. Severity Assignment
 
-**Purpose**: Prioritize findings using heuristic
+Use this heuristic to prioritize findings:
 
-**Severity Levels**:
-
-- **CRITICAL**: Violates constitution MUST, missing core artifact, requirement with zero coverage blocking baseline
-- **HIGH**: Duplicate/conflicting requirement, ambiguous security/performance, untestable acceptance
+- **CRITICAL**: Violates constitution MUST, missing core spec artifact, or requirement with zero coverage that blocks baseline functionality
+- **HIGH**: Duplicate or conflicting requirement, ambiguous security/performance attribute, untestable acceptance criterion
 - **MEDIUM**: Terminology drift, missing non-functional task coverage, underspecified edge case
-- **LOW**: Style/wording improvements, minor redundancy
+- **LOW**: Style/wording improvements, minor redundancy not affecting execution order
 
-**Validation**: \`severity_assigned\`
+### 6. Produce Compact Analysis Report
 
-### Step 6: Produce Analysis Report
+Output a Markdown report (no file writes) with the following structure:
 
-**Purpose**: Generate structured Markdown report (no file writes)
-
-**Report Structure**:
-
-\`\`\`markdown
 ## Specification Analysis Report
 
 | ID | Category | Severity | Location(s) | Summary | Recommendation |
 |----|----------|----------|-------------|---------|----------------|
 | A1 | Duplication | HIGH | spec.md:L120-134 | Two similar requirements ... | Merge phrasing; keep clearer version |
+
+(Add one row per finding; generate stable IDs prefixed by category initial.)
 
 **Coverage Summary Table:**
 
@@ -174,166 +145,40 @@ $ARGUMENTS
 
 - Total Requirements
 - Total Tasks
-- Coverage % (requirements with ≥1 task)
+- Coverage % (requirements with >=1 task)
 - Ambiguity Count
 - Duplication Count
 - Critical Issues Count
-\`\`\`
 
-**Validation**: \`report_generated\`
+### 7. Provide Next Actions
 
-### Step 7: Provide Next Actions
+At end of report, output a concise Next Actions block:
 
-**Purpose**: Guide user on next steps
+- If CRITICAL issues exist: Recommend resolving before `/speckit.implement`
+- If only LOW/MEDIUM: User may proceed, but provide improvement suggestions
+- Provide explicit command suggestions: e.g., "Run /speckit.specify with refinement", "Run /speckit.plan to adjust architecture", "Manually edit tasks.md to add coverage for 'performance-metrics'"
 
-**Recommendations**:
-- If CRITICAL issues: Resolve before \`/speckit.implement\`
-- If only LOW/MEDIUM: May proceed with improvement suggestions
-- Provide explicit commands: 
-  - "Run /speckit.specify with refinement"
-  - "Run /speckit.plan to adjust architecture"
-  - "Manually edit tasks.md to add coverage for 'performance-metrics'"
+### 8. Offer Remediation
 
-**Validation**: \`next_actions_provided\`
+Ask the user: "Would you like me to suggest concrete remediation edits for the top N issues?" (Do NOT apply them automatically.)
 
-### Step 8: Offer Remediation
-
-**Purpose**: Optionally suggest fixes
-
-**Ask**: "Would you like me to suggest concrete remediation edits for the top N issues?"
-
-**Do NOT apply automatically** - user must explicitly approve
-
-**Validation**: \`remediation_offered\`
-
----
-
-## 3. 💡 EXAMPLES
-
-### Example 1: Basic Analysis
-
-\`\`\`bash
-/speckit.analyze
-\`\`\`
-
-**Result**: Generates read-only analysis report with findings
-
-### Example 2: With Context
-
-\`\`\`bash
-/speckit.analyze "Focus on constitution alignment and coverage gaps"
-\`\`\`
-
-**Result**: Prioritizes constitution and coverage in analysis
-
----
-
-## 4. 📖 RULES
-
-### ALWAYS
-
-- Verify all required artifacts exist
-- Load artifacts with progressive disclosure
-- Build semantic models for analysis
-- Perform all detection passes
-- Assign severity to all findings
-- Limit findings to 50 (aggregate overflow)
-- Generate structured report
-- Provide next actions
-- Offer remediation suggestions
-- **NEVER modify files** (read-only)
-
-### NEVER
-
-- Modify any files (strictly read-only)
-- Hallucinate missing sections
-- Dilute or ignore constitution principles
-- Apply remediation automatically
-- Exceed 50 findings without aggregation
-- Skip severity assignment
-
-### ESCALATE IF
-
-- Required artifacts missing (instruct user on prerequisite command)
-- CRITICAL constitution violations found
-- Coverage gaps for baseline functionality
-- Conflicting requirements detected
-
----
-
-## 5. 🎓 SUCCESS CRITERIA
-
-**Analysis is successful when**:
-- ✅ Prerequisites check passes
-- ✅ All artifacts loaded
-- ✅ Semantic models built
-- ✅ All detection passes complete
-- ✅ Severity assigned to findings
-- ✅ Structured report generated
-- ✅ Coverage metrics calculated
-- ✅ Next actions provided
-- ✅ Remediation offered
-- ✅ No files modified
-
-**Quality Gates**:
-- Findings limited to 50 (or aggregated)
-- Constitution violations marked CRITICAL
-- Zero-coverage requirements identified
-- Deterministic results (rerunning produces consistent output)
-
----
-
-## 6. 🔗 INTEGRATION POINTS
-
-### Related Commands
-
-- \`/speckit.specify\`: Creates spec.md (prerequisite)
-- \`/speckit.plan\`: Creates plan.md (prerequisite)
-- \`/speckit.tasks\`: Creates tasks.md (prerequisite)
-- \`/speckit.implement\`: Next step after analysis
-
-### Constitution Authority
-
-- \`.specify/memory/constitution.md\` is **non-negotiable**
-- Constitution conflicts are automatically CRITICAL
-- Require adjustment of spec/plan/tasks, not constitution
-- Constitution changes require separate explicit update
-
----
-
-## 7. ⚠️ OPERATING PRINCIPLES
+## Operating Principles
 
 ### Context Efficiency
 
-- **Minimal high-signal tokens**: Focus on actionable findings
-- **Progressive disclosure**: Load incrementally, don't dump all content
-- **Token-efficient output**: Limit findings table to 50 rows
-- **Deterministic results**: Consistent IDs and counts across reruns
+- **Minimal high-signal tokens**: Focus on actionable findings, not exhaustive documentation
+- **Progressive disclosure**: Load artifacts incrementally; don't dump all content into analysis
+- **Token-efficient output**: Limit findings table to 50 rows; summarize overflow
+- **Deterministic results**: Rerunning without changes should produce consistent IDs and counts
 
 ### Analysis Guidelines
 
-- **NEVER modify files** (read-only analysis)
-- **NEVER hallucinate missing sections** (report accurately)
-- **Prioritize constitution violations** (always CRITICAL)
-- **Use examples over rules** (cite specific instances)
-- **Report zero issues gracefully** (emit success report with stats)
+- **NEVER modify files** (this is read-only analysis)
+- **NEVER hallucinate missing sections** (if absent, report them accurately)
+- **Prioritize constitution violations** (these are always CRITICAL)
+- **Use examples over exhaustive rules** (cite specific instances, not generic patterns)
+- **Report zero issues gracefully** (emit success report with coverage statistics)
 
----
+## Context
 
-## 8. ⚠️ COMMON MISTAKES
-
-**Modifying files during analysis**:
-- **Problem**: Accidentally editing artifacts
-- **Fix**: Strictly read-only, only output reports
-
-**Ignoring constitution violations**:
-- **Problem**: Marking constitution conflicts as non-critical
-- **Fix**: Always mark as CRITICAL, require spec/plan/task adjustments
-
-**Reporting too many findings**:
-- **Problem**: Overwhelming user with 100+ findings
-- **Fix**: Limit to 50, aggregate remainder in summary
-
-**Missing coverage gaps**:
-- **Problem**: Not identifying requirements without tasks
-- **Fix**: Build coverage mapping, report zero-coverage requirements
+$ARGUMENTS

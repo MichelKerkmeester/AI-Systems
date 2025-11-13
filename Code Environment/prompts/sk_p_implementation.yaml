@@ -17,18 +17,11 @@ operating_mode:
 # USER INPUTS
 # ─────────────────────────────────────────────────────────────────
 user_inputs:
-  branch_strategy: |
-    [BRANCH_STRATEGY]
-    
-    Specify workspace isolation strategy (typically inherited from planning):
-    - main_temp (default): Quick integration, isolated work merged immediately
-    - feature_branch: Long-running branch for team review
-  
   git_branch: |
     [GIT_BRANCH]
     
-    Git branch name. Leave empty to auto-derive or inherit from planning phase
-    based on branch_strategy (temp/{spec-id} or feature-{spec-id}).
+    Git branch name for the work. Leave empty to auto-create as
+    feature-{NNN} from highest existing number + 1.
   
   spec_folder: |
     [SPEC_FOLDER]
@@ -90,31 +83,12 @@ request_handling:
 # FIELD HANDLING
 # ─────────────────────────────────────────────────────────────────
 field_handling:
-  branch_strategy:
-    required: true
-    type: enum
-    options:
-      - main_temp: "Temporary worktree with short-lived branch (default). Work is isolated in .worktrees/{spec-id} on temp/{spec-id} branch, then merged back to main immediately after validation. Use for: 80% of work - normal features, bug fixes, improvements."
-      - feature_branch: "Long-running feature branch in worktree for PR review. Work stays in .worktrees/{spec-id} on feature-{spec-id} branch for team review before integration. Use for: 20% of work - complex features requiring multi-day development and code review."
-    default: main_temp
-    note: |
-      This field should be inherited from the planning workflow (steps 1-7).
-      Worktree may already exist from planning phase and will be reused.
-      If starting implementation independently, prompt user for choice.
-      main_branch option removed (use main_temp for quick integration).
-
   spec_id:
     derive_from: "spec_folder path using pattern specs/{NNN} or specs/{NNN-name}"
     fallback: "Extract numeric portion or use timestamp if extraction fails"
-    note: "Used to generate feature_branch_name"
-
-  feature_branch_name:
-    pattern: "feature-{spec_id}"
-    condition: "Only used when branch_strategy == feature_branch"
 
   defaults:
-    branch_strategy_empty: "Inherit from planning phase; if unavailable, default to main_temp"
-    git_branch_empty: "Derived from worktree: temp/{spec-id} for main_temp, feature-{spec-id} for feature_branch"
+    git_branch_empty: "Auto-create feature-{NNN} from highest +001"
     spec_folder_empty: "Auto-create specs/{NNN} from highest +001"
     context_empty: "Infer from [REQUEST] and [STAGING LINK]"
     issues_empty: "Investigate during workflow"
@@ -124,52 +98,6 @@ field_handling:
   scope_policy:
     default: "specs/**"
     rule: "Limit file operations to scope when provided"
-
-  note_on_branch_creation: "Worktree and branch creation handled by git-worktrees skill. Worktree may already exist from planning phase and will be reused (see worktree_setup section below)."
-
-# ─────────────────────────────────────────────────────────────────
-# WORKTREE SETUP
-# ─────────────────────────────────────────────────────────────────
-worktree_setup:
-  trigger: after_step_11_review
-  invoke: git_worktrees_skill
-  description: |
-    Verify or create isolated worktree for implementation using git-worktrees skill.
-    Worktree location: .worktrees/{spec-id}
-    Branch depends on strategy:
-      - main_temp: temp/{spec-id} (short-lived, merges back immediately)
-      - feature_branch: feature-{spec-id} (long-running, preserved for PR)
-
-  strategy: branch_strategy  # Inherited from planning phase (steps 1-7)
-
-  inheritance_handling:
-    from_planning_phase: true
-    worktree_exists_check: required
-    actions:
-      if_exists: verify_and_reuse
-      if_not_exists: create_new
-
-  inputs:
-    task_description: derived_from_request_field
-    branch_strategy: branch_strategy  # Inherited from planning
-    spec_folder: spec_folder
-    worktree_directory: auto_detect
-    existing_worktree: check_if_present
-
-  outputs:
-    worktree_path: absolute_path_to_worktree  # e.g., /project/.worktrees/001
-    git_branch: active_branch_name  # e.g., temp/001 or feature-001
-    baseline_tests: pass_fail_status
-    worktree_reused: true_if_inherited_from_planning
-
-  validation: worktree_ready_and_verified
-
-  note: |
-    Implementation phase (steps 11-21) may inherit worktree from planning phase (steps 1-10).
-    If worktree exists: verify it's clean and on correct branch, then reuse.
-    If worktree doesn't exist: create new isolated workspace.
-    All subsequent implementation steps execute within this worktree context.
-    All sub-agents in parallel stages run within the same worktree.
 
 # ─────────────────────────────────────────────────────────────────
 # SUB-AGENTS (PARALLEL PREP)
@@ -209,18 +137,19 @@ sub_agents:
 # ─────────────────────────────────────────────────────────────────
 workflow:
   step_11_review_plan_and_spec:
+    input_source: USER_INPUTS_SECTION_ABOVE
+    git_branch: "[GIT_BRANCH] → auto-create if empty"
+    spec_folder: "[SPEC_FOLDER] → auto-create if empty"
+    context: "[CONTEXT] → infer if empty"
+    issues: "[ISSUES] → discover if empty"
+    request: "Use [REQUEST] if provided, else use default from request_handling"
+    environment: "[STAGING LINK] → skip DevTools if empty"
+    scope: "[FILES] → default scope if empty"
     note: |
       This workflow is a continuation of the planning phase (steps 1-10).
-      Branch strategy should have been set during planning.
-      Worktree may already exist from planning and will be verified/reused.
-      If starting independently, branch_strategy must be provided.
-    branch_strategy: "[BRANCH_STRATEGY] → inherited from planning (default: main_temp)"
-    git_branch: "[GIT_BRANCH] → derived from worktree"
     action: |
-      1. Confirm branch_strategy (should be inherited from planning phase, defaults to main_temp)
-      2. Check if worktree exists from planning phase
-      3. Review spec and planning artifacts
-      4. Prepare for workspace verification (next step will verify/create workspace)
+      1. Review spec and planning artifacts
+      2. Prepare for implementation
     required_documents:
       - "[SPEC_FOLDER]/spec.md"
       - "[SPEC_FOLDER]/plan.md"
@@ -231,27 +160,10 @@ workflow:
       - tasks.md: "Task breakdown if created during planning"
       - checklist.md: "Validation checklists if systematic validation needed"
     outputs:
-      - branch_strategy_confirmed
-      - worktree_existence_checked
       - planning_artifacts_understood
-    validation: planning_artifacts_understood_and_branch_confirmed
+    validation: planning_artifacts_understood
 
-  step_12_workspace_verification:
-    action: Verify or create isolated worktree via git-worktrees skill
-    reference: worktree_setup section above defines complete setup process with inheritance handling
-    inheritance_check:
-      - check_if_worktree_exists_from_planning
-      - if_exists_verify_clean_and_reuse
-      - if_not_exists_create_new
-    validation: worktree_ready_and_verified
-    outputs:
-      - worktree_path_resolved
-      - git_branch_active
-      - baseline_tests_status
-      - worktree_reused_from_planning
-    note: "All parallel sub-agents and implementation steps will execute within this worktree context"
-
-  step_13_task_breakdown:
+  step_12_task_breakdown:
     command: /tasks
     outputs:
       - tasks/checklist.md
@@ -261,7 +173,7 @@ workflow:
       - checklist.md: "Validation & QA checklists if not already created (copy from .specify/templates/checklist-template.md)"
     validation: tasks_actionable
 
-  step_14_analysis:
+  step_13_analysis:
     command: /analyze
     outputs:
       - consistency_report
@@ -270,13 +182,13 @@ workflow:
       - gap_analysis
     validation: consistency_verified
 
-  step_15_quality_checklist:
+  step_14_quality_checklist:
     command: /speckit.checklist
     outputs:
       - quality_checklist: generated
     validation: checklist_generated
 
-  step_16_parallel_implementation_preparation:
+  step_15_parallel_implementation_preparation:
     description: Parallel preparation for core, integrations, tests, and docs
     analyze_inputs:
       summarize:
@@ -349,7 +261,7 @@ workflow:
         - main_agent_review_notes
         - final_signoff: true
 
-  step_17_implementation_check:
+  step_16_implementation_check:
     command: /implement [task-id]
     checks:
       prerequisites: verified
@@ -370,7 +282,7 @@ workflow:
         - blocker_identification
         - readiness_confirmation
 
-  step_18_development:
+  step_17_development:
     approach: autonomous_implementation_with_checkpoints
     requirements:
       - follow: .claude/knowledge/code_standards.md
@@ -401,7 +313,7 @@ workflow:
         - optimization_opportunities
         - test_coverage_gaps
 
-  step_19_completion:
+  step_18_completion:
     summary_document:
       location: "[SPEC_FOLDER]/implementation-summary.md"
       required_sections:
@@ -426,7 +338,7 @@ workflow:
         - technical_debt_noted
         - future_improvements
 
-  step_20_save_context:
+  step_19_save_context:
     action: Save implementation conversation context via parallel sub-agent
     description: |
       Preserve comprehensive implementation conversation including:
@@ -462,86 +374,11 @@ prerequisites:
   user_context: "[CONTEXT]"
   user_request: "[REQUEST]"
 
-step_21_integration_and_cleanup:
-  name: Integration & Cleanup
-  description: Integrate implementation and cleanup based on strategy
-
-  # ─────────────────────────────────────────────────────────────
-  # MAIN_TEMP STRATEGY (DEFAULT - 80% of work)
-  # ─────────────────────────────────────────────────────────────
-  condition_main_temp:
-    when: branch_strategy == main_temp
-    philosophy: "Temp branches are immediately merged and deleted. Worktree is ephemeral."
-
-    integration_steps:
-      - action: verify_worktree_clean
-        command: "git status"
-        validation: no_uncommitted_changes
-      - action: return_to_main_repo
-        command: "cd ../.."
-      - action: checkout_main_and_update
-        command: "git checkout main && git pull --ff-only"
-        validation: main_up_to_date
-      - action: merge_temp_branch
-        command: "git merge --ff-only temp/{spec-id}"
-        validation: fast_forward_successful
-        on_failure: |
-          If merge fails: offer to rebase
-      - action: delete_temp_branch
-        command: "git branch -d temp/{spec-id}"
-      - action: remove_worktree
-        command: "git worktree remove .worktrees/{spec-id}"
-      - action: verify_integration
-        command: "git log --oneline -5"
-
-    success_criteria:
-      - changes_integrated_to_main: true
-      - temp_branch_deleted: true
-      - worktree_removed: true
-
-    final_message: |
-      ✓ Implementation integrated to main
-      ✓ Temp branch deleted
-      ✓ Worktree removed
-      ✓ Review implementation-summary.md for details
-
-  # ─────────────────────────────────────────────────────────────
-  # FEATURE_BRANCH STRATEGY (EXCEPTION - 20% of work)
-  # ─────────────────────────────────────────────────────────────
-  condition_feature_branch:
-    when: branch_strategy == feature_branch
-    philosophy: "Long-running branches remain for PR workflow. Worktree preserved."
-
-    push_steps:
-      - action: verify_worktree_clean
-        command: "cd .worktrees/{spec-id} && git status"
-      - action: push_feature_branch
-        command: "git push -u origin feature-{spec-id}"
-      - action: preserve_worktree
-
-    manual_steps:
-      - "Create PR via GitHub/GitLab when ready"
-      - "Merge PR after code review"
-      - "Manual cleanup: git worktree remove .worktrees/{spec-id}"
-
-    success_criteria:
-      - feature_branch_pushed: true
-      - worktree_preserved: true
-
-    final_message: |
-      ✓ Feature branch pushed
-      ✓ Branch: feature-{spec-id}
-      ✓ Worktree preserved at .worktrees/{spec-id}
-      ✓ Ready for PR creation and code review
-      ✓ Review implementation-summary.md for details
-
-  validation: integration_complete_per_strategy
-
-  termination:
-    after_step: 21
-    message: "Implementation phase completed successfully. Workflow terminated after step 21 (integration and cleanup)."
-    optional_post_completion:
-      - retrospective.md: "Capture learnings AFTER feature complete (copy from .specify/templates/retrospective-template.md)"
+termination:
+  after_step: 19
+  message: "Implementation phase completed successfully. Workflow terminated after step 19 (save context)."
+  optional_post_completion:
+    - retrospective.md: "Capture learnings AFTER feature complete (copy from .specify/templates/retrospective-template.md)"
 
 # ─────────────────────────────────────────────────────────────────
 # ADAPTIVE RULES & ERROR HANDLING

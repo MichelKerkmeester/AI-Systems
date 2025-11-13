@@ -22,13 +22,11 @@ debug_philosophy:
 # USER INPUTS
 # ─────────────────────────────────────────────────────────────────
 user_inputs:
-  use_worktree: |
-    [USE_WORKTREE]
+  git_branch: |
+    [GIT_BRANCH]
     
-    Enable isolated worktree for debugging (recommended for most cases).
-    - true: Create isolated workspace for testing fixes (default for standard/deep/performance)
-    - false: Work in current directory (default for quick_fix mode)
-    Default varies by debug mode complexity.
+    Git branch name for the work. Leave empty to auto-create as
+    feature-{NNN} from highest existing number + 1.
   
   environment: |
     [STAGING LINK]
@@ -94,17 +92,8 @@ user_inputs:
 # FIELD HANDLING
 # ─────────────────────────────────────────────────────────────────
 field_handling:
-  use_worktree:
-    type: boolean
-    default:
-      quick_fix: false         # Simple fix, no isolation needed
-      standard: true           # Isolate for testing fix
-      deep_investigation: true # Complex debugging requires isolation
-      performance: true        # Performance issues require baseline comparison
-    note: "Enable isolated worktree for testing debug fixes. Default varies by debug mode."
-
   defaults:
-    use_worktree_empty: "Use mode-based default (see above)"
+    git_branch_empty: "Auto-create feature-{NNN} from highest +001"
     environment_empty: "Skip browser testing steps"
     scope_empty: "Use all relevant files"
     target_document_empty: "Infer from [ISSUES] or [REQUEST]"
@@ -117,6 +106,14 @@ field_handling:
 # ─────────────────────────────────────────────────────────────────
 workflow:
   step_1_reproduce:
+    input_source: USER_INPUTS_SECTION_ABOVE
+    git_branch: "[GIT_BRANCH] → auto-create if empty"
+    environment: "[STAGING LINK] → skip DevTools if empty"
+    scope: "[FILES] → use all relevant files if empty"
+    target_document: "[TARGET_DOCUMENT] → infer from ISSUES/REQUEST if empty"
+    context: "[CONTEXT] → infer from issue description if empty"
+    issues: "[ISSUES] → parse from REQUEST if empty"
+    request: "Use [REQUEST] if provided, else use ISSUES as primary source"
     purpose: Confirm the issue exists
     actions:
       - Review target document for issue documentation
@@ -132,26 +129,7 @@ workflow:
       - Network tab for API issues
       - Performance profiler if needed
 
-  step_2_workspace_setup:
-    condition: use_worktree == true
-    action: Create isolated worktree via git-worktrees skill
-    strategy: main_temp  # Always main_temp for code workflows
-    description: |
-      Create isolated workspace for debug work.
-      Allows testing fix in isolation without affecting main branch.
-      All debugging and fixes happen in .worktrees/debug-{timestamp} on temp/debug-{timestamp} branch.
-    inputs:
-      task_description: derived_from_issues_or_request
-      branch_strategy: main_temp
-      debug_mode: mode_from_context  # quick_fix, standard, deep_investigation, performance
-    outputs:
-      worktree_path: absolute_path
-      git_branch: temp/debug-{timestamp}
-    note: |
-      If use_worktree=true: Create worktree for isolated debug work
-      If use_worktree=false: Skip, work in current directory (e.g., quick_fix mode)
-
-  step_3_diagnose:
+  step_2_diagnose:
     purpose: Find the root cause
     investigation:
       - Generate hypotheses
@@ -172,7 +150,7 @@ workflow:
       - DOM snapshots
       - Performance traces
 
-  step_4_fix:
+  step_3_fix:
     purpose: Implement the solution
     approach:
       - Design minimal fix
@@ -186,7 +164,7 @@ workflow:
       - Document complex logic
       - Add preventive measures
 
-  step_5_verify:
+  step_4_verify:
     purpose: Ensure fix works completely
     testing:
       - Original issue resolved
@@ -200,7 +178,7 @@ workflow:
       - Code quality maintained
       - Documentation updated
 
-  step_6_save_context:
+  step_5_save_context:
     action: Save debugging conversation context
     invocation: Skill(skill: "save-context")
     description: |
@@ -217,24 +195,9 @@ workflow:
       Context saved for future reference and knowledge sharing.
       Captures full debugging journey including challenges and solutions.
 
-  step_7_integration_and_cleanup:
-    condition: use_worktree == true
-    action: Integrate debug fix and cleanup worktree
-    strategy: main_temp  # Always main_temp for code workflows
-    description: |
-      After successful fix and verification, integrate changes back to main.
-      Fast-forward merge ensures clean integration.
-      Cleanup removes temporary debug branch and worktree.
-    steps:
-      - verify_worktree_clean
-      - return_to_main_repo
-      - checkout_main_and_update
-      - merge_temp_branch_fast_forward_only
-      - delete_temp_branch
-      - remove_worktree
-    note: |
-      If use_worktree=true: Integrate fix to main and cleanup
-      If use_worktree=false: Skip (already working on main, e.g., quick_fix mode)
+termination:
+  after_step: 5
+  message: "Debugging completed successfully. Workflow terminated after step 5 (save context)."
 
 # ─────────────────────────────────────────────────────────────────
 # DEBUG MODES

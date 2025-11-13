@@ -22,14 +22,11 @@ optimization_philosophy:
 # USER INPUTS
 # ─────────────────────────────────────────────────────────────────
 user_inputs:
-  use_worktree: |
-    [USE_WORKTREE]
+  git_branch: |
+    [GIT_BRANCH]
     
-    Enable isolated worktree for performance work (strongly recommended).
-    - true: Create isolated workspace for clean baseline comparison (default)
-    - false: Work in current directory (not recommended)
-    Performance optimization requires clean baseline from main for accurate
-    before/after comparison.
+    Git branch name for the work. Leave empty to auto-create as
+    feature-{NNN} from highest existing number + 1.
   
   environment: |
     [STAGING LINK]
@@ -92,13 +89,8 @@ user_inputs:
 # FIELD HANDLING
 # ─────────────────────────────────────────────────────────────────
 field_handling:
-  use_worktree:
-    type: boolean
-    default: true  # ALWAYS isolate for performance work - baseline from main required
-    note: "Performance optimization requires clean baseline from main. Worktree isolation ensures accurate before/after comparison without affecting main branch."
-
   defaults:
-    use_worktree_empty: true
+    git_branch_empty: "Auto-create feature-{NNN} from highest +001"
     environment_empty: "Skip browser-based profiling"
     scope_empty: "All performance-critical files"
     target_document_empty: "Optimize current application or infer from [REQUEST]"
@@ -111,6 +103,14 @@ field_handling:
 # ─────────────────────────────────────────────────────────────────
 workflow:
   step_1_baseline:
+    input_source: USER_INPUTS_SECTION_ABOVE
+    git_branch: "[GIT_BRANCH] → auto-create if empty"
+    environment: "[STAGING LINK] → skip browser profiling if empty"
+    scope: "[FILES] → all performance-critical files if empty"
+    target_document: "[TARGET_DOCUMENT] → infer from REQUEST if empty"
+    context: "[CONTEXT] → infer from performance issues if empty"
+    issues: "[ISSUES] → identify during baseline if empty"
+    request: "Use [REQUEST] if provided, else general performance optimization"
     purpose: Measure current performance
     actions:
       - Review target document plan/spec for requirements
@@ -132,25 +132,7 @@ workflow:
       - Performance bottlenecks
       - Request requirements from [REQUEST]
 
-  step_2_workspace_setup:
-    condition: use_worktree == true
-    action: Create isolated worktree via git-worktrees skill
-    strategy: main_temp  # Always main_temp for code workflows
-    description: |
-      Create isolated workspace for performance optimization.
-      Ensures clean baseline from main branch for accurate before/after comparison.
-      All optimization work happens in .worktrees/perf-{timestamp} on temp/perf-{timestamp} branch.
-    inputs:
-      task_description: derived_from_request_or_issues
-      branch_strategy: main_temp
-    outputs:
-      worktree_path: absolute_path
-      git_branch: temp/perf-{timestamp}
-    note: |
-      If use_worktree=true: Create worktree for isolated optimization work
-      If use_worktree=false: Skip, work in current directory
-
-  step_3_analyze:
+  step_2_analyze:
     purpose: Identify optimization opportunities
     analysis:
       - Profile critical paths
@@ -172,7 +154,7 @@ workflow:
         - Micro-optimizations
         - Code cleanup
 
-  step_4_optimize:
+  step_3_optimize:
     purpose: Apply improvements incrementally
     approach:
       - One optimization at a time
@@ -201,7 +183,7 @@ workflow:
         - API caching
         - CDN usage
 
-  step_5_verify:
+  step_4_verify:
     purpose: Ensure improvements without regression
     checks:
       performance:
@@ -219,7 +201,7 @@ workflow:
         - Mobile performance
         - Network conditions
 
-  step_6_save_context:
+  step_5_save_context:
     action: Save performance optimization conversation context
     invocation: Skill(skill: "save-context")
     description: |
@@ -236,24 +218,9 @@ workflow:
       Context saved for future performance work and knowledge sharing.
       Captures full optimization journey including metrics and trade-offs.
 
-  step_7_integration_and_cleanup:
-    condition: use_worktree == true
-    action: Integrate optimizations and cleanup worktree
-    strategy: main_temp  # Always main_temp for code workflows
-    description: |
-      After successful optimization and verification, integrate changes back to main.
-      Fast-forward merge ensures clean integration.
-      Cleanup removes temporary branch and worktree.
-    steps:
-      - verify_worktree_clean
-      - return_to_main_repo
-      - checkout_main_and_update
-      - merge_temp_branch_fast_forward_only
-      - delete_temp_branch
-      - remove_worktree
-    note: |
-      If use_worktree=true: Integrate changes to main and cleanup
-      If use_worktree=false: Skip (already working on main)
+termination:
+  after_step: 5
+  message: "Performance optimization completed successfully. Workflow terminated after step 5 (save context)."
 
 # ─────────────────────────────────────────────────────────────────
 # PRESERVATION REQUIREMENTS

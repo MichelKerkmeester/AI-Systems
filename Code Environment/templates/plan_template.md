@@ -4,21 +4,7 @@ Implementation plan defining technical approach, project structure, and executio
 
 ---
 
-## 📋 Table of Contents
-- [1. 🎯 Objective](#1--objective)
-- [2. 🔒 Quality Gates](#2--quality-gates)
-- [3. 🗂 Project Structure](#3--project-structure)
-- [4. 🚧 Implementation Phases](#4--implementation-phases)
-- [5. 🧪 Testing Strategy](#5--testing-strategy)
-- [6. 📏 Success Metrics](#6--success-metrics)
-- [7. ⚠️ Risks & Mitigations](#7--risks--mitigations)
-- [8. 🔗 Dependencies](#8--dependencies)
-- [9. 📣 Communication & Review](#9--communication--review)
-- [10. 📎 References](#10--references)
-
----
-
-## 1. 🎯 OBJECTIVE
+## 1. OBJECTIVE
 
 ### Metadata
 - **Category**: Plan
@@ -54,7 +40,7 @@ Feature specification from `/specs/[###-feature-name]/spec.md`
 
 ---
 
-## 2. 🔒 QUALITY GATES
+## 2. QUALITY GATES
 
 **GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.**
 
@@ -85,19 +71,19 @@ Feature specification from `/specs/[###-feature-name]/spec.md`
 
 ---
 
-## 3. 🗂 PROJECT STRUCTURE
+## 3. PROJECT STRUCTURE
 
 ### Documentation (This Feature)
 
 ```
 specs/[###-feature]/
-├── spec.md              # Feature specification (see spec-template.md)
-├── plan.md              # This file (/speckit.plan command output)
-├── research.md          # Phase 0 output (/speckit.plan command)
-├── data-model.md        # Phase 1 output (/speckit.plan command)
-├── quickstart.md        # Phase 1 output (/speckit.plan command)
-├── contracts/           # Phase 1 output (/speckit.plan command)
-└── tasks.md             # Phase 2 output (/speckit.tasks command)
+  spec.md              # Feature specification (see spec-template.md)
+  plan.md              # This file (/speckit.plan command output)
+  research.md          # Phase 0 output (/speckit.plan command)
+  data-model.md        # Phase 1 output (/speckit.plan command)
+  quickstart.md        # Phase 1 output (/speckit.plan command)
+  contracts/           # Phase 1 output (/speckit.plan command)
+  tasks.md             # Phase 2 output (/speckit.tasks command)
 ```
 
 ### Source Code (Repository Root)
@@ -112,37 +98,37 @@ specs/[###-feature]/
 ```
 # [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
 src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+  models/
+  services/
+  cli/
+  lib/
 
 tests/
-├── contract/
-├── integration/
-└── unit/
+  contract/
+  integration/
+  unit/
 
 # [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
 backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
+  src/
+    models/
+    services/
+    api/
+  tests/
 
 frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
+  src/
+    components/
+    pages/
+    services/
+  tests/
 
 # [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
 api/
-└── [same as backend above]
+  [same as backend above]
 
 ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+  [platform-specific structure: feature modules, UI flows, platform tests]
 ```
 
 ### Structure Decision
@@ -151,7 +137,7 @@ ios/ or android/
 
 ---
 
-## 4. 🚧 IMPLEMENTATION PHASES
+## 4. IMPLEMENTATION PHASES
 
 ### Phase 0: Research & Discovery
 
@@ -213,17 +199,17 @@ ios/ or android/
 
 ---
 
-## 5. 🧪 TESTING STRATEGY
+## 5. TESTING STRATEGY
 
 ### Test Pyramid
 
 ```
         /\
-       /E2E\      ← Few, high-value end-to-end tests
+       /E2E\      <- Few, high-value end-to-end tests
       /------\
-     /  INTEG \   ← More integration tests
+     /  INTEG \   <- More integration tests
     /----------\
-   /   UNIT     \  ← Many unit tests (foundation)
+   /   UNIT     \  <- Many unit tests (foundation)
   /--------------\
 ```
 
@@ -265,7 +251,7 @@ ios/ or android/
 
 ---
 
-## 6. 📏 SUCCESS METRICS
+## 6. SUCCESS METRICS
 
 ### Functional Metrics
 
@@ -292,7 +278,7 @@ ios/ or android/
 
 ---
 
-## 7. ⚠️ RISKS & MITIGATIONS
+## 7. RISKS & MITIGATIONS
 
 ### Risk Matrix
 
@@ -313,7 +299,7 @@ ios/ or android/
 
 ---
 
-## 8. 🔗 DEPENDENCIES
+## 8. DEPENDENCIES
 
 ### Internal Dependencies
 
@@ -331,7 +317,7 @@ ios/ or android/
 
 ---
 
-## 9. 📣 COMMUNICATION & REVIEW
+## 9. COMMUNICATION & REVIEW
 
 ### Stakeholders
 
@@ -357,7 +343,7 @@ ios/ or android/
 
 ---
 
-## 10. 📎 REFERENCES
+## 10. REFERENCES
 
 ### Related Documents
 

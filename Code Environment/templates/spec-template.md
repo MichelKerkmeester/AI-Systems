@@ -4,22 +4,7 @@ Complete feature specification defining requirements, user stories, and success 
 
 ---
 
-## 📋 Table of Contents
-- [1. 🎯 Objective](#1--objective)
-- [2. 🧩 Scope](#2--scope)
-- [3. 🧭 Users & Stories](#3--users--stories)
-- [4. ✅ Functional Requirements](#4--functional-requirements)
-- [5. 🧪 Non-Functional Requirements](#5--non-functional-requirements)
-- [6. 🧷 Edge Cases](#6--edge-cases)
-- [7. 📏 Success Criteria](#7--success-criteria)
-- [8. 🔗 Dependencies & Risks](#8--dependencies--risks)
-- [9. 🚫 Out of Scope](#9--out-of-scope)
-- [10. ❓ Open Questions](#10--open-questions)
-- [11. 📎 Appendix](#11--appendix)
-
----
-
-## 1. 🎯 OBJECTIVE
+## 1. OBJECTIVE
 
 ### Metadata
 - **Category**: Spec
@@ -50,7 +35,7 @@ Complete feature specification defining requirements, user stories, and success 
 
 ---
 
-## 2. 🧩 SCOPE
+## 2. SCOPE
 
 ### In Scope
 - [Item 1]
@@ -64,7 +49,7 @@ Complete feature specification defining requirements, user stories, and success 
 
 ---
 
-## 3. 🧭 USERS & STORIES
+## 3. USERS & STORIES
 
 <!--
   IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
@@ -122,7 +107,7 @@ Complete feature specification defining requirements, user stories, and success 
 
 ---
 
-## 4. ✅ FUNCTIONAL REQUIREMENTS
+## 4. FUNCTIONAL REQUIREMENTS
 
 <!--
   ACTION REQUIRED: The content in this section represents placeholders.
@@ -140,7 +125,7 @@ Complete feature specification defining requirements, user stories, and success 
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
 ### Traceability Mapping
-Map User Stories → Functional Requirements
+Map User Stories -> Functional Requirements
 
 | User Story | Related FRs |
 |------------|-------------|
@@ -150,7 +135,7 @@ Map User Stories → Functional Requirements
 
 ---
 
-## 5. 🧪 NON-FUNCTIONAL REQUIREMENTS
+## 5. NON-FUNCTIONAL REQUIREMENTS
 
 ### Performance
 
@@ -184,7 +169,7 @@ Map User Stories → Functional Requirements
 
 ---
 
-## 6. 🧷 EDGE CASES
+## 6. EDGE CASES
 
 <!--
   ACTION REQUIRED: Fill this with the right edge cases.
@@ -205,7 +190,7 @@ Map User Stories → Functional Requirements
 
 ---
 
-## 7. 📏 SUCCESS CRITERIA
+## 7. SUCCESS CRITERIA
 
 ### Measurable Outcomes
 
@@ -227,7 +212,7 @@ Select relevant KPIs:
 
 ---
 
-## 8. 🔗 DEPENDENCIES & RISKS
+## 8. DEPENDENCIES & RISKS
 
 ### Dependencies
 
@@ -253,7 +238,7 @@ Select relevant KPIs:
 
 ---
 
-## 9. 🚫 OUT OF SCOPE
+## 9. OUT OF SCOPE
 
 **Explicit Exclusions** (to reduce ambiguity):
 
@@ -263,7 +248,7 @@ Select relevant KPIs:
 
 ---
 
-## 10. ❓ OPEN QUESTIONS
+## 10. OPEN QUESTIONS
 
 - [NEEDS CLARIFICATION]: [Question 1]
 - [NEEDS CLARIFICATION]: [Question 2]
@@ -271,7 +256,7 @@ Select relevant KPIs:
 
 ---
 
-## 11. 📎 APPENDIX
+## 11. APPENDIX
 
 ### References
 
@@ -290,7 +275,7 @@ Select relevant KPIs:
 
 ---
 
-## 🔗 RELATED DOCUMENTS
+## RELATED DOCUMENTS
 
 - **Implementation Plan**: See `plan.md` for technical approach and architecture
 - **Task Breakdown**: See `tasks.md` for implementation task list

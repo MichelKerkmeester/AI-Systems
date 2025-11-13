@@ -204,8 +204,13 @@ workflow:
       - Include placeholders where appropriate
       - Add examples matching prompt style
       - Follow target prompt's conventions
+      - Format multi-line content using pipe literals (|)
+      - Ensure proper indentation for nested structures
+      - Include contextual examples where applicable
     outputs:
       - populated_fields: per_target_prompt_structure
+      - formatted_yaml: proper_syntax
+    validation: fields_properly_formatted
 
   step_7_decision_making:
     purpose: Determine branch strategy and documentation level (if applicable)

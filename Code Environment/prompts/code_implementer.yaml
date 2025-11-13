@@ -22,12 +22,11 @@ implementation_philosophy:
 # USER INPUTS
 # ─────────────────────────────────────────────────────────────────
 user_inputs:
-  use_worktree: |
-    [USE_WORKTREE]
+  git_branch: |
+    [GIT_BRANCH]
     
-    Enable isolated worktree for feature implementation (optional).
-    - true: Create isolated workspace for complex features
-    - false: Work in current directory (default, fine for most work)
+    Git branch name for the work. Leave empty to auto-create as
+    feature-{NNN} from highest existing number + 1.
   
   environment: |
     [STAGING LINK]
@@ -79,13 +78,8 @@ user_inputs:
 # FIELD HANDLING
 # ─────────────────────────────────────────────────────────────────
 field_handling:
-  use_worktree:
-    type: boolean
-    default: false  # Optional isolation for feature implementation
-    note: "Enable for complex tasks requiring isolation. Most implementations work fine on main branch."
-
   defaults:
-    use_worktree_empty: false
+    git_branch_empty: "Auto-create feature-{NNN} from highest +001"
     environment_empty: "Skip browser testing steps"
     scope_empty: "Use all relevant project files"
     target_document_empty: "Use current directory or infer from [REQUEST]"
@@ -97,6 +91,13 @@ field_handling:
 # ─────────────────────────────────────────────────────────────────
 workflow:
   step_1_understand:
+    input_source: USER_INPUTS_SECTION_ABOVE
+    git_branch: "[GIT_BRANCH] → auto-create if empty"
+    environment: "[STAGING LINK] → skip DevTools if empty"
+    scope: "[FILES] → use all relevant project files if empty"
+    target_document: "[TARGET_DOCUMENT] → infer from REQUEST if empty"
+    context: "[CONTEXT] → infer from target plan/specification if empty"
+    request: "Use [REQUEST] if provided, else default"
     purpose: Grasp what needs to be built
     activities:
       - Review target document plan/specification
@@ -110,25 +111,7 @@ workflow:
       - Technical approach
       - Success metrics
 
-  step_2_workspace_setup:
-    condition: use_worktree == true
-    action: Create isolated worktree via git-worktrees skill
-    strategy: main_temp  # Always main_temp for code workflows
-    description: |
-      Create isolated workspace for feature implementation (optional).
-      Allows developing complex features in isolation.
-      Work happens in .worktrees/feature-{timestamp} on temp/feature-{timestamp} branch.
-    inputs:
-      task_description: derived_from_request_or_target_document
-      branch_strategy: main_temp
-    outputs:
-      worktree_path: absolute_path
-      git_branch: temp/feature-{timestamp}
-    note: |
-      If use_worktree=true: Create worktree for isolated feature work
-      If use_worktree=false: Skip, work in current directory
-
-  step_3_build:
+  step_2_build:
     purpose: Implement the feature
     approach:
       iterative:
@@ -156,7 +139,7 @@ workflow:
       - Tests (if applicable)
       - Documentation (inline)
 
-  step_4_polish:
+  step_3_polish:
     purpose: Refine and complete
     activities:
       - Code cleanup
@@ -170,7 +153,7 @@ workflow:
       - implementation.md document
       - Ready for review
 
-  step_5_save_context:
+  step_4_save_context:
     action: Save implementation conversation context
     invocation: Skill(skill: "save-context")
     description: |
@@ -187,24 +170,9 @@ workflow:
       Context saved alongside implementation.md for complete record.
       Captures full implementation journey including challenges and solutions.
 
-  step_6_integration_and_cleanup:
-    condition: use_worktree == true
-    action: Integrate feature and cleanup worktree
-    strategy: main_temp  # Always main_temp for code workflows
-    description: |
-      After successful implementation and testing, integrate changes back to main.
-      Fast-forward merge ensures clean integration.
-      Cleanup removes temporary feature branch and worktree.
-    steps:
-      - verify_worktree_clean
-      - return_to_main_repo
-      - checkout_main_and_update
-      - merge_temp_branch_fast_forward_only
-      - delete_temp_branch
-      - remove_worktree
-    note: |
-      If use_worktree=true: Integrate feature to main and cleanup
-      If use_worktree=false: Skip (already working on main)
+termination:
+  after_step: 4
+  message: "Implementation completed successfully. Workflow terminated after step 4 (save context)."
 
 # ─────────────────────────────────────────────────────────────────
 # INCREMENTAL DELIVERY

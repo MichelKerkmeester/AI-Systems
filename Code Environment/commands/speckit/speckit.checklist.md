@@ -8,18 +8,18 @@ description: Generate a custom checklist for the current feature based on user r
 
 **NOT for verification/testing**:
 
-- ❌ NOT "Verify the button clicks correctly"
-- ❌ NOT "Test error handling works"
-- ❌ NOT "Confirm the API returns 200"
-- ❌ NOT checking if code/implementation matches the spec
+-  NOT "Verify the button clicks correctly"
+-  NOT "Test error handling works"
+-  NOT "Confirm the API returns 200"
+-  NOT checking if code/implementation matches the spec
 
 **FOR requirements quality validation**:
 
-- ✅ "Are visual hierarchy requirements defined for all card types?" (completeness)
-- ✅ "Is 'prominent display' quantified with specific sizing/positioning?" (clarity)
-- ✅ "Are hover state requirements consistent across all interactive elements?" (consistency)
-- ✅ "Are accessibility requirements defined for keyboard navigation?" (coverage)
-- ✅ "Does the spec define what happens when logo image fails to load?" (edge cases)
+-  "Are visual hierarchy requirements defined for all card types?" (completeness)
+-  "Is 'prominent display' quantified with specific sizing/positioning?" (clarity)
+-  "Are hover state requirements consistent across all interactive elements?" (consistency)
+-  "Are accessibility requirements defined for keyboard navigation?" (coverage)
+-  "Does the spec define what happens when logo image fails to load?" (edge cases)
 
 **Metaphor**: If your spec is code written in English, the checklist is its unit test suite. You're testing whether the requirements are well-written, complete, unambiguous, and ready for implementation - NOT whether the implementation works.
 
@@ -116,12 +116,12 @@ You **MUST** consider the user input before proceeding (if not empty).
 
    **HOW TO WRITE CHECKLIST ITEMS - "Unit Tests for English"**:
 
-   ❌ **WRONG** (Testing implementation):
+    **WRONG** (Testing implementation):
    - "Verify landing page displays 3 episode cards"
    - "Test hover states work on desktop"
    - "Confirm logo click navigates home"
 
-   ✅ **CORRECT** (Testing requirements quality):
+    **CORRECT** (Testing requirements quality):
    - "Are the exact number and layout of featured episodes specified?" [Completeness]
    - "Is 'prominent display' quantified with specific sizing/positioning?" [Clarity]
    - "Are hover state requirements consistent across all interactive elements?" [Consistency]
@@ -134,9 +134,39 @@ You **MUST** consider the user input before proceeding (if not empty).
    Each item should follow this pattern:
    - Question format asking about requirement quality
    - Focus on what's WRITTEN (or not written) in the spec/plan
+   - **Priority tag** `[P0]`, `[P1]`, or `[P2]` (see priority inference below)
    - Include quality dimension in brackets [Completeness/Clarity/Consistency/etc.]
    - Reference spec section `[Spec §X.Y]` when checking existing requirements
    - Use `[Gap]` marker when checking for missing requirements
+
+   **PRIORITY TAG INFERENCE**:
+   Assign priority based on requirement type being checked:
+
+   **[P0] - Critical** (blocks launch/deployment):
+   - Security requirements (authentication, authorization, data protection)
+   - Compliance requirements (GDPR, accessibility, legal)
+   - Critical functional requirements (core user journey)
+   - Data integrity requirements
+   - Safety-critical requirements
+   - Example: `- [ ] CHK001 [P0] Are authentication requirements specified for all protected resources? [Completeness]`
+
+   **[P1] - High** (needed for quality, not blocking):
+   - Important functional requirements (secondary flows)
+   - Performance requirements (response times, throughput)
+   - Error handling requirements
+   - Usability requirements
+   - Important edge cases
+   - Example: `- [ ] CHK015 [P1] Are error handling requirements defined for API failures? [Gap]`
+
+   **[P2] - Medium** (nice to have, can defer):
+   - Polish requirements
+   - Nice-to-have features
+   - Documentation requirements
+   - Low-impact edge cases
+   - Future considerations
+   - Example: `- [ ] CHK032 [P2] Are tooltip text requirements consistent across UI? [Consistency]`
+
+   **Default**: If unclear, use [P1]
 
    **EXAMPLES BY QUALITY DIMENSION**:
 
@@ -187,29 +217,108 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Merge near-duplicates checking the same requirement aspect
    - If >5 low-impact edge cases, create one item: "Are edge cases X, Y, Z addressed in requirements? [Coverage]"
 
-   **🚫 ABSOLUTELY PROHIBITED** - These make it an implementation test, not a requirements test:
-   - ❌ Any item starting with "Verify", "Test", "Confirm", "Check" + implementation behavior
-   - ❌ References to code execution, user actions, system behavior
-   - ❌ "Displays correctly", "works properly", "functions as expected"
-   - ❌ "Click", "navigate", "render", "load", "execute"
-   - ❌ Test cases, test plans, QA procedures
-   - ❌ Implementation details (frameworks, APIs, algorithms)
+   ** ABSOLUTELY PROHIBITED** - These make it an implementation test, not a requirements test:
+   -  Any item starting with "Verify", "Test", "Confirm", "Check" + implementation behavior
+   -  References to code execution, user actions, system behavior
+   -  "Displays correctly", "works properly", "functions as expected"
+   -  "Click", "navigate", "render", "load", "execute"
+   -  Test cases, test plans, QA procedures
+   -  Implementation details (frameworks, APIs, algorithms)
 
-   **✅ REQUIRED PATTERNS** - These test requirements quality:
-   - ✅ "Are [requirement type] defined/specified/documented for [scenario]?"
-   - ✅ "Is [vague term] quantified/clarified with specific criteria?"
-   - ✅ "Are requirements consistent between [section A] and [section B]?"
-   - ✅ "Can [requirement] be objectively measured/verified?"
-   - ✅ "Are [edge cases/scenarios] addressed in requirements?"
-   - ✅ "Does the spec define [missing aspect]?"
+   ** REQUIRED PATTERNS** - These test requirements quality:
+   -  "Are [requirement type] defined/specified/documented for [scenario]?"
+   -  "Is [vague term] quantified/clarified with specific criteria?"
+   -  "Are requirements consistent between [section A] and [section B]?"
+   -  "Can [requirement] be objectively measured/verified?"
+   -  "Are [edge cases/scenarios] addressed in requirements?"
+   -  "Does the spec define [missing aspect]?"
 
-6. **Structure Reference**: Generate the checklist following the canonical template in `.specify/templates/checklist-template.md` for title, meta section, category headings, and ID formatting. If template is unavailable, use: H1 title, purpose/created meta lines, `##` category sections containing `- [ ] CHK### <requirement item>` lines with globally incrementing IDs starting at CHK001.
+6. **Generate Checklist from Template**: Load `.specify/templates/checklist-template.md` and preserve its EXACT structure:
+
+   **Template Preservation**:
+   - Preserve EXACT structure from checklist-template.md including:
+     -  H1 title with feature name
+     -  Metadata fields (Purpose, Created, Feature, Status)
+     -  Section headers with UPPERCASE names
+     -  Category sections for checklist items
+     -  Priority tag examples and descriptions
+     -  Markdown formatting (tables, lists, checkboxes)
+   - Replace ONLY placeholder content ([BRACKETS], example items)
+   - Keep all structural elements unchanged
+
+   **Content Generation** - The generated checklist must include:
+
+   a. **Metadata Section** (H1 title + metadata):
+      ```markdown
+      # [Checklist Type] Checklist: [FEATURE NAME]
+
+      **Purpose**: [Brief description of what this checklist validates]
+      **Created**: [DATE]
+      **Feature**: [Link to spec.md]
+      **Status**: [Draft | In Progress | Completed]
+      ```
+
+   b. **Links Section** (generate after metadata):
+      ```markdown
+      ##  LINKS
+
+      ### Related Documents
+      - **Specification**: [Link to spec.md in FEATURE_DIR]
+      - **Implementation Plan**: [Link to plan.md in FEATURE_DIR if exists]
+      - **Task List**: [Link to tasks.md in FEATURE_DIR if exists]
+      - **Related Checklists**: [Links to other checklists in /checklists if exist]
+      ```
+
+   c. **Category Sections** (checklist items grouped by quality dimension)
+
+   d. **Usage Notes Section** (generate after all checklist items):
+      ```markdown
+      ## USAGE NOTES
+
+      ### Checking Items Off
+      - Mark completed items: `[x]`
+      - Add comments or findings inline
+      - Link to relevant resources or documentation
+
+      ### Priority Tags
+      - **[P0]**: Critical - blocks launch/deployment
+      - **[P1]**: High - needed for quality but not blocking
+      - **[P2]**: Medium - nice to have, can be deferred
+
+      ### Optional Fields
+      - **Owner**: [Name] - Who is responsible for this item
+      - **Evidence**: [Link] - Link to proof of completion (test results, PR, etc.)
+      - **Status**: [Done | Blocked | In Progress] - Current status
+
+      ### Example With Optional Fields
+      \`\`\`markdown
+      - [x] CHK001 [P0] Are authentication requirements specified? | Owner: Alice | Evidence: [Spec §NFR-S01] | Status: Done
+      \`\`\`
+
+      ### Numbering
+      - Use CHK### format for easy reference
+      - Items numbered sequentially for traceability
+      - Keep numbering consistent when exporting or sharing
+      ```
 
 7. **Report**: Output full path to created checklist, item count, and remind user that each run creates a new file. Summarize:
+   - Checklist type and filename
    - Focus areas selected
+   - Total item count
+   - **Priority distribution**:
+     - P0 (Critical): X items
+     - P1 (High): Y items
+     - P2 (Medium): Z items
+   - **Template sections generated**:
+     -  Metadata (purpose, date, status)
+     -  Links (spec, plan, tasks, related checklists)
+     -  Checklist items (with priority tags and traceability)
+     -  Usage Notes (priorities, optional fields, examples)
+   - Traceability: X% of items include spec references (target: ≥80%)
    - Depth level
    - Actor/timing
    - Any explicit user-specified must-have items incorporated
+   - Next: Review checklist and use to validate requirements quality
 
 **Important**: Each `/speckit.checklist` command invocation creates a checklist file using short, descriptive names unless file already exists. This allows:
 
@@ -225,12 +334,12 @@ To avoid clutter, use descriptive types and clean up obsolete checklists when do
 
 Sample items (testing the requirements, NOT the implementation):
 
-- "Are visual hierarchy requirements defined with measurable criteria? [Clarity, Spec §FR-1]"
-- "Is the number and positioning of UI elements explicitly specified? [Completeness, Spec §FR-1]"
-- "Are interaction state requirements (hover, focus, active) consistently defined? [Consistency]"
-- "Are accessibility requirements specified for all interactive elements? [Coverage, Gap]"
-- "Is fallback behavior defined when images fail to load? [Edge Case, Gap]"
-- "Can 'prominent display' be objectively measured? [Measurability, Spec §FR-4]"
+- `- [ ] CHK001 [P0] Are accessibility requirements specified for all interactive elements? [Coverage, Gap]`
+- `- [ ] CHK002 [P1] Are visual hierarchy requirements defined with measurable criteria? [Clarity, Spec §FR-1]`
+- `- [ ] CHK003 [P1] Is the number and positioning of UI elements explicitly specified? [Completeness, Spec §FR-1]`
+- `- [ ] CHK004 [P1] Are interaction state requirements (hover, focus, active) consistently defined? [Consistency]`
+- `- [ ] CHK005 [P2] Is fallback behavior defined when images fail to load? [Edge Case, Gap]`
+- `- [ ] CHK006 [P1] Can 'prominent display' be objectively measured? [Measurability, Spec §FR-4]`
 
 **API Requirements Quality:** `api.md`
 
@@ -264,7 +373,7 @@ Sample items:
 
 ## Anti-Examples: What NOT To Do
 
-**❌ WRONG - These test implementation, not requirements:**
+** WRONG - These test implementation, not requirements:**
 
 ```markdown
 - [ ] CHK001 - Verify landing page displays 3 episode cards [Spec §FR-001]
@@ -273,7 +382,7 @@ Sample items:
 - [ ] CHK004 - Check that related episodes section shows 3-5 items [Spec §FR-005]
 ```
 
-**✅ CORRECT - These test requirements quality:**
+** CORRECT - These test requirements quality:**
 
 ```markdown
 - [ ] CHK001 - Are the number and layout of featured episodes explicitly specified? [Completeness, Spec §FR-001]

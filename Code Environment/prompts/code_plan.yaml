@@ -17,12 +17,11 @@ operating_mode:
 # USER INPUTS
 # ─────────────────────────────────────────────────────────────────
 user_inputs:
-  use_worktree: |
-    [USE_WORKTREE]
+  git_branch: |
+    [GIT_BRANCH]
     
-    Enable isolated worktree for planning work (optional).
-    - true: Create isolated workspace for complex planning
-    - false: Work in current directory (default, fine for most planning)
+    Git branch name for the work. Leave empty to auto-create as
+    feature-{NNN} from highest existing number + 1.
   
   target_document: |
     [TARGET_DOCUMENT]
@@ -69,13 +68,8 @@ user_inputs:
 # FIELD HANDLING
 # ─────────────────────────────────────────────────────────────────
 field_handling:
-  use_worktree:
-    type: boolean
-    default: false  # Optional isolation for planning work
-    note: "Enable for complex planning requiring isolation. Most planning work fine on main branch."
-
   defaults:
-    use_worktree_empty: false
+    git_branch_empty: "Auto-create feature-{NNN} from highest +001"
     target_document_empty: "/specs"
     context_empty: "Infer from [REQUEST]"
     complexity_empty: "standard"
@@ -131,6 +125,7 @@ planning_areas:
 workflow:
   step_1_initialization:
     input_source: USER_INPUTS_SECTION_ABOVE
+    git_branch: "[GIT_BRANCH] → auto-create if empty"
     target_document: "[TARGET_DOCUMENT] → apply defaults"
     context: "[CONTEXT] → use for agent context"
     complexity: "[COMPLEXITY] → apply policy"
@@ -145,25 +140,7 @@ workflow:
       - planning_configuration
       - plan_filename: "[TARGET_DOCUMENT]/plan-[slug]-[YYYYMMDD-HHMMSS].md"
 
-  step_2_workspace_setup:
-    condition: use_worktree == true
-    action: Create isolated worktree via git-worktrees skill
-    strategy: main_temp  # Always main_temp for code workflows
-    description: |
-      Create isolated workspace for planning work (optional).
-      Allows developing complex plans in isolation.
-      Work happens in .worktrees/plan-{timestamp} on temp/plan-{timestamp} branch.
-    inputs:
-      task_description: derived_from_request
-      branch_strategy: main_temp
-    outputs:
-      worktree_path: absolute_path
-      git_branch: temp/plan-{timestamp}
-    note: |
-      If use_worktree=true: Create worktree for isolated planning work
-      If use_worktree=false: Skip, work in current directory
-
-  step_3_comprehensive_planning:
+  step_2_comprehensive_planning:
     description: Plan from all critical perspectives
     purpose: Create complete project plan covering all aspects
     
@@ -204,7 +181,7 @@ workflow:
         type: markdown
         sections: [completeness_check, feasibility_assessment, risk_matrix, identified_gaps]
 
-  step_4_synthesis_and_integration:
+  step_3_synthesis_and_integration:
     input: comprehensive_planning_from_step_2
     action: Synthesize all planning perspectives into cohesive plan
     purpose: Create integrated project roadmap
@@ -221,8 +198,8 @@ workflow:
 
     output: integrated_planning_guidance
 
-  step_5_finalization:
-    input: integrated_plan_from_step_4
+  step_4_finalization:
+    input: integrated_plan_from_step_3
     action: Create single consolidated markdown plan document
     
     process:
@@ -268,7 +245,7 @@ workflow:
         - synthesis_notes: integration_highlights
         - next_steps: immediate_actions
 
-  step_6_save_context:
+  step_5_save_context:
     action: Save planning conversation context
     invocation: Skill(skill: "save-context")
     description: |
@@ -284,25 +261,6 @@ workflow:
     note: |
       Context saved alongside plan for complete record.
       Captures all planning outputs and synthesis process.
-
-  step_7_integration_and_cleanup:
-    condition: use_worktree == true
-    action: Integrate plan and cleanup worktree
-    strategy: main_temp  # Always main_temp for code workflows
-    description: |
-      After successful plan creation, integrate changes back to main.
-      Fast-forward merge ensures clean integration.
-      Cleanup removes temporary plan branch and worktree.
-    steps:
-      - verify_worktree_clean
-      - return_to_main_repo
-      - checkout_main_and_update
-      - merge_temp_branch_fast_forward_only
-      - delete_temp_branch
-      - remove_worktree
-    note: |
-      If use_worktree=true: Integrate plan to main and cleanup
-      If use_worktree=false: Skip (already working on main)
 
 # ─────────────────────────────────────────────────────────────────
 # OUTPUT FORMAT

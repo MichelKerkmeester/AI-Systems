@@ -4,7 +4,7 @@ Quick documentation for trivial code changes (<10 LOC) that require minimal over
 
 ---
 
-## 1. 📄 METADATA
+## 1. METADATA
 
 - **Date**: [YYYY-MM-DD]
 - **Type**: [Bug Fix | Update | Refactor | Documentation | Feature | Security | Performance]
@@ -13,7 +13,7 @@ Quick documentation for trivial code changes (<10 LOC) that require minimal over
 
 ---
 
-## 2. 🎯 CHANGE DESCRIPTION
+## 2. CHANGE DESCRIPTION
 
 [1-2 sentences describing what was changed]
 
@@ -31,26 +31,26 @@ Quick documentation for trivial code changes (<10 LOC) that require minimal over
 
 ---
 
-## 3. 📝 FILES MODIFIED
+## 3. FILES MODIFIED
 
 - `path/to/file1.ext` - [Brief description of change]
 - `path/to/file2.ext` - [Brief description of change]
 
 ---
 
-## 4. 💭 REASON FOR CHANGE
+## 4. REASON FOR CHANGE
 
 [Brief explanation of why this change was necessary]
 
 ---
 
-## 5. 🔗 RELATED ISSUES
+## 5. RELATED ISSUES
 
 - [Link to issue/ticket if applicable, or "N/A"]
 
 ---
 
-## 6. ✅ TESTING PERFORMED
+## 6. TESTING PERFORMED
 
 - [ ] Manual verification in [environment]
 - [ ] No regressions observed
@@ -58,13 +58,13 @@ Quick documentation for trivial code changes (<10 LOC) that require minimal over
 
 ---
 
-## 7. 📌 NOTES
+## 7. NOTES
 
 [Any additional context or notes for future reference]
 
 ---
 
-## ⚠️ ESCALATION TO LEVEL 1
+## ESCALATION TO LEVEL 1
 
 **Upgrade to `concise-spec-template.md` if:**
 - Change exceeds 10 LOC

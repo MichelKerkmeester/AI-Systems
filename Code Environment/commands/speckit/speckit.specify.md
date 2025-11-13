@@ -23,10 +23,10 @@ Given that feature description, do this:
    - Preserve technical terms and acronyms (OAuth2, API, JWT, etc.)
    - Keep it concise but descriptive enough to understand the feature at a glance
    - Examples:
-     - "I want to add user authentication" → "user-auth"
-     - "Implement OAuth2 integration for the API" → "oauth2-api-integration"
-     - "Create a dashboard for analytics" → "analytics-dashboard"
-     - "Fix payment processing timeout bug" → "fix-payment-timeout"
+     - "I want to add user authentication" -> "user-auth"
+     - "Implement OAuth2 integration for the API" -> "oauth2-api-integration"
+     - "Create a dashboard for analytics" -> "analytics-dashboard"
+     - "Fix payment processing timeout bug" -> "fix-payment-timeout"
 
 2. **Check for existing branches before creating new one**:
    
@@ -59,7 +59,49 @@ Given that feature description, do this:
    - The JSON output will contain BRANCH_NAME and SPEC_FILE paths
    - For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot")
 
-3. Load `.specify/templates/spec-template.md` to understand required sections.
+3. **Estimate Complexity and Select Template Level**:
+
+   Analyze the feature description to determine appropriate documentation level:
+
+   **Level 0 (Trivial)** - Use `concise-readme-template.md`:
+   - Single file modification
+   - < 10 lines of code
+   - No architecture impact
+   - Examples: typo fix, constant update, simple CSS tweak
+
+   **Level 1 (Simple)** - Use `concise-spec-template.md`:
+   - Simple, isolated feature
+   - < 100 lines of code
+   - Single component/module
+   - No complex dependencies
+   - Examples: add contact form, new UI component, simple API endpoint
+
+   **Level 2 (Complex)** - Use `spec-template.md`:
+   - Complex feature requiring coordination
+   - ≥ 100 lines of code
+   - Multiple components/systems
+   - User stories needed
+   - Formal requirements tracking needed
+   - Examples: authentication system, payment integration, multi-step workflow
+
+   **Estimation Criteria** (use to determine level):
+   - Count of systems/components affected
+   - Number of user personas/workflows
+   - Data model complexity (entities, relationships)
+   - Integration points (APIs, services)
+   - Security/compliance requirements
+
+   **Selection Logic**:
+   ```
+   IF (single file AND simple change AND no architecture):
+     level = 0
+   ELSE IF (< 100 LOC AND single component AND limited scope):
+     level = 1
+   ELSE:
+     level = 2
+   ```
+
+   Load the selected template and use its structure for generation.
 
 4. Follow this execution flow:
 
@@ -87,7 +129,86 @@ Given that feature description, do this:
     7. Identify Key Entities (if data involved)
     8. Return: SUCCESS (spec ready for planning)
 
-5. Write the specification to SPEC_FILE using the template structure, replacing placeholders with concrete details derived from the feature description (arguments) while preserving section order and headings.
+5. **Generate Specification from Template** - Load the selected template file and use it as the EXACT structure for output:
+
+   **Template Loading**:
+   - Load `.specify/templates/spec-template.md` (Level 2) OR `.specify/templates/concise-spec-template.md` (Level 1) OR `.specify/templates/concise-readme-template.md` (Level 0)
+   - Preserve EXACT structure including:
+     -  Section headers with UPPERCASE names
+     -  HTML comment blocks (keep guidance comments as-is)
+     -  Metadata structure and fields
+     -  Section numbering and subsections
+     -  Markdown formatting (tables, lists, emphasis)
+
+   **Content Generation**:
+   - Replace ONLY the placeholder content (text in [BRACKETS], example values, generic descriptions)
+   - Keep all structural elements unchanged (headers, comments, formatting)
+   - Fill in specific values from feature description in $ARGUMENTS
+   - Generate concrete examples based on feature context
+
+   **For Level 2 (spec-template.md), MUST include these mandatory sections**:
+
+   a. **Traceability Mapping** (§4, after Functional Requirements):
+      ```markdown
+      ### Traceability Mapping
+      Map User Stories -> Functional Requirements
+
+      | User Story | Related FRs |
+      |------------|-------------|
+      | Story 1 - [Title] | FR-001, FR-003 |
+      | Story 2 - [Title] | FR-002, FR-004 |
+      ```
+      - Map each user story to its functional requirements
+      - Ensure all FRs are traced to at least one story
+      - Identify shared FRs across multiple stories
+
+   b. **Risk Matrix** (§8, Dependencies & Risks section):
+      ```markdown
+      ### Risk Assessment
+
+      **Risk Matrix** (MANDATORY for Level 2+):
+
+      | Risk ID | Description | Impact | Likelihood | Mitigation Strategy | Owner |
+      |---------|-------------|--------|------------|---------------------|-------|
+      | R-001 | [Risk description] | High/Med/Low | High/Med/Low | [Mitigation plan] | [Name] |
+      | R-002 | [Risk description] | High/Med/Low | High/Med/Low | [Mitigation plan] | [Name] |
+      ```
+      - Minimum 2 risks required for Level 2
+      - Identify technical, security, and operational risks
+      - Include impact and likelihood assessment
+      - Document mitigation strategies
+
+   c. **Rollback Plan** (§8, after Risk Matrix):
+      ```markdown
+      ### Rollback Plan
+
+      - **Rollback Trigger**: [Conditions that require rollback]
+      - **Rollback Procedure**: [Step-by-step rollback process]
+      - **Data Migration Reversal**: [If applicable]
+      ```
+      - Define rollback triggers (error rate, critical bugs, etc.)
+      - Document step-by-step rollback procedure
+      - Address data migration reversal if state changes occur
+
+   d. **Constitution Check** (§1, in Assumptions subsection):
+      ```markdown
+      ### Assumptions
+
+      **Constitution Compliance**:
+      - This feature aligns with constitution principles: [reference .specify/memory/constitution.md]
+      - Complexity justification: [if adding new patterns/projects/abstractions]
+      ```
+      - Reference constitution for complexity tracking
+      - Justify any complexity increases
+      - Document simpler alternatives considered
+
+   **For Level 1 (concise-spec-template.md), include**:
+   - All sections from template (Metadata, Objective, What Changed, Why, Testing, Dependencies, Success Criteria)
+   - Escalation guidance (when to upgrade to Level 2)
+
+   **For Level 0 (concise-readme-template.md), include**:
+   - Minimal sections (Metadata, Change Description, Files Modified, Reason, Testing, Notes)
+   - Escalation guidance (when to upgrade to Level 1)
 
 6. **Specification Quality Validation**: After writing the initial spec, validate it against quality criteria:
 
@@ -108,7 +229,7 @@ Given that feature description, do this:
       - [ ] All mandatory sections completed
       
       ## Requirement Completeness
-      
+
       - [ ] No [NEEDS CLARIFICATION] markers remain
       - [ ] Requirements are testable and unambiguous
       - [ ] Success criteria are measurable
@@ -117,9 +238,16 @@ Given that feature description, do this:
       - [ ] Edge cases are identified
       - [ ] Scope is clearly bounded
       - [ ] Dependencies and assumptions identified
-      
+
+      ## Level 2 Mandatory Sections (if Level 2 selected)
+
+      - [ ] Traceability Mapping table present (User Stories -> FRs)
+      - [ ] Risk Matrix present (minimum 2 risks with impact/likelihood/mitigation)
+      - [ ] Rollback Plan section present (trigger, procedure, data reversal)
+      - [ ] Constitution Check reference in Assumptions
+
       ## Feature Readiness
-      
+
       - [ ] All functional requirements have clear acceptance criteria
       - [ ] User scenarios cover primary flows
       - [ ] Feature meets measurable outcomes defined in Success Criteria
@@ -181,7 +309,44 @@ Given that feature description, do this:
 
    d. **Update Checklist**: After each validation iteration, update the checklist file with current pass/fail status
 
-7. Report completion with branch name, spec file path, checklist results, and readiness for the next phase (`/speckit.clarify` or `/speckit.plan`).
+7. Report completion with:
+   - **Template Level Selected**: Level 0/1/2 (with reasoning)
+   - **Template Used**: Path to template file
+   - **Branch Name**: Feature branch created
+   - **Spec File Path**: Path to generated spec.md
+   - **Mandatory Sections** (Level 2 only):
+     -  Traceability Mapping (User Stories -> FRs)
+     -  Risk Matrix (minimum 2 risks)
+     -  Rollback Plan
+     -  Constitution Check
+   - **Checklist Results**: Pass/fail status from requirements.md validation
+   - **Next Phase**: Recommend `/speckit.clarify` if clarifications needed, or `/speckit.plan` if ready
+
+   **Example Report**:
+   ```
+    Specification Complete
+
+    Template Selection:
+   - Level: 2 (Complex Feature)
+   - Reasoning: Multiple components (auth, API, database), >100 LOC estimated
+   - Template: .specify/templates/spec-template.md
+
+    Artifacts Created:
+   - Branch: 029-user-authentication
+   - Spec: /specs/029-user-authentication/spec.md
+
+    Mandatory Sections (Level 2):
+   -  Traceability Mapping: 3 user stories mapped to 8 FRs
+   -  Risk Matrix: 4 risks identified (2 High, 2 Medium)
+   -  Rollback Plan: Defined with triggers and procedures
+   -  Constitution Check: Included in Assumptions
+
+    Quality Validation:
+   - Requirements Checklist: checklists/requirements.md (15 items)
+   - Status: 2 clarifications needed (see spec.md)
+
+   Next: Run /speckit.clarify to resolve ambiguities, then /speckit.plan
+   ```
 
 **NOTE:** The script creates and checks out the new branch and initializes the spec file before writing.
 

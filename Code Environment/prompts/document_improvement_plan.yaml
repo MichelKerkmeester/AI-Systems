@@ -50,6 +50,12 @@ constraints:
 # USER INPUTS
 # ─────────────────────────────────────────────────────────────────
 user_inputs:
+  git_branch: |
+    [GIT_BRANCH]
+    
+    Git branch name for the work. Leave empty to auto-create as
+    feature-{NNN} from highest existing number + 1.
+  
   target_document: |
     [TARGET_DOCUMENT]
     
@@ -102,6 +108,7 @@ user_inputs:
 # ─────────────────────────────────────────────────────────────────
 field_handling:
   defaults:
+    git_branch_empty: "Auto-create feature-{NNN} from highest +001"
     target_document_empty: "ERROR: TARGET_DOCUMENT is required"
     context_empty: "Infer enhancement opportunities from TARGET_DOCUMENT alone using best practices"
     complexity_empty: "standard"
@@ -170,6 +177,7 @@ analysis_areas:
 workflow:
   step_1_initialization:
     input_source: USER_INPUTS_SECTION_ABOVE
+    git_branch: "[GIT_BRANCH] → auto-create if empty"
     target_document: "[TARGET_DOCUMENT] → document to analyze"
     context: "[CONTEXT] → extract rules, constraints, style guides"
     complexity: "[COMPLEXITY] → apply policy"

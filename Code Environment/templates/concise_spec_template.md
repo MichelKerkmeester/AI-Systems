@@ -4,7 +4,7 @@ Concise specification for simple, isolated changes (<100 LOC) requiring focused 
 
 ---
 
-## 1. 📄 METADATA
+## 1. METADATA
 
 - **Date**: [YYYY-MM-DD]
 - **Type**: [Feature | Bug Fix | Enhancement | Refactor | Security | Performance]
@@ -14,7 +14,7 @@ Concise specification for simple, isolated changes (<100 LOC) requiring focused 
 
 ---
 
-## 2. 🎯 OBJECTIVE
+## 2. OBJECTIVE
 
 [1-2 sentences describing the purpose and outcome of this change in plain language]
 
@@ -26,7 +26,7 @@ Concise specification for simple, isolated changes (<100 LOC) requiring focused 
 
 ---
 
-## 3. 📝 WHAT CHANGED
+## 3. WHAT CHANGED
 
 ### Modified Files
 
@@ -45,7 +45,7 @@ Concise specification for simple, isolated changes (<100 LOC) requiring focused 
 
 ---
 
-## 4. 🤔 WHY
+## 4. WHY
 
 ### Problem Statement
 [What problem does this solve? What was broken or missing?]
@@ -55,7 +55,7 @@ Concise specification for simple, isolated changes (<100 LOC) requiring focused 
 
 ---
 
-## 5. 🧪 TESTING PERFORMED
+## 5. TESTING PERFORMED
 
 ### Test Cases
 
@@ -76,7 +76,7 @@ Concise specification for simple, isolated changes (<100 LOC) requiring focused 
 
 ---
 
-## 6. 🔗 DEPENDENCIES
+## 6. DEPENDENCIES
 
 ### Affected Systems/Components
 
@@ -92,7 +92,7 @@ Concise specification for simple, isolated changes (<100 LOC) requiring focused 
 
 ---
 
-## 7. 📏 SUCCESS CRITERIA
+## 7. SUCCESS CRITERIA
 
 - [ ] [Specific success criterion 1]
 - [ ] [Specific success criterion 2]
@@ -100,7 +100,7 @@ Concise specification for simple, isolated changes (<100 LOC) requiring focused 
 
 ---
 
-## 8. ⚠️ KNOWN ISSUES / LIMITATIONS
+## 8. KNOWN ISSUES / LIMITATIONS
 
 [List any known issues, limitations, or technical debt created]
 
@@ -108,7 +108,7 @@ Concise specification for simple, isolated changes (<100 LOC) requiring focused 
 
 ---
 
-## 9. 📎 REFERENCES
+## 9. REFERENCES
 
 - **Related Issue**: [Link or "N/A"]
 - **Related PR**: [Link or "N/A"]
@@ -117,7 +117,7 @@ Concise specification for simple, isolated changes (<100 LOC) requiring focused 
 
 ---
 
-## 10. 🔮 FUTURE CONSIDERATIONS
+## 10. FUTURE CONSIDERATIONS
 
 [Any follow-up work needed or future enhancements to consider]
 
@@ -125,7 +125,7 @@ Concise specification for simple, isolated changes (<100 LOC) requiring focused 
 
 ---
 
-## ⚠️ ESCALATION TO LEVEL 2
+## ESCALATION TO LEVEL 2
 
 **Upgrade to full spec (`spec-template.md`) + plan (`plan-template.md`) if:**
 

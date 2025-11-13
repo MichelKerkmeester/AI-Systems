@@ -4,7 +4,7 @@ Architecture Decision Record (ADR) documenting a significant technical decision 
 
 ---
 
-## 1. 📄 METADATA
+## 1. METADATA
 
 - **Decision ID**: ADR-[###]
 - **Status**: [Proposed | Accepted | Deprecated | Superseded]
@@ -16,7 +16,7 @@ Architecture Decision Record (ADR) documenting a significant technical decision 
 
 ---
 
-## 2. 🎯 CONTEXT
+## 2. CONTEXT
 
 ### Problem Statement
 [What is the technical problem we are trying to solve? What forces are at play?]
@@ -37,7 +37,7 @@ Architecture Decision Record (ADR) documenting a significant technical decision 
 
 ---
 
-## 3. ✅ DECISION
+## 3. DECISION
 
 ### Summary
 [One-sentence description of the decision made]
@@ -56,7 +56,7 @@ Architecture Decision Record (ADR) documenting a significant technical decision 
 
 ---
 
-## 4. 🔍 ALTERNATIVES CONSIDERED
+## 4. ALTERNATIVES CONSIDERED
 
 ### Option 1: [CHOSEN] [Option Name]
 
@@ -118,16 +118,16 @@ Architecture Decision Record (ADR) documenting a significant technical decision 
 
 | Criterion | Weight | Option 1 | Option 2 | Option 3 |
 |-----------|--------|----------|----------|----------|
-| Performance | High | ✅ Excellent | ⚠️ Moderate | ❌ Poor |
-| Maintainability | High | ✅ Good | ✅ Good | ⚠️ Moderate |
-| Cost | Medium | ✅ Low | ⚠️ Medium | ❌ High |
-| Time to implement | Medium | ✅ Fast | ⚠️ Moderate | ❌ Slow |
-| Scalability | High | ✅ Excellent | ⚠️ Moderate | ✅ Good |
+| Performance | High | Excellent | Moderate | Poor |
+| Maintainability | High | Good | Good | Moderate |
+| Cost | Medium | Low | Medium | High |
+| Time to implement | Medium | Fast | Moderate | Slow |
+| Scalability | High | Excellent | Moderate | Good |
 | **Weighted Score** | - | **[X/10]** | [Y/10] | [Z/10] |
 
 ---
 
-## 5. 🎭 CONSEQUENCES
+## 5. CONSEQUENCES
 
 ### Positive Consequences
 - [Positive outcome 1]
@@ -152,7 +152,7 @@ Architecture Decision Record (ADR) documenting a significant technical decision 
 
 ---
 
-## 6. 📊 IMPACT ASSESSMENT
+## 6. IMPACT ASSESSMENT
 
 ### Systems Affected
 - [System/component 1] - [How it's affected]
@@ -174,7 +174,7 @@ Architecture Decision Record (ADR) documenting a significant technical decision 
 
 ---
 
-## 7. ⏱️ TIMELINE
+## 7. TIMELINE
 
 - **Decision Made**: [Date]
 - **Implementation Start**: [Date]
@@ -183,7 +183,7 @@ Architecture Decision Record (ADR) documenting a significant technical decision 
 
 ---
 
-## 8. 🔗 REFERENCES
+## 8. REFERENCES
 
 ### Related Documents
 - **Feature Specification**: [Link to spec.md]
@@ -204,15 +204,15 @@ Architecture Decision Record (ADR) documenting a significant technical decision 
 
 ---
 
-## 9. ✍️ APPROVAL & SIGN-OFF
+## 9. APPROVAL & SIGN-OFF
 
 ### Approvers
 
 | Name | Role | Approved | Date | Comments |
 |------|------|----------|------|----------|
-| [Name] | [Role] | ✅ Yes / ❌ No | [Date] | [Comments] |
-| [Name] | [Role] | ✅ Yes / ❌ No | [Date] | [Comments] |
-| [Name] | [Role] | ✅ Yes / ❌ No | [Date] | [Comments] |
+| [Name] | [Role] | Yes / No | [Date] | [Comments] |
+| [Name] | [Role] | Yes / No | [Date] | [Comments] |
+| [Name] | [Role] | Yes / No | [Date] | [Comments] |
 
 ### Status Changes
 
@@ -223,7 +223,7 @@ Architecture Decision Record (ADR) documenting a significant technical decision 
 
 ---
 
-## 10. 📝 UPDATES & AMENDMENTS
+## 10. UPDATES & AMENDMENTS
 
 ### Amendment History
 

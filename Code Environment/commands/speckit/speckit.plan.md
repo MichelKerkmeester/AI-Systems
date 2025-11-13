@@ -2,275 +2,176 @@
 description: Execute the implementation planning workflow using the plan template to generate design artifacts.
 ---
 
-# Implementation Planning
-
-Execute implementation planning workflow to generate design artifacts including research, data models, API contracts, and quickstart documentation.
-
----
-
-## 1. 📋 INPUTS
-
-### User Arguments
+## User Input
 
 ```text
 $ARGUMENTS
 ```
 
-**MUST consider user input before proceeding** (if not empty).
+You **MUST** consider the user input before proceeding (if not empty).
 
-### Setup Script Output
+## Outline
 
-**Command**: \`.specify/scripts/bash/setup-plan.sh --json\`
+1. **Setup**: Run `.specify/scripts/bash/setup-plan.sh --json` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-**Outputs**:
-- FEATURE_SPEC: Path to feature specification
-- IMPL_PLAN: Path to implementation plan
-- SPECS_DIR: Specifications directory
-- BRANCH: Current git branch
+2. **Load context**: Read FEATURE_SPEC and `.specify/memory/constitution.md`. Load IMPL_PLAN template from `.specify/templates/plan-template.md`.
 
-**Note**: For single quotes in args (e.g., "I'm Groot"), use escape syntax: \`'I'\\''m Groot'\` or double-quote: \`"I'm Groot"\`
+   **Template Preservation**:
+   - Preserve EXACT structure from plan-template.md including:
+     -  Section headers with UPPERCASE names
+     -  HTML comment blocks (keep guidance comments as-is)
+     -  Metadata structure and all fields
+     -  Section numbering (§1-§10) and subsections
+     -  Markdown formatting (tables, lists, code blocks)
+   - Replace ONLY placeholder content ([BRACKETS], NEEDS CLARIFICATION, example values)
+   - Keep all structural elements unchanged
 
----
+3. **Execute plan workflow**: Fill the template structure following this sequence:
+   - Fill Technical Context (mark unknowns as "NEEDS CLARIFICATION")
+   - Fill Constitution Check section from constitution
+   - Evaluate gates (ERROR if violations unjustified)
+   - Phase 0: Generate research.md (resolve all NEEDS CLARIFICATION)
+   - Phase 1: Generate data-model.md, contracts/, quickstart.md
+   - Phase 1: Update agent context by running the agent script
+   - Re-evaluate Constitution Check post-design
 
-## 2. 🚀 WORKFLOW
+4. **Stop and report**: Command ends after Phase 1 complete. Report:
+   - Branch name
+   - IMPL_PLAN path (plan.md)
+   - Generated artifacts:
+     - research.md (Phase 0)
+     - data-model.md (Phase 1)
+     - contracts/ directory (Phase 1)
+     - quickstart.md (Phase 1)
+   - Plan sections added:
+     -  Testing Strategy (§5)
+     -  Success Metrics (§6)
+     -  Risk Matrix (§7, imported from spec)
+     -  Dependencies (§8)
+     -  Communication & Review (§9)
+     -  Phases 2-4 outlines (§4)
+   - Template compliance: All plan-template.md sections present
+   - Next step: Run `/speckit.tasks` to generate implementation task breakdown
 
-### Step 1: Setup
+## Phases
 
-**Purpose**: Initialize planning environment and paths
+### Phase 0: Outline & Research
 
-**Actions**:
-1. Run \`.specify/scripts/bash/setup-plan.sh --json\` from repo root
-2. Parse JSON output for paths (FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH)
-3. Verify all paths are accessible
-
-**Validation**: \`setup_complete\`
-
-### Step 2: Load Context
-
-**Purpose**: Read feature spec and constitution
-
-**Actions**:
-1. Read FEATURE_SPEC file
-2. Read \`.specify/memory/constitution.md\`
-3. Load IMPL_PLAN template (already copied by setup script)
-4. Verify all context is loaded
-
-**Validation**: \`context_loaded\`
-
-### Step 3: Fill Technical Context
-
-**Purpose**: Document technical decisions and unknowns
-
-**Actions**:
-1. Fill Technical Context section in IMPL_PLAN
-2. Mark unknowns as "NEEDS CLARIFICATION"
-3. Fill Constitution Check section from constitution
-4. Evaluate gates (ERROR if violations unjustified)
-
-**Validation**: \`technical_context_filled\`
-
-### Step 4: Phase 0 - Outline & Research
-
-**Purpose**: Resolve all technical unknowns through research
-
-**Actions**:
-
-1. **Extract unknowns from Technical Context**:
-   - Each NEEDS CLARIFICATION → research task
-   - Each dependency → best practices task
-   - Each integration → patterns task
+1. **Extract unknowns from Technical Context** above:
+   - For each NEEDS CLARIFICATION -> research task
+   - For each dependency -> best practices task
+   - For each integration -> patterns task
 
 2. **Generate and dispatch research agents**:
-   \`\`\`text
+
+   ```text
    For each unknown in Technical Context:
      Task: "Research {unknown} for {feature context}"
    For each technology choice:
      Task: "Find best practices for {tech} in {domain}"
-   \`\`\`
+   ```
 
-3. **Consolidate findings in research.md**:
+3. **Consolidate findings** in `research.md` using format:
    - Decision: [what was chosen]
    - Rationale: [why chosen]
    - Alternatives considered: [what else evaluated]
 
-**Output**: \`research.md\` with all NEEDS CLARIFICATION resolved
+**Output**: research.md with all NEEDS CLARIFICATION resolved
 
-**Validation**: \`phase_0_complete\`
+### Phase 1: Design & Contracts
 
-### Step 5: Phase 1 - Design & Contracts
+**Prerequisites:** `research.md` complete
 
-**Purpose**: Generate data models, API contracts, and quickstart docs
-
-**Prerequisites**: \`research.md\` complete
-
-**Actions**:
-
-1. **Extract entities from feature spec → data-model.md**:
+1. **Extract entities from feature spec** -> `data-model.md`:
    - Entity name, fields, relationships
    - Validation rules from requirements
    - State transitions if applicable
 
-2. **Generate API contracts from functional requirements**:
-   - For each user action → endpoint
+2. **Generate API contracts** from functional requirements:
+   - For each user action -> endpoint
    - Use standard REST/GraphQL patterns
-   - Output OpenAPI/GraphQL schema to \`/contracts/\`
+   - Output OpenAPI/GraphQL schema to `/contracts/`
 
-3. **Update agent context**:
-   - Run \`.specify/scripts/bash/update-agent-context.sh\`
-   - Script auto-detects which AI agent is in use (Claude, Cursor, etc.)
-   - Updates appropriate agent-specific context file
-   - Adds only new technology from current plan
-   - Preserves manual additions between markers
+3. **Generate Testing Strategy** -> Add to `plan.md`:
+   - Load Technical Context from plan.md
+   - Detect language/framework from tech stack
+   - Generate test pyramid section:
+     ```
+            /\
+           /E2E\      <- Few, high-value end-to-end tests
+          /------\
+         /  INTEG \   <- More integration tests
+        /----------\
+       /   UNIT     \  <- Many unit tests (foundation)
+      /--------------\
+     ```
+   - Add test tool recommendations based on stack
+   - Define coverage targets (unit ≥70%, integration ≥60%, E2E ≥40%)
+   - Create CI quality gates checklist
 
-**Output**: \`data-model.md\`, \`/contracts/*\`, \`quickstart.md\`, agent-specific file
+4. **Generate Success Metrics** -> Add to `plan.md`:
+   - Load Success Criteria from spec.md
+   - Convert each criterion to measurable metric
+   - Create tables: Functional, Performance, Quality Metrics
+   - Add measurement methods for each
+   - Include target values and baselines
 
-**Validation**: \`phase_1_complete\`
+5. **Import Risk Matrix** -> Add to `plan.md`:
+   - Load Risk Assessment section from spec.md
+   - Copy Risk Matrix to plan.md §7
+   - Add implementation-specific mitigations
+   - Cross-reference rollback plan
 
-### Step 6: Re-evaluate Constitution Check
+6. **Generate Dependencies Tables** -> Add to `plan.md`:
+   - Scan spec.md for dependencies
+   - Categorize: Internal vs. External
+   - Add status tracking columns (Green/Yellow/Red)
+   - Include impact assessment
+   - Reference from Technical Context
 
-**Purpose**: Verify design aligns with constitution post-planning
+7. **Generate Communication & Review** -> Add to `plan.md`:
+   - Identify stakeholders from spec.md
+   - Define checkpoint cadence (standups, reviews, demos)
+   - List approval gates
+   - Add review schedule
 
-**Actions**:
-1. Review Constitution Check section
-2. Verify no violations introduced during planning
-3. Document any justified exceptions
+8. **Agent context update**:
+   - Run `.specify/scripts/bash/update-agent-context.sh opencode`
+   - These scripts detect which AI agent is in use
+   - Update the appropriate agent-specific context file
+   - Add only new technology from current plan
+   - Preserve manual additions between markers
 
-**Validation**: \`constitution_check_passed\`
+**Output**: data-model.md, /contracts/*, quickstart.md, Testing Strategy, Success Metrics, Risk Matrix, Dependencies, Communication sections in plan.md, agent-specific file
 
-### Step 7: Stop and Report
+### Phase 2-4: Implementation Phases Outline
 
-**Purpose**: Provide planning completion summary
+After Phase 1 complete, generate outline sections in plan.md for remaining implementation phases:
 
-**Report Includes**:
-- Current branch name
-- IMPL_PLAN path
-- Generated artifacts list:
-  - research.md
-  - data-model.md
-  - contracts/*
-  - quickstart.md
-  - agent context file
+**Phase 2: Core Implementation**
+- Goal: Implement primary user stories (extract from spec.md priorities P0, P1)
+- Deliverables: List key features from spec.md user stories
+- Owner: [Placeholder - team/individual]
+- Duration: [Estimate based on task count from user stories]
+- Parallel Tasks: Identify independent story implementations with [P] marker
 
-**Note**: Command ends after Phase 2 planning
+**Phase 3: Integration & Testing**
+- Goal: Integrate components, run full test suite
+- Deliverables: Integration tests passing, E2E tests passing, performance benchmarks met
+- Owner: [Placeholder]
+- Duration: [Estimate 20-30% of core implementation time]
+- Parallel Tasks: Independent test suites, documentation updates
 
-**Validation**: \`report_complete\`
+**Phase 4: Deployment & Monitoring**
+- Goal: Production deployment with observability
+- Deliverables: Production deployment complete, monitoring/alerting configured, documentation finalized
+- Owner: [Placeholder]
+- Duration: [Estimate 10-15% of core implementation time]
+- Parallel Tasks: Documentation finalization, monitoring setup
 
----
+**Note**: These are outline sections. Detailed task breakdown will be generated by `/speckit.tasks` command.
 
-## 3. 💡 EXAMPLES
+## Key rules
 
-### Example 1: Basic Planning
-
-\`\`\`bash
-/speckit.plan
-\`\`\`
-
-**Result**: Generates all Phase 0-1 artifacts
-
-### Example 2: With Context
-
-\`\`\`bash
-/speckit.plan "Focus on database schema design"
-\`\`\`
-
-**Result**: Emphasizes data model generation
-
----
-
-## 4. 📖 RULES
-
-### ALWAYS
-
-- Use absolute paths for all file operations
-- Run setup script from repo root
-- Parse JSON output for paths
-- Mark unknowns as "NEEDS CLARIFICATION"
-- Fill Constitution Check from constitution
-- Resolve all clarifications in Phase 0
-- Generate complete artifacts in Phase 1
-- Update agent context after design
-- Re-evaluate constitution compliance
-- Provide completion report
-
-### NEVER
-
-- Skip setup script execution
-- Leave unknowns unresolved after Phase 0
-- Generate contracts without feature spec
-- Omit agent context update
-- Skip constitution re-evaluation
-- Continue past Phase 1 (command stops here)
-
-### ESCALATE IF
-
-- Setup script fails
-- Gate violations detected
-- Constitution conflicts arise
-- Required paths inaccessible
-- Research cannot resolve unknowns
-- Agent context update fails
-
----
-
-## 5. 🎓 SUCCESS CRITERIA
-
-**Planning is successful when**:
-- ✅ Setup completes with valid paths
-- ✅ Technical Context fully documented
-- ✅ All NEEDS CLARIFICATION resolved
-- ✅ research.md generated with decisions
-- ✅ data-model.md created with entities
-- ✅ API contracts generated
-- ✅ quickstart.md created
-- ✅ Agent context updated
-- ✅ Constitution Check passes
-- ✅ Completion report provided
-
-**Quality Gates**:
-- No unresolved clarifications
-- No unjustified gate violations
-- All Phase 0-1 artifacts complete
-- Agent context properly updated
-
----
-
-## 6. 🔗 INTEGRATION POINTS
-
-### Related Commands
-
-- \`/speckit.specify\`: Creates feature spec (prerequisite)
-- \`/speckit.tasks\`: Uses plan artifacts (next step)
-- \`/speckit.implement\`: Executes implementation
-
-### Generated Artifacts
-
-- \`research.md\`: Technical decisions and rationale
-- \`data-model.md\`: Entity definitions and relationships
-- \`contracts/\`: API specifications
-- \`quickstart.md\`: Getting started documentation
-- Agent context file: Technology stack reference
-
-### Scripts Used
-
-- \`.specify/scripts/bash/setup-plan.sh\`: Initialize planning
-- \`.specify/scripts/bash/update-agent-context.sh\`: Update context
-
----
-
-## 7. ⚠️ COMMON MISTAKES
-
-**Skipping unknowns resolution**:
-- **Problem**: Leaving NEEDS CLARIFICATION in final plan
-- **Fix**: Complete Phase 0 research for all unknowns
-
-**Missing constitution check**:
-- **Problem**: Design violates project principles
-- **Fix**: Fill Constitution Check and address violations
-
-**Incomplete contracts**:
-- **Problem**: Not generating contracts for all user actions
-- **Fix**: Map each functional requirement to API endpoint
-
-**Agent context not updated**:
-- **Problem**: Agent doesn't know about new technology
-- **Fix**: Always run update-agent-context.sh after design
+- Use absolute paths
+- ERROR on gate failures or unresolved clarifications
