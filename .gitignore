@@ -21,6 +21,10 @@ lib/
 mcp_servers.json
 settings.local.json
 
+# Exception: Allow specific config files in Code Environment
+!Code Environment/mcp.json
+!Code Environment/settings.local.json
+
 # Working directories (ignored at all levels)
 context/
 design system/
