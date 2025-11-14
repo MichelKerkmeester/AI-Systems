@@ -1,6 +1,6 @@
 # Animation Strategy & Standards
 
-Defines our animation strategy across the project: CSS is the default for simple interactions; Anime.js is the only JavaScript animation library we use for sequences that CSS cannot express ergonomically.
+Defines our animation strategy across the project: CSS is the default for simple interactions; Motion.dev is the only JavaScript animation library we use for sequences that CSS cannot express ergonomically.
 
 This keeps payloads small, performance high, and behavior predictable.
 
@@ -27,14 +27,14 @@ This keeps payloads small, performance high, and behavior predictable.
 ### Primary Order (Use in Sequence)
 
 1. CSS transitions/keyframes — first choice for hover, focus, small reveals, and state changes
-2. Anime.js — used when we need programmatic control, in‑view triggers, or coordinated sequences
+2. Motion.dev — used when we need programmatic control, in‑view triggers, or coordinated sequences
 
 ### Quick Decision Tree
 
 ```
 Need animation?
 ├─> Can CSS express it (transform/opacity/clip/mask)? -> Use CSS
-└─> Requires sequencing/stagger/scroll/in‑view logic? -> Use Anime.js
+└─> Requires sequencing/stagger/scroll/in‑view logic? -> Use Motion.dev
 ```
 
 ---
@@ -56,11 +56,11 @@ Need animation?
 
 ---
 
-## 3. ⚙️ ANIME.JS INTEGRATION
+## 3. ⚙️ MOTION.DEV INTEGRATION
 
 ### How we load it
 
-We load Anime.js once, as an ES module, and expose it globally for components:
+We load Motion.dev once, as an ES module, and expose it globally for components:
 
 ```html
 <!-- src/0_html/global.html -->
@@ -73,7 +73,7 @@ We load Anime.js once, as an ES module, and expose it globally for components:
 ### Defensive loading in components
 
 ```javascript
-// CDN-safe pattern with Anime.js retry logic
+// CDN-safe pattern with Motion.dev retry logic
 (() => {
   const INIT_FLAG = '__animationComponentCdnInit';
   const INIT_DELAY_MS = 50;
@@ -108,7 +108,7 @@ We load Anime.js once, as an ES module, and expose it globally for components:
 })();
 ```
 
-**Note**: The CDN-safe guard-based pattern wraps the Anime.js retry logic. See [initialization_pattern.md](./initialization_pattern.md) for the complete pattern documentation.
+**Note**: The CDN-safe guard-based pattern wraps the Motion.dev retry logic. See [initialization_pattern.md](./initialization_pattern.md) for the complete pattern documentation.
 
 ### Parameters we standardize
 

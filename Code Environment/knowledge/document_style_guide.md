@@ -186,7 +186,7 @@ const userName = 'John';
 ```
 Need Animation?
 ├─> Can Webflow handle it? -> Use Webflow
-├─> Simple animation? -> Use Anime.js
+├─> Simple animation? -> Use Motion.dev
 └─> Complex (3D/morphing)? -> Use GSAP
 ```
 
