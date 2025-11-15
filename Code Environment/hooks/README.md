@@ -34,6 +34,7 @@ This directory contains hooks that automatically trigger during Claude Code oper
 - ✅ Hard-block enforcement of spec folders + template validation
 - ✅ Block dangerous Bash commands (security + performance)
 - ✅ Auto-fix markdown filenames to lowercase snake_case with condensed output
+- ✅ **NEW**: Debug trace output for semantic search hook (visible execution with timing)
 - ✅ **NEW**: C7score quality analysis for modified markdown files
 - ✅ **NEW**: Condensed hook output (~70% verbosity reduction)
 - ✅ **NEW**: Success indicators for validation passes
@@ -175,14 +176,25 @@ User Action
 - `.claude/knowledge/semantic_search_mcp.md` → Usage guidelines
 - MCP semantic search tools → Intent-based code discovery
 
-**Output Example**:
+**Debug Output**:
+- Shows execution trace: `🔍 [suggest-semantic-search.sh] START`
+- Shows completion with timing: `🔍 [suggest-semantic-search.sh] END (56ms)`
+- Output goes to stderr for visibility without interfering with stdout
+
+**Output Example** (when pattern matches):
 ```
+🔍 [suggest-semantic-search.sh] START
+
 💡 SEMANTIC SEARCH REMINDER:
   • semantic_search - Find code by what it does, not what it's called
   • Helpful for: locating implementations, understanding features
   📖 See: .claude/knowledge/semantic_search_mcp.md
   ⚠️  Note: CLI AI agents only (not IDE integrations)
+
+🔍 [suggest-semantic-search.sh] END (61ms)
 ```
+
+**Logs to**: `.claude/hooks/logs/performance.log` (execution timing)
 
 #### `enforce-markdown-strict.sh`
 **What it does**: Validates markdown files, blocks on critical violations, and provides C7score quality analysis

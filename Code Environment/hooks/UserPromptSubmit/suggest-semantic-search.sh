@@ -14,6 +14,9 @@ source "$SCRIPT_DIR/../lib/output-helpers.sh" || exit 0
 # Performance timing START
 START_TIME=$(date +%s%N)
 
+# Debug trace (visible when running)
+>&2 echo "🔍 [suggest-semantic-search.sh] START"
+
 # Read JSON input from stdin
 INPUT=$(cat)
 
@@ -91,6 +94,9 @@ fi
 END_TIME=$(date +%s%N)
 DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] suggest-semantic-search.sh ${DURATION}ms" >> "$HOOKS_DIR/logs/performance.log"
+
+# Debug trace (completion)
+>&2 echo "🔍 [suggest-semantic-search.sh] END (${DURATION}ms)"
 
 # Always allow the prompt to proceed
 exit 0
