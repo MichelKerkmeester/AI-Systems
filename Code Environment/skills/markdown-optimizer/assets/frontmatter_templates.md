@@ -4,7 +4,7 @@ Templates for adding missing YAML frontmatter to documents. Use these templates 
 
 ---
 
-## SKILL.md Frontmatter Template
+## 1. 📋 SKILL.MD FRONTMATTER TEMPLATE
 
 **Required Fields**: `name`, `description`, `allowed-tools`
 
@@ -47,7 +47,7 @@ allowed-tools: Read, Bash, Grep
 
 ---
 
-## Command Frontmatter Template
+## 2. 📝 COMMAND FRONTMATTER TEMPLATE
 
 **Required Fields**: `description`, `argument-hint`, `allowed-tools`
 
@@ -89,7 +89,7 @@ allowed-tools: Read, Write, Bash
 
 ---
 
-## Knowledge File Frontmatter
+## 3. 📚 KNOWLEDGE FILE FRONTMATTER
 
 **Rule**: Knowledge files should **NOT** have YAML frontmatter.
 
@@ -117,7 +117,7 @@ Content...
 
 ---
 
-## Spec File Frontmatter
+## 4. 📄 SPEC FILE FRONTMATTER
 
 **Rule**: Spec files should **NOT** have YAML frontmatter.
 
@@ -140,7 +140,7 @@ Brief introduction...
 
 ---
 
-## README.md Frontmatter
+## 5. 📖 README.MD FRONTMATTER
 
 **Rule**: README files follow universal rules only. No specific frontmatter requirements.
 
@@ -150,7 +150,7 @@ Brief introduction...
 
 ---
 
-## Frontmatter Validation Rules
+## 6. ✅ FRONTMATTER VALIDATION RULES
 
 ### Required Field Checks
 
@@ -195,7 +195,7 @@ grep "^allowed-tools:" file.md | grep -q "^allowed-tools: .\\+$"
 
 ---
 
-## Auto-Generation Guidelines
+## 7. 🤖 AUTO-GENERATION GUIDELINES
 
 ### When to Add Frontmatter
 
@@ -252,7 +252,7 @@ tools=$(grep -E "^(Read|Write|Edit|Bash|Grep)" file.md | cut -d' ' -f1 | sort -u
 
 ---
 
-## Interactive Frontmatter Addition
+## 8. 💬 INTERACTIVE FRONTMATTER ADDITION
 
 ### Approval Flow
 
@@ -305,7 +305,7 @@ Press Enter to keep default, or type new value.
 
 ---
 
-## Frontmatter Correction
+## 9. 🔧 FRONTMATTER CORRECTION
 
 ### Fixing Incomplete Frontmatter
 
@@ -360,7 +360,7 @@ allowed-tools: Read
 
 ---
 
-## Quick Reference
+## 10. 🎯 QUICK REFERENCE
 
 ### Frontmatter Decision Tree
 

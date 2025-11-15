@@ -1,0 +1,109 @@
+#!/bin/bash
+# ───────────────────────────────────────────────────────────────
+# FILE: markdown-optimizer
+# DESC: CLI wrapper for markdown optimization and validation
+# ───────────────────────────────────────────────────────────────
+
+set -euo pipefail
+
+# Get script directory (resolves symlinks)
+SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}" 2>/dev/null || echo "${BASH_SOURCE[0]}")")" && pwd)"
+ANALYZE_SCRIPT="$SCRIPT_DIR/scripts/analyze_docs.py"
+
+# Check Python3 availability
+if ! command -v python3 >/dev/null 2>&1; then
+    echo "Error: python3 not found. Install Python 3 to use markdown-optimizer." >&2
+    exit 1
+fi
+
+# Check if analyze script exists
+if [[ ! -f "$ANALYZE_SCRIPT" ]]; then
+    echo "Error: analyze_docs.py not found at $ANALYZE_SCRIPT" >&2
+    exit 1
+fi
+
+# Show usage
+show_usage() {
+    cat << 'EOF'
+markdown-optimizer - Document quality analysis and optimization
+
+USAGE:
+    markdown-optimizer [OPTIONS] <file.md>
+    markdown-optimizer --phase <phase> <file.md>
+
+OPTIONS:
+    --phase enforcement    Run Phase 1: Structure enforcement and analysis
+    --phase optimization   Run Phase 2: Content optimization (future)
+    --phase validation     Run Phase 3: Quality validation (future)
+    --help, -h             Show this help message
+
+EXAMPLES:
+    # Analyze a README file
+    markdown-optimizer README.md
+
+    # Run enforcement phase
+    markdown-optimizer --phase enforcement SKILL.md
+
+    # Check multiple files
+    find docs/ -name "*.md" -exec markdown-optimizer {} \;
+
+For full documentation, see:
+    .claude/skills/markdown-optimizer/SKILL.md
+    .claude/skills/markdown-optimizer/references/quick_reference.md
+EOF
+}
+
+# Parse command line
+case "${1:-}" in
+    --help|-h|help)
+        show_usage
+        exit 0
+        ;;
+    --phase)
+        if [[ $# -lt 3 ]]; then
+            echo "Error: --phase requires phase name and file path" >&2
+            echo "Usage: markdown-optimizer --phase <enforcement|optimization|validation> <file.md>" >&2
+            exit 1
+        fi
+
+        PHASE="$2"
+        shift 2
+
+        case "$PHASE" in
+            enforcement)
+                # Phase 1: Run analysis (current Python script functionality)
+                python3 "$ANALYZE_SCRIPT" "$@"
+                ;;
+            optimization)
+                echo "Phase 2 (optimization) not yet implemented." >&2
+                echo "Current: Use Phase 1 (enforcement) to identify issues" >&2
+                exit 1
+                ;;
+            validation)
+                echo "Phase 3 (validation) not yet implemented." >&2
+                echo "Current: Use Phase 1 (enforcement) to analyze quality" >&2
+                exit 1
+                ;;
+            *)
+                echo "Error: Unknown phase '$PHASE'" >&2
+                echo "Valid phases: enforcement, optimization, validation" >&2
+                exit 1
+                ;;
+        esac
+        ;;
+    --*)
+        echo "Error: Unknown option '$1'" >&2
+        echo "Try 'markdown-optimizer --help' for usage" >&2
+        exit 1
+        ;;
+    "")
+        echo "Error: No file specified" >&2
+        echo "Usage: markdown-optimizer <file.md>" >&2
+        echo "Try 'markdown-optimizer --help' for more information" >&2
+        exit 1
+        ;;
+    *)
+        # Direct file analysis (default behavior)
+        python3 "$ANALYZE_SCRIPT" "$@"
+        ;;
+esac

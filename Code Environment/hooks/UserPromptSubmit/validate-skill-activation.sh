@@ -29,6 +29,9 @@ fi
 
 # Load skill rules configuration
 SKILL_RULES="$(cd "$SCRIPT_DIR/../.." && pwd)/configs/skill-rules.json"
+PROJECT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || (cd "$SCRIPT_DIR/../.." && pwd))
+SPECS_DIR="$PROJECT_ROOT/specs"
+DOC_GUIDE="$PROJECT_ROOT/.claude/knowledge/conversation_documentation.md"
 
 if [ ! -f "$SKILL_RULES" ]; then
   # No rules file, silently allow
@@ -40,6 +43,12 @@ validate_json "$SKILL_RULES" || exit 0
 
 # Convert prompt to lowercase for case-insensitive matching
 PROMPT_LOWER=$(echo "$PROMPT" | tr '[:upper:]' '[:lower:]')
+DOC_SCOPE_INFO=$(estimate_documentation_scope "$PROMPT_LOWER")
+DOC_SCOPE_LEVEL=${DOC_SCOPE_INFO%%|*}
+DOC_SCOPE_REMAINDER=${DOC_SCOPE_INFO#*|}
+DOC_SCOPE_LOC=${DOC_SCOPE_REMAINDER%%|*}
+DOC_SCOPE_REASON=${DOC_SCOPE_INFO##*|}
+NEXT_SPEC_NUMBER=$(calculate_next_spec_number)
 
 # Array to store matched skills
 MATCHED_SKILLS=()
@@ -163,6 +172,138 @@ check_file_context() {
   return 1  # No match
 }
 
+estimate_documentation_scope() {
+  local text="$1"
+  local level=2
+  local loc=200
+  local reason="Feature or multi-file change"
+
+  if echo "$text" | grep -qiE "typo|misspell|spelling|grammar|whitespace"; then
+    level=0
+    loc=5
+    reason="Minor typo/whitespace adjustment"
+  elif echo "$text" | grep -qiE "rename|single file|small fix|docs only|readme"; then
+    level=1
+    loc=50
+    reason="Single-file or documentation-only update"
+  elif echo "$text" | grep -qiE "architecture|system|platform|rebuild|overhaul|multi-service|infra"; then
+    level=3
+    loc=600
+    reason="Architecture/system-wide change"
+  elif echo "$text" | grep -qiE "feature|component|integration|workflow|refactor|implement"; then
+    level=2
+    loc=200
+    reason="Feature implementation or refactor"
+  fi
+
+  echo "$level|$loc|$reason"
+}
+
+calculate_next_spec_number() {
+  if [ ! -d "$SPECS_DIR" ]; then
+    printf "%03d" 1
+    return
+  fi
+
+  local max=0
+  while IFS= read -r dir; do
+    local base=$(basename "$dir")
+    local num=${base%%-*}
+    if [[ "$num" =~ ^[0-9]+$ ]]; then
+      if ((10#$num > max)); then
+        max=$((10#$num))
+      fi
+    fi
+  done < <(find "$SPECS_DIR" -maxdepth 1 -mindepth 1 -type d -name "[0-9]*-*" 2>/dev/null)
+
+  printf "%03d" $((max + 1))
+}
+
+level_label() {
+  case "$1" in
+    0) echo "Level 0 (Minimal)" ;;
+    1) echo "Level 1 (Concise)" ;;
+    2) echo "Level 2 (Standard)" ;;
+    3) echo "Level 3 (Complete)" ;;
+  esac
+}
+
+documentation_time_for_level() {
+  case "$1" in
+    0) echo "≈5 minutes" ;;
+    1) echo "≈10 minutes" ;;
+    2) echo "≈20 minutes" ;;
+    3) echo "≈30 minutes" ;;
+  esac
+}
+
+print_required_template_commands() {
+  local level="$1"
+  local spec_number="$2"
+  case "$level" in
+    0)
+      echo "   cp .specify/templates/concise_readme_template.md specs/${spec_number}-your-feature-name/README.md"
+      ;;
+    1)
+      echo "   cp .specify/templates/concise_spec_template.md specs/${spec_number}-your-feature-name/spec.md"
+      ;;
+    2)
+      echo "   cp .specify/templates/spec_template.md specs/${spec_number}-your-feature-name/spec.md"
+      echo "   cp .specify/templates/plan_template.md specs/${spec_number}-your-feature-name/plan.md"
+      ;;
+    3)
+      echo "   /speckit.specify (auto-generates spec.md, plan.md, tasks.md, etc.)"
+      ;;
+  esac
+}
+
+print_optional_template_commands() {
+  local level="$1"
+  local spec_number="$2"
+  case "$level" in
+    1)
+      echo "   cp .specify/templates/checklist_template.md specs/${spec_number}-your-feature-name/checklist.md"
+      ;;
+    2)
+      echo "   cp .specify/templates/tasks_template.md specs/${spec_number}-your-feature-name/tasks.md"
+      echo "   cp .specify/templates/checklist_template.md specs/${spec_number}-your-feature-name/checklist.md"
+      ;;
+    3)
+      echo "   cp .specify/templates/tasks_template.md specs/${spec_number}-your-feature-name/tasks.md"
+      echo "   cp .specify/templates/checklist_template.md specs/${spec_number}-your-feature-name/checklist.md"
+      echo "   cp .specify/templates/decision_record_template.md specs/${spec_number}-your-feature-name/decision-record-topic.md"
+      echo "   cp .specify/templates/spike_template.md specs/${spec_number}-your-feature-name/spike-topic.md"
+      echo "   cp .specify/templates/retrospective_template.md specs/${spec_number}-your-feature-name/retrospective.md"
+      ;;
+  esac
+}
+
+print_conversation_doc_guidance() {
+  echo ""
+  echo "📊 Detected Intent: $DOC_SCOPE_REASON"
+  echo "📏 Estimated LOC: ~${DOC_SCOPE_LOC} lines"
+  echo "📋 Recommended Level: $(level_label "$DOC_SCOPE_LEVEL")"
+  echo ""
+  echo "🗂️  Next Spec Number: $NEXT_SPEC_NUMBER"
+  echo "📁 Create Folder: specs/${NEXT_SPEC_NUMBER}-your-feature-name/"
+  echo ""
+  echo "📝 Required Templates:"
+  print_required_template_commands "$DOC_SCOPE_LEVEL" "$NEXT_SPEC_NUMBER"
+
+  local optional_templates=$(print_optional_template_commands "$DOC_SCOPE_LEVEL" "$NEXT_SPEC_NUMBER")
+  if [ -n "$optional_templates" ]; then
+    echo ""
+    echo "💡 Optional Templates:"
+    echo "$optional_templates"
+  fi
+
+  echo ""
+  echo "📖 Guide: $DOC_GUIDE"
+  echo "⚙️  Level Decision Tree: Section 2 of conversation_documentation.md"
+  echo "⏱️  Estimated Documentation Time: $(documentation_time_for_level "$DOC_SCOPE_LEVEL")"
+  echo ""
+}
+
 # ───────────────────────────────────────────────────────────────
 # SKILL EVALUATION
 # ───────────────────────────────────────────────────────────────
@@ -227,6 +368,7 @@ ACTIVATION_MSG=""
 CRITICAL_SKILLS=()
 HIGH_SKILLS=()
 MEDIUM_SKILLS=()
+CONV_DOC_REQUIRED=false
 
 for skill in "${MATCHED_SKILLS[@]}"; do
   priority=$(jq -r ".skills[\"$skill\"].priority" "$SKILL_RULES" 2>/dev/null)
@@ -243,7 +385,12 @@ for skill in "${MATCHED_SKILLS[@]}"; do
       MEDIUM_SKILLS+=("$skill|$description")
       ;;
   esac
-done
+
+  if [ "$skill" = "conversation-documentation" ]; then
+    CONV_DOC_REQUIRED=true
+  fi
+  done
+
 
 # ───────────────────────────────────────────────────────────────
 # DISPLAY CRITICAL SKILLS TO USER
@@ -269,6 +416,10 @@ if [ ${#CRITICAL_SKILLS[@]} -gt 0 ]; then
     echo "   • $skill_name - $desc_short"
   done
   echo ""
+
+  if [ "$CONV_DOC_REQUIRED" = true ]; then
+    print_conversation_doc_guidance
+  fi
 fi
 
 # ───────────────────────────────────────────────────────────────

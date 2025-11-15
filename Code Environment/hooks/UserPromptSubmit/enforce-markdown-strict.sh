@@ -25,15 +25,15 @@
 
 # Source output helpers
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-LIB_DIR="$(dirname "$(dirname "$SCRIPT_DIR")")/lib"
+LIB_DIR="$(dirname "$SCRIPT_DIR")/lib"
 
 if [[ -f "$LIB_DIR/output-helpers.sh" ]]; then
     source "$LIB_DIR/output-helpers.sh"
 fi
 
 # Configuration
-LOG_DIR="$(dirname "$(dirname "$SCRIPT_DIR")")/logs"
-LOG_FILE="$LOG_DIR/markdown-enforcement.log"
+LOG_DIR="$(dirname "$SCRIPT_DIR")/logs"
+LOG_FILE="$LOG_DIR/quality-checks.log"
 
 # Get git repository root (portable across all environments)
 GIT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
@@ -186,8 +186,36 @@ check_knowledge_critical() {
     return 0
 }
 
+# Run c7score analysis on file (non-blocking, informational only)
+run_c7score_analysis() {
+    local filepath="$1"
+    local cli_wrapper="$GIT_ROOT/.claude/skills/markdown-optimizer/markdown-optimizer"
+
+    # Only run if CLI wrapper exists and Python3 available
+    if [[ ! -f "$cli_wrapper" ]] || ! command -v python3 >/dev/null 2>&1; then
+        return 0
+    fi
+
+    # Run analyzer and capture relevant output
+    local analysis_output=$("$cli_wrapper" "$filepath" 2>/dev/null | grep -E "(Issue rate|Recommendations|Anti-patterns)" | head -5 || true)
+
+    # If there are notable issues, show summary
+    if [[ -n "$analysis_output" && "$analysis_output" == *"Issue rate"* ]]; then
+        cat >&2 << EOF
+
+ℹ️  C7SCORE ANALYSIS:
+$(echo "$analysis_output" | sed 's/^/   /')
+
+   Tip: Run 'markdown-optimizer $filepath' for full analysis
+EOF
+    fi
+}
+
 # Main enforcement logic
 main() {
+    # Initialize HOOKS_DIR for performance logging
+    local hooks_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
     # Get git repository root (or use CWD as fallback)
     local git_root=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
 
@@ -202,10 +230,15 @@ main() {
 
     # If no markdown files modified, exit silently
     if [[ -z "$all_files" ]]; then
+        # Performance timing END
+        local end_time=$(date +%s%N)
+        local duration=$(( (end_time - START_TIME) / 1000000 ))
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] enforce-markdown-strict.sh ${duration}ms" >> "$hooks_dir/logs/performance.log"
         exit 0
     fi
 
     local has_critical=false
+    local files_checked=0
 
     # Check each file
     while IFS= read -r file; do
@@ -226,6 +259,9 @@ main() {
         # Skip spec files (loose enforcement only)
         [[ "$doc_type" == "spec" ]] && continue
 
+        # Count this file as checked
+        ((files_checked++))
+
         # Check for critical violations based on type
         local critical_violations=""
         case "$doc_type" in
@@ -240,6 +276,9 @@ main() {
                 ;;
         esac
 
+        # Run c7score analysis (non-blocking, informational)
+        run_c7score_analysis "$full_path"
+
         # If critical violations found, BLOCK
         if [[ -n "$critical_violations" ]]; then
             has_critical=true
@@ -248,43 +287,30 @@ main() {
             log_action "BLOCKED: $file (type: $doc_type) - Critical violations found"
 
             # Inject BLOCKING error into AI context
-            cat >&2 << EOF
-
-🚫 MARKDOWN ENFORCEMENT BLOCKED:
-
-File: $file
-Type: $doc_type (strict enforcement)
-Status: ❌ CRITICAL VIOLATIONS - CANNOT PROCEED
-
-Critical Issues:
-$(echo "$critical_violations" | sed 's/^/  /')
-
-Action Required:
-You MUST fix these critical violations before continuing.
-
-How to Fix:
-  1. Open file: $full_path
-  2. Add missing frontmatter (use template from .claude/skills/markdown-enforcer/references/frontmatter_templates.md)
-  3. Ensure H1 subtitle format is correct
-  4. Add any missing required sections
-  5. Run validation: markdown-enforcer $file
-
-Reference:
-  - Style Guide: $STYLE_GUIDE
-  - Frontmatter Templates: .claude/skills/markdown-enforcer/references/frontmatter_templates.md
-  - Structure Templates: .claude/skills/markdown-enforcer/references/structure_templates.md
-
-⚠️  This is a BLOCKING error. Fix the issues above to continue.
-
-EOF
+            print_blocking_error_condensed "$file" "$doc_type" "$critical_violations"
         fi
     done <<< "$all_files"
 
     # If any critical violations found, EXIT 1 to block execution
     if [[ "$has_critical" == "true" ]]; then
         log_action "EXECUTION BLOCKED - Critical violations must be fixed"
+        # Performance timing END
+        local end_time=$(date +%s%N)
+        local duration=$(( (end_time - START_TIME) / 1000000 ))
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] enforce-markdown-strict.sh ${duration}ms" >> "$hooks_dir/logs/performance.log"
         exit 1
     fi
+
+    # Show success indicator if files were checked
+    if [[ $files_checked -gt 0 ]]; then
+        echo "" >&2
+        echo "✅ Markdown validation passed: $files_checked file(s) checked, 0 violations" >&2
+    fi
+
+    # Performance timing END
+    local end_time=$(date +%s%N)
+    local duration=$(( (end_time - START_TIME) / 1000000 ))
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] enforce-markdown-strict.sh ${duration}ms" >> "$hooks_dir/logs/performance.log"
 
     # No critical violations - exit 0 (allow execution)
     exit 0
@@ -295,9 +321,3 @@ START_TIME=$(date +%s%N)
 
 # Execute main function
 main
-
-# Performance timing END
-END_TIME=$(date +%s%N)
-DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
-HOOKS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] enforce-markdown-strict.sh ${DURATION}ms" >> "$HOOKS_DIR/logs/performance.log"

@@ -8,6 +8,7 @@
 
 # Source output helpers (completely silent on success)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"
+HOOKS_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 source "$SCRIPT_DIR/../lib/output-helpers.sh" || exit 0
 
 # Performance timing START

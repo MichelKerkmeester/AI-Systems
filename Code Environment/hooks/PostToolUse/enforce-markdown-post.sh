@@ -20,7 +20,7 @@ fi
 
 # Configuration
 LOG_DIR="$(dirname "$(dirname "$SCRIPT_DIR")")/logs"
-LOG_FILE="$LOG_DIR/markdown-enforcement.log"
+LOG_FILE="$LOG_DIR/quality-checks.log"
 
 # Get git repository root (portable across all environments)
 GIT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
@@ -172,21 +172,8 @@ main() {
                 # Log the correction
                 log_correction "FILENAME AUTO-FIXED: $file_path → $corrected_path (naming convention violation)"
 
-                # Inject correction notice into AI context (to stderr so it appears in system reminders)
-                cat >&2 << EOF
-
-✓ MARKDOWN FILENAME AUTO-CORRECTED:
-   Renamed: $file_path → $corrected_filename
-   Reason: Violates .claude/knowledge/document_style_guide.md naming conventions
-   Rule: Only README.md and SKILL.md (in .claude/skills/) may use ALL CAPS
-   Enforced: lowercase snake_case for all other markdown files
-   Reference: $STYLE_GUIDE:37-42
-
-   ✓ Future markdown files should follow: lowercase_snake_case.md
-   ✗ Avoid: ALL_CAPS.md, My-File.md, MyFile.md, myFile.md
-   ✓ Exceptions: README.md, .claude/skills/*/SKILL.md
-
-EOF
+                # Show condensed correction notice
+                print_correction_condensed "$file_path" "$corrected_filename" "$STYLE_GUIDE:37-42"
             fi
         fi
     fi

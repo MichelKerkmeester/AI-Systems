@@ -1,4 +1,4 @@
-# Claude Skills - anobel.com Project
+# Claude Skills
 
 Curated collection of specialized skills for Webflow frontend development, Git workflow, documentation, and code quality. Each skill provides systematic approaches, best practices, and real-world patterns.
 
@@ -10,7 +10,6 @@ Curated collection of specialized skills for Webflow frontend development, Git w
 4. [🚀 QUICK START](#4--quick-start)
 5. [💡 BEST PRACTICES](#5--best-practices)
 6. [📚 ADDITIONAL RESOURCES](#6--additional-resources)
-7. [🔄 MAINTENANCE](#7--maintenance)
 
 ---
 
@@ -23,42 +22,31 @@ Four-phase debugging framework for browser console errors, CSS layout issues, Ja
 
 **When to use**: Console errors, layout bugs, animation issues, event handler failures, cross-browser problems, mobile responsive issues
 
----
-
 **[code-verification-before-completion](./code-verification-before-completion/)**
 Requires browser testing across viewports and animations before claiming work complete. No "works on my machine" claims without evidence.
 
 **When to use**: Before claiming any work is fixed, complete, or passing. Requires testing in Chrome/Firefox/Safari at mobile and desktop viewports.
-
----
 
 **[code-root-cause-tracing](./code-root-cause-tracing/)**
 Traces bugs backward through call stack and event chain using DevTools to find original trigger. Fix at source, not symptom.
 
 **When to use**: Errors deep in execution, mysterious event handler failures, animation wrong values, video initialization issues, DOM unexpected state
 
----
-
 **[code-defense-in-depth](./code-defense-in-depth/)**
 Multi-layer validation at every point data passes through (input, processing, output). Makes JavaScript errors structurally impossible.
 
 **When to use**: Form handling, API calls, DOM manipulation, user input, third-party data integration, XSS prevention
-
----
 
 **[code-condition-based-waiting](./code-condition-based-waiting/)**
 Replaces arbitrary `setTimeout` with condition polling. Wait for actual DOM ready, library loaded, animation complete, or video ready state.
 
 **When to use**: DOM elements not found, timing issues, race conditions, external CDN scripts, animations, fonts, media loading
 
----
-
 **[code-cdn-versioning](./code-cdn-versioning/)**
 Automates CDN cache-busting by updating version numbers in HTML files after JavaScript modifications. Forces browsers to download fresh versions.
 
 **When to use**: After JavaScript file changes, when users see stale cached code, before deploying updates
 
----
 
 ### Browser Automation & Testing
 
@@ -67,7 +55,6 @@ Browser automation, debugging, and performance analysis using Puppeteer CLI scri
 
 **When to use**: Automated testing, screenshot generation, performance analysis, network monitoring, form automation, web scraping
 
----
 
 ### Git Workflows
 
@@ -76,14 +63,11 @@ Professional Git commit workflow following Conventional Commits specification. A
 
 **When to use**: Before any git commit, when reviewing staged changes, ensuring atomic commits, excluding artifacts
 
----
-
 **[git-worktrees](./git-worktrees/)**
 Creates isolated workspaces with minimal branching. Short-lived temp branches merge back to main immediately, keeping codebase unified.
 
 **When to use**: Feature work needing isolation, executing implementation plans, parallel development, experimental changes
 
----
 
 ### Documentation
 
@@ -92,23 +76,19 @@ Creates comprehensive ASCII flowcharts in markdown. Visualizes workflows, user j
 
 **When to use**: Multi-step workflows, user journeys, system architecture, decision trees, parallel execution, approval gates
 
----
-
 **[markdown-enforcer](./markdown-enforcer/)**
 Unified markdown enforcement for filenames, structure, and content. Automatically fixes safe violations (filenames, spacing, formatting) via PostToolUse hooks, and blocks critical issues (missing frontmatter, wrong structure) via UserPromptSubmit hooks. Merged from three separate skills: markdown-naming-enforcer, document-style-validator, and document-style-fixer.
 
 **Enforcement Layers**:
 - **Filename Layer**: Auto-fixes ALL_CAPS.md, My-File.md, myFile.md → lowercase_snake_case.md
 - **Structure Layer**: Validates frontmatter, H1 format, required sections, section order
-- **Content Layer**: Checks H2 ALL CAPS + emoji, --- separators, H1 subtitle format
+- **Content Layer**: Checks H2 ALL CAPS + emoji separators, H1 subtitle format
 
 **Hook Integration**:
 - `enforce-markdown-post.sh` (PostToolUse): Non-blocking auto-fix for filenames
 - `enforce-markdown-strict.sh` (UserPromptSubmit): Blocking validation for structure
 
 **When to use**: Creating or editing markdown files, validating document structure, fixing style violations, ensuring naming compliance
-
----
 
 **[save-context](./save-context/)**
 Saves expanded conversation context from feature implementations and architectural discussions. Preserves dialogue, decisions, flowcharts, and file changes.
@@ -117,7 +97,6 @@ Saves expanded conversation context from feature implementations and architectur
 
 **Auto-triggers**: Keywords ("save context") or 200+ messages (75% context used)
 
----
 
 ### Meta Skills
 
@@ -244,13 +223,3 @@ Each skill provides:
 - MDN Web Docs - Browser APIs and JavaScript
 - Can I Use - Browser compatibility tables
 - Webflow University - Platform-specific guidance
-
----
-
-## 7. 🔄 MAINTENANCE
-
-Skills are living documents that evolve with project needs. When patterns emerge or anti-patterns are identified, skills are updated to reflect new learnings.
-
-**Last Updated**: 2025-11-10
-**Total Skills**: 15
-**Active Categories**: 5

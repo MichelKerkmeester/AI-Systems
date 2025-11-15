@@ -2,9 +2,20 @@
 
 Reference templates showing correct structure for each document type. Use these as starting points when creating new documentation.
 
+#### 📋 TABLE OF CONTENTS
+
+1. [🧾 SKILL.MD TEMPLATE](#1--skillmd-template)
+2. [⚙️ COMMAND TEMPLATE](#2-️-command-template)
+3. [📚 KNOWLEDGE FILE TEMPLATE](#3--knowledge-file-template)
+4. [📋 SPEC FILE TEMPLATE](#4--spec-file-template)
+5. [📂 README.MD TEMPLATE](#5--readmemd-template)
+6. [🔢 SECTION ORDER REQUIREMENTS](#6--section-order-requirements)
+7. [🎨 H2 EMOJI STANDARDS](#7--h2-emoji-standards)
+8. [✅ QUICK VALIDATION CHECKLIST](#8--quick-validation-checklist)
+
 ---
 
-## SKILL.md Template
+## 1. 🧾 SKILL.MD TEMPLATE
 
 **Location**: `.claude/skills/*/SKILL.md`
 **Enforcement**: Strict
@@ -163,7 +174,7 @@ another-example --with-flags
 
 ---
 
-## Command Template
+## 2. ⚙️ COMMAND TEMPLATE
 
 **Location**: `.claude/commands/**/*.md`
 **Enforcement**: Strict
@@ -243,7 +254,7 @@ Output format when command fails
 
 ---
 
-## Knowledge File Template
+## 3. 📚 KNOWLEDGE FILE TEMPLATE
 
 **Location**: `.claude/knowledge/*.md`
 **Enforcement**: Moderate
@@ -302,7 +313,7 @@ Content for additional information...
 
 ---
 
-## Spec File Template
+## 4. 📋 SPEC FILE TEMPLATE
 
 **Location**: `specs/**/*.md`
 **Enforcement**: Loose (suggestions only)
@@ -374,7 +385,7 @@ Deployment strategy...
 
 ---
 
-## README.md Template
+## 5. 📂 README.MD TEMPLATE
 
 **Location**: Any directory
 **Enforcement**: Flexible (universal rules only)
@@ -403,7 +414,7 @@ How to use the contents of this directory...
 
 ---
 
-## Section Order Requirements
+## 6. 🔢 SECTION ORDER REQUIREMENTS
 
 ### SKILL.md (Strict Order)
 
@@ -440,7 +451,7 @@ How to use the contents of this directory...
 
 ---
 
-## H2 Emoji Standards
+## 7. 🎨 H2 EMOJI STANDARDS
 
 ### SKILL.md Emoji Map
 
@@ -481,7 +492,7 @@ Use relevant emoji for each section:
 
 ---
 
-## Quick Validation Checklist
+## 8. ✅ QUICK VALIDATION CHECKLIST
 
 ### SKILL.md Checklist
 
