@@ -4,12 +4,12 @@
       "type": "knowledge",
       "enforcement": "suggest",
       "priority": "high",
-      "description": "Animation implementation with anime.js (.claude/knowledge/animation_strategy.md)",
+      "description": "Animation implementation with Motion.dev (.claude/knowledge/animation_strategy.md)",
       "promptTriggers": {
         "keywords": [
           "animation",
-          "anime",
-          "anime.js",
+          "motion",
+          "Motion.dev",
           "animate",
           "transition",
           "sequence",
@@ -30,9 +30,7 @@
           "animate\\(",
           "timeline\\(",
           "from 'motion'",
-          "import.*?motion",
-          "anime\\.",
-          "import.*anime"
+          "import.*?motion"
         ]
       }
     },
@@ -68,8 +66,7 @@
         "contentPatterns": [
           "\\?v=[0-9]",
           "page_loader\\.js",
-          "hero_.*\\.js",
-          "anime_js_.*\\.js"
+          "hero_.*\\.js"
         ]
       }
     },
@@ -140,6 +137,24 @@
       "enforcement": "strict",
       "priority": "critical",
       "description": "Mandatory spec folder system for all implementation conversations (.claude/knowledge/conversation_documentation.md)",
+      "enforcementConfig": {
+        "mode": "hard-block",
+        "validationLevel": "moderate",
+        "checkSpecFolder": true,
+        "checkTemplates": true,
+        "checkPlaceholders": false,
+        "allowedExceptions": {
+          "patterns": [
+            "typo fix",
+            "whitespace only",
+            "comment update",
+            "fix spelling",
+            "correct grammar"
+          ],
+          "maxLOC": 5,
+          "singleFileOnly": true
+        }
+      },
       "promptTriggers": {
         "keywords": [
           "spec",
@@ -690,7 +705,7 @@
         "anime\\.",
         "animeInstance\\."
       ],
-      "reminder": "✅ ANIMATION CHECK:\n- CSS used for simple interactions?\n- anime.js for complex sequences?\n- Performance optimized (transform/opacity)?\n- Mobile timing adjusted?\n- 60fps target maintained?"
+      "reminder": "✅ ANIMATION CHECK:\n- CSS used for simple interactions?\n- Motion.dev for complex sequences?\n- Performance optimized (transform/opacity)?\n- Mobile timing adjusted?\n- 60fps target maintained?"
     },
     "asyncOperations": {
       "patterns": [
