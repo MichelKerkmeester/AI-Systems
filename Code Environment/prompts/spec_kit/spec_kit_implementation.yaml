@@ -1,9 +1,9 @@
 # ─────────────────────────────────────────────────────────────────
 # FRAMEWORK
 # ─────────────────────────────────────────────────────────────────
-role: Expert Developer using GitHub SpecKit for autonomous implementation with parallel sub-agents
-purpose: Spec-driven implementation with parallel preparation (core, integrations, tests, docs), then development with checkpoints
-action: Run preparatory parallel block → review → synthesis into implementation_plan.md → proceed autonomously
+role: Expert Developer using GitHub SpecKit for autonomous implementation (no approval gates)
+purpose: Spec-driven implementation with autonomous execution and self-validation from step 5
+action: Execute from task breakdown to completion with self-validation, no user approvals
 
 operating_mode:
   workflow: sequential
@@ -15,7 +15,7 @@ operating_mode:
 
 implementation_philosophy:
   principle: "Correctness first, elegance second"
-  approach: "Parallel preparation with systematic execution"
+  approach: "Systematic execution with continuous validation"
   mandate: "Build incrementally, test thoroughly, deliver confidently"
 
 # ─────────────────────────────────────────────────────────────────
@@ -105,27 +105,10 @@ field_handling:
     rule: "Limit file operations to scope when provided"
 
 # ─────────────────────────────────────────────────────────────────
-# SUB-AGENTS (PARALLEL PREP)
-# ─────────────────────────────────────────────────────────────────
-sub_agents:
-  - id: core_adapters
-    name: Core & Integration Engineer
-    role: Draft core logic plan, modules, data structures, algorithms, external integrations, API surfaces, configuration, error handling
-    focus: business_logic_data_structures_algorithms_core_modules_external_integrations_apis_configuration_error_handling
-  - id: tests_docs
-    name: Test & Documentation Engineer
-    role: Create test plan (unit/integration), fixtures, coverage targets, usage notes, examples, migration notes
-    focus: unit_integration_fixtures_coverage_test_strategies_usage_guides_examples_migration_api_documentation
-  - id: synthesis_review
-    name: Integration Reviewer & Synthesizer
-    role: Validate coherence, API consistency, testability, identify gaps, produce implementation_plan.md
-    focus: coherence_consistency_testability_gap_identification_implementation_strategy_task_ordering_dependency_mapping_session_documentation_decision_capture
-
-# ─────────────────────────────────────────────────────────────────
-# WORKFLOW (PARALLEL OUTPUT QA BY MAIN AGENT)
+# WORKFLOW
 # ─────────────────────────────────────────────────────────────────
 workflow:
-  step_11_review_plan_and_spec:
+  step_10_review_plan_and_spec:
     input_source: USER_INPUTS_SECTION_ABOVE
     git_branch: "[GIT_BRANCH] → auto-create if empty"
     spec_folder: "[SPEC_FOLDER] → auto-create if empty"
@@ -134,123 +117,87 @@ workflow:
     request: "Use [REQUEST] if provided, else use default from request_handling"
     environment: "[STAGING LINK] → skip DevTools if empty"
     scope: "[FILES] → default scope if empty"
-    note: |
-      This workflow is a continuation of the planning phase (steps 1-10).
-    action: |
-      1. Review spec and planning artifacts
-      2. Prepare for implementation
+    action: Review spec and planning artifacts
     required_documents:
-      - "[SPEC_FOLDER]/spec.md"
-      - "[SPEC_FOLDER]/plan.md"
-      - "[SPEC_FOLDER]/planning-summary.md"
+    - "[SPEC_FOLDER]/spec.md"
+    - "[SPEC_FOLDER]/plan.md"
+    - "[SPEC_FOLDER]/planning-summary.md"
     optional_documents:
       - spike-[name].md: "Research findings if technical investigation was performed"
       - decision-record-[name].md: "Architecture decisions if significant choices were made"
       - tasks.md: "Task breakdown if created during planning"
       - checklist.md: "Validation checklists if systematic validation needed"
-    outputs:
-      - planning_artifacts_understood
+    review_focus:
+    - understand_feature_requirements
+    - analyze_technical_approach
+    - identify_dependencies
+    - note_implementation_constraints
+    - clarify_acceptance_criteria
+    deep_analysis:
+      focus: comprehensive_plan_review
+      approach: deep_understanding
+      outputs:
+      - requirements_summary
+      - technical_approach_understanding
+      - identified_dependencies
+      - potential_challenges
+      - implementation_readiness_assessment
+      - specification_interpretation
+      - technical_approach_validation
+      - dependency_impact_analysis
+      - edge_case_identification
+      - implementation_strategy_refinement
     validation: planning_artifacts_understood
 
-  step_12_task_breakdown:
+  step_11_task_breakdown:
     command: /speckit.tasks
     outputs:
-      - tasks/checklist.md
-      - task_duration: 15_to_60_minutes
-      - tracking_structure: established
+    - tasks/checklist.md
+    - task_duration: 15_to_60_minutes
+    - tracking_structure: established
     optional_documents:
       - checklist.md: "Validation & QA checklists if not already created (copy from .specify/templates/checklist-template.md)"
-    validation: tasks_actionable
+    deep_analysis:
+      focus: comprehensive_task_analysis
+      approach: deep_breakdown
+      outputs:
+      - granular_task_list
+      - dependency_chain
+      - time_estimates
+      - priority_ordering
+    validation: tasks_documented
 
-  step_13_analysis:
+  step_12_analysis:
     command: /speckit.analyze
     outputs:
-      - consistency_report
-      - coverage_verification
-      - alignment_check
-      - gap_analysis
+    - consistency_report
+    - coverage_verification
+    - alignment_check
+    - gap_analysis
     validation: consistency_verified
+    chrome_devtools:
+      when: comparing_staging_vs_spec
+      approach: Navigate → Snapshot → Compare → Report
+      focus:
+      - ui_consistency
+      - functionality_gaps
+      - performance_baseline
+    deep_analysis:
+      focus: comprehensive_consistency_check
+      approach: deep_analysis
+      outputs:
+      - spec_vs_implementation_gaps
+      - potential_edge_cases
+      - integration_points
+      - risk_assessment
 
-  step_14_quality_checklist:
+  step_13_quality_checklist:
     command: /speckit.checklist
     outputs:
-      - quality_checklist: generated
+    - quality_checklist: generated
     validation: checklist_generated
 
-  step_15_parallel_implementation_preparation:
-    description: Parallel preparation for core, integrations, tests, and docs
-    analyze_inputs:
-      summarize:
-        - key_requirements
-        - constraints
-        - unknowns
-      shard_plan:
-        - core
-        - adapters
-        - tests
-        - docs
-    parallel_work:
-      execution: parallel
-      concurrency: 3
-      shared_context:
-        - "[SPEC_FOLDER]/spec.md"
-        - "[SPEC_FOLDER]/plan.md"
-        - "tasks/checklist.md"
-        - "consistency_report"
-      tasks:
-        - agent: core
-          instructions: Draft module breakdown, key data structures, and algorithmic approach with rationale
-          expected_output:
-            type: markdown
-            sections: [modules, data_structures, algorithms, rationale]
-        - agent: adapters
-          instructions: Enumerate integration points, API contracts, error-handling, and configuration matrix
-          expected_output:
-            type: markdown
-            sections: [integrations, api_contracts, error_handling, configuration]
-        - agent: tests
-          instructions: Define test plan with key test cases, fixtures, and coverage goals
-          expected_output:
-            type: markdown
-            sections: [test_plan, key_cases, fixtures, coverage_targets]
-        - agent: docs
-          instructions: "Draft developer-facing docs: usage patterns, examples, migration notes"
-          expected_output:
-            type: markdown
-            sections: [usage, examples, migration_upgrade]
-    review:
-      by: reviewer
-      focus:
-        - coherence_across_tracks
-        - api_consistency
-        - testability
-        - identify_gaps
-      outputs:
-        - synthesis_guidance
-        - review_notes
-    synthesis:
-      by: synthesizer
-      action: Produce implementation_plan.md combining parallel outputs + review guidance
-      output_files:
-        - "[SPEC_FOLDER]/implementation_plan.md"
-      validation_checklist:
-        - modules_and_integrations_aligned
-        - tests_cover_critical_paths
-        - docs_reflect_actual_interfaces
-        - risks_and_open_questions_listed
-    main_agent_finalization:
-      by: MAIN_AGENT
-      action: QA review and finalization of "[SPEC_FOLDER]/implementation_plan.md"
-      checks:
-        - confirm_alignment_with_request_and_context
-        - validate_completeness_and_consistency
-        - ensure_output_format_and_sections_present
-        - resolve_remaining_open_questions_or_note_them
-      outputs:
-        - main_agent_review_notes
-        - final_signoff: true
-
-  step_16_implementation_check:
+  step_14_implementation_check:
     command: /speckit.implement [task-id]
     checks:
       prerequisites: verified
@@ -259,25 +206,25 @@ workflow:
     chrome_devtools:
       when: validating_environment
       verify:
-        - api_endpoints_accessible
-        - authentication_working
-        - dependencies_loaded
+      - api_endpoints_accessible
+      - authentication_working
+      - dependencies_loaded
     deep_analysis:
       focus: pre_implementation_verification
       approach: environment_validation
       outputs:
-        - environment_status
-        - dependency_verification
-        - blocker_identification
-        - readiness_confirmation
+      - environment_status
+      - dependency_verification
+      - blocker_identification
+      - readiness_confirmation
 
-  step_17_development:
+  step_15_development:
     approach: autonomous_implementation_with_checkpoints
     requirements:
-      - follow: .claude/knowledge/code_standards.md
-      - update: task_checklist_progressively
-      - test: before_commit
-      - no_premature_optimization
+    - follow: .claude/knowledge/code_standards.md
+    - update: task_checklist_progressively
+    - test: before_commit
+    - no_premature_optimization
     checkpoints:
       major_changes:
         action: log_progress
@@ -288,59 +235,54 @@ workflow:
     chrome_devtools:
       when: debugging_implementation
       actions:
-        - test_in_browser
-        - verify_network_calls
-        - check_console_output
-        - validate_dom_changes
-        - measure_performance_impact
+      - test_in_browser
+      - verify_network_calls
+      - check_console_output
+      - validate_dom_changes
+      - measure_performance_impact
     deep_analysis:
       focus: iterative_problem_solving
       approach: continuous_validation
       outputs:
-        - implementation_decisions
-        - debugging_insights
-        - optimization_opportunities
-        - test_coverage_gaps
+      - implementation_decisions
+      - debugging_insights
+      - optimization_opportunities
+      - test_coverage_gaps
 
-  step_18_completion:
+  step_16_completion:
     summary_document:
       location: "[SPEC_FOLDER]/implementation-summary.md"
       required_sections:
-        - feature_branch_name
-        - files_modified_created
-        - verification_steps_taken
-        - deviations_from_plan
-        - knowledge_base_updates
-        - recommended_next_steps
-        - browser_testing_results
+      - feature_branch_name
+      - files_modified_created
+      - verification_steps_taken
+      - deviations_from_plan
+      - knowledge_base_updates
+      - recommended_next_steps
+      - browser_testing_results
     final_checklist:
-      - update_task_status: completed
-      - validation_passed: confirmed
-      - summary_created: true
-      - staging_verified: true
+    - update_task_status: completed
+    - validation_passed: confirmed
+    - summary_created: true
+    - staging_verified: true
     deep_analysis:
       focus: comprehensive_completion_review
       approach: retrospective_analysis
       outputs:
-        - implementation_quality_assessment
-        - lessons_learned
-        - technical_debt_noted
-        - future_improvements
+      - implementation_quality_assessment
+      - lessons_learned
+      - technical_debt_noted
+      - future_improvements
 
-  step_19_save_context:
-    action: Save implementation conversation context via parallel sub-agent
+  step_17_save_context:
+    action: Save conversation context for implementation documentation
+    invocation: Skill(skill: "save-context")
     description: |
       Preserve comprehensive implementation conversation including:
       - Development decisions and rationale
       - Debugging insights and solutions
       - Code changes and architecture decisions
       - Testing and validation results
-    parallel_work:
-      execution: parallel
-      concurrency: 1
-      tasks:
-        - agent: context_saver
-          instructions: "Save conversation context with Skill(skill: 'save-context')"
     outputs:
       - context_file: "[SPEC_FOLDER]/memory/[DD-MM-YY_HH-MM]__implementation_session.md"
       - workflow_flowchart: auto_generated
@@ -355,65 +297,40 @@ workflow:
 # ─────────────────────────────────────────────────────────────────
 prerequisites:
   required_artifacts:
-    - "[SPEC_FOLDER]/spec.md"
-    - "[SPEC_FOLDER]/plan.md"
-    - "[SPEC_FOLDER]/planning-summary.md"
+  - "[SPEC_FOLDER]/spec.md"
+  - "[SPEC_FOLDER]/plan.md"
+  - "[SPEC_FOLDER]/planning-summary.md"
   verification: MUST EXIST BEFORE PROCEEDING
-  note: This workflow assumes steps 1-10 completed via speckit_plan_and_spec.yaml
+  note: This workflow assumes steps 1-6 completed via speckit_plan_and_spec.yaml
   user_context: "[CONTEXT]"
   user_request: "[REQUEST]"
 
-  step_20_retrospective:
-    command: /speckit.retrospective
-    when: feature_complete
-    note: "Capture lessons learned and process improvements"
-    outputs:
-      - retrospective_document: "specs/[NNN-feature]/retrospective.md"
-    validation: learnings_documented
-
 termination:
-  after_step: 20
-  message: "Implementation phase completed successfully. Workflow terminated after step 20 (retrospective)."
+  after_step: 17
+  message: "Implementation phase completed successfully. Workflow terminated after step 17 (save context)."
+  next_steps:
+  - Review implementation-summary.md
+  - Verify all changes in staging environment
+  - Prepare for code review and PR submission
+  - Update knowledge base if needed
   optional_post_completion:
     - retrospective.md: "Capture learnings AFTER feature complete (copy from .specify/templates/retrospective-template.md)"
-
-# ─────────────────────────────────────────────────────────────────
-# ADAPTIVE RULES & ERROR HANDLING
-# ─────────────────────────────────────────────────────────────────
-adaptive_rules:
-  high_complexity:
-    review_depth: exhaustive
-    concurrency: 2
-  high_uncertainty:
-    insert: discovery_microstep_prior_to_parallel
-  parallel_not_supported:
-    concurrency: 1
-    note: "If parallel sub-agents unsupported, run tasks one-by-one; keep review and synthesis."
-
-error_handling:
-  retry_policy:
-    targeted: true
-    max_retries: 2
-  fallback:
-    on_repeated_failure: rerun_failed_tasks_sequentially
-    proceed_with_partial: true
-    annotate_in_review: true
 
 # ─────────────────────────────────────────────────────────────────
 # RULES
 # ─────────────────────────────────────────────────────────────────
 rules:
   ALWAYS:
-  - follow_workflow_sequence
-  - document_all_changes
-  - validate_before_completion
-  - use_devtools_for_staging_analysis
-  - update_task_checklist_progressively
-  - self_validate_and_proceed
-  - enforce_review_before_synthesis
-  - apply_minimum_needed_change
+    - follow_workflow_sequence
+    - document_all_changes
+    - validate_before_completion
+    - use_devtools_for_staging_analysis
+    - update_task_checklist_progressively
+    - self_validate_and_proceed
+    - do_not_prompt_for_user_approval
   NEVER:
-  - skip_workflow_steps
-  - ignore_blockers
-  - submit_without_validation
-  - skip_browser_testing
+    - skip_workflow_steps
+    - ignore_blockers
+    - submit_without_validation
+    - skip_browser_testing
+    - expand_scope_beyond_spec

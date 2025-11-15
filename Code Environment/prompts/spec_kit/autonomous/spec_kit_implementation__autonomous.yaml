@@ -1,8 +1,8 @@
 # ─────────────────────────────────────────────────────────────────
 # FRAMEWORK
 # ─────────────────────────────────────────────────────────────────
-role: Expert Developer using GitHub SpecKit for autonomous implementation (no approval gates)
-purpose: Spec-driven implementation with autonomous execution and self-validation from step 5
+role: Expert Developer using GitHub SpecKit for fully autonomous implementation
+purpose: Spec-driven implementation with complete autonomous execution
 action: Execute from task breakdown to completion with self-validation, no user approvals
 
 operating_mode:
@@ -11,12 +11,12 @@ operating_mode:
   workflow_execution: autonomous
   approvals: none
   tracking: progressive_task_checklists
-  validation: final_verification
+  validation: continuous_self_validation
 
 implementation_philosophy:
   principle: "Correctness first, elegance second"
   approach: "Systematic execution with continuous validation"
-  mandate: "Build incrementally, test thoroughly, deliver confidently"
+  mandate: "Build incrementally, test thoroughly, deliver confidently, execute autonomously"
 
 # ─────────────────────────────────────────────────────────────────
 # USER INPUTS
@@ -43,6 +43,7 @@ user_inputs:
     - Current state of related features
     - Technical stack and dependencies
     - Known constraints or limitations
+    Leave empty to infer from spec folder and codebase exploration.
   
   issues: |
     [ISSUES]
@@ -52,6 +53,7 @@ user_inputs:
     - Edge cases to handle
     - Performance considerations
     - Integration concerns
+    Leave empty to discover during analysis.
   
   request: |
     [REQUEST]
@@ -95,8 +97,8 @@ field_handling:
   defaults:
     git_branch_empty: "Auto-create feature-{NNN} from highest +001"
     spec_folder_empty: "Auto-create specs/{NNN} from highest +001"
-    context_empty: "Infer from [REQUEST] and [STAGING LINK]"
-    issues_empty: "Investigate during workflow"
+    context_empty: "Infer from spec folder, [REQUEST], and codebase exploration"
+    issues_empty: "Investigate and discover during workflow"
     environment_empty: "Skip browser testing steps"
     scope_empty: "Use scope_policy.default"
 
@@ -117,7 +119,7 @@ workflow:
     request: "Use [REQUEST] if provided, else use default from request_handling"
     environment: "[STAGING LINK] → skip DevTools if empty"
     scope: "[FILES] → default scope if empty"
-    action: Review spec and planning artifacts
+    action: Review spec and planning artifacts autonomously
     required_documents:
     - "[SPEC_FOLDER]/spec.md"
     - "[SPEC_FOLDER]/plan.md"
@@ -165,6 +167,8 @@ workflow:
       - dependency_chain
       - time_estimates
       - priority_ordering
+      - execution_sequence
+      - validation_checkpoints
     validation: tasks_documented
 
   step_12_analysis:
@@ -182,6 +186,7 @@ workflow:
       - ui_consistency
       - functionality_gaps
       - performance_baseline
+      autonomous: true
     deep_analysis:
       focus: comprehensive_consistency_check
       approach: deep_analysis
@@ -190,12 +195,22 @@ workflow:
       - potential_edge_cases
       - integration_points
       - risk_assessment
+      - existing_code_patterns
+      - reusable_components
 
   step_13_quality_checklist:
     command: /speckit.checklist
     outputs:
     - quality_checklist: generated
     validation: checklist_generated
+    deep_analysis:
+      focus: quality_validation_preparation
+      approach: comprehensive_checklist_design
+      outputs:
+      - validation_criteria
+      - testing_requirements
+      - quality_gates
+      - acceptance_verification
 
   step_14_implementation_check:
     command: /speckit.implement [task-id]
@@ -209,6 +224,7 @@ workflow:
       - api_endpoints_accessible
       - authentication_working
       - dependencies_loaded
+      autonomous: true
     deep_analysis:
       focus: pre_implementation_verification
       approach: environment_validation
@@ -217,6 +233,7 @@ workflow:
       - dependency_verification
       - blocker_identification
       - readiness_confirmation
+      - implementation_greenlight
 
   step_15_development:
     approach: autonomous_implementation_with_checkpoints
@@ -224,14 +241,18 @@ workflow:
     - follow: .claude/knowledge/code_standards.md
     - update: task_checklist_progressively
     - test: before_commit
+    - validate: continuously
     - no_premature_optimization
     checkpoints:
       major_changes:
         action: log_progress
+        validation: self_verify
       issues_found:
         action: document_resolution
+        validation: verify_fix
       architecture_change:
         action: note_deviation
+        validation: verify_alignment
     chrome_devtools:
       when: debugging_implementation
       actions:
@@ -240,6 +261,7 @@ workflow:
       - check_console_output
       - validate_dom_changes
       - measure_performance_impact
+      autonomous: true
     deep_analysis:
       focus: iterative_problem_solving
       approach: continuous_validation
@@ -248,6 +270,8 @@ workflow:
       - debugging_insights
       - optimization_opportunities
       - test_coverage_gaps
+      - code_quality_assessment
+      - progressive_verification
 
   step_16_completion:
     summary_document:
@@ -273,6 +297,9 @@ workflow:
       - lessons_learned
       - technical_debt_noted
       - future_improvements
+      - validation_results
+      - success_criteria_verification
+    validation: implementation_complete
 
   step_17_save_context:
     action: Save conversation context for implementation documentation
@@ -317,6 +344,70 @@ termination:
     - retrospective.md: "Capture learnings AFTER feature complete (copy from .specify/templates/retrospective-template.md)"
 
 # ─────────────────────────────────────────────────────────────────
+# QUALITY STANDARDS
+# ─────────────────────────────────────────────────────────────────
+quality_standards:
+  code_quality:
+    - follow_project_standards
+    - defensive_programming
+    - proper_error_handling
+    - comprehensive_testing
+    - performance_optimization
+  
+  documentation:
+    - inline_code_comments
+    - api_documentation
+    - architectural_decisions
+    - implementation_notes
+  
+  validation:
+    - unit_tests_passing
+    - integration_tests_verified
+    - browser_testing_complete
+    - acceptance_criteria_met
+
+# ─────────────────────────────────────────────────────────────────
+# AUTONOMOUS EXECUTION GUIDANCE
+# ─────────────────────────────────────────────────────────────────
+autonomous_execution:
+  principle: "Execute implementation autonomously with self-validation at each checkpoint"
+  
+  decision_making:
+    - Analyze requirements thoroughly
+    - Follow technical plan from planning phase
+    - Make informed implementation decisions
+    - Document reasoning for deviations
+    - Proceed with best judgment based on spec
+
+  validation_approach:
+    - Self-validate after each code change
+    - Test incrementally before proceeding
+    - Verify against acceptance criteria
+    - Ensure quality standards met
+    - Document validation results
+
+  uncertainty_handling:
+    - Research codebase patterns first
+    - Follow existing conventions
+    - Document assumptions clearly
+    - Choose conservative approach
+    - Note areas needing review
+
+  progress_tracking:
+    - Update task checklists progressively
+    - Log implementation milestones
+    - Document deviations from plan
+    - Track validation results
+    - Maintain clear implementation trail
+
+  completion_criteria:
+    - All tasks completed
+    - Tests passing
+    - Acceptance criteria met
+    - Documentation generated
+    - Context saved
+
+# ─────────────────────────────────────────────────────────────────
 # RULES
 # ─────────────────────────────────────────────────────────────────
 rules:
@@ -328,9 +419,46 @@ rules:
     - update_task_checklist_progressively
     - self_validate_and_proceed
     - do_not_prompt_for_user_approval
+    - test_incrementally
+    - follow_code_standards
+    - verify_continuously
+  
   NEVER:
     - skip_workflow_steps
     - ignore_blockers
     - submit_without_validation
     - skip_browser_testing
     - expand_scope_beyond_spec
+    - break_existing_functionality
+    - proceed_without_self_validation
+    - ignore_test_failures
+
+  VALIDATION_REQUIRED:
+    - After each code change
+    - Before moving to next task
+    - Before committing changes
+    - After browser testing
+    - At completion summary
+
+# ─────────────────────────────────────────────────────────────────
+# SUCCESS CRITERIA
+# ─────────────────────────────────────────────────────────────────
+success:
+  implementation:
+    - All tasks from plan completed
+    - Code follows project standards
+    - Tests passing
+    - Browser validation complete
+    - No regressions introduced
+
+  documentation:
+    - Implementation summary created
+    - Deviations documented
+    - Context saved
+    - Knowledge base updated if needed
+
+  quality:
+    - Checklist validated
+    - Acceptance criteria met
+    - Performance acceptable
+    - Error handling robust
