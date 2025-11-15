@@ -76,19 +76,19 @@ Creates comprehensive ASCII flowcharts in markdown. Visualizes workflows, user j
 
 **When to use**: Multi-step workflows, user journeys, system architecture, decision trees, parallel execution, approval gates
 
-**[markdown-enforcer](./markdown-enforcer/)**
-Unified markdown enforcement for filenames, structure, and content. Automatically fixes safe violations (filenames, spacing, formatting) via PostToolUse hooks, and blocks critical issues (missing frontmatter, wrong structure) via UserPromptSubmit hooks. Merged from three separate skills: markdown-naming-enforcer, document-style-validator, and document-style-fixer.
+**[markdown-c7-optimizer](./markdown-c7-optimizer/)**
+Complete document quality pipeline with structure enforcement, content optimization (c7score), and style guide compliance. Three-phase system: Enforcement → Optimization → Validation. Automatically fixes safe violations via hooks, blocks critical issues, and optimizes content for AI assistants.
 
-**Enforcement Layers**:
-- **Filename Layer**: Auto-fixes ALL_CAPS.md, My-File.md, myFile.md → lowercase_snake_case.md
-- **Structure Layer**: Validates frontmatter, H1 format, required sections, section order
-- **Content Layer**: Checks H2 ALL CAPS + emoji separators, H1 subtitle format
+**Pipeline Phases**:
+- **Enforcement**: Validates filenames, frontmatter, structure; auto-fixes safe violations
+- **Optimization**: Enhances content for AI-friendliness using 16 transformation patterns (c7score 85+ target)
+- **Validation**: Scores structure (0-100), c7score (0-100), and style compliance (0-100)
 
 **Hook Integration**:
-- `enforce-markdown-post.sh` (PostToolUse): Non-blocking auto-fix for filenames
-- `enforce-markdown-strict.sh` (UserPromptSubmit): Blocking validation for structure
+- `PostToolUse`: Auto-corrects filename violations (non-blocking)
+- `UserPromptSubmit`: Blocks critical violations with fix suggestions
 
-**When to use**: Creating or editing markdown files, validating document structure, fixing style violations, ensuring naming compliance
+**When to use**: Creating or editing markdown files, optimizing documentation for AI assistants, quality validation, generating llms.txt files
 
 **[save-context](./save-context/)**
 Saves expanded conversation context from feature implementations and architectural discussions. Preserves dialogue, decisions, flowcharts, and file changes.
@@ -139,7 +139,7 @@ Provides guidance for creating effective skills with specialized knowledge, work
 ### Documentation
 
 ```
-1. markdown-enforcer             → Unified enforcement (filenames, structure, content)
+1. markdown-c7-optimizer         → Enforce structure, optimize content, validate quality
 2. markdown-flowchart            → Visualize workflows
 3. save-context                  → Preserve decisions
 ```
@@ -153,7 +153,7 @@ Provides guidance for creating effective skills with specialized knowledge, work
 | **Code Quality** | 6 | Debugging, validation, timing, tracing, verification, cache-busting |
 | **Browser Testing** | 1 | Automation, performance, screenshots |
 | **Git Workflow** | 2 | Commits, worktrees, branching strategy |
-| **Documentation** | 3 | Unified markdown enforcement, flowcharts, context preservation |
+| **Documentation** | 3 | Document quality pipeline (c7-optimizer), flowcharts, context preservation |
 | **Meta** | 1 | Skill creation and management |
 
 **Total Active Skills**: 13
@@ -195,7 +195,7 @@ Use code-defense-in-depth during implementation
 **Complex bugs**: systematic-debugging + root-cause-tracing + defense-in-depth
 **Race conditions**: condition-based-waiting + verification-before-completion
 **New features**: defense-in-depth + verification-before-completion + git-commit
-**Documentation**: document-style-validator + document-style-fixer + save-context + git-commit
+**Documentation**: markdown-c7-optimizer + markdown-flowchart + save-context + git-commit
 
 ### Naming Convention
 

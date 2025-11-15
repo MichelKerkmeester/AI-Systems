@@ -1,13 +1,14 @@
-# Puppeteer Quick Reference - Complete Browser Automation API Guide
+# Puppeteer Quick Reference
 
-Complete guide to browser automation with Puppeteer - a high-level API over Chrome DevTools Protocol. 
-Covers browser launching, page manipulation, element interaction, JavaScript execution, screenshots, network control, device emulation, performance testing, and common automation patterns.
+Complete browser automation API guide covering Puppeteer's high-level API over Chrome DevTools Protocol for browser launching, page manipulation, element interaction, JavaScript execution, screenshots, network control, device emulation, performance testing, and common automation patterns.
 
 ---
 
 ## 1. 🚀 SETUP
 
-### Installation
+### How to Install Puppeteer
+
+Choose between full Puppeteer (includes Chrome) or puppeteer-core (bring your own browser):
 
 ```bash
 # Install Puppeteer
@@ -44,7 +45,11 @@ await browser.close();
 
 ## 2. 🌐 BROWSER & PAGE MANAGEMENT
 
-### Launch Browser
+### How to Launch a Browser
+
+Puppeteer provides extensive browser launch configuration options:
+
+### Launch Browser Options
 
 ```javascript
 const browser = await puppeteer.launch({

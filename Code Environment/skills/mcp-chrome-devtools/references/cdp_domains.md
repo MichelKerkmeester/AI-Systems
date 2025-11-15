@@ -1,10 +1,12 @@
-# CDP Domains Reference - Chrome DevTools Protocol Complete Domain Catalog
+# CDP Domains Reference
 
-CDP is organized into **47 domains**, each providing specific browser capabilities. 
+Complete catalog of Chrome DevTools Protocol's **47 domains**, each providing specific browser automation and debugging capabilities. 
 
 ---
 
 ## 1. 🧭 DOMAIN CATEGORIES
+
+CDP domains are organized into nine categories for easier navigation:
 
 - **Core** - Fundamental browser control
 - **DOM & Styling** - Page structure and styling
@@ -19,6 +21,8 @@ CDP is organized into **47 domains**, each providing specific browser capabiliti
 ---
 
 ## 2. 🔧 CORE DOMAINS
+
+These foundational domains provide essential browser control and debugging capabilities.
 
 ### Runtime
 

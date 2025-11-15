@@ -1,19 +1,29 @@
-# Performance Analysis Guide - Web Performance Optimization with Chrome DevTools
+# Performance Analysis Guide
 
-Comprehensive guide to analyzing web performance using Chrome DevTools Protocol, Puppeteer, and chrome-devtools-mcp tools. 
-Covers Core Web Vitals measurement, performance tracing, network analysis, JavaScript profiling, rendering optimization, memory leak detection, and automated testing strategies.
+Complete guide to web performance optimization using Chrome DevTools Protocol, Puppeteer, and chrome-devtools-mcp tools for measuring Core Web Vitals, performance tracing, network analysis, JavaScript profiling, rendering optimization, memory leak detection, and automated testing.
 
 ---
 
 ## 1. 📊 CORE WEB VITALS
 
-### Overview
+### What Are Core Web Vitals?
 
-Core Web Vitals are Google's standardized metrics for measuring user experience:
+Core Web Vitals are Google's standardized metrics for measuring real-world user experience. Three metrics matter most:
 
-- **LCP (Largest Contentful Paint)** - Loading performance (< 2.5s good)
-- **FID (First Input Delay)** - Interactivity (< 100ms good)
-- **CLS (Cumulative Layout Shift)** - Visual stability (< 0.1 good)
+**LCP (Largest Contentful Paint)** - Loading performance
+- **Good**: < 2.5 seconds
+- **Needs improvement**: 2.5-4.0 seconds
+- **Poor**: > 4.0 seconds
+
+**FID (First Input Delay)** - Interactivity responsiveness
+- **Good**: < 100 milliseconds
+- **Needs improvement**: 100-300 milliseconds
+- **Poor**: > 300 milliseconds
+
+**CLS (Cumulative Layout Shift)** - Visual stability
+- **Good**: < 0.1
+- **Needs improvement**: 0.1-0.25
+- **Poor**: > 0.25
 
 ### Measuring with chrome-devtools-mcp
 
@@ -97,9 +107,11 @@ const vitals = await page.evaluate(() => {
 console.log('Core Web Vitals:', vitals);
 ```
 
-### Other Important Metrics
+### Additional Performance Metrics
 
-**TTFB (Time to First Byte)**
+Beyond Core Web Vitals, these metrics provide deeper performance insights:
+
+**TTFB (Time to First Byte)** - Server response time
 ```javascript
 const ttfb = await page.evaluate(() => {
   const [navigationEntry] = performance.getEntriesByType('navigation');
@@ -129,7 +141,11 @@ const tti = await page.evaluate(() => {
 
 ## 2. 🔍 PERFORMANCE TRACING
 
+Performance tracing captures detailed timeline data about browser activity, enabling deep analysis of bottlenecks and optimization opportunities.
+
 ### Chrome Trace Categories
+
+Traces are organized into categories that capture different aspects of browser behavior:
 
 **Loading:**
 - Page load events

@@ -1,12 +1,12 @@
-# Chrome DevTools - Extended Automation Workflow Patterns
+# Chrome DevTools Workflow Examples
 
-This document provides comprehensive workflow examples for common browser automation scenarios using chrome-devtools scripts.
+Comprehensive workflow patterns for common browser automation scenarios using chrome-devtools scripts, covering web scraping, performance testing, form automation, error monitoring, multi-page testing, device emulation, file uploads, dropdown menus, drag-and-drop, and dialog handling.
 
-**Referenced from**: `chrome-devtools/skill.md`
+**Referenced from**: `chrome-devtools/SKILL.md`
 
 ---
 
-## 1. Web Scraping Workflows
+## 1. 🔍 WEB SCRAPING WORKFLOWS
 
 ### Basic Content Extraction
 
@@ -50,7 +50,7 @@ node evaluate.js --script "
 
 ---
 
-## 2. Performance Testing Workflows
+## 2. ⚡ PERFORMANCE TESTING WORKFLOWS
 
 ### Core Web Vitals Audit
 
@@ -106,7 +106,7 @@ echo "Upload trace to: chrome://tracing"
 
 ---
 
-## 3. Form Automation Workflows
+## 3. 📝 FORM AUTOMATION WORKFLOWS
 
 ### Simple Login Flow
 
@@ -174,7 +174,7 @@ node evaluate.js --script "
 
 ---
 
-## 4. Error Monitoring Workflows
+## 4. 🚨 ERROR MONITORING WORKFLOWS
 
 ### Console Error Detection
 
@@ -223,7 +223,7 @@ fi
 
 ---
 
-## 5. Multi-Page Testing Workflows
+## 5. 📑 MULTI-PAGE TESTING WORKFLOWS
 
 ### Tab Management
 
@@ -265,7 +265,7 @@ node screenshot.js --output ./docs/screenshots/production.png
 
 ---
 
-## 6. Device Emulation Testing
+## 6. 📱 DEVICE EMULATION TESTING
 
 ### Network Throttling
 
@@ -315,7 +315,7 @@ node performance.js --url https://example.com | jq '{
 
 ---
 
-## 7. File Upload Automation
+## 7. 📤 FILE UPLOAD AUTOMATION
 
 ### Single File Upload
 
@@ -365,7 +365,7 @@ node console.js --types log --duration 30000 | jq '.messages[] | select(.text | 
 
 ---
 
-## 8. Dropdown Menu Testing
+## 8. 🎯 DROPDOWN MENU TESTING
 
 ### Hover-Triggered Dropdowns
 
@@ -411,7 +411,7 @@ node evaluate.js --script "
 
 ---
 
-## 9. Drag and Drop Workflows
+## 9. 🖱️ DRAG AND DROP WORKFLOWS
 
 ### Simple Drag and Drop
 
@@ -441,7 +441,7 @@ node evaluate.js --script "
 
 ---
 
-## 10. Dialog Handling
+## 10. 💬 DIALOG HANDLING
 
 ### JavaScript Alerts
 
