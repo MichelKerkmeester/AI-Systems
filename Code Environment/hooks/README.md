@@ -195,15 +195,15 @@ User Action
 - Knowledge files: H1 subtitle format, no frontmatter allowed
 
 **NEW - C7Score Integration**:
-- Runs `markdown-optimizer` CLI tool on modified markdown files
+- Runs `markdown-c7-optimizer` CLI tool on modified markdown files
 - Shows condensed analysis output (issue rate, recommendations)
 - Non-blocking informational feedback only
 - Helps optimize documentation for AI consumption
 
 **Connects to**:
 - `.claude/knowledge/document_style_guide.md` → Markdown standards
-- `.claude/skills/markdown-optimizer/markdown-optimizer` → CLI wrapper for C7score analysis
-- `.claude/skills/markdown-optimizer/scripts/analyze_docs.py` → Python analyzer
+- `.claude/skills/markdown-c7-optimizer/markdown-c7-optimizer` → CLI wrapper for C7score analysis
+- `.claude/skills/markdown-c7-optimizer/scripts/analyze_docs.py` → Python analyzer
 - Git status → Finds modified .md files
 - `lib/output-helpers.sh` → Condensed output formatting
 
@@ -223,7 +223,7 @@ User Action
      CRITICAL: H1 missing subtitle
 
    Fix: Review .claude/knowledge/document_style_guide.md
-   Then: markdown-optimizer --phase enforcement SKILL.md
+   Then: markdown-c7-optimizer --phase enforcement SKILL.md
 ```
 
 **Output Example** (C7score analysis):
@@ -232,7 +232,7 @@ User Action
    Issue rate: 20.0%
    ✅ Recommendations
 
-   Tip: Run 'markdown-optimizer /path/to/file.md' for full analysis
+   Tip: Run 'markdown-c7-optimizer /path/to/file.md' for full analysis
 ```
 
 **Output Example** (success):
@@ -293,14 +293,14 @@ RELATED SPECS FOUND
 Found existing specs that may be related to your request:
 ──────────────────────────────────────────────────────────
 
-  • 049-markdown-optimizer-alignment
+  • 049-markdown-c7-optimizer-alignment
     Status: ✓ ACTIVE - recommended for updates
-    Path: /path/to/specs/049-markdown-optimizer-alignment
+    Path: /path/to/specs/049-markdown-c7-optimizer-alignment
 ──────────────────────────────────────────────────────────
 
-  • 052-markdown-optimizer-alignment
+  • 052-markdown-c7-optimizer-alignment
     Status: ◐ DRAFT - can be started
-    Path: /path/to/specs/052-markdown-optimizer-alignment
+    Path: /path/to/specs/052-markdown-c7-optimizer-alignment
 ──────────────────────────────────────────────────────────
 
 RECOMMENDATION
@@ -418,7 +418,7 @@ User Prompt
 │                             → Logs to spec-enforcement.log  │
 │                                                              │
 │ 5. enforce-markdown-strict  → document_style_guide.md      │
-│                             → markdown-optimizer CLI tool   │
+│                             → markdown-c7-optimizer CLI tool   │
 │                             → C7score quality analysis      │
 │                             → Git status (modified .md)     │
 │                             → BLOCKS if critical violations │
@@ -633,7 +633,7 @@ bash .claude/hooks/scripts/rotate-logs.sh
 - code-verification-before-completion, mcp-chrome-devtools
 - code-standards ⭐ (alwaysActive), conversation-documentation ⭐ (alwaysActive)
 - debugging, document-style-guide, git-commit, git-worktrees
-- initialization-pattern, markdown-flowchart, markdown-optimizer, save-context, webflow-platform-constraints
+- initialization-pattern, markdown-flowchart, markdown-c7-optimizer, save-context, webflow-platform-constraints
 
 **Current Risk Patterns** (7 categories):
 - animation, asyncOperations, commitOperations, formHandling
@@ -694,10 +694,10 @@ bash .claude/hooks/scripts/validate-config.sh
 Related specs found for: markdown optimizer
 ──────────────────────────────────────────────────────────────
 
-049-markdown-optimizer-alignment
+049-markdown-c7-optimizer-alignment
   Status: ✓ ACTIVE
-  Path: /path/to/specs/049-markdown-optimizer-alignment
-  Description: Align markdown-optimizer skill with standards...
+  Path: /path/to/specs/049-markdown-c7-optimizer-alignment
+  Description: Align markdown-c7-optimizer skill with standards...
 
 ──────────────────────────────────────────────────────────────
 Found 2 related spec(s)

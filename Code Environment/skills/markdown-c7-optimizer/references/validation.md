@@ -294,26 +294,26 @@ Estimated improvement: 89 → 97
 
 **Validate single file**:
 ```bash
-markdown-optimizer --validate document.md
+markdown-c7-optimizer --validate document.md
 ```
 
 **Validate with threshold**:
 ```bash
-markdown-optimizer --validate --threshold=85 document.md
+markdown-c7-optimizer --validate --threshold=85 document.md
 # Exit code 1 if score < 85
 ```
 
 **Batch validation**:
 ```bash
 find specs/ -name "*.md" | while read file; do
-  markdown-optimizer --validate "$file"
+  markdown-c7-optimizer --validate "$file"
 done
 ```
 
 **CI/CD integration**:
 ```bash
 # Fail build if documentation quality < 80
-markdown-optimizer --validate --threshold=80 README.md || exit 1
+markdown-c7-optimizer --validate --threshold=80 README.md || exit 1
 ```
 
 ---

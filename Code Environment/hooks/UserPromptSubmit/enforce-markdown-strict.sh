@@ -189,7 +189,7 @@ check_knowledge_critical() {
 # Run c7score analysis on file (non-blocking, informational only)
 run_c7score_analysis() {
     local filepath="$1"
-    local cli_wrapper="$GIT_ROOT/.claude/skills/markdown-optimizer/markdown-optimizer"
+    local cli_wrapper="$GIT_ROOT/.claude/skills/markdown-c7-optimizer/markdown-c7-optimizer"
 
     # Only run if CLI wrapper exists and Python3 available
     if [[ ! -f "$cli_wrapper" ]] || ! command -v python3 >/dev/null 2>&1; then
@@ -206,7 +206,7 @@ run_c7score_analysis() {
 ℹ️  C7SCORE ANALYSIS:
 $(echo "$analysis_output" | sed 's/^/   /')
 
-   Tip: Run 'markdown-optimizer $filepath' for full analysis
+   Tip: Run 'markdown-c7-optimizer $filepath' for full analysis
 EOF
     fi
 }

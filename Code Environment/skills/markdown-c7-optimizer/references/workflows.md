@@ -168,7 +168,7 @@ cd .claude/skills/my-skill
 # (PostToolUse hook auto-fixes filename)
 
 # 3. Run full pipeline
-markdown-optimizer --full-pipeline SKILL.md
+markdown-c7-optimizer --full-pipeline SKILL.md
 
 # Expected: Structure 100, C7Score 85+, Style 90+, Overall 90+
 ```
@@ -176,7 +176,7 @@ markdown-optimizer --full-pipeline SKILL.md
 **Example 2: README Optimization**
 ```bash
 # Current README c7score: 52/100
-markdown-optimizer --optimize README.md
+markdown-c7-optimizer --optimize README.md
 
 # Output:
 # Before: c7score 52/100
@@ -187,7 +187,7 @@ markdown-optimizer --optimize README.md
 **Example 3: Pre-Commit Validation**
 ```bash
 # Validate spec before commit
-markdown-optimizer --validate specs/042/spec.md
+markdown-c7-optimizer --validate specs/042/spec.md
 
 # Output:
 # Structure: 100/100 ✓
@@ -203,7 +203,7 @@ markdown-optimizer --validate specs/042/spec.md
 **Multi-file enforcement**:
 ```bash
 find specs/ -name "spec.md" | while read file; do
-  markdown-optimizer --full-pipeline "$file"
+  markdown-c7-optimizer --full-pipeline "$file"
 done
 ```
 
@@ -211,9 +211,9 @@ done
 ```bash
 # Only optimize files with c7score < 70
 for file in $(find docs/ -name "*.md"); do
-  score=$(markdown-optimizer --validate "$file" | grep "C7Score" | awk '{print $2}' | cut -d'/' -f1)
+  score=$(markdown-c7-optimizer --validate "$file" | grep "C7Score" | awk '{print $2}' | cut -d'/' -f1)
   if [ "$score" -lt 70 ]; then
-    markdown-optimizer --optimize "$file"
+    markdown-c7-optimizer --optimize "$file"
   fi
 done
 ```

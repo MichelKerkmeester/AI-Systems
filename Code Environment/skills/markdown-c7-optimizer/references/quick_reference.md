@@ -8,25 +8,25 @@
 
 **Full Pipeline**:
 ```bash
-markdown-optimizer --full document.md
+markdown-c7-optimizer --full document.md
 # Runs: Enforcement → Optimization → Validation
 ```
 
 **Enforcement Only**:
 ```bash
-markdown-optimizer --enforce document.md
+markdown-c7-optimizer --enforce document.md
 # Auto-fixes structure, blocks on critical violations
 ```
 
 **Optimization Only**:
 ```bash
-markdown-optimizer --optimize document.md
+markdown-c7-optimizer --optimize document.md
 # Improves c7score, generates llms.txt
 ```
 
 **Validation Only**:
 ```bash
-markdown-optimizer --validate document.md
+markdown-c7-optimizer --validate document.md
 # Triple scoring report
 ```
 
@@ -108,7 +108,7 @@ markdown-optimizer --validate document.md
 ## 6. 📁 FILE STRUCTURE
 
 ```
-.claude/skills/markdown-optimizer/
+.claude/skills/markdown-c7-optimizer/
 ├── SKILL.md (overview + quick guidance)
 ├── references/
 │   ├── core_standards.md (filename conventions, document types, violations)

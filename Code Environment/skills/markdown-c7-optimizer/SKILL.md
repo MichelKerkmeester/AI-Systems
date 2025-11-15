@@ -1,5 +1,5 @@
 ---
-name: markdown-optimizer
+name: markdown-c7-optimizer
 description: Complete document quality pipeline with structure enforcement, content optimization (c7score), and style guide compliance. Unified skill replacing markdown-enforcer and llm-docs-optimizer.
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep, AskUserQuestion
 version: 2.0.0
@@ -17,7 +17,7 @@ Enforce markdown structure, optimize content for AI assistants, and validate qua
 
 ### Navigation Guide
 
-**This file (SKILL.md)**: Essential overview and rules for using markdown-optimizer
+**This file (SKILL.md)**: Essential overview and rules for using markdown-c7-optimizer
 
 **Reference Files** (detailed documentation):
 - [core_standards.md](./references/core_standards.md) - Filename conventions, document types, structural violations
@@ -107,7 +107,7 @@ OUTPUT: Quality Report + Approved Document
 
 **Mode 1: Full Pipeline** - All three phases (recommended for critical docs)
 ```bash
-markdown-optimizer --full-pipeline document.md
+markdown-c7-optimizer --full-pipeline document.md
 # Target: 85+ overall score
 ```
 
@@ -119,13 +119,13 @@ markdown-optimizer --full-pipeline document.md
 
 **Mode 3: Optimization Only** - Content improvement (c7score focus)
 ```bash
-markdown-optimizer --optimize document.md
+markdown-c7-optimizer --optimize document.md
 # Target: 80+ c7score
 ```
 
 **Mode 4: Validation Only** - Quality audit (no modifications)
 ```bash
-markdown-optimizer --validate document.md
+markdown-c7-optimizer --validate document.md
 # Output: Triple scoring report
 ```
 
@@ -182,24 +182,30 @@ See [core_standards.md](./references/core_standards.md) for complete type system
    - Validate required fields
    - Flag missing or malformed frontmatter
 
-4. **ALWAYS ask about llms.txt generation during optimization**
+4. **ALWAYS preserve TOC sections based on document type**
+   - SKILL.md: Remove TOC (not allowed)
+   - llms.txt: Remove TOC (not allowed)
+   - Knowledge/Command/Spec/README: Preserve TOC if present (never add if absent)
+   - TOC format: H4 header `#### 📋 TABLE OF CONTENTS`
+
+5. **ALWAYS ask about llms.txt generation during optimization**
    - Use AskUserQuestion tool when c7score optimization requested
    - Present choice: docs only, or docs + llms.txt
    - Never generate llms.txt without explicit consent
 
-5. **ALWAYS apply safe auto-fixes for enforcement**
+6. **ALWAYS apply safe auto-fixes for enforcement**
    - Convert H2 headings to proper case
    - Add missing section separators (---)
    - Fix filename violations
    - Log all auto-fixes applied
 
-6. **ALWAYS validate before declaring completion**
+7. **ALWAYS validate before declaring completion**
    - Run structure validation
    - Calculate c7score estimate
    - Check style compliance
    - Provide scoring breakdown
 
-7. **ALWAYS provide before/after metrics**
+8. **ALWAYS provide before/after metrics**
    - Document baseline scores
    - Show improvement deltas
    - Highlight transformation impact
@@ -223,12 +229,18 @@ See [core_standards.md](./references/core_standards.md) for complete type system
    - Only block: missing frontmatter, wrong section order, invalid structure
    - Safe fixes are logged but non-blocking
 
-4. **NEVER generate llms.txt without asking**
+4. **NEVER add emojis to llms.txt files**
+   - llms.txt is plain text format (no emojis anywhere)
+   - All other document types allow emojis
+   - SKILL.md requires emojis in H2 headers
+   - Knowledge/Command/Spec/README allow emojis
+
+5. **NEVER generate llms.txt without asking**
    - Always use AskUserQuestion for llms.txt generation
    - User must explicitly consent
    - Respect user's navigation preferences
 
-5. **NEVER apply strict enforcement to wrong document types**
+6. **NEVER apply strict enforcement to wrong document types**
    - README, Generic → Flexible enforcement
    - SKILL, Command → Strict enforcement
    - Knowledge → Moderate enforcement

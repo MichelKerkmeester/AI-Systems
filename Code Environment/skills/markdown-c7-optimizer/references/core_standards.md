@@ -31,6 +31,7 @@ Filename conventions, document type detection, and structural violation patterns
 |----------|---------|------|---------|
 | 1 | Exact filename | README → readme | `/any/path/README.md` |
 | 1 | Exact filename | SKILL → skill | `.claude/skills/*/SKILL.md` |
+| 1 | Exact filename | llms.txt → llmstxt | `/any/path/llms.txt` |
 | 2 | Directory path | `.claude/commands/**/*.md` → command | `.claude/commands/deploy.md` |
 | 2 | Directory path | `.claude/knowledge/*.md` → knowledge | `.claude/knowledge/api.md` |
 | 2 | Directory path | `specs/**/*.md` → spec | `specs/042/spec.md` |
@@ -39,18 +40,19 @@ Filename conventions, document type detection, and structural violation patterns
 
 **Enforcement levels by type**:
 
-| Type | Enforcement | Frontmatter | H1 Subtitle | Blocks |
-|------|-------------|-------------|-------------|--------|
-| README | Flexible | None | Optional | No |
-| SKILL | Strict | Required | Required | Yes |
-| Knowledge | Moderate | Forbidden | Required | Yes |
-| Command | Strict | Required | Forbidden | Yes |
-| Spec | Loose | Optional | Optional | No |
-| Generic | Flexible | Optional | Optional | No |
+| Type | Enforcement | Frontmatter | H1 Subtitle | TOC Allowed | Emojis Allowed | Blocks |
+|------|-------------|-------------|-------------|-------------|----------------|--------|
+| README | Flexible | None | Optional | ✅ Yes | ✅ Yes | No |
+| SKILL | Strict | Required | Required | ❌ No | ✅ Required (H2) | Yes |
+| llms.txt | Strict | Forbidden | N/A | ❌ No | ❌ No | Yes |
+| Knowledge | Moderate | Forbidden | Required | ✅ Yes | ✅ Yes | Yes |
+| Command | Strict | Required | Forbidden | ✅ Yes | ✅ Yes | Yes |
+| Spec | Loose | Optional | Optional | ✅ Yes | ✅ Yes | No |
+| Generic | Flexible | Optional | Optional | ✅ Yes | ✅ Yes | No |
 
 **Manual override**:
 ```bash
-markdown-optimizer --type=skill document.md
+markdown-c7-optimizer --type=skill document.md
 ```
 
 ---
@@ -129,7 +131,7 @@ allowed-tools: Read, Write, Edit
 **Validation command**:
 ```bash
 # Check for violations
-markdown-optimizer --validate-only file.md
+markdown-c7-optimizer --validate-only file.md
 ```
 
 ---
@@ -166,6 +168,19 @@ Frontmatter: None
 H1 format: Flexible
 Sections: Flexible
 Quality target: 85+ c7score
+TOC: Allowed (optional)
+Emojis: Allowed
+```
+
+**llms.txt**:
+```yaml
+Frontmatter: None (forbidden)
+H1 format: Plain text only (no markdown headers)
+Sections: Free-form plain text
+Quality target: High clarity, no formatting
+TOC: Not allowed (plain text file)
+Emojis: Not allowed (plain text only)
+Format: Plain text navigation file for LLMs
 ```
 
 ---

@@ -1,6 +1,6 @@
 #!/bin/bash
 # ───────────────────────────────────────────────────────────────
-# FILE: markdown-optimizer
+# FILE: markdown-c7-optimizer
 # DESC: CLI wrapper for markdown optimization and validation
 # ───────────────────────────────────────────────────────────────
 
@@ -12,7 +12,7 @@ ANALYZE_SCRIPT="$SCRIPT_DIR/scripts/analyze_docs.py"
 
 # Check Python3 availability
 if ! command -v python3 >/dev/null 2>&1; then
-    echo "Error: python3 not found. Install Python 3 to use markdown-optimizer." >&2
+    echo "Error: python3 not found. Install Python 3 to use markdown-c7-optimizer." >&2
     exit 1
 fi
 
@@ -25,11 +25,11 @@ fi
 # Show usage
 show_usage() {
     cat << 'EOF'
-markdown-optimizer - Document quality analysis and optimization
+markdown-c7-optimizer - Document quality analysis and optimization
 
 USAGE:
-    markdown-optimizer [OPTIONS] <file.md>
-    markdown-optimizer --phase <phase> <file.md>
+    markdown-c7-optimizer [OPTIONS] <file.md>
+    markdown-c7-optimizer --phase <phase> <file.md>
 
 OPTIONS:
     --phase enforcement    Run Phase 1: Structure enforcement and analysis
@@ -39,17 +39,17 @@ OPTIONS:
 
 EXAMPLES:
     # Analyze a README file
-    markdown-optimizer README.md
+    markdown-c7-optimizer README.md
 
     # Run enforcement phase
-    markdown-optimizer --phase enforcement SKILL.md
+    markdown-c7-optimizer --phase enforcement SKILL.md
 
     # Check multiple files
-    find docs/ -name "*.md" -exec markdown-optimizer {} \;
+    find docs/ -name "*.md" -exec markdown-c7-optimizer {} \;
 
 For full documentation, see:
-    .claude/skills/markdown-optimizer/SKILL.md
-    .claude/skills/markdown-optimizer/references/quick_reference.md
+    .claude/skills/markdown-c7-optimizer/SKILL.md
+    .claude/skills/markdown-c7-optimizer/references/quick_reference.md
 EOF
 }
 
@@ -62,7 +62,7 @@ case "${1:-}" in
     --phase)
         if [[ $# -lt 3 ]]; then
             echo "Error: --phase requires phase name and file path" >&2
-            echo "Usage: markdown-optimizer --phase <enforcement|optimization|validation> <file.md>" >&2
+            echo "Usage: markdown-c7-optimizer --phase <enforcement|optimization|validation> <file.md>" >&2
             exit 1
         fi
 
@@ -93,13 +93,13 @@ case "${1:-}" in
         ;;
     --*)
         echo "Error: Unknown option '$1'" >&2
-        echo "Try 'markdown-optimizer --help' for usage" >&2
+        echo "Try 'markdown-c7-optimizer --help' for usage" >&2
         exit 1
         ;;
     "")
         echo "Error: No file specified" >&2
-        echo "Usage: markdown-optimizer <file.md>" >&2
-        echo "Try 'markdown-optimizer --help' for more information" >&2
+        echo "Usage: markdown-c7-optimizer <file.md>" >&2
+        echo "Try 'markdown-c7-optimizer --help' for more information" >&2
         exit 1
         ;;
     *)
