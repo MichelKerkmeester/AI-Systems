@@ -1,4 +1,4 @@
-# Animation Strategy & Standards
+# Animation Strategy - Project Animation Guidelines
 
 Defines our animation strategy across the project: CSS is the default for simple interactions; Motion.dev is the only JavaScript animation library we use for sequences that CSS cannot express ergonomically.
 
@@ -6,13 +6,13 @@ This keeps payloads small, performance high, and behavior predictable.
 
 #### 📋 TABLE OF CONTENTS
 
-- [Animation Strategy \& Standards](#animation-strategy--standards)
+- [Animation Strategy - Project Animation Guidelines](#animation-strategy---project-animation-guidelines)
       - [📋 TABLE OF CONTENTS](#-table-of-contents)
   - [1. 🧭 DECISION FRAMEWORK](#1--decision-framework)
     - [Primary Order (Use in Sequence)](#primary-order-use-in-sequence)
     - [Quick Decision Tree](#quick-decision-tree)
   - [2. 🧰 CSS-FIRST PLAYBOOK](#2--css-first-playbook)
-  - [3. ⚙️ ANIME.JS INTEGRATION](#3-️-animejs-integration)
+  - [3. ⚙️ MOTION.DEV INTEGRATION](#3-️-motiondev-integration)
     - [How we load it](#how-we-load-it)
     - [Defensive loading in components](#defensive-loading-in-components)
     - [Parameters we standardize](#parameters-we-standardize)
